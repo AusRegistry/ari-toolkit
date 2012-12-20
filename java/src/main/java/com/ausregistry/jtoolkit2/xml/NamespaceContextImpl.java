@@ -44,22 +44,23 @@ public final class NamespaceContextImpl implements NamespaceContext {
         NamespaceContextImpl.put(StandardObjectType.HOST.getName(), StandardObjectType.HOST.getURI());
         NamespaceContextImpl.put(StandardObjectType.CONTACT.getName(), StandardObjectType.CONTACT.getURI());
         NamespaceContextImpl.put(StandardObjectType.DOMAIN.getName(), StandardObjectType.DOMAIN.getURI());
-        NamespaceContextImpl.put(ExtensionImpl.E164.getPrefix(), ExtensionImpl.E164.getURI());
-        NamespaceContextImpl.put(ExtensionImpl.AU.getPrefix(), ExtensionImpl.AU.getURI());
-        NamespaceContextImpl.put(ExtensionImpl.AU_V1.getPrefix(), ExtensionImpl.AU_V1.getURI());
         NamespaceContextImpl.put(ExtendedObjectType.AU_DOMAIN.getName(), ExtendedObjectType.AU_DOMAIN.getURI());
-        NamespaceContextImpl.put(ExtensionImpl.AR.getPrefix(), ExtensionImpl.AR.getURI());
         NamespaceContextImpl.put(ExtendedObjectType.AR_DOMAIN.getName(), ExtendedObjectType.AR_DOMAIN.getURI());
-        NamespaceContextImpl.put(ExtensionImpl.AE.getPrefix(), ExtensionImpl.AE.getURI());
         NamespaceContextImpl.put(ExtendedObjectType.AE_DOMAIN.getName(), ExtendedObjectType.AE_DOMAIN.getURI());
         NamespaceContextImpl.put(ExtendedObjectType.IDNA_DOMAIN.getName(), ExtendedObjectType.IDNA_DOMAIN.getURI());
         NamespaceContextImpl.put(ExtendedObjectType.VARIANT.getName(), ExtendedObjectType.VARIANT.getURI());
-        NamespaceContextImpl.put(ExtensionImpl.VIEXT.getPrefix(), ExtensionImpl.VIEXT.getURI());
         NamespaceContextImpl.put(ExtendedObjectType.SEC_DNS.getName(), ExtendedObjectType.SEC_DNS.getURI());
         NamespaceContextImpl.put(ExtendedObjectType.RESTORE.getName(), ExtendedObjectType.RESTORE.getURI());
         NamespaceContextImpl.put(ExtendedObjectType.SYNC.getName(), ExtendedObjectType.SYNC.getURI());
         NamespaceContextImpl.put(ExtendedObjectType.KV.getName(), ExtendedObjectType.KV.getURI());
+        NamespaceContextImpl.put(ExtendedObjectType.LAUNCH.getName(), ExtendedObjectType.LAUNCH.getURI());
+        NamespaceContextImpl.put(ExtensionImpl.AE.getPrefix(), ExtensionImpl.AE.getURI());
         NamespaceContextImpl.put(ExtensionImpl.REGISTRANT.getPrefix(), ExtensionImpl.REGISTRANT.getURI());
+        NamespaceContextImpl.put(ExtensionImpl.E164.getPrefix(), ExtensionImpl.E164.getURI());
+        NamespaceContextImpl.put(ExtensionImpl.AU.getPrefix(), ExtensionImpl.AU.getURI());
+        NamespaceContextImpl.put(ExtensionImpl.AU_V1.getPrefix(), ExtensionImpl.AU_V1.getURI());
+        NamespaceContextImpl.put(ExtensionImpl.AR.getPrefix(), ExtensionImpl.AR.getURI());
+        NamespaceContextImpl.put(ExtensionImpl.VIEXT.getPrefix(), ExtensionImpl.VIEXT.getURI());
     }
 
     /**

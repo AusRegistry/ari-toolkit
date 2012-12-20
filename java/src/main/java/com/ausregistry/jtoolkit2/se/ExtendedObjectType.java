@@ -14,7 +14,8 @@ public enum ExtendedObjectType implements ObjectType {
     SYNC("sync", "urn:X-ar:params:xml:ns:sync-1.0", "sync-1.0.xsd", "name"),
     KV("kv", "urn:X-ar:params:xml:ns:kv-1.0", "kv-1.0.xsd", "name"),
     REGISTRANT("registrant", "urn:X-ar:params:xml:ns:registrant-1.0", "registrant-1.0.xsd", "name"),
-    RESTORE("restore", "urn:ietf:params:xml:ns:rgp-1.0", "rgp-1.0.xsd", "name");
+    RESTORE("restore", "urn:ietf:params:xml:ns:rgp-1.0", "rgp-1.0.xsd", "name"), 
+    LAUNCH("launch", "urn:rbp:params:xml:ns:application-1.0", "launch-1.0.xsd", "name");
 
     private String prefix, uri, schemaDefinition, identType;
 
