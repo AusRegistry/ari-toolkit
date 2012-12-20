@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:sync="urn:X-ar:params:xml:ns:sync-1.0"
+        targetNamespace="urn:X-ar:params:xml:ns:sync-1.0"
+        elementFormDefault="qualified">
+
+	<annotation>
+		<documentation>
+			Extensible Provisioning Protocol v1.0 domain name
+			extension schema for expiration date synchronisation.
+		</documentation>
+	</annotation>
+
+	<!--
+   Child elements found in EPP commands.
+   -->
+	<element name="update" type="sync:updateType" />
+
+	<!--
+   Child elements of the <update> command.
+   -->
+	<complexType name="updateType">
+		<sequence>
+			<element name="exDate" type="dateTime" />
+		</sequence>
+	</complexType>
+
+	<!--
+   End of schema.
+   -->
+</schema>
+

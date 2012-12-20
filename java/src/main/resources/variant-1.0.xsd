@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="urn:X-ar:params:xml:ns:variant-1.0"
+  xmlns:variant="urn:X-ar:params:xml:ns:variant-1.0" xmlns:epp="urn:ietf:params:xml:ns:epp-1.0"
+  xmlns:eppcom="urn:ietf:params:xml:ns:eppcom-1.0" xmlns="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified">
+
+  <!--
+    Import common EPP element types.
+  -->
+  <import namespace="urn:ietf:params:xml:ns:epp-1.0"
+    schemaLocation="epp-1.0.xsd" />
+  <import namespace="urn:ietf:params:xml:ns:eppcom-1.0"
+    schemaLocation="eppcom-1.0.xsd" />
+
+
+  <annotation>
+    <documentation>Internationalised Domain Name
+      Extensions to the Extensible Provisioning Protocol v1.0 schema.
+      Object mappings to variant-specific commands.</documentation>
+  </annotation>
+
+  <!--
+    Custom command extensions
+  -->
+  <element name="info" type="variant:infoType" />
+  <element name="update" type="variant:updateType" />
+  <element name="variantInfo" type="variant:nameType" />
+
+  <!--
+    Custom response extensions
+  -->
+  <element name="infData" type="variant:resDataType" />
+  <element name="creData" type="variant:resDataType" />
+  <element name="varInfData" type="variant:resDataType" />
+
+  <!--
+    Child elements of the <info> command extension.
+  -->
+  <complexType name="infoType">
+    <attribute name="variants" type="variant:variantsInfoAttributeType"
+      default="all" />
+  </complexType>
+
+  <simpleType name="variantsInfoAttributeType">
+    <restriction base="token">
+      <enumeration value="all" />
+      <enumeration value="none" />
+    </restriction>
+  </simpleType>
+
+  <!--
+    Child elements of the <update> command extension.
+  -->
+  <complexType name="updateType">
+    <sequence>
+      <element name="add" type="variant:addRemType" minOccurs="0" maxOccurs="1"/>
+      <element name="rem" type="variant:addRemType" minOccurs="0" maxOccurs="1" />
+    </sequence>
+  </complexType>
+
+  <complexType name="addRemType">
+    <sequence>
+      <element name="variant" type="variant:variantType" maxOccurs="unbounded" />
+    </sequence>
+  </complexType>
+
+  <!--
+    Child elements of the <variantInfo> command.
+  -->
+  <complexType name="nameType">
+    <sequence>
+      <element name="name" type="variant:internationalisedLabelType" />
+    </sequence>
+  </complexType>
+
+
+  <complexType name="internationalisedLabelType">
+    <simpleContent>
+      <extension base="eppcom:labelType">
+        <attribute name="language" type="language">
+          <annotation>
+            <documentation>
+              Registration of language with IANA requires the
+              definition
+              of a Script or Language Designator
+              (http://www.iana.org/procedures/idn-repository.html).
+
+              The linked
+              document above notes that Language Designators
+              are defined in BCP
+              47
+              (http://www.rfc-editor.org/rfc/bcp/bcp47.txt), which
+              satisfies
+              the requirements of the language datatype and
+              RFC3066 (BCP 47,
+              Section 2.2.8).
+            </documentation>
+          </annotation>
+        </attribute>
+      </extension>
+    </simpleContent>
+  </complexType>
+  
+  <!--
+    Response extension elements.
+  -->
+  <complexType name="resDataType">
+    <sequence>
+      <element name="variant" type="variant:variantType" maxOccurs="unbounded" />
+    </sequence>
+  </complexType>
+
+  <complexType name="variantType">
+    <simpleContent>
+      <extension base="eppcom:labelType">
+        <attribute name="userForm" type="eppcom:labelType" use="required" />
+      </extension>
+    </simpleContent>
+  </complexType>
+
+  <!--
+		End of schema.
+	-->
+</schema>

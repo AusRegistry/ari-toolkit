@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="urn:X-ar:params:xml:ns:kv-1.0"
+	xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:kv="urn:X-ar:params:xml:ns:kv-1.0"
+	elementFormDefault="qualified">
+
+	<!--
+		Definition of kvlist to be reused in other DTDs
+	-->
+	<group name="kvlist">
+		<sequence>
+			<element name="kvlist" type="kv:listType" />
+		</sequence>
+	</group>
+
+	<!--
+		Command extension elements 
+	 -->
+	<element name="create" type="kv:createType" />
+	<element name="update" type="kv:updateType" />
+
+	<complexType name="createType">
+		<group ref="kv:kvlist" maxOccurs="unbounded" />
+	</complexType>
+
+	<complexType name="updateType">
+		<group ref="kv:kvlist" maxOccurs="unbounded" />
+	</complexType>
+
+	<complexType name="listType">
+		<sequence maxOccurs="unbounded">
+			<element name="item" type="kv:itemType" />
+		</sequence>
+		<attribute name="name" type="token" use="required" />
+	</complexType>
+
+	<complexType name="itemType">
+		<simpleContent>
+			<extension base="token">
+				<attribute name="key" type="token" use="required" />
+			</extension>
+		</simpleContent>
+	</complexType>
+
+	<!--
+		Response extension types 
+	 -->
+	<element name="infData" type="kv:infDataType" />
+
+	<complexType name="infDataType">
+		<group ref="kv:kvlist" maxOccurs="unbounded" />
+	</complexType>
+
+</schema>

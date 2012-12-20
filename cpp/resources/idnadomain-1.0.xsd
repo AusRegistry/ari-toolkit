@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="urn:X-ar:params:xml:ns:idnadomain-1.0"
+  xmlns:idnadomain="urn:X-ar:params:xml:ns:idnadomain-1.0"
+  xmlns:eppcom="urn:ietf:params:xml:ns:eppcom-1.0"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified">
+
+  <!--
+    Import common element types.
+  -->
+  <import namespace="urn:ietf:params:xml:ns:eppcom-1.0"
+    schemaLocation="eppcom-1.0.xsd" />
+
+  <annotation>
+    <documentation>
+      Internationalised Domain Name Extensions to the Extensible
+      Provisioning Protocol v1.1 schema. Domain-specific types and
+      attributes.
+    </documentation>
+  </annotation>
+
+  <group name="namePair">
+    <annotation>
+      <documentation>
+        User and DNS presentation forms of a domain
+      </documentation>
+    </annotation>
+    <sequence>
+      <element name="userForm" type="eppcom:labelType">
+        <annotation>
+          <documentation>
+            This should be of type internationalisedLabelType
+          </documentation>
+        </annotation>
+      </element>
+      <element name="dnsForm" type="eppcom:labelType" />
+    </sequence>
+  </group>
+
+  <!--
+    Child elements found in EPP commands.
+  -->
+  <element name="check" type="idnadomain:mNameType" />
+
+  <!--
+    Child elements of the <check> command.
+  -->
+  <complexType name="mNameType">
+    <sequence>
+      <element name="name" type="idnadomain:internationalisedLabelType"
+        maxOccurs="unbounded" />
+    </sequence>
+  </complexType>
+
+  <complexType name="internationalisedLabelType">
+    <simpleContent>
+      <extension base="eppcom:labelType">
+        <attribute name="language" type="language">
+          <annotation>
+            <documentation>
+              Registration of language with IANA requires the definition
+              of a Script or Language Designator
+              (http://www.iana.org/procedures/idn-repository.html).
+
+              The linked document above notes that Language Designators
+              are defined in BCP 47
+              (http://www.rfc-editor.org/rfc/bcp/bcp47.txt), which
+              satisfies the requirements of the language datatype and
+              RFC3066 (BCP 47, Section 2.2.8).
+            </documentation>
+          </annotation>
+        </attribute>
+      </extension>
+    </simpleContent>
+  </complexType>
+
+  <!--
+    Child response elements.
+  -->
+  <element name="chkData" type="idnadomain:chkDataType" />
+
+  <!--
+    <check> response elements.
+  -->
+  <complexType name="chkDataType">
+    <sequence>
+      <element name="cd" type="idnadomain:checkType"
+        maxOccurs="unbounded" />
+    </sequence>
+  </complexType>
+
+  <complexType name="checkType">
+    <sequence>
+      <element name="name" type="idnadomain:checkNameType" />
+      <element name="reason" type="eppcom:reasonType" minOccurs="0" />
+    </sequence>
+  </complexType>
+
+  <complexType name="checkNameType">
+    <simpleContent>
+      <extension base="idnadomain:internationalisedLabelType">
+        <attribute name="avail" type="boolean" use="required" />
+      </extension>
+    </simpleContent>
+  </complexType>
+
+  <!--
+    Custom extensions
+  -->
+  <element name="create" type="idnadomain:createType" />
+  <element name="info" type="idnadomain:infoType" />
+
+  <!--
+    Child elements of the <create> command extension.
+  -->
+  <complexType name="createType">
+    <attribute name="language" use="required" />
+  </complexType>
+
+  <!--
+    Child elements of the <info> command extension.
+  -->
+  <complexType name="infoType">
+    <attribute name="variants" type="idnadomain:variantsInfoType"
+      default="all" />
+  </complexType>
+
+  <simpleType name="variantsInfoType">
+    <restriction base="token">
+      <enumeration value="all" />
+      <enumeration value="none" />
+    </restriction>
+  </simpleType>
+
+  <!--
+    Custom response
+  -->
+  <element name="infData" type="idnadomain:resDataType" />
+  <element name="creData" type="idnadomain:resDataType" />
+
+  <!--
+    Response extension elements.
+  -->
+  <complexType name="resDataType">
+    <sequence>
+      <!-- primary is the name in domain create -->
+      <element name="primary" type="idnadomain:primaryType"
+        minOccurs="1" />
+      <element name="variant" type="idnadomain:variantType"
+        minOccurs="0" maxOccurs="unbounded" />
+    </sequence>
+  </complexType>
+
+  <complexType name="primaryType">
+    <annotation>
+      <documentation>
+        Should this be moved directly into the resDataType? - assumes
+        that userForm of namePair is of type internationalisedLabelType
+      </documentation>
+    </annotation>
+    <group ref="idnadomain:namePair" />
+    <attribute name="language" />
+  </complexType>
+
+  <complexType name="variantType">
+    <group ref="idnadomain:namePair" />
+    <attribute name="language" />
+    <attribute name="provisioned" type="boolean" default="false" />
+  </complexType>
+
+  <!--
+    End of schema.
+  -->
+</schema>

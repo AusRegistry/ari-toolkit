@@ -1,0 +1,31 @@
+AusRegistry's EPP Client Library for the Java Programming Language.
+
+Changes in version 2.0.6.5
+* Implemented support for hosts attribute of name element in domain info command. Previous versions defaulted to "all".
+
+Changes in version 2.0.6
+* Cleaned up libs, moved to Java6 and added RGP support.
+
+Changes in version 2.0.5
+* Corrected sample hostname value in toolkit.properties.
+
+Changes in version 2.0.4
+* Corrected version number of JAR file deployed to Maven repository after 
+tests are complete.
+
+Changes in version 2.0.3
+* Added missing library dependencies.
+
+Changes in version 2.0.2
+* Removed deprecation from .au and .ae specific command and response classes 
+until the respective registries are updated to support generic extensions
+
+Changes in version 2.0.1
+* Minor SecDNS-1.1 code revisions
+
+Changes in version 2.0
+* Added classes to support Key Value extensions (DomainInfoKVResponseExtension, 
+DomainKVCommandExtension)
+* Added classes to support generic Domain Registrant Transfer command (
+DomainRegistrantTransfer)
+* Updated DNSSEC support to SecDNS-1.1
