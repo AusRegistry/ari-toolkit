@@ -1,0 +1,825 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en"><head><title>EPP Key-Value Mapping: Key-Value Mapping for the Extensible
+      Provisioning Protocol (EPP)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Key-Value Mapping for the Extensible
+      Provisioning Protocol (EPP)">
+<meta name="generator" content="xml2rfc v1.35 (http://xml.resource.org/)">
+<style type='text/css'><!--
+        body {
+                font-family: verdana, charcoal, helvetica, arial, sans-serif;
+                font-size: small; color: #000; background-color: #FFF;
+                margin: 2em;
+        }
+        h1, h2, h3, h4, h5, h6 {
+                font-family: helvetica, monaco, "MS Sans Serif", arial, sans-serif;
+                font-weight: bold; font-style: normal;
+        }
+        h1 { color: #900; background-color: transparent; text-align: right; }
+        h3 { color: #333; background-color: transparent; }
+
+        td.RFCbug {
+                font-size: x-small; text-decoration: none;
+                width: 30px; height: 30px; padding-top: 2px;
+                text-align: justify; vertical-align: middle;
+                background-color: #000;
+        }
+        td.RFCbug span.RFC {
+                font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+                font-weight: bold; color: #666;
+        }
+        td.RFCbug span.hotText {
+                font-family: charcoal, monaco, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+                font-weight: normal; text-align: center; color: #FFF;
+        }
+
+        table.TOCbug { width: 30px; height: 15px; }
+        td.TOCbug {
+                text-align: center; width: 30px; height: 15px;
+                color: #FFF; background-color: #900;
+        }
+        td.TOCbug a {
+                font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, sans-serif;
+                font-weight: bold; font-size: x-small; text-decoration: none;
+                color: #FFF; background-color: transparent;
+        }
+
+        td.header {
+                font-family: arial, helvetica, sans-serif; font-size: x-small;
+                vertical-align: top; width: 33%;
+                color: #FFF; background-color: #666;
+        }
+        td.author { font-weight: bold; font-size: x-small; margin-left: 4em; }
+        td.author-text { font-size: x-small; }
+
+        /* info code from SantaKlauss at http://www.madaboutstyle.com/tooltip2.html */
+        a.info {
+                /* This is the key. */
+                position: relative;
+                z-index: 24;
+                text-decoration: none;
+        }
+        a.info:hover {
+                z-index: 25;
+                color: #FFF; background-color: #900;
+        }
+        a.info span { display: none; }
+        a.info:hover span.info {
+                /* The span will display just on :hover state. */
+                display: block;
+                position: absolute;
+                font-size: smaller;
+                top: 2em; left: -5em; width: 15em;
+                padding: 2px; border: 1px solid #333;
+                color: #900; background-color: #EEE;
+                text-align: left;
+        }
+
+        a { font-weight: bold; }
+        a:link    { color: #900; background-color: transparent; }
+        a:visited { color: #633; background-color: transparent; }
+        a:active  { color: #633; background-color: transparent; }
+
+        p { margin-left: 2em; margin-right: 2em; }
+        p.copyright { font-size: x-small; }
+        p.toc { font-size: small; font-weight: bold; margin-left: 3em; }
+        table.toc { margin: 0 0 0 3em; padding: 0; border: 0; vertical-align: text-top; }
+        td.toc { font-size: small; font-weight: bold; vertical-align: text-top; }
+
+        ol.text { margin-left: 2em; margin-right: 2em; }
+        ul.text { margin-left: 2em; margin-right: 2em; }
+        li      { margin-left: 3em; }
+
+        /* RFC-2629 <spanx>s and <artwork>s. */
+        em     { font-style: italic; }
+        strong { font-weight: bold; }
+        dfn    { font-weight: bold; font-style: normal; }
+        cite   { font-weight: normal; font-style: normal; }
+        tt     { color: #036; }
+        tt, pre, pre dfn, pre em, pre cite, pre span {
+                font-family: "Courier New", Courier, monospace; font-size: small;
+        }
+        pre {
+                text-align: left; padding: 4px;
+                color: #000; background-color: #CCC;
+        }
+        pre dfn  { color: #900; }
+        pre em   { color: #66F; background-color: #FFC; font-weight: normal; }
+        pre .key { color: #33C; font-weight: bold; }
+        pre .id  { color: #900; }
+        pre .str { color: #000; background-color: #CFF; }
+        pre .val { color: #066; }
+        pre .rep { color: #909; }
+        pre .oth { color: #000; background-color: #FCF; }
+        pre .err { background-color: #FCC; }
+
+        /* RFC-2629 <texttable>s. */
+        table.all, table.full, table.headers, table.none {
+                font-size: small; text-align: center; border-width: 2px;
+                vertical-align: top; border-collapse: collapse;
+        }
+        table.all, table.full { border-style: solid; border-color: black; }
+        table.headers, table.none { border-style: none; }
+        th {
+                font-weight: bold; border-color: black;
+                border-width: 2px 2px 3px 2px;
+        }
+        table.all th, table.full th { border-style: solid; }
+        table.headers th { border-style: none none solid none; }
+        table.none th { border-style: none; }
+        table.all td {
+                border-style: solid; border-color: #333;
+                border-width: 1px 2px;
+        }
+        table.full td, table.headers td, table.none td { border-style: none; }
+
+        hr { height: 1px; }
+        hr.insert {
+                width: 80%; border-style: none; border-width: 0;
+                color: #CCC; background-color: #CCC;
+        }
+--></style>
+</head>
+<body>
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<table summary="layout" width="66%" border="0" cellpadding="0" cellspacing="0"><tr><td><table summary="layout" width="100%" border="0" cellpadding="2" cellspacing="1">
+<tr><td class="header">EPP Key-Value Mapping</td><td class="header">J. Mitchell</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">AusRegistry Pty Ltd</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">September 17, 2010</td></tr>
+</table></td></tr></table>
+<h1><br />Key-Value Mapping for the Extensible
+      Provisioning Protocol (EPP)</h1>
+
+<h1>Abstract</h1>
+
+<p>This document describes an Extensible Provisioning Protocol
+        (EPP) extension mapping for the transport of arbitrary data
+        associated with domain names stored in a shared central
+        repository.
+      
+</p>
+<h3>Status of This Document</h3>
+
+<p>This document specifies an extension to the EPP protocol first
+        implemented in AusRegistry's Domain Name Registry EPP service.
+        Discussion and suggestions for improvements are welcome. Please
+        refer to AusRegistry for more information on the status of this
+        document. Distribution of this document and use of the protocol
+        extensions defined within is unrestricted and unlimited.
+      
+</p>
+<h3>Copyright Notice</h3>
+
+<p>Copyright (C) AusRegistry International Pty Ltd (2010)
+      
+</p><a name="toc"></a><br /><hr />
+<h1>Table of Contents</h1>
+<p class="toc">
+<a href="#Intro">1.</a>&nbsp;
+Introduction<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor1">1.1.</a>&nbsp;
+Conventions Used In This Document<br />
+<a href="#anchor2">2.</a>&nbsp;
+EPP Command Mapping<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor3">2.1.</a>&nbsp;
+EPP Query Commands<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor4">2.1.1.</a>&nbsp;
+EPP &lt;check&gt; Command<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor5">2.1.2.</a>&nbsp;
+EPP &lt;info&gt; Command<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor6">2.1.3.</a>&nbsp;
+EPP &lt;transfer&gt; Command<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor7">2.2.</a>&nbsp;
+EPP Transform Commands<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor8">2.2.1.</a>&nbsp;
+EPP &lt;create&gt; Command<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor9">2.2.2.</a>&nbsp;
+EPP &lt;delete&gt; Command<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor10">2.2.3.</a>&nbsp;
+EPP &lt;renew&gt; Command<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor11">2.2.4.</a>&nbsp;
+EPP &lt;transfer&gt; Command<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor12">2.2.5.</a>&nbsp;
+EPP &lt;update&gt; Command<br />
+<a href="#anchor13">3.</a>&nbsp;
+Formal Syntax<br />
+<a href="#anchor14">4.</a>&nbsp;
+Internationalization Considerations<br />
+<a href="#anchor15">5.</a>&nbsp;
+Security Considerations<br />
+<a href="#rfc.references1">6.</a>&nbsp;
+References<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#rfc.references1">6.1.</a>&nbsp;
+Normative References<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#rfc.references2">6.2.</a>&nbsp;
+Informative References<br />
+<a href="#rfc.authors">&#167;</a>&nbsp;
+Author's Address<br />
+</p>
+<br clear="all" />
+
+<a name="Intro"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.1"></a><h1>1.&nbsp;
+Introduction</h1>
+
+<p>
+        This document describes an domain mapping for version 1.0 of
+        the
+        Extensible Provisioning Protocol (EPP) that allows for the
+        transport of arbitrary data associated with a domain name. This
+        mapping, an extension of the domain name mapping described in
+        <a class='info' href='#RFC5731'>[RFC5731]<span> (</span><span class='info'>Hollenbeck, S., &ldquo;Extensible Provisioning Protocol (EPP) Domain Name Mapping,&rdquo; August&nbsp;2009.</span><span>)</span></a>, is specified using the Extensible Markup Language
+        (XML) 1.0, as
+        described in
+        <a class='info' href='#W3C.REC-xml-20040204'>[W3C.REC&#8209;xml&#8209;20040204]<span> (</span><span class='info'>Maler, E., Paoli, J., Yergeau, F., Sperberg-McQueen, C., and T. Bray, &ldquo;Extensible Markup Language (XML) 1.0 (Third Edition),&rdquo; February&nbsp;2004.</span><span>)</span></a>, and XML
+        Schema notation, as described in
+        <a class='info' href='#W3C.REC-xmlschema-1-20041028'>[W3C.REC&#8209;xmlschema&#8209;1&#8209;20041028]<span> (</span><span class='info'>Thompson, H., Mendelsohn, N., Maloney, M., and D. Beech, &ldquo;XML Schema Part 1: Structures Second Edition,&rdquo; October&nbsp;2004.</span><span>)</span></a>
+        and [W3C.REC-xmlschema-2-20041028].
+      
+</p>
+<p>
+        The EPP core protocol specification
+        <a class='info' href='#RFC5730'>[RFC5730]<span> (</span><span class='info'>Hollenbeck, S., &ldquo;Extensible Provisioning Protocol (EPP),&rdquo; August&nbsp;2009.</span><span>)</span></a>
+        provides a
+        complete description of EPP command and response
+        structures. A
+        thorough understanding of the base protocol and
+        specification of
+        relevant extensions is necessary to understand the
+        mapping
+        described in this document.
+      
+</p>
+<a name="anchor1"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.1.1"></a><h2>1.1.&nbsp;
+Conventions Used In This Document</h2>
+
+<p>
+          The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
+          NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
+          "OPTIONAL" in this document are to be interpreted as described
+          in
+          <a class='info' href='#RFC2119'>[RFC2119]<span> (</span><span class='info'>Bradner, S., &ldquo;Key words for use in RFCs to Indicate Requirement Levels,&rdquo; March&nbsp;1997.</span><span>)</span></a>
+          .
+        
+</p>
+<p>In examples, "C:" represents lines sent by a protocol client
+          and "S:" represents lines returned by a protocol server.
+          Indentation and white space in examples are provided only to
+          illustrate element relationships and are not a REQUIRED
+          feature of this protocol.
+        
+</p>
+<a name="anchor2"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2"></a><h1>2.&nbsp;
+EPP Command Mapping</h1>
+
+<p>
+        A detailed description of the EPP syntax and semantics can be
+        found in the EPP core protocol specification
+        <a class='info' href='#RFC5730'>[RFC5730]<span> (</span><span class='info'>Hollenbeck, S., &ldquo;Extensible Provisioning Protocol (EPP),&rdquo; August&nbsp;2009.</span><span>)</span></a>
+        . The
+        command mappings described here are specifically for use in
+        provisioning and managing generic domain extensions via EPP.
+      
+</p>
+<a name="anchor3"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.1"></a><h2>2.1.&nbsp;
+EPP Query Commands</h2>
+
+<p>EPP provides three commands to retrieve object information:
+          &lt;check&gt; to determine if an object is known to the
+          server, &lt;info&gt; to retrieve detailed information
+          associated with an object, and &lt;transfer&gt; to retrieve
+          object transfer status information.
+        
+</p>
+<a name="anchor4"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.1.1"></a><h3>2.1.1.&nbsp;
+EPP &lt;check&gt; Command</h3>
+
+<p>This
+            extension does not add any elements to the EPP
+            &lt;check&gt;
+            command or &lt;check&gt; response described in
+            the EPP domain
+            mapping
+            <a class='info' href='#RFC5731'>[RFC5731]<span> (</span><span class='info'>Hollenbeck, S., &ldquo;Extensible Provisioning Protocol (EPP) Domain Name Mapping,&rdquo; August&nbsp;2009.</span><span>)</span></a>
+            .
+          
+</p>
+<a name="anchor5"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.1.2"></a><h3>2.1.2.&nbsp;
+EPP &lt;info&gt; Command</h3>
+
+<p>This
+            extension does not add any elements to the EPP
+            &lt;info&gt;
+            command described in the EPP domain mapping
+            <a class='info' href='#RFC5731'>[RFC5731]<span> (</span><span class='info'>Hollenbeck, S., &ldquo;Extensible Provisioning Protocol (EPP) Domain Name Mapping,&rdquo; August&nbsp;2009.</span><span>)</span></a>.
+            However, additional elements are defined for the
+            &lt;info&gt; response.
+          
+</p>
+<p>When
+            an &lt;info&gt; command has been processed successfully, the
+            EPP &lt;resData&gt; element MUST contain child elements as
+            described in the EPP domain mapping
+            <a class='info' href='#RFC5731'>[RFC5731]<span> (</span><span class='info'>Hollenbeck, S., &ldquo;Extensible Provisioning Protocol (EPP) Domain Name Mapping,&rdquo; August&nbsp;2009.</span><span>)</span></a>.
+            In addition,
+            the EPP &lt;extension&gt; element MUST contain
+            an
+            &lt;infData&gt; element identifying the kv namespace. The
+            &lt;infData&gt; element contains the following child
+            elements:
+            </p>
+<ul class="text">
+<li>One or more &lt;kvlist&gt; elements that contain a list
+                of key-value items that are associated with the
+                specified domain. A MANDATORY "name" attribute MUST be
+                present to identify the name of the key-value list.
+              
+</li>
+</ul><p>
+          
+</p>
+<p>The
+            &lt;kvlist&gt; element contains the following child
+            elements:
+            </p>
+<ul class="text">
+<li>One or more &lt;item&gt; elements that contain the
+                value of an item in the list. A MANDATORY "key"
+                attribute MUST be present to indicate the key for the
+                specified item.
+              
+</li>
+</ul><p>
+          
+</p>
+<p>Example &lt;info&gt; response:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+C:&lt;epp xmlns="urn:ietf:params:xml:ns:epp-1.0"
+C:  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+C:  xsi:schemaLocation="urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd"&gt;
+C:  &lt;response&gt;
+C:    &lt;result code="1000"&gt;
+C:      &lt;msg lang="en"&gt;Command completed successfully&lt;/msg&gt;
+C:    &lt;/result&gt;
+C:    &lt;resData&gt;
+C:      &lt;infData xmlns="urn:ietf:params:xml:ns:domain-1.0"
+C:        xsi:schemaLocation=
+C:           "urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd"&gt;
+C:        &lt;name&gt;example.com.au&lt;/name&gt;
+C:        &lt;roid&gt;D0001337-AR&lt;/roid&gt;
+C:        &lt;status s="ok" /&gt;
+C:        &lt;registrant&gt;Registrant&lt;/registrant&gt;
+C:        &lt;contact type="tech"&gt;TECH-1&lt;/contact&gt;
+C:        &lt;clID&gt;Client1&lt;/clID&gt;
+C:        &lt;crID&gt;Client2&lt;/crID&gt;
+C:        &lt;crDate&gt;2010-09-02T04:26:42.0Z&lt;/crDate&gt;
+C:        &lt;exDate&gt;2012-09-02T04:26:42.0Z&lt;/exDate&gt;
+C:        &lt;authInfo&gt;
+C:          &lt;pw&gt;123paSSword&lt;/pw&gt;
+C:        &lt;/authInfo&gt;
+C:      &lt;/infData&gt;
+C:    &lt;/resData&gt;
+C:    &lt;extension&gt;
+C:      &lt;infData xmlns="urn:X-ar:params:xml:ns:kv-1.0"&gt;
+C:        &lt;kvlist name="au"&gt;
+C:          &lt;item key="eligibilityType"&gt;Company&lt;/item&gt;
+C:          &lt;item key="policyReason"&gt;1&lt;/item&gt;
+C:          &lt;item key="registrantIDType"&gt;ACN&lt;/item&gt;
+C:          &lt;item key="registrantIDValue"&gt;123456789&lt;/item&gt;
+C:        &lt;/kvlist&gt;
+C:      &lt;/infData&gt;
+C:    &lt;/extension&gt;
+C:    &lt;trID&gt;
+C:      &lt;clTRID&gt;ABC12345&lt;/clTRID&gt;
+C:      &lt;svTRID&gt;XYZ54321&lt;/svTRID&gt;
+C:    &lt;/trID&gt;
+C:  &lt;/response&gt;
+C:&lt;/epp&gt;
+</pre></div>
+<a name="anchor6"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.1.3"></a><h3>2.1.3.&nbsp;
+EPP &lt;transfer&gt; Command</h3>
+
+<p>This
+            extension does not add any elements to the EPP
+            &lt;transfer&gt; command or &lt;transfer&gt; response
+            described in the EPP domain mapping
+            <a class='info' href='#RFC5731'>[RFC5731]<span> (</span><span class='info'>Hollenbeck, S., &ldquo;Extensible Provisioning Protocol (EPP) Domain Name Mapping,&rdquo; August&nbsp;2009.</span><span>)</span></a>
+            .
+          
+</p>
+<a name="anchor7"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.2"></a><h2>2.2.&nbsp;
+EPP Transform Commands</h2>
+
+<p>EPP provides five commands to transform objects:
+          &lt;create&gt; to create an instance of an object,
+          &lt;delete&gt; to delete an instance of an object,
+          &lt;renew&gt; to extend the validity period of an object,
+          &lt;transfer&gt; to manage object sponsorship changes, and
+          &lt;update&gt; to change information associated with an
+          object.
+        
+</p>
+<a name="anchor8"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.2.1"></a><h3>2.2.1.&nbsp;
+EPP &lt;create&gt; Command</h3>
+
+<p>This
+            extension defines additional elements for the EPP
+            &lt;create&gt; command described in the EPP domain mapping
+            <a class='info' href='#RFC5731'>[RFC5731]<span> (</span><span class='info'>Hollenbeck, S., &ldquo;Extensible Provisioning Protocol (EPP) Domain Name Mapping,&rdquo; August&nbsp;2009.</span><span>)</span></a>
+            .
+          
+</p>
+<p>
+            In
+            addition to the EPP command elements described in the EPP
+            domain mapping
+            <a class='info' href='#RFC5731'>[RFC5731]<span> (</span><span class='info'>Hollenbeck, S., &ldquo;Extensible Provisioning Protocol (EPP) Domain Name Mapping,&rdquo; August&nbsp;2009.</span><span>)</span></a>,
+            the &lt;create&gt; command MUST
+            contain an &lt;extension&gt;
+            element, which MUST contain a
+            &lt;create&gt; element
+            identifying the kv namespace. The
+            &lt;create&gt; element
+            contains the following child
+            elements:
+            </p>
+<ul class="text">
+<li>One or more &lt;kvlist&gt; elements that contain the
+                list of key-value items to be associated with the
+                specified domain. A MANDATORY "name" attribute MUST be
+                present to identify the name of the key-value list.
+              
+</li>
+</ul><p>
+          
+</p>
+<p>The
+            &lt;kvlist&gt; element contains the following child
+            elements:
+            </p>
+<ul class="text">
+<li>One or more &lt;item&gt; elements that contain the
+                value of an item in the list. A MANDATORY "key"
+                attribute MUST be present to indicate the key for the
+                specified item.
+              
+</li>
+</ul><p>
+          
+</p>
+<p>Example &lt;create&gt; command:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+C:&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+C:&lt;epp xmlns="urn:ietf:params:xml:ns:epp-1.0"
+C:  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+C:  xsi:schemaLocation="urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd"&gt;
+C:  &lt;command&gt;
+C:    &lt;create&gt;
+C:      &lt;create xmlns="urn:ietf:params:xml:ns:domain-1.0"
+C:        xsi:schemaLocation=
+C:           "urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd"&gt;
+C:        &lt;name&gt;example.com.au&lt;/name&gt;
+C:        &lt;registrant&gt;Registrant&lt;/registrant&gt;
+C:        &lt;contact type="tech"&gt;Tech1&lt;/contact&gt;
+C:        &lt;authInfo&gt;
+C:          &lt;pw&gt;SjweDcB84E&lt;/pw&gt;
+C:        &lt;/authInfo&gt;
+C:      &lt;/create&gt;
+C:    &lt;/create&gt;
+C:    &lt;extension&gt;
+C:      &lt;create xmlns="urn:X-ar:params:xml:ns:kv-1.0"
+C:        xsi:schemaLocation=
+C:           "urn:X-ar:params:xml:ns:kv-1.0 kv-1.0.xsd"&gt;
+C:        &lt;kvlist name="au"&gt;
+C:          &lt;item key="eligibilityType"&gt;Company&lt;/item&gt;
+C:          &lt;item key="policyReason"&gt;1&lt;/item&gt;
+C:          &lt;item key="registrantName"&gt;My Registrant&lt;/item&gt;
+C:        &lt;/kvlist&gt;
+C:      &lt;/create&gt;
+C:    &lt;/extension&gt;
+C:    &lt;clTRID&gt;ABC-12345&lt;/clTRID&gt;
+C:  &lt;/command&gt;
+C:&lt;/epp&gt;
+</pre></div>
+<p>No additional elements are defined for the EPP
+            &lt;create&gt; response.
+          
+</p>
+<a name="anchor9"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.2.2"></a><h3>2.2.2.&nbsp;
+EPP &lt;delete&gt; Command</h3>
+
+<p>This
+            extension does not add any elements to the EPP
+            &lt;delete&gt; command or &lt;delete&gt; response described
+            in the EPP domain mapping
+            <a class='info' href='#RFC5731'>[RFC5731]<span> (</span><span class='info'>Hollenbeck, S., &ldquo;Extensible Provisioning Protocol (EPP) Domain Name Mapping,&rdquo; August&nbsp;2009.</span><span>)</span></a>
+            .
+          
+</p>
+<a name="anchor10"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.2.3"></a><h3>2.2.3.&nbsp;
+EPP &lt;renew&gt; Command</h3>
+
+<p>This
+            extension does not add any elements to the EPP
+            &lt;renew&gt;
+            command or &lt;renew&gt; response described in
+            the EPP domain
+            mapping
+            <a class='info' href='#RFC5731'>[RFC5731]<span> (</span><span class='info'>Hollenbeck, S., &ldquo;Extensible Provisioning Protocol (EPP) Domain Name Mapping,&rdquo; August&nbsp;2009.</span><span>)</span></a>
+            .
+          
+</p>
+<a name="anchor11"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.2.4"></a><h3>2.2.4.&nbsp;
+EPP &lt;transfer&gt; Command</h3>
+
+<p>This
+            extension does not add any elements to the EPP
+            &lt;transfer&gt; command or &lt;transfer&gt; response
+            described in the EPP domain mapping
+            <a class='info' href='#RFC5731'>[RFC5731]<span> (</span><span class='info'>Hollenbeck, S., &ldquo;Extensible Provisioning Protocol (EPP) Domain Name Mapping,&rdquo; August&nbsp;2009.</span><span>)</span></a>
+            .
+          
+</p>
+<a name="anchor12"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.2.5"></a><h3>2.2.5.&nbsp;
+EPP &lt;update&gt; Command</h3>
+
+<p>This
+            extension defines additional elements for the EPP
+            &lt;update&gt; command described in the EPP domain mapping
+            <a class='info' href='#RFC5731'>[RFC5731]<span> (</span><span class='info'>Hollenbeck, S., &ldquo;Extensible Provisioning Protocol (EPP) Domain Name Mapping,&rdquo; August&nbsp;2009.</span><span>)</span></a>
+            .
+          
+</p>
+<p>
+            In
+            addition to the EPP command elements described in the EPP
+            domain mapping
+            <a class='info' href='#RFC5731'>[RFC5731]<span> (</span><span class='info'>Hollenbeck, S., &ldquo;Extensible Provisioning Protocol (EPP) Domain Name Mapping,&rdquo; August&nbsp;2009.</span><span>)</span></a>,
+            the &lt;update&gt; command MUST
+            contain an &lt;extension&gt;
+            element, which MUST contain a
+            &lt;create&gt; element
+            identifying the kv namespace. The
+            &lt;update&gt; element
+            contains the following child
+            elements:
+            </p>
+<ul class="text">
+<li>One or more &lt;kvlist&gt; elements that contain the
+                list of key-value items to be associated with the
+                specified domain. A MANDATORY "name" attribute MUST be
+                present to identify the name of the key-value list.
+              
+</li>
+</ul><p>
+          
+</p>
+<p>The
+            &lt;kvlist&gt; element contains the following child
+            elements:
+            </p>
+<ul class="text">
+<li>One or more &lt;item&gt; elements that contain the
+                value of an item in the list. A MANDATORY "key"
+                attribute MUST be present to indicate the key for the
+                specified item.
+              
+</li>
+</ul><p>
+          
+</p>
+<p>Example &lt;update&gt; command:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+C:&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+C:&lt;epp xmlns="urn:ietf:params:xml:ns:epp-1.0"
+C:  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+C:  xsi:schemaLocation="urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd"&gt;
+C:  &lt;command&gt;
+C:    &lt;update&gt;
+C:      &lt;update xmlns="urn:ietf:params:xml:ns:domain-1.0"
+C:        xsi:schemaLocation=
+C:           "urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd"&gt;
+C:        &lt;name&gt;example.com.au&lt;/name&gt;
+C:      &lt;/update&gt;
+C:    &lt;/update&gt;
+C:    &lt;extension&gt;
+C:      &lt;update xmlns="urn:X-ar:params:xml:ns:kv-1.0"
+C:        xsi:schemaLocation=
+C:           "urn:X-ar:params:xml:ns:kv-1.0 kv-1.0.xsd"&gt;
+C:        &lt;kvlist name="au"&gt;
+C:          &lt;item key="eligibilityType"&gt;Company&lt;/item&gt;
+C:          &lt;item key="policyReason"&gt;1&lt;/item&gt;
+C:          &lt;item key="registrantName"&gt;New Registrant&lt;/item&gt;
+C:        &lt;/kvlist&gt;
+C:      &lt;/update&gt;
+C:    &lt;/extension&gt;
+C:    &lt;clTRID&gt;ABC-12345&lt;/clTRID&gt;
+C:  &lt;/command&gt;
+C:&lt;/epp&gt;
+</pre></div>
+<p>No additional elements are defined for the EPP
+            &lt;update&gt; response.
+</p>
+<a name="anchor13"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3"></a><h1>3.&nbsp;
+Formal Syntax</h1>
+
+<p>An EPP object mapping is specified in XML Schema notation. The
+        formal syntax presented here is a complete schema representation
+        of the object mapping suitable for automated validation of EPP
+        XML instances. The BEGIN and END tags are not part of the
+        schema;
+        they are used to note the beginning and ending of the
+        schema for
+        URI registration purposes.
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+        BEGIN
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;schema targetNamespace="urn:X-ar:params:xml:ns:kv-1.0"
+   xmlns="http://www.w3.org/2001/XMLSchema"
+   xmlns:kv="urn:X-ar:params:xml:ns:kv-1.0"
+   elementFormDefault="qualified"&gt;
+
+   &lt;!--
+      Definition of kvlist to be reused in other DTDs
+   --&gt;
+   &lt;group name="kvlist"&gt;
+      &lt;sequence&gt;
+         &lt;element name="kvlist" type="kv:listType" /&gt;
+      &lt;/sequence&gt;
+   &lt;/group&gt;
+
+   &lt;!--
+      Command extension elements
+    --&gt;
+   &lt;element name="create" type="kv:createType" /&gt;
+   &lt;element name="update" type="kv:updateType" /&gt;
+
+   &lt;complexType name="createType"&gt;
+      &lt;group ref="kv:kvlist" maxOccurs="unbounded" /&gt;
+   &lt;/complexType&gt;
+
+   &lt;complexType name="updateType"&gt;
+      &lt;group ref="kv:kvlist" maxOccurs="unbounded" /&gt;
+   &lt;/complexType&gt;
+
+   &lt;complexType name="listType"&gt;
+      &lt;sequence maxOccurs="unbounded"&gt;
+         &lt;element name="item" type="kv:itemType" /&gt;
+      &lt;/sequence&gt;
+      &lt;attribute name="name" type="token" use="required" /&gt;
+   &lt;/complexType&gt;
+
+   &lt;complexType name="itemType"&gt;
+      &lt;simpleContent&gt;
+         &lt;extension base="token"&gt;
+            &lt;attribute name="key" type="token" use="required" /&gt;
+         &lt;/extension&gt;
+      &lt;/simpleContent&gt;
+   &lt;/complexType&gt;
+
+   &lt;!--
+      Response extension types
+    --&gt;
+   &lt;element name="infData" type="kv:infDataType" /&gt;
+
+   &lt;complexType name="infDataType"&gt;
+      &lt;group ref="kv:kvlist" maxOccurs="unbounded" /&gt;
+   &lt;/complexType&gt;
+
+&lt;/schema&gt;
+END
+</pre></div>
+<a name="anchor14"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4"></a><h1>4.&nbsp;
+Internationalization Considerations</h1>
+
+<p>
+        EPP is represented in XML, which provides native support for
+        encoding information using the Unicode character set and its
+        more compact representations, including UTF-8
+        <a class='info' href='#RFC3629'>[RFC3629]<span> (</span><span class='info'>Yergeau, F., &ldquo;UTF-8, a transformation format of ISO 10646,&rdquo; November&nbsp;2003.</span><span>)</span></a>
+        .
+        Conformant XML processors recognize both UTF-8 and UTF-16
+        <a class='info' href='#RFC2781'>[RFC2781]<span> (</span><span class='info'>Hoffman, P. and F. Yergeau, &ldquo;UTF-16, an encoding of ISO 10646,&rdquo; February&nbsp;2000.</span><span>)</span></a>.
+        Though XML includes provisions to identify and use
+        other
+        character encodings through use of an "encoding" attribute
+        in an
+        &lt;?xml?&gt; declaration, use of UTF-8 is RECOMMENDED in
+        environments where parser encoding support incompatibility
+        exists.
+      
+</p>
+<p>
+        As an extension of the EPP domain mapping
+        <a class='info' href='#RFC5731'>[RFC5731]<span> (</span><span class='info'>Hollenbeck, S., &ldquo;Extensible Provisioning Protocol (EPP) Domain Name Mapping,&rdquo; August&nbsp;2009.</span><span>)</span></a>
+        , the
+        elements, element content, attributes, and attribute values
+        described in this document MUST inherit the internationalization
+        conventions used to represent higher-layer domain and core
+        protocol structures present in an XML instance that includes
+        this extension.
+      
+</p>
+<a name="anchor15"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5"></a><h1>5.&nbsp;
+Security Considerations</h1>
+
+<p>
+        The mapping extensions described in this document do not
+        provide
+        any security services beyond those described by EPP
+        <a class='info' href='#RFC5730'>[RFC5730]<span> (</span><span class='info'>Hollenbeck, S., &ldquo;Extensible Provisioning Protocol (EPP),&rdquo; August&nbsp;2009.</span><span>)</span></a>
+        , the EPP domain name mapping
+        <a class='info' href='#RFC5731'>[RFC5731]<span> (</span><span class='info'>Hollenbeck, S., &ldquo;Extensible Provisioning Protocol (EPP) Domain Name Mapping,&rdquo; August&nbsp;2009.</span><span>)</span></a>
+        , and protocol
+        layers used by EPP. The security considerations
+        described in
+        these other specifications apply to this
+        specification as well.
+      
+</p>
+<p>
+        As with other domain object transforms, the EPP transform
+        operations described in this document MUST be restricted to the
+        sponsoring client as authenticated using the mechanisms
+        described in Sections 2.9.1.1 and 7 of <a class='info' href='#RFC5730'>[RFC5730]<span> (</span><span class='info'>Hollenbeck, S., &ldquo;Extensible Provisioning Protocol (EPP),&rdquo; August&nbsp;2009.</span><span>)</span></a>
+        . Any
+        attempt to perform a transform operation on a domain object
+        by
+        any client other than the sponsoring client MUST be rejected
+        with an appropriate EPP authorization error.
+      
+</p>
+<a name="rfc.references"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6"></a><h1>6.&nbsp;
+References</h1>
+
+<a name="rfc.references1"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h1>6.1.&nbsp;Normative References</h1>
+<table width="99%" border="0">
+<tr><td class="author-text" valign="top"><a name="RFC2119">[RFC2119]</a></td>
+<td class="author-text"><a href="mailto:sob@harvard.edu">Bradner, S.</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>,&rdquo; BCP&nbsp;14, RFC&nbsp;2119, March&nbsp;1997 (<a href="http://www.rfc-editor.org/rfc/rfc2119.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/html/rfc2119.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc2119.xml">XML</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC5730">[RFC5730]</a></td>
+<td class="author-text">Hollenbeck, S., &ldquo;<a href="http://tools.ietf.org/html/rfc5730">Extensible Provisioning Protocol (EPP)</a>,&rdquo; STD&nbsp;69, RFC&nbsp;5730, August&nbsp;2009 (<a href="http://www.rfc-editor.org/rfc/rfc5730.txt">TXT</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC5731">[RFC5731]</a></td>
+<td class="author-text">Hollenbeck, S., &ldquo;<a href="http://tools.ietf.org/html/rfc5731">Extensible Provisioning Protocol (EPP) Domain Name Mapping</a>,&rdquo; STD&nbsp;69, RFC&nbsp;5731, August&nbsp;2009 (<a href="http://www.rfc-editor.org/rfc/rfc5731.txt">TXT</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC3629">[RFC3629]</a></td>
+<td class="author-text">Yergeau, F., &ldquo;<a href="http://tools.ietf.org/html/rfc3629">UTF-8, a transformation format of ISO 10646</a>,&rdquo; STD&nbsp;63, RFC&nbsp;3629, November&nbsp;2003 (<a href="http://www.rfc-editor.org/rfc/rfc3629.txt">TXT</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC2781">[RFC2781]</a></td>
+<td class="author-text"><a href="mailto:phoffman@imc.org">Hoffman, P.</a> and <a href="mailto:fyergeau@alis.com">F. Yergeau</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc2781">UTF-16, an encoding of ISO 10646</a>,&rdquo; RFC&nbsp;2781, February&nbsp;2000 (<a href="http://www.rfc-editor.org/rfc/rfc2781.txt">TXT</a>).</td></tr>
+</table>
+
+<a name="rfc.references2"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h1>6.2.&nbsp;Informative References</h1>
+<table width="99%" border="0">
+<tr><td class="author-text" valign="top"><a name="W3C.REC-xml-20040204">[W3C.REC-xml-20040204]</a></td>
+<td class="author-text">Maler, E., Paoli, J., Yergeau, F., Sperberg-McQueen, C., and T. Bray, &ldquo;<a href="http://www.w3.org/TR/2004/REC-xml-20040204">Extensible Markup Language (XML) 1.0 (Third Edition)</a>,&rdquo; World Wide Web Consortium FirstEdition&nbsp;REC-xml-20040204, February&nbsp;2004 (<a href="http://www.w3.org/TR/2004/REC-xml-20040204">HTML</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="W3C.REC-xmlschema-1-20041028">[W3C.REC-xmlschema-1-20041028]</a></td>
+<td class="author-text">Thompson, H., Mendelsohn, N., Maloney, M., and D. Beech, &ldquo;<a href="http://www.w3.org/TR/2004/REC-xmlschema-1-20041028">XML Schema Part 1: Structures Second Edition</a>,&rdquo; World Wide Web Consortium Recommendation&nbsp;REC-xmlschema-1-20041028, October&nbsp;2004 (<a href="http://www.w3.org/TR/2004/REC-xmlschema-1-20041028">HTML</a>).</td></tr>
+</table>
+
+<a name="rfc.authors"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h1>Author's Address</h1>
+<table width="99%" border="0" cellpadding="0" cellspacing="0">
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">James Mitchell</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">AusRegistry Pty Ltd</td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:support@ausregistry.com.au">support@ausregistry.com.au</a></td></tr>
+</table>
+</body></html>

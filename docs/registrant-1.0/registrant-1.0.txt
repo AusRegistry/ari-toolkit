@@ -1,0 +1,560 @@
+
+
+
+EPP Registrant Transfer Mapping                              J. Mitchell
+                                                     AusRegistry Pty Ltd
+                                                      September 17, 2010
+
+
+  Registrant Transfer Mapping for the Extensible Provisioning Protocol
+                                 (EPP)
+
+Abstract
+
+   This document describes an Extensible Provisioning Protocol (EPP)
+   extension mapping for the transfer of a domain name registrant.
+   Specified in XML, this mapping extends the core EPP protocol to
+   provide one additional command required for the transfer of a domain
+   name registrant.
+
+Status of This Document
+
+   This document specifies an extension to the EPP protocol first
+   implemented in AusRegistry's Domain Name Registry EPP service.
+   Discussion and suggestions for improvements are welcome.  Please
+   refer to AusRegistry for more information on the status of this
+   document.  Distribution of this document and use of the protocol
+   extensions defined within is unrestricted and unlimited.
+
+Copyright Notice
+
+   Copyright (C) AusRegistry International Pty Ltd (2010)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Mitchell                                                        [Page 1]
+
+                     EPP Registrant Transfer Mapping      September 2010
+
+
+Table of Contents
+
+   1.  Introduction . . . . . . . . . . . . . . . . . . . . . . . . .  3
+     1.1.  Conventions Used In This Document  . . . . . . . . . . . .  3
+   2.  EPP Protocol Extension . . . . . . . . . . . . . . . . . . . .  3
+     2.1.  Command Format . . . . . . . . . . . . . . . . . . . . . .  3
+       2.1.1.  EPP <registrantTransfer> Command . . . . . . . . . . .  4
+   3.  Formal Syntax  . . . . . . . . . . . . . . . . . . . . . . . .  7
+   4.  Internationalization Considerations  . . . . . . . . . . . . .  9
+   5.  Security Considerations  . . . . . . . . . . . . . . . . . . .  9
+   6.  References . . . . . . . . . . . . . . . . . . . . . . . . . .  9
+     6.1.  Normative References . . . . . . . . . . . . . . . . . . .  9
+     6.2.  Informative References . . . . . . . . . . . . . . . . . . 10
+   Author's Address . . . . . . . . . . . . . . . . . . . . . . . . . 10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Mitchell                                                        [Page 2]
+
+                     EPP Registrant Transfer Mapping      September 2010
+
+
+1.  Introduction
+
+   This document describes an protocol extension for version 1.0 of the
+   Extensible Provisioning Protocol (EPP) that allows for the transport
+   of a domain name's registrant.  This extension is specified using the
+   Extensible Markup Language (XML) 1.0, as described in
+   [W3C.REC-xml-20040204] , and XML Schema notation, as described in
+   [W3C.REC-xmlschema-1-20041028] and [W3C.REC-xmlschema-2-20041028].
+
+   The EPP core protocol specification [RFC5730] provides a complete
+   description of EPP command and response structures.  A thorough
+   understanding of the base protocol and specification of relevant
+   extensions is necessary to understand the extension in this document.
+   In addition, this document makes use of elements defined in
+   [AR.KV-1.0] to represent key-value data associated with a domain
+   name.
+
+1.1.  Conventions Used In This Document
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in [RFC2119] .
+
+   In examples, "C:" represents lines sent by a protocol client and "S:"
+   represents lines returned by a protocol server.  Indentation and
+   white space in examples are provided only to illustrate element
+   relationships and are not a REQUIRED feature of this protocol.
+
+
+2.  EPP Protocol Extension
+
+   A detailed description of the EPP syntax and semantics can be found
+   in the EPP core protocol specification [RFC5730].  The protocol
+   extensions described here are specifically for use in supporting
+   transfer of domain registrant.
+
+   The EPP extension framework allows for definition of new protocol
+   elements identified using XML namespace notation with a reference to
+   an XML schema that defines the namespace.  The <epp> element that
+   identifies the beginning of a protocol instance includes multiple
+   child element choices, one of which is an <extension> element whose
+   children define the extension.  For example, a protocol extension
+   element would be described in generic terms as follows:
+
+2.1.  Command Format
+
+   An EPP client interacts with an EPP server by sending a command to
+   the server and receiving a response from the server.  A detailed
+
+
+
+Mitchell                                                        [Page 3]
+
+                     EPP Registrant Transfer Mapping      September 2010
+
+
+   description of the EPP syntax and semantics can be found in
+   [RFC5730].  This document describes an additional EPP domain
+   transform command, <registrantTransfer>, specifically for use in
+   transferring a domain name's registrant.
+
+2.1.1.  EPP <registrantTransfer> Command
+
+   This specification defines an additional EPP command to allow a
+   client to request a transfer of domain registrant.  In addition to
+   the standard EPP elements, an EPP command contains the following
+   elements:
+
+   o  A <registrantTransfer> element.
+
+   o  An OPTIONAL <clTRID> (client transaction identifier) element that
+      MAY be used to uniquely identify the command to the client.
+      Clients are responsible for maintaining their own transaction
+      identifier space to ensure uniqueness.
+
+   The <registrantTransfer> element contains the following child
+   elements:
+
+   o  A <name> element that contains the fully qualified name of the
+      domain object for which the transfer of registrant is being
+      requested.
+
+   o  A <curExpDate> element that contains the date on which the current
+      validity period ends.  This value ensures that repeated
+      <registrantTransfer> commands do not result in multiple,
+      unanticipated successful transfers of registrant.
+
+   o  An OPTIONAL <period> element that contains the number of units to
+      be added to the registration period of the domain object.  The
+      number of units available MAY be subject to limits imposed by the
+      server.
+
+   o  A <kvlist> element that contain the list of key-value items to be
+      associated with the specified domain.  A MANDATORY "name"
+      attribute MUST be present to identify the name of the key-value
+      list.  The <kvlist> element MUST identify the kv namespace, as
+      defined in [AR.KV-1.0].
+
+   o  An OPTIONAL <explanation> element that explains the purpose of the
+      update, e.g. a correction of a spelling mistake.
+
+
+
+
+
+
+
+Mitchell                                                        [Page 4]
+
+                     EPP Registrant Transfer Mapping      September 2010
+
+
+   Example <registrantTransfer> command:
+
+   C:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0">
+   C:  <extension>
+   C:    <command xmlns="urn:X-ar:params:xml:ns:registrant-1.0">
+   C:      <registrantTransfer>
+   C:        <name>example.com.au</name>
+   C:        <curExpDate>1999-04-03Z</curExpDate>
+   C:        <period unit="y">2</period>
+   C:        <kvlist name="au" xmlns="urn:X-ar:params:xml:ns:kv-1.0">
+   C:          <item key="registrantName">AusRegistry Pty Ltd</item>
+   C:          <item key="eligibilityType">Company</item>
+   C:          <item key="policyReason">1</item>
+   C:        </kvlist>
+   C:        <explanation>Sale of business</explanation>
+   C:      </registrantTransfer>
+   C:      <clTRID>ABC12345</clTRID>
+   C:    </command>
+   C:  </extension>
+   C:</epp>
+
+   When a <registrantTransfer> command has been processed successfully,
+   the EPP <resData> element MUST contain an <rtrnData> element that
+   identifies the registrant namespace.  The <rtrnData> element contains
+   the following child elements.
+
+   o  A <name> element that contains the fully qualified name of the
+      domain object.
+
+   o  An <exDate> element that contains the date and time identifying
+      the end of the domain object's registration period.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Mitchell                                                        [Page 5]
+
+                     EPP Registrant Transfer Mapping      September 2010
+
+
+   Example <registrantTransfer> response:
+
+   C:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0">
+   C:  <response>
+   C:    <result code="1000">
+   C:      <msg lang="en">Command completed successfully</msg>
+   C:    </result>
+   C:    <resData>
+   C:      <rtrnData xmlns="urn:X-ar:params:xml:ns:registrant-1.0">
+   C:        <name>example.com.au</name>
+   C:        <exDate>2001-04-03T22:00:00.0Z</exDate>
+   C:      </rtrnData>
+   C:    </resData>
+   C:    <trID>
+   C:      <clTRID>ABC12345</clTRID>
+   C:      <svTRID>XYZ54321</svTRID>
+   C:    </trID>
+   C:  </response>
+   C:</epp>
+
+   When a <registrantTransfer> command has been processed successfully,
+   the EPP <resData> element MUST contain an <rtrnData> element
+   identifying the registrant namespace.  The <rtrnData> element
+   contains the following child elements.
+
+   o  A <name> element that contains the fully qualified name of the
+      domain object.
+
+   o  An <exDate> element that contains the date and time identifying
+      the end of the domain object's registration period.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Mitchell                                                        [Page 6]
+
+                     EPP Registrant Transfer Mapping      September 2010
+
+
+   Example <registrantTransfer> response:
+
+   C:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0">
+   C:  <response>
+   C:    <result code="1000">
+   C:      <msg lang="en">Command completed successfully</msg>
+   C:    </result>
+   C:    <resData>
+   C:      <rtrnData xmlns="urn:X-ar:params:xml:ns:registrant-1.0">
+   C:       <name>example.com</name>
+   C:       <exDate>2001-04-03T22:00:00.0Z</exDate>
+   C:      </rtrnData>
+   C:    </resData>
+   C:    <trID>
+   C:      <clTRID>ABC12345</clTRID>
+   C:      <svTRID>XYZ54321</svTRID>
+   C:    </trID>
+   C:  </response>
+   C:</epp>
+
+
+3.  Formal Syntax
+
+   An EPP object mapping is specified in XML Schema notation.  The
+   formal syntax presented here is a complete schema representation of
+   the object mapping suitable for automated validation of EPP XML
+   instances.  The BEGIN and END tags are not part of the schema; they
+   are used to note the beginning and ending of the schema for URI
+   registration purposes.
+
+   BEGIN
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="urn:X-ar:params:xml:ns:registrant-1.0"
+  xmlns:registrant="urn:X-ar:params:xml:ns:registrant-1.0"
+  xmlns:eppcom="urn:ietf:params:xml:ns:eppcom-1.0"
+  xmlns:epp="urn:ietf:params:xml:ns:epp-1.0"
+  xmlns:domain="urn:ietf:params:xml:ns:domain-1.0"
+  xmlns:kv="urn:X-ar:params:xml:ns:kv-1.0"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified">
+
+  <!--
+    Import common element types.
+  -->
+  <import namespace="urn:ietf:params:xml:ns:eppcom-1.0"
+    schemaLocation="eppcom-1.0.xsd" />
+  <import namespace="urn:ietf:params:xml:ns:epp-1.0"
+    schemaLocation="epp-1.0.xsd" />
+
+
+
+Mitchell                                                        [Page 7]
+
+                     EPP Registrant Transfer Mapping      September 2010
+
+
+  <import namespace="urn:ietf:params:xml:ns:domain-1.0"
+    schemaLocation="domain-1.0.xsd" />
+  <import namespace="urn:X-ar:params:xml:ns:kv-1.0"
+    schemaLocation="kv-1.0.xsd" />
+  <annotation>
+    <documentation> .au Domain Extensions to the Extensible Provisioning
+      Protocol v1.0. schema.</documentation>
+  </annotation>
+
+  <!--
+    Protocol extension framework elements.
+  -->
+  <element name="command" type="registrant:commandType" />
+
+  <!--
+    Protocol extension type definitions.
+  -->
+  <complexType name="commandType">
+    <sequence>
+      <element name="registrantTransfer"
+        type="registrant:registrantTransferType" />
+      <element name="clTRID" type="epp:trIDStringType"
+        minOccurs="0" />
+    </sequence>
+  </complexType>
+
+  <!--
+    Type definitions.
+  -->
+  <complexType name="registrantTransferType">
+    <sequence>
+      <element name="name" type="eppcom:labelType" />
+      <element name="curExpDate" type="date" />
+      <element name="period" type="domain:periodType" minOccurs="0" />
+      <group ref="kv:kvlist" />
+      <element name="explanation" type="normalizedString" />
+    </sequence>
+  </complexType>
+
+  <!--
+    Protocol extension framework response elements.
+  -->
+  <element name="rtrnData" type="registrant:rtrnDataType" />
+  <complexType name="rtrnDataType">
+    <sequence>
+      <element name="name" type="eppcom:labelType" />
+      <element name="exDate" type="dateTime" />
+    </sequence>
+
+
+
+Mitchell                                                        [Page 8]
+
+                     EPP Registrant Transfer Mapping      September 2010
+
+
+  </complexType>
+
+  <!--
+    End of schema.
+  -->
+</schema>
+   END
+
+
+4.  Internationalization Considerations
+
+   EPP is represented in XML, which provides native support for encoding
+   information using the Unicode character set and its more compact
+   representations, including UTF-8 [RFC3629] .  Conformant XML
+   processors recognize both UTF-8 and UTF-16 [RFC2781].  Though XML
+   includes provisions to identify and use other character encodings
+   through use of an "encoding" attribute in an <?xml?> declaration, use
+   of UTF-8 is RECOMMENDED in environments where parser encoding support
+   incompatibility exists.
+
+   As an extension of the EPP core protocol specification [RFC5730] ,
+   the elements, element content, attributes, and attribute values
+   described in this document MUST inherit the internationalization
+   conventions used to represent higher-layer domain and core protocol
+   structures present in an XML instance that includes this extension.
+
+
+5.  Security Considerations
+
+   The mapping extensions described in this document do not provide any
+   security services beyond those described by EPP [RFC5730] and
+   protocol layers used by EPP.  The security considerations described
+   in these other specifications apply to this specification as well.
+
+   As with other domain object transforms, the EPP transform operations
+   described in this document MUST be restricted to the sponsoring
+   client as authenticated using the mechanisms described in Sections
+   2.9.1.1 and 7 of [RFC5730].  Any attempt to perform a transform
+   operation on a domain object by any client other than the sponsoring
+   client MUST be rejected with an appropriate EPP authorization error.
+
+
+6.  References
+
+6.1.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+
+
+Mitchell                                                        [Page 9]
+
+                     EPP Registrant Transfer Mapping      September 2010
+
+
+   [RFC5730]  Hollenbeck, S., "Extensible Provisioning Protocol (EPP)",
+              STD 69, RFC 5730, August 2009.
+
+   [AR.KV-1.0]
+              Mitchell, J., "Key-Value Mapping for the Extensible
+              Provisioning Protocol (EPP)", September 2010.
+
+   [RFC3629]  Yergeau, F., "UTF-8, a transformation format of ISO
+              10646", STD 63, RFC 3629, November 2003.
+
+   [RFC2781]  Hoffman, P. and F. Yergeau, "UTF-16, an encoding of ISO
+              10646", RFC 2781, February 2000.
+
+6.2.  Informative References
+
+   [W3C.REC-xml-20040204]
+              Maler, E., Paoli, J., Yergeau, F., Sperberg-McQueen, C.,
+              and T. Bray, "Extensible Markup Language (XML) 1.0 (Third
+              Edition)", World Wide Web Consortium FirstEdition REC-xml-
+              20040204, February 2004,
+              <http://www.w3.org/TR/2004/REC-xml-20040204>.
+
+   [W3C.REC-xmlschema-1-20041028]
+              Thompson, H., Mendelsohn, N., Maloney, M., and D. Beech,
+              "XML Schema Part 1: Structures Second Edition", World Wide
+              Web Consortium Recommendation REC-xmlschema-1-20041028,
+              October 2004,
+              <http://www.w3.org/TR/2004/REC-xmlschema-1-20041028>.
+
+
+Author's Address
+
+   James Mitchell
+   AusRegistry Pty Ltd
+
+   Email: support@ausregistry.com.au
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Mitchell                                                       [Page 10]
+

@@ -1,0 +1,1515 @@
+
+
+
+
+
+
+.au Registry                                                Chris Wright
+.au Extensions Version 1.1                                Anthony Harris
+Obsoletes: .au Extensions Version 1.0                AusRegistry Pty Ltd
+Category: .au Registry Service Extensions                 June 4th, 2007
+
+       .au Extensions to the Extensible Provisioning Protocol
+
+Status of This Document
+
+   This document specifies an extension to the EPP protocol for use with
+   the .au ccTLD Domain Name Registry EPP service. Discussion and
+   suggestions for improvements are welcome. Please refer to AusRegistry
+   for more information on the status of this document. Distribution of
+   this document and use of the protocol extensions defined within is
+   unrestricted and unlimited.
+
+Copyright Notice
+
+   Copyright (C) AusRegistry Pty Ltd (2007).
+
+Abstract
+
+   This document describes application layer client-server protocol
+   extensions for the Extensible Provisioning Protocol as needed for the
+   management of domain objects stored in the .au  Registry.  Specified
+   in XML, the protocol defines specific object management operations
+   and an extensible framework that maps the protocol extensions to the
+   relevant objects.  This document includes a protocol specification,
+   an object mapping template, and an XML media type registration.  This
+   document obsoletes the .au Extensions version 1.0.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry           .au Registry Service Extensions           [Page 1]
+
+.au Extensions 1.1                  EPP                   June 4th, 2007
+
+
+Table of Contents
+
+   1.  General  . . . . . . . . . . . . . . . . . . . . . . . . . . .  3
+   2.  EPP <greeting> . . . . . . . . . . . . . . . . . . . . . . . .  4
+   3.  EPP <login>  . . . . . . . . . . . . . . . . . . . . . . . . .  5
+   3.1.  EPP <login> Command  . . . . . . . . . . . . . . . . . . . .  5
+   3.2.  EPP <login> Response . . . . . . . . . . . . . . . . . . . .  5
+   4.  EPP <domain:info>  . . . . . . . . . . . . . . . . . . . . . .  6
+   4.1.  EPP <domain:info> Command  . . . . . . . . . . . . . . . . .  6
+   4.2.  EPP <domain:info> Response . . . . . . . . . . . . . . . . .  6
+   5.  EPP <domain:create>  . . . . . . . . . . . . . . . . . . . . . 10
+   5.1.  EPP <domain:create> Command  . . . . . . . . . . . . . . . . 10
+   5.2.  EPP <domain:create> Response . . . . . . . . . . . . . . . . 12
+   6.  EPP <domain:update>  . . . . . . . . . . . . . . . . . . . . . 13
+   6.1.  EPP <domain:update> Command  . . . . . . . . . . . . . . . . 13
+   6.2.  EPP <domain:update> Response . . . . . . . . . . . . . . . . 15
+   7.  au Extensions <auext:registrantTransfer> . . . . . . . . . . . 16
+   7.1.  au Extensions <auext:registrantTransfer> Command . . . . . . 16
+   7.2.  au Extensions <auext:registrantTransfer> Response  . . . . . 18
+   8.  XML Schema . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+   8.1  XML Schema [urn:X-au:params:xml:ns:auext-1.1] . . . . . . . . 20
+   8.2  XML Schema [urn:X-au:params:xml:ns:audomain-1.0]  . . . . . . 25
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry           .au Registry Service Extensions           [Page 2]
+
+.au Extensions 1.1                  EPP                   June 4th, 2007
+
+
+1.  General
+
+   This document contains explanations of the relevant commands from the
+   EPP RFCs that are affected by the inclusion of the au extensions.
+
+   The use of these extensions by the client/server will be identified
+   in the following commands as explained in the relevant sections
+   below:
+
+   -  <login>
+   -  <greeting>
+
+   EPP's command response extension framework [EPP RFC4930 2.7.3] is
+   used to extend the following commands:
+
+   -  <domain:create>
+   -  <domain:update>
+
+   And the following responses:
+
+   -  <domain:info>
+
+   The following additional Protocol Extensions (object/operation
+   extension) [EPP RFC4930 2.7.1] are defined:
+
+   -  <auext:registrantTransfer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry           .au Registry Service Extensions           [Page 3]
+
+.au Extensions 1.1                  EPP                   June 4th, 2007
+
+
+2.  EPP <greeting>
+
+   All standard EPP elements apply plus:
+
+   -  A <svcExtension> element that contains a <extURI> element that
+      includes the namespace URI representing the .au EPP extensions.
+
+   Example <greeting> with .au extensions specified:
+
+   S:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   S:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0"
+   S:  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   S:  xsi:schemaLocation="urn:ietf:params:xml:ns:epp-1.0
+   S:  epp-1.0.xsd">
+   S:  <greeting>
+   S:    <svID>AusRegistry EPP Server</svID>
+   S:    <svDate>2006-02-09T15:42:29.0Z</svDate>
+   S:    <svcMenu>
+   S:      <version>1.0</version>
+   S:      <lang>en</lang>
+   S:      <objURI>urn:ietf:params:xml:ns:domain-1.0</objURI>
+   S:      <objURI>urn:ietf:params:xml:ns:contact-1.0</objURI>
+   S:      <objURI>urn:ietf:params:xml:ns:host-1.0</objURI>
+   S:      <svcExtension>
+   S:        <extURI>urn:X-au:params:xml:ns:auext-1.1</extURI>
+   S:        <extURI>
+   S:          urn:X-au:params:xml:ns:audomain-1.0
+   S:        </extURI>
+   S:        </svcExtension>
+   S:    </svcMenu>
+   S:    <dcp>
+   S:      <access><all/></access>
+   S:      <statement>
+   S:        <purpose><admin/><prov/></purpose>
+   S:        <recipient><ours/><public/></recipient>
+   S:        <retention><stated/></retention>
+   S:      </statement>
+   S:    </dcp>
+   S:  </greeting>
+   S:</epp>
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry           .au Registry Service Extensions           [Page 4]
+
+.au Extensions 1.1                  EPP                   June 4th, 2007
+
+
+3.  EPP <login>
+
+   The login command is not "extended" however the au extensions uri
+   must be specified at time of login.
+
+3.1.  EPP <login> Command
+
+   In addition to the standard EPP elements, an EPP <login> command must
+   also include:
+
+   -  A <svcExtension> element that contains a <extURI> element that
+      includes the namespace URI representing the .au EPP extensions 
+
+   Example EPP Login command with .au extensions specified:
+
+   C:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   C:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0"
+   C:  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   C:  xsi:schemaLocation="urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd">
+   C:  <command>
+   C:    <login>
+   C:      <clID>REGISTRAR</clID>
+   C:      <pw>p4ssw0rd!</pw>
+   C:      <options>
+   C:        <version>1.0</version>
+   C:        <lang>en</lang>
+   C:      </options>
+   C:      <svcs>
+   C:        <objURI>urn:ietf:params:xml:ns:contact-1.0</objURI>
+   C:        <objURI>urn:ietf:params:xml:ns:domain-1.0</objURI>
+   C:        <objURI>urn:ietf:params:xml:ns:host-1.0</objURI>
+   C:        <svcExtension>
+   C:          <extURI>urn:X-au:params:xml:ns:auext-1.1</extURI>
+   C:          <extURI>
+   C:            urn:X-au:params:xml:ns:audomain-1.0
+   C:          </extURI>
+   C:        </svcExtension>
+   C:      </svcs>
+   C:    </login>
+   C:  </command>
+   C:</epp>
+
+3.2.  EPP <login> Response
+
+   No modifications are required.
+
+
+
+
+
+
+AusRegistry           .au Registry Service Extensions           [Page 5]
+
+.au Extensions 1.1                  EPP                   June 4th, 2007
+
+
+4.  EPP <domain:info>
+
+   Extensions are provided to support the ability to view the current
+   .au information associated with a particular domain stored within
+   the registry system.
+
+4.1.  EPP <domain:info> Command
+
+   No modifications required
+
+4.2.  EPP <domain:info> Response
+
+   In addition to the standard EPP elements found in a <domain:info>
+   response a <domain:info> response should also conform to the
+   following using an <extension> element that contains the extensions
+   information specific to the domain.
+
+   -  An <auext:infData> element which contains the .au extension
+      information.
+
+   -  An <auext:auProperties> element which contains the following
+      elements:
+
+      -  An <auext:registrantName> element MUST be provided. This  
+         element MUST contain an English readable or UTF-8 string for the
+         Registrant's name.
+
+      -  An OPTIONAL <auext:registrantID> element that represents the
+         identifier for the Registrant.
+
+      -  Every <auext:registrantID> element MUST have a "type"
+         attribute which is the enumeration of valid Registrant ID
+         values specified in this document.  The type attribute
+         identifies the type of the Registrant ID specified for the
+         <registrantID> element.
+
+      -  An <auext:eligibilityType> element MUST be provided. This
+         element MUST be one of the valid eligibility type values
+         specified by this document.
+
+      -  An OPTIONAL <auext:eligibilityName> element which is only used
+         if different from the Registrants name.
+
+      -  An OPTIONAL <auext:eligibilityID> element that represents the
+         identifier for the eligibility name.
+
+
+
+
+
+
+AusRegistry           .au Registry Service Extensions           [Page 6]
+
+.au Extensions 1.1                  EPP                   June 4th, 2007
+
+
+      -  Every <auext:eligibilityID> element MUST have a "type"
+         attribute which is the enumeration of valid eligibility ID
+         values specified in this document.  The type attribute
+         identifies the type of the eligibility ID specified for the
+         <eligibilityID> element.
+
+      -  A <auext:policyReason> element MUST be provided. This element
+         MUST be one of the valid policy reasons specified by this
+         document.
+
+   Example <domain:info> response for an authorized client:
+
+   S:<?xml version="1.0" encoding="UTF-8" standalone='no'?>
+   S:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0"
+   S:  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   S:  xsi:schemaLocation="urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd">
+   S:  <response>
+   S:    <result code="1000">
+   S:      <msg>Command completed successfully</msg>
+   S:    </result>
+   S:    <resData>
+   S:      <domain:infData
+   S:        xmlns:domain="urn:ietf:params:xml:ns:domain-1.0"
+   S:        xsi:schemaLocation="urn:ietf:params:xml:ns:domain-1.0
+   S:        domain-1.0.xsd">
+   S:        <domain:name>example.com.au</domain:name>
+   S:        <domain:roid>D0000003-AR</domain:roid>
+   S:        <domain:status s="ok" lang="en"/>
+   S:        <domain:registrant>EXAMPLE</domain:registrant>
+   S:        <domain:contact type="tech">EXAMPLE</domain:contact>
+   S:        <domain:ns>
+   S:          <domain:hostObj>ns1.example.com.au</domain:hostObj>
+   S:          <domain:hostObj>ns2.example.com.au</domain:hostObj>
+   S:        </domain:ns>
+   S:        <domain:host>ns1.example.com.au</domain:host>
+   S:        <domain:host>ns2.exmaple.com.au</domain:host>
+   S:        <domain:clID>Registrar</domain:clID>
+   S:        <domain:crID>Registrar</domain:crID>
+   S:        <domain:crDate>2006-02-09T15:44:58.0Z</domain:crDate>
+   S:        <domain:exDate>2008-02-10T00:00:00.0Z</domain:exDate>
+   S:        <domain:authInfo>
+   S:          <domain:pw>0192pqow</domain:pw>
+   S:        </domain:authInfo>
+   S:      </domain:infData>
+   S:    </resData>
+   S:    <extension>
+   S:      <auext:infData
+
+
+
+
+AusRegistry           .au Registry Service Extensions           [Page 7]
+
+.au Extensions 1.1                  EPP                   June 4th, 2007
+
+
+   S:         xmlns:auext="urn:X-au:params:xml:ns:auext-1.1"
+   S:         xsi:schemaLocation=
+   S:         "urn:X-au:params:xml:ns:auext-1.1 auext-1.1.xsd">
+   S:        <auext:auProperties>
+   S:          <auext:registrantName>RegistrantName Pty. Ltd.
+   S:          </auext:registrantName>
+   S:          <auext:registrantID type="ACN">
+   S:            123456789
+   S:          </auext:registrantID>
+   S:          <auext:eligibilityType>Other</auext:eligibilityType>
+   S:          <auext:eligibilityName>
+   S:            Registrant Eligibility
+   S:          </auext:eligibilityName>
+   S:          <auext:eligibilityID type="ABN">
+   S:            987654321
+   S:          </auext:eligibilityID>
+   S:          <auext:policyReason>2</auext:policyReason>
+   S:        </auext:auProperties>
+   S:      </auext:infData>
+   S:    </extension>
+   S:    <trID>
+   S:      <clTRID>ABC-12345</clTRID>
+   S:      <svTRID>805</svTRID>
+   S:    </trID>
+   S:  </response>
+   S:</epp>
+
+   This .au Extension information is only returned to the sponsoring
+   Registrar, all others will receive the response as below:
+
+   Example <info> response for an unauthorized client:
+
+   S:<?xml version="1.0" encoding="UTF-8" standalone='no'?>
+   S:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0"
+   S:  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   S:  xsi:schemaLocation="urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd">
+   S:  <response>
+   S:    <result code="1000">
+   S:      <msg>Command completed successfully</msg>
+   S:    </result>
+   S:    <resData>
+   S:      <domain:infData
+   S:        xmlns:domain="urn:ietf:params:xml:ns:domain-1.0"
+   S:        xsi:schemaLocation="urn:ietf:params:xml:ns:domain-1.0
+   S:        domain-1.0.xsd">
+   S:        <domain:name>example.com.au</domain:name>
+   S:        <domain:roid>D0000003-AR</domain:roid>
+   S:        <domain:clID>Registrar</domain:clID>
+
+
+
+AusRegistry           .au Registry Service Extensions           [Page 8]
+
+.au Extensions 1.1                  EPP                   June 4th, 2007
+
+
+   S:      </domain:infData>
+   S:    </resData>
+   S:    <trID>
+   S:      <clTRID>ABC-12345</clTRID>
+   S:      <svTRID>805</svTRID>
+   S:    </trID>
+   S:  </response>
+   S:</epp>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry           .au Registry Service Extensions           [Page 9]
+
+.au Extensions 1.1                  EPP                   June 4th, 2007
+
+
+5.  EPP <domain:create>
+
+   The EPP domain create command is extended to enable the client to
+   supply the required .au information at time of registration.
+
+5.1.  EPP <domain:create> Command
+
+   In addition to the standard EPP elements found in a <domain:create>
+   command a <domain:create> command should also conform to the
+   following using the <extension> element that contains the extension
+   information specific to the domain being created.
+
+   -  A <auext:create> element which contains a number of elements that
+      hold the information which is specific to the .au name space.
+
+   -  A <auext:auProperties> element which contains the following child
+      elements:
+
+      -  A <auext:registrantName> element MUST be provided. This element
+         MUST contain an english readable string for the Registrants
+         name.
+
+      -  An OPTIONAL <auext:registrantID> element that represents the
+         identifier for the Registrant.
+
+      -  Every <auext:registrantID> element MUST have a "type" attribute
+         which is the enumeration of valid Registrant ID values
+         specified in this document.  The type attribute identifies the
+         type of the Registrant ID specified for the <registrantID>
+         element.
+
+      -  An <auext:eligibilityType> element MUST be provided.  This
+         element MUST be one of the valid eligibility type values
+         specified by this document.
+
+      -  An OPTIONAL <auext:eligibilityName> element which is only used
+         if different from the Registrant's name.
+
+      -  An OPTIONAL <auext:eligibilityID> element that represents the
+         identifier for the eligibility name.
+
+      -  Every <auext:eligibilityID> element MUST have a "type"
+         attribute which is the enumeration of valid eligibility ID
+         values specified in this document.  The type attribute
+         identifies the type of the eligibility ID specified for the
+         <eligibilityID> element.
+
+
+
+
+
+AusRegistry           .au Registry Service Extensions          [Page 10]
+
+.au Extensions 1.1                  EPP                   June 4th, 2007
+
+
+      -  A <auext:policyReason> element MUST be provided. This element
+         MUST be one of the valid policy reasons specified by
+         this document.
+
+   Example <domain:create> command:
+
+   C:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   C:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0"
+   C:  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   C:  xsi:schemaLocation="urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd">
+   C:  <command>
+   C:    <create>
+   C:      <domain:create
+   C:        xmlns:domain="urn:ietf:params:xml:ns:domain-1.0"
+   C:        xsi:schemaLocation=
+   C:        "urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd">
+   C:        <domain:name>example.com.au</domain:name>
+   C:        <domain:registrant>Registrant</domain:registrant>
+   C:        <domain:contact type="tech">Tech2</domain:contact>
+   C:        <domain:authInfo>
+   C:          <domain:pw>0192pqow</domain:pw>
+   C:        </domain:authInfo>
+   C:      </domain:create>
+   C:    </create>
+   C:    <extension>
+   C:      <auext:create
+   C:        xmlns:auext="urn:X-au:params:xml:ns:auext-1.1"
+   C:        xsi:schemaLocation=
+   C:        "urn:X-au:params:xml:ns:auext-1.1 auext-1.1.xsd">
+   C:        <auext:auProperties>
+   C:          <auext:registrantName>
+   C:            RegistrantName Pty. Ltd.
+   C:          </auext:registrantName>
+   C:          <auext:registrantID type="ACN">
+   C:            123456789
+   C:          </auext:registrantID>
+   C:          <auext:eligibilityType>Other</auext:eligibilityType>
+   C:          <auext:eligibilityName>
+   C:            Registrant Eligibility
+   C:          </auext:eligibilityName>
+   C:          <auext:eligibilityID type="ABN">
+   C:            987654321
+   C:          </auext:eligibilityID>
+   C:          <auext:policyReason>2</auext:policyReason>
+   C:        </auext:auProperties>
+   C:      </auext:create>
+   C:    </extension>
+   C:    <clTRID>ABC-12345</clTRID>
+
+
+
+AusRegistry           .au Registry Service Extensions          [Page 11]
+
+.au Extensions 1.1                  EPP                   June 4th, 2007
+
+
+   C:  </command>
+   C:</epp>
+
+5.2.  EPP <domain:create> Response
+
+   No modifications neccessary
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry           .au Registry Service Extensions          [Page 12]
+
+.au Extensions 1.1                  EPP                   June 4th, 2007
+
+
+6.  EPP <domain:update>
+
+   Extensions are provided to enable a client to make "corrections" to
+   domain name .au information as required.
+
+6.1.  EPP <domain:update> Command
+
+   In addition to the standard EPP elements found in a <domain:update>
+   command a <domain:update> command can also conform to the following
+   using the <extension> element that contains the extension information
+   to be updated specific to the domain being updated.
+   
+   Note: these elements are equivilent to an EPP "chg" element, meaning
+   that all information will be replaced with the new .au extension
+   information supplied I.E. the entire .au extension unit is one
+   atomic unit.
+
+   -  A <auext:update> element which contains a number of elements that
+      hold the information which is specific to the .au name space:
+
+      -  A <auext:auProperties> element which contains the following
+         child elements:
+
+         -  A <auext:registrantName> element MUST be provided. This
+            element MUST contain an english readable string for the
+            Registrant's name.
+
+         -  An OPTIONAL <auext:registrantID> element that represents the
+            identifier for the Registrant.
+
+         -  Every <auext:registrantID> element MUST have a "type"
+            attribute which is the enumeration of valid Registrant ID
+            values specified in this document.  The type attribute
+            identifies the type of the Registrant ID specified for the
+            <registrantID> element.
+
+         -  An <auext:eligibilityType> element MUST be provided. This
+            element MUST be one of the valid eligibility type values
+            specified by this document.
+
+         -  An OPTIONAL <auext:eligibilityName> element which is only
+            used if different from the Registrant's name.
+
+         -  An OPTIONAL <auext:eligibilityID> element that represents
+            the identifier for the eligibility name.
+
+
+
+
+
+
+AusRegistry           .au Registry Service Extensions          [Page 13]
+
+.au Extensions 1.1                  EPP                   June 4th, 2007
+
+
+         -  Every <auext:eligibilityID> element MUST have a "type"
+            attribute which is the enumeration of valid eligibility ID
+            values specified in this document.  The type attribute
+            identifies the type of the eligibility ID specified for the
+            <eligibilityID> element.
+
+         -  A <auext:policyReason> element MUST be provided. This
+            element MUST be one of the valid policy reasons specified by
+            this document.
+
+         -  A <auext:explanation> element MUST be provided.  This
+            element must contain an explanation as to the prupose of the
+            update.  For example a correction of a spelling mistake.  It
+            should be noted that these explanations are reviewed by the
+            regulator and this update mechanism is NOT provided to
+            facilitate transfer of registrant.
+
+   Example <domain:update> command:
+
+   C:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   C:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0"
+   C:  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   C:  xsi:schemaLocation="urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd">
+   C:  <command>
+   C:    <update>
+   C:      <domain:update
+   C:        xmlns:domain="urn:ietf:params:xml:ns:domain-1.0"
+   C:        xsi:schemaLocation=
+   C:        "urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd">
+   C:        <domain:name>example.com.au</domain:name>
+   C:        <domain:add>
+   C:          <domain:contact type="tech">Tech2</domain:contact>
+   C:        </domain:add>
+   C:      </domain:update>
+   C:    </update>
+   C:    <extension>
+   C:      <auext:update
+   C:        xmlns:auext="urn:X-au:params:xml:ns:auext-1.1"
+   C:        xsi:schemaLocation=
+   C:        "urn:X-au:params:xml:ns:auext-1.1 auext-1.1.xsd">
+   C:        <auext:auProperties>
+   C:          <auext:registrantName>New Name</auext:registrantName>
+   C:          <auext:registrantID type="ACN">
+   C:            123456789
+   C:          </auext:registrantID>
+   C:          <auext:eligibilityType>Other</auext:eligibilityType>
+   C:          <auext:eligibilityName>
+   C:            Registrant Eligibility</auext:eligibilityName>
+
+
+
+AusRegistry           .au Registry Service Extensions          [Page 14]
+
+.au Extensions 1.1                  EPP                   June 4th, 2007
+
+
+   C:          <auext:eligibilityID type="ABN">
+   C:            987654321
+   C:          </auext:eligibilityID>
+   C:          <auext:policyReason>2</auext:policyReason>
+   C:        </auext:auProperties>
+   C:        <auext:explanation>
+   C:          Registrant made spelling mistake during registration.
+   C:        </auext:explanation>
+   C:      </auext:update>
+   C:    </extension>
+   C:    <clTRID>ABC-12345</clTRID>
+   C:  </command>
+   C:</epp>
+
+6.2.  EPP <domain:update> Response
+
+   No modifications necessary
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry           .au Registry Service Extensions          [Page 15]
+
+.au Extensions 1.1                  EPP                   June 4th, 2007
+
+
+7.  au Extensions <auext:registrantTransfer>
+
+   With this version of the .au extensions an additional command  is
+   added to allow a client to request a "transfer of domain registrant".
+
+7.1.  au Extensions <auext:registrantTransfer> Command
+
+   This command is used to initiate a transfer of registrant of a domain
+   name.  A transfer of domain name from one registrant to another also
+   results in a new license period for the domain name.  An
+   <auext:registrantTransfer> command is defined as follows:
+
+   -  An <auext:command> element which contains the following child
+      elements:
+
+     -  An <auext:registrantTransfer> element which contains the
+        following child elements:
+
+        -  An <auDomain:registrantTransfer> element which contains the
+           following child elements:
+
+           -  An <auDomain:name> element MUST be provided which
+              specifies the fully qualifed name of the domain of which
+              the registrant should be transfered.
+
+           -  An <auDomain:curExpDate> element MUST be provided which
+              specifies the current expiry date of the domain.
+
+           -  An <auDomain:period> element that specifies the period for
+              which the new registrant wants the name to be registered
+
+           -  A <auDomain:auProperties> element that contains the
+              following child elements:
+
+              -  A <auDomain:registrantName> element MUST be provided.
+                 This element MUST contain an english readable string
+                 for the Registrant's name.
+
+              -  An OPTIONAL <auDomain:registrantID> element that
+                 represents the identifier for the Registrant.
+
+              -  Every <auDomain:registrantID> element MUST have a
+                 "type" attribute which is the enumeration of valid
+                 Registrant ID values specified in this document.  The
+                 type attribute identifies the type of the Registrant ID
+                 specified for the <registrantID> element.
+
+
+
+
+
+AusRegistry           .au Registry Service Extensions          [Page 16]
+
+.au Extensions 1.1                  EPP                   June 4th, 2007
+
+
+              -  An <auDomain:eligibilityType> element MUST be provided
+                 This element MUST be one of the valid eligibility type
+                 values specified by this document.
+
+              -  An OPTIONAL <auDomain:eligibilityName> element which is
+                 only used if different from the Registrant's name.
+
+              -  An OPTIONAL <auDomain:eligibilityID> element that
+                 represents the identifier for the eligibility name.
+
+              -  Every <auDomain:eligibilityID> element MUST have a 
+                 type" attribute which is the enumeration of valid
+                 eligibility ID values specified in this document.  The
+                 type attribute identifies the type of the eligibility
+                 ID specified for the <eligibilityID> element.
+
+              -  A <auDomain:policyReason> element MUST be provided.
+                 This element MUST be one of the valid policy reasons
+                 specified by this document.
+
+              -  A <auDomain:explanation> element MUST be provided.
+                 This element must contain an explanation as to the
+                 purpose of the update For example a correction of a
+                 spelling mistake.  It should be noted that these
+                 explanations are reviewed by the regulator and this
+                 update mechanism is NOT provided to facilitate transfer
+                 of registrant.
+
+              -  An OPTIONAL <auext:clTRID> element which contains the
+                 client supplied identifier for the transaction.
+
+   Example <auext:registrantTransfer> command:
+
+   C:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   C:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0"
+   C:  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   C:  xsi:schemaLocation="urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd">
+   C:  <extension>
+   C:    <auext:command
+   C:      xmlns:auext="urn:X-au:params:xml:ns:auext-1.1"
+   C:      xsi:schemaLocation="urn:X-au:params:xml:ns:auext-1.1
+   C:      auext-1.1.xsd">
+   C:      <auext:registrantTransfer>
+   C:        <auDomain:registrantTransfer
+   C:          xmlns:auDomain="urn:X-au:params:xml:ns:audomain-1.0"
+   C:          xsi:schemaLocation="urn:X-au:params:xml:ns:audomain-1.0
+   C:          audomain-1.0.xsd">
+   C:          <auDomain:name>domain.com.au</auDomain:name>
+
+
+
+AusRegistry           .au Registry Service Extensions          [Page 17]
+
+.au Extensions 1.1                  EPP                   June 4th, 2007
+
+
+   C:          <auDomain:curExpDate>2000-04-03</auDomain:curExpDate>
+   C:          <auDomain:period unit="y">2</auDomain:period>
+   C:          <auDomain:auProperties>
+   C:            <auDomain:registrantName>
+   C:              New Name
+   C:            </auDomain:registrantName>
+   C:            <auDomain:registrantID type="ACN">
+   C:              123456789
+   C:            </auDomain:registrantID>
+   C:            <auDomain:eligibilityType>
+   C:              Other
+   C:            </auDomain:eligibilityType>
+   C:            <auDomain:eligibilityName>
+   C:              Registrant Eligibility
+   C:            </auDomain:eligibilityName>
+   C:            <auDomain:eligibilityID type="ABN">
+   C:              987654321
+   C;            </auDomain:eligibilityID>
+   C:            <auDomain:policyReason>2</auDomain:policyReason>
+   C:          </auDomain:auProperties>
+   C:          <auDomain:explanation>
+   C:            Previous registrant has sold the business
+   C:          </auDomain:explanation>
+   C:        </auDomain:registrantTransfer>
+   C:      </auext:registrantTransfer>
+   C:      <auext:clTRID>ABC-12345</auext:clTRID>
+   C:    </auext:command>
+   C:  </extension>
+   C:</epp>
+
+7.2.  au Extensions <auext:registrantTransfer> Response
+
+   The following response will be returned from the au extensions
+   <registrantTransfer> command:
+
+   -  An <auext:response> element that contains the same child elements
+      as the epp:response type does (see EPP RFC).
+
+   The resData section of this response contains the following:
+
+   -  An <auDomain:rtrnData> element that contains the following child
+      elements:
+
+      -  A <auDomain:name> element that contains the fully qualified
+         name of the domain which the registrant transfer was applied.
+
+      -  A <auDomain:exDate> element that contains the new expiry date
+         of the domain after the registrant transfer.
+
+
+
+AusRegistry           .au Registry Service Extensions          [Page 18]
+
+.au Extensions 1.1                  EPP                   June 4th, 2007
+
+
+   Example <auext:registrantTransfer> response:
+
+   S:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   S:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0"
+   S:  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   S:  xsi:schemaLocation="urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd">
+   S:  <extension>
+   S:    <auext:response
+   S:      xmlns:auext="urn:X-au:params:xml:ns:auext-1.1"
+   S:      xsi:schemaLocation="urn:X-au:params:xml:ns:auext-1.1
+   S:      auext-1.1.xsd">
+   S:      <auext:result code="1000">
+   S:        <auext:msg>Command completed successfully</auext:msg>
+   S:      </auext:result>
+   S:      <auext:resData>
+   S:        <auDomain:rtrnData
+   S:          xmlns:auDomain= "urn:X-au:params:xml:ns:audomain-1.0"
+   S:          xsi:schemaLocation="urn:X-au:params:xml:ns:audomain-1.0
+   S:          audomain-1.0.xsd">
+   S:          <auDomain:name>domain.com.au</auDomain:name>
+   S:          <auDomain:exDate>
+   S:            2005-04-03T22:00:00.0Z
+   S:          </auDomain:exDate>
+   S:        </auDomain:rtrnData>
+   S:      </auext:resData>
+   S:      <auext:trID>
+   S:        <auext:clTRID>ABC-12345</auext:clTRID>
+   S:        <auext:svTRID>2389742981742</auext:svTRID>
+   S:      </auext:trID>
+   S:    </auext:response>
+   S:  </extension>
+   S:</epp>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry           .au Registry Service Extensions          [Page 19]
+
+.au Extensions 1.1                  EPP                   June 4th, 2007
+
+
+8.  XML Schema
+
+8.1  XML Schema [urn:X-au:params:xml:ns:auext-1.1]
+
+Formal Syntax:
+
+   BEGIN
+   <?xml version="1.0" encoding="UTF-8"?>
+   <schema targetNamespace="urn:X-au:params:xml:ns:auext-1.1"
+           xmlns:auext="urn:X-au:params:xml:ns:auext-1.1"
+           xmlns:eppcom="urn:ietf:params:xml:ns:eppcom-1.0"
+           xmlns:epp="urn:ietf:params:xml:ns:epp-1.0"
+           xmlns="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+
+   <!--
+   Import common element types.
+   -->
+     <import namespace="urn:ietf:params:xml:ns:eppcom-1.0"
+             schemaLocation="eppcom-1.0.xsd"/>
+     <import namespace="urn:ietf:params:xml:ns:epp-1.0"
+             schemaLocation="epp-1.0.xsd"/>
+
+     <annotation>
+       <documentation>
+         .au Extensions to the
+         Extensible Provisioning
+         Protocol v1.1 schema.
+       </documentation>
+     </annotation>
+
+   <!--
+   Protocol extension framework elements.
+   -->
+     <element name="command" type="auext:commandType"/>
+     <element name="response" type="auext:responseType"/>
+
+     <complexType name="responseType">
+       <sequence>
+         <element name="result" type="auext:resultType"
+           maxOccurs="unbounded"/>
+         <element name="resData" type="epp:extAnyType" minOccurs="0"/>
+         <element name="extension" type="epp:extAnyType" minOccurs="0"/>
+         <element name="trID" type="auext:trIDType"/>
+       </sequence>
+     </complexType>
+
+
+
+
+
+AusRegistry           .au Registry Service Extensions          [Page 20]
+
+.au Extensions 1.1                  EPP                   June 4th, 2007
+
+
+     <complexType name="resultType">
+       <sequence>
+         <element name="msg" type="epp:msgType"/>
+         <choice minOccurs="0" maxOccurs="unbounded">
+           <element name="value" type="epp:errValueType"/>
+           <element name="extValue" type="auext:extErrValueType"/>
+         </choice>
+       </sequence>
+       <attribute name="code" type="epp:resultCodeType" use="required"/>
+     </complexType>
+
+     <complexType name="extErrValueType">
+       <sequence>
+         <element name="value" type="epp:errValueType"/>
+         <element name="reason" type="epp:msgType"/>
+       </sequence>
+     </complexType>
+
+     <complexType name="trIDType">
+       <sequence>
+         <element name="clTRID" type="epp:trIDStringType"
+          minOccurs="0"/>
+         <element name="svTRID" type="epp:trIDStringType"/>
+       </sequence>
+     </complexType>
+
+   <!--
+   Protocol extension type definitions.
+   -->
+     <complexType name="commandType">
+       <sequence>
+         <choice>
+           <element name="registrantTransfer" type="epp:readWriteType"/>
+         </choice>
+         <element name="clTRID" type="epp:trIDStringType"
+          minOccurs="0"/>
+       </sequence>
+     </complexType>
+
+   <!--
+   Command-response framework extension elements.
+   -->
+     <element name="create" type="auext:createType"/>
+     <element name="update" type="auext:updateType"/>
+     <element name="infData" type="auext:infDataType"/>
+
+
+
+
+
+
+AusRegistry           .au Registry Service Extensions          [Page 21]
+
+.au Extensions 1.1                  EPP                   June 4th, 2007
+
+
+   <!--
+   .au update command extension
+   -->
+     <complexType name="updateType">
+       <sequence>
+         <element name="auProperties" type="auext:auPropertiesType"
+          minOccurs="1"/>
+         <element name="explanation" type="auext:explanationType"
+          minOccurs="1"/>
+       </sequence>
+     </complexType>
+
+   <!--
+   .au create command extension
+   -->
+     <complexType name="createType">
+       <sequence>
+         <element name="auProperties" type="auext:auPropertiesType"
+          minOccurs="1"/>
+       </sequence>
+     </complexType>
+
+   <!--
+   .au info response extension
+   -->
+     <complexType name="infDataType">
+       <sequence>
+         <element name="auProperties" type="auext:auPropertiesType"
+          minOccurs="1"/>
+       </sequence>
+     </complexType>
+
+   <!--
+   the .au extension domain properties
+   -->
+     <complexType name="auPropertiesType">
+       <sequence>
+         <element name="registrantName" type="eppcom:labelType"
+          minOccurs="1"/>
+         <element name="registrantID" type="auext:registrantIDType"
+          minOccurs="0"/>
+         <element name="eligibilityType" type="auext:eligType"
+          minOccurs="1"/>
+         <element name="eligibilityName" type="eppcom:labelType"
+          minOccurs="0"/>
+         <element name="eligibilityID" type="auext:eligibilityIDType"
+          minOccurs="0"/>
+         <element name="policyReason" type="auext:policyNumType"
+
+
+
+AusRegistry           .au Registry Service Extensions          [Page 22]
+
+.au Extensions 1.1                  EPP                   June 4th, 2007
+
+
+          minOccurs="1"/>
+       </sequence>
+     </complexType>
+
+   <!--
+   the explanation type
+   -->
+     <simpleType name="explanationType">
+       <restriction base="normalizedString">
+         <maxLength value="1000"/>
+       </restriction>
+     </simpleType>
+
+   <!--
+   registrant id type is used for registrantID
+   -->
+     <complexType name="registrantIDType">
+       <simpleContent>
+         <extension base="eppcom:labelType">
+           <attribute name="type" type="auext:registrantAUIdType"
+            use="required"/>
+         </extension>
+       </simpleContent>
+     </complexType>
+
+   <!--
+   eligibility id type is used for eligibilityID
+   -->
+     <complexType name="eligibilityIDType">
+       <simpleContent>
+         <extension base="eppcom:labelType">
+           <attribute name="type" type="auext:eligibilityAUIdType"
+            use="required"/>
+         </extension>
+       </simpleContent>
+     </complexType>
+
+   <!--
+   enumeration of valid registrant ID types for the .au namespace
+   -->
+     <simpleType name="registrantAUIdType">
+       <restriction base="token">
+         <enumeration value="ACN"/>
+         <enumeration value="ABN"/>
+         <enumeration value="OTHER"/>
+       </restriction>
+     </simpleType>
+
+
+
+
+AusRegistry           .au Registry Service Extensions          [Page 23]
+
+.au Extensions 1.1                  EPP                   June 4th, 2007
+
+
+   <!--
+   enumeration of valid eligibility ID types for the .au namespace
+   -->
+     <simpleType name="eligibilityAUIdType">
+       <restriction base="token">
+         <enumeration value="ACN"/>
+         <enumeration value="ABN"/>
+         <enumeration value="VIC BN"/>
+         <enumeration value="NSW BN"/>
+         <enumeration value="SA BN"/>
+         <enumeration value="NT BN"/>
+         <enumeration value="WA BN"/>
+         <enumeration value="TAS BN"/>
+         <enumeration value="ACT BN"/>
+         <enumeration value="QLD BN"/>
+         <enumeration value="TM"/>
+         <enumeration value="OTHER"/>
+       </restriction>
+     </simpleType>
+
+   <!--
+   enumeration of valid Eligibility Types for the .au namespace
+   -->
+     <simpleType name="eligType">
+       <restriction base="token">
+         <enumeration value="Charity"/>
+         <enumeration value="Child Care Centre"/>
+         <enumeration value="Citizen/Resident"/>
+         <enumeration value="Club"/>
+         <enumeration value="Commercial Statutory Body"/>
+         <enumeration value="Company"/>
+         <enumeration value="Government School"/>
+         <enumeration value="Higher Education Institution"/>
+         <enumeration value="Incorporated Association"/>
+         <enumeration value="Industry Body"/>
+         <enumeration value="National Body"/>
+         <enumeration value="Non-Government School"/>
+         <enumeration value="Non-profit Organisation"/>
+         <enumeration value="Other"/>
+         <enumeration value="Partnership"/>
+         <enumeration value="Pending TM Owner"/>
+         <enumeration value="Political Party"/>
+         <enumeration value="Pre-school"/>
+         <enumeration value="Registered Business"/>
+         <enumeration value="Religious/Church Group"/>
+         <enumeration value="Research Organisation"/>
+         <enumeration value="Sole Trader"/>
+         <enumeration value="Trade Union"/>
+
+
+
+AusRegistry           .au Registry Service Extensions          [Page 24]
+
+.au Extensions 1.1                  EPP                   June 4th, 2007
+
+
+         <enumeration value="Trademark Owner"/>
+         <enumeration value="Training Organisation"/>
+       </restriction>
+     </simpleType>
+
+   <!--
+   Policy numbers can be allocated up to 106.  Less than the max number
+   of policy values may be valued in the .au registry.  This will be
+   handled by registry command validation.  This is done so that a new
+   schema does not have to be released each time the policy reasons are
+   modified.
+   -->
+     <simpleType name="policyNumType">
+       <restriction base="integer">
+         <minInclusive value="1"/>
+         <maxInclusive value="106"/>
+       </restriction>
+     </simpleType>
+
+   <!--
+   End of schema.
+   -->
+   </schema>
+   END
+
+8.2  XML Schema [urn:X-au:params:xml:ns:audomain-1.0]
+
+Formal Syntax:
+
+   BEGIN
+   <?xml version="1.0" encoding="UTF-8"?>
+
+   <schema targetNamespace="urn:X-au:params:xml:ns:audomain-1.0"
+           xmlns:auDomain="urn:X-au:params:xml:ns:audomain-1.0"
+           xmlns:eppcom="urn:ietf:params:xml:ns:eppcom-1.0"
+           xmlns:domain="urn:ietf:params:xml:ns:domain-1.0"
+           xmlns:auext="urn:X-au:params:xml:ns:auext-1.1"
+           xmlns="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+
+   <!--
+   Import common element types.
+   -->
+     <import namespace="urn:ietf:params:xml:ns:eppcom-1.0"
+      schemaLocation="eppcom-1.0.xsd"/>
+     <import namespace="urn:ietf:params:xml:ns:domain-1.0"
+      schemaLocation="domain-1.0.xsd"/>
+     <import namespace="urn:X-au:params:xml:ns:auext-1.1"
+
+
+
+AusRegistry           .au Registry Service Extensions          [Page 25]
+
+.au Extensions 1.1                  EPP                   June 4th, 2007
+
+
+      schemaLocation="auext-1.1.xsd"/>
+
+     <annotation>
+       <documentation>
+         .au Domain Extensions to the Extensible
+         Provisioning Protocol v1.0. schema.
+       </documentation>
+     </annotation>
+
+   <!--
+   Protocol extension framework command elements.
+   -->
+     <element name="registrantTransfer"
+              type="auDomain:registrantTransferType"/>
+
+   <!--
+   Protocol extension framework response elements.
+   -->
+     <element name="rtrnData" type="auDomain:rtrnDataType"/>
+     
+   <!--
+   Type definitions.
+   -->
+     <complexType name="registrantTransferType">
+       <sequence>
+         <element name="name" type="eppcom:labelType" minOccurs="1"/>
+         <element name="curExpDate" type="date" minOccurs="1"/>
+         <element name="period" type="domain:periodType" minOccurs="0"/>
+         <element name="auProperties" type="auDomain:auPropertiesType"
+          minOccurs="1"/>
+         <element name="explanation" type="auext:explanationType"
+          minOccurs="1"/>
+       </sequence>
+     </complexType>
+
+   <!--
+   the .au extension domain properties
+   -->
+     <complexType name="auPropertiesType">
+       <sequence>
+         <element name="registrantName" type="eppcom:labelType"
+          minOccurs="1"/>
+         <element name="registrantID" type="auext:registrantIDType"
+          minOccurs="0"/>
+         <element name="eligibilityType" type="auext:eligType"
+          minOccurs="1"/>
+         <element name="eligibilityName" type="eppcom:labelType"
+          minOccurs="0"/>
+
+
+
+AusRegistry           .au Registry Service Extensions          [Page 26]
+
+         <element name="eligibilityID" type="auext:eligibilityIDType"
+          minOccurs="0"/>
+         <element name="policyReason" type="auext:policyNumType"
+          minOccurs="1"/>
+       </sequence>
+     </complexType>
+
+     <complexType name="rtrnDataType">
+       <sequence>
+         <element name="name" type="eppcom:labelType" minOccurs="1"/>
+         <element name="exDate" type="dateTime" minOccurs="1"/>
+       </sequence>
+     </complexType>
+
+   <!--
+   End of schema.
+   -->
+   </schema>
+   END
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry           .au Registry Service Extensions          [Page 27]
+

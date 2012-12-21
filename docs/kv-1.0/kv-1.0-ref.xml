@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<reference anchor='AR.KV-1.0'>
+
+  <front>
+    <title>Key-Value Mapping for the Extensible
+      Provisioning Protocol
+      (EPP)</title>
+    <author initials='J.' surname='Mitchell' fullname='James Mitchell'>
+      <organization />
+    </author>
+    <date month='September' year='2010' />
+
+    <abstract>
+      <t>This document describes an Extensible Provisioning Protocol
+        (EPP) extension mapping for the transport of arbitrary data
+        associated with domain names stored in a shared central
+        repository.
+      </t>
+    </abstract>
+  </front>
+  <format type='TXT' octets='134464'
+    target='http://www.rfc-editor.org/rfc/rfc5730.txt' />
+</reference>

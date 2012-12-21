@@ -1,0 +1,1517 @@
+
+
+
+
+
+
+.ae Registry                                                Chris Wright
+.ae Extensions Version 1.0                                Anthony Harris
+                                                       AusRegistry Pty Ltd
+Category: .ae Registry Service Extensions              October 1st, 2007
+
+       .ae Extensions to the Extensible Provisioning Protocol
+
+Status of This Document
+
+   This document specifies an extension to the EPP protocol for use with
+   the .ae ccTLD Domain Name Registry EPP service. Discussion and
+   suggestions for improvements are welcome. Please refer to AusRegistry
+   for more information on the status of this document. Distribution of
+   this document and use of the protocol extensions defined within is
+   unrestricted and unlimited.
+
+Copyright Notice
+
+   Copyright (C) AusRegistry Pty Ltd (2007).
+
+Abstract
+
+   This document describes application layer client-server protocol
+   extensions for the Extensible Provisioning Protocol as needed for the
+   management of domain objects stored in the .ae Registry.  Specified
+   in XML, the protocol defines specific object management operations
+   and an extensible framework that maps the protocol extensions to the
+   relevant objects.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry International    .ae Registry Service Extensions    [Page 1]
+
+.ae Extensions 1.0                  EPP                October 1st, 2007
+
+
+Table of Contents
+
+   1.  General  . . . . . . . . . . . . . . . . . . . . . . . . . . .  3
+   2.  EPP <greeting> . . . . . . . . . . . . . . . . . . . . . . . .  4
+   3.  EPP <login>  . . . . . . . . . . . . . . . . . . . . . . . . .  5
+   3.1.  EPP <login> Command  . . . . . . . . . . . . . . . . . . . .  5
+   3.2.  EPP <login> Response . . . . . . . . . . . . . . . . . . . .  5
+   4.  EPP <domain:info>  . . . . . . . . . . . . . . . . . . . . . .  6
+   4.1.  EPP <domain:info> Command  . . . . . . . . . . . . . . . . .  6
+   4.2.  EPP <domain:info> Response . . . . . . . . . . . . . . . . .  6
+   5.  EPP <domain:create>  . . . . . . . . . . . . . . . . . . . . . 10
+   5.1.  EPP <domain:create> Command  . . . . . . . . . . . . . . . . 10
+   5.2.  EPP <domain:create> Response . . . . . . . . . . . . . . . . 12
+   6.  EPP <domain:update>  . . . . . . . . . . . . . . . . . . . . . 13
+   6.1.  EPP <domain:update> Command  . . . . . . . . . . . . . . . . 13
+   6.2.  EPP <domain:update> Response . . . . . . . . . . . . . . . . 15
+   7.  ae Extensions <aeext:registrantTransfer> . . . . . . . . . . . 16
+   7.1.  ae Extensions <aeext:registrantTransfer> Command . . . . . . 16
+   7.2.  ae Extensions <aeext:registrantTransfer> Response  . . . . . 18
+   8.  XML Schema . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+   8.1  XML Schema [urn:X-ae:params:xml:ns:aeext-1.0] . . . . . . . . 20
+   8.2  XML Schema [urn:X-ae:params:xml:ns:aedomain-1.0]  . . . . . . 25
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry International    .ae Registry Service Extensions    [Page 2]
+
+.ae Extensions 1.0                  EPP                October 1st, 2007
+
+
+1.  General
+
+   This document contains explanations of the relevant commands from the
+   EPP RFCs that are affected by the inclusion of the ae extensions.
+
+   The use of these extensions by the client/server will be identified
+   in the following commands as explained in the relevant sections
+   below:
+
+   -  <login>
+   -  <greeting>
+
+   EPP's command response extension framework [EPP RFC4930 2.7.3] is
+   used to extend the following commands:
+
+   -  <domain:create>
+   -  <domain:update>
+
+   And the following responses:
+
+   -  <domain:info>
+
+   The following additional Protocol Extensions (object/operation
+   extension) [EPP RFC4930 2.7.1] are defined:
+
+   -  <aeext:registrantTransfer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry International    .ae Registry Service Extensions    [Page 3]
+
+.ae Extensions 1.0                  EPP                October 1st, 2007
+
+
+2.  EPP <greeting>
+
+   All standard EPP elements apply plus:
+
+   -  A <svcExtension> element that contains a <extURI> element that
+      includes the namespace URI representing the .ae EPP extensions.
+
+   Example <greeting> with .ae extensions specified:
+
+   S:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   S:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0"
+   S:  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   S:  xsi:schemaLocation="urn:ietf:params:xml:ns:epp-1.0
+   S:  epp-1.0.xsd">
+   S:  <greeting>
+   S:    <svID>AusRegistry International EPP Server</svID>
+   S:    <svDate>2006-02-09T15:42:29.0Z</svDate>
+   S:    <svcMenu>
+   S:      <version>1.0</version>
+   S:      <lang>en</lang>
+   S:      <objURI>urn:ietf:params:xml:ns:domain-1.0</objURI>
+   S:      <objURI>urn:ietf:params:xml:ns:contact-1.0</objURI>
+   S:      <objURI>urn:ietf:params:xml:ns:host-1.0</objURI>
+   S:      <svcExtension>
+   S:        <extURI>urn:X-ae:params:xml:ns:aeext-1.0</extURI>
+   S:        <extURI>urn:X-ae:params:xml:ns:aedomain-1.0</extURI>
+   S:        </svcExtension>
+   S:    </svcMenu>
+   S:    <dcp>
+   S:      <access><all/></access>
+   S:      <statement>
+   S:        <purpose><admin/><prov/></purpose>
+   S:        <recipient><ours/><public/></recipient>
+   S:        <retention><stated/></retention>
+   S:      </statement>
+   S:    </dcp>
+   S:  </greeting>
+   S:</epp>
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry International    .ae Registry Service Extensions    [Page 4]
+
+.ae Extensions 1.0                  EPP                October 1st, 2007
+
+
+3.  EPP <login>
+
+   The login command is not "extended" however the ae extensions uri
+   must be specified at time of login.
+
+3.1.  EPP <login> Command
+
+   In addition to the standard EPP elements, an EPP <login> command
+   must also include:
+
+   -  A <svcExtension> element that contains a <extURI> element that
+      includes the namespace URI representing the .ae EPP extensions 
+
+   Example EPP Login command with .ae extensions specified:
+
+   C:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   C:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0"
+   C:  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   C:  xsi:schemaLocation="urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd">
+   C:  <command>
+   C:    <login>
+   C:      <clID>REGISTRAR</clID>
+   C:      <pw>p4S5w@Rd!</pw>
+   C:      <options>
+   C:        <version>1.0</version>
+   C:        <lang>en</lang>
+   C:      </options>
+   C:      <svcs>
+   C:        <objURI>urn:ietf:params:xml:ns:contact-1.0</objURI>
+   C:        <objURI>urn:ietf:params:xml:ns:domain-1.0</objURI>
+   C:        <objURI>urn:ietf:params:xml:ns:host-1.0</objURI>
+   C:        <svcExtension>
+   C:          <extURI>urn:X-ae:params:xml:ns:aeext-1.0</extURI>
+   C:          <extURI>urn:X-ae:params:xml:ns:aedomain-1.0</extURI>
+   C:        </svcExtension>
+   C:      </svcs>
+   C:    </login>
+   C:  </command>
+   C:</epp>
+
+3.2.  EPP <login> Response
+
+   No modifications are required.
+
+
+
+
+
+
+
+
+AusRegistry International    .ae Registry Service Extensions    [Page 5]
+
+.ae Extensions 1.0                  EPP                October 1st, 2007
+
+
+4.  EPP <domain:info>
+
+   Extensions are provided to support the ability to view the current
+   .ae information associated with a particular domain stored within
+   the registry system.
+
+4.1.  EPP <domain:info> Command
+
+   No modifications required
+
+4.2.  EPP <domain:info> Response
+
+   In addition to the standard EPP elements found in a <domain:info>
+   response a <domain:info> response should also conform to the
+   following using an <extension> element that contains the extension
+   information specific to the domain.
+
+   -  An <aeext:infData> element which contains the .ae extension
+      information.
+
+   -  An <aeext:aeProperties> element which contains the following
+      elements:
+
+      -  An <aeext:registrantName> element MUST be provided. This  
+         element MUST contain an English readable or UTF-8 string for the
+         Registrant's name.
+
+      -  An OPTIONAL <aeext:registrantID> element that represents the
+         identifier for the Registrant.  This MUST be specified if the
+         eligibilityType element contains the value "Trademark".
+
+      -  The <aeext:registrantID> element MUST have a "type" attribute
+         which is the enumeration of valid Registrant ID values
+         specified in this document.  The type attribute identifies the
+         type of the Registrant ID specified for the <registrantID>
+         element.
+
+      -  An <aeext:eligibilityType> element MUST be provided. This
+         element MUST be one of the valid eligibility type values
+         specified by this document.
+
+      -  An OPTIONAL <aeext:eligibilityName> element which is only used
+         if different from the Registrant's name.
+
+      -  An OPTIONAL <aeext:eligibilityID> element that represents the
+         identifier for the eligibility name.
+
+
+
+
+
+AusRegistry International    .ae Registry Service Extensions    [Page 6]
+
+.ae Extensions 1.0                  EPP                October 1st, 2007
+
+
+      -  The <aeext:eligibilityID> element MUST have a "type"
+         attribute which is the enumeration of valid eligibility ID
+         values specified in this document.  The type attribute
+         identifies the type of the eligibility ID specified for the
+         <eligibilityID> element.
+
+      -  A <aeext:policyReason> element MUST be provided. This element
+         MUST be one of the valid policy reasons specified by this
+         document.
+
+   Example <domain:info> response for an authorized client:
+
+   S:<?xml version="1.0" encoding="UTF-8" standalone='no'?>
+   S:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0"
+   S:  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   S:  xsi:schemaLocation="urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd">
+   S:  <response>
+   S:    <result code="1000">
+   S:      <msg>Command completed successfully</msg>
+   S:    </result>
+   S:    <resData>
+   S:      <infData xmlns="urn:ietf:params:xml:ns:domain-1.0">
+   S:        <name>example.co.ae</name>
+   S:        <roid>D0000003-AR</roid>
+   S:        <status s="ok" lang="en"/>
+   S:        <registrant>EXAMPLE</registrant>
+   S:        <contact type="tech">EXAMPLE</contact>
+   S:        <ns>
+   S:          <hostObj>ns1.example.co.ae</hostObj>
+   S:          <hostObj>ns2.example.co.ae</hostObj>
+   S:        </ns>
+   S:        <host>ns1.example.co.ae</host>
+   S:        <host>ns2.exmaple.co.ae</host>
+   S:        <clID>Registrar</clID>
+   S:        <crID>Registrar</crID>
+   S:        <crDate>2006-02-09T15:44:58.0Z</crDate>
+   S:        <exDate>2008-02-10T00:00:00.0Z</exDate>
+   S:        <authInfo>
+   S:          <pw>0192pqow</pw>
+   S:        </authInfo>
+   S:      </infData>
+   S:    </resData>
+   S:    <extension>
+   S:      <infData xmlns="urn:X-ae:params:xml:ns:aeext-1.0">
+   S:        <aeProperties>
+   S:          <registrantName>Not Related Ltd</registrantName>
+   S:          <registrantID type="Trade License">
+   S:            123456789
+   S:          </registrantID>
+
+
+AusRegistry International    .ae Registry Service Extensions    [Page 7]
+
+.ae Extensions 1.0                  EPP                October 1st, 2007
+
+
+   S:          <eligibilityType>Trademark (IT)</eligibilityType>
+   S:          <eligibilityName>Examples Are Us</eligibilityName>
+   S:          <eligibilityID type="Trademark">987654321</eligibilityID>
+   S:          <policyReason>1</policyReason>
+   S:        </aeProperties>
+   S:      </infData>
+   S:    </extension>
+   S:    <trID>
+   S:      <clTRID>ABC-12345</clTRID>
+   S:      <svTRID>805</svTRID>
+   S:    </trID>
+   S:  </response>
+   S:</epp>
+
+   Limited .ae Extension information is returned to non-sponsoring Registrars:
+
+   Example <info> response for an unauthorized client:
+
+   S:<?xml version="1.0" encoding="UTF-8" standalone='no'?>
+   S:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0"
+   S:  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   S:  xsi:schemaLocation="urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd">
+   S:  <response>
+   S:    <result code="1000">
+   S:      <msg>Command completed successfully</msg>
+   S:    </result>
+   S:    <resData>
+   S:      <infData xmlns="urn:ietf:params:xml:ns:domain-1.0">
+   S:        <name>example.co.ae</name>
+   S:        <roid>D0000003-AR</roid>
+   S:        <clID>Registrar</clID>
+   S:      </infData>
+   S:    </resData>
+   S:    <extension>
+   S:      <infData xmlns="urn:X-ae:params:xml:ns:aeext-1.0">
+   S:        <aeProperties>
+   S:          <registrantName>Example Co Ltd</registrantName>
+   S:          <registrantID type="Trade License">
+   S:            123456789
+   S:          </registrantID>
+   S:          <eligibilityType>Trademark (IT)</eligibilityType>
+   S:          <eligibilityName>Examples Are Us</eligibilityName>
+   S:          <eligibilityID type="Trademark">987654321</eligibilityID>
+   S:        </aeProperties>
+   S:      </infData>
+   S:    </extension>
+   S:    <trID>
+   S:      <clTRID>ABC-12345</clTRID>
+
+
+
+AusRegistry International    .ae Registry Service Extensions    [Page 8]
+
+.ae Extensions 1.0                  EPP                October 1st, 2007
+
+
+
+   S:      <svTRID>805</svTRID>
+   S:    </trID>
+   S:  </response>
+   S:</epp>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry International    .ae Registry Service Extensions    [Page 9]
+
+.ae Extensions 1.0                  EPP                October 1st, 2007
+
+
+5.  EPP <domain:create>
+
+   The EPP domain create command is extended to enable the client to
+   supply the required .ae information at time of registration.
+
+5.1.  EPP <domain:create> Command
+
+   In addition to the standard EPP elements found in a <domain:create>
+   command a <domain:create> command should also conform to the
+   following using the <extension> element that contains the extension
+   information specific to the domain being created.
+
+   -  A <aeext:create> element which contains a number of elements that
+      hold the information which is specific to the .ae name space.
+
+   -  A <aeext:aeProperties> element which contains the following child
+      elements:
+
+      -  A <aeext:registrantName> element MUST be provided. This element
+         MUST contain an english readable string for the Registrants
+         name.
+
+      -  An OPTIONAL <aeext:registrantID> element that represents the
+         identifier for the Registrant.
+
+      -  Every <aeext:registrantID> element MUST have a "type" attribute
+         which is the enumeration of valid Registrant ID values
+         specified in this document.  The type attribute identifies the
+         type of the Registrant ID specified for the <registrantID>
+         element.
+
+      -  An <aeext:eligibilityType> element MUST be provided.  This
+         element MUST be one of the valid eligibility type values
+         specified by this document.
+
+      -  An OPTIONAL <aeext:eligibilityName> element which is only used
+         if different from the Registrant's name.
+
+      -  An OPTIONAL <aeext:eligibilityID> element that represents the
+         identifier for the eligibility name.
+
+      -  Every <aeext:eligibilityID> element MUST have a "type"
+         attribute which is the enumeration of valid eligibility ID
+         values specified in this document.  The type attribute
+         identifies the type of the eligibility ID specified for the
+         <eligibilityID> element.
+
+
+
+
+
+AusRegistry International    .ae Registry Service Extensions   [Page 10]
+
+.ae Extensions 1.0                  EPP                October 1st, 2007
+
+
+      -  A <aeext:policyReason> element MUST be provided. This element
+         MUST be one of the valid policy reasons specified by
+         this document.
+
+   Example <domain:create> command:
+
+   C:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   C:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0"
+   C:  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   C:  xsi:schemaLocation="urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd">
+   C:  <command>
+   C:    <create>
+   C:      <create xmlns="urn:ietf:params:xml:ns:domain-1.0">
+   C:        <name>example.co.ae</name>
+   C:        <registrant>Registrant</registrant>
+   C:        <contact type="tech">Tech2</contact>
+   C:        <authInfo>
+   C:          <pw>0192pqow</pw>
+   C:        </authInfo>
+   C:      </create>
+   C:    </create>
+   C:    <extension>
+   C:      <create xmlns:aeext="urn:X-ae:params:xml:ns:aeext-1.0">
+   C:        <aeProperties>
+   C:          <registrantName>Unrelated Co Ltd.</registrantName>
+   C:          <registrantID type="Trade License">
+   C:            123456789
+   C:          </registrantID>
+   C:          <eligibilityType>Trademark (IT)</eligibilityType>
+   C:          <eligibilityName>Example Things</eligibilityName>
+   C:          <eligibilityID type="Trademark">987654321</eligibilityID>
+   C:          <policyReason>1</policyReason>
+   C:        </aeProperties>
+   C:      </create>
+   C:    </extension>
+   C:    <clTRID>ABC-12345</clTRID>
+   C:  </command>
+   C:</epp>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry International    .ae Registry Service Extensions   [Page 11]
+
+.ae Extensions 1.0                  EPP                October 1st, 2007
+
+
+
+5.2.  EPP <domain:create> Response
+
+   No modifications neccessary
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry International    .ae Registry Service Extensions   [Page 12]
+
+.ae Extensions 1.0                  EPP                October 1st, 2007
+
+
+6.  EPP <domain:update>
+
+   Extensions are provided to enable a client to make "corrections" to
+   domain name .ae information as required.
+
+6.1.  EPP <domain:update> Command
+
+   In addition to the standard EPP elements found in a <domain:update>
+   command a <domain:update> command can also conform to the following
+   using the <extension> element that contains the extension information
+   to be updated specific to the domain being updated.
+   
+   Note: these elements are equivilent to an EPP "chg" element, meaning
+   that all information will be replaced with the new .ae extension
+   information supplied I.E. the entire .ae extension unit is one
+   atomic unit.
+
+   -  A <aeext:update> element which contains a number of elements that
+      hold the information which is specific to the .ae name space:
+
+      -  A <aeext:aeProperties> element which contains the following
+         child elements:
+
+         -  A <aeext:registrantName> element MUST be provided. This
+            element MUST contain an english readable string for the
+            Registrant's name.
+
+         -  An OPTIONAL <aeext:registrantID> element that represents the
+            identifier for the Registrant.
+
+         -  Every <aeext:registrantID> element MUST have a "type"
+            attribute which is the enumeration of valid Registrant ID
+            values specified in this document.  The type attribute
+            identifies the type of the Registrant ID specified for the
+            <registrantID> element.
+
+         -  An <aeext:eligibilityType> element MUST be provided. This
+            element MUST be one of the valid eligibility type values
+            specified by this document.
+
+         -  An OPTIONAL <aeext:eligibilityName> element which is only
+            used if different from the Registrant's name.
+
+         -  An OPTIONAL <aeext:eligibilityID> element that represents
+            the identifier for the eligibility name.
+
+
+
+
+
+
+AusRegistry International    .ae Registry Service Extensions   [Page 13]
+
+.ae Extensions 1.0                  EPP                October 1st, 2007
+
+
+         -  Every <aeext:eligibilityID> element MUST have a "type"
+            attribute which is the enumeration of valid eligibility ID
+            values specified in this document.  The type attribute
+            identifies the type of the eligibility ID specified for the
+            <eligibilityID> element.
+
+         -  A <aeext:policyReason> element MUST be provided. This
+            element MUST be one of the valid policy reasons specified by
+            this document.
+
+         -  A <aeext:explanation> element MUST be provided.  This
+            element must contain an explanation as to the prupose of the
+            update.  For example a correction of a spelling mistake.  It
+            should be noted that these explanations are reviewed by the
+            regulator and this update mechanism is NOT provided to
+            facilitate transfer of registrant.
+
+   Example <domain:update> command:
+
+   C:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   C:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0"
+   C:  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   C:  xsi:schemaLocation="urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd">
+   C:  <command>
+   C:    <update>
+   C:      <update xmlns="urn:ietf:params:xml:ns:domain-1.0">
+   C:        <name>example.co.ae</name>
+   C:        <add>
+   C:          <contact type="tech">Tech2</contact>
+   C:        </add>
+   C:      </update>
+   C:    </update>
+   C:    <extension>
+   C:      <update xmlns="urn:X-ae:params:xml:ns:aeext-1.0">
+   C:        <aeProperties>
+   C:          <registrantName>New Name</registrantName>
+   C:          <registrantID type="Trade License">
+   C:            123456789
+   C:          </registrantID>
+   C:          <eligibilityType>Trademark (IT)</eligibilityType>
+   C:          <eligibilityName>Good Example</eligibilityName>
+   C:          <eligibilityID type="Trademark">987654321</eligibilityID>
+   C:          <policyReason>1</policyReason>
+   C:        </aeProperties>
+   C:        <explanation>
+   C:          Registrant made spelling mistake during registration.
+   C:        </explanation>
+   C:      </update>
+   C:    </extension>
+
+
+AusRegistry International    .ae Registry Service Extensions   [Page 14]
+
+.ae Extensions 1.0                  EPP                October 1st, 2007
+
+
+   C:    <clTRID>ABC-12345</clTRID>
+   C:  </command>
+   C:</epp>
+
+6.2.  EPP <domain:update> Response
+
+   No modifications necessary
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry International    .ae Registry Service Extensions   [Page 15]
+
+.ae Extensions 1.0                  EPP                October 1st, 2007
+
+
+7.  ae Extensions <aeext:registrantTransfer>
+
+   With this version of the .ae extensions an additional command  is
+   added to allow a client to request a "transfer of domain registrant".
+
+7.1.  ae Extensions <aeext:registrantTransfer> Command
+
+   This command is used to initiate a transfer of registrant of a domain
+   name.  A transfer of domain name from one registrant to another also
+   results in a new license period for the domain name.  An
+   <aeext:registrantTransfer> command is defined as follows:
+
+   -  An <aeext:command> element which contains the following child
+      elements:
+
+     -  An <aeext:registrantTransfer> element which contains the
+        following child elements:
+
+        -  An <aeDomain:registrantTransfer> element which contains the
+           following child elements:
+
+           -  An <aeDomain:name> element MUST be provided which
+              specifies the fully qualifed name of the domain of which
+              the registrant should be transfered.
+
+           -  An <aeDomain:curExpDate> element MUST be provided which
+              specifies the current expiry date of the domain.
+
+           -  An <aeDomain:period> element that specifies the period for
+              which the new registrant wants the name to be registered
+
+           -  A <aeDomain:aeProperties> element that contains the
+              following child elements:
+
+              -  A <aeDomain:registrantName> element MUST be provided.
+                 This element MUST contain an english readable string
+                 for the Registrant's name.
+
+              -  An OPTIONAL <aeDomain:registrantID> element that
+                 represents the identifier for the Registrant.
+
+              -  Every <aeDomain:registrantID> element MUST have a
+                 "type" attribute which is the enumeration of valid
+                 Registrant ID values specified in this document.  The
+                 type attribute identifies the type of the Registrant ID
+                 specified for the <registrantID> element.
+
+
+
+
+
+AusRegistry International    .ae Registry Service Extensions   [Page 16]
+
+.ae Extensions 1.0                  EPP                October 1st, 2007
+
+
+              -  An <aeDomain:eligibilityType> element MUST be provided
+                 This element MUST be one of the valid eligibility type
+                 values specified by this document.
+
+              -  An OPTIONAL <aeDomain:eligibilityName> element which is
+                 only used if different from the Registrant's name.
+
+              -  An OPTIONAL <aeDomain:eligibilityID> element that
+                 represents the identifier for the eligibility name.
+
+              -  Every <aeDomain:eligibilityID> element MUST have a 
+                 type" attribute which is the enumeration of valid
+                 eligibility ID values specified in this document.  The
+                 type attribute identifies the type of the eligibility
+                 ID specified for the <eligibilityID> element.
+
+              -  A <aeDomain:policyReason> element MUST be provided.
+                 This element MUST be one of the valid policy reasons
+                 specified by this document.
+
+              -  A <aeDomain:explanation> element MUST be provided.
+                 This element must contain an explanation as to the
+                 purpose of the update For example a correction of a
+                 spelling mistake.  It should be noted that these
+                 explanations are reviewed by the regulator and this
+                 update mechanism is NOT provided to facilitate transfer
+                 of registrant.
+
+              -  An OPTIONAL <aeext:clTRID> element which contains the
+                 client supplied identifier for the transaction.
+
+   Example <aeext:registrantTransfer> command:
+
+   C:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   C:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0"
+   C:  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   C:  xsi:schemaLocation="urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd">
+   C:  <extension>
+   C:    <command xmlns="urn:X-ae:params:xml:ns:aeext-1.0">
+   C:      <registrantTransfer>
+   C:        <registrantTransfer
+   C:            xmlns="urn:X-ae:params:xml:ns:aedomain-1.0">
+   C:          <name>domain.co.ae</name>
+   C:          <curExpDate>2000-04-03</curExpDate>
+   C:          <period unit="y">2</period>
+   C:          <aeProperties>
+   C:            <registrantName>New Name</registrantName>
+
+
+
+
+AusRegistry International    .ae Registry Service Extensions   [Page 17]
+
+.ae Extensions 1.0                  EPP                October 1st, 2007
+
+
+   C:            <registrantID type="Trade License">
+   C:              123456789
+   C:            </registrantID>
+   C:            <eligibilityType>Trademark (IT)</eligibilityType>
+   C:            <eligibilityName>Registrant Elig</eligibilityName>
+   C:            <eligibilityID type="Trademark">
+   C:              987654321
+   C:            </eligibilityID>
+   C:            <policyReason>2</policyReason>
+   C:          </aeProperties>
+   C:          <explanation>Previous registrant has sold the business
+   C:          </explanation>
+   C:        </registrantTransfer>
+   C:      </registrantTransfer>
+   C:      <clTRID>ABC-12345</clTRID>
+   C:    </command>
+   C:  </extension>
+   C:</epp>
+
+7.2.  ae Extensions <aeext:registrantTransfer> Response
+
+   The following response will be returned from the ae extensions
+   <registrantTransfer> command:
+
+   -  An <aeext:response> element that contains the same child elements
+      as the epp:response type does (see EPP RFC).
+
+   The resData section of this response contains the following:
+
+   -  An <aeDomain:rtrnData> element that contains the following child
+      elements:
+
+      -  A <aeDomain:name> element that contains the fully qualified
+         name of the domain which the registrant transfer was applied.
+
+      -  An OPTIONAL <aeDomain:exDate> element that contains the new
+	 expiry date of the domain after the registrant transfer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry International    .ae Registry Service Extensions   [Page 18]
+
+.ae Extensions 1.0                  EPP                October 1st, 2007
+
+
+   Example <aeext:registrantTransfer> response:
+
+   S:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   S:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0"
+   S:  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   S:  xsi:schemaLocation="urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd">
+   S:  <extension>
+   S:    <response xmlns="urn:X-ae:params:xml:ns:aeext-1.0">
+   S:      <result code="1000">
+   S:        <msg>Command completed successfully</msg>
+   S:      </result>
+   S:      <resData>
+   S:        <rtrnData xmlns="urn:X-ae:params:xml:ns:aedomain-1.0">
+   S:          <name>domain.co.ae</name>
+   S:          <exDate>2005-04-03T22:00:00.0Z</exDate>
+   S:        </rtrnData>
+   S:      </resData>
+   S:      <trID>
+   S:        <clTRID>ABC-12345</clTRID>
+   S:        <svTRID>2389742981742</svTRID>
+   S:      </trID>
+   S:    </response>
+   S:  </extension>
+   S:</epp>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry International    .ae Registry Service Extensions   [Page 19]
+
+.ae Extensions 1.0                  EPP                October 1st, 2007
+
+
+8.  XML Schema
+
+8.1  XML Schema [urn:X-ae:params:xml:ns:aeext-1.0]
+
+Formal Syntax:
+
+   BEGIN
+   <?xml version="1.0" encoding="UTF-8"?>
+   <schema targetNamespace="urn:X-ae:params:xml:ns:aeext-1.0"
+           xmlns:aeext="urn:X-ae:params:xml:ns:aeext-1.0"
+           xmlns:eppcom="urn:ietf:params:xml:ns:eppcom-1.0"
+           xmlns:epp="urn:ietf:params:xml:ns:epp-1.0"
+           xmlns="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+
+   <!--
+   Import common element types.
+   -->
+     <import namespace="urn:ietf:params:xml:ns:eppcom-1.0"
+             schemaLocation="eppcom-1.0.xsd"/>
+     <import namespace="urn:ietf:params:xml:ns:epp-1.0"
+             schemaLocation="epp-1.0.xsd"/>
+
+     <annotation>
+       <documentation>
+	       .ae Extensions to the
+	       Extensible Provisioning Protocol v1.0 schema.
+       </documentation>
+     </annotation>
+
+   <!--
+   Protocol extension framework elements.
+   -->
+     <element name="command" type="aeext:commandType"/>
+     <element name="response" type="aeext:responseType"/>
+
+     <complexType name="responseType">
+       <sequence>
+         <element name="result" type="aeext:resultType"
+           maxOccurs="unbounded"/>
+         <element name="resData" type="epp:extAnyType" minOccurs="0"/>
+         <element name="extension" type="epp:extAnyType" minOccurs="0"/>
+         <element name="trID" type="aeext:trIDType"/>
+       </sequence>
+     </complexType>
+
+
+
+
+
+
+AusRegistry International    .ae Registry Service Extensions   [Page 20]
+
+.ae Extensions 1.0                  EPP                October 1st, 2007
+
+
+     <complexType name="resultType">
+       <sequence>
+         <element name="msg" type="epp:msgType"/>
+         <choice minOccurs="0" maxOccurs="unbounded">
+           <element name="value" type="epp:errValueType"/>
+           <element name="extValue" type="aeext:extErrValueType"/>
+         </choice>
+       </sequence>
+       <attribute name="code" type="epp:resultCodeType" use="required"/>
+     </complexType>
+
+     <complexType name="extErrValueType">
+       <sequence>
+         <element name="value" type="epp:errValueType"/>
+         <element name="reason" type="epp:msgType"/>
+       </sequence>
+     </complexType>
+
+     <complexType name="trIDType">
+       <sequence>
+         <element name="clTRID" type="epp:trIDStringType"
+          minOccurs="0"/>
+         <element name="svTRID" type="epp:trIDStringType"/>
+       </sequence>
+     </complexType>
+
+   <!--
+   Protocol extension type definitions.
+   -->
+     <complexType name="commandType">
+       <sequence>
+         <choice>
+           <element name="registrantTransfer" type="epp:readWriteType"/>
+         </choice>
+         <element name="clTRID" type="epp:trIDStringType"
+          minOccurs="0"/>
+       </sequence>
+     </complexType>
+
+   <!--
+   Command-response framework extension elements.
+   -->
+     <element name="create" type="aeext:createType"/>
+     <element name="update" type="aeext:updateType"/>
+     <element name="infData" type="aeext:infDataType"/>
+
+
+
+
+
+
+AusRegistry International    .ae Registry Service Extensions   [Page 21]
+
+.ae Extensions 1.0                  EPP                October 1st, 2007
+
+
+   <!--
+   .ae update command extension
+   -->
+     <complexType name="updateType">
+       <sequence>
+         <element name="aeProperties" type="aeext:aePropertiesType"
+          minOccurs="1"/>
+         <element name="explanation" type="aeext:explanationType"
+          minOccurs="1"/>
+       </sequence>
+     </complexType>
+
+   <!--
+   .ae create command extension
+   -->
+     <complexType name="createType">
+       <sequence>
+         <element name="aeProperties" type="aeext:aePropertiesType"
+          minOccurs="1"/>
+       </sequence>
+     </complexType>
+
+   <!--
+   .ae info response extension
+   -->
+     <complexType name="infDataType">
+       <sequence>
+         <element name="aeProperties" type="aeext:aePropertiesType"
+          minOccurs="1"/>
+       </sequence>
+     </complexType>
+
+   <!--
+   the .ae extension domain properties
+   -->
+     <complexType name="aePropertiesType">
+       <sequence>
+         <element name="registrantName" type="eppcom:labelType"
+          minOccurs="1"/>
+         <element name="registrantID" type="aeext:registrantIDType"
+          minOccurs="0"/>
+         <element name="eligibilityType" type="aeext:eligType"
+          minOccurs="1"/>
+         <element name="eligibilityName" type="eppcom:labelType"
+          minOccurs="0"/>
+         <element name="eligibilityID" type="aeext:eligibilityIDType"
+          minOccurs="0"/>
+         <element name="policyReason" type="aeext:policyNumType"
+
+
+
+AusRegistry International    .ae Registry Service Extensions   [Page 22]
+
+.ae Extensions 1.0                  EPP                October 1st, 2007
+
+
+          minOccurs="0"/>
+       </sequence>
+     </complexType>
+
+   <!--
+   the explanation type
+   -->
+     <simpleType name="explanationType">
+       <restriction base="normalizedString">
+         <maxLength value="1000"/>
+       </restriction>
+     </simpleType>
+
+   <!--
+   registrant id type is used for registrantID
+   -->
+     <complexType name="registrantIDType">
+       <simpleContent>
+         <extension base="eppcom:labelType">
+           <attribute name="type" type="aeext:registrantAEIdType"
+            use="required"/>
+         </extension>
+       </simpleContent>
+     </complexType>
+
+   <!--
+   eligibility id type is used for eligibilityID
+   -->
+     <complexType name="eligibilityIDType">
+       <simpleContent>
+         <extension base="eppcom:labelType">
+           <attribute name="type" type="aeext:eligibilityAEIdType"
+            use="required"/>
+         </extension>
+       </simpleContent>
+     </complexType>
+
+   <!--
+   enumeration of valid registrant ID types for the .ae namespace
+   -->
+     <simpleType name="registrantAEIdType">
+       <restriction base="token">
+         <enumeration value="Trade License"/>
+       </restriction>
+     </simpleType>
+
+
+
+
+
+
+AusRegistry International    .ae Registry Service Extensions   [Page 23]
+
+.ae Extensions 1.0                  EPP                October 1st, 2007
+
+
+   <!--
+   enumeration of valid eligibility ID types for the .ae namespace
+   -->
+     <simpleType name="eligibilityAEIdType">
+       <restriction base="token">
+         <enumeration value="Trademark"/>
+       </restriction>
+     </simpleType>
+
+   <!--
+   enumeration of valid Eligibility Types for the .ae namespace
+   -->
+     <simpleType name="eligType">
+       <restriction base="token">
+         <enumeration value="Trade License"/>
+         <enumeration value="Free Trade License"/>
+         <enumeration value="Trademark"/>
+         <enumeration value="Freezone Trademark"/>
+         <enumeration value="Trade License (IT)"/>
+         <enumeration value="Freezone Trade License (IT)"/>
+         <enumeration value="Trademark (IT)"/>
+         <enumeration value="Freezone Trademark (IT)"/>
+         <enumeration value="Legacy"/>
+         <enumeration value="Legacy - Approved"/>
+         <enumeration value="Citizen"/>
+         <enumeration value="Permanent Resident"/>
+         <enumeration value="Sporting Organisation"/>
+         <enumeration value="Charitable Organisation"/>
+         <enumeration value="Religious Organisation"/>
+         <enumeration value="University"/>
+         <enumeration value="Technical College"/>
+         <enumeration value="School"/>
+         <enumeration value="Academy"/>
+         <enumeration value="Government Approved"/>
+       </restriction>
+     </simpleType>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry International    .ae Registry Service Extensions   [Page 24]
+
+.ae Extensions 1.0                  EPP                October 1st, 2007
+
+
+   <!--
+     Policy reason numbers are left unassigned to a meaning to promote
+     flexibility of policy application.  The range is also left more
+     open than is strictly known at the time of writing in order to
+     reduce the need for redistribution of an updated version of this
+     schema should the supported policy numbers change at some time in
+     the future.
+   -->
+     <simpleType name="policyNumType">
+       <restriction base="integer">
+         <minInclusive value="1"/>
+         <maxInclusive value="99"/>
+       </restriction>
+     </simpleType>
+
+   <!--
+   End of schema.
+   -->
+   </schema>
+   END
+
+8.2  XML Schema [urn:X-ae:params:xml:ns:aedomain-1.0]
+
+Formal Syntax:
+
+   BEGIN
+   <?xml version="1.0" encoding="UTF-8"?>
+
+   <schema targetNamespace="urn:X-ae:params:xml:ns:aedomain-1.0"
+           xmlns:aeDomain="urn:X-ae:params:xml:ns:aedomain-1.0"
+           xmlns:eppcom="urn:ietf:params:xml:ns:eppcom-1.0"
+           xmlns:domain="urn:ietf:params:xml:ns:domain-1.0"
+           xmlns:aeext="urn:X-ae:params:xml:ns:aeext-1.0"
+           xmlns="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+
+   <!--
+   Import common element types.
+   -->
+     <import namespace="urn:ietf:params:xml:ns:eppcom-1.0"
+      schemaLocation="eppcom-1.0.xsd"/>
+     <import namespace="urn:ietf:params:xml:ns:domain-1.0"
+      schemaLocation="domain-1.0.xsd"/>
+     <import namespace="urn:X-ae:params:xml:ns:aeext-1.0"
+      schemaLocation="aeext-1.0.xsd"/>
+
+
+
+
+
+
+AusRegistry International    .ae Registry Service Extensions   [Page 25]
+
+.ae Extensions 1.0                  EPP                October 1st, 2007
+
+
+     <annotation>
+       <documentation>
+         .ae Domain Extensions to the Extensible
+         Provisioning Protocol v1.0. schema.
+       </documentation>
+     </annotation>
+
+   <!--
+   Protocol extension framework command elements.
+   -->
+     <element name="registrantTransfer"
+              type="aeDomain:registrantTransferType"/>
+
+   <!--
+   Protocol extension framework response elements.
+   -->
+     <element name="rtrnData" type="aeDomain:rtrnDataType"/>
+     
+   <!--
+   Type definitions.
+   -->
+     <complexType name="registrantTransferType">
+       <sequence>
+         <element name="name" type="eppcom:labelType" minOccurs="1"/>
+         <element name="curExpDate" type="date" minOccurs="1"/>
+         <element name="period" type="domain:periodType" minOccurs="0"/>
+         <element name="aeProperties" type="aeDomain:aePropertiesType"
+          minOccurs="1"/>
+         <element name="explanation" type="aeext:explanationType"
+          minOccurs="1"/>
+       </sequence>
+     </complexType>
+
+   <!--
+   the .ae extension domain properties
+   -->
+     <complexType name="aePropertiesType">
+       <sequence>
+         <element name="registrantName" type="eppcom:labelType"
+          minOccurs="1"/>
+         <element name="registrantID" type="aeext:registrantIDType"
+          minOccurs="0"/>
+         <element name="eligibilityType" type="aeext:eligType"
+          minOccurs="1"/>
+         <element name="eligibilityName" type="eppcom:labelType"
+          minOccurs="0"/>
+         <element name="eligibilityID" type="aeext:eligibilityIDType"
+          minOccurs="0"/>
+
+
+
+AusRegistry International    .ae Registry Service Extensions   [Page 26]
+
+.ae Extensions 1.0                  EPP                October 1st, 2007
+
+
+
+         <element name="policyReason" type="aeext:policyNumType"
+          minOccurs="0"/>
+       </sequence>
+     </complexType>
+
+     <complexType name="rtrnDataType">
+       <sequence>
+         <element name="name" type="eppcom:labelType" minOccurs="1"/>
+         <element name="exDate" type="dateTime" minOccurs="0"/>
+       </sequence>
+     </complexType>
+
+   <!--
+   End of schema.
+   -->
+   </schema>
+   END
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry International    .ae Registry Service Extensions   [Page 27]
+

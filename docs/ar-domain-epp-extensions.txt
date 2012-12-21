@@ -1,0 +1,898 @@
+
+
+
+
+
+
+                                                               C. Wright
+                                                          Anthony Harris
+AusRegistry Draft: ardomain                          AusRegistry Pty Ltd
+Category: Private Experimental                                  May 2007
+
+
+  AusRegistry Extensions to the Extensible Provisioning Protocol (EPP)
+                          Domain Name Mapping
+
+Status of This Document
+
+   This document specifies an extension to the EPP protocol first
+   implemented in AusRegistry's Domain Name Registry EPP service.
+   Discussion and suggestions for improvements are welcome. Please refer
+   to AusRegistry for more information on the status of this document.
+   Distribution of this document and use of the protocol extensions
+   defined within is unrestricted and unlimited.
+
+Copyright Notice
+
+   Copyright (C) AusRegistry Pty Ltd (2007).
+
+Abstract
+
+   This document describes an Extensible Provisioning Protocol (EPP)
+   mapping for the extended management, as specified in the AusRegistry
+   Extensions to the Extensible Provisioning Protocol, of Internet
+   domain names stored in a shared central repository.  Specified in
+   XML, the mapping defines extended EPP command syntax and semantics as
+   applied to domain names.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry                   Private Use                       [Page 1]
+
+AR Domain Mapping    AR Extensions to EPP Domain Name Mapping   May 2007
+
+
+Table of Contents
+
+   1.  Introduction . . . . . . . . . . . . . . . . . . . . . . . . .  3
+   2.  Object Attributes  . . . . . . . . . . . . . . . . . . . . . .  4
+     2.1.  Validity Periods . . . . . . . . . . . . . . . . . . . . .  4
+   3.  AusRegistry EPP Extensions Command Mapping . . . . . . . . . .  5
+     3.1.  EPP Transform Commands . . . . . . . . . . . . . . . . . .  5
+       3.1.1.  EPP <undelete> Command . . . . . . . . . . . . . . . .  5
+       3.1.2.  EPP <unrenew> Command  . . . . . . . . . . . . . . . .  7
+       3.1.3.  EPP <policyDelete> Command . . . . . . . . . . . . . .  8
+       3.1.4.  EPP <policyUndelete> Command . . . . . . . . . . . . . 10
+   4.  Formal Syntax  . . . . . . . . . . . . . . . . . . . . . . . . 11
+   5.  Internationalisation Considerations  . . . . . . . . . . . . . 13
+   6.  Security Considerations  . . . . . . . . . . . . . . . . . . . 13
+   7.  References . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+     7.1.  Normative References . . . . . . . . . . . . . . . . . . . 14
+     7.2.  Informative References . . . . . . . . . . . . . . . . . . 15
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry                   Private Use                       [Page 2]
+
+AR Domain Mapping    AR Extensions to EPP Domain Name Mapping   May 2007
+
+
+1.  Introduction
+
+   This document describes an Internet domain name mapping for version
+   1.0 of the AusRegistry Extensions to the Extensible Provisioning
+   Protocol (EPP).  This mapping is specified using the Extensible
+   Markup Language (XML) 1.0 as described in [W3C.REC-xml-20040204] and
+   XML Schema notation as described in [W3C.REC-xmlschema-1-20041028]
+   and [W3C.REC-xmlschema-2-20041028].
+
+   [AREXT] provides a complete description of EPP command and response
+   structures.  A thorough understanding of the base protocol
+   specification is necessary to understand the mapping described in
+   this document.
+
+   XML is case sensitive.  Unless stated otherwise, XML specifications
+   and examples provided in this document MUST be interpreted in the
+   character case presented to develop a conforming implementation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry                   Private Use                       [Page 3]
+
+AR Domain Mapping    AR Extensions to EPP Domain Name Mapping   May 2007
+
+
+2.  Object Attributes
+
+   An AusRegistry extended domain object has the same attributes and
+   associated values as an EPP domain object.  The extended protocol
+   mappings for supporting the AusRegistry Extensions to the Extensible
+   Provisioning Protocol do not require additional attributes.
+   Following is a description of the attributes which are affected by
+   the extended commands.
+
+
+
+
+
+2.1.  Validity Periods
+
+   The validity period of a domain MAY be affected by the <unrenew> and
+   <policyUndelete> commands.  As a matter of server policy, this
+   specification does not define actions to be taken upon expiration of
+   a domain object's validity period.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry                   Private Use                       [Page 4]
+
+AR Domain Mapping    AR Extensions to EPP Domain Name Mapping   May 2007
+
+
+3.  AusRegistry EPP Extensions Command Mapping
+
+   A detailed description of the EPP syntax and semantics can be found
+   in [AREXT].  The command mappings described here are specifically
+   for use in provisioning and managing Internet domain names via EPP.
+
+3.1.  EPP Transform Commands
+
+   The AusRegistry Extensions to EPP provide four commands to transform 
+   domains: <undelete> to reinstate a previously deleted domain not yet
+   completely removed from the repository, <unrenew> to retract the
+   validity period of a provisioned domain object, <policyDelete> to
+   remove an instance of a domain object from the server due to server
+   policy violation, and <policyUndelete> to reinstate a domain object
+   which was previously deleted due to policy violation.
+
+3.1.1.  EPP <undelete> Command
+
+   The EPP <undelete> command is used to cancel a previously requested
+   domain deletion.  In addition to the extended EPP command elements,
+   the <undelete> command MUST contact a <domain:undelete> element that
+   identifies the AusRegistry domain namespace.  The <domain:undelete>
+   element contains the following child elements:
+
+      - A <domain:name> element that contains the fully qualified name
+        of the domain object to be undeleted.
+
+   Example <undelete> command:
+
+   C:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   C:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0">
+   C:  <extension>
+   C:    <command xmlns="urn:X-ar:params:xml:ns:arext-1.0">
+   C:      <undelete>
+   C:        <domain:undelete
+   C:            xmlns:domain="urn:X-ar:params:xml:ns:ardomain-1.0">
+   C:          <domain:name>example.com.au</domain:name>
+   C:        </domain:undelete>
+   C:      </undelete>
+   C:      <clTRID>UNDELETE-12345</clTRID>
+   C:    </command>
+   C:  </extension>
+   C:</epp>
+
+
+
+
+
+
+
+
+AusRegistry                   Private Use                       [Page 5]
+
+AR Domain Mapping    AR Extensions to EPP Domain Name Mapping   May 2007
+
+
+   When an <undelete> command has been processed successfully, a server
+   MUST respond with an EPP response with no <resData> element.
+
+   Example <undelete> response without <resData>:
+
+   S:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   S:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0">
+   S:  <response xmlns="urn:X-ar:params:xml:ns:arext-1.0">
+   S:    <result code="1000">
+   S:      <msg>Command completed successfully</msg>
+   S:    </result>
+   S:    <trID>
+   S:      <clTRID>UNDELETE-12345</clTRID>
+   S:      <svTRID>2389742981744</svTRID>
+   S:    </trID>
+   S:  </response>
+   S:</epp>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry                   Private Use                       [Page 6]
+
+AR Domain Mapping    AR Extensions to EPP Domain Name Mapping   May 2007
+
+
+3.1.2.  EPP <unrenew> Command
+
+   The EPP <unrenew> command is used to cancel a previously requested
+   domain renewal.  In addition to the extended EPP command elements,
+   the <unrenew> command MUST contact a <domain:unrenew> element that
+   identifies the AusRegistry domain namespace.  The <domain:unrenew>
+   element contains the following child elements:
+
+      -  A <domain:name> element that contains the fully qualified name
+         of the domain object to be undeleted.
+
+      -  A <domain:curExpDate> element that contains the date on which
+         the current validity period ends.  This value ensures that
+         repeated <unrenew> commands do not result in multiple
+         unanticipated successful renewals.
+
+   Example <unrenew> command:
+
+   C:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   C:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0">
+   C:  <extension>
+   C:    <command xmlns="urn:X-ar:params:xml:ns:arext-1.0">
+   C:      <unrenew>
+   C:        <domain:unrenew
+   C:            xmlns:domain="urn:X-ar:params:xml:ns:ardomain-1.0">
+   C:          <domain:name>example.com.au</domain:name>
+   C:          <domain:curExpDate>2009-06-28</domain:curExpDate>
+   C:        </domain:unrenew>
+   C:      </unrenew>
+   C:      <clTRID>UNRENEW-12345</clTRID>
+   C:    </command>
+   C:  </extension>
+   C:</epp>
+
+
+   When an <unrenew> command has been processed successfully, the
+   <resData> element MUST contain a child <domain:urenData> element that
+   identifies the AusRegistry domain namespace.  The <domain:urenData>
+   element contains the following child elements:
+
+      -  A <domain:name> element that contains the fully qualified name
+         of the domain object.
+
+      -  A <domain:exDate> element that contains the date and time
+         identifying the end of the domain object's registration period.
+
+
+
+
+
+
+
+
+AR Domain Mapping    AR Extensions to EPP Domain Name Mapping   May 2007
+
+
+   Example <unrenew> response with <resData>
+
+   S:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   S:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0">
+   S:  <response xmlns="urn:X-ar:params:xml:ns:arext-1.0">
+   S:    <result code="1000">
+   S:      <msg>Command completed successfully</msg>
+   S:    </result>
+   S:    <resData>
+   S:      <domain:urenData
+   S:          xmlns:domain="urn:X-ar:params:xml:ns:ardomain-1.0">
+   S:        <domain:name>example.com.au</domain:name>
+   S:        <domain:exDate>2007-06-28T04:13:08.0Z</domain:exDate>
+   S:      </domain:urenData>
+   S:    </resData>
+   S:    <trID>
+   S:      <clTRID>UNRENEW-12345</clTRID>
+   S:      <svTRID>2389742981742</svTRID>
+   S:    </trID>
+   S:  </response>
+   S:</epp>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry                   Private Use                       [Page 7]
+
+AR Domain Mapping    AR Extensions to EPP Domain Name Mapping   May 2007
+
+
+3.1.3.  EPP <policyDelete> Command
+
+   The <policyDelete> command is used to remove an instance of an
+   existing object.  This command differs from <delete> in that the
+   removal is not registrant-initiated; it is initiated by a client when
+   notified that the provisioning of the object violates server policy.
+   In addition to the extended EPP command elements, the <policyDelete>
+   command MUST contact a <domain:policyDelete> element that identifies
+   the AusRegistry domain namespace.  The <domain:policyDelete> element
+   contains the following child elements:
+
+      - A <domain:name> element that contains the fully qualified name
+        of the domain object to be undeleted.
+
+      - A <domain:reason> element that explains in what way policy has
+        been violated that has lead to the domain being deleted.
+
+   Example <policyDelete> command:
+
+   C:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   C:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0">
+   C:  <extension>
+   C:    <command xmlns="urn:X-ar:params:xml:ns:arext-1.0">
+   C:      <policyDelete>
+   C:        <domain:policyDelete
+   C:          xmlns:domain="urn:X-ar:params:xml:ns:ardomain-1.0">
+   C:          <domain:name>example.com.au</domain:name>
+   C:          <domain:reason>Cyber-squatting</domain:reason>
+   C:        </domain:policyDelete>
+   C:      </policyDelete>
+   C:      <clTRID>POLDEL-12345</clTRID>
+   C:    </command>
+   C:  </extension>
+   C:</epp>
+
+   When a <policyDelete> command has been processed successfully, a
+   server MUST respond with an EPP response with no <resData> element.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry                   Private Use                       [Page 8]
+
+AR Domain Mapping    AR Extensions to EPP Domain Name Mapping   May 2007
+
+
+   Example <policyDelete> response without <resData>:
+
+   S:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   S:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0">
+   S:  <response xmlns="urn:X-ar:params:xml:ns:arext-1.0">
+   S:    <result code="1000">
+   S:      <msg>Command completed successfully</msg>
+   S:    </result>
+   S:    <trID>
+   S:      <clTRID>POLDEL-12345</clTRID>
+   S:      <svTRID>2389742981745</svTRID>
+   S:    </trID>
+   S:  </response>
+   S:</epp>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry                   Private Use                       [Page 9]
+
+AR Domain Mapping    AR Extensions to EPP Domain Name Mapping   May 2007
+
+
+3.1.4.  EPP <policyUndelete> Command
+
+   The <policyUndelete> command is used to cancel a previously requested
+   object deletion via a policy delete operation such as is defined by
+   the <policyDelete> command described previously.  In addition to the
+   extended EPP command elements, the <policyUndelete> command MUST
+   contact a <domain:policyUndelete> element that identifies the
+   AusRegistry domain namespace.  The <domain:policyUndelete> element
+   contains the following child elements:
+
+      - A <domain:name> element that contains the fully qualified name
+        of the domain object to be undeleted.
+
+   Example <policyUndelete> command:
+
+   C:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   C:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0">
+   C:  <extension>
+   C:    <command xmlns="urn:X-ar:params:xml:ns:arext-1.0">
+   C:      <policyUndelete>
+   C:        <domain:policyUndelete
+   C:          xmlns:domain="urn:X-ar:params:xml:ns:ardomain-1.0">
+   C:          <domain:name>example.com.au</domain:name>
+   C:        </domain:policyUndelete>
+   C:      </policyUndelete>
+   C:      <clTRID>POLUNDEL-12345</clTRID>
+   C:    </command>
+   C:  </extension>
+   C:</epp>
+
+   When a <policyUndelete> command has been processed successfully, a
+   server MUST respond with an EPP response with no <resData> element.
+
+   Example <policyUndelete> response:
+
+   S:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   S:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0">
+   S:  <response xmlns="urn:X-ar:params:xml:ns:arext-1.0">
+   S:    <result code="1000">
+   S:      <msg>Command completed successfully</msg>
+   S:    </result>
+   S:    <trID>
+   S:      <clTRID>POLUNDEL-12345</clTRID>
+   S:      <svTRID>2389742981752</svTRID>
+   S:    </trID>
+   S:  </response>
+   S:</epp>
+
+
+
+
+AusRegistry                   Private Use                      [Page 10]
+
+AR Domain Mapping    AR Extensions to EPP Domain Name Mapping   May 2007
+
+
+4.  Formal Syntax
+
+   An EPP object mapping is specified in XML Schema notation.  The
+   formal syntax presented here is a complete schema representation of
+   the object mapping suitable for automated validation of EPP XML
+   instances.  The BEGIN and END tags are not part of the schema; they
+   are used to note the beginning and ending of the schema for URI
+   registration purposes.
+
+   BEGIN
+   <?xml version="1.0" encoding="UTF-8"?>
+
+   <schema targetNamespace="urn:X-ar:params:xml:ns:ardomain-1.0"
+    xmlns:arDomain="urn:X-ar:params:xml:ns:ardomain-1.0"
+    xmlns:eppcom="urn:ietf:params:xml:ns:eppcom-1.0"
+    xmlns="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault="qualified">
+
+      <!--
+         Import common element types.
+      -->
+      <import namespace="urn:ietf:params:xml:ns:eppcom-1.0"
+       schemaLocation="eppcom-1.0.xsd"/>
+
+      <annotation>
+         <documentation>
+            AusRegistry Domain Extensions to the Extensible
+            Provisioning Protocol v1.0. schema.
+         </documentation>
+      </annotation>
+
+      <!--
+         Protocol extension framework command elements.
+      -->
+      <element name="unrenew" type="arDomain:unrenewType"/>
+      <element name="undelete" type="arDomain:undeleteType"/>
+      <element name="policyDelete" type="arDomain:policyDeleteType"/>
+      <element name="policyUndelete"
+       type="arDomain:policyUndeleteType"/>
+
+      <!--
+         Protocol extension framework response elements.
+      -->
+      <element name="urenData" type="arDomain:urenDataType"/>
+
+
+
+
+
+
+
+
+AusRegistry                   Private Use                      [Page 11]
+
+AR Domain Mapping    AR Extensions to EPP Domain Name Mapping   May 2007
+
+
+      <!--
+         Type definitions.
+      -->
+
+      <complexType name="unrenewType">
+         <sequence>
+            <element name="name" type="eppcom:labelType"/>
+            <element name="curExpDate" type="date"/>
+         </sequence>
+      </complexType>
+
+      <complexType name="undeleteType">
+         <sequence>
+            <element name="name" type="eppcom:labelType"/>
+         </sequence>
+      </complexType>
+
+      <complexType name="policyDeleteType">
+         <sequence>
+            <element name="name" type="eppcom:labelType"/>
+            <element name="reason" type="arDomain:reasonType"/>
+         </sequence>
+      </complexType>
+
+      <simpleType name="reasonType">
+         <restriction base="normalizedString">
+            <maxLength value="1000"/>
+         </restriction>
+      </simpleType>
+
+      <complexType name="policyUndeleteType">
+         <sequence>
+            <element name="name" type="eppcom:labelType"/>
+         </sequence>
+      </complexType>
+
+      <complexType name="urenDataType">
+         <sequence>
+            <element name="name" type="eppcom:labelType" minOccurs="1"/>
+            <element name="exDate" type="dateTime" minOccurs="1"/>
+         </sequence>
+      </complexType>
+
+      <!--
+         End of schema.
+      -->
+   </schema>
+   END
+
+
+
+AusRegistry                   Private Use                      [Page 12]
+
+AR Domain Mapping    AR Extensions to EPP Domain Name Mapping   May 2007
+
+
+5.  Internationalisation Considerations
+
+   EPP is represented in XML, which provides native support for encoding
+   information using the Unicode character set and its more compact
+   representations including UTF-8.  Conformant XML processors recognize
+   both UTF-8 and UTF-16 [RFC2781].  Though XML includes provisions to
+   identify and use other character encodings through use of an
+   "encoding" attribute in an <?xml?> declaration, use of UTF-8 is
+   RECOMMENDED in environments where parser encoding support
+   incompatibility exists.
+
+   All date-time values presented via EPP MUST be expressed in Universal
+   Coordinated Time using the Gregorian calendar.  XML Schema allows use
+   of time zone identifiers to indicate offsets from the zero meridian,
+   but this option MUST NOT be used with EPP.  The extended date-time
+   form using upper case "T" and "Z" characters defined in
+   [W3C.REC-xmlschema-2-20041028] MUST be used to represent date-time
+   values as XML Schema does not support truncated date-time forms or
+   lower case "T" and "Z" characters.
+
+   This document requires domain and host name syntax as specified in
+   [RFC0952] as updated by [RFC1123].  At the time of this writing, RFC
+   3490 [RFC3490] describes a standard to use certain ASCII name labels
+   to represent non-ASCII name labels.  These conformance requirements
+   might change as a result of progressing work in developing standards
+   for internationalized domain names.
+
+6.  Security Considerations
+
+   The object mapping described in this document does not provide any
+   other security services or introduce any additional considerations
+   beyond those described by [RFC4930] and [RFC4931] and protocol layers
+   used by EPP.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry                   Private Use                      [Page 13]
+
+AR Domain Mapping    AR Extensions to EPP Domain Name Mapping   May 2007
+
+
+7.  References
+
+7.1.  Normative References
+
+   [RFC0952]  Harrenstien, K., Stahl, M., and E. Feinler, "DoD Internet
+              host table specification", RFC 952, October 1985.
+
+   [RFC1123]  Braden, R., "Requirements for Internet Hosts - Application
+              and Support", STD 3, RFC 1123, October 1989.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+   [RFC3688]  Mealling, M., "The IETF XML Registry", BCP 81, RFC 3688,
+              January 2004.
+
+   [RFC4930]  Hollenbeck, S., "Extensible Provisioning Protocol (EPP)",
+              RFC 4930, May 2007.
+
+   [RFC4932]  Hollenbeck, S., "Extensible Provisioning Protocol (EPP)
+              Host Mapping", RFC 4932, May 2007.
+
+   [RFC4933]  Hollenbeck, S., "Extensible Provisioning Protocol (EPP)
+              Contact Mapping", RFC 4933, May 2007.
+
+   [W3C.REC-xml-20040204]
+              Maler, E., Yergeau, F., Paoli, J., Bray, T., and C.
+              Sperberg-McQueen, "Extensible Markup Language (XML) 1.0
+              (Third Edition)", World Wide Web Consortium
+              FirstEdition REC-xml-20040204, February 2004,
+              <http://www.w3.org/TR/2004/REC-xml-20040204>.
+
+   [W3C.REC-xmlschema-1-20041028]
+              Thompson, H., Maloney, M., Mendelsohn, N., and D. Beech,
+              "XML Schema Part 1: Structures Second Edition", World Wide
+              Web Consortium Recommendation REC-xmlschema-1-20041028,
+              October 2004,
+              <http://www.w3.org/TR/2004/REC-xmlschema-1-20041028>.
+
+   [W3C.REC-xmlschema-2-20041028]
+              Biron, P. and A. Malhotra, "XML Schema Part 2: Datatypes
+              Second Edition", World Wide Web Consortium
+              Recommendation REC-xmlschema-2-20041028, October 2004,
+              <http://www.w3.org/TR/2004/REC-xmlschema-2-20041028>.
+
+
+
+
+
+
+
+AusRegistry                   Private Use                      [Page 14]
+
+AR Domain Mapping    AR Extensions to EPP Domain Name Mapping   May 2007
+
+
+7.2.  Informative References
+
+   None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry                   Private Use                      [Page 15]
+

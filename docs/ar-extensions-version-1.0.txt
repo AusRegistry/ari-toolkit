@@ -1,0 +1,730 @@
+
+
+
+
+
+
+AusRegistry                                                 Chris Wright
+                                                          Anthony Harris
+AusRegistry Extensions Version 1.0                   AusRegistry Pty Ltd
+Category: AusRegistry Service Extensions                August 9th, 2007
+
+     AusRegistry Extensions to the Extensible Provisioning Protocol
+
+Status of This Document
+
+   This document specifies an extension to the EPP protocol first
+   implemented in AusRegistry's Domain Name Registry EPP service.
+   Discussion and suggestions for improvements are welcome. Please refer
+   to AusRegistry for more information on the status of this document.
+   Distribution of this document and use of the protocol extensions
+   defined within is unrestricted and unlimited.
+
+Copyright Notice
+
+   Copyright (C) AusRegistry Pty Ltd (2007).
+
+Abstract
+
+   This document describes application layer client-server protocol
+   extensions for the Extensible Provisioning Protocol as needed for the
+   management of objects stored in the AusRegistry Registry system.
+   Specified in XML, the protocol defines general object management
+   operations and an extensible framework that maps the protocol
+   extensions to the relevant objects.  This document includes a
+   protocol extension specification, an object mapping template, and an
+   XML media type registration.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry             Registry Service Extensions             [Page 1]
+
+AusRegistry Extensions 1.0             EPP              August 9th, 2007
+
+
+Table of Contents
+
+   1.  Introduction . . . . . . . . . . . . . . . . . . . . . . . . .  3
+     1.1.  Additional Services  . . . . . . . . . . . . . . . . . . .  3
+     1.2.  Enabling Extended Services . . . . . . . . . . . . . . . .  3
+   2.  Protocol Extension Description . . . . . . . . . . . . . . . .  5
+     2.1.  Command Format . . . . . . . . . . . . . . . . . . . . . .  5
+     2.2.  Response Format  . . . . . . . . . . . . . . . . . . . . .  6
+     2.3.  Service Extensions . . . . . . . . . . . . . . . . . . . .  6
+       2.3.1.  Extension Transform Commands . . . . . . . . . . . . .  6
+         2.3.1.1.  EPP <unrenew> Command  . . . . . . . . . . . . . .  7
+         2.3.1.2.  EPP <undelete> Command . . . . . . . . . . . . . .  8
+         2.3.1.3.  EPP <policyDelete> Command . . . . . . . . . . . .  9
+         2.3.1.4.  EPP <policyUndelete> Command . . . . . . . . . . . 10
+   3.  Formal Syntax  . . . . . . . . . . . . . . . . . . . . . . . . 12
+   Appendix A.  Object Mapping Template . . . . . . . . . . . . . . . 13
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry             Registry Service Extensions             [Page 2]
+
+AusRegistry Extensions 1.0             EPP              August 9th, 2007
+
+
+1. Introduction
+
+   This document describes the AusRegistry extensions to the Extensible
+   Provisioning Protocol (EPP) and the additional object management
+   services supported by these extensions.
+
+   The EPP core protocol specification provides a complete description
+   of core EPP command and response structures.  Those structures have
+   been mimicked in the extension commands and responses defined within
+   this document.  A thorough understanding of the base protocol is
+   necessary to understand the extensions defined in this document.
+
+1.1.  Additional Services
+   The following additional commands [EPP RFC4930 2.7.1] are defined:
+
+   -  <unrenew>
+   -  <undelete>
+   -  <policyDelete>
+   -  <policyUndelete>
+
+1.2.  Enabling Extended Services
+
+   In accordance with the service extension usage mechanism described in
+   the Extensible Provisioning Protocol (EPP), server support for
+   AusRegistry EPP extensions is published in a <greeting> service
+   element via the <svcExtension> element.  A server supporting the
+   AusRegistry EPP extensions MUST inform the client of its capability
+   via an <extURI> child element whose value is the AusRegistry EPP
+   extension URI (urn:X-ar:params:xml:ns:arext-1.0).  A client wishing
+   to use such services MUST present the AusRegistry EPP extension URI
+   as the value of an <extURI> element in the EPP <login> command which
+   initiates the session in which the services will be used.
+
+   Example <greeting> publishing support for AR extensions:
+
+   S:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   S:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0">
+   S:  epp-1.0.xsd">
+   S:  <greeting>
+   S:    <svID>AusRegistry EPP Server</svID>
+   S:    <svDate>2006-02-09T15:42:29.0Z</svDate>
+   S:    <svcMenu>
+   S:      <version>1.0</version>
+   S:      <lang>en</lang>
+   S:      <objURI>urn:ietf:params:xml:ns:domain-1.0</objURI>
+   S:      <objURI>urn:ietf:params:xml:ns:contact-1.0</objURI>
+
+
+
+
+
+AusRegistry             Registry Service Extensions             [Page 3]
+
+AusRegistry Extensions 1.0             EPP              August 9th, 2007
+
+
+   S:      <objURI>urn:ietf:params:xml:ns:host-1.0</objURI>
+   S:      <svcExtension>
+   S:        <extURI>urn:X-ar:params:xml:ns:arext-1.0</extURI>
+   S:      </svcExtension>
+   S:    </svcMenu>
+   S:    <dcp>
+   S:      <access><all/></access>
+   S:      <statement>
+   S:        <purpose><admin/><prov/></purpose>
+   S:        <recipient><ours/><public/></recipient>
+   S:        <retention><stated/></retention>
+   S:      </statement>
+   S:    </dcp>
+   S:  </greeting>
+   S:</epp>
+
+   Example <login> requesting AusRegistry extensions services:
+
+   C:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   C:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0">
+   C:  <command>
+   C:    <login>
+   C:      <clID>REGISTRAR</clID>
+   C:      <pw>p4ssw0rd!</pw>
+   C:      <options>
+   C:        <version>1.0</version>
+   C:        <lang>en</lang>
+   C:      </options>
+   C:      <svcs>
+   C:        <objURI>urn:ietf:params:xml:ns:contact-1.0</objURI>
+   C:        <objURI>urn:ietf:params:xml:ns:domain-1.0</objURI>
+   C:        <objURI>urn:ietf:params:xml:ns:host-1.0</objURI>
+   C:        <svcExtension>
+   C:          <extURI>urn:X-ar:params:xml:ns:arext-1.0</extURI>
+   C:        </svcExtension>
+   C:      </svcs>
+   C:    </login>
+   C:  </command>
+   C:</epp>
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry             Registry Service Extensions             [Page 4]
+
+AusRegistry Extensions 1.0             EPP              August 9th, 2007
+
+
+2. Protocol Extension Description
+
+   The AusRegistry Extension to EPP provides two basic service elements:
+   commands and responses.  These are layered on top of the protocol
+   extension framework of EPP.  The EPP server state machine is
+   unaffected by these extension elements; they are equivalent in the
+   state machine to core command and response elements.
+
+2.1. Command Format
+
+   An EPP client may interact with an EPP server by sending an extension
+   command and receiving an EPP response as defined in this document, in
+   the same manner as described in [EPPCORE].  In addition to the
+   standard EPP elements, an extension command contains the following
+   elements:
+
+   -  An <extension> element that contains the following child elements:
+
+      -  A <command> element that contains the following child elements:
+
+         -  A command element whose tag corresponds to one of the valid
+            extension commands described in this document.  The command
+            element contains object-specified child elements.
+
+         - An OPTIONAL <clTRID> (client transaction identifier) element
+           that MAY be used to uniquely identify the command to the
+           client.  Clients are responsible for maintaining their own
+           transaction identifier space to ensure uniqueness.
+
+   Example command with object-specified child elements:
+
+   C:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   C:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0">
+   C:  <extension>
+   C:    <command xmlns="urn:X-ar:params:xml:ns:arext-1.0">
+   C:      <unrenew>
+   C:        <obj:unrenew xmlns:obj="urn:X-ar:params:xml:ns:obj">
+   C:          <obj:name>example</obj:name>
+   C:        </obj:unrenew>
+   C:      </unrenew>
+   C:      <clTRID>ABC-12345</clTRID>
+   C:    </command>
+   C:  </extension>
+   C:</epp>
+
+
+
+
+
+
+
+AusRegistry             Registry Service Extensions             [Page 5]
+
+AusRegistry Extensions 1.0             EPP              August 9th, 2007
+
+
+2.2. Response Format
+
+   An EPP server responds to an EPP client extension command by
+   returning an EPP response to the client as described in [EPPCORE].
+
+   Example response with <resData>:
+
+   S:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   S:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0">
+   S:  <response xmlns="urn:X-ar:params:xml:ns:arext-1.0">
+   S:    <result code="1000">
+   S:      <msg>Command completed successfully</msg>
+   S:    </result>
+   S:    <resData>
+   S:      <obj:urenData xmlns:obj="urn:X-ar:params:xml:ns:obj">
+   S:        <obj:name>example</obj:name>
+   S:        <obj:exDate>example</obj:exDate>
+   S:      </obj:urenData>
+   S:    </resData>
+   S:    <trID>
+   S:      <clTRID>ABC-12345</clTRID>
+   S:      <svTRID>54321-XYZ</svTRID>
+   S:    </trID>
+   S:  </response>
+   S:</epp>
+
+2.3. Extension Protocol Commands
+
+   The AusRegistry extension to EPP provides commands to perform
+   transformation operations on objects.  This describes each extension
+   command, including examples with representative server responses.
+
+2.3.1. Object Transform Commands
+
+   The AusRegistry extensions to EPP provide four commands to transform
+   objects: <unrenew> to retract the validity period of a provisioned
+   object, <undelete> to reinstate a previously deleted object not yet
+   completely removed from the repository, <policyDelete> to remove an
+   instance of an object from the server due to server policy violation,
+   and <policyUndelete> to reinstate an object which was previously
+   deleted due to policy violation.
+
+
+
+
+
+
+
+
+
+
+AusRegistry             Registry Service Extensions             [Page 6]
+
+AusRegistry Extensions 1.0             EPP              August 9th, 2007
+
+
+2.3.1.1. <unrenew> Command
+
+   The EPP <unrenew> command is used to cancel a previously requested
+   object renewal.  The elements needed to identify an object and ensure
+   command idempotency are object-specific, so the child elements of the
+   <unrenew> command are specified in an object-specific mapping using
+   the EPP extension framework.  In addition to the <arext:command>
+   elements, the <unrenew> command contains the following child
+   elements:
+
+      -  An object-specific <obj:unrenew> element that identifies the
+         object to be unrenewed and the elements that are required to
+         ensure idempotency of the command.
+
+   Example <unrenew> command:
+
+   C:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   C:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0">
+   C:  <extension>
+   C:    <command xmlns="urn:X-ar:params:xml:ns:arext-1.0">
+   C:      <unrenew>
+   C:        <obj:unrenew xmlns:obj="urn:org:params:xml:ns:obj-1.0">
+   C:          <!-- Object-specific elements. -->
+   C:        </obj:unrenew>
+   C:      </unrenew>
+   C:      <clTRID>ABC-12345</clTRID>
+   C:    </command>
+   C:  </extension>
+   C:</epp>
+
+   When an <unrenew> command has been processed successfully, a server
+   MAY respond with a <resData> element that MUST contain a child
+   element that identifies the object namespace.  The child elements of
+   the <arext:resData> element are object-specific.
+
+   Example <unrenew> response with <resData>
+
+   S:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   S:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0">
+   S:  <response xmlns="urn:X-ar:params:xml:ns:arext-1.0">
+   S:    <result code="1000">
+   S:      <msg>Command completed successfully</msg>
+   S:    </result>
+   S:    <resData>
+   S:      <obj:urenData xmlns:obj="urn:org:params:xml:ns:obj-1.0">
+   S:        <!-- Object-specific elements. -->
+   S:      </obj:urenData>
+
+
+
+
+AusRegistry             Registry Service Extensions             [Page 7]
+
+AusRegistry Extensions 1.0             EPP              August 9th, 2007
+
+
+   S:    </resData>
+   S:    <trID>
+   S:      <clTRID>ABC-12345</clTRID>
+   S:      <svTRID>2389742981742</svTRID>
+   S:    </trID>
+   S:  </response>
+   S:</epp>
+
+2.3.1.2. <undelete> Command
+
+   The EPP <undelete> command is used to cancel a previously requested
+   object deletion.  The elements needed to identify an object are
+   object-specific, so the child elements of the <undelete> command are
+   specified in an object-specific mapping using the EPP extension
+   framework.  In addition to the <arext:command> elements, the
+   <undelete> command contains the following child elements:
+
+      - An object-specific <obj:undelete> element that identifies the
+        object to be undeleted.
+
+   Example <undelete> command:
+
+   C:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   C:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0">
+   C:  <extension>
+   C:    <command xmlns="urn:X-ar:params:xml:ns:arext-1.0">
+   C:      <undelete>
+   C:        <obj:undelete xmlns:obj="urn:org:params:xml:ns:obj-1.0">
+   C:          <!-- Object-specific elements. -->
+   C:        </obj:undelete>
+   C:      </undelete>
+   C:      <clTRID>UNDELETE-12345</clTRID>
+   C:    </command>
+   C:  </extension>
+   C:</epp>
+
+   When an <undelete> command has been processed successfully, a server
+   MAY respond with an EPP <resData> element that MUST contain a child
+   element that identifies the object namespace.  The child elements of
+   the <resData> element are object-specific.
+
+   Example <undelete> response without <resData>:
+
+   S:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   S:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0">
+   S:  <response xmlns="urn:X-ar:params:xml:ns:arext-1.0">
+   S:    <result code="1000">
+
+
+
+
+AusRegistry             Registry Service Extensions             [Page 8]
+
+AusRegistry Extensions 1.0             EPP              August 9th, 2007
+
+
+
+
+   S:      <msg>Command completed successfully</msg>
+   S:    </result>
+   S:    <trID>
+   S:      <clTRID>UNDELETE-12345</clTRID>
+   S:      <svTRID>2389742981744</svTRID>
+   S:    </trID>
+   S:  </response>
+   S:</epp>
+
+2.3.1.3. <policyDelete> Command
+
+   The <policyDelete> command is used to remove an instance of an
+   existing object.  This command differs from <delete> in that the
+   removal is not registrant-initiated; it is initiated by a client when
+   notified that the provisioning of the object violates server policy.
+   The elements needed to identify an object are object-specific, so the
+   child elements of the <policyDelete> command are specified in an
+   object-specific mapping using the EPP extension framework.  In
+   addition to the <arext:command> elements, the <policyDelete> command
+   contains the following child elements:
+
+      - An object-specific <obj:policyDelete> element that identifies
+        the object to be deleted.
+
+   Example <policyDelete> command:
+
+   C:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   C:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0">
+   C:  <extension>
+   C:    <command xmlns="urn:X-ar:params:xml:ns:arext-1.0">
+   C:      <policyDelete>
+   C:        <obj:policyDelete
+   C:         xmlns:obj="urn:org:params:xml:ns:obj-1.0">
+   C:          <!-- Object-specific elements. -->
+   C:        </obj:policyDelete>
+   C:      </policyDelete>
+   C:      <clTRID>POLDEL-12345</clTRID>
+   C:    </command>
+   C:  </extension>
+   C:</epp>
+
+   When a <policyDelete> command has been processed successfully, a
+   server MAY respond with an EPP <resData> element that MUST contain a
+   child element that identifies the object namespace.  The child
+   elements of the <resData> element are object-specific.
+
+
+
+
+AusRegistry             Registry Service Extensions             [Page 9]
+
+AusRegistry Extensions 1.0             EPP              August 9th, 2007
+
+
+   Example <policyDelete> response without <resData>:
+
+   S:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   S:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0">
+   S:  <response xmlns="urn:X-ar:params:xml:ns:arext-1.0">
+   S:    <result code="1000">
+   S:      <msg>Command completed successfully</msg>
+   S:    </result>
+   S:    <trID>
+   S:      <clTRID>POLDEL-12345</clTRID>
+   S:      <svTRID>2389742981745</svTRID>
+   S:    </trID>
+   S:  </response>
+   S:</epp>
+
+2.3.1.4. <policyUndelete> Command
+
+   The <policyUndelete> command is used to cancel a previously requested
+   object deletion via a policy delete operation such as is defined by
+   the <policyDelete> command described previously.  The elements needed
+   to identify an object are object-specific, so the child elements of
+   the <policyUndelete> command are specified in an object-specific
+   mapping using the EPP extension framework.  In addition to the
+   <arext:command> elements, the <policyUndelete> command contains the
+   following child elements:
+
+      - An object-specific <obj:policyUndelete> element that identifies
+        the object to be undeleted.
+
+   Example <policyUndelete> command:
+
+   C:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   C:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0">
+   C:  <extension>
+   C:    <command xmlns="urn:X-ar:params:xml:ns:arext-1.0">
+   C:      <policyUndelete>
+   C:        <obj:policyUndelete
+   C:          xmlns:obj="urn:org:params:xml:ns:obj-1.0">
+   C:          <!-- Object-specific elements. -->
+   C:        </obj:policyUndelete>
+   C:      </policyUndelete>
+   C:      <clTRID>POLUNDEL-12345</clTRID>
+
+
+
+
+
+
+
+
+
+AusRegistry             Registry Service Extensions            [Page 10]
+
+AusRegistry Extensions 1.0             EPP              August 9th, 2007
+
+
+   C:    </command>
+   C:  </extension>
+   C:</epp>
+
+   When a <policyUndelete> command has been processed successfully, a
+   server MAY respond with a <resData> element that MUST contain a child
+   element that identifies the object namespace.  The child elements of
+   the <arext:resData> element are object-specific.
+
+   Example <policyUndelete> response:
+
+   S:<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   S:<epp xmlns="urn:ietf:params:xml:ns:epp-1.0">
+   S:  <response>
+   S:    <result code="1000">
+   S:      <msg>Command completed successfully</msg>
+   S:    </result>
+   S:    <trID>
+   S:      <clTRID>POLUNDEL-12345</clTRID>
+   S:      <svTRID>2389742981752</svTRID>
+   S:    </trID>
+   S:  </response>
+   S:</epp>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AusRegistry             Registry Service Extensions            [Page 11]
+
+AusRegistry Extensions 1.0             EPP              August 9th, 2007
+
+
+3. Formal Syntax
+
+Formal Syntax:
+
+   BEGIN
+   <?xml version="1.0" encoding="UTF-8"?>
+   
+   <schema targetNamespace="urn:X-ar:params:xml:ns:arext-1.0"
+           xmlns:arext="urn:X-ar:params:xml:ns:arext-1.0"
+           xmlns:epp="urn:ietf:params:xml:ns:epp-1.0"
+           xmlns="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+
+   <!--
+   Import common element types.
+   -->
+     <import namespace="urn:ietf:params:xml:ns:epp-1.0"
+             schemaLocation="epp-1.0.xsd"/>
+
+     <annotation>
+       <documentation>
+         ar Extensions to the
+         Extensible Provisioning Protocol v1.0 schema.
+       </documentation>
+     </annotation>
+
+   <!--
+   Protocol extension framework elements.
+   -->
+     <element name="command" type="arext:commandType"/>
+
+     <complexType name="commandType">
+       <sequence>
+         <choice>
+           <element name="unrenew" type="epp:readWriteType"/>
+           <element name="undelete" type="epp:readWriteType"/>
+           <element name="policyDelete" type="epp:readWriteType"/>
+           <element name="policyUndelete" type="epp:readWriteType"/>
+         </choice>
+         <element name="clTRID" type="epp:trIDStringType"/>
+       </sequence>
+     </complexType>
+
+   <!--
+   End of schema.
+   -->
+   </schema>
+   END
+
+
+
+AusRegistry             Registry Service Extensions            [Page 12]
+
+AusRegistry Extensions 1.0             EPP              August 9th, 2007
+
+
+Appendix A.  Object Mapping Template
+
+   This appendix describes a recommended outline for documenting the EPP
+   mapping of an object to the service extensions described within this
+   document.  Documents that describe object mappings SHOULD describe
+   the mapping in a format similar to the one used here.
+
+   1. Introduction
+
+      Provide an introduction that describes the object and an overview
+      of the mapping to EPP.
+
+   2. Object Attributes
+
+      Describe the attributes associated with the object, including
+      references to syntax specifications as appropriate.  Examples of
+      object attributes include a name or identifier and dates
+      associated with modification events.
+
+   3. EPP Command Mapping
+
+   3.1.  EPP Transform Commands
+
+   3.1.1.  EPP <undelete> Command
+
+      Describe the object-specific mappings required to implement the
+      EPP <undelete> command.  Include both sample commands and sample
+      responses.
+
+   3.1.2.  EPP <unrenew> Command
+
+      Describe the object-specific mappings required to implement the
+      EPP <unrenew> command.  Include both sample commands and sample
+      responses.
+
+   3.1.3.  EPP <policyDelete> Command
+
+      Describe the object-specific mappings required to implement the
+      EPP <policyDelete> command.  Include both sample commands and
+      sample responses.
+
+   3.1.4.  EPP <policyUndelete> Command
+
+      Describe the object-specific mappings required to implement the
+      EPP <policyUndelete> command.  Include both sample commands and
+      sample responses.
+
+
+
+
+
+AusRegistry             Registry Service Extensions            [Page 13]
+
