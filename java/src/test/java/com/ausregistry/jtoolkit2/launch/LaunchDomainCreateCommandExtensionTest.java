@@ -28,7 +28,7 @@ public class LaunchDomainCreateCommandExtensionTest {
     }
 
     @Test
-    public void shouldCreateValidXmlWhenSupplyLanuchExtension() throws SAXException {
+    public void shouldCreateValidXmlWhenSupplyLaunchExtension() throws SAXException {
 
         final Command cmd = new DomainCreateCommand("jtkutest.com.au", "jtkUT3st");
         final LaunchDomainCreateCommandExtension ext = new LaunchDomainCreateCommandExtension();

@@ -101,6 +101,15 @@
         </artifact:install>
     </target>
 
+    <target name="maven-deploy" depends="lib" description="Install arjtk package remotely" xmlns:artifact="antlib:org.apache.maven.artifact.ant">
+        <artifact:deploy file="${target.main.toolkit.jar}">
+            <remoteRepository url="http://nexus:8081/nexus/content/repositories/inhouse">
+                <authentication username="admin" password="admin123" /> 
+            </remoteRepository>
+            <artifact:pom file="pom.xml" />
+        </artifact:deploy>
+    </target>
+
     <target name="site-props" description="Show location properties of site-specific parameters">
         <ant dir="${basedir}" antfile="sourceforge-build.xml" target="site-props" />
     </target>

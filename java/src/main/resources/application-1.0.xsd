@@ -55,7 +55,7 @@
 
   <simpleType name="statusValueType">
     <restriction base="token">
-      <enumeration value="recieved" />
+      <enumeration value="received" />
       <enumeration value="pendingValidation" />
       <enumeration value="invalid" />
       <enumeration value="validated" />

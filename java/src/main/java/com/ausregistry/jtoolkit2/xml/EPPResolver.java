@@ -35,20 +35,20 @@ public class EPPResolver implements URIResolver {
                 ExtensionImpl.E164.getURI(),
                 ExtensionImpl.AU_V1.getURI(),
                 ExtensionImpl.AU.getURI(),
-                ExtensionImpl.AR.getURI(),
-                ExtensionImpl.AE.getURI(),
-                ExtensionImpl.VIEXT.getURI(),
-                ExtensionImpl.REGISTRANT.getURI(),
                 ExtendedObjectType.AU_DOMAIN.getURI(),
+                ExtensionImpl.AR.getURI(),
                 ExtendedObjectType.AR_DOMAIN.getURI(),
+                ExtensionImpl.AE.getURI(),
                 ExtendedObjectType.AE_DOMAIN.getURI(),
                 ExtendedObjectType.IDNA_DOMAIN.getURI(),
                 ExtendedObjectType.VARIANT.getURI(),
+                ExtensionImpl.VIEXT.getURI(),
                 ExtendedObjectType.SEC_DNS.getURI(),
                 ExtendedObjectType.SYNC.getURI(),
                 ExtendedObjectType.KV.getURI(),
-                ExtendedObjectType.LAUNCH.getURI(),
+                ExtensionImpl.REGISTRANT.getURI(),
                 ExtendedObjectType.RESTORE.getURI(),
+                ExtendedObjectType.LAUNCH.getURI()
         };
 
         final String[] localResources = new String[] {
@@ -60,20 +60,20 @@ public class EPPResolver implements URIResolver {
                 ExtensionImpl.E164.getSchemaDefinition(),
                 ExtensionImpl.AU_V1.getSchemaDefinition(),
                 ExtensionImpl.AU.getSchemaDefinition(),
-                ExtensionImpl.AR.getSchemaDefinition(),
-                ExtensionImpl.AE.getSchemaDefinition(),
-                ExtensionImpl.VIEXT.getSchemaDefinition(),
-                ExtensionImpl.REGISTRANT.getSchemaDefinition(),
                 ExtendedObjectType.AU_DOMAIN.getSchemaDefinition(),
+                ExtensionImpl.AR.getSchemaDefinition(),
                 ExtendedObjectType.AR_DOMAIN.getSchemaDefinition(),
+                ExtensionImpl.AE.getSchemaDefinition(),
                 ExtendedObjectType.AE_DOMAIN.getSchemaDefinition(),
                 ExtendedObjectType.IDNA_DOMAIN.getSchemaDefinition(),
                 ExtendedObjectType.VARIANT.getSchemaDefinition(),
+                ExtensionImpl.VIEXT.getSchemaDefinition(),
                 ExtendedObjectType.SEC_DNS.getSchemaDefinition(),
                 ExtendedObjectType.RESTORE.getSchemaDefinition(),
                 ExtendedObjectType.SYNC.getSchemaDefinition(),
                 ExtendedObjectType.KV.getSchemaDefinition(),
-                ExtendedObjectType.LAUNCH.getSchemaDefinition(),
+                ExtensionImpl.REGISTRANT.getSchemaDefinition(),
+                ExtendedObjectType.LAUNCH.getSchemaDefinition()
         };
 
         uriLocMap = new HashMap<String, String>();

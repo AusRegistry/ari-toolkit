@@ -41,6 +41,8 @@ public final class NamespaceContextImpl implements NamespaceContext {
          */
         NamespaceContextImpl.put("e", "urn:ietf:params:xml:ns:epp-1.0");
         NamespaceContextImpl.put("epp", "urn:ietf:params:xml:ns:epp-1.0");
+        NamespaceContextImpl.put("e", "urn:ietf:params:xml:ns:epp-1.0");
+        NamespaceContextImpl.put("epp", "urn:ietf:params:xml:ns:epp-1.0");
         NamespaceContextImpl.put(StandardObjectType.HOST.getName(), StandardObjectType.HOST.getURI());
         NamespaceContextImpl.put(StandardObjectType.CONTACT.getName(), StandardObjectType.CONTACT.getURI());
         NamespaceContextImpl.put(StandardObjectType.DOMAIN.getName(), StandardObjectType.DOMAIN.getURI());
@@ -61,6 +63,7 @@ public final class NamespaceContextImpl implements NamespaceContext {
         NamespaceContextImpl.put(ExtensionImpl.AU_V1.getPrefix(), ExtensionImpl.AU_V1.getURI());
         NamespaceContextImpl.put(ExtensionImpl.AR.getPrefix(), ExtensionImpl.AR.getURI());
         NamespaceContextImpl.put(ExtensionImpl.VIEXT.getPrefix(), ExtensionImpl.VIEXT.getURI());
+        NamespaceContextImpl.put(ExtendedObjectType.LAUNCH.getName(), ExtendedObjectType.LAUNCH.getURI());
     }
 
     /**
