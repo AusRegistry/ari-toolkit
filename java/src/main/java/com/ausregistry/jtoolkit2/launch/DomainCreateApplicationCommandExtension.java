@@ -7,25 +7,24 @@ import com.ausregistry.jtoolkit2.se.CommandExtension;
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.xml.XMLWriter;
 
-public class LaunchDomainInfoCommandExtension  implements CommandExtension {
+public class DomainCreateApplicationCommandExtension implements CommandExtension {
 
-    private static final long serialVersionUID = 5799892330484406301L;
-    
-    private String applicationId;
+    private static final long serialVersionUID = 5202343696850193788L;
+    private String phase;
 
     @Override
     public void addToCommand(Command command) throws Exception {
         final XMLWriter xmlWriter = command.getXmlWriter();
         final Element extensionElement = command.getExtensionElement();
-        final Element createElement = xmlWriter.appendChild(extensionElement, "info",
+        final Element createElement = xmlWriter.appendChild(extensionElement, "create",
                 ExtendedObjectType.LAUNCH.getURI());
 
-        xmlWriter.appendChild(createElement, "id", ExtendedObjectType.LAUNCH.getURI()).setTextContent(applicationId);
-        
+        xmlWriter.appendChild(createElement, "phase", ExtendedObjectType.LAUNCH.getURI()).setTextContent(phase);
+
     }
 
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
+    public void setPhase(String phase) {
+        this.phase = phase;
     }
 
 }

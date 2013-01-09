@@ -19,7 +19,7 @@ import com.ausregistry.jtoolkit2.xml.ParsingException;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 import com.ausregistry.jtoolkit2.xml.XMLParser;
 
-public class LaunchDomainInfoCommandExtensionTest {
+public class DomainInfoApplicationCommandExtensionTest {
 
     private static final XMLParser PARSER = new XMLParser();
 
@@ -33,7 +33,7 @@ public class LaunchDomainInfoCommandExtensionTest {
     public void shouldCreateValidXmlWhenSupplyLaunchExtensionForInfo() throws SAXException {
 
         final Command cmd = new DomainInfoCommand("jtkutest.com.au");
-        final LaunchDomainInfoCommandExtension ext = new LaunchDomainInfoCommandExtension();
+        final DomainInfoApplicationCommandExtension ext = new DomainInfoApplicationCommandExtension();
         ext.setApplicationId("sunrise-application-id");
 
         cmd.appendExtension(ext);
@@ -52,7 +52,7 @@ public class LaunchDomainInfoCommandExtensionTest {
     public void shouldReturnLaunchDetailsForInfoCommand() throws ParsingException {
         final String dnsForm = "test-domain";
         final DomainInfoResponse response = new DomainInfoResponse();
-        final LaunchDomainInfoResponseExtension launchExtension = new LaunchDomainInfoResponseExtension(
+        final DomainInfoApplicationResponseExtension launchExtension = new DomainInfoApplicationResponseExtension(
                 ResponseExtension.INFO);
         String applicationId = "sunrise-application-id";
         String creDate = "2011-01-01T00:00:00Z";
@@ -77,7 +77,7 @@ public class LaunchDomainInfoCommandExtensionTest {
     public void shouldReturnLaunchDetailsForInfoCommandWhenNotUpdated() throws ParsingException {
         final String dnsForm = "test-domain";
         final DomainInfoResponse response = new DomainInfoResponse();
-        final LaunchDomainInfoResponseExtension launchExtension = new LaunchDomainInfoResponseExtension(
+        final DomainInfoApplicationResponseExtension launchExtension = new DomainInfoApplicationResponseExtension(
                 ResponseExtension.INFO);
         String applicationId = "sunrise-application-id";
         String creDate = "2011-01-01T00:00:00Z";
