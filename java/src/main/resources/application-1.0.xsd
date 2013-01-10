@@ -38,7 +38,7 @@
     <sequence>
       <element name="id" type="token" />
       <element name="phase" type="token" />
-      <element name="status" type="app:statusType" />
+      <element name="status" type="app:statusType" maxOccurs="unbounded" />
       <element name="crDate" type="dateTime" />
       <element name="upDate" type="dateTime" minOccurs="0" />
     </sequence>
@@ -55,17 +55,16 @@
 
   <simpleType name="statusValueType">
     <restriction base="token">
-      <enumeration value="received" />
-      <enumeration value="pendingValidation" />
-      <enumeration value="invalid" />
-      <enumeration value="validated" />
+      <enumeration value="ok" />
+      <enumeration value="deleteProhibited" />
       <enumeration value="pendingAllocation" />
-      <enumeration value="allocated" />
-      <enumeration value="allocation-lost" />
-      <enumeration value="deleted" />
-      <enumeration value="other" />
+      <enumeration value="pendingValidation" />
+      <enumeration value="updateAuthInfoProhibited" />
+      <enumeration value="updateContactProhibited" />
+      <enumeration value="updateDelegationProhibited" />
+      <enumeration value="updateRegistrantProhibited" />
+      <enumeration value="updateOtherProhibited" />
     </restriction>
   </simpleType>
 
-  <!-- End of schema. -->
 </schema>

@@ -57,7 +57,7 @@ public class DomainInfoApplicationCommandExtensionTest {
         String applicationId = "sunrise-application-id";
         String creDate = "2011-01-01T00:00:00Z";
         String phase = "sunrise";
-        String status = "received";
+        String status = "ok";
         String updDate = "2012-01-01T00:00:00Z";
         final XMLDocument doc = PARSER.parse(getInfoResponseExpectedXml(dnsForm, applicationId, phase, status, creDate,
                 updDate));
@@ -82,7 +82,7 @@ public class DomainInfoApplicationCommandExtensionTest {
         String applicationId = "sunrise-application-id";
         String creDate = "2011-01-01T00:00:00Z";
         String phase = "sunrise";
-        String status = "received";
+        String status = "ok";
         String updDate = null;
         final XMLDocument doc = PARSER.parse(getInfoResponseExpectedXml(dnsForm, applicationId, phase, status, creDate,
                 updDate));
