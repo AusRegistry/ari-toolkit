@@ -6,6 +6,9 @@ package com.ausregistry.jtoolkit2.se;
  * implementation from the user.
  */
 public abstract class DomainTransferCommand extends TransferCommand {
+
+	private static final long serialVersionUID = -5730286980387444992L;
+
 	public DomainTransferCommand(TransferOp operation, String name) {
 		super(StandardObjectType.DOMAIN, operation, name);
 	}

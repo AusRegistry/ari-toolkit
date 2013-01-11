@@ -6,6 +6,9 @@ package com.ausregistry.jtoolkit2.se;
  * implementation from the user.
  */
 public abstract class ContactTransferCommand extends TransferCommand {
+
+	private static final long serialVersionUID = 2266050198631174340L;
+
 	public ContactTransferCommand(TransferOp operation, String id) {
 		super(StandardObjectType.CONTACT, operation, id);
 	}

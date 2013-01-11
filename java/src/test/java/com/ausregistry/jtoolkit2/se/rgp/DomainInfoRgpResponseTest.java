@@ -12,7 +12,6 @@ import org.junit.Test;
 
 import com.ausregistry.jtoolkit2.se.DomainInfoResponse;
 import com.ausregistry.jtoolkit2.se.ResponseExtension;
-import com.ausregistry.jtoolkit2.xml.ParsingException;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 import com.ausregistry.jtoolkit2.xml.XMLParser;
 

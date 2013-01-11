@@ -8,6 +8,9 @@ package com.ausregistry.jtoolkit2.se;
  * @see com.ausregistry.jtoolkit2.se.Response
  */
 public abstract class UpdateCommand extends ObjectCommand {
+
+	private static final long serialVersionUID = -5658605879430546350L;
+
 	/**
 	 * Create an update command mapped to the specified object type to update
 	 * the identified object.

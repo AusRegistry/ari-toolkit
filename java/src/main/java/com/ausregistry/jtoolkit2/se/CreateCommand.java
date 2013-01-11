@@ -6,6 +6,9 @@ package com.ausregistry.jtoolkit2.se;
  * is mapped and the object-specific identifier of the object to create.
  */
 public abstract class CreateCommand extends ObjectCommand {
+
+	private static final long serialVersionUID = 6839564125865392586L;
+
 	/**
 	 * Construct a create command of the given object type mapping with the
 	 * given object identifier.

@@ -7,7 +7,10 @@ package com.ausregistry.jtoolkit2.se;
  * types to which the response applies.
  */
 public abstract class DataResponse extends Response {
-    protected static final String OBJ = "OBJ";
+
+	private static final long serialVersionUID = -7470124100857220847L;
+
+	protected static final String OBJ = "OBJ";
     protected static final String RES_DATA_EXPR = RESPONSE_EXPR + "/e:resData";
 
     private CommandType cmdType;

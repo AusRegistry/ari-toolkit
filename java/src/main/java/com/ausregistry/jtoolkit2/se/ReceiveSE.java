@@ -12,7 +12,9 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
  */
 abstract class ReceiveSE implements java.io.Serializable {
 
-    protected String xml;
+	private static final long serialVersionUID = 3404913770026760200L;
+
+	protected String xml;
     protected Logger maintLogger;
     protected Logger supportLogger;
     protected Logger userLogger;

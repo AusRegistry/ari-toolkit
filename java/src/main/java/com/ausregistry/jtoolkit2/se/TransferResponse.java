@@ -22,7 +22,10 @@ import javax.xml.xpath.XPathExpressionException;
  * @see com.ausregistry.jtoolkit2.se.TransferCommand
  */
 public abstract class TransferResponse extends DataResponse {
-    protected static final String OBJ = "OBJ";
+
+	private static final long serialVersionUID = 4700444182315651037L;
+
+	protected static final String OBJ = "OBJ";
     protected static final String TR_STATUS_EXPR = RES_DATA_EXPR +
         "/OBJ:trnData/OBJ:trStatus/text()";
     protected static final String REID_EXPR = RES_DATA_EXPR +

@@ -6,6 +6,9 @@ package com.ausregistry.jtoolkit2.se;
  * is mapped and the object-specific identifier of the object to delete.
  */
 public abstract class DeleteCommand extends ObjectCommand {
+
+	private static final long serialVersionUID = -4790273172825054472L;
+
 	/**
 	 * Construct a delete command of the given object type mapping with the
 	 * given object identifier.

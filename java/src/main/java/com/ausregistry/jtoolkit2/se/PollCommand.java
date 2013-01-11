@@ -9,7 +9,10 @@ import com.ausregistry.jtoolkit2.ErrorPkg;
  * operation type to the user.
  */
 public abstract class PollCommand extends Command {
-    public PollCommand(PollOperation op) {
+
+	private static final long serialVersionUID = 2569927516750627497L;
+
+	public PollCommand(PollOperation op) {
 		super(StandardCommandType.POLL);
 
 		if (op == null) {

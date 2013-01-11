@@ -11,7 +11,10 @@ import com.ausregistry.jtoolkit2.ErrorPkg;
  * @see com.ausregistry.jtoolkit2.se.TransferResponse
  */
 public abstract class TransferCommand extends ObjectCommand {
-    /**
+
+	private static final long serialVersionUID = 2577041132486433812L;
+
+	/**
      * Create a transfer command of the specified operation type mapped to the
      * specified object type for the identified object.
      *

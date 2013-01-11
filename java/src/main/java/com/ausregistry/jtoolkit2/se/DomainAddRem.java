@@ -10,6 +10,9 @@ import org.w3c.dom.Element;
  * domain object.
  */
 public abstract class DomainAddRem implements Appendable {
+
+	private static final long serialVersionUID = -5023022665651367748L;
+
 	private String type;
 	private String[] nameservers;
 	private String[] techContacts;

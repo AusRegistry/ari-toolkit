@@ -21,7 +21,10 @@ import javax.xml.xpath.XPathExpressionException;
  * @see com.ausregistry.jtoolkit2.se.InfoCommand
  */
 public abstract class InfoResponse extends DataResponse {
-    protected static final String INF_DATA_EXPR = RESPONSE_EXPR +
+
+	private static final long serialVersionUID = 1473168990371776574L;
+
+	protected static final String INF_DATA_EXPR = RESPONSE_EXPR +
         "/e:resData/OBJ:infData";
     protected static final String ROID_EXPR = INF_DATA_EXPR +
         "/OBJ:roid/text()";

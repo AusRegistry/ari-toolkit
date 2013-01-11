@@ -9,7 +9,10 @@ import com.ausregistry.jtoolkit2.xml.XMLWriter;
  * This defines the operations or actions for sending XML to an EPP based server.  It defines the user level logger.
  */
 abstract class SendSE implements Serializable {
-    private String xml;
+
+	private static final long serialVersionUID = 8732674992510564553L;
+
+	private String xml;
     protected final transient XMLWriter xmlWriter;
     protected final transient Logger userLogger;
 

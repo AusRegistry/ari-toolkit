@@ -20,7 +20,10 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
  * @see com.ausregistry.jtoolkit2.se.PollResponse
  */
 public abstract class NotificationResponse extends DataResponse {
-    protected static final String IDENT = "IDENT";
+
+	private static final long serialVersionUID = 8926602539143476957L;
+
+	protected static final String IDENT = "IDENT";
 
     private static final String PAN_DATA_EXPR = RES_DATA_EXPR
         + "/OBJ:panData";
