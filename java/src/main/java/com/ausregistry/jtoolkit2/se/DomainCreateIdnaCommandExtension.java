@@ -12,7 +12,7 @@ import com.ausregistry.jtoolkit2.xml.XMLWriter;
  */
 public final class DomainCreateIdnaCommandExtension implements CommandExtension {
     private static final long serialVersionUID = -8945007354471832288L;
-    private String userForm = null;
+    private String userForm;
     private String language;
 
     public DomainCreateIdnaCommandExtension(final String userForm, final String language) {
@@ -20,15 +20,18 @@ public final class DomainCreateIdnaCommandExtension implements CommandExtension 
         setLanguage(language);
     }
 
-	public void addToCommand(final Command command) {
-		final XMLWriter xmlWriter = command.getXmlWriter();
-		final Element extensionElement = command.getExtensionElement();
-		final Element createElement = xmlWriter.appendChild(extensionElement,
-				"create", ExtendedObjectType.IDNA_DOMAIN.getURI());
-		xmlWriter.appendChild(createElement, "userForm", userForm, "language", language);
+    public void addToCommand(final Command command) {
+        final XMLWriter xmlWriter = command.getXmlWriter();
+        final Element extensionElement = command.getExtensionElement();
+        final Element createElement =
+        xmlWriter.appendChild(extensionElement, "create", ExtendedObjectType.IDNA_DOMAIN.getURI());
+        xmlWriter.appendChild(createElement, "userForm", userForm, "language", language);
     }
     
     private void setUserForm(final String userForm) {
+        if (userForm == null || userForm.isEmpty()) {
+            throw new IllegalArgumentException("User form must not be null or empty");
+        }
         this.userForm = userForm;
     }
     

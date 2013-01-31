@@ -1,4 +1,4 @@
-package com.ausregistry.jtoolkit2.se.rgp;
+package com.ausregistry.jtoolkit2.gtld.rgp;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.ausregistry.jtoolkit2.se.rgp.DomainRestoreResponse;
+import com.ausregistry.jtoolkit2.se.rgp.RgpStatus;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 import com.ausregistry.jtoolkit2.xml.XMLParser;
 

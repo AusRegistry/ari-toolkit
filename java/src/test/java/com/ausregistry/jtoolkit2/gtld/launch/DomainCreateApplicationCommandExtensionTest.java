@@ -1,4 +1,4 @@
-package com.ausregistry.jtoolkit2.launch;
+package com.ausregistry.jtoolkit2.gtld.launch;
 
 import static org.junit.Assert.assertEquals;
 
@@ -8,6 +8,8 @@ import org.xml.sax.SAXException;
 
 import com.ausregistry.jtoolkit2.EPPDateFormatter;
 import com.ausregistry.jtoolkit2.Timer;
+import com.ausregistry.jtoolkit2.launch.DomainCreateApplicationCommandExtension;
+import com.ausregistry.jtoolkit2.launch.DomainCreateApplicationResponse;
 import com.ausregistry.jtoolkit2.se.CLTRID;
 import com.ausregistry.jtoolkit2.se.Command;
 import com.ausregistry.jtoolkit2.se.DomainCreateCommand;

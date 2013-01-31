@@ -24,7 +24,7 @@
       </documentation>
     </annotation>
     <sequence>
-      <element name="userForm" type="idnadomain:userFormLabelType">
+      <element name="userForm" type="eppcom:labelType">
       </element>
       <element name="dnsForm" type="eppcom:labelType" />
     </sequence>
@@ -33,28 +33,6 @@
   <complexType name="internationalisedLabelType">
     <simpleContent>
       <extension base="eppcom:labelType">
-        <attribute name="language" type="language" use="required">
-          <annotation>
-            <documentation>
-              Registration of language with IANA requires the definition
-              of a Script or Language Designator
-              (http://www.iana.org/procedures/idn-repository.html).
-
-              The linked document above notes that Language Designators
-              are defined in BCP 47
-              (http://www.rfc-editor.org/rfc/bcp/bcp47.txt), which
-              satisfies the requirements of the language datatype and
-              RFC3066 (BCP 47, Section 2.2.8).
-            </documentation>
-          </annotation>
-        </attribute>
-      </extension>
-    </simpleContent>
-  </complexType>
-  
-    <complexType name="internationalisedUserFormLabelType">
-    <simpleContent>
-      <extension base="idnadomain:userFormLabelType">
         <attribute name="language" type="language" use="required">
           <annotation>
             <documentation>
@@ -85,7 +63,7 @@
   <complexType name="createType">
     <sequence>
       <element name="userForm"
-        type="idnadomain:internationalisedUserFormLabelType" />
+        type="idnadomain:internationalisedLabelType" />
     </sequence>
   </complexType>
 
@@ -106,13 +84,6 @@
         minOccurs="1" />
     </sequence>
   </complexType>
-
-  <simpleType name="userFormLabelType">
-	<restriction base="token">
-		<minLength value="0" />
-		<maxLength value="255" />
-	</restriction>
-  </simpleType>
 
   <!--
     End of schema.

@@ -1,0 +1,28 @@
+<?xml version="1.0" standalone="no" ?>
+<schema targetNamespace="urn:rbp:params:xml:ns:idn-1.0"
+  xmlns:idn="urn:rbp:params:xml:ns:idn-1.0"
+  xmlns:eppcom="urn:ietf:params:xml:ns:eppcom-1.0"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified">
+
+  <!-- Import common element types. -->
+  <import namespace="urn:ietf:params:xml:ns:eppcom-1.0" />
+
+  <annotation>
+    <documentation>
+      Internationalized Domain Name Extensions to the
+      Extensible Provisioning Protocol.
+    </documentation>
+  </annotation>
+
+  <element name="create" type="idn:languageTagType" />
+
+  <complexType name="languageTagType">
+    <sequence>
+      <element name="languageTag" type="language" />
+    </sequence>
+  </complexType>
+
+  <element name="infData" type="idn:languageTagType" />
+
+</schema>

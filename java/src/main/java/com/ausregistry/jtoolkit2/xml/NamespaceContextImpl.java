@@ -49,6 +49,7 @@ public final class NamespaceContextImpl implements NamespaceContext {
         NamespaceContextImpl.put(ExtendedObjectType.AU_DOMAIN.getName(), ExtendedObjectType.AU_DOMAIN.getURI());
         NamespaceContextImpl.put(ExtendedObjectType.AR_DOMAIN.getName(), ExtendedObjectType.AR_DOMAIN.getURI());
         NamespaceContextImpl.put(ExtendedObjectType.AE_DOMAIN.getName(), ExtendedObjectType.AE_DOMAIN.getURI());
+        NamespaceContextImpl.put(ExtendedObjectType.IDN.getName(), ExtendedObjectType.IDN.getURI());
         NamespaceContextImpl.put(ExtendedObjectType.IDNA_DOMAIN.getName(), ExtendedObjectType.IDNA_DOMAIN.getURI());
         NamespaceContextImpl.put(ExtendedObjectType.VARIANT.getName(), ExtendedObjectType.VARIANT.getURI());
         NamespaceContextImpl.put(ExtendedObjectType.SEC_DNS.getName(), ExtendedObjectType.SEC_DNS.getURI());
