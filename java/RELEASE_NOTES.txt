@@ -1,5 +1,9 @@
 AusRegistry's EPP Client Library for the Java Programming Language.
 
+Changes in version 2.0.6.12
+* Added sunrise application extension support for domain delete application based on draft
+specification for application.xsd.
+
 Changes in version 2.0.6.11
 * Added idn-1.0 extension. Added implementation to for IDN extension for domain create and domain info response 
 based on the draft 
