@@ -50,6 +50,40 @@ public class DomainCreateResponseTest {
     }
 
     @Test
+    public void testGetIdnName() throws Exception {
+        final String userForm = "\u0257\u018c\u0661.com";
+        final String dnsForm = "xn--xha91b83h.com";
+        final String canonicalForm = "\u0257\u018c1.com";
+        final DomainCreateResponse response = new DomainCreateResponse();
+        final DomainIdnaResponseExtension idnaExtension =
+                new DomainIdnaResponseExtension(ResponseExtension.CREATE);
+        final XMLDocument doc =
+                PARSER.parse(getCreateResponseExpectedXml(dnsForm, true, userForm, canonicalForm,
+                        null, null));
+        response.registerExtension(idnaExtension);
+        response.fromXML(doc);
+        assertEquals(dnsForm, response.getName());
+        assertEquals(userForm, idnaExtension.getUserFormName());
+        assertEquals(canonicalForm, idnaExtension.getCanonicalForm());
+        assertEquals("test", idnaExtension.getLanguage());
+    }
+
+    @Test
+    public void testGetNoIdn() throws Exception {
+        final String domainName = "xn--xha91b83h.com";
+        final DomainCreateResponse response = new DomainCreateResponse();
+        final DomainIdnaResponseExtension re =
+            new DomainIdnaResponseExtension(ResponseExtension.CREATE);
+        
+        final XMLDocument doc =
+            PARSER.parse(getCreateResponseExpectedXml(domainName));
+        response.registerExtension(re);
+        response.fromXML(doc);
+        assertEquals(domainName, response.getName());
+        assertFalse("IDN extension should not have been initialised", re.isInitialised());
+    }
+
+    @Test
     public void testGetVariants() throws Exception {
         final String dnsForm = "xn--xha91b83h.com";
         final String variantUserForm = "\u0257\u015c\u0661.com";
@@ -83,6 +117,18 @@ public class DomainCreateResponseTest {
         response.fromXML(doc);
         assertEquals(domainName, response.getName());
         assertFalse("Variants should not have been initialised", variantsExtension.isInitialised());
+    }
+
+    @Test
+    public void testLdhOnlyGetName() throws Exception {
+        final DomainCreateResponse response = new DomainCreateResponse();
+        final DomainIdnaResponseExtension re = new DomainIdnaResponseExtension(ResponseExtension.CREATE);
+        final XMLDocument doc = PARSER.parse(getCreateResponseExpectedXml("example.com", true, "example.com", "example.com", null, null));
+        response.registerExtension(re);
+        response.fromXML(doc);
+        assertEquals("example.com", response.getName());
+        assertEquals("example.com", re.getUserFormName());
+        assertEquals("example.com", re.getCanonicalForm());
     }
 
     private static String getCreateResponseExpectedXml(final String domainName,

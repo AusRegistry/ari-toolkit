@@ -46,11 +46,11 @@ public final class NamespaceContextImpl implements NamespaceContext {
         for (StandardObjectType standardObjectType : StandardObjectType.values()) {
             NamespaceContextImpl.put(standardObjectType.getName(), standardObjectType.getURI());
         }
-        for (ExtendedObjectType extendedObjectType : ExtendedObjectType.values()) {
-            NamespaceContextImpl.put(extendedObjectType.getName(), extendedObjectType.getURI());
-        }
         for (ExtensionImpl extension : ExtensionImpl.values()) {
             NamespaceContextImpl.put(extension.getPrefix(), extension.getURI());
+        }
+        for (ExtendedObjectType extendedObjectType : ExtendedObjectType.values()) {
+            NamespaceContextImpl.put(extendedObjectType.getName(), extendedObjectType.getURI());
         }
     }
 

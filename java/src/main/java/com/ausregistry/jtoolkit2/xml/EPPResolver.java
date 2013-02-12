@@ -38,13 +38,13 @@ public class EPPResolver implements URIResolver {
             uriList.add(objectType.getURI());
             localResources.add(objectType.getSchemaDefintion());
         }
-        for (ExtendedObjectType extendedObjectType : ExtendedObjectType.values()) {
-            uriList.add(extendedObjectType.getURI());
-            localResources.add(extendedObjectType.getSchemaDefinition());
-        }
         for (ExtensionImpl extension : ExtensionImpl.values()) {
             uriList.add(extension.getURI());
             localResources.add(extension.getSchemaDefinition());
+        }
+        for (ExtendedObjectType extendedObjectType : ExtendedObjectType.values()) {
+            uriList.add(extendedObjectType.getURI());
+            localResources.add(extendedObjectType.getSchemaDefinition());
         }
         uris = uriList.toArray(new String[]{});
         uriLocMap = new HashMap<String, String>();

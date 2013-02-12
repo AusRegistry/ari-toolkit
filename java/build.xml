@@ -21,8 +21,8 @@
     <property name="target.main.lib.dir" location="${target.dir}/lib" />
     <property name="target.test.lib.dir" location="${target.dir}/test-lib" />
     <property name="target.doc.dir" location="${target.dir}/doc" />
-    <property name="target.main.toolkit.jar" value="${target.main.lib.dir}/arjtk.jar" />
-    <property name="target.test.toolkit.jar" value="${target.test.lib.dir}/arjtk.jar" />
+    <property name="target.main.toolkit.jar" value="${target.main.lib.dir}/arjtk-cctld.jar" />
+    <property name="target.test.toolkit.jar" value="${target.test.lib.dir}/arjtk-cctld.jar" />
 
     <property name="java.util.logging.config.file" location="${target.config.dir}/logging.properties" />
     <property name="extlib.dir" location="lib" />
