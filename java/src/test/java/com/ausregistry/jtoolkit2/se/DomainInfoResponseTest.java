@@ -106,42 +106,6 @@ public class DomainInfoResponseTest {
     }
 
     @Test
-    public void testGetIdnName() throws Exception {
-        final String userForm = "\u0257\u018c\u0661.com";
-        final String dnsForm = "xn--xha91b83h.com";
-        final String canonicalForm = "\u0257\u018c1.com";
-        final DomainInfoResponse response = new DomainInfoResponse();
-        final DomainIdnaResponseExtension re =
-                new DomainIdnaResponseExtension(ResponseExtension.INFO);
-
-        final XMLDocument doc =
-                PARSER.parse(getInfoResponseExpectedXml(dnsForm, true, userForm, canonicalForm,
-                        null, null));
-        response.registerExtension(re);
-        response.fromXML(doc);
-        assertEquals(dnsForm, response.getName());
-        assertTrue("IDN extension should have been initialised", re.isInitialised());
-        assertEquals(userForm, re.getUserFormName());
-        assertEquals(canonicalForm, re.getCanonicalForm());
-        assertEquals("test", re.getLanguage());
-    }
-    
-    @Test
-    public void testGetNoIdn() throws Exception {
-        final String domainName = "xn--xha91b83h.com";
-        final DomainInfoResponse response = new DomainInfoResponse();
-        final DomainIdnaResponseExtension re =
-            new DomainIdnaResponseExtension(ResponseExtension.INFO);
-        
-        final XMLDocument doc =
-            PARSER.parse(getInfoResponseExpectedXml(domainName));
-        response.registerExtension(re);
-        response.fromXML(doc);
-        assertEquals(domainName, response.getName());
-        assertFalse("IDN extension should not have been initialised", re.isInitialised());
-    }
-
-    @Test
     public void testGetVariants() throws Exception {
         final String dnsForm = "xn--xha91b83h.com";
         final String variantUserForm = "\u0257\u015c\u0661.com";
@@ -176,20 +140,6 @@ public class DomainInfoResponseTest {
         assertEquals(domainName, response.getName());
         assertFalse("Variant extension should not have been initialised",
                 variantsExtension.isInitialised());
-    }
-
-    @Test
-    public void testLdhOnlyGetName() throws Exception {
-        final DomainInfoResponse response = new DomainInfoResponse();
-        final DomainIdnaResponseExtension re =
-                new DomainIdnaResponseExtension(ResponseExtension.INFO);
-        final XMLDocument doc =
-                PARSER.parse(getInfoResponseExpectedXml("example.com", true, "example.com"));
-        response.registerExtension(re);
-        response.fromXML(doc);
-        assertEquals("example.com", response.getName());
-        assertTrue("IDN extension should have been initialised", re.isInitialised());
-        assertEquals("example.com", re.getUserFormName());
     }
 
     private static String getInfoResponseExpectedXml(final String domainName, final boolean isIdn,
@@ -227,20 +177,9 @@ public class DomainInfoResponseTest {
         result.append("</authInfo>");
         result.append("</infData>");
         result.append("</resData>");
-        result.append("<extension>");
-        result.append("<auext:infData xmlns:auext=\"urn:X-au:params:xml:ns:auext-1.1\"");
-        result.append(" xsi:schemaLocation=\"urn:X-au:params:xml:ns:auext-1.1 auext-1.1.xsd\">");
-        result.append("<auext:auProperties>");
-        result.append("<auext:registrantName>RegistrantName Pty. Ltd.</auext:registrantName>");
-        result.append("<auext:registrantID type=\"ACN\">123456789</auext:registrantID>");
-        result.append("<auext:eligibilityType>Other</auext:eligibilityType>");
-        result.append("<auext:eligibilityName>Registrant Eligi</auext:eligibilityName>");
-        result.append("<auext:eligibilityID type=\"ABN\">987654321</auext:eligibilityID>");
-        result.append("<auext:policyReason>2</auext:policyReason>");
-        result.append("</auext:auProperties>");
-        result.append("</auext:infData>");
 
         if (isIdn || variantDnsForm != null) {
+            result.append("<extension>");
             if (isIdn) {
                 result.append("<infData xmlns=\"urn:X-ar:params:xml:ns:idnadomain-1.0\"");
                 result.append(" xsi:schemaLocation=\"urn:X-ar:params:xml:ns:idnadomain-1.0 idnadomain-1.0.xsd\">");
@@ -256,9 +195,9 @@ public class DomainInfoResponseTest {
                 result.append("</infData>");
             }
 
+            result.append("</extension>");
         }
 
-        result.append("</extension>");
         result.append("<trID>");
         result.append("<clTRID>ABC-12345</clTRID>");
         result.append("<svTRID>54321-XYZ</svTRID>");
@@ -271,11 +210,6 @@ public class DomainInfoResponseTest {
     private static String getInfoResponseExpectedXml(final String domainName,
             final String variantUserForm, final String variantDnsForm) {
         return getInfoResponseExpectedXml(domainName, false, null, null, variantUserForm, variantDnsForm);
-    }
-
-    private static String getInfoResponseExpectedXml(final String domainName, final boolean isIdn, 
-            final String userForm) {
-        return getInfoResponseExpectedXml(domainName, isIdn, userForm, null, null, null);
     }
 
     private static String getInfoResponseExpectedXml(final String domainName) {

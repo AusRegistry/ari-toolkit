@@ -141,17 +141,6 @@ public final class SecDnsDomainInfoResponseTest {
     private static void buildSecDNSXmlExtension(final boolean isMulitpleDs, final boolean isKeyData,
             final boolean isDsData, final StringBuilder result) {
 		result.append(        "<extension>");
-        result.append(            "<auext:infData xmlns:auext=\"urn:X-au:params:xml:ns:auext-1.1\"");
-        result.append(                 " xsi:schemaLocation=\"urn:X-au:params:xml:ns:auext-1.1 auext-1.1.xsd\">");
-        result.append(                 "<auext:auProperties>");
-        result.append(                      "<auext:registrantName>RegistrantName Pty. Ltd.</auext:registrantName>");
-        result.append(                      "<auext:registrantID type=\"ACN\">123456789</auext:registrantID>");
-        result.append(                      "<auext:eligibilityType>Other</auext:eligibilityType>");
-        result.append(                      "<auext:eligibilityName>Registrant Eligi</auext:eligibilityName>");
-        result.append(                      "<auext:eligibilityID type=\"ABN\">987654321</auext:eligibilityID>");
-        result.append(                      "<auext:policyReason>2</auext:policyReason>");
-        result.append(                  "</auext:auProperties>");
-        result.append(            "</auext:infData>");
         result.append(            "<secDNS:infData xmlns:secDNS=\"urn:ietf:params:xml:ns:secDNS-1.1\"");
         result.append(                 " xsi:schemaLocation=\"urn:ietf:params:xml:ns:secDNS-1.1 secDNS-1.1.xsd\">");
         result.append(                 "<secDNS:maxSigLife>604800</secDNS:maxSigLife>");

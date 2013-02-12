@@ -1,15 +1,12 @@
 package com.ausregistry.jtoolkit2.se;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
-
+import com.ausregistry.jtoolkit2.Timer;
+import com.ausregistry.jtoolkit2.xml.Attribute;
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import com.ausregistry.jtoolkit2.Timer;
-import com.ausregistry.jtoolkit2.xml.Attribute;
+import static org.junit.Assert.*;
 
 public class DomainInfoCommandTest {
     private DomainInfoCommand cmd1;
@@ -45,15 +42,6 @@ public class DomainInfoCommandTest {
         }
     }
 
-    @Test
-    public void testVariantExtension() throws Exception {
-        final DomainInfoVariantCommandExtension ce = new DomainInfoVariantCommandExtension();
-        ce.setVariants("all");
-        cmd1.appendExtension(ce);
-        assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><command><info><info xmlns=\"urn:ietf:params:xml:ns:domain-1.0\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd\"><name>jtkutest.com.au</name></info></info><extension><info xmlns=\"urn:X-ar:params:xml:ns:variant-1.0\" variants=\"all\"/></extension><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>",
-                cmd1.toXML());
-    }
-    
     @Test
     public void shouldSupportHostsAttributeInDomainInfoCommand() {
         DomainInfoCommand domainInfo = new DomainInfoCommand("domain.com", new Attribute("hosts", "del"));

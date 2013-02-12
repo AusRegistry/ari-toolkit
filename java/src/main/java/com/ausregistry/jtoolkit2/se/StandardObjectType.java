@@ -5,12 +5,12 @@ package com.ausregistry.jtoolkit2.se;
  * resulting XML.
  */
 public enum StandardObjectType implements ObjectType {
-    DOMAIN("domain", "urn:ietf:params:xml:ns:domain-1.0",
-			"domain-1.0.xsd", "name"),
 	HOST("host", "urn:ietf:params:xml:ns:host-1.0",
 			"host-1.0.xsd", "name"),
 	CONTACT("contact", "urn:ietf:params:xml:ns:contact-1.0",
-			"contact-1.0.xsd", "id");
+			"contact-1.0.xsd", "id"),
+    DOMAIN("domain", "urn:ietf:params:xml:ns:domain-1.0",
+			"domain-1.0.xsd", "name");
 
     private String name, uri, schemaDefinition, identType;
 	private static String[] stdURIs;
