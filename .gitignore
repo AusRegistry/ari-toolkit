@@ -1,3 +1,5 @@
-/java/target
-/java/.idea/
-/java/arjtk.iml
+.gradle
+.idea
+*.iml
+build
+target

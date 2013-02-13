@@ -1,8 +1,0 @@
-   =========================================================================
-   ==  NOTICE file corresponding to the section 4d of                     ==
-   ==  the Apache License, Version 2.0,                                   ==
-   ==  for the AusRegistry DNRS distribution.                             ==
-   =========================================================================
-
-This product includes software covered under the CPL v1.0 license.
-http://junit.org/
