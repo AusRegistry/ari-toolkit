@@ -1,0 +1,57 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+ext {
+    junitVersion = '4.8.2'
+    artifactsDir = "$projectDir/artifacts"
+    artifactGroupId = 'au.com.ausregistry'
+}
+
+sourceCompatibility = 1.6
+version = toolkitVersion
+
+repositories {
+    maven {
+        url 'http://nexus.office:8081/nexus/content/repositories/inhouse/'
+    }
+    maven {
+        url 'http://nexus.office:8081/nexus/content/repositories/central/'
+    }
+}
+
+dependencies {
+    testCompile "junit:junit:$junitVersion"
+}
+
+test {
+    outputs.upToDateWhen { false }
+    exclude '**/PerfTest.class'
+    exclude '**/SessionTest.class'
+    exclude '**/SessionManagerTest.class'
+}
+
+javadoc {
+    destinationDir = file("$projectDir/docs/javadoc")
+}
+
+test.dependsOn jar
+
+uploadArchives.dependsOn javadoc
+
+uploadArchives {
+    repositories {
+        flatDir {
+            dirs artifactsDir
+        }
+        if (System.properties.keySet().containsAll('repoUrl', 'repoUsername', 'repoPassword')) {
+            mavenDeployer {
+                repository(url: System.properties['repoUrl']) {
+                    authentication(userName: System.properties['repoUsername'], password: System.properties['repoPassword'])
+                }
+                pom.groupId = artifactGroupId
+                pom.artifactId = rootProject.name
+                pom.version = toolkitVersion
+            }
+        }
+    }
+}
