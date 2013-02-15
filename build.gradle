@@ -23,6 +23,10 @@ dependencies {
     testCompile "junit:junit:$junitVersion"
 }
 
+task cleanArtifacts(type: Delete) {
+    delete artifactsDir
+}
+
 test {
     outputs.upToDateWhen { false }
     exclude '**/PerfTest.class'
@@ -31,14 +35,17 @@ test {
 }
 
 javadoc {
-    destinationDir = file("$projectDir/docs/javadoc")
+    destinationDir = file("$artifactsDir/javadoc")
 }
+
+clean.dependsOn cleanArtifacts
 
 test.dependsOn jar
 
 uploadArchives.dependsOn javadoc
 
 uploadArchives {
+    uploadDescriptor = false
     repositories {
         flatDir {
             dirs artifactsDir
