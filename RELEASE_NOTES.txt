@@ -1,5 +1,8 @@
 AusRegistry's EPP Client Library for the Java Programming Language.
 
+Changes in version 3.0.0.1
+* Cleaned up the gradle script 
+
 Changes in version 3.0.0.0
 * Removed all gTLD related functionality now that the toolkit is modularised into separate branches for
 gTLD and ccTLD.
