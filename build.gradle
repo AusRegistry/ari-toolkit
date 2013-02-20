@@ -5,6 +5,7 @@ ext {
     junitVersion = '4.8.2'
     artifactsDir = "$projectDir/artifacts"
     artifactGroupId = 'au.com.ausregistry'
+    gradleWrapperVersion = '1.4'
 }
 
 version = toolkitVersion
@@ -15,6 +16,14 @@ repositories {
 
 dependencies {
     testCompile "junit:junit:$junitVersion"
+}
+
+tasks.withType(Compile) {
+    options.encoding = "UTF-8"
+}
+
+tasks.withType(Test) {
+    jvmArgs '-Dfile.encoding=UTF8'
 }
 
 task cleanArtifacts(type: Delete) {
@@ -35,6 +44,12 @@ javadoc {
 clean.dependsOn cleanArtifacts
 
 test.dependsOn jar
+
+//Run this task to download the gradle wrapper corresponding to the gradleWrapperVersion number
+
+task wrapper(type: Wrapper) {
+    gradleVersion = "$gradleWrapperVersion"
+}
 
 uploadArchives.dependsOn javadoc
 
