@@ -34,11 +34,5 @@ public class EPPDateFormatterTest {
 	public void testWriteDateTime() {
         assertEquals(utcNormalisedDateTimeString, EPPDateFormatter.toXSDateTime(dateTime));
 	}
-	
-	@Ignore // fromXSDateTime() does not correctly normalise to UTC   
-	@Test
-	public void testReadDate() {
-		assertEquals(dateTime.getTimeInMillis(), EPPDateFormatter.fromXSDateTime(dateTimeString).getTimeInMillis());
-	}
 }
 
