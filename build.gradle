@@ -7,7 +7,6 @@ ext {
     artifactGroupId = 'au.com.ausregistry'
 }
 
-sourceCompatibility = 1.6
 version = toolkitVersion
 
 repositories {
