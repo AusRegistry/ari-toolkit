@@ -1,7 +1,10 @@
 AusRegistry's EPP Client Library for the Java Programming Language.
 
+Changes in version 3.0.0.3
+* Removed a failing test, which was skipped. Removed source compatability property from gradle script
+
 Changes in version 3.0.0.2
-* Cleaned up the gradle script 
+* Cleaned up the gradle script
 
 Changes in version 3.0.0.0
 * Removed all ccTLD and gTLD specific functionality from the toolkit. These features are now
