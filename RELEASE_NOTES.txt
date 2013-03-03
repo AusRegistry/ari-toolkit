@@ -1,5 +1,8 @@
 AusRegistry's EPP Client Library for the Java Programming Language.
 
+Changes in version 3.0.0.4
+* Added gradle task to publish documentation to ari-toolkit-gitpages project.
+
 Changes in version 3.0.0.3
 * Removed a failing test, which was skipped. Removed source compatability property from gradle script
 
