@@ -6,6 +6,7 @@ ext {
     artifactsDir = "$projectDir/artifacts"
     artifactGroupId = 'au.com.ausregistry'
     gradleWrapperVersion = '1.4'
+    pagesProjectDir = "$projectDir/../ari-toolkit-gitpages"
 }
 
 version = toolkitVersion
@@ -51,6 +52,21 @@ task wrapper(type: Wrapper) {
     gradleVersion = "$gradleWrapperVersion"
 }
 
+task sourcesJar(type: Jar, dependsOn:classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn:javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
 uploadArchives.dependsOn javadoc
 
 uploadArchives {
@@ -64,6 +80,13 @@ uploadArchives {
                 repository(url: System.properties['repoUrl']) {
                     authentication(userName: System.properties['repoUsername'], password: System.properties['repoPassword'])
                 }
+                pom.groupId = artifactGroupId
+                pom.artifactId = rootProject.name
+                pom.version = toolkitVersion
+            }
+        } else {
+            mavenDeployer {
+                repository(url: "file://$pagesProjectDir/repo")
                 pom.groupId = artifactGroupId
                 pom.artifactId = rootProject.name
                 pom.version = toolkitVersion
