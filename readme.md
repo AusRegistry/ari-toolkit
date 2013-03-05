@@ -1,5 +1,3 @@
-~toc~
-
 Client-side libraries that implement the core EPP specifications, the domain, host and contact mappings of the specifications, and mappings for extensions operated by ARI.
 
 ## Introduction
