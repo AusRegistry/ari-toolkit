@@ -41,9 +41,9 @@ Configuration parameters are read from a properties file called toolkit.properti
 
 Configuration of the following properties is mandatory. All other values are set to intelligent defaults.
 
-* epp.client.clID = 
-* epp.client.password=
-* epp.client.hostname = 
+    epp.client.clID = #?
+    epp.client.password = #?
+    epp.client.hostname = #?
 
 The Toolkit is designed to be flexible enough to read properties from any source as long as the data source implements the SessionManagerProperties interface. For example, you could source your configuration parameters from an encrypted file by providing an implementation of SessionManagerProperties to read from the encrypted file.
 
