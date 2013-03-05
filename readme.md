@@ -21,6 +21,14 @@ The service element mapping module provides a simple means of translating betwee
 
 ## Installation and Setup
 
+### How to get the toolkit
+
+This version of the toolkit is the abstract base for more specific toolkits. You should choose a different branch (either `ccTLD` or `gTLD`) and view the readme there.
+
+#### Contribute
+
+You can view the source on [GitHub/AusRegistry](http://github.com/ausregistry/ari-toolkit). Contributions via pull requests are welcome.
+
 ### Environment
 
 The following environment specifics are required:
