@@ -1,5 +1,7 @@
 Client-side libraries that implement the core EPP specifications, the domain, host and contact mappings of the specifications, and mappings for extensions operated by ARI.
 
+* Jump to [Installation and Setup](#installation-and-setup).
+
 ## Introduction
 
 The Extensible Provisioning Protocol (EPP) was selected as the registry-registrar protocol for communication between ARI Registry Services' Domain Name Registry System (DNRS) and the registrars licensed to interact with the registry.
