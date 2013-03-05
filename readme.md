@@ -1,11 +1,7 @@
-Client-side libraries that implement the core EPP specifications, the domain, host and contact mappings of the specifications, and mappings for extensions operated by ARI.
-
-## Contents
-
 ~toc~
 
+Client-side libraries that implement the core EPP specifications, the domain, host and contact mappings of the specifications, and mappings for extensions operated by ARI.
 
-<a id="introduction"></a>
 ## Introduction
 
 The Extensible Provisioning Protocol (EPP) was selected as the registry-registrar protocol for communication between ARI Registry Services' Domain Name Registry System (DNRS) and the registrars licensed to interact with the registry.
@@ -19,17 +15,14 @@ Implementation of much of the EPP specification can be independent of the specif
 These services are best bundled in a library which each registrar can utilise to reduce the costs of implementing an EPP client application.
 
 
-<a id="overview"></a>
 ### Toolkit Overview
 
 The EPP Toolkit developed and supplied by ARI provides the client-side libraries which implement the core EPP specifications, the domain, host and contact mappings of the specifications, and mappings for extensions operated by ARI (for a list of all specifications and extensions implemented see the Appendix). These libraries are broken down into two key modules: an extensible set of EPP service element mappings to classes (object-oriented programming paradigm), and an EPP network transport module.
 
 The service element mapping module provides a simple means of translating between EPP service elements and their programmatic representation. The network transport module, which depends on session management service elements in the service element module, provides the following services; service information discovery, opening and closing EPP sessions, and sending and receiving EPP service elements.
 
-<a id="setup"></a>
 ## Installation and Setup
 
-<a id="environment"></a>
 ### Environment
 
 The following environment specifics are required:
@@ -44,7 +37,6 @@ The Toolkit uses the Java VM default character set for character encoding. Conse
 
     java -Dfile.encoding=UTF-8 ...
 
-<a id="configuration"></a>
 ### Configuration
 
 Configuration parameters are read from a properties file called toolkit.properties (default) on startup. The toolkit.properties file should be in the applications classpath for the Toolkit to read from it.
@@ -57,14 +49,12 @@ Configuration of the following properties is mandatory. All other values are set
 
 The Toolkit is designed to be flexible enough to read properties from any source as long as the data source implements the SessionManagerProperties interface. For example, you could source your configuration parameters from an encrypted file by providing an implementation of SessionManagerProperties to read from the encrypted file.
 
-<a id="responsibilities"></a>
 ### Registrar Responsibilities
 
-It is your responsibility to protect the Toolkit parameter file which contains the client identifier and password for login, and also to implement suitable mechanisms to protect the cryptographic keys used by the Toolkits� TLS implementations.
+It is your responsibility to protect the Toolkit parameter file which contains the client identifier and password for login, and also to implement suitable mechanisms to protect the cryptographic keys used by the Toolkits' TLS implementations.
 
 The default log files contain XML sent to and received from the EPP server. These log files may contain information of a sensitive nature, for example domain name auth info. Clients should take care to ensure this information is accessible only to those that require it. Applications may disable logging of commands; however this may impair ability to provide support.
 
-<a id="quick-start"></a>
 ## Quick Start Guide
 
 ARI's EPP Toolkit allows you to send commands to an EPP service and receive back responses. To send commands it is necessary to create a session, which will handle socket connection, the EPP greeting, and logging in.
@@ -121,7 +111,6 @@ After you have finished sending commands, it is possible to end the session, log
     // End the session, disconnecting the socket connection as well
     manager.shutdown();
 
-<a id="bulk-ops"></a>
 ### Performing bulk operations
 
 It is recommended to send multiple commands in the same session, to avoid the overhead of connecting and sending login commands each time. The following example performs multiple domain checks, saving the results in an array of result objects:
@@ -136,7 +125,6 @@ It is recommended to send multiple commands in the same session, to avoid the ov
        responses[i] = response;
     }
 
-<a id="extension"></a>
 ### Using extensions with commands
 
 The following example shows how to use the SecDNS extension with a Domain Create. It is necessary to specify what extensions you will be using at login time. Therefore, the `SessionManagerProperties` will use a list of extension uris when logging in to the EPP server. In the default `SessionManagerPropertiesImpl`, these will be stored in the `toolkit.properties` file with the prefix `xml.uri.ext`.
@@ -216,12 +204,10 @@ Obtain the DS data associated with the domain. This will be returned as a list o
        final List<DSData> dsDataList = secDNSExt.getInfData().getDsDataList();
     }
 
-<a id="implementation"></a>
 ## Implementation Notes
 
 The Toolkit is comprised of two components, one for communicating with the registry, and the second to map java objects into their XML representation conforming to the EPP specifications. These two components are discussed briefly below.
 
-<a id="sessions"></a>
 ### Connection and Session Management
 
 The Toolkit facilitates connections to the registry using classes in the com.ausregistry.jtoolkit2.session package. Clients obtain one instance of the SessionManager to be shared amongst all client threads that interact with the registry. The SessionManager provides a pool of connections that are automatically created as required. EPP session management is transparent to users of the SessionManager with EPP login commands issued when new connections are established.
@@ -234,7 +220,6 @@ EPP servers may be configured to close inactive connections. Applications that w
 
 The default implementation of SessionManager gathers data such as the number of commands issued by type, both recently (within command rate limit window) and since start-up; average response time by session; and response count by result code. This information is exposed via the StatsManager interface and may be used for real-time monitoring of the application.
 
-<a id="xml"></a>
 ### XML Marshalling and Unmarshalling
 
 The Toolkit provides Object->XML round-trip serialisation using classes in the *se packages. All commands extend from the Command class, and all responses extend from the Response class. The implementation uses DOM to construct and serialise XML and DOM and XPath to evaluate XML responses from the server.
@@ -243,7 +228,6 @@ While construction of commands leads the caller to provide the minimal set of in
 
 Applications looking to extend the command/response framework should model their code from extensions provided in the core Toolkit. The com.ausregistry.jtoolkit2.se.secdns package provides an example command extension, and its use is documented in the seciont **Using extensions with commands**.
 
-<a id="logging"></a>
 ###	Logging
 
 The Toolkit supports the following:
