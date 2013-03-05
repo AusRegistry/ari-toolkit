@@ -2,19 +2,7 @@ Client-side libraries that implement the core EPP specifications, the domain, ho
 
 ## Contents
 
-1. [Introduction](#introduction)
-    1. [Toolkit Overview](#overview)
-1. [Setup](#setup)
-    1. [Environment](#environment)
-    1. [Configuration](#configuration)
-    1. [Registrar Responsibilities](#responsibilities)
-1. [Quick Start](#quick-start)
-    1. [Performing bulk operations](#bulk-ops)
-    1. [Using extensions with commands](#extension)
-1. [Implementation Notes](#implementation)
-    1. [Connection and Session Management](#sessions)
-    1. [XML Marshalling and Unmarshalling](#xml)
-    1. [Logging](#logging)
+~toc~
 
 
 <a id="introduction"></a>
@@ -256,7 +244,7 @@ While construction of commands leads the caller to provide the minimal set of in
 Applications looking to extend the command/response framework should model their code from extensions provided in the core Toolkit. The com.ausregistry.jtoolkit2.se.secdns package provides an example command extension, and its use is documented in the seciont **Using extensions with commands**.
 
 <a id="logging"></a>
-###	Logging 
+###	Logging
 
 The Toolkit supports the following:
 
