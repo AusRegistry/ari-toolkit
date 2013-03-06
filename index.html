@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Ari-toolkit : Client-side libraries that implement the core EPP specifications, the domain, host and contact mappings of the specifications, and mappings for extensions operated by ARI." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Ari-toolkit</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/AusRegistry/ari-toolkit">View on GitHub</a>
+
+          <h1 id="project_title">Ari-toolkit</h1>
+          <h2 id="project_tagline">Client-side libraries that implement the core EPP specifications, the domain, host and contact mappings of the specifications, and mappings for extensions operated by ARI.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/AusRegistry/ari-toolkit/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/AusRegistry/ari-toolkit/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p>Client-side libraries that implement the core EPP specifications, the domain, host and contact mappings of the specifications, and mappings for extensions operated by ARI.</p>
+
+<ul>
+<li>Jump to <a href="#installation-and-setup">Installation and Setup</a>.</li>
+</ul><h2>Introduction</h2>
+
+<p>The Extensible Provisioning Protocol (EPP) was selected as the registry-registrar protocol for communication between ARI Registry Services' Domain Name Registry System (DNRS) and the registrars licensed to interact with the registry.</p>
+
+<p>The core EPP specifications provide for management of domains, hosts (for DNS delegation), and contacts (for enabling communication with the entities responsible for a domain name registration). The protocol is extensible in various ways, including support for; extension to objects other than domains, hosts and contacts, extension of the commands defined on existing objects, and extension of the protocol to commands not defined in the core protocol.</p>
+
+<p>To communicate with an EPP-based DNRS, a registrar must send commands in the form of XML documents to the DNRS and receive and interpret the responses returned. The format of the commands and responses is formally specified in an XML schema forming part of the EPP specifications. Transmission of the service elements must be secured using Transport Layer Security version 1 (TLSv1). In addition, opening of an EPP session requires the provision of client credentials delivered via an out of band mechanism.</p>
+
+<p>Implementation of much of the EPP specification can be independent of the specific registrar requirements, since every implementation must provide such services as discovering registry service information, opening and closing sessions, sending and receiving EPP service elements, as well as a simple means of translating between EPP service elements and their programmatic representation.</p>
+
+<p>These services are best bundled in a library which each registrar can utilise to reduce the costs of implementing an EPP client application.</p>
+
+<h3>Toolkit Overview</h3>
+
+<p>The EPP Toolkit developed and supplied by ARI provides the client-side libraries which implement the core EPP specifications, the domain, host and contact mappings of the specifications, and mappings for extensions operated by ARI (for a list of all specifications and extensions implemented see the Appendix). These libraries are broken down into two key modules: an extensible set of EPP service element mappings to classes (object-oriented programming paradigm), and an EPP network transport module.</p>
+
+<p>The service element mapping module provides a simple means of translating between EPP service elements and their programmatic representation. The network transport module, which depends on session management service elements in the service element module, provides the following services; service information discovery, opening and closing EPP sessions, and sending and receiving EPP service elements.</p>
+
+<h2>Installation and Setup</h2>
+
+<h3>How to get the gTLD Toolkit</h3>
+
+<h4>Direct download</h4>
+
+<p>Obtain the latest gTLD toolkit here: <a href="http://ausregistry.github.com/repo/au/com/ausregistry/arjtk-gtld/3.0.0.13/arjtk-gtld-3.0.0.13.jar">gTLD Toolkit v3.0.0.13</a> (<a href="http://ausregistry.github.com/repo/au/com/ausregistry/arjtk-gtld/3.0.0.13/arjtk-gtld-3.0.0.13-sources.jar">sources</a> | <a href="http://ausregistry.github.com/repo/au/com/ausregistry/arjtk-gtld/3.0.0.13/arjtk-gtld-3.0.0.13-javadoc.jar">javadoc</a>)</p>
+
+<h4>Dependency Management</h4>
+
+<p>Use your build's dependency management tool to automatically download the toolkit from our repository.</p>
+
+<ul>
+<li>Repository: <code>http://ausregistry.github.com/repo/</code>
+</li>
+<li>groupId: <code>au.com.ausregistry</code>
+</li>
+<li>artifactId: <code>arjtk-gtld</code>
+</li>
+<li>version: <code>3.0.0.13</code>
+</li>
+</ul><p>For example (using Maven):</p>
+
+<pre><code>&lt;repositories&gt;
+   &lt;repository&gt;
+      &lt;id&gt;ausregistry.com.au&lt;/id&gt;
+      &lt;url&gt;http://ausregistry.github.com/repo&lt;/url&gt;
+   &lt;/repository&gt;
+&lt;/repositories&gt;
+
+&lt;dependencies&gt;
+   &lt;dependency&gt;
+      &lt;groupId&gt;au.com.ausregistry&lt;/groupId&gt;
+      &lt;artifactId&gt;arjtk-gtld&lt;/artifactId&gt;
+      &lt;version&gt;3.0.0.13&lt;/version&gt;
+   &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+
+<h4>Contribute</h4>
+
+<p>You can view the source on <a href="http://github.com/ausregistry/ari-toolkit/tree/gtld">GitHub/AusRegistry</a>. Contributions via pull requests are welcome.</p>
+
+<h3>Development documentation</h3>
+
+<p>The javadoc is available online: <a href="http://ausregistry.github.com/javadoc/gtld/index.html">gTLD Toolkit javadoc</a></p>
+
+<h3>Environment</h3>
+
+<p>The following environment specifics are required:</p>
+
+<h4>Java 6</h4>
+
+<p>The Toolkit API was implemented in Java using only standard libraries (some of which are only standard with Java SE 6 or later) to minimise dependency on external resources.</p>
+
+<h4>UTF-8 Encoding</h4>
+
+<p>The Toolkit uses the Java VM default character set for character encoding. Consequently, the default character set must be UTF-8 to properly parse and encode UTF-8 characters in sent and received EPP messages. For English Windows machines, the default character set is typically Cp1252, and can be changed to UTF-8 by setting the <code>file.encoding</code> system property to UTF-8. This can be done on the command line with the syntax:</p>
+
+<pre><code>java -Dfile.encoding=UTF-8 ...
+</code></pre>
+
+<h3>Configuration</h3>
+
+<p>Configuration parameters are read from a properties file called toolkit.properties (default) on startup. The toolkit.properties file should be in the applications classpath for the Toolkit to read from it.</p>
+
+<p>Configuration of the following properties is mandatory. All other values are set to intelligent defaults.</p>
+
+<pre><code>epp.client.clID = #?
+epp.client.password = #?
+epp.client.hostname = #?
+</code></pre>
+
+<p>The Toolkit is designed to be flexible enough to read properties from any source as long as the data source implements the SessionManagerProperties interface. For example, you could source your configuration parameters from an encrypted file by providing an implementation of SessionManagerProperties to read from the encrypted file.</p>
+
+<h3>Registrar Responsibilities</h3>
+
+<p>It is your responsibility to protect the Toolkit parameter file which contains the client identifier and password for login, and also to implement suitable mechanisms to protect the cryptographic keys used by the Toolkits' TLS implementations.</p>
+
+<p>The default log files contain XML sent to and received from the EPP server. These log files may contain information of a sensitive nature, for example domain name auth info. Clients should take care to ensure this information is accessible only to those that require it. Applications may disable logging of commands; however this may impair ability to provide support.</p>
+
+<h2>Quick Start Guide</h2>
+
+<p>ARI's EPP Toolkit allows you to send commands to an EPP service and receive back responses. To send commands it is necessary to create a session, which will handle socket connection, the EPP greeting, and logging in.</p>
+
+<p><strong>Create a session</strong></p>
+
+<p>To create a session, an implementation of SessionManagerProperties is required. The default implementation (SessionManagerPropertiesImpl) uses a property file (defaulting to 'toolkit.properties' if not specified on construction) obtained from the classpath, to handle properties such as EPP server host, port, and user details. You can also use a custom implementation of SessionManagerProperties if this behaviour is not appropriate for your circumstances. The following code creates a new SessionManager:</p>
+
+<pre><code>/* Read in configuration properties from the toolkit.properties 
+   file. This file is searched for on the classpath. Alternatively 
+   you can create your own implementation of sessionmanagerproperties 
+   should the default behaviour not suit. */
+properties = new SessionManagerPropertiesImpl("toolkit.properties");
+
+/* Create a new session manager. This will use the properties loaded 
+   above to set up parameters required to connect to an EPP server. */
+manager = SessionManagerFactory.newInstance(properties);
+</code></pre>
+
+<p><strong>Start a session</strong></p>
+
+<p>After obtaining a SessionManager, it is necessary to start a session. This will create a connection, handle the EPP greeting and then login, allowing you to send accross EPP commands:</p>
+
+<pre><code>/* Start the session. This will automatically create a connection, send 
+   a hello and a greeting and perform a login. The manager will be 
+   ready to execute transactions after this call. */
+manager.startup();
+</code></pre>
+
+<p><strong>Create a command</strong></p>
+
+<p>After starting a session, a command must be created. It is also necessary to create a response object to store the response details for your command. This will automatically be populated from the XML returned from the EPP service. The following code creates a Domain Check command and response, and sends it to the EPP server:</p>
+
+<pre><code>// Create a domain check command
+DomainCheckCommand command = new DomainCheckCommand(domainName);
+
+// Create the required response object for the domain check
+final DomainCheckResponse response = new DomainCheckResponse();
+
+/* Execute the command using the session manager, wrapping it in a 
+   Transaction object */
+manager.execute(new Transaction(command, response));
+</code></pre>
+
+<p><strong>View response details</strong></p>
+
+<p>After creating a command, you can view the details of the response:</p>
+
+<pre><code>// Print out the details of the response
+System.out.println("EPP Response code: " + 
+   response.getResults()[0].getResultCode());
+</code></pre>
+
+<p><strong>End a session</strong></p>
+
+<p>After you have finished sending commands, it is possible to end the session, log out and close the socket connection:</p>
+
+<pre><code>// End the session, disconnecting the socket connection as well
+manager.shutdown();
+</code></pre>
+
+<h3>Performing bulk operations</h3>
+
+<p>It is recommended to send multiple commands in the same session, to avoid the overhead of connecting and sending login commands each time. The following example performs multiple domain checks, saving the results in an array of result objects:</p>
+
+<pre><code>final int loops = 5;
+final DomainCheckResponse[] responses = new 
+   DomainCheckResponse[loops];
+for (int i = 0; i &lt; loops; i++) { 
+   DomainCheckCommand command = new DomainCheckCommand(domainName);
+   final DomainCheckResponse response = new DomainCheckResponse();
+   manager.execute(new Transaction(command, response));
+   responses[i] = response;
+}
+</code></pre>
+
+<h3>Using extensions with commands</h3>
+
+<p>The following example shows how to use the SecDNS extension with a Domain Create. It is necessary to specify what extensions you will be using at login time. Therefore, the <code>SessionManagerProperties</code> will use a list of extension uris when logging in to the EPP server. In the default <code>SessionManagerPropertiesImpl</code>, these will be stored in the <code>toolkit.properties</code> file with the prefix <code>xml.uri.ext</code>.</p>
+
+<p>Set up a standard Domain Create:</p>
+
+<pre><code>// Create a domain create command with the minimum required parameters
+final DomainCreateCommand command = new 
+   DomainCreateCommand(domainName, password, contactName, new 
+   String[] {contactName});
+
+// Create the domain create response.
+final DomainCreateResponse domainCreateResponse = new 
+   DomainCreateResponse();
+</code></pre>
+
+<p>Initialise the extension class, <code>SecDnsDomainCreateCommandExtension</code>:</p>
+
+<pre><code>// Create a SECDNS create command extension object
+final SecDnsDomainCreateCommandExtension ext = new 
+   SecDnsDomainCreateCommandExtension();
+</code></pre>
+
+<p>Create a DSData object with the required DS data that you would like to add to the domain:</p>
+
+<pre><code>/* Create a DS data object, supplying key tag, algorithm, digest type and digest */
+final DSData dsData = new DSData(1, 3, 1, 49FD46E6C4B45C55D4AC49FD46E6C4B45C55D4AC");
+</code></pre>
+
+<p>Create a DSOrKeyType object, which is the container for all DS data and Key data associated with a domain:</p>
+
+<pre><code>/* Add the DS data to a DSOrKeyType object, which will store all DS 
+   and Key data for a domain */
+final DSOrKeyType createData = new DSOrKeyType();
+</code></pre>
+
+<p>Add the DS data to the DSOrKeyType object:</p>
+
+<pre><code>//Add the DS data to the DSOrKeyType object
+createData.addToDsData(dsData);
+
+// Add the DSOrKeyType object to the extension
+ext.setCreateData(createData);
+</code></pre>
+
+<p>Add the extension to the command. Multiple extensions can be added to the same command if this is required. You can then execute the command, which sends across the base command as well as all associate extensions:</p>
+
+<pre><code>// Add the extension to the domain create command
+command.appendExtension(ext);
+
+/* Tell the manager to execute the command. This command includes the SECDNS extension object. */
+manager.execute(new Transaction(command, domainCreateResponse));
+</code></pre>
+
+<p><strong>Receiving extension data</strong></p>
+
+<p>It is also possible to use the Toolkit to receive extension data. The following example will show how to obtain the DS data from a DomainInfo using the SecDNS extension. Similar to sending command data, you need to create a new object for the extension, this time a SecDnsDomainInfoResponseExtension.</p>
+
+<p>Create a standard DomainInfoResponse:</p>
+
+<pre><code>// Create the domain info response
+final DomainInfoResponse domainInfoResponse = new DomainInfoResponse();
+</code></pre>
+
+<p>Create a SecDnsDomainInfoResponseExtension:</p>
+
+<pre><code>// Create a SECDNS response extension object
+final SecDnsDomainInfoResponseExtension secDNSExt = new 
+   SecDnsDomainInfoResponseExtension();
+</code></pre>
+
+<p>Register the extension to the standard DomainInfoResponse object:</p>
+
+<pre><code>// Register the extension response to the domain info response
+domainInfoResponse.registerExtension(secDNSExt);
+</code></pre>
+
+<p>Execute DomainInfoCommand:</p>
+
+<pre><code>/* Tell the manager to execute the command. The response includes the response extension */
+manager.execute(new Transaction(new DomainInfoCommand(domainName, password), domainInfoResponse));
+</code></pre>
+
+<p>Obtain the DS data associated with the domain. This will be returned as a list of DSData objects. First check that the extension has been initalised, because if there are no SecDNS extension elements in the return XML, the object will initalise. This only occurs if DNSSEC data is not applied to the domain:</p>
+
+<pre><code>if (secDNSExt.isInitialised()) {
+   final List&lt;DSData&gt; dsDataList = secDNSExt.getInfData().getDsDataList();
+}
+</code></pre>
+
+<h2>Implementation Notes</h2>
+
+<p>The Toolkit is comprised of two components, one for communicating with the registry, and the second to map java objects into their XML representation conforming to the EPP specifications. These two components are discussed briefly below.</p>
+
+<h3>Connection and Session Management</h3>
+
+<p>The Toolkit facilitates connections to the registry using classes in the com.ausregistry.jtoolkit2.session package. Clients obtain one instance of the SessionManager to be shared amongst all client threads that interact with the registry. The SessionManager provides a pool of connections that are automatically created as required. EPP session management is transparent to users of the SessionManager with EPP login commands issued when new connections are established.</p>
+
+<p>Note that the object and extension URIs provided in the EPP login command are sourced from the namespaces declared in the default properties file. Developers can comment out, or add new namespace URIs to have them sent to the registry during login.</p>
+
+<p>Transactions (a command and its response) are executed by calling SessionManager.execute(). The session manager will pick the best available connection and process the transaction using blocking IO. The SessionManager does not manage threads; calling application threads will be used for IO thus executing transactions will block the calling thread.</p>
+
+<p>EPP servers may be configured to close inactive connections. Applications that wish to keep connections alive may call the SessionManager.keepAlive() method to spawn a thread that will poll inactive sessions to prevent dropped connections.</p>
+
+<p>The default implementation of SessionManager gathers data such as the number of commands issued by type, both recently (within command rate limit window) and since start-up; average response time by session; and response count by result code. This information is exposed via the StatsManager interface and may be used for real-time monitoring of the application.</p>
+
+<h3>XML Marshalling and Unmarshalling</h3>
+
+<p>The Toolkit provides Object-&gt;XML round-trip serialisation using classes in the *se packages. All commands extend from the Command class, and all responses extend from the Response class. The implementation uses DOM to construct and serialise XML and DOM and XPath to evaluate XML responses from the server.</p>
+
+<p>While construction of commands leads the caller to provide the minimal set of information, the Toolkit was designed to not pre-empt validations of parameter values such that changes to validation rules would not require new revisions of the Toolkit. It is the responsibility of the calling application to ensure the parameter values are correct and accurate for the target registry. The Toolkit provides a configuration option that turns on outbound schema validation to catch errors before a round-trip to the server. This is particularly useful when developing against the Toolkit.</p>
+
+<p>Applications looking to extend the command/response framework should model their code from extensions provided in the core Toolkit. The com.ausregistry.jtoolkit2.se.secdns package provides an example command extension, and its use is documented in the seciont <strong>Using extensions with commands</strong>.</p>
+
+<h3>Logging</h3>
+
+<p>The Toolkit supports the following:</p>
+
+<ul>
+<li>A default logging implementation which logs to a configured set of destination files, the specific file depending on the target audience.</li>
+<li>The option to define an alternative logging implementation which meets a specified interface. This provides great control over filtering log messages, and how and where to write log records.</li>
+</ul><p>There are two levels of logging configuration supported by the Toolkit:</p>
+
+<ul>
+<li>Simple modification of logging behaviour via configuration parameters.</li>
+<li>Custom implementation of logging handler classes.</li>
+</ul><p>The standard handler implementations log to files. There are four handler classes, one for each class of audience:</p>
+
+<ul>
+<li>Debug handler for Toolkit developers</li>
+<li>Maintenance handler for maintainers of the Toolkit</li>
+<li>Support handler for messages targeted at the Registry support team</li>
+<li>A user handler for messages relevant to the application developers and production support staff (users of the Toolkit).</li>
+</ul><p>The system property <code>java.util.logging.config.file</code> specifies the location of the logging properties file from which logging properties are read. The location should be specified as a fully qualified filename for the best guarantee that the properties file will be found at runtime.</p>
+
+<p>The properties relevant to the standard logging implementation are:</p>
+
+<ul>
+<li>
+<p><code>.level={ALL|FINEST|FINER|FINE|INFO|WARNING|SEVERE|NONE}</code>
+defines the minimum severity of messages that will be logged.</p>
+
+<p>Thus, if <code>.level=FINER</code>, then all messages of severity <code>FINER</code> or greater would be logged (<code>FINER</code>,<code>FINE</code>,<code>INFO</code>,<code>WARNING</code>,<code>SEVERE</code>) unless a more specific rule overrides this parameter (see below).</p>
+</li>
+<li><p><code>package-name.audience.level={ALL|FINEST|FINER|FINE|INFO|WARNING|SEVERE|NONE}</code> 
+overrides for the named package and audience any more general specification of logging level.</p></li>
+<li><p><code>handler-class.*</code>
+FileHandler properties, as described in the FileHandler section of the Java Logging API. As long as the default handler implementations are used, all of the properties specified for FileHandler are effective. Notable properties are pattern and formatter, which control the destination file and format (plain text or XML) respectively.</p></li>
+<li><p><code>package-name.audience.handlers</code> should be left at the default values to use the provided handler implementations. The default values are provided in the <code>logging.properties</code> file distributed with the Toolkit.
+Alternatively, the user may implement custom handler classes and register those classes using the package-name.audience.handlers parameters. Implementers should familiarise themselves with the Java Logging API [JLOGAPI] and Java Logging Overview [JLOGGUIDE] before deciding on this approach.</p></li>
+</ul>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Ari-toolkit maintained by <a href="https://github.com/AusRegistry">AusRegistry</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
