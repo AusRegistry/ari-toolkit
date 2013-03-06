@@ -1,8 +1,18 @@
-Client-side libraries that implement the core EPP specifications, the domain, host and contact mappings of the specifications, and mappings for extensions operated by ARI.
+## Downloads
 
-* Jump to [Installation and Setup](#installation-and-setup).
+The latest ari-toolkit for ccTLDs is available for download. [ccTLD Toolkit v3.0.0.4](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk-cctld/3.0.0.4/arjtk-cctld-3.0.0.4.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk-cctld/3.0.0.4/arjtk-cctld-3.0.0.4-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk-cctld/3.0.0.4/arjtk-cctld-3.0.0.4-javadoc.jar))
+
+For more information, please read [Installation and Setup](#installation-and-setup).
+
+
+## Building
+
+To build the ari-toolkit for ccTLDs, you must have the Java Development Kit (JDK) v6.0 or above installed. The project can be built with the command `gradlew build`.
+
 
 ## Introduction
+
+These are client-side libraries that implement the core EPP specifications, the domain, host and contact mappings of the specifications, and mappings for extensions operated by ARI.
 
 The Extensible Provisioning Protocol (EPP) was selected as the registry-registrar protocol for communication between ARI Registry Services' Domain Name Registry System (DNRS) and the registrars licensed to interact with the registry.
 
