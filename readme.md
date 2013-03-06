@@ -1,5 +1,7 @@
 Client-side libraries that implement the core EPP specifications, the domain, host and contact mappings of the specifications, and mappings for extensions operated by ARI.
 
+* Jump to [Installation and Setup](#installation-and-setup).
+
 ## Introduction
 
 The Extensible Provisioning Protocol (EPP) was selected as the registry-registrar protocol for communication between ARI Registry Services' Domain Name Registry System (DNRS) and the registrars licensed to interact with the registry.
@@ -92,7 +94,7 @@ The Toolkit is designed to be flexible enough to read properties from any source
 
 ### Registrar Responsibilities
 
-It is your responsibility to protect the Toolkit parameter file which contains the client identifier and password for login, and also to implement suitable mechanisms to protect the cryptographic keys used by the Toolkits� TLS implementations.
+It is your responsibility to protect the Toolkit parameter file which contains the client identifier and password for login, and also to implement suitable mechanisms to protect the cryptographic keys used by the Toolkits' TLS implementations.
 
 The default log files contain XML sent to and received from the EPP server. These log files may contain information of a sensitive nature, for example domain name auth info. Clients should take care to ensure this information is accessible only to those that require it. Applications may disable logging of commands; however this may impair ability to provide support.
 
