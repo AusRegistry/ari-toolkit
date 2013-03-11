@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<schema targetNamespace="urn:ar:params:xml:ns:variant-1.1"
+        xmlns:variant="urn:ar:params:xml:ns:variant-1.1"
+        xmlns:eppcom="urn:ietf:params:xml:ns:eppcom-1.0"
+        xmlns="http://www.w3.org/2001/XMLSchema"
+        elementFormDefault="qualified">
+
+    <import namespace="urn:ietf:params:xml:ns:eppcom-1.0" />
+
+    <element name="update" type="variant:updateType" />
+
+    <complexType name="updateType">
+        <sequence>
+            <element name="rem" type="variant:addRemType" minOccurs="0" />
+            <element name="add" type="variant:addRemType" minOccurs="0" />
+        </sequence>
+    </complexType>
+
+    <complexType name="addRemType">
+        <sequence>
+            <element name="variant" type="eppcom:labelType"
+                     maxOccurs="unbounded" />
+        </sequence>
+    </complexType>
+
+    <element name="infData" type="variant:resDataType" />
+    <element name="creData" type="variant:resDataType" />
+
+    <complexType name="resDataType">
+        <sequence>
+            <element name="variant" type="eppcom:labelType"
+                     maxOccurs="unbounded" />
+        </sequence>
+    </complexType>
+
+</schema>

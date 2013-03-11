@@ -1,13 +1,14 @@
 apply plugin: 'java'
 apply plugin: 'maven'
 
+sourceCompatibility = '6'
+
 ext {
     junitVersion = '4.8.2'
     artifactsDir = "$projectDir/artifacts"
     artifactGroupId = 'au.com.ausregistry'
     gradleWrapperVersion = '1.4'
     pagesProjectDir = "$projectDir/../ari-toolkit-gitpages"
-    gitBranch = 'cctld'
 }
 
 version = toolkitVersion
@@ -17,11 +18,12 @@ repositories {
 }
 
 dependencies {
-    testCompile "junit:junit:$junitVersion"
+    testCompile group: "junit", name: "junit", version: junitVersion
 }
 
 tasks.withType(Compile) {
     options.encoding = "UTF-8"
+    options.compilerArgs << "-Xlint:-options"
 }
 
 tasks.withType(Test) {
@@ -100,7 +102,7 @@ uploadArchives << {
     if (!System.properties.keySet().containsAll('repoUrl', 'repoUsername', 'repoPassword')) {
         copy {
             from(javadoc.destinationDir)
-            into "$pagesProjectDir/javadoc/$gitBranch/"
+            into "$pagesProjectDir/javadoc/"
         }
     }
 }

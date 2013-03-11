@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="urn:ar:params:xml:ns:application-1.0"
+  xmlns:app="urn:ar:params:xml:ns:application-1.0"
+  xmlns:eppcom="urn:ietf:params:xml:ns:eppcom-1.0"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified">
+
+  <import namespace="urn:ietf:params:xml:ns:eppcom-1.0" />
+
+  <!-- Child elements found in EPP commands. -->
+  <element name="check" type="app:phaseType" />
+  <element name="create" type="app:phaseType" />
+  <element name="delete" type="app:idType" />
+  <element name="info" type="app:idType" />
+  <element name="update" type="app:idType" />
+
+  <complexType name="phaseType">
+    <sequence>
+      <element name="phase" type="app:phaseValueType" />
+    </sequence>
+  </complexType>
+
+  <simpleType name="phaseValueType">
+    <restriction base="token">
+      <minLength value="1" />
+    </restriction>
+  </simpleType>
+
+  <complexType name="idType">
+    <sequence>
+      <element name="id" type="app:idValueType" />
+    </sequence>
+  </complexType>
+
+  <simpleType name="idValueType">
+    <restriction base="token">
+      <minLength value="1" />
+    </restriction>
+  </simpleType>
+
+  <!-- Child elements found in EPP responses. -->
+  <element name="creData" type="app:creDataType" />
+  <element name="infData" type="app:infDataType" />
+
+  <complexType name="creDataType">
+    <sequence>
+      <element name="id" type="app:idValueType" />
+      <element name="name" type="eppcom:labelType" />
+      <element name="crDate" type="dateTime" minOccurs="0" />
+    </sequence>
+  </complexType>
+
+  <complexType name="infDataType">
+    <sequence>
+      <element name="id" type="app:idValueType" />
+      <element name="phase" type="app:phaseValueType" />
+      <element name="status" type="app:statusType"
+           maxOccurs="unbounded" />
+    </sequence>
+  </complexType>
+
+  <complexType name="statusType">
+    <simpleContent>
+      <extension base="normalizedString">
+        <attribute name="s" type="token" use="required" />
+      </extension>
+    </simpleContent>
+  </complexType>
+
+</schema>

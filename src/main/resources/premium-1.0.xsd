@@ -1,0 +1,54 @@
+<?xml version="1.0" standalone="no" ?>
+<schema targetNamespace="urn:ar:params:xml:ns:premium-1.0"
+        xmlns:premium="urn:ar:params:xml:ns:premium-1.0"
+        xmlns:eppcom="urn:ietf:params:xml:ns:eppcom-1.0"
+        xmlns="http://www.w3.org/2001/XMLSchema"
+        elementFormDefault="qualified">
+
+    <import namespace="urn:ietf:params:xml:ns:eppcom-1.0" />
+
+    <!-- command-response extension elements -->
+    <element name="check" />
+    <element name="create" type="premium:ackType" />
+    <element name="transfer" type="premium:ackType" />
+
+    <complexType name="ackType">
+        <sequence>
+            <element name="ack" type="premium:priceAckType" />
+        </sequence>
+    </complexType>
+
+    <complexType name="priceAckType">
+        <sequence>
+            <element name="price" type="decimal" minOccurs="0" />
+            <element name="renewalPrice" type="decimal" minOccurs="0" />
+        </sequence>
+    </complexType>
+
+    <!-- response elements -->
+    <element name="chkData" type="premium:chkDataType" />
+
+    <complexType name="chkDataType">
+        <sequence>
+            <element name="cd" type="premium:checkType"
+                     maxOccurs="unbounded" />
+        </sequence>
+    </complexType>
+
+    <complexType name="checkType">
+        <sequence>
+            <element name="name" type="premium:checkNameType" />
+            <element name="price" type="decimal" minOccurs="0" />
+            <element name="renewalPrice" type="decimal" minOccurs="0" />
+        </sequence>
+    </complexType>
+
+    <complexType name="checkNameType">
+        <simpleContent>
+            <extension base="eppcom:labelType">
+                <attribute name="premium" type="boolean" use="required" />
+            </extension>
+        </simpleContent>
+    </complexType>
+
+</schema>

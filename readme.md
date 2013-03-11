@@ -1,13 +1,13 @@
 ## Downloads
 
-The latest ari-toolkit for ccTLDs is available for download. [ccTLD Toolkit v3.0.0.4](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk-cctld/3.0.0.4/arjtk-cctld-3.0.0.4.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk-cctld/3.0.0.4/arjtk-cctld-3.0.0.4-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk-cctld/3.0.0.4/arjtk-cctld-3.0.0.4-javadoc.jar))
+The latest ari-toolkit for gTLDs is available for download. [ari-toolkit-gtld v3.0.0.15](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk-gtld/3.0.0.15/arjtk-gtld-3.0.0.15.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk-gtld/3.0.0.15/arjtk-gtld-3.0.0.15-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk-gtld/3.0.0.15/arjtk-gtld-3.0.0.15-javadoc.jar))
 
 For more information, please read [Installation and Setup](#installation-and-setup).
 
 
 ## Building
 
-To build the ari-toolkit for ccTLDs, you must have the Java Development Kit (JDK) v6.0 or above installed. The project can be built with the command `gradlew build`.
+To build the ari-toolkit for gTLDs, you must have the Java Development Kit (JDK) v6.0 or above installed. The project can be built with the command `gradlew build`.
 
 
 ## Introduction
@@ -34,11 +34,11 @@ The service element mapping module provides a simple means of translating betwee
 
 ## Installation and Setup
 
-### How to get the ccTLD Toolkit
+### How to get the gTLD Toolkit
 
 #### Direct download
 
-Obtain the latest ccTLD toolkit here: [ccTLD Toolkit v3.0.0.4](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk-cctld/3.0.0.4/arjtk-cctld-3.0.0.4.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk-cctld/3.0.0.4/arjtk-cctld-3.0.0.4-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk-cctld/3.0.0.4/arjtk-cctld-3.0.0.4-javadoc.jar))
+Obtain the latest gTLD toolkit here: [gTLD Toolkit v3.0.0.15](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk-gtld/3.0.0.15/arjtk-gtld-3.0.0.15.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk-gtld/3.0.0.15/arjtk-gtld-3.0.0.15-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk-gtld/3.0.0.15/arjtk-gtld-3.0.0.15-javadoc.jar))
 
 #### Dependency Management
 
@@ -46,8 +46,8 @@ Use your build's dependency management tool to automatically download the toolki
 
 * Repository: `http://ausregistry.github.com/repo/`
 * groupId: `au.com.ausregistry`
-* artifactId: `arjtk-cctld`
-* version: `3.0.0.4`
+* artifactId: `arjtk-gtld`
+* version: `3.0.0.15`
 
 For example (using Maven):
 
@@ -61,20 +61,19 @@ For example (using Maven):
     <dependencies>
        <dependency>
           <groupId>au.com.ausregistry</groupId>
-          <artifactId>arjtk-cctld</artifactId>
-          <version>3.0.0.4</version>
+          <artifactId>arjtk-gtld</artifactId>
+          <version>3.0.0.15</version>
        </dependency>
     </dependencies>
 
 
 #### Contribute
 
-You can view the source on [GitHub/AusRegistry](http://github.com/ausregistry/ari-toolkit/tree/cctld). Contributions via pull requests are welcome.
+You can view the source on [GitHub/AusRegistry](http://github.com/ausregistry/ari-toolkit/tree/gtld). Contributions via pull requests are welcome.
 
 ### Development documentation
 
-The javadoc is available online: [ccTLD Toolkit javadoc](http://ausregistry.github.com/javadoc/cctld/index.html)
-
+The javadoc is available online: [gTLD Toolkit javadoc](http://ausregistry.github.com/javadoc/gtld/index.html)
 
 ### Environment
 

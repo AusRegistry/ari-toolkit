@@ -3,53 +3,40 @@ package com.ausregistry.jtoolkit2.se;
 import java.io.Serializable;
 
 /**
- * This class models the <variant> element specified in an IDNA EPP Domain
+ * This class models the <variant> element specified in an IDN EPP Domain
  * Create/Info response, as documented in 'IDN Extension Mapping for the
  * Extensible Provisioning Protocol'.
  */
-public final class IdnaDomainVariant implements Comparable<IdnaDomainVariant>,
+public final class IdnDomainVariant implements Comparable<IdnDomainVariant>,
         Serializable {
 
     private static final long serialVersionUID = -2441248857298156912L;
 
     private String name;
-    private String userForm;
 
     /**
-     * Constructs an IDNA domain variant
+     * Constructs an IDN domain variant
      * @param name
      *            the DNS form of the domain name
-     * @param userForm
-     *            the user form of the domain name
      */
-    public IdnaDomainVariant(final String name, final String userForm) {
-        this.userForm = userForm;
+    public IdnDomainVariant(final String name) {
         this.name = name;
     }
 
     /**
-     * @return the DNS form of the IDNA domain name
+     * @return the DNS form of the IDN domain name
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @return the user form of the IDNA domain name
-     */
-    public String getUserForm() {
-        return userForm;
-    }
-
-    /**
-     * @see Object#hashCode()
+     * @see java.lang.Object#hashCode()
      */
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        
-        result = prime * result + ((userForm == null) ? 0 : userForm.hashCode());
         
         /*
          * Given that DNS form is generated from the user form, adding its hash
@@ -63,7 +50,7 @@ public final class IdnaDomainVariant implements Comparable<IdnaDomainVariant>,
     }
 
     /**
-     * @see Object#equals(Object)
+     * @see java.lang.Object#equals(Object)
      */
     @Override
     public boolean equals(final Object obj) {
@@ -79,29 +66,23 @@ public final class IdnaDomainVariant implements Comparable<IdnaDomainVariant>,
             return false;
         }
 
-        return (compareTo((IdnaDomainVariant) obj) == 0);
+        return (compareTo((IdnDomainVariant) obj) == 0);
     }
 
     /**
-     * Compares an IdnaDomainVariant based, in order, on the user form and DNS
+     * Compares an IdnDomainVariant based, in order, on the user form and DNS
      * form. Given that DNS form is generated from the user form, these two
      * comparisons should yield identical results.  However, since both values are
      * provided externally this can't be guaranteed, hence both are compared.
      * 
-     * @see Comparable#compareTo(Object)
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
      */
-    public int compareTo(final IdnaDomainVariant other) {
+    public int compareTo(final IdnDomainVariant other) {
         if (other == null) {
             throw new NullPointerException();
         }
 
-        int match = compareStrings(userForm, other.userForm);
-        
-        if (match == 0) {
-            match = compareStrings(name, other.name);
-        }
-
-        return match;
+        return compareStrings(name, other.name);
     }
 
     private int compareStrings(final String mine, final String other) {
