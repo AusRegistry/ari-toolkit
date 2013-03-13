@@ -226,6 +226,11 @@ Add the extension to the command. Multiple extensions can be added to the same c
     /* Tell the manager to execute the command. This command includes the SECDNS extension object. */
     manager.execute(new Transaction(command, domainCreateResponse));
 
+Add the premium price extension to the domain check command to query for create and renew prices.
+
+    DomainCheckPremiumCommandExtension premiumExt = new DomainCheckPremiumCommandExtension();
+    command.appendExtension(premiumExt);
+
 **Receiving extension data**
 
 It is also possible to use the Toolkit to receive extension data. The following example will show how to obtain the DS data from a DomainInfo using the SecDNS extension. Similar to sending command data, you need to create a new object for the extension, this time a SecDnsDomainInfoResponseExtension.
@@ -251,11 +256,20 @@ Execute DomainInfoCommand:
     /* Tell the manager to execute the command. The response includes the response extension */
     manager.execute(new Transaction(new DomainInfoCommand(domainName, password), domainInfoResponse));
  
-Obtain the DS data associated with the domain. This will be returned as a list of DSData objects. First check that the extension has been initalised, because if there are no SecDNS extension elements in the return XML, the object will initalise. This only occurs if DNSSEC data is not applied to the domain:
+Obtain the DS data associated with the domain. This will be returned as a list of DSData objects. First check that the extension has been initialised, because if there are no SecDNS extension elements in the return XML, the object will initalise. This only occurs if DNSSEC data is not applied to the domain:
 
     if (secDNSExt.isInitialised()) {
        final List<DSData> dsDataList = secDNSExt.getInfData().getDsDataList();
     }
+Created Domain  check premium response to get the create and renew premium price values and to check if the domain is premium.
+
+    DomainCheckPremiumResponse response = new DomainCheckPremiumResponse();
+    response.getCreatePrice(domain_name);
+    response.getCreatePrice(index);
+    response.getRenewPrice(domain_name);
+    response.getRenewPrice(index);
+    response.isPremiun(domain_name);
+    response.isPremiun(index);
 
 ## Implementation Notes
 
