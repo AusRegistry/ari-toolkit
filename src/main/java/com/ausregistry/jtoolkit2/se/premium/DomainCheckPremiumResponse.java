@@ -33,6 +33,9 @@ public class DomainCheckPremiumResponse extends DataResponse {
     }
 
 
+    /**
+     * @param xmlDoc the XML to be processed
+     */
     @Override
     public void fromXML(XMLDocument xmlDoc) {
         super.fromXML(xmlDoc);
@@ -79,26 +82,50 @@ public class DomainCheckPremiumResponse extends DataResponse {
         return xmlDoc.getNodeValue(qry + CHKDATA_DOMAIN_NAME_EXPR);
     }
 
+    /**
+     * @param domainName domain name to be checked
+     * @return true if the domain is premium, false otherwise
+     */
     public boolean isPremium(String domainName) {
         return premiumNameMap.get(domainName).isPremium();
     }
 
+    /**
+     * @param domainName domain name to be checked
+     * @return create price for domain
+     */
     public BigDecimal getCreatePrice(String domainName) {
         return premiumNameMap.get(domainName).getCreatePrice();
     }
 
+    /**
+     * @param domainName domain name to be checked
+     * @return renew price for domain
+     */
     public BigDecimal getRenewPrice(String domainName) {
         return premiumNameMap.get(domainName).getRenewPrice();
     }
 
+    /**
+     * @param index the index of domain to be checked
+     * @return true if the domain is premium, false otherwise
+     */
     public boolean isPremium(long index) {
         return premiumIndexMap.get(index).isPremium();
     }
 
+    /**
+     * @param index the index of domain to be checked
+     * @return create price for domain
+     */
     public BigDecimal getCreatePrice(long index) {
         return premiumIndexMap.get(index).getCreatePrice();
     }
 
+    /**
+     * @param index the index of domain to be checked
+     * @return renew price for domain
+     */
     public BigDecimal getRenewPrice(long index) {
         return premiumIndexMap.get(index).getRenewPrice();
     }

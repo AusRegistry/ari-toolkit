@@ -11,6 +11,10 @@ public class DomainCheckPremiumCommandExtension implements CommandExtension {
 
     private static final long serialVersionUID = 2327272643303127953L;
 
+    /**
+     * @param command the domain-check command into which extension will be applied
+     * @throws Exception
+     */
     @Override
     public void addToCommand(Command command) throws Exception {
         final XMLWriter xmlWriter = command.getXmlWriter();
