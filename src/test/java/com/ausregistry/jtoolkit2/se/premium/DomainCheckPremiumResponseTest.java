@@ -40,14 +40,14 @@ public class DomainCheckPremiumResponseTest {
     }
 
     @Test
-    public void shouldNotHavePriceForNonPremiumDomains() {
+    public void testShouldNotHavePriceForNonPremiumDomains() {
         assertEquals(domainCheckPremiumResponse.isPremium("nonpremiumdomain1.zone"), false);
         assertEquals(domainCheckPremiumResponse.getCreatePrice("nonpremiumdomain1.zone"), null);
         assertEquals(domainCheckPremiumResponse.getRenewPrice("nonpremiumdomain1.zone"), null);
     }
 
     @Test
-    public void shouldBeAbleToGetValuesUsingPosition() {
+    public void testShouldBeAbleToGetValuesUsingPosition() {
         assertEquals(domainCheckPremiumResponse.isPremium(1L), true);
         assertEquals(domainCheckPremiumResponse.getCreatePrice(2L), BigDecimal.valueOf(500.0));
         assertEquals(domainCheckPremiumResponse.getRenewPrice(3L), null);

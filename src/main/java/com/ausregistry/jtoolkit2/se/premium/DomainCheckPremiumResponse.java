@@ -37,16 +37,13 @@ public class DomainCheckPremiumResponse extends DataResponse {
      * @param xmlDoc the XML to be processed
      */
     @Override
-    public void fromXML(XMLDocument xmlDoc) {
+    public final void fromXML(XMLDocument xmlDoc) {
         super.fromXML(xmlDoc);
-
         if (!resultArray[0].succeeded()) {
             return;
         }
-
         try {
             int cdCount = xmlDoc.getNodeCount(CHKDATA_COUNT_EXPR);
-
             for (int i = 0; i < cdCount; i++) {
                 processElement(xmlDoc, i);
             }
@@ -65,7 +62,7 @@ public class DomainCheckPremiumResponse extends DataResponse {
         String premiumStr = xmlDoc.getNodeValue(qry + CHKDATA_PREMIUM_VALUE_EXPR);
         boolean isPremiumDomain = (premiumStr.equals("1") ? true : false);
         PremiumInfo premiumInfo;
-        if(isPremiumDomain) {
+        if (isPremiumDomain) {
         BigDecimal createPriceValue = BigDecimal.valueOf(Double.parseDouble(xmlDoc.getNodeValue(qry
                 + CHKDATA_CREATE_PRICE_EXPR)));
         BigDecimal renewPriceValue = BigDecimal.valueOf(Double.parseDouble(xmlDoc.getNodeValue(qry
@@ -86,47 +83,53 @@ public class DomainCheckPremiumResponse extends DataResponse {
      * @param domainName domain name to be checked
      * @return true if the domain is premium, false otherwise
      */
-    public boolean isPremium(String domainName) {
-        return premiumNameMap.get(domainName).isPremium();
+    public final Boolean isPremium(final String domainName) {
+        PremiumInfo premiumInfo = premiumNameMap.get(domainName);
+        return premiumInfo == null ? null : premiumInfo.isPremium();
     }
 
     /**
      * @param domainName domain name to be checked
-     * @return create price for domain
+     * @return create price for domain if exists otherwise null
      */
-    public BigDecimal getCreatePrice(String domainName) {
-        return premiumNameMap.get(domainName).getCreatePrice();
+    public final BigDecimal getCreatePrice(final String domainName) {
+        PremiumInfo premiumInfo = premiumNameMap.get(domainName);
+        return premiumInfo == null ? null : premiumInfo.getCreatePrice();
     }
 
     /**
      * @param domainName domain name to be checked
-     * @return renew price for domain
+     * @return renew price for domain if exists otherwise null
      */
-    public BigDecimal getRenewPrice(String domainName) {
-        return premiumNameMap.get(domainName).getRenewPrice();
+    public final BigDecimal getRenewPrice(final String domainName) {
+        PremiumInfo premiumInfo = premiumNameMap.get(domainName);
+        return premiumInfo == null ? null : premiumInfo.getRenewPrice();
     }
 
     /**
      * @param index the index of domain to be checked
      * @return true if the domain is premium, false otherwise
      */
-    public boolean isPremium(long index) {
-        return premiumIndexMap.get(index).isPremium();
+    public final boolean isPremium(final long index) {
+        PremiumInfo premiumInfo = premiumIndexMap.get(index);
+        return premiumInfo == null ? null : premiumInfo.isPremium();
     }
 
     /**
      * @param index the index of domain to be checked
-     * @return create price for domain
+     * @return create price for domain if exists otherwise null
      */
-    public BigDecimal getCreatePrice(long index) {
-        return premiumIndexMap.get(index).getCreatePrice();
+    public final BigDecimal getCreatePrice(final Long index) {
+        PremiumInfo premiumInfo = premiumIndexMap.get(index);
+        return premiumInfo == null ? null : premiumInfo.getCreatePrice();
     }
 
     /**
      * @param index the index of domain to be checked
-     * @return renew price for domain
+     * @return renew price for domain if exists otherwise null
      */
-    public BigDecimal getRenewPrice(long index) {
-        return premiumIndexMap.get(index).getRenewPrice();
+    public final BigDecimal getRenewPrice(final Long index) {
+        PremiumInfo premiumInfo = premiumIndexMap.get(index);
+        return premiumInfo == null ? null : premiumInfo.getRenewPrice();
     }
 }
