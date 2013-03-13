@@ -53,4 +53,15 @@ public class DomainCheckPremiumResponseTest {
         assertEquals(domainCheckPremiumResponse.getRenewPrice(3L), null);
     }
 
+    @Test
+    public void testShouldGetNullForInvalidDomains() {
+        assertEquals(domainCheckPremiumResponse.isPremium("invalid"), null);
+        assertEquals(domainCheckPremiumResponse.getCreatePrice("invalid"), null);
+        assertEquals(domainCheckPremiumResponse.getRenewPrice("invalid"), null);
+
+        assertEquals(domainCheckPremiumResponse.isPremium("invalid"), null);
+        assertEquals(domainCheckPremiumResponse.getCreatePrice("invalid"), null);
+        assertEquals(domainCheckPremiumResponse.getRenewPrice("invalid"), null);
+    }
+
 }
