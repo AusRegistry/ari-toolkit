@@ -110,7 +110,7 @@ public class DomainCheckPremiumResponse extends DataResponse {
      * @param index the index of domain to be checked
      * @return true if the domain is premium, false otherwise
      */
-    public final boolean isPremium(final long index) {
+    public final Boolean isPremium(final long index) {
         PremiumInfo premiumInfo = premiumIndexMap.get(index);
         return premiumInfo == null ? null : premiumInfo.isPremium();
     }
