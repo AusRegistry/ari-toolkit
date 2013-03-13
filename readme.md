@@ -1,13 +1,13 @@
 ## Downloads
 
-The latest ari-toolkit for gTLDs is available for download. [ari-toolkit-gtld v3.0.0.15](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk-gtld/3.0.0.15/arjtk-gtld-3.0.0.15.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk-gtld/3.0.0.15/arjtk-gtld-3.0.0.15-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk-gtld/3.0.0.15/arjtk-gtld-3.0.0.15-javadoc.jar))
+The latest ari-toolkit is available for download. [ari-toolkit v3.0.0.16](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.0.0.16/arjtk-3.0.0.16.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.0.0.16/arjtk-3.0.0.16-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.0.0.16/arjtk-3.0.0.16-javadoc.jar))
 
 For more information, please read [Installation and Setup](#installation-and-setup).
 
 
 ## Building
 
-To build the ari-toolkit for gTLDs, you must have the Java Development Kit (JDK) v6.0 or above installed. The project can be built with the command `gradlew build`.
+To build the ari-toolkit, you must have the Java Development Kit (JDK) v6.0 or above installed. The project can be built with the command `gradlew build`.
 
 
 ## Introduction
@@ -34,11 +34,11 @@ The service element mapping module provides a simple means of translating betwee
 
 ## Installation and Setup
 
-### How to get the gTLD Toolkit
+### How to get the toolkit
 
 #### Direct download
 
-Obtain the latest gTLD toolkit here: [gTLD Toolkit v3.0.0.15](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk-gtld/3.0.0.15/arjtk-gtld-3.0.0.15.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk-gtld/3.0.0.15/arjtk-gtld-3.0.0.15-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk-gtld/3.0.0.15/arjtk-gtld-3.0.0.15-javadoc.jar))
+Obtain the latest toolkit here: [Toolkit v3.0.0.16](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.0.0.16/arjtk-3.0.0.16.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.0.0.16/arjtk-3.0.0.16-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.0.0.16/arjtk-3.0.0.16-javadoc.jar))
 
 #### Dependency Management
 
@@ -46,8 +46,8 @@ Use your build's dependency management tool to automatically download the toolki
 
 * Repository: `http://ausregistry.github.com/repo/`
 * groupId: `au.com.ausregistry`
-* artifactId: `arjtk-gtld`
-* version: `3.0.0.15`
+* artifactId: `arjtk`
+* version: `3.0.0.16`
 
 For example (using Maven):
 
@@ -61,19 +61,19 @@ For example (using Maven):
     <dependencies>
        <dependency>
           <groupId>au.com.ausregistry</groupId>
-          <artifactId>arjtk-gtld</artifactId>
-          <version>3.0.0.15</version>
+          <artifactId>arjtk</artifactId>
+          <version>3.0.0.16</version>
        </dependency>
     </dependencies>
 
 
 #### Contribute
 
-You can view the source on [GitHub/AusRegistry](http://github.com/ausregistry/ari-toolkit/tree/gtld). Contributions via pull requests are welcome.
+You can view the source on [GitHub/AusRegistry](http://github.com/ausregistry/ari-toolkit). Contributions via pull requests are welcome.
 
 ### Development documentation
 
-The javadoc is available online: [gTLD Toolkit javadoc](http://ausregistry.github.com/javadoc/gtld/index.html)
+The javadoc is available online: [Toolkit javadoc](http://ausregistry.github.com/javadoc/ari-toolkit/index.html)
 
 ### Environment
 
@@ -128,7 +128,7 @@ To create a session, an implementation of SessionManagerProperties is required. 
 
 **Start a session**
 
-After obtaining a SessionManager, it is necessary to start a session. This will create a connection, handle the EPP greeting and then login, allowing you to send accross EPP commands:
+After obtaining a SessionManager, it is necessary to start a session. This will create a connection, handle the EPP greeting and then login, allowing you to send across EPP commands:
 
     /* Start the session. This will automatically create a connection, send 
        a hello and a greeting and perform a login. The manager will be 

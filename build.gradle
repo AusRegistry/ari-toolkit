@@ -102,7 +102,7 @@ uploadArchives << {
     if (!System.properties.keySet().containsAll('repoUrl', 'repoUsername', 'repoPassword')) {
         copy {
             from(javadoc.destinationDir)
-            into "$pagesProjectDir/javadoc/"
+            into "$pagesProjectDir/javadoc/ari-toolkit"
         }
     }
 }
