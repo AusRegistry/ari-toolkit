@@ -26,7 +26,7 @@ public class DomainCheckPremiumResponse extends DataResponse {
     private Map<Long, PremiumInfo> premiumIndexMap;
 
 
-    protected DomainCheckPremiumResponse() {
+    public DomainCheckPremiumResponse() {
         super(StandardCommandType.CHECK, StandardObjectType.DOMAIN);
         premiumNameMap = new HashMap<String, PremiumInfo>();
         premiumIndexMap = new HashMap<Long, PremiumInfo>();
