@@ -27,7 +27,7 @@ These services are best bundled in a library which each registrar can utilise to
 
 ### Toolkit Overview
 
-The EPP Toolkit developed and supplied by ARI provides the client-side libraries which implement the core EPP specifications, the domain, host and contact mappings of the specifications, and mappings for extensions operated by ARI (for a list of all specifications and extensions implemented see the Appendix). These libraries are broken down into two key modules: an extensible set of EPP service element mappings to classes (object-oriented programming paradigm), and an EPP network transport module.
+The EPP toolkit developed and supplied by ARI provides the client-side libraries which implement the core EPP specifications, the domain, host and contact mappings of the specifications, and mappings for extensions operated by ARI (for a list of all specifications and extensions implemented see the Appendix). These libraries are broken down into two key modules: an extensible set of EPP service element mappings to classes (object-oriented programming paradigm), and an EPP network transport module.
 
 The service element mapping module provides a simple means of translating between EPP service elements and their programmatic representation. The network transport module, which depends on session management service elements in the service element module, provides the following services; service information discovery, opening and closing EPP sessions, and sending and receiving EPP service elements.
 
@@ -293,7 +293,7 @@ The Toolkit provides Object->XML round-trip serialisation using classes in the *
 
 While construction of commands leads the caller to provide the minimal set of information, the Toolkit was designed to not pre-empt validations of parameter values such that changes to validation rules would not require new revisions of the Toolkit. It is the responsibility of the calling application to ensure the parameter values are correct and accurate for the target registry. The Toolkit provides a configuration option that turns on outbound schema validation to catch errors before a round-trip to the server. This is particularly useful when developing against the Toolkit.
 
-Applications looking to extend the command/response framework should model their code from extensions provided in the core Toolkit. The com.ausregistry.jtoolkit2.se.secdns package provides an example command extension, and its use is documented in the seciont **Using extensions with commands**.
+Applications looking to extend the command/response framework should model their code from extensions provided in the core Toolkit. The com.ausregistry.jtoolkit2.se.secdns package provides an example command extension, and its use is documented in the section **Using extensions with commands**.
 
 ###	Logging
 
