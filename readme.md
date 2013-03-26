@@ -285,7 +285,7 @@ Transactions (a command and its response) are executed by calling SessionManager
 
 EPP servers may be configured to close inactive connections. Applications that wish to keep connections alive may call the SessionManager.keepAlive() method to spawn a thread that will poll inactive sessions to prevent dropped connections.
 
-The default implementation of SessionManager gathers data such as the number of commands issued by type, both recently (within command rate limit window) and since start-up; average response time by session; and response count by result code. This information is exposed via the StatsManager interface and may be used for real-time monitoring of the application.
+The default implementation of SessionManager gathers data such as the number of commands issued by type, both recently and since start-up; average response time by session; and response count by result code. This information is exposed via the StatsManager interface and may be used for real-time monitoring of the application.
 
 ### XML Marshalling and Unmarshalling
 
@@ -300,7 +300,7 @@ Applications looking to extend the command/response framework should model their
 The Toolkit supports the following:
 
 * A default logging implementation which logs to a configured set of destination files, the specific file depending on the target audience.
-* The option to define an alternative logging implementation which meets a specified interface. This provides great control over filtering log messages, and how and where to write log records.
+* The option to define an alternative logging implementation which meets a specified interface. This provides control over filtering log messages, and how and where to write log records.
 
 There are two levels of logging configuration supported by the Toolkit:
 
