@@ -27,7 +27,7 @@ These services are best bundled in a library which each registrar can utilise to
 
 ### Toolkit Overview
 
-The EPP toolkit developed and supplied by ARI provides the client-side libraries which implement the core EPP specifications, the domain, host and contact mappings of the specifications, and mappings for extensions operated by ARI (for a list of all specifications and extensions implemented see the Appendix). These libraries are broken down into two key modules: an extensible set of EPP service element mappings to classes (object-oriented programming paradigm), and an EPP network transport module.
+The EPP toolkit developed and supplied by ARI provides client-side libraries that implement the EPP specifications described in RFC 5730-5734, and extension mappings for published RFCs and proprietary extensions implemented in Registries developed by ARI. These libraries are broken down into two key modules: an extensible set of EPP service element mappings to classes (object-oriented programming paradigm), and an EPP network transport module.
 
 The service element mapping module provides a simple means of translating between EPP service elements and their programmatic representation. The network transport module, which depends on session management service elements in the service element module, provides the following services; service information discovery, opening and closing EPP sessions, and sending and receiving EPP service elements.
 
@@ -81,7 +81,7 @@ The following environment specifics are required:
 
 #### Java 6
 
-The Toolkit API was implemented in Java using only standard libraries (some of which are only standard with Java SE 6 or later) to minimise dependency on external resources.
+The Toolkit has been developed against the standard Java 6 API, and has no runtime dependencies on external libraries.
 
 #### UTF-8 Encoding
 
@@ -91,7 +91,7 @@ The Toolkit uses the Java VM default character set for character encoding. Conse
 
 ### Configuration
 
-Configuration parameters are read from a properties file called toolkit.properties (default) on startup. The toolkit.properties file should be in the applications classpath for the Toolkit to read from it.
+Configuration parameters are read from a properties file called toolkit.properties (default) on startup. The toolkit.properties file must be in the application's classpath.
 
 Configuration of the following properties is mandatory. All other values are set to intelligent defaults.
 
@@ -99,14 +99,13 @@ Configuration of the following properties is mandatory. All other values are set
     epp.client.password = #?
     epp.client.hostname = #?
 
-The Toolkit is designed to be flexible enough to read properties from any source as long as the data source implements the SessionManagerProperties interface. For example, you could source your configuration parameters from an encrypted file by providing an implementation of SessionManagerProperties to read from the encrypted file.
+Clients may provide custom implementations of the SessionManagerProperties interface to source configuration properties from alternate data sources, such as encrypted file or database.
 
 ### Registrar Responsibilities
 
-It is your responsibility to protect the Toolkit parameter file which contains the client identifier and password for login, and also to implement suitable mechanisms to protect the cryptographic keys used by the Toolkits' TLS implementations.
+It is your responsibility to protect the Toolkit parameter file which contains the client identifier and password for login, and also to implement suitable mechanisms to protect the cryptographic keys used by the Toolkits’ TLS implementation.
 
-The default log files contain XML sent to and received from the EPP server. These log files may contain information of a sensitive nature, for example domain name auth info. Clients should take care to ensure this information is accessible only to those that require it. Applications may disable logging of commands; however this may impair ability to provide support.
-
+The default configuration for log files contain XML sent to and received from the EPP server. These log files may contain information of a sensitive nature, for example domain name authInfo elements and login credentials. Clients should take care to ensure this information is accessible only to those that require it. Applications may disable logging of commands; however this may impair ability to provide support.
 
 ## Quick Start Guide
 
