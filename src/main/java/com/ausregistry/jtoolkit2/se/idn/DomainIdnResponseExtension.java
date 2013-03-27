@@ -35,12 +35,7 @@ public final class DomainIdnResponseExtension extends ResponseExtension {
             + ":languageTag/text()";
     
     private String languageTag;
-    private String responseType;
     private boolean initialised;
-
-    public DomainIdnResponseExtension(String responseType) {
-        this.responseType = responseType;
-    }
 
     /**
      * @see com.ausregistry.jtoolkit2.se.ResponseExtension#fromXML(com.ausregistry.jtoolkit2.xml.XMLDocument)
@@ -48,7 +43,7 @@ public final class DomainIdnResponseExtension extends ResponseExtension {
     public void fromXML(final XMLDocument xmlDoc)
             throws XPathExpressionException {
         languageTag = xmlDoc.getNodeValue(replaceResponseType(
-                LANGUAGE_EXPR, responseType));
+                LANGUAGE_EXPR, ResponseExtension.INFO));
         
         initialised = (languageTag != null);
     }

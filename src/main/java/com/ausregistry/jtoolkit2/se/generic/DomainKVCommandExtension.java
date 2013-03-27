@@ -46,7 +46,7 @@ public final class DomainKVCommandExtension implements CommandExtension {
         kvList.put(key, value);
     }
 
-    public void addToCommand(final Command command) throws Exception {
+    public void addToCommand(final Command command) {
         final XMLWriter xmlWriter = command.getXmlWriter();
         final Element extensionElement = command.getExtensionElement();
         final Element commandElement = createCommandElement(xmlWriter, extensionElement);

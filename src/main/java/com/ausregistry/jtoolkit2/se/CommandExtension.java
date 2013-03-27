@@ -9,5 +9,5 @@ public interface CommandExtension extends java.io.Serializable {
     public static final String CREATE = "create";
     public static final String UPDATE = "update";
 
-    public void addToCommand(Command command) throws Exception;
+    public void addToCommand(Command command);
 }

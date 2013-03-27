@@ -13,10 +13,9 @@ public class DomainCheckPremiumCommandExtension implements CommandExtension {
 
     /**
      * @param command the domain-check command into which extension will be applied
-     * @throws Exception
      */
     @Override
-    public void addToCommand(Command command) throws Exception {
+    public void addToCommand(Command command) {
         final XMLWriter xmlWriter = command.getXmlWriter();
         final Element extensionElement = command.getExtensionElement();
         final Element createElement = xmlWriter.appendChild(extensionElement, "check",

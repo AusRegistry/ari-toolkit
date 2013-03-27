@@ -31,7 +31,7 @@ public class DomainUpdateVariantCommandExtensionV1_1 implements CommandExtension
     }
 
     @Override
-    public void addToCommand(final Command command) throws Exception {
+    public void addToCommand(final Command command) {
         final XMLWriter xmlWriter = command.getXmlWriter();
         final Element extensionElement = command.getExtensionElement();
         final Element updateElement =

@@ -19,7 +19,7 @@ public class SecDnsDomainUpdateCommandExtension implements CommandExtension {
     private ChgType chgData;
 
     @Override
-    public void addToCommand(final Command command) throws Exception {
+    public void addToCommand(final Command command) {
         final XMLWriter xmlWriter = command.getXmlWriter();
         final Element extensionElement = command.getExtensionElement();
         final Element updateElement = SecDNSXMLUtil.createElement(xmlWriter, extensionElement, "update");

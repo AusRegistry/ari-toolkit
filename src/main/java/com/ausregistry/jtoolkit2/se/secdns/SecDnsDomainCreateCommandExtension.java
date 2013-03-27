@@ -16,7 +16,7 @@ public final class SecDnsDomainCreateCommandExtension implements CommandExtensio
     private DSOrKeyType createData;
 
     @Override
-    public void addToCommand(final Command command) throws Exception {
+    public void addToCommand(final Command command) {
         final XMLWriter xmlWriter = command.getXmlWriter();
         final Element extensionElement = command.getExtensionElement();
 

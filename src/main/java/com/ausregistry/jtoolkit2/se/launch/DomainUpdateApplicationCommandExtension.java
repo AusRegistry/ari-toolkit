@@ -17,7 +17,7 @@ public class DomainUpdateApplicationCommandExtension implements CommandExtension
     private String applicationId;
 
     @Override
-    public void addToCommand(Command command) throws Exception {
+    public void addToCommand(Command command) {
         final XMLWriter xmlWriter = command.getXmlWriter();
         final Element extensionElement = command.getExtensionElement();
         final Element createElement = xmlWriter.appendChild(extensionElement, "update",

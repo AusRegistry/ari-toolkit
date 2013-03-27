@@ -14,7 +14,7 @@ public final class DomainInfoVariantCommandExtension implements CommandExtension
     private static final long serialVersionUID = -2441248857298156911L;
     private String variants;
 
-    public void addToCommand(final Command command) throws Exception {
+    public void addToCommand(final Command command) {
 		XMLWriter xmlWriter = command.getXmlWriter();
 		Element extensionElement = command.getExtensionElement();
 		Element infoElement = xmlWriter.appendChild(

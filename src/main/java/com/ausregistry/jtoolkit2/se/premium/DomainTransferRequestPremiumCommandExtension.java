@@ -15,7 +15,7 @@ public class DomainTransferRequestPremiumCommandExtension implements CommandExte
     private BigDecimal renewalPrice;
 
     @Override
-    public void addToCommand(Command command) throws Exception {
+    public void addToCommand(Command command) {
         final XMLWriter xmlWriter = command.getXmlWriter();
         final Element extensionElement = command.getExtensionElement();
         final Element transferElement = xmlWriter.appendChild(extensionElement, "transfer",

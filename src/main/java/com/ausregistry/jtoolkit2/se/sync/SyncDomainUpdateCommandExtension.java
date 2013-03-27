@@ -28,7 +28,7 @@ public class SyncDomainUpdateCommandExtension implements CommandExtension {
     }
 
     @Override
-    public void addToCommand(Command command) throws Exception {
+    public void addToCommand(Command command) {
         final XMLWriter xmlWriter = command.getXmlWriter();
         final Element extensionElement = command.getExtensionElement();
 

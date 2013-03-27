@@ -17,7 +17,7 @@ public class DomainCreatePremiumCommandExtension implements CommandExtension {
     private BigDecimal renewalPrice;
 
     @Override
-    public void addToCommand(Command command) throws Exception {
+    public void addToCommand(Command command) {
         final XMLWriter xmlWriter = command.getXmlWriter();
         final Element extensionElement = command.getExtensionElement();
         final Element createElement = xmlWriter.appendChild(extensionElement, "create",
