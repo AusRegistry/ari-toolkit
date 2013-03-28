@@ -179,56 +179,29 @@ It is recommended to send multiple commands in the same session, to avoid the ov
 
 ### Using extensions with commands
 
-The following example shows how to use the SecDNS extension with a Domain Create. It is necessary to specify what extensions you will be using at login time. Therefore, the `SessionManagerProperties` will use a list of extension uris when logging in to the EPP server. In the default `SessionManagerPropertiesImpl`, these will be stored in the `toolkit.properties` file with the prefix `xml.uri.ext`.
+The following example shows how to use extensions with commands. The examples below use the IDN extension for illustrative purposes, however you can substitute the extension below with any command extension.
 
-Set up a standard Domain Create:
+It is necessary to specify what extensions you will be using at login. The SessionProperties interface provides the list of extension URIs used in login commands sent to the EPP server. The default implementation sources this information from properties prefixed with xml.uri.ext, configured in the toolkit.properties file.
 
-    // Create a domain create command with the minimum required parameters
-    final DomainCreateCommand command = new 
-       DomainCreateCommand(domainName, password, contactName, new 
-       String[] {contactName});
+Set up a command:
 
-    // Create the domain create response.
-    final DomainCreateResponse domainCreateResponse = new 
-       DomainCreateResponse();
+    // instantiate a domain create command
+    // adjust parameters to suit registry requirements
+    DomainCreateCommand command = new DomainCreateCommand(
+        domainName, password, registrant, new String[] {tech});
 
-Initialise the extension class, `SecDnsDomainCreateCommandExtension`:
+Create the command extension:
 
-    // Create a SECDNS create command extension object
-    final SecDnsDomainCreateCommandExtension ext = new 
-       SecDnsDomainCreateCommandExtension();
+    // instantiate the idn extension, specifying "ar" as the language tag
+    CommandExtension extension = new DomainCreateIdnCommandExtension("ar");
 
-Create a DSData object with the required DS data that you would like to add to the domain:
+Add the extension to the command. Multiple extensions can be added to the same command if required. You can then execute the command, which sends across the base command as well as all associate extensions:
 
-    /* Create a DS data object, supplying key tag, algorithm, digest type and digest */
-    final DSData dsData = new DSData(1, 3, 1, 49FD46E6C4B45C55D4AC49FD46E6C4B45C55D4AC");
+    // add the idn extension to the domain create command
+    command.appendExtension(extension);
 
-Create a DSOrKeyType object, which is the container for all DS data and Key data associated with a domain:
-
-    /* Add the DS data to a DSOrKeyType object, which will store all DS 
-       and Key data for a domain */
-    final DSOrKeyType createData = new DSOrKeyType();
-
-Add the DS data to the DSOrKeyType object:
-
-    //Add the DS data to the DSOrKeyType object
-    createData.addToDsData(dsData);
-
-    // Add the DSOrKeyType object to the extension
-    ext.setCreateData(createData);
-
-Add the extension to the command. Multiple extensions can be added to the same command if this is required. You can then execute the command, which sends across the base command as well as all associate extensions:
-
-    // Add the extension to the domain create command
-    command.appendExtension(ext);
-
-    /* Tell the manager to execute the command. This command includes the SECDNS extension object. */
-    manager.execute(new Transaction(command, domainCreateResponse));
-
-Add the premium price extension to the domain check command to query for create and renew prices.
-
-    DomainCheckPremiumCommandExtension premiumExt = new DomainCheckPremiumCommandExtension();
-    command.appendExtension(premiumExt);
+    // execute the command containing the IDN extension
+    manager.execute(new Transaction(command, response));
 
 **Receiving extension data**
 
