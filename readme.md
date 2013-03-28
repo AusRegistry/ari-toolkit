@@ -226,7 +226,7 @@ Register the extension with the response. You can then execute the command, whic
  
 Obtain the information from the response extension:
 
-if (idnResponse.isInitialised()) {String languageTag = idnResponse.getLanguageTag();}
+    if (idnResponse.isInitialised()) {String languageTag = idnResponse.getLanguageTag();}
 
 ## Implementation Notes
 
