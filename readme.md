@@ -187,8 +187,10 @@ Set up a command:
 
     // instantiate a domain create command
     // adjust parameters to suit registry requirements
-    DomainCreateCommand command = new DomainCreateCommand(
-        domainName, password, registrant, new String[] {tech});
+    DomainCreateCommand command = new DomainCreateCommand(domainName, password, registrant, new String[] {tech});
+
+    // instantiate the domain create response
+    DomainCreateResponse response = new DomainCreateResponse();
 
 Create the command extension:
 
@@ -205,43 +207,26 @@ Add the extension to the command. Multiple extensions can be added to the same c
 
 **Receiving extension data**
 
-It is also possible to use the Toolkit to receive extension data. The following example will show how to obtain the DS data from a DomainInfo using the SecDNS extension. Similar to sending command data, you need to create a new object for the extension, this time a SecDnsDomainInfoResponseExtension.
+It is also possible to use the Toolkit to receive extension data. The following example will show how to obtain information in response extensions using the IDN info response extension.
 
-Create a standard DomainInfoResponse:
+Create response and extension objects:
 
-    // Create the domain info response
-    final DomainInfoResponse domainInfoResponse = new DomainInfoResponse();
+    // instantiate a domain info response object
+    final DomainInfoResponse response = new DomainInfoResponse();
+    // instantiate an idn extension response object
+    DomainIdnResponseExtension idnResponse = new DomainIdnResponseExtension();
 
-Create a SecDnsDomainInfoResponseExtension:
+Register the extension with the response. You can then execute the command, which populates the response object as well as its registered extensions:
 
-    // Create a SECDNS response extension object
-    final SecDnsDomainInfoResponseExtension secDNSExt = new 
-       SecDnsDomainInfoResponseExtension();
+    // register the idn extension with the response object
+    response.registerExtension(idnResponse);
 
-Register the extension to the standard DomainInfoResponse object:
-
-    // Register the extension response to the domain info response
-    domainInfoResponse.registerExtension(secDNSExt);
-
-Execute DomainInfoCommand:
-
-    /* Tell the manager to execute the command. The response includes the response extension */
-    manager.execute(new Transaction(new DomainInfoCommand(domainName, password), domainInfoResponse));
+    // execute the command with the response object from above
+    manager.execute(new Transaction(new DomainInfoCommand("domain.example"), response));
  
-Obtain the DS data associated with the domain. This will be returned as a list of DSData objects. First check that the extension has been initialised, because if there are no SecDNS extension elements in the return XML, the object will initalise. This only occurs if DNSSEC data is not applied to the domain:
+Obtain the information from the response extension:
 
-    if (secDNSExt.isInitialised()) {
-       final List<DSData> dsDataList = secDNSExt.getInfData().getDsDataList();
-    }
-Created Domain  check premium response to get the create and renew premium price values and to check if the domain is premium.
-
-    DomainCheckPremiumResponse response = new DomainCheckPremiumResponse();
-    response.getCreatePrice(domain_name);
-    response.getCreatePrice(index);
-    response.getRenewPrice(domain_name);
-    response.getRenewPrice(index);
-    response.isPremiun(domain_name);
-    response.isPremiun(index);
+if (idnResponse.isInitialised()) {String languageTag = idnResponse.getLanguageTag();}
 
 ## Implementation Notes
 
