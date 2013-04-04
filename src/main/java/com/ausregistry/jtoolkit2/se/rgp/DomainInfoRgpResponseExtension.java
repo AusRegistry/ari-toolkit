@@ -1,14 +1,14 @@
 package com.ausregistry.jtoolkit2.se.rgp;
 
+import javax.xml.xpath.XPathExpressionException;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.se.ResponseExtension;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-
-import javax.xml.xpath.XPathExpressionException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Extension of the domain mapping of the EPP info response for registry grace periods, as
@@ -26,7 +26,7 @@ import java.util.List;
  *
  * @see com.ausregistry.jtoolkit2.se.ResponseExtension
  */
-public final class DomainRgpResponseExtension extends ResponseExtension {
+public final class DomainInfoRgpResponseExtension extends ResponseExtension {
 
     private static final long serialVersionUID = -821812925617413583L;
 
@@ -43,7 +43,7 @@ public final class DomainRgpResponseExtension extends ResponseExtension {
     List<RgpStatus> rgpStatuses;
     private boolean initialised;
 
-    public DomainRgpResponseExtension(String responseExtension) {
+    public DomainInfoRgpResponseExtension(String responseExtension) {
         this.responseExtension = responseExtension;
     }
 

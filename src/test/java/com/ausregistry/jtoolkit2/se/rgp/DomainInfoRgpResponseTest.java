@@ -1,15 +1,15 @@
 package com.ausregistry.jtoolkit2.se.rgp;
 
+import static org.junit.Assert.*;
+
+import java.util.Arrays;
+import java.util.List;
+
 import com.ausregistry.jtoolkit2.se.DomainInfoResponse;
 import com.ausregistry.jtoolkit2.se.ResponseExtension;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 import com.ausregistry.jtoolkit2.xml.XMLParser;
 import org.junit.Test;
-
-import java.util.Arrays;
-import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class DomainInfoRgpResponseTest {
 
@@ -23,7 +23,7 @@ public class DomainInfoRgpResponseTest {
     			new RgpStatus("renewPeriod", "lang", "message"));
     	
     	final DomainInfoResponse response = new DomainInfoResponse();
-        final DomainRgpResponseExtension rgpExtension = new DomainRgpResponseExtension(ResponseExtension.INFO);
+        final DomainInfoRgpResponseExtension rgpExtension = new DomainInfoRgpResponseExtension(ResponseExtension.INFO);
         final XMLDocument doc = PARSER.parse(getInfoResponseWithRgpExtensionExpectedXml(domainName, expectedRgpStatuses));
         
         response.registerExtension(rgpExtension);
@@ -48,7 +48,7 @@ public class DomainInfoRgpResponseTest {
         final List<RgpStatus> expectedRgpStatuses = Arrays.asList(new RgpStatus("addPeriod", "lang", "message"));
 
         final DomainInfoResponse response = new DomainInfoResponse();
-        final DomainRgpResponseExtension rgpExtension = new DomainRgpResponseExtension(ResponseExtension.INFO);
+        final DomainInfoRgpResponseExtension rgpExtension = new DomainInfoRgpResponseExtension(ResponseExtension.INFO);
         final XMLDocument doc = PARSER.parse(getInfoResponseWithRgpExtensionExpectedXml(domainName, expectedRgpStatuses));
 
         response.registerExtension(rgpExtension);
@@ -73,7 +73,7 @@ public class DomainInfoRgpResponseTest {
         final List<RgpStatus> expectedRgpStatuses = null;
 
         final DomainInfoResponse response = new DomainInfoResponse();
-        final DomainRgpResponseExtension rgpExtension = new DomainRgpResponseExtension(ResponseExtension.INFO);
+        final DomainInfoRgpResponseExtension rgpExtension = new DomainInfoRgpResponseExtension(ResponseExtension.INFO);
         final XMLDocument doc = PARSER.parse(getInfoResponseWithRgpExtensionExpectedXml(domainName, expectedRgpStatuses));
 
         response.registerExtension(rgpExtension);

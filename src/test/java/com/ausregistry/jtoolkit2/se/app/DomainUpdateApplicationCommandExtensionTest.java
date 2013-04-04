@@ -1,4 +1,4 @@
-package com.ausregistry.jtoolkit2.se.launch;
+package com.ausregistry.jtoolkit2.se.app;
 
 import static org.junit.Assert.assertEquals;
 
@@ -19,7 +19,7 @@ public class DomainUpdateApplicationCommandExtensionTest {
     }
 
     @Test
-    public void shouldCreateValidXmlWhenSupplyLaunchExtension() throws SAXException {
+    public void shouldCreateValidXmlWhenSupplyApplicationExtension() throws SAXException {
 
         final Command cmd = new DomainUpdateCommand("jtkutest.com.au", "jtkUT3st", null, null, null);
         final DomainUpdateApplicationCommandExtension ext = new DomainUpdateApplicationCommandExtension();

@@ -9,18 +9,26 @@ public enum ExtendedObjectType implements ObjectType {
     AE_DOMAIN("aedom", "urn:X-ae:params:xml:ns:aedomain-1.0", "aedomain-1.0.xsd", "name"),
     AU_DOMAIN("audom", "urn:X-au:params:xml:ns:audomain-1.0", "audomain-1.0.xsd", "name"),
     IDNA_DOMAIN("idnadomain", "urn:X-ar:params:xml:ns:idnadomain-1.0", "idnadomain-1.0.xsd", "name"),
-    VARIANT("variant", "urn:X-ar:params:xml:ns:variant-1.0", "variant-1.0.xsd", "name"),
-    VARIANT_V1_1("variantV1_1", "urn:ar:params:xml:ns:variant-1.1", "variant-1.1.xsd", "name"),
-    SEC_DNS("secDNS", "urn:ietf:params:xml:ns:secDNS-1.1", "secDNS-1.1.xsd", "name"),
-    SYNC("sync", "urn:X-ar:params:xml:ns:sync-1.0", "sync-1.0.xsd", "name"),
-    KV("kv", "urn:X-ar:params:xml:ns:kv-1.0", "kv-1.0.xsd", "name"),
-    REGISTRANT("registrant", "urn:X-ar:params:xml:ns:registrant-1.0", "registrant-1.0.xsd", "name"),
-    RESTORE("restore", "urn:ietf:params:xml:ns:rgp-1.0", "rgp-1.0.xsd", "name"),
-    LAUNCH("launch", "urn:ar:params:xml:ns:application-1.0", "application-1.0.xsd", "name"),
-    IDN("idn", "urn:ar:params:xml:ns:idn-1.0", "idn-1.0.xsd", "name"),
-    PREMIUM("premium", "urn:ar:params:xml:ns:premium-1.0", "premium-1.0.xsd", "name");
+    /** References the domain name variants extension (v1.0) XML namespace and schema file */
+    VARIANT ("variant", "urn:X-ar:params:xml:ns:variant-1.0", "variant-1.0.xsd", "name"),
+    /** References the domain name variants extension (v1.1) XML namespace and schema file */
+    VARIANT_V1_1 ("variantV1_1", "urn:ar:params:xml:ns:variant-1.1", "variant-1.1.xsd", "name"),
+    /** References the secDNS extension XML namespace and schema file */
+    SEC_DNS ("secDNS", "urn:ietf:params:xml:ns:secDNS-1.1", "secDNS-1.1.xsd", "name"),
+    SYNC ("sync", "urn:X-ar:params:xml:ns:sync-1.0", "sync-1.0.xsd", "name"),
+    /** References the key-value list extension XML namespace and schema file */
+    KV ("kv", "urn:X-ar:params:xml:ns:kv-1.0", "kv-1.0.xsd", "name"),
+    REGISTRANT ("registrant", "urn:X-ar:params:xml:ns:registrant-1.0", "registrant-1.0.xsd", "name"),
+    /** References the domain restore (redemption grace period) extension XML namespace and schema file */
+    RESTORE ("restore", "urn:ietf:params:xml:ns:rgp-1.0", "rgp-1.0.xsd", "name"),
+    /** References the domain application extension XML namespace and schema file */
+    APP ("app", "urn:ar:params:xml:ns:application-1.0", "application-1.0.xsd", "name"),
+    /** References the internationalised domain name extension XML namespace and schema file */
+    IDN ("idn", "urn:ar:params:xml:ns:idn-1.0", "idn-1.0.xsd", "name"),
+    /** References the premium domain name extension XML namespace and schema file */
+    PREMIUM ("premium", "urn:ar:params:xml:ns:premium-1.0", "premium-1.0.xsd", "name");
 
-    private String prefix, uri, schemaDefinition, identType;
+    private final String prefix, uri, schemaDefinition, identType;
 
     ExtendedObjectType(final String prefix, final String uri, final String schemaDefinition,
             final String identType) {

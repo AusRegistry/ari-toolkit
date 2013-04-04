@@ -1,4 +1,4 @@
-package com.ausregistry.jtoolkit2.se.launch;
+package com.ausregistry.jtoolkit2.se.app;
 
 import com.ausregistry.jtoolkit2.se.Command;
 import com.ausregistry.jtoolkit2.se.CommandExtension;
@@ -10,7 +10,7 @@ import org.w3c.dom.Element;
  * Use this to set domain create application extension to an EPP domain create command.
  *
  * @see com.ausregistry.jtoolkit2.se.DomainCreateCommand
- * @see com.ausregistry.jtoolkit2.se.launch.DomainCreateApplicationResponse
+ * @see DomainCreateApplicationResponse
  */
 public class DomainCreateApplicationCommandExtension implements CommandExtension {
 
@@ -22,9 +22,9 @@ public class DomainCreateApplicationCommandExtension implements CommandExtension
         final XMLWriter xmlWriter = command.getXmlWriter();
         final Element extensionElement = command.getExtensionElement();
         final Element createElement = xmlWriter.appendChild(extensionElement, "create",
-                ExtendedObjectType.LAUNCH.getURI());
+                ExtendedObjectType.APP.getURI());
 
-        xmlWriter.appendChild(createElement, "phase", ExtendedObjectType.LAUNCH.getURI()).setTextContent(phase);
+        xmlWriter.appendChild(createElement, "phase", ExtendedObjectType.APP.getURI()).setTextContent(phase);
 
     }
 

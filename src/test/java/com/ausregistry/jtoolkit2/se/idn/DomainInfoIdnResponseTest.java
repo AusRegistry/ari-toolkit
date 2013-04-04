@@ -18,7 +18,7 @@ public class DomainInfoIdnResponseTest {
         final String languageTag = "test";
 
         final DomainInfoResponse response = new DomainInfoResponse();
-        final DomainIdnResponseExtension re = new DomainIdnResponseExtension();
+        final DomainInfoIdnResponseExtension re = new DomainInfoIdnResponseExtension();
 
 		final XMLDocument doc =
                 PARSER.parse(getInfoResponseExpectedXml(dnsForm, true, languageTag));
@@ -33,7 +33,7 @@ public class DomainInfoIdnResponseTest {
     public void testGetNoIdn() throws Exception {
         final String domainName = "xn--xha91b83h.com";
         final DomainInfoResponse response = new DomainInfoResponse();
-        final DomainIdnResponseExtension re = new DomainIdnResponseExtension();
+        final DomainInfoIdnResponseExtension re = new DomainInfoIdnResponseExtension();
 
         final XMLDocument doc =
             PARSER.parse(getInfoResponseExpectedXml(domainName, false, null));

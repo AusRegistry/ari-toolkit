@@ -1,4 +1,4 @@
-package com.ausregistry.jtoolkit2.se.launch;
+package com.ausregistry.jtoolkit2.se.app;
 
 import com.ausregistry.jtoolkit2.se.Command;
 import com.ausregistry.jtoolkit2.se.CommandExtension;
@@ -21,9 +21,9 @@ public class DomainDeleteApplicationCommandExtension implements CommandExtension
         final XMLWriter xmlWriter = command.getXmlWriter();
         final Element extensionElement = command.getExtensionElement();
         final Element createElement = xmlWriter.appendChild(extensionElement, "delete",
-                ExtendedObjectType.LAUNCH.getURI());
+                ExtendedObjectType.APP.getURI());
 
-        xmlWriter.appendChild(createElement, "id", ExtendedObjectType.LAUNCH.getURI()).setTextContent
+        xmlWriter.appendChild(createElement, "id", ExtendedObjectType.APP.getURI()).setTextContent
                 (applicationId);
 
     }

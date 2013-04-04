@@ -1,10 +1,10 @@
 package com.ausregistry.jtoolkit2.se.idn;
 
+import javax.xml.xpath.XPathExpressionException;
+
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.se.ResponseExtension;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
-
-import javax.xml.xpath.XPathExpressionException;
 
 /**
  * Extension of the domain mapping of the EPP info response, to IDN domain names, 
@@ -21,7 +21,7 @@ import javax.xml.xpath.XPathExpressionException;
  * 
  * @see com.ausregistry.jtoolkit2.se.ResponseExtension
  */
-public final class DomainIdnResponseExtension extends ResponseExtension {
+public final class DomainInfoIdnResponseExtension extends ResponseExtension {
 
     private static final long serialVersionUID = -2441248857298156911L;
 

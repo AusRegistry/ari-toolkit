@@ -10,7 +10,7 @@ import org.w3c.dom.Element;
  * Use this to set IDN Domain extension properties for an EPP Domain Create
  * command.
  * 
- * @see com.ausregistry.jtoolkit2.se.idn.DomainIdnResponseExtension
+ * @see DomainInfoIdnResponseExtension
  */
 public final class DomainCreateIdnCommandExtension implements CommandExtension {
     private static final long serialVersionUID = -8945007354471832288L;

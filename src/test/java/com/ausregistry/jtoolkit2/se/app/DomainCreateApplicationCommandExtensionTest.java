@@ -1,4 +1,6 @@
-package com.ausregistry.jtoolkit2.se.launch;
+package com.ausregistry.jtoolkit2.se.app;
+
+import static org.junit.Assert.assertEquals;
 
 import com.ausregistry.jtoolkit2.EPPDateFormatter;
 import com.ausregistry.jtoolkit2.Timer;
@@ -11,8 +13,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import static org.junit.Assert.assertEquals;
-
 public class DomainCreateApplicationCommandExtensionTest {
 
     private static final XMLParser PARSER = new XMLParser();
@@ -24,7 +24,7 @@ public class DomainCreateApplicationCommandExtensionTest {
     }
 
     @Test
-    public void shouldCreateValidXmlWhenSupplyLaunchExtension() throws SAXException {
+    public void shouldCreateValidXmlWhenSupplyApplicationExtension() throws SAXException {
 
         final Command cmd = new DomainCreateCommand("jtkutest.com.au", "jtkUT3st");
         final DomainCreateApplicationCommandExtension ext = new DomainCreateApplicationCommandExtension();
@@ -43,7 +43,7 @@ public class DomainCreateApplicationCommandExtensionTest {
     }
 
     @Test
-    public void shouldReturnLaunchApplicationIdFromDomainCreateResponse() throws Exception {
+    public void shouldReturnApplicationIdFromDomainCreateResponse() throws Exception {
         String dnsForm = "test-domain";
         DomainCreateApplicationResponse response = new DomainCreateApplicationResponse();
         String applicationId = "sunrise-application-id";

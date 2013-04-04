@@ -15,7 +15,7 @@ import java.util.List;
 public class DomainRestoreResponse extends Response {
 	private static final long serialVersionUID = -5724827272682186647L;
 
-	private final DomainRgpResponseExtension restoreExtension = new DomainRgpResponseExtension(
+	private final DomainInfoRgpResponseExtension restoreExtension = new DomainInfoRgpResponseExtension(
 			ResponseExtension.UPDATE);
 
 	@Override

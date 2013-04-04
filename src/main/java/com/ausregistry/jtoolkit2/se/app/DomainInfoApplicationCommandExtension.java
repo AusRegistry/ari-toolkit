@@ -1,4 +1,4 @@
-package com.ausregistry.jtoolkit2.se.launch;
+package com.ausregistry.jtoolkit2.se.app;
 
 import com.ausregistry.jtoolkit2.se.Command;
 import com.ausregistry.jtoolkit2.se.CommandExtension;
@@ -10,7 +10,7 @@ import org.w3c.dom.Element;
  * Use this to set domain info application extension to an EPP domain info command.
  *
  * @see com.ausregistry.jtoolkit2.se.DomainInfoCommand
- * @see com.ausregistry.jtoolkit2.se.launch.DomainInfoApplicationResponseExtension
+ * @see DomainInfoApplicationResponseExtension
  */
 public class DomainInfoApplicationCommandExtension  implements CommandExtension {
 
@@ -23,9 +23,9 @@ public class DomainInfoApplicationCommandExtension  implements CommandExtension 
         final XMLWriter xmlWriter = command.getXmlWriter();
         final Element extensionElement = command.getExtensionElement();
         final Element createElement = xmlWriter.appendChild(extensionElement, "info",
-                ExtendedObjectType.LAUNCH.getURI());
+                ExtendedObjectType.APP.getURI());
 
-        xmlWriter.appendChild(createElement, "id", ExtendedObjectType.LAUNCH.getURI()).setTextContent(applicationId);
+        xmlWriter.appendChild(createElement, "id", ExtendedObjectType.APP.getURI()).setTextContent(applicationId);
         
     }
 

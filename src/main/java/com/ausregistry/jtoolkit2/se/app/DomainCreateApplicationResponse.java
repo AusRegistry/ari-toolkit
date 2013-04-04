@@ -1,10 +1,10 @@
-package com.ausregistry.jtoolkit2.se.launch;
+package com.ausregistry.jtoolkit2.se.app;
+
+import javax.xml.xpath.XPathExpressionException;
 
 import com.ausregistry.jtoolkit2.se.CreateResponse;
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
-
-import javax.xml.xpath.XPathExpressionException;
 
 /**
  * Use this to access create data for a domain as provided in an EPP domain
@@ -13,14 +13,14 @@ import javax.xml.xpath.XPathExpressionException;
  * command with domain create application extension.
  *
  * @see com.ausregistry.jtoolkit2.se.DomainCreateCommand
- * @see com.ausregistry.jtoolkit2.se.launch.DomainCreateApplicationCommandExtension
+ * @see DomainCreateApplicationCommandExtension
  */
 public class DomainCreateApplicationResponse extends CreateResponse {
 	private static final long serialVersionUID = -5724827272682186647L;
 
 	private static final String DOM_CR_DATE_EXPR = exprReplace(CR_DATE_EXPR);
-	private static final String DOM_APPLICATION_ID_EXPR = exprReplace(CRE_DATA_EXPR) + "/launch:id/text()";
-	private static final String DOM_DOMAIN_NAME_EXPR = exprReplace(CRE_DATA_EXPR) + "/launch:name/text()";
+	private static final String DOM_APPLICATION_ID_EXPR = exprReplace(CRE_DATA_EXPR) + "/app:id/text()";
+	private static final String DOM_DOMAIN_NAME_EXPR = exprReplace(CRE_DATA_EXPR) + "/app:name/text()";
 
 	private String applicationId;
     private String domainName;
@@ -38,11 +38,11 @@ public class DomainCreateApplicationResponse extends CreateResponse {
     }
 
     protected static String exprReplace(String expr) {
-		return expr.replaceAll(OBJ, ExtendedObjectType.LAUNCH.getName());
+		return expr.replaceAll(OBJ, ExtendedObjectType.APP.getName());
 	}
 
 	public DomainCreateApplicationResponse() {
-		super(ExtendedObjectType.LAUNCH);
+		super(ExtendedObjectType.APP);
 	}
 
 	@Override

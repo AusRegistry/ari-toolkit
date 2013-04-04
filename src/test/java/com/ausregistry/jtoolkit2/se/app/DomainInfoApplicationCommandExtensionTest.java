@@ -1,6 +1,7 @@
-package com.ausregistry.jtoolkit2.se.launch;
+package com.ausregistry.jtoolkit2.se.app;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class DomainInfoApplicationCommandExtensionTest {
     }
 
     @Test
-    public void shouldCreateValidXmlWhenSupplyLaunchExtensionForInfo() throws SAXException {
+    public void shouldCreateValidXmlWhenSupplyApplicationExtensionForInfo() throws SAXException {
 
         final Command cmd = new DomainInfoCommand("jtkutest.com.au");
         final DomainInfoApplicationCommandExtension ext = new DomainInfoApplicationCommandExtension();
@@ -44,10 +45,10 @@ public class DomainInfoApplicationCommandExtensionTest {
     }
 
     @Test
-    public void shouldReturnLaunchDetailsForInfoCommand() throws ParsingException {
+    public void shouldReturnApplicationDetailsForInfoCommand() throws ParsingException {
         final String dnsForm = "test-domain";
         final DomainInfoResponse response = new DomainInfoResponse();
-        final DomainInfoApplicationResponseExtension launchExtension = new DomainInfoApplicationResponseExtension(
+        final DomainInfoApplicationResponseExtension applicationExtension = new DomainInfoApplicationResponseExtension(
                 ResponseExtension.INFO);
         String applicationId = "sunrise-application-id";
         String creDate = "2011-01-01T00:00:00Z";
@@ -55,23 +56,23 @@ public class DomainInfoApplicationCommandExtensionTest {
         List<String> statuses = new ArrayList<String>();
         statuses.add("ok");
         String updDate = "2012-01-01T00:00:00Z";
-        final XMLDocument doc = PARSER.parse(getInfoResponseExpectedXml(dnsForm, applicationId, phase, statuses, creDate,
-                updDate));
+        final XMLDocument doc = PARSER.parse(getInfoResponseExpectedXml(dnsForm, applicationId, phase, statuses,
+                creDate, updDate));
 
-        response.registerExtension(launchExtension);
+        response.registerExtension(applicationExtension);
         response.fromXML(doc);
         assertEquals(dnsForm, response.getName());
-        assertTrue("Launch extension should have been initialised", launchExtension.isInitialised());
-        assertEquals(applicationId, launchExtension.getApplicationId());
-        assertEquals(phase, launchExtension.getPhase());
-        assertEquals(statuses, launchExtension.getStatuses());
+        assertTrue("Application extension should have been initialised", applicationExtension.isInitialised());
+        assertEquals(applicationId, applicationExtension.getApplicationId());
+        assertEquals(phase, applicationExtension.getPhase());
+        assertEquals(statuses, applicationExtension.getStatuses());
     }
 
     @Test
-    public void shouldReturnLaunchDetailsForInfoCommandWhenNotUpdated() throws ParsingException {
+    public void shouldReturnApplicationDetailsForInfoCommandWhenNotUpdated() throws ParsingException {
         final String dnsForm = "test-domain";
         final DomainInfoResponse response = new DomainInfoResponse();
-        final DomainInfoApplicationResponseExtension launchExtension = new DomainInfoApplicationResponseExtension(
+        final DomainInfoApplicationResponseExtension applicationExtension = new DomainInfoApplicationResponseExtension(
                 ResponseExtension.INFO);
         String applicationId = "sunrise-application-id";
         String creDate = "2011-01-01T00:00:00Z";
@@ -85,10 +86,10 @@ public class DomainInfoApplicationCommandExtensionTest {
         final XMLDocument doc = PARSER.parse(getInfoResponseExpectedXml(dnsForm, applicationId, phase, statuses,
                 creDate, updDate));
 
-        response.registerExtension(launchExtension);
+        response.registerExtension(applicationExtension);
         response.fromXML(doc);
         assertEquals(dnsForm, response.getName());
-        assertTrue("Launch extension should have been initialised", launchExtension.isInitialised());
+        assertTrue("Application extension should have been initialised", applicationExtension.isInitialised());
     }
 
     private String getInfoResponseExpectedXml(final String domainName, final String applicationId, final String phase,
@@ -127,14 +128,14 @@ public class DomainInfoApplicationCommandExtensionTest {
         result.append("</resData>");
 
         result.append("<extension>");
-        result.append("<launch:infData xmlns:launch=\"urn:ar:params:xml:ns:application-1.0\"");
+        result.append("<app:infData xmlns:app=\"urn:ar:params:xml:ns:application-1.0\"");
         result.append(" xsi:schemaLocation=\"urn:ar:params:xml:ns:application-1.0 application-1.0.xsd\">");
-        result.append("<launch:id>" + applicationId + "</launch:id>");
-        result.append("<launch:phase>" + phase + "</launch:phase>");
+        result.append("<app:id>" + applicationId + "</app:id>");
+        result.append("<app:phase>" + phase + "</app:phase>");
         for (String status : statuses) {
-            result.append("<launch:status s=\"" + status + "\" />");
+            result.append("<app:status s=\"" + status + "\" />");
         }
-        result.append("</launch:infData>");
+        result.append("</app:infData>");
         result.append("</extension>");
 
         result.append("<trID>");

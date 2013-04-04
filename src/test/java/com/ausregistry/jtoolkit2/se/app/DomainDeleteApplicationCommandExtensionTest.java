@@ -1,4 +1,6 @@
-package com.ausregistry.jtoolkit2.se.launch;
+package com.ausregistry.jtoolkit2.se.app;
+
+import static org.junit.Assert.assertEquals;
 
 import com.ausregistry.jtoolkit2.Timer;
 import com.ausregistry.jtoolkit2.se.CLTRID;
@@ -7,8 +9,6 @@ import com.ausregistry.jtoolkit2.se.DomainDeleteCommand;
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
-
-import static org.junit.Assert.assertEquals;
 
 public class DomainDeleteApplicationCommandExtensionTest {
 
@@ -19,7 +19,7 @@ public class DomainDeleteApplicationCommandExtensionTest {
     }
 
     @Test
-    public void shouldCreateValidXmlWhenSupplyLaunchExtensionForDelete() throws SAXException {
+    public void shouldCreateValidXmlWhenSupplyApplicationExtensionForDelete() throws SAXException {
 
         final Command cmd = new DomainDeleteCommand("jtkutest.com.au");
         final DomainDeleteApplicationCommandExtension ext = new DomainDeleteApplicationCommandExtension();
