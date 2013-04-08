@@ -20,7 +20,7 @@ public abstract class ObjectCommand extends Command {
 	 * Construct the DOM tree component common to all object-mapped commands
 	 * which take multiple object identifiers as parameters.
      *
-     * @throws IllegalArgumentException if {@code objectType} or {@code idents} are {@null}, or if
+     * @throws IllegalArgumentException if {@code objectType} or {@code idents} are {@code null}, or if
      * {@code idents} is empty.
 	 */
 	public ObjectCommand(CommandType commandType, ObjectType objectType,
@@ -44,7 +44,7 @@ public abstract class ObjectCommand extends Command {
 	 * Construct the DOM tree component common to all object-mapped commands
 	 * which operate on a single object.
      *
-     * @throws IllegalArgumentException if {@code objectType} or {@code ident} are {@null}.
+     * @throws IllegalArgumentException if {@code objectType} or {@code ident} are {@code null}.
 	 */
 	public ObjectCommand(CommandType commandType, ObjectType objectType,
 			String ident) {
@@ -68,7 +68,7 @@ public abstract class ObjectCommand extends Command {
 	 * Construct the DOM tree component common to all object-mapped commands
 	 * which operate on a single object, and assign it the attribute name and value.
      *
-     * @throws IllegalArgumentException if {@code objectType} or {@code ident} are {@null}.
+     * @throws IllegalArgumentException if {@code objectType} or {@code ident} are {@code null}.
 	 */
 	public ObjectCommand(CommandType commandType, ObjectType objectType,
 	        String ident, String attrName, String attrValue) {
