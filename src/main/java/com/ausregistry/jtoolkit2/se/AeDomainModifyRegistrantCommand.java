@@ -18,6 +18,9 @@ public final class AeDomainModifyRegistrantCommand extends DomainUpdateCommand {
 
     private static final long serialVersionUID = 8196324073107340593L;
 
+    /**
+     * @throws IllegalArgumentException if {@code eligibilityType} or {@code registrantName} is null.
+     */
     public AeDomainModifyRegistrantCommand(String name, String eligibilityType,
             int policyReason, String registrantName, String registrantID,
             String registrantIDType, String eligibilityName,

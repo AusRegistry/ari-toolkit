@@ -1,5 +1,7 @@
 package com.ausregistry.jtoolkit2.se.sync;
 
+import java.util.GregorianCalendar;
+
 import com.ausregistry.jtoolkit2.EPPDateFormatter;
 import com.ausregistry.jtoolkit2.ErrorPkg;
 import com.ausregistry.jtoolkit2.se.Command;
@@ -7,8 +9,6 @@ import com.ausregistry.jtoolkit2.se.CommandExtension;
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.xml.XMLWriter;
 import org.w3c.dom.Element;
-
-import java.util.GregorianCalendar;
 
 /**
  * Models the ARI EPP Extension for synchronising the expiry date of a Domain Name.
@@ -19,6 +19,10 @@ public class SyncDomainUpdateCommandExtension implements CommandExtension {
 
     private final String syncExpiryDate;
 
+    /**
+     * @param exDate The domain expiry date. Required.
+     * @throws IllegalArgumentException if {@code exDate} is {@code null}.
+     */
     public SyncDomainUpdateCommandExtension(GregorianCalendar exDate) {
         if (exDate == null) {
             throw new IllegalArgumentException(ErrorPkg.getMessage("se.domain.update.sync.exDate.missing"));

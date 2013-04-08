@@ -1,9 +1,9 @@
 package com.ausregistry.jtoolkit2.se;
 
+import java.util.GregorianCalendar;
+
 import com.ausregistry.jtoolkit2.EPPDateFormatter;
 import com.ausregistry.jtoolkit2.ErrorPkg;
-
-import java.util.GregorianCalendar;
 
 /**
  * Mapping of EPP urn:ar:params:xml:ns:arext-1.0 domainUnrenew command
@@ -19,6 +19,9 @@ public class ArDomainUnrenewCommand extends ProtocolExtensionCommand {
 
 	private static final CommandType unrenewCmdType = new ArUnrenewCommandType();
 
+    /**
+     * @throws IllegalArgumentException if {@code name} or {@code exDaten} is {@code null}.
+     */
     public ArDomainUnrenewCommand(String name, GregorianCalendar exDate) {
         super(unrenewCmdType, ExtendedObjectType.AR_DOMAIN, name);
 

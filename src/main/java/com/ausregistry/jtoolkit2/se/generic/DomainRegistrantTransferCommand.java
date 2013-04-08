@@ -1,14 +1,17 @@
 package com.ausregistry.jtoolkit2.se.generic;
 
-import com.ausregistry.jtoolkit2.EPPDateFormatter;
-import com.ausregistry.jtoolkit2.ErrorPkg;
-import com.ausregistry.jtoolkit2.se.*;
-import org.w3c.dom.Element;
-import org.xml.sax.SAXException;
-
 import java.util.GregorianCalendar;
 import java.util.Map.Entry;
 import java.util.TreeMap;
+
+import com.ausregistry.jtoolkit2.EPPDateFormatter;
+import com.ausregistry.jtoolkit2.ErrorPkg;
+import com.ausregistry.jtoolkit2.se.Command;
+import com.ausregistry.jtoolkit2.se.CommandType;
+import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
+import com.ausregistry.jtoolkit2.se.Period;
+import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
 /**
  * In cases where the legal registrant of a domain name has changed, this
@@ -47,13 +50,14 @@ public final class DomainRegistrantTransferCommand extends Command {
      * 
      * @param period
      *            The desired new validity period, starting from the time the
-     *            transfer completes successfully.
+     *            transfer completes successfully. Optional.
      * 
      * @param kvListName
      *            The name under which the list of key-value items are aggregated.
      * 
      * @param explanation
      *            An explanation of how the transfer was effected.
+     * @throws IllegalAccessException if {@code curExpDate} is {@code null}.
      */
     public DomainRegistrantTransferCommand(final String name, final GregorianCalendar curExpDate,
             final Period period, final String kvListName, final String explanation) {

@@ -110,6 +110,9 @@ public class DSData implements Serializable {
         return keyTag;
     }
 
+    /**
+     * @throws IllegalArgumentException if {@code keyTagArg} is outside of the range 0...65535
+     */
     public void setKeyTag(final int keyTagArg) {
         if (keyTagArg < 0) {
             throw new IllegalArgumentException();
@@ -124,6 +127,9 @@ public class DSData implements Serializable {
         return alg;
     }
 
+    /**
+     * @throws IllegalArgumentException if {@code algArg} is outside of the range 0...255
+     */
     public void setAlg(final int algArg) {
         if (algArg < 0) {
             throw new IllegalArgumentException();
@@ -138,6 +144,9 @@ public class DSData implements Serializable {
         return digestType;
     }
 
+    /**
+     * @throws IllegalArgumentException if {@code digestTypeArg} is outside of the range 0...255
+     */
     public void setDigestType(final int digestTypeArg) {
         if (digestTypeArg < 0) {
             throw new IllegalArgumentException();
@@ -152,6 +161,10 @@ public class DSData implements Serializable {
         return digest;
     }
 
+    /**
+     * @throws IllegalArgumentException if {@code digestArg} does not resemble a valid digest, or if
+     * the digest has an odd number of characters.
+     */
     public void setDigest(final String digestArg) {
         final Matcher matcher = DIGEST_VALIDATION_PATTERN.matcher(digestArg);
         if (matcher.matches() && digestArg.length() % 2 == 0) {

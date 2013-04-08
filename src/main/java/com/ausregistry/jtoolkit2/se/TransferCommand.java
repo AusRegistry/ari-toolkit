@@ -21,10 +21,12 @@ public abstract class TransferCommand extends ObjectCommand {
      * @param objType The type of object to which the transfer command is to be
      * mapped.
      *
-     * @param operation The type of transfer operation to perform.
+     * @param operation The type of transfer operation to perform. Required.
      *
      * @param ident An object type-specific label identifying the object
      * subject to the transfer command.
+     *
+     * @throws IllegalArgumentException if {@code operation} is {@code null}.
      */
     public TransferCommand(ObjectType objType, TransferOp operation,
             String ident) {
@@ -76,10 +78,12 @@ public abstract class TransferCommand extends ObjectCommand {
      *
      * @param period The validity period of the identified object should be
      * extended by this duration upon successful completion of the transfer
-     * related to this command.
+     * related to this command. Required.
      *
      * @param pw The password of the object subject to the transfer command -
      * also referred to as authInfo or authorisation information.
+     *
+     * @throws IllegalArgumentException if {@code period} is {@code null}.
      */
     public TransferCommand(ObjectType objType, TransferOp operation,
             String ident, Period period, String pw) {

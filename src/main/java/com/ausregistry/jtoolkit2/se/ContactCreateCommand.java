@@ -37,15 +37,17 @@ public class ContactCreateCommand extends CreateCommand {
 	 * Provision a contact with the specified details.  This constructor allows
 	 * specification of any and all parameters for a contact create command.
 	 *
-	 * @param id The new contact's identifier.
+	 * @param id The new contact's identifier. Required.
 	 *
 	 * @param pw The password to assign to the contact (also known as authInfo
-	 * or authorisation information).
+	 * or authorisation information). Required.
 	 *
 	 * @param postalInfo Postal information for the new contact.  If
 	 * localPostalInfo is also specified, then this MUST be IntPostalInfo.
+     * Required if {@code localPostInfo} is not supplied.
 	 *
 	 * @param localPostalInfo Local postal information for the new contact.
+     * Required if {@code postalInfo} is not supplied.
 	 *
 	 * @param voice The contact's voice telephone number.
 	 *
@@ -57,12 +59,13 @@ public class ContactCreateCommand extends CreateCommand {
 	 * @param faxExt The extension for the contact's fax telephone number, if
 	 * applicable.
 	 *
-	 * @param email The contact's email address.
+	 * @param email The contact's email address. Required.
 	 *
 	 * @param disclose Disclosure request information, which may modify what
 	 * information is disclosed by the Registry system in response to queries.
 	 * Note that the server may not accept specification of this parameter, or
 	 * may ignore any requests described by this parameter.
+     * @throws IllegalArgumentException if any required parameter is {@code null}.
 	 */
     public ContactCreateCommand(String id, String pw,
             PostalInfo postalInfo, LocalPostalInfo localPostalInfo,

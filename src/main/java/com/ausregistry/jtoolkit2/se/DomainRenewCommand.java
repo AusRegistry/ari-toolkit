@@ -1,9 +1,9 @@
 package com.ausregistry.jtoolkit2.se;
 
+import java.util.GregorianCalendar;
+
 import com.ausregistry.jtoolkit2.EPPDateFormatter;
 import com.ausregistry.jtoolkit2.ErrorPkg;
-
-import java.util.GregorianCalendar;
 
 /**
  * Use this to request the renewal of a domain object provisioned in an EPP
@@ -18,6 +18,9 @@ import java.util.GregorianCalendar;
 public class DomainRenewCommand extends ObjectCommand {
 	private static final long serialVersionUID = 4860769492565708028L;
 
+    /**
+     * @throws IllegalArgumentException if {@code exDate} is {@code null}.
+     */
 	public DomainRenewCommand(String name, GregorianCalendar exDate) {
 		super(StandardCommandType.RENEW, StandardObjectType.DOMAIN, name);
 

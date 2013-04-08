@@ -19,7 +19,7 @@ public class DomainRestoreRequestCommand extends UpdateCommand {
 	private static final long serialVersionUID = 2409916920503111390L;
 
 	/**
-	 * Constructor taking in a domain name for the restore request.
+	 * <p>Constructor taking in a domain name for the restore request.</p>
 	 */
 	public DomainRestoreRequestCommand(String name) {
 		super(StandardObjectType.DOMAIN, name);

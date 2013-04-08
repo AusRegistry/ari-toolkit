@@ -26,6 +26,8 @@ public class ContactUpdateCommand extends UpdateCommand {
     /**
      * The complete set of attributes of a contact which may be updated as per
      * RFC5733.
+     *
+     * @throws IllegalArgumentException if {@code id} is {@code null}.
      */
     public ContactUpdateCommand(String id, String pw,
             Status[] addStatuses, String[] remStatuses,

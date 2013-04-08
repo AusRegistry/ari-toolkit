@@ -1,10 +1,10 @@
 package com.ausregistry.jtoolkit2.se;
 
+import java.util.GregorianCalendar;
+
 import com.ausregistry.jtoolkit2.EPPDateFormatter;
 import com.ausregistry.jtoolkit2.ErrorPkg;
 import org.w3c.dom.Element;
-
-import java.util.GregorianCalendar;
 
 /**
  * In cases where the legal registrant of a .au domain name has changed, this
@@ -37,16 +37,25 @@ public final class AuDomainTransferRegistrantCommand
 	 * Request that the named .au domain name be transferred to the legal
 	 * entity specified by the given au extension data.
 	 *
-	 * @param name The domain name to transfer.
+	 * @param name The domain name to transfer. Required.
 	 *
 	 * @param curExpDate The current expiry of the identified domain name.
 	 * This is required in order to prevent repeated transfer of the name due
-	 * to protocol transmission failures.
+	 * to protocol transmission failures. Required.
 	 *
 	 * @param period The desired new validity period, starting from the time
-	 * the transfer completes successfully.
-	 *
+	 * the transfer completes successfully. Optional.
+     * @param eligibilityType Required.
+     * @param policyReason
+     * @param registrantName Required.
+     * @param registrantID
+     * @param registrantIDType
+     * @param eligibilityName
+     * @param eligibilityID
+     * @param eligibilityIDType
 	 * @param explanation An explanation of how the transfer was effected.
+     * @throws IllegalArgumentException if {@code name}, {@code curExpDate}, {@code eligibilityType} or
+     * {@code registrantName} is {@code null}.
 	 */
     public AuDomainTransferRegistrantCommand(String name,
 			GregorianCalendar curExpDate, Period period,

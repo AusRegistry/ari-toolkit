@@ -95,6 +95,7 @@ public final class AeDomainCreateCommand extends DomainCreateCommand {
      *
      * @param aeEligibilityIDType
      *            aeext:eligibilityID type attribute.
+     * @throws IllegalArgumentException if {@code eligibilityType} or {@code registrantIDType} is {@code null}.
      */
     public AeDomainCreateCommand(String name, String pw, String registrantID,
             String[] techContacts, String[] adminContacts, String[] billingContacts,

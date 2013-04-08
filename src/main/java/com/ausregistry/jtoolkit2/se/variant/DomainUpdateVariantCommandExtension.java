@@ -1,5 +1,7 @@
 package com.ausregistry.jtoolkit2.se.variant;
 
+import java.util.ArrayList;
+
 import com.ausregistry.jtoolkit2.ErrorPkg;
 import com.ausregistry.jtoolkit2.se.Command;
 import com.ausregistry.jtoolkit2.se.CommandExtension;
@@ -8,11 +10,12 @@ import com.ausregistry.jtoolkit2.se.IdnaDomainVariant;
 import com.ausregistry.jtoolkit2.xml.XMLWriter;
 import org.w3c.dom.Element;
 
-import java.util.ArrayList;
-
 /**
  * This class models the &lt;update&gt; element as documented in 'Variant Extension
  * Mapping for the Extensible Provisioning Protocol (EPP)'.
+ *
+ * <p>This extension will throw an {@link IllegalArgumentException} if no variants
+ * are added or removed as part of the "Update Variant" operation.</p>
  */
 public class DomainUpdateVariantCommandExtension implements CommandExtension {
 
@@ -20,9 +23,6 @@ public class DomainUpdateVariantCommandExtension implements CommandExtension {
 
     private final ArrayList<IdnaDomainVariant> addVariants = new ArrayList<IdnaDomainVariant>();
     private final ArrayList<IdnaDomainVariant> remVariants = new ArrayList<IdnaDomainVariant>();
-
-    public DomainUpdateVariantCommandExtension() {
-    }
 
     @Override
     public void addToCommand(final Command command) {
@@ -40,10 +40,16 @@ public class DomainUpdateVariantCommandExtension implements CommandExtension {
         writeVariantsToXml(xmlWriter, updateElement, "rem", remVariants);
     }
 
+    /**
+     * @throws IllegalArgumentException if any variants in the list are missing their name or user form.
+     */
     public void addVariant(final IdnaDomainVariant... variant) {
         addVariantsToList(variant, addVariants);
     }
 
+    /**
+     * @throws IllegalArgumentException if any variants in the list are missing their name or user form.
+     */
     public void remVariant(final IdnaDomainVariant... variant) {
         addVariantsToList(variant, remVariants);
     }

@@ -1,13 +1,13 @@
 package com.ausregistry.jtoolkit2.se.rgp;
 
+import java.util.GregorianCalendar;
+
 import com.ausregistry.jtoolkit2.EPPDateFormatter;
 import com.ausregistry.jtoolkit2.ErrorPkg;
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.se.StandardObjectType;
 import com.ausregistry.jtoolkit2.se.UpdateCommand;
 import org.w3c.dom.Element;
-
-import java.util.GregorianCalendar;
 
 /**
  * Use this to initiate the restoration of a domain object provisioned in an EPP
@@ -23,9 +23,18 @@ public class DomainRestoreReportCommand extends UpdateCommand {
 	private static final long serialVersionUID = 2409916920503111390L;
 
 	/**
-	 * Constructor allowing all possible fields for a domain restore report
-	 * command. Null is acceptable for the optional values (secondStatement and
-	 * other).
+	 * <p>Constructor allowing all possible fields for a domain restore report command.</p>
+     * @param name Required.
+     * @param preData Required.
+     * @param postData Required.
+     * @param delTime Required.
+     * @param resTime Required.
+     * @param resReason Required.
+     * @param statement Required.
+     * @param secondStatement Optional.
+     * @param other Optional.
+     * @throws IllegalArgumentException if {@code name}, {@code preData}, {@code postData}, {@code delTime},
+     * {@code resTime}, {@code resReason} or {@code statement} is {@code null}.
 	 */
 	public DomainRestoreReportCommand(String name, String preData,
 			String postData, GregorianCalendar delTime,

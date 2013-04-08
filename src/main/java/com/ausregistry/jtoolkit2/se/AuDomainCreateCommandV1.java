@@ -22,6 +22,8 @@ public final class AuDomainCreateCommandV1 extends DomainCreateCommand {
 	 * Minimal constructor for creating a domain:create + auext:create
 	 * EPP command.  These parameters are the least required for a valid
 	 * .au domain create command.
+     *
+     * @throws IllegalArgumentException if any required parameters are {@code null}.
 	 */
     public AuDomainCreateCommandV1(String name, String pw,
 			String registrantID, String[] techContacts,
@@ -65,11 +67,11 @@ public final class AuDomainCreateCommandV1 extends DomainCreateCommand {
 	 * in this way will result in an EPP result of '2303  "Object does not
 	 * exist"'.
 	 *
-	 * @param auEligibilityType auext:eligType.
+	 * @param auEligibilityType auext:eligType. Required.
 	 *
 	 * @param auPolicyReason auext:policyReason.
 	 *
-	 * @param auRegistrantName auext:registrantName.
+	 * @param auRegistrantName auext:registrantName. Required.
 	 *
 	 * @param auRegistrantID auext:registrantID.
 	 *
@@ -80,6 +82,8 @@ public final class AuDomainCreateCommandV1 extends DomainCreateCommand {
 	 * @param auEligibilityID auext:eligibilityID.
 	 *
 	 * @param auEligibilityIDType auext:eligibilityID type attribute.
+     *
+     * @throws IllegalArgumentException if {@code auEligibilityType} or {@code auRegistrantName} is {@code null}.
 	 */
 	public AuDomainCreateCommandV1(String name, String pw,
 			String registrantID, String[] techContacts, String[] adminContacts,

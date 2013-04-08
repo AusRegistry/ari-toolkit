@@ -36,6 +36,8 @@ public class DomainCreateCommand extends CreateCommand {
 	/**
 	 * Most verbose constructor for a domain:create EPP command.  All core EPP
 	 * domain:create attributes may be set using this constructor.
+     *
+     * @throws IllegalArgumentException if {@code name} or {@code pw} are {@code null}.
 	 */
 	public DomainCreateCommand(String name, String pw, String registrantID,
 			String[] techContacts, String[] adminContacts,

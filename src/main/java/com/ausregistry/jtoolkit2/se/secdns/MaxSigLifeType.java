@@ -24,6 +24,7 @@ public class MaxSigLifeType {
      * Sets the max sig life and validates the value is a positive number.
      *
      * @param maxSigLifeArg the new max sig life
+     * @throws IllegalArgumentException if {@code maxSigLifeArg} is less than one.
      */
     public final void setMaxSigLife(int maxSigLifeArg) {
         if (maxSigLifeArg < 1) {

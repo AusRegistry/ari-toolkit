@@ -14,6 +14,10 @@ import com.ausregistry.jtoolkit2.xml.XMLWriter;
 /**
  * This class models the &lt;update&gt; element as documented in 'Variant Extension
  * Mapping for the Extensible Provisioning Protocol (EPP)'.
+ *
+ *
+ * <p>This extension will throw an {@link IllegalArgumentException} if no variants
+ * are added or removed as part of the "Update Variant" operation.</p>
  */
 public class DomainUpdateVariantCommandExtensionV1_1 implements CommandExtension {
 
@@ -22,10 +26,16 @@ public class DomainUpdateVariantCommandExtensionV1_1 implements CommandExtension
     private final ArrayList<IdnDomainVariant> addVariants = new ArrayList<IdnDomainVariant>();
     private final ArrayList<IdnDomainVariant> remVariants = new ArrayList<IdnDomainVariant>();
 
+    /**
+     * @throws IllegalArgumentException if any variants in the list are missing their name or user form.
+     */
     public void addVariant(final IdnDomainVariant... variant) {
         addVariantsToList(variant, addVariants);
     }
 
+    /**
+     * @throws IllegalArgumentException if any variants in the list are missing their name or user form.
+     */
     public void remVariant(final IdnDomainVariant... variant) {
         addVariantsToList(variant, remVariants);
     }

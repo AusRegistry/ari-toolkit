@@ -14,6 +14,9 @@ public final class DomainCreateIdnaCommandExtension implements CommandExtension 
     private String userForm;
     private String language;
 
+    /**
+     * @throws IllegalArgumentException if {@code userForm} or {@code language} are {@code null} or empty.
+     */
     public DomainCreateIdnaCommandExtension(final String userForm, final String language) {
         setUserForm(userForm);
         setLanguage(language);

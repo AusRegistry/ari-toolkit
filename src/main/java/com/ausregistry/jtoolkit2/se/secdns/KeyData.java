@@ -85,6 +85,7 @@ public class KeyData implements Serializable {
      * Sets the flags and validates the value is unsigned short.
      *
      * @param flagsArg the new flags
+     * @throws IllegalArgumentException if {@code flagsArg} are outside of the range 0...65535
      */
     public void setFlags(final int flagsArg) {
         if (flagsArg < 0) {
@@ -104,6 +105,7 @@ public class KeyData implements Serializable {
      * Sets the protocol and validates the value is unsigned byte.
      *
      * @param protocolArg the new protocol
+     * @throws IllegalArgumentException if {@code protocolArg} is outside of the range 0...255
      */
     public void setProtocol(final int protocolArg) {
         if (protocolArg < 0) {
@@ -123,6 +125,7 @@ public class KeyData implements Serializable {
      * Sets the algorithm and validates the value is an unsigned byte.
      *
      * @param algArg the new algorithm
+     * @throws IllegalArgumentException if {@code algArg} is outside of the range 0...255
      */
     public void setAlg(final int algArg) {
         if (algArg < 0) {
@@ -142,6 +145,7 @@ public class KeyData implements Serializable {
      * Sets the pub key and validates the value is not a zero length string.
      *
      * @param pubKeyArg the new pub key
+     * @throws IllegalArgumentException if {@code pubKeyArg} is empty.
      */
     public void setPubKey(final String pubKeyArg) {
         if (pubKeyArg.length() < 1) {

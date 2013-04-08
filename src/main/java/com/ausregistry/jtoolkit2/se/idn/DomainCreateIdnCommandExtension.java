@@ -16,6 +16,10 @@ public final class DomainCreateIdnCommandExtension implements CommandExtension {
     private static final long serialVersionUID = -8945007354471832288L;
     private String language;
 
+    /**
+     * @param language The IDN language. Required.
+     * @throws IllegalArgumentException if {@code language} is {@code null} or empty.
+     */
     public DomainCreateIdnCommandExtension(final String language) {
         setLanguage(language);
     }

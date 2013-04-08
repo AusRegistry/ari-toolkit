@@ -23,6 +23,9 @@ public abstract class Command extends SendSE {
 		return extension;
 	}
 
+    /**
+     * @throws IllegalArgumentException if {@code commandType} is {@code null}.
+     */
 	public Command(final CommandType commandType) {
         if (commandType == null) {
             throw new IllegalArgumentException(ErrorPkg.getMessage("se.command.type.missing"));

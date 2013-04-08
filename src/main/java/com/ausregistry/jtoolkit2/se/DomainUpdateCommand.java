@@ -26,6 +26,7 @@ public class DomainUpdateCommand extends UpdateCommand {
 	/**
 	 * The complete set of attributes of a domain which may be updated as per
 	 * RFC5731.
+     * @throws IllegalArgumentException if {@code name} is {@code null}.
 	 */
 	public DomainUpdateCommand(String name, String pw,
 			DomainAdd add, DomainRem rem, String registrantID) {

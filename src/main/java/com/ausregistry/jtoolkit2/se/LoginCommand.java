@@ -42,6 +42,17 @@ public final class LoginCommand extends Command {
 		this(clID, password, null, version, lang, objURIs, extURIs);
 	}
 
+    /**
+     *
+     * @param clID Required.
+     * @param password Required.
+     * @param newPassword Optional.
+     * @param version Required.
+     * @param lang
+     * @param objURIs Required.
+     * @param extURIs Optional.
+     * @throws IllegalArgumentException if {@code clID}, {@code password} or {@code version} are {@code null}.
+     */
 	public LoginCommand(String clID, String password, String newPassword,
 			String version, String lang,
 			String[] objURIs, String[] extURIs) {
@@ -77,4 +88,3 @@ public final class LoginCommand extends Command {
 		}
 	}
 }
-

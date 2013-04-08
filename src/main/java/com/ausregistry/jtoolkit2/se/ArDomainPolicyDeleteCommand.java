@@ -16,6 +16,11 @@ public class ArDomainPolicyDeleteCommand extends ProtocolExtensionCommand {
 
 	private static final CommandType polDeleteCmdType = new ArPolicyDeleteCommandType();
 
+    /**
+     * @param name Required.
+     * @param reason Required.
+     * @throws IllegalArgumentException if {@code name} or {@code reason} is {@code null}.
+     */
 	public ArDomainPolicyDeleteCommand(String name, String reason) {
 		super(polDeleteCmdType, ExtendedObjectType.AR_DOMAIN, name);
 
