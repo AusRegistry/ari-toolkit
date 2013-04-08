@@ -14,6 +14,9 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
  * compliant with RFC5730, RFC5731 and RFC3915. Such a service element is sent by a compliant EPP server in response
  * to a valid Domain Update command with the Registry Grace Period extension.</p>
  *
+ * <p>For flexibility, this implementation extracts the data from the response using XPath queries, the expressions
+ * for which are defined statically.</p>
+ *
  * @see DomainRestoreRequestCommand
  * @see DomainRestoreReportCommand
  * @see <a href="http://tools.ietf.org/html/rfc3915">Domain Registry Grace Period Mapping for the

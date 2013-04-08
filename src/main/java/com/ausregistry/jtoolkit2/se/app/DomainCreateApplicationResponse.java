@@ -14,6 +14,9 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
  * compliant with RFC5730 and RFC5731. Such a service element is sent by a compliant EPP server in response
  * to a valid Domain Create command with the Domain Name Application extension.</p>
  *
+ * <p>For flexibility, this implementation extracts the data from the response using XPath queries, the expressions
+ * for which are defined statically.</p>
+ *
  * @see DomainCreateApplicationCommandExtension
  * @see <a href="http://ausregistry.github.io/doc/application-1.0/application-1.0.html">Domain Name Application
  * Extension Mapping for the Extensible Provisioning Protocol (EPP)</a>

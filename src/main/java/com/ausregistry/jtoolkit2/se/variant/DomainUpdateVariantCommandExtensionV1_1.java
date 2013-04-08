@@ -20,7 +20,7 @@ import org.w3c.dom.Element;
  * command compliant with RFC5730 and RFC5731.</p>
  *
  * <p>This extension will throw an {@link IllegalArgumentException} if no variants
- * are added or removed as part of the "Update Variant" operation.</p>
+ * are added or removed as part of the "Update Variants" operation.</p>
  *
  * @see DomainUpdateCommand
  * @see Response

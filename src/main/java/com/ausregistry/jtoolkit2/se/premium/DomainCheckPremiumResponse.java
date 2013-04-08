@@ -19,6 +19,9 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
  * compliant with RFC5730 and RFC5731. Such a service element is sent by a compliant EPP server in response
  * to a valid Domain Check command with the Premium Domain Name extension.</p>
  *
+ * <p>For flexibility, this implementation extracts the data from the response using XPath queries, the expressions
+ * for which are defined statically.</p>
+ *
  * @see DomainCheckPremiumCommandExtension
  * @see <a href="http://ausregistry.github.io/doc/premium-1.0/premium-1.0.html">Premium Domain Name Extension
  * Mapping for the Extensible Provisioning Protocol (EPP)</a>
