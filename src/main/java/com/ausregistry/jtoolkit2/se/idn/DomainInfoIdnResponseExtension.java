@@ -51,7 +51,6 @@ public final class DomainInfoIdnResponseExtension extends ResponseExtension {
         initialised = (languageTag != null);
     }
 
-
     public String getLanguageTag() {
         return languageTag;
     }
