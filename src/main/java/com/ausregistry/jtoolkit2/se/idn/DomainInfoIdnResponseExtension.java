@@ -2,24 +2,27 @@ package com.ausregistry.jtoolkit2.se.idn;
 
 import javax.xml.xpath.XPathExpressionException;
 
+import com.ausregistry.jtoolkit2.se.DomainInfoCommand;
+import com.ausregistry.jtoolkit2.se.DomainInfoResponse;
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.se.ResponseExtension;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 
 /**
- * Extension of the domain mapping of the EPP info response, to IDN domain names, 
- * the specification of which are in the XML schema definition urn:rbp:params:xml:ns:idn-1.0.
- * 
- * Instances of this class provide an interface to access info data
- * for an IDN domain. This relies on the instance first being initialised 
- * by a suitable EPP domain info response using the method fromXML. 
- * Such a service element is sent by a EPP server in response to a valid 
- * domain info command as implemented by the DomainInfoCommand.
- * 
- * For flexibility, this implementation extracts the data from the response
- * using XPath queries, the expressions for which are defined statically.
- * 
- * @see com.ausregistry.jtoolkit2.se.ResponseExtension
+ * <p>Extension for the EPP Domain Info response, representing the IDN Info aspect of the Internationalized Domain
+ * Name extension.</p>
+ *
+ * <p>Use this to access the language tag for an IDN as provided in an EPP Domain Info response compliant
+ * with RFC5730 and RFC5731. Such a service element is sent by a compliant EPP server in response to a valid
+ * Domain Info command.</p>
+ *
+ * <p>For flexibility, this implementation extracts the data from the response using XPath queries, the expressions
+ * for which are defined statically.</p>
+ *
+ * @see DomainInfoCommand
+ * @see DomainInfoResponse
+ * @see <a href="http://ausregistry.github.io/doc/idn-1.0/idn-1.0.html">Internationalized Domain Name Extension
+ * Mapping for the Extensible Provisioning Protocol (EPP)</a>
  */
 public final class DomainInfoIdnResponseExtension extends ResponseExtension {
 

@@ -1,14 +1,28 @@
 package com.ausregistry.jtoolkit2.se.premium;
 
+import javax.xml.xpath.XPathExpressionException;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.xml.xpath.XPathExpressionException;
-
-import com.ausregistry.jtoolkit2.se.*;
+import com.ausregistry.jtoolkit2.se.DataResponse;
+import com.ausregistry.jtoolkit2.se.PremiumInfo;
+import com.ausregistry.jtoolkit2.se.StandardCommandType;
+import com.ausregistry.jtoolkit2.se.StandardObjectType;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 
+/**
+ * <p>Representation of the EPP Domain Check response with the Premium Fee Check aspect of the
+ * Premium Domain Name extension.</p>
+ *
+ * <p>Use this to access "create" and "renew" fees for premium domains as provided in an EPP Domain Check response
+ * compliant with RFC5730 and RFC5731. Such a service element is sent by a compliant EPP server in response
+ * to a valid Domain Check command with the Premium Domain Name extension.</p>
+ *
+ * @see DomainCheckPremiumCommandExtension
+ * @see <a href="http://ausregistry.github.io/doc/premium-1.0/premium-1.0.html">Premium Domain Name Extension
+ * Mapping for the Extensible Provisioning Protocol (EPP)</a>
+ */
 public class DomainCheckPremiumResponse extends DataResponse {
 
     private static final long serialVersionUID = 1616054275103086838L;

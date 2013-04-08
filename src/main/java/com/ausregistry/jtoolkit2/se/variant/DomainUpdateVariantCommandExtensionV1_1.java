@@ -2,22 +2,30 @@ package com.ausregistry.jtoolkit2.se.variant;
 
 import java.util.ArrayList;
 
-import com.ausregistry.jtoolkit2.se.IdnDomainVariant;
-import org.w3c.dom.Element;
-
 import com.ausregistry.jtoolkit2.ErrorPkg;
 import com.ausregistry.jtoolkit2.se.Command;
 import com.ausregistry.jtoolkit2.se.CommandExtension;
+import com.ausregistry.jtoolkit2.se.DomainUpdateCommand;
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
+import com.ausregistry.jtoolkit2.se.IdnDomainVariant;
+import com.ausregistry.jtoolkit2.se.Response;
 import com.ausregistry.jtoolkit2.xml.XMLWriter;
+import org.w3c.dom.Element;
 
 /**
- * This class models the &lt;update&gt; element as documented in 'Variant Extension
- * Mapping for the Extensible Provisioning Protocol (EPP)'.
+ * <p>Extension for the EPP Domain Update command, representing the Update Variants aspect of the
+ * Domain Name Variant extension (v1.1)</p>
  *
+ * <p>Use this to add or remove variants for a domain as part of an EPP Domain Update
+ * command compliant with RFC5730 and RFC5731.</p>
  *
  * <p>This extension will throw an {@link IllegalArgumentException} if no variants
  * are added or removed as part of the "Update Variant" operation.</p>
+ *
+ * @see DomainUpdateCommand
+ * @see Response
+ * @see <a href="http://ausregistry.github.io/doc/variant-1.1/variant-1.1.html">Domain Name Variant Extension
+ * Mapping for the Extensible Provisioning Protocol (EPP)</a>
  */
 public class DomainUpdateVariantCommandExtensionV1_1 implements CommandExtension {
 

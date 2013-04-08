@@ -7,13 +7,16 @@ import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 
 /**
- * Use this to access create data for a domain as provided in an EPP domain
- * create response compliant with RFC5730 and RFC5731.  Such a service element
- * is sent by a compliant EPP server in response to a valid domain create
- * command with domain create application extension.
+ * <p>Representation of the EPP Domain Create response with the Create Domain Application aspect of the
+ * Domain Name Application extension.</p>
  *
- * @see com.ausregistry.jtoolkit2.se.DomainCreateCommand
+ * <p>Use this to access domain application data for a domain as provided in an EPP Domain Create response
+ * compliant with RFC5730 and RFC5731. Such a service element is sent by a compliant EPP server in response
+ * to a valid Domain Create command with the Domain Name Application extension.</p>
+ *
  * @see DomainCreateApplicationCommandExtension
+ * @see <a href="http://ausregistry.github.io/doc/application-1.0/application-1.0.html">Domain Name Application
+ * Extension Mapping for the Extensible Provisioning Protocol (EPP)</a>
  */
 public class DomainCreateApplicationResponse extends CreateResponse {
 	private static final long serialVersionUID = -5724827272682186647L;
@@ -64,6 +67,5 @@ public class DomainCreateApplicationResponse extends CreateResponse {
             maintLogger.warning(xpee.getMessage());
         }
 	}
-
 }
 

@@ -10,13 +10,16 @@ import com.ausregistry.jtoolkit2.se.UpdateCommand;
 import org.w3c.dom.Element;
 
 /**
- * Use this to initiate the restoration of a domain object provisioned in an EPP
- * Registry with the provided report. Instances of this class generate RFC3915 
- * compliant domain update  EPP command service elements with RGP extension 
- * elements via the toXML method. The response expected from a server should be 
- * handled by a Response object.
- * 
- * @see com.ausregistry.jtoolkit2.se.Response
+ * <p>Representation of the EPP Domain Update command with the Domain Restore Report aspect of the Registry Grace Period
+ * extension.</p>
+ *
+ * <p>Use this to post a Domain Restoration Report for restoring a domain from a "pending restore" RGP state
+ * as part of an EPP Domain Update command compliant with RFC5730, RFC5731 and RFC3915. The response expected
+ * from a server should be handled by a {@link DomainRestoreResponse} object.</p>
+ *
+ * @see DomainRestoreResponse
+ * @see <a href="http://tools.ietf.org/html/rfc3915">Domain Registry Grace Period Mapping for the
+ * Extensible Provisioning Protocol (EPP)</a>
  */
 public class DomainRestoreReportCommand extends UpdateCommand {
 

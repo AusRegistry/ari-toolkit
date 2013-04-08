@@ -6,9 +6,25 @@ import org.w3c.dom.Element;
 
 import com.ausregistry.jtoolkit2.se.Command;
 import com.ausregistry.jtoolkit2.se.CommandExtension;
+import com.ausregistry.jtoolkit2.se.DomainCreateCommand;
+import com.ausregistry.jtoolkit2.se.DomainCreateResponse;
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.xml.XMLWriter;
 
+/**
+ * <p>Extension for the EPP Domain Create command, representing the Create Premium Domain aspect of the
+ * Premium Domain Name Extension.</p>
+ *
+ * <p>Use this to acknowledge the premium fees associated with this domain name as part of an EPP Domain Create
+ * command compliant with RFC5730 and RFC5731. The "price" and "renewal price" values are optional, but if they are
+ * supplied, should match the fees that are set for the domain name for the requested period.
+ * The response expected from a server should be handled by a {@link DomainCreateResponse} object.</p>
+ *
+ * @see DomainCreateCommand
+ * @see DomainCreateResponse
+ * @see <a href="http://ausregistry.github.io/doc/premium-1.0/premium-1.0.html">Premium Domain Name Extension
+ * Mapping for the Extensible Provisioning Protocol (EPP)</a>
+ */
 public class DomainCreatePremiumCommandExtension implements CommandExtension {
 
     private static final long serialVersionUID = 2782521830455586062L;

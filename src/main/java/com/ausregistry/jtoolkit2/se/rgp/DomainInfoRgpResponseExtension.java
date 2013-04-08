@@ -4,6 +4,8 @@ import javax.xml.xpath.XPathExpressionException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ausregistry.jtoolkit2.se.DomainInfoCommand;
+import com.ausregistry.jtoolkit2.se.DomainInfoResponse;
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.se.ResponseExtension;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
@@ -11,20 +13,20 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 /**
- * Extension of the domain mapping of the EPP info response for registry grace periods, as
- * defined in RFC 3915, the specification which is found in XML schema definition
- * urn:ietf:params:xml:ns:rgp-1.0.
+ * <p>Extension for the EPP Domain Info response, representing the RGP Info aspect of the Registry Grace Period
+ * extension.</p>
  *
- * Instances of this class provide an interface to access info data for registry grace periods
- * as provided in an EPP domain info response. This relies on the instance first being initialised
- * by a suitable EPP domain info response using the method fromXML. Such a service element is
- * sent by a EPP server in response to a valid domain info command as implemented by the
- * DomainInfoCommand class, with RGP extensions as implemented by RGPDomainInfoCommandExtension class.
+ * <p>Use this to access the registry grace period statuses for a domain as provided in an EPP Domain Info response
+ * compliant with RFC5730, RFC5731 and RFC3915. Such a service element is sent by a compliant EPP server in response
+ * to a valid Domain Info command.</p>
  *
- * For flexibility, this implementation extracts the data from the response
- * using XPath queries, the expressions for which are defined statically.
+ * <p>For flexibility, this implementation extracts the data from the response using XPath queries, the expressions
+ * for which are defined statically.</p>
  *
- * @see com.ausregistry.jtoolkit2.se.ResponseExtension
+ * @see DomainInfoCommand
+ * @see DomainInfoResponse
+ * @see <a href="http://tools.ietf.org/html/rfc3915">Domain Registry Grace Period Mapping for the
+ * Extensible Provisioning Protocol (EPP)</a>
  */
 public final class DomainInfoRgpResponseExtension extends ResponseExtension {
 

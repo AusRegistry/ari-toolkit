@@ -1,16 +1,25 @@
 package com.ausregistry.jtoolkit2.se.idn;
 
 import com.ausregistry.jtoolkit2.se.Command;
+import com.ausregistry.jtoolkit2.se.DomainCreateCommand;
 import com.ausregistry.jtoolkit2.se.CommandExtension;
+import com.ausregistry.jtoolkit2.se.DomainCreateResponse;
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.xml.XMLWriter;
 import org.w3c.dom.Element;
 
 /**
- * Use this to set IDN Domain extension properties for an EPP Domain Create
- * command.
- * 
- * @see DomainInfoIdnResponseExtension
+ * <p>Extension for the EPP Domain Create command, representing the Create IDN Domain aspect of the
+ * Internationalized Domain Names extension.</p>
+ *
+ * <p>Use this to set the language tag to be used for an IDN as part of an EPP Domain Create command
+ * compliant with RFC5730 and RFC5731. The response expected from a server should be
+ * handled by a {@link DomainCreateResponse} object.</p>
+ *
+ * @see DomainCreateCommand
+ * @see DomainCreateResponse
+ * @see <a href="http://ausregistry.github.io/doc/idn-1.0/idn-1.0.html">Internationalized Domain Name Extension
+ * Mapping for the Extensible Provisioning Protocol (EPP)</a>
  */
 public final class DomainCreateIdnCommandExtension implements CommandExtension {
     private static final long serialVersionUID = -8945007354471832288L;

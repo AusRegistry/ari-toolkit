@@ -4,18 +4,23 @@ import javax.xml.xpath.XPathExpressionException;
 import java.util.Arrays;
 import java.util.List;
 
+import com.ausregistry.jtoolkit2.se.DomainInfoCommand;
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.se.ResponseExtension;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 
 /**
- * Use this to access info data for a domain as provided in an EPP domain
- * info response compliant with RFC5731.  Such a service element
- * is sent by a compliant EPP server in response to a valid domain info
- * command with domain info application extension.
+ * <p>Extension for the EPP Domain Info response, representing the Application Info aspect of the Domain Name
+ * Application extension.</p>
  *
- * @see com.ausregistry.jtoolkit2.se.DomainInfoCommand
+ * <p>Use this to access domain application data for a domain as provided in an EPP Domain Info response compliant
+ * with RFC5730 and RFC5731. Such a service element is sent by a compliant EPP server in response to a valid
+ * Domain Info command with the Domain Name Application extension.</p>
+ *
+ * @see DomainInfoCommand
  * @see DomainInfoApplicationCommandExtension
+ * @see <a href="http://ausregistry.github.io/doc/application-1.0/application-1.0.html">Domain Name Application
+ * Extension Mapping for the Extensible Provisioning Protocol (EPP)</a>
  */
 public class DomainInfoApplicationResponseExtension extends ResponseExtension {
 
