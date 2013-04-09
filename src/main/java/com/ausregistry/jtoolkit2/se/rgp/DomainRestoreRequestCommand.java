@@ -11,7 +11,7 @@ import org.w3c.dom.Element;
  *
  * <p>Use this to post a Domain Restoration Request for restoring a domain from a "redemption period" RGP state
  * as part of an EPP Domain Update command compliant with RFC5730, RFC5731 and RFC3915. The response expected
- * from a server should be handled by a {@link DomainRestoreResponse} object.</p>
+ * from a server should be handled by a Domain Restore Response.</p>
  *
  * @see DomainRestoreResponse
  * @see <a href="http://tools.ietf.org/html/rfc3915">Domain Registry Grace Period Mapping for the

@@ -1,7 +1,9 @@
 /**
- * This defines the classes for the Generic or Key Value List extension.  The Registry System supports the model of
- * extending stored data in a Key Value pairs for a given named data extension.  This allows the Registry to store
- * unknown amount of extra information if it fits in this model.
+ * <p>Contains replacement command, response, command extension and response extension classes for the Key-Value Mapping
+ * and Registrant Transfer generic extensions.</p>
+ *
+ * @see <a href="http://ausregistry.github.com/doc/kv-1.0/kv-1.0.html">Key-Value Mapping for the Extensible
+ * Provisioning Protocol (EPP)</a>
  */
 package com.ausregistry.jtoolkit2.se.generic;
 

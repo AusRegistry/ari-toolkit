@@ -17,7 +17,8 @@ import org.w3c.dom.Element;
  * Domain Name Variant extension (v1.1)</p>
  *
  * <p>Use this to add or remove variants for a domain as part of an EPP Domain Update
- * command compliant with RFC5730 and RFC5731.</p>
+ * command compliant with RFC5730 and RFC5731. The response expected from a server
+ * should be handled by a generic Response.</p>
  *
  * <p>This extension will throw an {@link IllegalArgumentException} if no variants
  * are added or removed as part of the "Update Variants" operation.</p>

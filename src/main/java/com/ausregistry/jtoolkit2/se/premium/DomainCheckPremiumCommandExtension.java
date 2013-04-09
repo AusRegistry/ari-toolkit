@@ -14,7 +14,7 @@ import com.ausregistry.jtoolkit2.xml.XMLWriter;
  *
  * <p>Use this to request information about a premium domain name fee as part of an EPP Domain Check command
  * compliant with RFC5730 and RFC5731. The response expected from a server should be
- * handled by a {@link DomainCheckPremiumResponse} object.</p>
+ * handled by a Domain Check Premium Response.</p>
  *
  * @see DomainCheckCommand
  * @see DomainCheckPremiumResponse

@@ -14,7 +14,7 @@ import org.w3c.dom.Element;
  *
  * <p>Use this to mark the ID of a domain name application to delete as part of an EPP Domain Delete command
  * compliant with RFC5730 and RFC5731. The response expected from a server should be
- * handled by a {@link Response} object.</p>
+ * handled by a generic Response.</p>
  *
  * @see DomainDeleteCommand
  * @see Response

@@ -18,7 +18,7 @@ import com.ausregistry.jtoolkit2.xml.XMLWriter;
  * <p>Use this to acknowledge the premium fees associated with this domain name as part of an EPP Domain Create
  * command compliant with RFC5730 and RFC5731. The "price" and "renewal price" values are optional, but if they are
  * supplied, should match the fees that are set for the domain name for the requested period.
- * The response expected from a server should be handled by a {@link DomainCreateResponse} object.</p>
+ * The response expected from a server should be handled by a Domain Create Response.</p>
  *
  * @see DomainCreateCommand
  * @see DomainCreateResponse

@@ -15,7 +15,7 @@ import org.w3c.dom.Element;
  *
  * <p>Use this to mark the ID of a domain name application to update as part of an EPP Domain Update command
  * compliant with RFC5730 and RFC5731. The response expected from a server should be
- * handled by a {@link Response} object.</p>
+ * handled by a generic Response object.</p>
  *
  * @see DomainUpdateCommand
  * @see Response

@@ -1,29 +1,24 @@
 package com.ausregistry.jtoolkit2.se;
 
+import javax.xml.xpath.XPathExpressionException;
 import java.util.ArrayList;
 
-import javax.xml.xpath.XPathExpressionException;
-
+import com.ausregistry.jtoolkit2.se.variant.DomainUpdateVariantCommandExtension;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 
 /**
- * Extension of the domain mapping of the EPP create/info response, as defined
- * in RFC5730 and RFC5731, to domain name variants, the specification of which
- * are in the XML schema definition urn:X-ar:params:xml:ns:variant-1.0.
- * 
- * Instances of this class provide an interface to access create and info data
- * for a domain as provided in an EPP domain create response. This relies on the
- * instance first being initialised by a suitable EPP domain create/info
- * response using the method fromXML. Such a service element is sent by a EPP
- * server in response to a valid domain create/info command as implemented by
- * the DomainCreateCommand and DomainInfoCommand classes, optionally with the
- * variant extension as implemented by the DomainInfoVariantsCommandExtension
- * class.
- * 
- * For flexibility, this implementation extracts the data from the response
- * using XPath queries, the expressions for which are defined statically.
- * 
- * @see ResponseExtension
+ * <p>Extension for the EPP Domain Create and Domain Info response, representing the Variant Info
+ * aspect of the Domain Name Variant extension (v1.0).</p>
+ *
+ * <p>Use this to access a list of the activated variants for a domain as provided in an EPP Domain Info or
+ * Domain Create response compliant with RFC5730 and RFC5731. Such a service element is sent by a compliant
+ * EPP server in response to a valid Domain Info or Domain Create command with the Domain Info Variant
+ * Command extension.</p>
+ *
+ * <p>For flexibility, this implementation extracts the data from the response using XPath queries, the expressions
+ * for which are defined statically.</p>
+ *
+ * @see DomainUpdateVariantCommandExtension
  */
 public final class DomainVariantResponseExtension extends
         ResponseExtension {

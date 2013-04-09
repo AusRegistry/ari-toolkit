@@ -13,7 +13,7 @@ import org.w3c.dom.Element;
  *
  * <p>Use this to identify the domain name application phase this command is being submitted in as part of an
  * EPP Domain Create command compliant with RFC5730 and RFC5731. The response expected from a server should be
- * handled by a {@link DomainCreateApplicationResponse} object.</p>
+ * handled by a Domain Create Application Response.</p>
  *
  * @see DomainCreateCommand
  * @see DomainCreateApplicationResponse

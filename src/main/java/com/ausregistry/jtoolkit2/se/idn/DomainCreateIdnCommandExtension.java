@@ -14,7 +14,7 @@ import org.w3c.dom.Element;
  *
  * <p>Use this to set the language tag to be used for an IDN as part of an EPP Domain Create command
  * compliant with RFC5730 and RFC5731. The response expected from a server should be
- * handled by a {@link DomainCreateResponse} object.</p>
+ * handled by a Domain Create Response.</p>
  *
  * @see DomainCreateCommand
  * @see DomainCreateResponse

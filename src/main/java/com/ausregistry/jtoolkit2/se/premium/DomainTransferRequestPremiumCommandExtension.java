@@ -17,7 +17,7 @@ import org.w3c.dom.Element;
  * <p>Use this to acknowledge the premium fees associated with this domain name as part of an EPP Domain Transfer
  * command compliant with RFC5730 and RFC5731. The "renewal price" value is optional, but if it is
  * supplied, should match the renewal fee that is set for the domain name for the one year.
- * The response expected from a server should be handled by a {@link DomainTransferResponse} object.</p>
+ * The response expected from a server should be handled by a Domain Transfer Response object.</p>
  *
  * @see DomainTransferRequestCommand
  * @see DomainTransferResponse
