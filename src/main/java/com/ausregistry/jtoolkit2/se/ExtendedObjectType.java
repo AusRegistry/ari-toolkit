@@ -26,7 +26,8 @@ public enum ExtendedObjectType implements ObjectType {
     /** References the internationalised domain name extension XML namespace and schema file */
     IDN ("idn", "urn:ar:params:xml:ns:idn-1.0", "idn-1.0.xsd", "name"),
     /** References the premium domain name extension XML namespace and schema file */
-    PREMIUM ("premium", "urn:ar:params:xml:ns:premium-1.0", "premium-1.0.xsd", "name");
+    PREMIUM ("premium", "urn:ar:params:xml:ns:premium-1.0", "premium-1.0.xsd", "name"),
+    TMCH("tmch", "urn:ar:params:xml:ns:tmch-1.0", "tmch-1.0.xsd", "name");
 
     private final String prefix, uri, schemaDefinition, identType;
 

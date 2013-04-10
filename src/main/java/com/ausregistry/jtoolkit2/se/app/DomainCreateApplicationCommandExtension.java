@@ -11,9 +11,9 @@ import org.w3c.dom.Element;
  * <p>Extension for the EPP Domain Create command, representing the Create Application aspect of the
  * Domain Name Application extension.</p>
  *
- * <p>Use this to identify the domain name application phase this command is being submitted in as part of an
- * EPP Domain Create command compliant with RFC5730 and RFC5731. The response expected from a server should be
- * handled by a Domain Create Application Response.</p>
+ * <p>Use this to identify the domain name application phase and encoded signed mark data this command is being
+ * submitted in as part of an EPP Domain Create command compliant with RFC5730 and RFC5731. The response expected
+ * from a server should be handled by a Domain Create Application Response.</p>
  *
  * @see DomainCreateCommand
  * @see DomainCreateApplicationResponse
@@ -24,6 +24,7 @@ public class DomainCreateApplicationCommandExtension implements CommandExtension
 
     private static final long serialVersionUID = 5202343696850193788L;
     private String phase;
+    private String encodedSignedMarkData;
 
     @Override
     public void addToCommand(Command command) {
@@ -31,11 +32,19 @@ public class DomainCreateApplicationCommandExtension implements CommandExtension
         final Element extensionElement = command.getExtensionElement();
         final Element createElement = xmlWriter.appendChild(extensionElement, "create",
                 ExtendedObjectType.APP.getURI());
-
         xmlWriter.appendChild(createElement, "phase", ExtendedObjectType.APP.getURI()).setTextContent(phase);
+
+        final Element tmchCreateElement = xmlWriter.appendChild(extensionElement, "create",
+                ExtendedObjectType.TMCH.getURI());
+        xmlWriter.appendChild(tmchCreateElement, "smd", ExtendedObjectType.TMCH.getURI())
+                .setTextContent(encodedSignedMarkData);
     }
 
     public void setPhase(String phase) {
         this.phase = phase;
+    }
+
+    public void setEncodedSignedMarkData(String encodedSignedMarkData) {
+        this.encodedSignedMarkData = encodedSignedMarkData;
     }
 }

@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<schema targetNamespace="urn:ar:params:xml:ns:tmch-1.0"
+        xmlns:tmch="urn:ar:params:xml:ns:tmch-1.0"
+        xmlns:eppcom="urn:ietf:params:xml:ns:eppcom-1.0"
+        xmlns="http://www.w3.org/2001/XMLSchema"
+        elementFormDefault="qualified">
+
+    <import namespace="urn:ietf:params:xml:ns:eppcom-1.0" />
+
+    <!-- Custom command extensions -->
+    <element name="check" />
+    <element name="create" type="tmch:createType" />
+    <element name="info" />
+
+    <complexType name="createType">
+        <choice>
+            <element name="smd" type="tmch:smdType">
+            </element>
+            <sequence>
+                <element name="noticeID" type="token" />
+                <element name="generated" type="dateTime" />
+                <element name="accepted" type="dateTime" />
+                <element name="source" type="token" />
+            </sequence>
+        </choice>
+    </complexType>
+
+    <simpleType name="smdType">
+        <restriction base="base64Binary">
+            <minLength value="1" />
+        </restriction>
+    </simpleType>
+
+    <!-- Custom response extensions for checkbis extension -->
+    <element name="chkData" type="tmch:chkDataType" />
+    <element name="infData" type="tmch:infDataType" />
+
+    <complexType name="chkDataType">
+        <sequence>
+            <element name="cd" type="tmch:checkType"
+                     maxOccurs="unbounded" />
+        </sequence>
+    </complexType>
+
+    <complexType name="checkType">
+        <sequence>
+            <element name="name" type="tmch:checkNameType" />
+            <element name="key" type="normalizedString" minOccurs="0" />
+        </sequence>
+    </complexType>
+
+    <complexType name="checkNameType">
+        <simpleContent>
+            <extension base="eppcom:labelType">
+                <attribute name="exists" type="boolean" use="required" />
+            </extension>
+        </simpleContent>
+    </complexType>
+
+    <complexType name="infDataType">
+        <sequence>
+            <element name="smd" type="tmch:smdType" minOccurs="0" />
+        </sequence>
+    </complexType>
+
+</schema>

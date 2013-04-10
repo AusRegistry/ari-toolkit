@@ -29,6 +29,8 @@ public class DomainCreateApplicationCommandExtensionTest {
         final Command cmd = new DomainCreateCommand("jtkutest.com.au", "jtkUT3st");
         final DomainCreateApplicationCommandExtension ext = new DomainCreateApplicationCommandExtension();
         ext.setPhase("sunrise");
+        String encodedSignedMarkData = "ZW5jb2RlZFNpZ25lZE1hcmtEYXRh";
+        ext.setEncodedSignedMarkData(encodedSignedMarkData);
 
         cmd.appendExtension(ext);
         assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\""
@@ -38,6 +40,7 @@ public class DomainCreateApplicationCommandExtensionTest {
                 + "xsi:schemaLocation=\"urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd\">"
                 + "<name>jtkutest.com.au</name><authInfo><pw>jtkUT3st</pw></authInfo></create></create>"
                 + "<extension><create xmlns=\"urn:ar:params:xml:ns:application-1.0\"><phase>sunrise</phase></create>"
+                + "<create xmlns=\"urn:ar:params:xml:ns:tmch-1.0\"><smd>" + encodedSignedMarkData + "</smd></create>"
                 + "</extension><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>", cmd.toXML());
 
     }
