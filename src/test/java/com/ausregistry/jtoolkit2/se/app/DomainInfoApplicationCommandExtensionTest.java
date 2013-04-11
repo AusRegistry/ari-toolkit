@@ -54,7 +54,7 @@ public class DomainInfoApplicationCommandExtensionTest {
         String applicationId = "sunrise-application-id";
         String creDate = "2011-01-01T00:00:00Z";
         String phase = "sunrise";
-        List<String> statuses = new ArrayList<>();
+        List<String> statuses = new ArrayList<String>();
         statuses.add("ok");
         String updDate = "2012-01-01T00:00:00Z";
         final XMLDocument doc = PARSER.parse(getInfoResponseExpectedXml(dnsForm, applicationId, phase, statuses,
@@ -78,7 +78,7 @@ public class DomainInfoApplicationCommandExtensionTest {
         String applicationId = "sunrise-application-id";
         String creDate = "2011-01-01T00:00:00Z";
         String phase = "sunrise";
-        List<String> statuses = new ArrayList<>();
+        List<String> statuses = new ArrayList<String>();
         statuses.add("pendingOutcome");
         statuses.add("deleteProhibited");
         statuses.add("updateProhibited");
@@ -164,7 +164,7 @@ public class DomainInfoApplicationCommandExtensionTest {
         String applicationId = "sunrise-application-id";
         String creDate = "2011-01-01T00:00:00Z";
         String phase = "sunrise";
-        List<String> statuses = new ArrayList<>();
+        List<String> statuses = new ArrayList<String>();
         statuses.add("ok");
         String updDate = "2012-01-01T00:00:00Z";
         final XMLDocument doc = PARSER.parse(getInfoResponseExpectedXml(dnsForm, applicationId, phase, statuses,
