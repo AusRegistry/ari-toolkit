@@ -83,7 +83,7 @@ public class DomainInfoApplicationCommandExtensionTest {
         statuses.add("deleteProhibited");
         statuses.add("updateProhibited");
 
-        String updDate = null;
+        String updDate = "2012-01-01T00:00:00Z";
         final XMLDocument doc = PARSER.parse(getInfoResponseExpectedXml(dnsForm, applicationId, phase, statuses,
                 creDate, updDate));
 
