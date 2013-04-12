@@ -8,12 +8,12 @@ import com.ausregistry.jtoolkit2.xml.XMLWriter;
 import org.w3c.dom.Element;
 
 /**
- * <p>Extension for the EPP Domain Create command, representing the Create Application aspect of the
- * Domain Name Application extension.</p>
+ * <p>Extension for the EPP Domain Create command, representing the Create aspect of the
+ * Domain Name Trademark Clearing House extension.</p>
  *
- * <p>Use this to identify the domain name encoded signed mark data this command is being
+ * <p>Use this to identify the domain's encoded signed mark data as part of the result of this command, which is being
  * submitted in as part of an EPP Domain Create command compliant with RFC5730 and RFC5731. The response expected
- * from a server should be handled by a Domain Create Application Response.</p>
+ * from a server should be handled by a Domain Create Response.</p>
  *
  * @see DomainCreateCommand
  * @see <a href="http://ausregistry.github.io/doc/tmch-1.0/tmch-1.0.html">Domain Name Trademark Clearing House

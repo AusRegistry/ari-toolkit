@@ -1,8 +1,6 @@
 package com.ausregistry.jtoolkit2.se.tmch;
 
 import javax.xml.xpath.XPathExpressionException;
-import java.util.Arrays;
-import java.util.List;
 
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.se.ResponseExtension;

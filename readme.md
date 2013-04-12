@@ -1,6 +1,6 @@
 ## Downloads
 
-The latest ari-toolkit is available for download. [ari-toolkit v3.0.1.3](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.0.1.3/arjtk-3.0.1.3.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.0.1.3/arjtk-3.0.1.3-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.0.1.3/arjtk-3.0.1.3-javadoc.jar))
+The latest ari-toolkit is available for download. [ari-toolkit v3.0.1.4](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.0.1.4/arjtk-3.0.1.4.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.0.1.4/arjtk-3.0.1.4-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.0.1.4/arjtk-3.0.1.4-javadoc.jar))
 
 For more information, please read [Installation and Setup](#installation-and-setup).
 
@@ -38,7 +38,7 @@ The service element mapping module provides a simple means of translating betwee
 
 #### Direct download
 
-Obtain the latest toolkit here: [Toolkit v3.0.1.3](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.0.1.3/arjtk-3.0.1.3.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.0.1.3/arjtk-3.0.1.3-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.0.1.3/arjtk-3.0.1.3-javadoc.jar))
+Obtain the latest toolkit here: [Toolkit v3.0.1.4](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.0.1.4/arjtk-3.0.1.4.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.0.1.4/arjtk-3.0.1.4-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.0.1.4/arjtk-3.0.1.4-javadoc.jar))
 
 #### Dependency Management
 
@@ -47,7 +47,7 @@ Use your build's dependency management tool to automatically download the toolki
 * Repository: `http://ausregistry.github.com/repo/`
 * groupId: `au.com.ausregistry`
 * artifactId: `arjtk`
-* version: `3.0.1.3`
+* version: `3.0.1.4`
 
 For example (using Maven):
 
@@ -62,7 +62,7 @@ For example (using Maven):
        <dependency>
           <groupId>au.com.ausregistry</groupId>
           <artifactId>arjtk</artifactId>
-          <version>3.0.1.3</version>
+          <version>3.0.1.4</version>
        </dependency>
     </dependencies>
 
