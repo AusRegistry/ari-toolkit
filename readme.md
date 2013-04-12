@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/AusRegistry/ari-toolkit.png)](https://travis-ci.org/AusRegistry/ari-toolkit)
 ## Downloads
 
 The latest ari-toolkit is available for download. [ari-toolkit v3.0.1](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.0.1/arjtk-3.0.1.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.0.1/arjtk-3.0.1-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.0.1/arjtk-3.0.1-javadoc.jar))
