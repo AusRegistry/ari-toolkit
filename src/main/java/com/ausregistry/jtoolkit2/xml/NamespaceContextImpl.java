@@ -43,6 +43,8 @@ public final class NamespaceContextImpl implements NamespaceContext {
         NamespaceContextImpl.put("epp", "urn:ietf:params:xml:ns:epp-1.0");
         NamespaceContextImpl.put("e", "urn:ietf:params:xml:ns:epp-1.0");
         NamespaceContextImpl.put("epp", "urn:ietf:params:xml:ns:epp-1.0");
+        NamespaceContextImpl.put("smd", "urn:ietf:params:xml:ns:signedMark-1.0");
+        NamespaceContextImpl.put("mark", "urn:ietf:params:xml:ns:mark-1.0");
         for (StandardObjectType standardObjectType : StandardObjectType.values()) {
             NamespaceContextImpl.put(standardObjectType.getName(), standardObjectType.getURI());
         }

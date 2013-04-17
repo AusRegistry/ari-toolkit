@@ -58,7 +58,7 @@ public class XMLDocument {
      *
      * @param root The root element of the XML document.
      */
-    XMLDocument(Element root) {
+    public XMLDocument(Element root) {
         this.root = root;
     }
 

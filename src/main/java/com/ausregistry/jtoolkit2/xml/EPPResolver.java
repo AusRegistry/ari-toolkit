@@ -30,9 +30,15 @@ public class EPPResolver implements URIResolver {
 
         uriList.add("urn:ietf:params:xml:ns:eppcom-1.0");
         uriList.add("urn:ietf:params:xml:ns:epp-1.0");
+        uriList.add("http://www.w3.org/2000/09/xmldsig#");
+        uriList.add("urn:ietf:params:xml:ns:mark-1.0");
+        uriList.add("urn:ietf:params:xml:ns:signedMark-1.0");
 
         localResources.add("eppcom-1.0.xsd");
         localResources.add("epp-1.0.xsd");
+        localResources.add("xmldsig-core-schema.xsd");
+        localResources.add("mark-1.0.xsd");
+        localResources.add("signedMark-1.0.xsd");
 
         for (StandardObjectType objectType : StandardObjectType.values()) {
             uriList.add(objectType.getURI());
