@@ -18,9 +18,8 @@
             </element>
             <sequence>
                 <element name="noticeID" type="token" />
-                <element name="generated" type="dateTime" />
+                <element name="notAfter" type="dateTime" />
                 <element name="accepted" type="dateTime" />
-                <element name="source" type="token" />
             </sequence>
         </choice>
     </complexType>
