@@ -10,6 +10,7 @@
     <!-- command-response extension elements -->
     <element name="check" />
     <element name="create" type="premium:ackType" />
+    <element name="renew" type="premium:ackType" />
     <element name="transfer" type="premium:ackType" />
 
     <complexType name="ackType">
