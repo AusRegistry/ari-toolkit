@@ -12,6 +12,16 @@ package com.ausregistry.jtoolkit2.se;
 public class ContactTransferApproveCommand extends ContactTransferCommand {
 	private static final long serialVersionUID = -8722539297610164487L;
 
+    /**
+     * Create a contact transfer command for the identified contact, specifying
+     * the 'approve' transfer operation.
+     *
+     * @param id The identifier of the contact to approve transfer of.
+     */
+    public ContactTransferApproveCommand(String id) {
+        super(TransferOp.APPROVE, id);
+    }
+
 	/**
 	 * Create a contact transfer command for the identified contact, specifying
 	 * the designated password and the 'approve' transfer operation.

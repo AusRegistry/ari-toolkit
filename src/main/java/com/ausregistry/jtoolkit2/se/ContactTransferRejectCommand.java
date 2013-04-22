@@ -12,6 +12,16 @@ package com.ausregistry.jtoolkit2.se;
 public class ContactTransferRejectCommand extends ContactTransferCommand {
     private static final long serialVersionUID = -3441305501001365568L;
 
+    /**
+     * Create a contact transfer command for the identified contact, specifying
+     * the 'reject' transfer operation.
+     *
+     * @param id The identifier of the contact to reject transfer of.
+     */
+    public ContactTransferRejectCommand(String id) {
+        super(TransferOp.REJECT, id);
+    }
+
 	/**
 	 * Create a contact transfer command for the identified contact, specifying
 	 * the designated password and the 'reject' transfer operation.

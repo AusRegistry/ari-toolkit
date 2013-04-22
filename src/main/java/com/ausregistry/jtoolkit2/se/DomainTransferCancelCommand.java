@@ -12,6 +12,16 @@ package com.ausregistry.jtoolkit2.se;
 public class DomainTransferCancelCommand extends DomainTransferCommand {
 	private static final long serialVersionUID = 4459609896155243761L;
 
+    /**
+     * Create a domain transfer command for the identified domain, specifying
+     * the 'cancel' transfer operation.
+     *
+     * @param name The name of the domain to cancel transfer of.
+     */
+    public DomainTransferCancelCommand(String name) {
+        super(TransferOp.CANCEL, name);
+    }
+
 	/**
 	 * Create a domain transfer command for the identified domain, specifying
 	 * the designated password and the 'cancel' transfer operation.

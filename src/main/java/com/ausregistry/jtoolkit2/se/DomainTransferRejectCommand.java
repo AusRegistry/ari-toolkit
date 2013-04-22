@@ -12,6 +12,16 @@ package com.ausregistry.jtoolkit2.se;
 public class DomainTransferRejectCommand extends DomainTransferCommand {
     private static final long serialVersionUID = -4558124546837429882L;
 
+    /**
+     * Create a domain transfer command for the identified domain, specifying
+     * the 'reject' transfer operation.
+     *
+     * @param name The name of the domain to reject transfer of.
+     */
+    public DomainTransferRejectCommand(String name) {
+        super(TransferOp.REJECT, name);
+    }
+
 	/**
 	 * Create a domain transfer command for the identified domain, specifying
 	 * the designated password and the 'reject' transfer operation.

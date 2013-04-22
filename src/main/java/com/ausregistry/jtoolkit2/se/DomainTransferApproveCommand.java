@@ -12,6 +12,16 @@ package com.ausregistry.jtoolkit2.se;
 public class DomainTransferApproveCommand extends DomainTransferCommand {
 	private static final long serialVersionUID = 5057086047385703151L;
 
+    /**
+     * Create a domain transfer command for the identified domain, specifying
+     * the 'approve' transfer operation.
+     *
+     * @param name The name of the domain to approve transfer of.
+     */
+    public DomainTransferApproveCommand(String name) {
+        super(TransferOp.APPROVE, name);
+    }
+
 	/**
 	 * Create a domain transfer command for the identified domain, specifying
 	 * the designated password and the 'approve' transfer operation.
