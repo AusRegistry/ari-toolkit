@@ -45,8 +45,7 @@
   <complexType name="creDataType">
     <sequence>
       <element name="id" type="app:idValueType" />
-      <element name="name" type="eppcom:labelType" />
-      <element name="crDate" type="dateTime" minOccurs="0" />
+      <element name="phase" type="app:phaseValueType" />
     </sequence>
   </complexType>
 
