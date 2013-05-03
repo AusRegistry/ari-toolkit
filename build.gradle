@@ -65,7 +65,7 @@ task javadocJar(type: Jar, dependsOn:javadoc) {
     from javadoc.destinationDir
 }
 
-task checkVersionNumersInReadme << {
+task checkVersionNumbersInReadme << {
     def readme = file("readme.md")
     def looksLikeVersionNumber = ~/\d+\.\d+\.\d+\.\d+/
     def versionNumbersInReadmeFile = readme.readLines().collectMany { line ->
@@ -81,7 +81,7 @@ artifacts {
     archives javadocJar
 }
 
-uploadArchives.dependsOn checkVersionNumersInReadme, javadoc
+uploadArchives.dependsOn checkVersionNumbersInReadme, javadoc
 
 uploadArchives {
     uploadDescriptor = false

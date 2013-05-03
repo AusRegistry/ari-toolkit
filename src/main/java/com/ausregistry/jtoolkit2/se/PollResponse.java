@@ -37,6 +37,7 @@ public class PollResponse extends Response {
     private ContactNotificationResponse conNtfnResponse;
     private DomainInfoResponse domInfoResponse;
     private ContactInfoResponse conInfoResponse;
+    private HostInfoResponse hostInfoResponse;
     private Response resDataResponse = null;
 
     public PollResponse() {
@@ -68,6 +69,10 @@ public class PollResponse extends Response {
 
     public DomainInfoResponse getDomainInfoResponse() {
         return domInfoResponse;
+    }
+
+    public HostInfoResponse getHostInfoResponse() {
+        return hostInfoResponse;
     }
 
     @Override
@@ -128,6 +133,12 @@ public class PollResponse extends Response {
                     conInfoResponse = new ContactInfoResponse();
                     conInfoResponse.fromXML(xmlDoc);
                     resDataResponse = conInfoResponse;
+                }
+            } else if (childNode.getNamespaceURI().equals(StandardObjectType.HOST.getURI())) {
+                if (childName.equals(INF_DATA)) {
+                    hostInfoResponse = new HostInfoResponse();
+                    hostInfoResponse.fromXML(xmlDoc);
+                    resDataResponse = hostInfoResponse;
                 }
             }
         } catch (XPathExpressionException xpee) {
