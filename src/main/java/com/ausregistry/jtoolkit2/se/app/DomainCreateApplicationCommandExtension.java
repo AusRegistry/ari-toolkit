@@ -24,6 +24,7 @@ public class DomainCreateApplicationCommandExtension implements CommandExtension
 
     private static final long serialVersionUID = 5202343696850193788L;
     private String phase;
+    private String applicationId;
 
     @Override
     public void addToCommand(Command command) {
@@ -31,10 +32,18 @@ public class DomainCreateApplicationCommandExtension implements CommandExtension
         final Element extensionElement = command.getExtensionElement();
         final Element createElement = xmlWriter.appendChild(extensionElement, "create",
                 ExtendedObjectType.APP.getURI());
-        xmlWriter.appendChild(createElement, "phase", ExtendedObjectType.APP.getURI()).setTextContent(phase);
+        if (phase != null) {
+            xmlWriter.appendChild(createElement, "phase", ExtendedObjectType.APP.getURI()).setTextContent(phase);
+        } else if (applicationId != null) {
+            xmlWriter.appendChild(createElement, "id", ExtendedObjectType.APP.getURI()).setTextContent(applicationId);
+        }
     }
 
     public void setPhase(String phase) {
         this.phase = phase;
+    }
+
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
     }
 }

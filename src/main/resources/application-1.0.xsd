@@ -9,10 +9,17 @@
 
   <!-- Child elements found in EPP commands. -->
   <element name="check" type="app:phaseType" />
-  <element name="create" type="app:phaseType" />
+  <element name="create" type="app:phaseOrIdType" />
   <element name="delete" type="app:idType" />
   <element name="info" type="app:idType" />
   <element name="update" type="app:idType" />
+
+  <complexType name="phaseOrIdType">
+      <choice>
+          <element name="phase" type="app:phaseValueType" />
+          <element name="id" type="app:idValueType" />
+      </choice>
+  </complexType>
 
   <complexType name="phaseType">
     <sequence>
