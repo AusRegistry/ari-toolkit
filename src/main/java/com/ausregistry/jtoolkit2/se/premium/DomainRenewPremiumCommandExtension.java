@@ -20,7 +20,7 @@ import com.ausregistry.jtoolkit2.xml.XMLWriter;
  *
  * @see com.ausregistry.jtoolkit2.se.DomainRenewCommand
  * @see com.ausregistry.jtoolkit2.se.DomainRenewResponse
- * @see <a href="http://ausregistry.github.io/doc/premium-1.0/premium-1.0.html">Premium Domain Name Extension
+ * @see <a href="http://ausregistry.github.io/doc/premium-1.1/premium-1.1.html">Premium Domain Name Extension
  * Mapping for the Extensible Provisioning Protocol (EPP)</a>
  */
 public class DomainRenewPremiumCommandExtension implements CommandExtension {

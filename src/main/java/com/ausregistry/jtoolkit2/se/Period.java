@@ -49,5 +49,19 @@ public class Period implements java.io.Serializable {
 
 		return retval;
 	}
+
+    /**
+     * @return period unit for the period
+     */
+    public PeriodUnit getUnit() {
+        return unit;
+    }
+
+    /**
+     * @return period value for the period
+     */
+    public int getPeriod() {
+        return period;
+    }
 }
 

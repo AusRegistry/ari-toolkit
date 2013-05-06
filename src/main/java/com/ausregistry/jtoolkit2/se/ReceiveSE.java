@@ -10,7 +10,7 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
  *
  * Uses the maintenance, debug, support and user level loggers.
  */
-abstract class ReceiveSE implements java.io.Serializable {
+public abstract class ReceiveSE implements java.io.Serializable {
 
 	private static final long serialVersionUID = 3404913770026760200L;
 
@@ -42,7 +42,7 @@ abstract class ReceiveSE implements java.io.Serializable {
      * @param index the index
      * @return the string
      */
-    protected static String replaceIndex(final String inputExpr, final int index) {
+    public static String replaceIndex(final String inputExpr, final int index) {
         return inputExpr.replaceAll("IDX", String.valueOf(index));
     }
 
