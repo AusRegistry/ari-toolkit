@@ -8,12 +8,12 @@ import com.ausregistry.jtoolkit2.xml.XMLWriter;
 import org.w3c.dom.Element;
 
 /**
- * <p>Extension for the EPP Domain Create command, representing the Create Application aspect of the
- * Domain Name Application extension.</p>
+ * <p>Extension for the EPP Domain Create command, representing the Create Application and Allocate Application
+ * aspects of the Domain Name Application extension.</p>
  *
- * <p>Use this to identify the domain name application phase this command is being
- * submitted in as part of an EPP Domain Create command compliant with RFC5730 and RFC5731. The response expected
- * from a server should be handled by a Domain Create Application Response.</p>
+ * <p>Use this to identify the domain name application phase or application id that this command is being submitted
+ * in as part of an EPP Domain Create command compliant with RFC5730 and RFC5731. The response expected from a
+ * server should be handled by a Domain Create Application Response.</p>
  *
  * @see DomainCreateCommand
  * @see DomainCreateApplicationResponse
