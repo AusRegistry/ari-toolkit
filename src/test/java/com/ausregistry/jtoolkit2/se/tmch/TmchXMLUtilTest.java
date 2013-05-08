@@ -7,6 +7,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 import com.ausregistry.jtoolkit2.xml.ParsingException;
+import org.apache.commons.codec.DecoderException;
 import org.junit.Test;
 
 public class TmchXMLUtilTest {
@@ -243,7 +244,7 @@ public class TmchXMLUtilTest {
     }
 
     @Test
-    public void shouldReturnDecodedSignedMarkData() throws IOException {
+    public void shouldReturnDecodedSignedMarkData() throws IOException, DecoderException {
 
         String expectedDecodedSignedMarkData = "encodedSignedMarkData";
         String encodedSignedMarkData = "ZW5jb2RlZFNpZ25lZE1hcmtEYXRh";
@@ -255,21 +256,21 @@ public class TmchXMLUtilTest {
 
     @Test
     public void shouldReturnAllObjects() throws Exception {
-        TmchSignedMarkData tmchSignedMarkData =
+        SignedMarkData signedMarkData =
                 TmchXMLUtil.parseDecodedSignedMarkData(new ByteArrayInputStream(tmchSignedMarkDataXml.getBytes()));
 
-        assertNotNull(tmchSignedMarkData.getTmchMark());
-        assertNotNull(tmchSignedMarkData.getTmchSmdIssuerInfo());
-        assertNotNull(tmchSignedMarkData.getTmchMark().getMarks().get(0));
+        assertNotNull(signedMarkData.getMarksList());
+        assertNotNull(signedMarkData.getSmdIssuerInfo());
+        assertNotNull(signedMarkData.getMarksList().getMarks().get(0));
 
     }
 
     @Test
-    public void shouldParseEncodedSignedMarkData() throws IOException, ParsingException {
-        TmchSignedMarkData tmchSignedMarkData = TmchXMLUtil.parseEncodedSignedMarkData(new ByteArrayInputStream
+    public void shouldParseEncodedSignedMarkData() throws IOException, ParsingException, DecoderException {
+        SignedMarkData signedMarkData = TmchXMLUtil.parseEncodedSignedMarkData(new ByteArrayInputStream
                 (encodedSmdPart.getBytes()));
-        assertNotNull(tmchSignedMarkData.getTmchMark());
-        assertNotNull(tmchSignedMarkData.getTmchSmdIssuerInfo());
-        assertNotNull(tmchSignedMarkData.getTmchMark().getMarks().get(0));
+        assertNotNull(signedMarkData.getMarksList());
+        assertNotNull(signedMarkData.getSmdIssuerInfo());
+        assertNotNull(signedMarkData.getMarksList().getMarks().get(0));
     }
 }

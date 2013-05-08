@@ -18,6 +18,9 @@ repositories {
 }
 
 dependencies {
+    compile("commons-codec:commons-codec:1.7") {
+        exclude group: 'junit', module: 'junit'
+    }
     testCompile group: "junit", name: "junit", version: junitVersion
 }
 

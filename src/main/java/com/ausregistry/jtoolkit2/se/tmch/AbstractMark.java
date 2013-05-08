@@ -17,7 +17,7 @@ import org.w3c.dom.NodeList;
  * defined in the "mark-1.0.xsd" schema.
  *
  */
-public abstract class TmchAbstractMark {
+public abstract class AbstractMark {
 
     private Logger maintLogger =
             Logger.getLogger(getClass().getPackage().getName() + ".maint");
@@ -26,9 +26,9 @@ public abstract class TmchAbstractMark {
 
     private String markName;
 
-    private List<TmchHolder> holders = new ArrayList<TmchHolder>();
+    private List<MarkHolder> holders = new ArrayList<MarkHolder>();
 
-    private List<TmchContact> contacts = new ArrayList<TmchContact>();
+    private List<MarkContact> contacts = new ArrayList<MarkContact>();
 
     private List<String> labels = new ArrayList<String>();
 
@@ -50,14 +50,14 @@ public abstract class TmchAbstractMark {
             for (int i = 0; i < childNodes.getLength(); i++) {
                 Node item = childNodes.item(i);
                 if (HOLDER_EXPR.equals(item.getLocalName())) {
-                    TmchHolder tmchHolder = new TmchHolder();
-                    tmchHolder.fromXML(new XMLDocument((Element) item));
-                    holders.add(tmchHolder);
+                    MarkHolder markHolder = new MarkHolder();
+                    markHolder.fromXML(new XMLDocument((Element) item));
+                    holders.add(markHolder);
                 }
                 else if (CONTACT_EXPR.equals(item.getLocalName())) {
-                    TmchContact tmchContact = new TmchContact();
-                    tmchContact.fromXML(new XMLDocument((Element) item));
-                    contacts.add(tmchContact);
+                    MarkContact markContact = new MarkContact();
+                    markContact.fromXML(new XMLDocument((Element) item));
+                    contacts.add(markContact);
                 }
                 else if (LABEL_EXPR.equals(item.getLocalName())) {
                     labels.add(item.getTextContent());
@@ -85,19 +85,19 @@ public abstract class TmchAbstractMark {
         this.markName = markName;
     }
 
-    public List<TmchHolder> getHolders() {
+    public List<MarkHolder> getHolders() {
         return holders;
     }
 
-    public void setHolders(List<TmchHolder> holders) {
+    public void setHolders(List<MarkHolder> holders) {
         this.holders = holders;
     }
 
-    public List<TmchContact> getContacts() {
+    public List<MarkContact> getContacts() {
         return contacts;
     }
 
-    public void setContacts(List<TmchContact> contacts) {
+    public void setContacts(List<MarkContact> contacts) {
         this.contacts = contacts;
     }
 

@@ -12,17 +12,17 @@ import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Element;
 
-public class TmchSignedMarkDataTest extends TmchAbstractTest {
-    private TmchSignedMarkData tmchSignedMarkData;
+public class SignedMarkDataTest extends MarkAbstractTest {
+    private SignedMarkData signedMarkData;
 
     private Date notBefore;
     private Date notAfter;
 
     @Before
     public void setUp() throws Exception {
-        tmchSignedMarkData = new TmchSignedMarkData();
+        signedMarkData = new SignedMarkData();
 
-        tmchSignedMarkData.fromXML(new XMLDocument((Element) xmlDocument.getElement("/smd:signedMark")));
+        signedMarkData.fromXML(new XMLDocument((Element) xmlDocument.getElement("/smd:signedMark")));
 
         notBefore = DatatypeConverter.parseDate("2009-08-16T09:00:00.0Z").getTime();
         notAfter = DatatypeConverter.parseDate("2010-08-16T09:00:00.0Z").getTime();
@@ -30,19 +30,19 @@ public class TmchSignedMarkDataTest extends TmchAbstractTest {
 
     @Test
     public void shouldPopulateBeanFromXml() {
-        assertEquals(tmchSignedMarkData.getId(), "1-2");
-        assertNotNull(tmchSignedMarkData.getTmchSmdIssuerInfo());
-        assertEquals(tmchSignedMarkData.getNotBefore(), notBefore);
-        assertEquals(tmchSignedMarkData.getNotAfter(), notAfter);
-        assertNotNull(tmchSignedMarkData.getTmchMark());
+        assertEquals(signedMarkData.getId(), "1-2");
+        assertNotNull(signedMarkData.getSmdIssuerInfo());
+        assertEquals(signedMarkData.getNotBefore(), notBefore);
+        assertEquals(signedMarkData.getNotAfter(), notAfter);
+        assertNotNull(signedMarkData.getMarksList());
     }
 
     @Test
     public void shouldValidateBeforeDate() throws ParseException {
         Date validBeforeDate = DatatypeConverter.parseDate("2009-08-16T09:00:00.0Z").getTime();
         Date invalidBeforeDate = DatatypeConverter.parseDate("2009-08-16T08:59:59.9Z").getTime();
-        assertEquals(true, tmchSignedMarkData.isValid(validBeforeDate));
-        assertEquals(false, tmchSignedMarkData.isValid(invalidBeforeDate));
+        assertEquals(true, signedMarkData.isValid(validBeforeDate));
+        assertEquals(false, signedMarkData.isValid(invalidBeforeDate));
 
     }
 
@@ -50,7 +50,7 @@ public class TmchSignedMarkDataTest extends TmchAbstractTest {
     public void shouldValidateAfterDate() throws ParseException {
         Date validAfterDate = DatatypeConverter.parseDate("2010-08-16T09:00:00.0Z").getTime();
         Date invalidAfterDate = DatatypeConverter.parseDate("2010-08-16T09:00:00.1Z").getTime();
-        assertEquals(true, tmchSignedMarkData.isValid(validAfterDate));
-        assertEquals(false, tmchSignedMarkData.isValid(invalidAfterDate));
+        assertEquals(true, signedMarkData.isValid(validAfterDate));
+        assertEquals(false, signedMarkData.isValid(invalidAfterDate));
     }
 }

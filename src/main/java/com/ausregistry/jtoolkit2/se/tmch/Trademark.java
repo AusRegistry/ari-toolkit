@@ -15,7 +15,7 @@ import org.w3c.dom.NodeList;
  * of type "trademarkType" in the "urn:ietf:params:xml:ns:mark-1.0" namespace, defined in the "mark-1.0.xsd" schema.
  *
  */
-public class TmchTrademark extends TmchAbstractMark {
+public class Trademark extends AbstractMark {
 
     private Logger maintLogger = Logger.getLogger(getClass().getPackage().getName() + ".maint");
 

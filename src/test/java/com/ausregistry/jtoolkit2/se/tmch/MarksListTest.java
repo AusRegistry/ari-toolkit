@@ -7,18 +7,18 @@ import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Element;
 
-public class TmchMarkTest extends TmchAbstractTest {
-    private TmchMark tmchMark;
+public class MarksListTest extends MarkAbstractTest {
+    private MarksList marksList;
 
     @Before
     public void setUp() throws Exception {
-        tmchMark = new TmchMark();
+        marksList = new MarksList();
 
-        tmchMark.fromXML(new XMLDocument((Element) xmlDocument.getElement("/smd:signedMark/mark:mark")));
+        marksList.fromXML(new XMLDocument((Element) xmlDocument.getElement("/smd:signedMark/mark:mark")));
     }
 
     @Test
     public void shouldPopulateBeanFromXml() {
-        assertEquals(tmchMark.getMarks().size(), 3);
+        assertEquals(marksList.getMarks().size(), 3);
     }
 }

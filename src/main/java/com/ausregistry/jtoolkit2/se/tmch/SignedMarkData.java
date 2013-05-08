@@ -13,7 +13,7 @@ import org.w3c.dom.Element;
  * defined in the "signedMark-1.0.xsd" schema.
  *
  */
-public class TmchSignedMarkData {
+public class SignedMarkData {
     private Logger maintLogger = Logger.getLogger(getClass().getPackage().getName() + ".maint");
 
     public static final String BASE_EXPR = "/smd:signedMark";
@@ -25,28 +25,28 @@ public class TmchSignedMarkData {
 
     private String id;
 
-    private TmchSmdIssuerInfo tmchSmdIssuerInfo;
+    private SmdIssuerInfo smdIssuerInfo;
 
     private Date notBefore;
 
     private Date notAfter;
 
-    private TmchMark tmchMark;
+    private MarksList marksList;
 
     public void fromXML(final XMLDocument xmlDocument) {
         try {
             id = xmlDocument.getNodeValue(SMD_ID_EXPR);
             Element issuerInfoElement = (Element) xmlDocument.getElement(ISSUER_INFO_EXPR);
             if (issuerInfoElement != null) {
-                tmchSmdIssuerInfo = new TmchSmdIssuerInfo();
-                tmchSmdIssuerInfo.fromXML(new XMLDocument(issuerInfoElement));
+                smdIssuerInfo = new SmdIssuerInfo();
+                smdIssuerInfo.fromXML(new XMLDocument(issuerInfoElement));
             }
             notBefore = DatatypeConverter.parseDate(xmlDocument.getNodeValue(SMD_NOT_BEFORE_EXPR)).getTime();
             notAfter = DatatypeConverter.parseDate(xmlDocument.getNodeValue(SMD_NOT_AFTER_EXPR)).getTime();
             Element markElement = (Element) xmlDocument.getElement(MARK_EXPR);
             if (markElement != null) {
-                tmchMark = new TmchMark();
-                tmchMark.fromXML(new XMLDocument(markElement));
+                marksList = new MarksList();
+                marksList.fromXML(new XMLDocument(markElement));
             }
         } catch (Exception e) {
             maintLogger.warning(e.getMessage());
@@ -62,12 +62,12 @@ public class TmchSignedMarkData {
         this.id = id;
     }
 
-    public TmchSmdIssuerInfo getTmchSmdIssuerInfo() {
-        return tmchSmdIssuerInfo;
+    public SmdIssuerInfo getSmdIssuerInfo() {
+        return smdIssuerInfo;
     }
 
-    public void setTmchSmdIssuerInfo(TmchSmdIssuerInfo tmchSmdIssuerInfo) {
-        this.tmchSmdIssuerInfo = tmchSmdIssuerInfo;
+    public void setSmdIssuerInfo(SmdIssuerInfo smdIssuerInfo) {
+        this.smdIssuerInfo = smdIssuerInfo;
     }
 
     public Date getNotBefore() {
@@ -86,12 +86,12 @@ public class TmchSignedMarkData {
         this.notAfter = notAfter;
     }
 
-    public TmchMark getTmchMark() {
-        return tmchMark;
+    public MarksList getMarksList() {
+        return marksList;
     }
 
-    public void setTmchMark(TmchMark tmchMark) {
-        this.tmchMark = tmchMark;
+    public void setMarksList(MarksList marksList) {
+        this.marksList = marksList;
     }
 
     public boolean isValid(final Date currentDate) {

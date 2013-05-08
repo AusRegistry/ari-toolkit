@@ -4,7 +4,7 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
 import com.ausregistry.jtoolkit2.xml.XMLParser;
 import org.junit.Before;
 
-public abstract class TmchAbstractTest {
+public abstract class MarkAbstractTest {
     private static final String tmchSignedMarkDataXml =
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                     "<smd:signedMark xmlns:smd=\"urn:ietf:params:xml:ns:signedMark-1.0\" id=\"signedMark\">\n" +

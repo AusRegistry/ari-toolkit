@@ -8,7 +8,8 @@ import java.io.InputStreamReader;
 import com.ausregistry.jtoolkit2.xml.ParsingException;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 import com.ausregistry.jtoolkit2.xml.XMLParser;
-import sun.misc.BASE64Decoder;
+import org.apache.commons.codec.DecoderException;
+import org.apache.commons.codec.binary.Base64;
 
 /**
  * This defines the operations to facilitate encoding / decoding signed mark data for tmch.
@@ -39,36 +40,39 @@ public class TmchXMLUtil {
      * @param encodedSignedMarkData Input stream to the base64-encoded data to decode
      * @return The decoded XML SMD data
      * @throws IOException In case the input stream cannot be read
+     * @throws DecoderException In case the stream cannot be decoded
      */
-    public static byte[] decodeSignedMarkData(final InputStream encodedSignedMarkData) throws IOException {
-        return new BASE64Decoder().decodeBuffer(encodedSignedMarkData);
+    public static byte[] decodeSignedMarkData(final InputStream encodedSignedMarkData) throws DecoderException,
+            IOException {
+        return Base64.decodeBase64(loadInputStreamIntoString(encodedSignedMarkData));
     }
 
     /**
-     * Decodes and parses the provided dbase64-encoded input stream and loads it into a TmchSignedMarkData bean
+     * Decodes and parses the provided dbase64-encoded input stream and loads it into a SignedMarkData bean
      * @param decodedSignedMarkData Input stream to the base64-encoded input stream data to decode and parse
-     * @return The loaded TmchSignedMarkData bean
+     * @return The loaded SignedMarkData bean
      * @throws IOException In case the input stream cannot be read
      * @throws ParsingException In case an error occurs while parsing
+     * @throws DecoderException In case the stream cannot be decoded
      */
-    public static TmchSignedMarkData parseEncodedSignedMarkData(final InputStream decodedSignedMarkData) throws
-            IOException, ParsingException {
+    public static SignedMarkData parseEncodedSignedMarkData(final InputStream decodedSignedMarkData) throws
+            IOException, ParsingException, DecoderException {
         return parseDecodedSignedMarkData(new ByteArrayInputStream(decodeSignedMarkData(decodedSignedMarkData)));
     }
 
     /**
-     * Parses the provided decoded XML SMD data and loads it into a TmchSignedMarkData bean
+     * Parses the provided decoded XML SMD data and loads it into a SignedMarkData bean
      * @param decodedSignedMarkData Input stream to the decoded XML SMD data to parse
-     * @return The loaded TmchSignedMarkData bean
+     * @return The loaded SignedMarkData bean
      * @throws IOException In case the input stream cannot be read
      * @throws ParsingException In case an error occurs while parsing
      */
-    public static TmchSignedMarkData parseDecodedSignedMarkData(final InputStream decodedSignedMarkData) throws
+    public static SignedMarkData parseDecodedSignedMarkData(final InputStream decodedSignedMarkData) throws
             IOException, ParsingException {
         XMLDocument xmlDocument = parser.parse(loadInputStreamIntoString(decodedSignedMarkData));
-        TmchSignedMarkData tmchSignedMarkData = new TmchSignedMarkData();
-        tmchSignedMarkData.fromXML(xmlDocument);
-        return tmchSignedMarkData;
+        SignedMarkData signedMarkData = new SignedMarkData();
+        signedMarkData.fromXML(xmlDocument);
+        return signedMarkData;
     }
 
     private static String loadInputStreamIntoString(InputStream inputStream) throws IOException {

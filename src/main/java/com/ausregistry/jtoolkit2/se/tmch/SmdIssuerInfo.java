@@ -11,7 +11,7 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
  * defined in the "signedMark-1.0.xsd" schema.
  *
  */
-public class TmchSmdIssuerInfo {
+public class SmdIssuerInfo {
     private Logger maintLogger = Logger.getLogger(getClass().getPackage().getName() + ".maint");
 
     private static final String ISSUER_INFO_ID_EXPR = "@issuerID";

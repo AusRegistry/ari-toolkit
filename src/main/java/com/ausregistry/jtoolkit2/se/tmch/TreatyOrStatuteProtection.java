@@ -11,7 +11,7 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
  * defined in the "mark-1.0.xsd" schema.
  *
  */
-public class TmchProtection {
+public class TreatyOrStatuteProtection {
     private Logger maintLogger = Logger.getLogger(getClass().getPackage().getName() + ".maint");
 
     private static final String RULING_EXPR = "@ruling";

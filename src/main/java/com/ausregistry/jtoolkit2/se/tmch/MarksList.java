@@ -15,48 +15,48 @@ import org.w3c.dom.NodeList;
  * of type "markType" in the "urn:ietf:params:xml:ns:mark-1.0" namespace, defined in the "mark-1.0.xsd" schema.
  *
  */
-public class TmchMark {
+public class MarksList {
     private Logger maintLogger = Logger.getLogger(getClass().getPackage().getName() + ".maint");
 
     private static final String TRADEMARK_NODE_LOCAL_NAME = "trademark";
     private static final String TREATY_OR_STATUTE_NODE_LOCAL_NAME = "treatyOrStatute";
     private static final String COURT_NODE_LOCAL_NAME = "court";
 
-    private List<TmchAbstractMark> marks;
+    private List<AbstractMark> marks;
 
     public void fromXML(XMLDocument xmlDocument) {
         try {
             Node element = xmlDocument.getElement(".");
             NodeList childNodes = element.getChildNodes();
-            marks = new ArrayList<TmchAbstractMark>(childNodes.getLength());
+            marks = new ArrayList<AbstractMark>(childNodes.getLength());
             for (int i = 0; i < childNodes.getLength(); i++) {
                 Node item = childNodes.item(i);
-                TmchAbstractMark tmchAbstractMark;
+                AbstractMark abstractMark;
                 if (TRADEMARK_NODE_LOCAL_NAME.equals(item.getLocalName())) {
-                    tmchAbstractMark = new TmchTrademark();
+                    abstractMark = new Trademark();
                 }
                 else if (TREATY_OR_STATUTE_NODE_LOCAL_NAME.equals(item.getLocalName())) {
-                    tmchAbstractMark = new TmchTreatyOrStatute();
+                    abstractMark = new TreatyOrStatute();
                 }
                 else if (COURT_NODE_LOCAL_NAME.equals(item.getLocalName())) {
-                    tmchAbstractMark = new TmchCourt();
+                    abstractMark = new CourtValidatedMark();
                 }
                 else {
                     continue;
                 }
-                tmchAbstractMark.fromXML(new XMLDocument((Element) item));
-                marks.add(tmchAbstractMark);
+                abstractMark.fromXML(new XMLDocument((Element) item));
+                marks.add(abstractMark);
             }
         } catch (XPathExpressionException e) {
             maintLogger.warning(e.getMessage());
         }
     }
 
-    public List<? extends TmchAbstractMark> getMarks() {
+    public List<? extends AbstractMark> getMarks() {
         return marks;
     }
 
-    public void setMarks(List<TmchAbstractMark> marks) {
+    public void setMarks(List<AbstractMark> marks) {
         this.marks = marks;
     }
 }

@@ -15,11 +15,11 @@ import org.w3c.dom.NodeList;
  * in the "urn:ietf:params:xml:ns:mark-1.0" namespace, defined in the "mark-1.0.xsd" schema.
  *
  */
-public class TmchAddress {
+public class MarkAddress {
 
     private Logger maintLogger = Logger.getLogger(getClass().getPackage().getName() + ".maint");
 
-    private static final String STREET_EXPR = "street";
+    private static final String STREET_NODE_LOCAL_NAME = "street";
     private static final String CITY_EXPR = "mark:city/text()";
     private static final String SP_EXPR = "mark:sp/text()";
     private static final String PC_EXPR = "mark:pc/text()";
@@ -82,7 +82,7 @@ public class TmchAddress {
             NodeList childNodes = element.getChildNodes();
             for (int i = 0; i < childNodes.getLength(); i++) {
                 Node item = childNodes.item(i);
-                if (STREET_EXPR.equals(item.getLocalName())) {
+                if (STREET_NODE_LOCAL_NAME.equals(item.getLocalName())) {
                     streets.add(item.getTextContent());
                 }
             }

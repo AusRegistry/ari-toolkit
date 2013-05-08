@@ -6,6 +6,6 @@ package com.ausregistry.jtoolkit2.se.tmch;
  * in the "urn:ietf:params:xml:ns:mark-1.0" namespace, defined in the "mark-1.0.xsd" schema.
  *
  */
-public enum TmchEntitlement {
+public enum MarkHolderEntitlement {
     owner, assignee, licensee;
 }
