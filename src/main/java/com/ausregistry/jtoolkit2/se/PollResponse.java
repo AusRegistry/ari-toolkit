@@ -5,6 +5,10 @@ import javax.xml.xpath.XPathExpressionException;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+import com.ausregistry.jtoolkit2.se.generic.DomainInfoKVResponseExtension;
+import com.ausregistry.jtoolkit2.se.idn.DomainInfoIdnResponseExtension;
+import com.ausregistry.jtoolkit2.se.rgp.DomainInfoRgpResponseExtension;
+import com.ausregistry.jtoolkit2.se.secdns.SecDnsDomainInfoResponseExtension;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 
 /**
@@ -39,6 +43,11 @@ public class PollResponse extends Response {
     private ContactInfoResponse conInfoResponse;
     private HostInfoResponse hostInfoResponse;
     private Response resDataResponse = null;
+    private DomainInfoIdnResponseExtension domainInfoIdnResponseExtension;
+    private SecDnsDomainInfoResponseExtension secDnsDomainInfoResponseExtension;
+    private DomainVariantResponseExtensionV1_1 variantResponseExtension1_1;
+    private DomainInfoRgpResponseExtension rgpDomainInfoResponseExtension;
+    private DomainInfoKVResponseExtension kvDomainInfoResponseExtension;
 
     public PollResponse() {
     }
@@ -116,6 +125,7 @@ public class PollResponse extends Response {
                     resDataResponse = domTrnResponse;
                 } else if (childName.equals(INF_DATA)) {
                     domInfoResponse = new DomainInfoResponse();
+                    initialiseExtensions();
                     domInfoResponse.fromXML(xmlDoc);
                     resDataResponse = domInfoResponse;
                 }
@@ -148,6 +158,19 @@ public class PollResponse extends Response {
         debugLogger.finest("exit");
     }
 
+    private void initialiseExtensions() {
+        domainInfoIdnResponseExtension = new DomainInfoIdnResponseExtension();
+        secDnsDomainInfoResponseExtension = new SecDnsDomainInfoResponseExtension();
+        variantResponseExtension1_1 = new DomainVariantResponseExtensionV1_1(ResponseExtension.INFO);
+        rgpDomainInfoResponseExtension = new DomainInfoRgpResponseExtension(ResponseExtension.INFO);
+        kvDomainInfoResponseExtension = new DomainInfoKVResponseExtension();
+        domInfoResponse.registerExtension(domainInfoIdnResponseExtension);
+        domInfoResponse.registerExtension(secDnsDomainInfoResponseExtension);
+        domInfoResponse.registerExtension(variantResponseExtension1_1);
+        domInfoResponse.registerExtension(rgpDomainInfoResponseExtension);
+        domInfoResponse.registerExtension(kvDomainInfoResponseExtension);
+    }
+
     private boolean isResDataAvailable() {
         return resDataResponse != null;
     }
@@ -159,6 +182,26 @@ public class PollResponse extends Response {
         } else {
             return super.toString();
         }
+    }
+
+    public DomainInfoIdnResponseExtension getIdnDomainInfoResponseExtension() {
+        return domainInfoIdnResponseExtension;
+    }
+
+    public SecDnsDomainInfoResponseExtension getSecDnsDomainInfoResponseExtension() {
+        return secDnsDomainInfoResponseExtension;
+    }
+
+    public DomainVariantResponseExtensionV1_1 getVariantDomainInfoResponseExtensionV1_1() {
+        return variantResponseExtension1_1;
+    }
+
+    public DomainInfoRgpResponseExtension getRgpDomainInfoResponseExtension() {
+        return rgpDomainInfoResponseExtension;
+    }
+
+    public DomainInfoKVResponseExtension getKvDomainInfoResponseExtension() {
+        return kvDomainInfoResponseExtension;
     }
 }
 
