@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="urn:ar:params:xml:ns:exAvail-1.0"
+        xmlns:exAvail="urn:ar:params:xml:ns:exAvail-1.0"
+        xmlns:eppcom="urn:ietf:params:xml:ns:eppcom-1.0"
+        xmlns="http://www.w3.org/2001/XMLSchema"
+        elementFormDefault="qualified">
+
+    <import namespace="urn:ietf:params:xml:ns:eppcom-1.0" />
+
+    <!-- Custom Extensions found in EPP commands. -->
+    <element name="check"/>
+
+    <!--
+     Child response elements.
+     -->
+    <element name="chkData" type="exAvail:chkDataType" />
+
+    <complexType name="chkDataType">
+        <sequence>
+            <element name="cd" type="exAvail:checkType" maxOccurs="unbounded" />
+        </sequence>
+    </complexType>
+
+    <complexType name="checkType">
+        <sequence>
+            <element name="name" type="eppcom:labelType" />
+            <element name="state" type="exAvail:checkStateType" />
+        </sequence>
+    </complexType>
+
+    <complexType name="checkStateType">
+        <choice>
+            <sequence>
+                <element name="reason" type="eppcom:reasonType"/>
+            </sequence>
+            <sequence>
+                <element name="phase" type="eppcom:labelType" minOccurs="0"/>
+                <element name="date" type="dateTime" minOccurs="0"/>
+            </sequence>
+            <sequence>
+                <element name="primaryDomainName" type="eppcom:labelType"/>
+            </sequence>
+        </choice>
+        <attribute name="s" type="exAvail:stateValueType"
+                   use="required"/>
+    </complexType>
+
+
+    <simpleType name="stateValueType">
+        <restriction base="token">
+            <enumeration value="available"/>
+            <enumeration value="application"/>
+            <enumeration value="unavailable"/>
+            <enumeration value="reserved"/>
+            <enumeration value="invalid"/>
+            <enumeration value="activatedVariant"/>
+            <enumeration value="withheldVariant"/>
+            <enumeration value="blockedVariant"/>
+            <enumeration value="pendingCreate"/>
+        </restriction>
+    </simpleType>
+</schema>
