@@ -1,4 +1,4 @@
-package com.ausregistry.jtoolkit2.se.premium;
+package com.ausregistry.jtoolkit2.se.price;
 
 import static org.junit.Assert.*;
 
@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.ausregistry.jtoolkit2.se.PeriodUnit;
-import com.ausregistry.jtoolkit2.se.price.DomainCheckPriceResponseExtension;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 import com.ausregistry.jtoolkit2.xml.XMLParser;
 

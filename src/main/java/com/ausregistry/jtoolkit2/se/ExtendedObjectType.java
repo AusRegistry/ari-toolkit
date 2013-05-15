@@ -25,9 +25,8 @@ public enum ExtendedObjectType implements ObjectType {
     APP ("app", "urn:ar:params:xml:ns:application-1.0", "application-1.0.xsd", "name"),
     /** References the internationalised domain name extension XML namespace and schema file */
     IDN ("idn", "urn:ar:params:xml:ns:idn-1.0", "idn-1.0.xsd", "name"),
-    /** References the premium domain name extension XML namespace and schema file */
-    PREMIUM ("premium", "urn:ar:params:xml:ns:premium-1.1", "premium-1.1.xsd", "name"),
     TMCH("tmch", "urn:ar:params:xml:ns:tmch-1.0", "tmch-1.0.xsd", "name"),
+    /** References the domain name price extension XML namespace and schema file */
     PRICE ("price", "urn:ar:params:xml:ns:price-1.0", "price-1.0.xsd", "name"),
     EX_AVAIL ("exAvail", "urn:ar:params:xml:ns:exAvail-1.0", "exAvail-1.0.xsd", "name");
 

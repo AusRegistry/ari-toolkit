@@ -1,4 +1,4 @@
-package com.ausregistry.jtoolkit2.se.premium;
+package com.ausregistry.jtoolkit2.se.price;
 
 import java.math.BigDecimal;
 
@@ -13,19 +13,19 @@ import com.ausregistry.jtoolkit2.xml.XMLWriter;
 
 /**
  * <p>Extension for the EPP Domain Create command, representing the Create Premium Domain aspect of the
- * Premium Domain Name Extension.</p>
+ * Domain Name Price Extension.</p>
  *
- * <p>Use this to acknowledge the premium fees associated with this domain name as part of an EPP Domain Create
+ * <p>Use this to acknowledge the price associated with this domain name as part of an EPP Domain Create
  * command compliant with RFC5730 and RFC5731. The "price" and "renewal price" values are optional, but if they are
  * supplied, should match the fees that are set for the domain name for the requested period.
  * The response expected from a server should be handled by a Domain Create Response.</p>
  *
  * @see DomainCreateCommand
  * @see DomainCreateResponse
- * @see <a href="http://ausregistry.github.io/doc/premium-1.1/premium-1.1.html">Premium Domain Name Extension
+ * @see <a href="http://ausregistry.github.io/doc/price-1.0/price-1.0.html">Domain Name Price Extension
  * Mapping for the Extensible Provisioning Protocol (EPP)</a>
  */
-public class DomainCreatePremiumCommandExtension implements CommandExtension {
+public class DomainCreatePriceCommandExtension implements CommandExtension {
 
     private static final long serialVersionUID = 2782521830455586062L;
 
@@ -37,7 +37,7 @@ public class DomainCreatePremiumCommandExtension implements CommandExtension {
         final XMLWriter xmlWriter = command.getXmlWriter();
         final Element extensionElement = command.getExtensionElement();
         final Element createElement = xmlWriter.appendChild(extensionElement, "create",
-                ExtendedObjectType.PREMIUM.getURI());
+                ExtendedObjectType.PRICE.getURI());
         Element ackElement = xmlWriter.appendChild(createElement, "ack");
         if (price != null) {
             xmlWriter.appendChild(ackElement, "price").setTextContent(price.toPlainString());

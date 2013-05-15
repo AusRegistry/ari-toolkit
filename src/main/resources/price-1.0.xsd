@@ -11,12 +11,28 @@
 
     <!-- command-response extension elements -->
     <element name="check" type="price:chkType" />
-	
-	<complexType name="chkType">
+	<element name="create" type="price:ackType" />
+    <element name="renew" type="price:ackType" />
+    <element name="transfer" type="price:ackType" />
+
+    <complexType name="chkType">
 		<sequence>
 			<element name="period" type="domain:periodType" minOccurs="0" />
 		</sequence>
 	</complexType>
+	
+	<complexType name="ackType">
+        <sequence>
+            <element name="ack" type="price:priceAckType" />
+        </sequence>
+    </complexType>
+
+    <complexType name="priceAckType">
+        <sequence>
+            <element name="price" type="decimal" minOccurs="0" />
+            <element name="renewalPrice" type="decimal" minOccurs="0" />
+        </sequence>
+    </complexType>
 	
 	<!-- response elements -->
 	<element name="chkData" type="price:chkDataType" />

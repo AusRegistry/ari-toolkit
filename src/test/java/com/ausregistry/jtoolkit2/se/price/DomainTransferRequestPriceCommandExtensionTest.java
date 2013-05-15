@@ -1,4 +1,4 @@
-package com.ausregistry.jtoolkit2.se.premium;
+package com.ausregistry.jtoolkit2.se.price;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -11,7 +11,7 @@ import com.ausregistry.jtoolkit2.Timer;
 import com.ausregistry.jtoolkit2.se.CLTRID;
 import com.ausregistry.jtoolkit2.se.DomainTransferRequestCommand;
 
-public class DomainTransferRequestPremiumCommandExtensionTest {
+public class DomainTransferRequestPriceCommandExtensionTest {
 
     private final static String DOMAIN_TRANSFER_REQUEST_ACK_NO_PRICE_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
             + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
@@ -27,7 +27,7 @@ public class DomainTransferRequestPremiumCommandExtensionTest {
             + "</transfer>"
             + "</transfer>"
             + "<extension>"
-            + "<transfer xmlns=\"urn:ar:params:xml:ns:premium-1.1\">"
+            + "<transfer xmlns=\"urn:ar:params:xml:ns:price-1.0\">"
             + "<ack/>"
             + "</transfer>"
             + "</extension>"
@@ -49,7 +49,7 @@ public class DomainTransferRequestPremiumCommandExtensionTest {
             + "</transfer>"
             + "</transfer>"
             + "<extension>"
-            + "<transfer xmlns=\"urn:ar:params:xml:ns:premium-1.1\">"
+            + "<transfer xmlns=\"urn:ar:params:xml:ns:price-1.0\">"
             + "<ack>"
             + "<renewalPrice>100.00</renewalPrice>"
             + "</ack>"
@@ -60,7 +60,7 @@ public class DomainTransferRequestPremiumCommandExtensionTest {
             + "</epp>";
 
     private DomainTransferRequestCommand domainTransferRequestCommand;
-    private DomainTransferRequestPremiumCommandExtension domainTransferRequestPremiumCommandExtension;
+    private DomainTransferRequestPriceCommandExtension domainTransferRequestPriceCommandExtension;
 
     @Before
     public void setUp() {
@@ -68,21 +68,21 @@ public class DomainTransferRequestPremiumCommandExtensionTest {
         CLTRID.setClID("JTKUTEST");
 
         domainTransferRequestCommand = new DomainTransferRequestCommand("premium.example", "2fooBAR");
-        domainTransferRequestPremiumCommandExtension = new DomainTransferRequestPremiumCommandExtension();
+        domainTransferRequestPriceCommandExtension = new DomainTransferRequestPriceCommandExtension();
     }
 
     @Test
-    public void shouldCreateDomainTransferRequestXmlWithPremiumAckAndNoRenewalPrice() throws Exception {
-        domainTransferRequestCommand.appendExtension(domainTransferRequestPremiumCommandExtension);
+    public void shouldCreateDomainTransferRequestXmlWithPriceAckAndNoRenewalPrice() throws Exception {
+        domainTransferRequestCommand.appendExtension(domainTransferRequestPriceCommandExtension);
 
         assertEquals(DOMAIN_TRANSFER_REQUEST_ACK_NO_PRICE_XML, domainTransferRequestCommand.toXML());
     }
 
     @Test
-    public void shouldCreateDomainTransferRequestXmlWithPremiumAckIncludingRenewalPrices() throws Exception {
+    public void shouldCreateDomainTransferRequestXmlWithPriceAckIncludingRenewalPrices() throws Exception {
 
-        domainTransferRequestPremiumCommandExtension.setRenewalPrice(BigDecimal.valueOf(10000, 2));
-        domainTransferRequestCommand.appendExtension(domainTransferRequestPremiumCommandExtension);
+        domainTransferRequestPriceCommandExtension.setRenewalPrice(BigDecimal.valueOf(10000, 2));
+        domainTransferRequestCommand.appendExtension(domainTransferRequestPriceCommandExtension);
 
         assertEquals(DOMAIN_TRANSFER_REQUEST_ACK_RENEW_PRICE_XML, domainTransferRequestCommand.toXML());
     }

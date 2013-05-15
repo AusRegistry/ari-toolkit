@@ -1,4 +1,4 @@
-package com.ausregistry.jtoolkit2.se.premium;
+package com.ausregistry.jtoolkit2.se.price;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -8,9 +8,8 @@ import org.xml.sax.SAXException;
 
 import com.ausregistry.jtoolkit2.Timer;
 import com.ausregistry.jtoolkit2.se.*;
-import com.ausregistry.jtoolkit2.se.price.DomainCheckPricingCommandExtension;
 
-public class DomainCheckPricingCommandExtensionTest {
+public class DomainCheckPriceCommandExtensionTest {
 
     @Before
     public void setUp() throws Exception {

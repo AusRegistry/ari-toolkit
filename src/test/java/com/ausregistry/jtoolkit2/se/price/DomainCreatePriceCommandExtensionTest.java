@@ -1,4 +1,4 @@
-package com.ausregistry.jtoolkit2.se.premium;
+package com.ausregistry.jtoolkit2.se.price;
 
 import static org.junit.Assert.assertEquals;
 
@@ -11,7 +11,7 @@ import com.ausregistry.jtoolkit2.Timer;
 import com.ausregistry.jtoolkit2.se.CLTRID;
 import com.ausregistry.jtoolkit2.se.DomainCreateCommand;
 
-public class DomainCreatePremiumCommandExtensionTest {
+public class DomainCreatePriceCommandExtensionTest {
 
     private final static String DOMAIN_CREATE_ACK_NO_PRICE_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
             + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
@@ -27,7 +27,7 @@ public class DomainCreatePremiumCommandExtensionTest {
             + "</create>"
             + "</create>"
             + "<extension>"
-            + "<create xmlns=\"urn:ar:params:xml:ns:premium-1.1\">"
+            + "<create xmlns=\"urn:ar:params:xml:ns:price-1.0\">"
             + "<ack/>"
             + "</create>"
             + "</extension>"
@@ -49,7 +49,7 @@ public class DomainCreatePremiumCommandExtensionTest {
             + "</create>"
             + "</create>"
             + "<extension>"
-            + "<create xmlns=\"urn:ar:params:xml:ns:premium-1.1\">"
+            + "<create xmlns=\"urn:ar:params:xml:ns:price-1.0\">"
             + "<ack>"
             + "<price>100.00</price>"
             + "</ack>"
@@ -73,7 +73,7 @@ public class DomainCreatePremiumCommandExtensionTest {
             + "</create>"
             + "</create>"
             + "<extension>"
-            + "<create xmlns=\"urn:ar:params:xml:ns:premium-1.1\">"
+            + "<create xmlns=\"urn:ar:params:xml:ns:price-1.0\">"
             + "<ack>"
             + "<renewalPrice>95.90</renewalPrice>"
             + "</ack>"
@@ -97,7 +97,7 @@ public class DomainCreatePremiumCommandExtensionTest {
             + "</create>"
             + "</create>"
             + "<extension>"
-            + "<create xmlns=\"urn:ar:params:xml:ns:premium-1.1\">"
+            + "<create xmlns=\"urn:ar:params:xml:ns:price-1.0\">"
             + "<ack>"
             + "<price>100.00</price>"
             + "<renewalPrice>90.95</renewalPrice>"
@@ -109,7 +109,7 @@ public class DomainCreatePremiumCommandExtensionTest {
             + "</epp>";
 
     private DomainCreateCommand domainCreateCommand;
-    private DomainCreatePremiumCommandExtension domainCreatePremiumCommandExtension;
+    private DomainCreatePriceCommandExtension domainCreatePriceCommandExtension;
 
     @Before
     public void setUp() throws Exception {
@@ -117,37 +117,37 @@ public class DomainCreatePremiumCommandExtensionTest {
         CLTRID.setClID("JTKUTEST");
 
         domainCreateCommand = new DomainCreateCommand("premium.example", "2fooBAR");
-        domainCreatePremiumCommandExtension = new DomainCreatePremiumCommandExtension();
+        domainCreatePriceCommandExtension = new DomainCreatePriceCommandExtension();
     }
 
     @Test
-    public void shouldCreateDomainCreateXmlWithPremiumAckAndNoPrices() throws Exception {
-        domainCreateCommand.appendExtension(domainCreatePremiumCommandExtension);
+    public void shouldCreateDomainCreateXmlWithPriceAckAndNoPrices() throws Exception {
+        domainCreateCommand.appendExtension(domainCreatePriceCommandExtension);
 
         assertEquals(DOMAIN_CREATE_ACK_NO_PRICE_XML, domainCreateCommand.toXML());
     }
 
     @Test
-    public void shouldCreateDomainCreateXmlWithPremiumAckAndCreatePrice() throws Exception {
-        domainCreatePremiumCommandExtension.setPrice(BigDecimal.valueOf(10000, 2));
-        domainCreateCommand.appendExtension(domainCreatePremiumCommandExtension);
+    public void shouldCreateDomainCreateXmlWithPriceAckAndCreatePrice() throws Exception {
+        domainCreatePriceCommandExtension.setPrice(BigDecimal.valueOf(10000, 2));
+        domainCreateCommand.appendExtension(domainCreatePriceCommandExtension);
 
         assertEquals(DOMAIN_CREATE_ACK_CREATE_PRICE_ONLY_XML, domainCreateCommand.toXML());
     }
 
     @Test
-    public void shouldCreateDomainCreateXmlWithPremiumAckAndRenewalPrice() throws Exception {
-        domainCreatePremiumCommandExtension.setRenewalPrice(BigDecimal.valueOf(9590, 2));
-        domainCreateCommand.appendExtension(domainCreatePremiumCommandExtension);
+    public void shouldCreateDomainCreateXmlWithPriceAckAndRenewalPrice() throws Exception {
+        domainCreatePriceCommandExtension.setRenewalPrice(BigDecimal.valueOf(9590, 2));
+        domainCreateCommand.appendExtension(domainCreatePriceCommandExtension);
 
         assertEquals(DOMAIN_CREATE_ACK_RENEW_PRICE_ONLY_XML, domainCreateCommand.toXML());
     }
 
     @Test
-    public void shouldCreateDomainCreateXmlWithPremiumAckAndBothPrices() throws Exception {
-        domainCreatePremiumCommandExtension.setPrice(BigDecimal.valueOf(10000, 2));
-        domainCreatePremiumCommandExtension.setRenewalPrice(BigDecimal.valueOf(9095, 2));
-        domainCreateCommand.appendExtension(domainCreatePremiumCommandExtension);
+    public void shouldCreateDomainCreateXmlWithPriceAckAndBothPrices() throws Exception {
+        domainCreatePriceCommandExtension.setPrice(BigDecimal.valueOf(10000, 2));
+        domainCreatePriceCommandExtension.setRenewalPrice(BigDecimal.valueOf(9095, 2));
+        domainCreateCommand.appendExtension(domainCreatePriceCommandExtension);
 
         assertEquals(DOMAIN_CREATE_ACK_BOTH_PRICE_XML, domainCreateCommand.toXML());
     }
