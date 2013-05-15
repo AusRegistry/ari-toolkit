@@ -1,17 +1,17 @@
 package com.ausregistry.jtoolkit2.se.tmch;
 
-import javax.xml.xpath.XPathExpressionException;
-
 import java.util.HashMap;
 import java.util.Map;
 
-import com.ausregistry.jtoolkit2.se.DataResponse;
-import com.ausregistry.jtoolkit2.se.StandardCommandType;
-import com.ausregistry.jtoolkit2.se.StandardObjectType;
+import javax.xml.xpath.XPathExpressionException;
+
+import com.ausregistry.jtoolkit2.se.ResponseExtension;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 
+import static com.ausregistry.jtoolkit2.se.ReceiveSE.replaceIndex;
+
 /**
- * <p>Representation of the EPP Domain Check response with the Claims key Check aspect of the
+ * <p>Representation of the EPP Domain Check response Extension with the Claims key Check aspect of the
  * Domain Name Trademark Clearing extension.</p>
  *
  * <p>Use this to get claims key for domain name during Trademark Clearing House Claims Period as provided
@@ -26,23 +26,24 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
  * @see <a href="http://ausregistry.github.io/doc/tmch-1.0/tmch-1.0.html">Trademark Clearinghouse Extension
  * Mapping for the Extensible Provisioning Protocol (EPP)</a>
  */
-public class TmchDomainCheckResponse extends DataResponse {
+public class TmchDomainCheckResponseExtension extends ResponseExtension {
 
-    private static final long serialVersionUID = -4688040539262792950L;
+    private static final long serialVersionUID = -1696245785014202518L;
 
-    private static final String CHKDATA_COUNT_EXPR = "count(" + RES_DATA_EXPR
+    private static final String CHKDATA_COUNT_EXPR = "count(" + EXTENSION_EXPR
             + "/tmch:chkData/*)";
-    private static final String CHKDATA_IND_EXPR = RES_DATA_EXPR
+    private static final String CHKDATA_IND_EXPR = EXTENSION_EXPR
             + "/tmch:chkData/tmch:cd[IDX]";
     private static final String CHKDATA_DOMAIN_NAME_EXPR = "/tmch:name/text()";
-    private static final String CHKDATA_EXISTS_VALUE_EXPR = "/tmch:name/@exists";
+    private static final String CHKDATA_EXISTS_VALUE_EXPR = "/tmch:name/@claim";
     private static final String CHKDATA_CLAIMS_KEY_EXPR = "/tmch:key/text()";
 
     private Map<String, ClaimsInfo> claimsNameMap;
     private Map<Long, ClaimsInfo> claimsIndexMap;
 
-    public TmchDomainCheckResponse() {
-        super(StandardCommandType.CHECK, StandardObjectType.DOMAIN);
+    private boolean isInitialised;
+
+    public TmchDomainCheckResponseExtension() {
         claimsNameMap = new HashMap<String, ClaimsInfo>();
         claimsIndexMap = new HashMap<Long, ClaimsInfo>();
     }
@@ -51,23 +52,19 @@ public class TmchDomainCheckResponse extends DataResponse {
      * @param xmlDoc the XML to be processed
      */
     @Override
-    public final void fromXML(XMLDocument xmlDoc) {
-        super.fromXML(xmlDoc);
-        if (!resultArray[0].succeeded()) {
-            return;
+    public final void fromXML(XMLDocument xmlDoc) throws XPathExpressionException {
+        int cdCount = xmlDoc.getNodeCount(CHKDATA_COUNT_EXPR);
+        for (int i = 0; i < cdCount; i++) {
+            processElement(xmlDoc, i);
         }
-        try {
-            int cdCount = xmlDoc.getNodeCount(CHKDATA_COUNT_EXPR);
-            for (int i = 0; i < cdCount; i++) {
-                processElement(xmlDoc, i);
-            }
-        } catch (XPathExpressionException xpee) {
-            maintLogger.warning(xpee.getMessage());
-        } catch (NumberFormatException nfe) {
-            maintLogger.warning(nfe.getMessage());
-        } catch (NullPointerException npe) {
-            maintLogger.warning(npe.getMessage());
+        if (cdCount > 0) {
+            isInitialised = true;
         }
+    }
+
+    @Override
+    public boolean isInitialised() {
+        return isInitialised;
     }
 
     private void processElement(XMLDocument xmlDoc, int i) throws XPathExpressionException {

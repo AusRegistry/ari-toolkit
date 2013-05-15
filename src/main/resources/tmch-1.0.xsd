@@ -51,7 +51,7 @@
     <complexType name="checkNameType">
         <simpleContent>
             <extension base="eppcom:labelType">
-                <attribute name="exists" type="boolean" use="required" />
+                <attribute name="claim" type="boolean" use="required" />
             </extension>
         </simpleContent>
     </complexType>
