@@ -54,8 +54,9 @@ public class DomainInfoApplicationResponseExtension extends ResponseExtension {
         
         applicationId = xmlDoc.getNodeValue(replaceResponseType(APPLICATION_ID, responseType));
         phase = xmlDoc.getNodeValue(replaceResponseType(PHASE_ID, responseType));
-        statuses = Arrays.asList(xmlDoc.getNodeValues(replaceResponseType(STATUS_EXPR, responseType)));
-
+        if (xmlDoc.getNodeValues(replaceResponseType(STATUS_EXPR, responseType)) != null) {
+            statuses = Arrays.asList(xmlDoc.getNodeValues(replaceResponseType(STATUS_EXPR, responseType)));
+        }
         initialised = applicationId!= null && phase != null && statuses != null;
     }
 

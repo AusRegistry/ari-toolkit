@@ -2,6 +2,7 @@ package com.ausregistry.jtoolkit2.se;
 
 import javax.xml.xpath.XPathExpressionException;
 
+import com.ausregistry.jtoolkit2.se.app.DomainInfoApplicationResponseExtension;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
@@ -48,6 +49,7 @@ public class PollResponse extends Response {
     private DomainVariantResponseExtensionV1_1 variantResponseExtension1_1;
     private DomainInfoRgpResponseExtension rgpDomainInfoResponseExtension;
     private DomainInfoKVResponseExtension kvDomainInfoResponseExtension;
+    private DomainInfoApplicationResponseExtension domainInfoApplicationResponseExtension;
 
     public PollResponse() {
     }
@@ -164,11 +166,13 @@ public class PollResponse extends Response {
         variantResponseExtension1_1 = new DomainVariantResponseExtensionV1_1(ResponseExtension.INFO);
         rgpDomainInfoResponseExtension = new DomainInfoRgpResponseExtension(ResponseExtension.INFO);
         kvDomainInfoResponseExtension = new DomainInfoKVResponseExtension();
+        domainInfoApplicationResponseExtension = new DomainInfoApplicationResponseExtension(ResponseExtension.INFO);
         domInfoResponse.registerExtension(domainInfoIdnResponseExtension);
         domInfoResponse.registerExtension(secDnsDomainInfoResponseExtension);
         domInfoResponse.registerExtension(variantResponseExtension1_1);
         domInfoResponse.registerExtension(rgpDomainInfoResponseExtension);
         domInfoResponse.registerExtension(kvDomainInfoResponseExtension);
+        domInfoResponse.registerExtension(domainInfoApplicationResponseExtension);
     }
 
     private boolean isResDataAvailable() {
@@ -202,6 +206,10 @@ public class PollResponse extends Response {
 
     public DomainInfoKVResponseExtension getKvDomainInfoResponseExtension() {
         return kvDomainInfoResponseExtension;
+    }
+
+    public DomainInfoApplicationResponseExtension getDomainInfoApplicationResponseExtension() {
+        return domainInfoApplicationResponseExtension;
     }
 }
 
