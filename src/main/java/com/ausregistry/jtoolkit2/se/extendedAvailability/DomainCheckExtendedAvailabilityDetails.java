@@ -2,6 +2,9 @@ package com.ausregistry.jtoolkit2.se.extendedAvailability;
 
 import java.util.GregorianCalendar;
 
+/**
+ * Contains the extended availability details of a domain returned in a check response extension.
+ */
 public class DomainCheckExtendedAvailabilityDetails {
     private String state;
     private String reason;
@@ -9,83 +12,54 @@ public class DomainCheckExtendedAvailabilityDetails {
     private String phase;
     private String variantPrimaryDomainName;
 
+    /**
+     * @param state the state of the domain label
+     * @param reason the reason for the state
+     * @param date the available date of the domain label
+     * @param phase the name of the phase in which the domain label is available as an application
+     * @param variantPrimaryDomainName the primary domain name for the variant domain label
+     */
     public DomainCheckExtendedAvailabilityDetails(String state, String reason, GregorianCalendar date,
                                                   String phase, String variantPrimaryDomainName) {
+        this.state = state;
+        this.reason = reason;
         this.date = date;
         this.phase = phase;
         this.variantPrimaryDomainName = variantPrimaryDomainName;
-        this.reason = reason;
-        this.state = state;
     }
 
-    public DomainCheckExtendedAvailabilityDetails() {
-    }
-
+    /**
+     * @return the state of the domain label
+     */
     public String getState() {
         return state;
     }
 
-    public void setState(String state) {
-        this.state = state;
-    }
-
+    /**
+     * @return the reason for the state
+     */
     public String getReason() {
         return reason;
     }
 
-    public void setReason(String reason) {
-        this.reason = reason;
-    }
-
+    /**
+     * @return the available date of the domain label
+     */
     public GregorianCalendar getDate() {
         return date;
     }
 
-    public void setDate(GregorianCalendar date) {
-        this.date = date;
-    }
-
+    /**
+     * @return the name of the phase in which the domain label is available as an application
+     */
     public String getPhase() {
         return phase;
     }
 
-    public void setPhase(String phase) {
-        this.phase = phase;
-    }
-
+    /**
+     * @return the primary domain name for the variant domain label
+     */
     public String getVariantPrimaryDomainName() {
         return variantPrimaryDomainName;
-    }
-
-    public void setVariantPrimaryDomainName(String variantPrimaryDomainName) {
-        this.variantPrimaryDomainName = variantPrimaryDomainName;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof DomainCheckExtendedAvailabilityDetails)) return false;
-
-        DomainCheckExtendedAvailabilityDetails that = (DomainCheckExtendedAvailabilityDetails) o;
-
-        if (date != null ? !date.equals(that.date) : that.date != null) return false;
-        if (phase != null ? !phase.equals(that.phase) : that.phase != null) return false;
-        if (variantPrimaryDomainName != null ? !variantPrimaryDomainName.equals(that.variantPrimaryDomainName)
-                : that.variantPrimaryDomainName != null)
-            return false;
-        if (reason != null ? !reason.equals(that.reason) : that.reason != null) return false;
-        if (!state.equals(that.state)) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = state.hashCode();
-        result = 31 * result + (reason != null ? reason.hashCode() : 0);
-        result = 31 * result + (date != null ? date.hashCode() : 0);
-        result = 31 * result + (phase != null ? phase.hashCode() : 0);
-        result = 31 * result + (variantPrimaryDomainName != null ? variantPrimaryDomainName.hashCode() : 0);
-        return result;
     }
 }

@@ -16,7 +16,7 @@ import org.w3c.dom.Element;
  * server should be handled by a Domain Create Application Response.</p>
  *
  * @see DomainCreateCommand
- * @see DomainCreateApplicationResponse
+ * @see com.ausregistry.jtoolkit2.se.app.DomainCreateApplicationResponseExtension
  * @see <a href="http://ausregistry.github.io/doc/application-1.0/application-1.0.html">Domain Name Application
  * Extension Mapping for the Extensible Provisioning Protocol (EPP)</a>
  */

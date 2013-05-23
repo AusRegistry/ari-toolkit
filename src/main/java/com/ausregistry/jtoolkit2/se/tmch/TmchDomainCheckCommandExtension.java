@@ -11,7 +11,7 @@ import org.w3c.dom.Element;
  * Domain Name Trademark Clearing House extension.</p>
  *
  * <p>Use this to express the will to retrieve Lookup key, as part of the result of this command, which is being
- * submitted in as part of an EPP Domain Check command compliant with ???. The response expected
+ * submitted in as part of an EPP Domain Check command. The response expected
  * from a server should be handled by a Domain Check Response.</p>
  *
  * @see com.ausregistry.jtoolkit2.se.DomainCheckCommand

@@ -11,7 +11,20 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * <p>Extended Availability Check response extension for EPP Domain Check command.</p>
+ *
+ * <p>Use this to access "state", "reason", "date", "phase" and "variantPrimaryDomainName" information for domains as
+ * provided in an extension to the EPP Domain Check response. Such a service element is sent by a compliant EPP server
+ * in response to a valid Domain Check command with the Extended Availability Check extension.</p>
+ *
+ * <p>For flexibility, this implementation extracts the data from the response using XPath queries, the expressions
+ * for which are defined statically.</p>
+ *
+ * @see com.ausregistry.jtoolkit2.se.extendedAvailability.DomainCheckExtendedAvailabilityCommandExtension
+ * @see <a href="http://ausregistry.github.io/doc/exAvail-1.0/exAvail-1.0.html">Domain Name Check Extended Availability
+ * Extension Mapping for the Extensible Provisioning Protocol (EPP)</a>
+ */
 public class DomainCheckExtendedAvailabilityResponseExtension extends ResponseExtension {
 
     private static final long serialVersionUID = 5649370730246651621L;
@@ -29,6 +42,9 @@ public class DomainCheckExtendedAvailabilityResponseExtension extends ResponseEx
     private Map<String, DomainCheckExtendedAvailabilityDetails> domainExtAvailabilityStateMap =
             new HashMap<String, DomainCheckExtendedAvailabilityDetails>();
 
+    /**
+     * @param xmlDoc the XML to be processed
+     */
     @Override
     public void fromXML(XMLDocument xmlDoc) throws XPathExpressionException {
         int extAvailStateCount = xmlDoc.getNodeCount(CHKDATA_COUNT_EXPR);
@@ -44,12 +60,8 @@ public class DomainCheckExtendedAvailabilityResponseExtension extends ResponseEx
             String variantPrimaryDomainName = xmlDoc.getNodeValue(qry + CHKDATA_DOMAIN_STATE_PRIMARY_DOMAIN_NAME_EXPR);
 
             DomainCheckExtendedAvailabilityDetails extAvailabilityDetails =
-                    new DomainCheckExtendedAvailabilityDetails();
-            extAvailabilityDetails.setState(domainState);
-            extAvailabilityDetails.setDate(date);
-            extAvailabilityDetails.setReason(reason);
-            extAvailabilityDetails.setPhase(phase);
-            extAvailabilityDetails.setVariantPrimaryDomainName(variantPrimaryDomainName);
+                    new DomainCheckExtendedAvailabilityDetails(domainState, reason, date, phase,
+                            variantPrimaryDomainName);
 
             domainExtAvailabilityStateMap.put(domainName, extAvailabilityDetails);
         }
@@ -60,10 +72,17 @@ public class DomainCheckExtendedAvailabilityResponseExtension extends ResponseEx
         return false;
     }
 
+    /**
+     * @return the extended availability details of all the domains checked for.
+     */
     public Map<String, DomainCheckExtendedAvailabilityDetails> getDomainExtAvailabilityStateMap() {
         return domainExtAvailabilityStateMap;
     }
 
+    /**
+     * @param domainName domain name to be checked
+     * @return the extended availability details for the domainName
+     */
     public DomainCheckExtendedAvailabilityDetails getStateForDomain(String domainName) {
         return domainExtAvailabilityStateMap.get(domainName);
     }
