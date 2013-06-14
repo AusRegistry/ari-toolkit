@@ -1,12 +1,8 @@
 <?xml version="1.0" standalone="no" ?>
 <schema targetNamespace="urn:ar:params:xml:ns:idn-1.0"
   xmlns:idn="urn:ar:params:xml:ns:idn-1.0"
-  xmlns:eppcom="urn:ietf:params:xml:ns:eppcom-1.0"
   xmlns="http://www.w3.org/2001/XMLSchema"
   elementFormDefault="qualified">
-
-  <!-- Import common element types. -->
-  <import namespace="urn:ietf:params:xml:ns:eppcom-1.0" />
 
   <annotation>
     <documentation>

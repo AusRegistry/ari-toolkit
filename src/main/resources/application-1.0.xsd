@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema targetNamespace="urn:ar:params:xml:ns:application-1.0"
   xmlns:app="urn:ar:params:xml:ns:application-1.0"
-  xmlns:eppcom="urn:ietf:params:xml:ns:eppcom-1.0"
   xmlns="http://www.w3.org/2001/XMLSchema"
   elementFormDefault="qualified">
 
-  <import namespace="urn:ietf:params:xml:ns:eppcom-1.0" />
-
   <!-- Child elements found in EPP commands. -->
-  <element name="check" type="app:phaseType" />
   <element name="create" type="app:phaseOrIdType" />
   <element name="delete" type="app:idType" />
   <element name="info" type="app:idType" />
@@ -19,12 +15,6 @@
           <element name="phase" type="app:phaseValueType" />
           <element name="id" type="app:idValueType" />
       </choice>
-  </complexType>
-
-  <complexType name="phaseType">
-    <sequence>
-      <element name="phase" type="app:phaseValueType" />
-    </sequence>
   </complexType>
 
   <simpleType name="phaseValueType">

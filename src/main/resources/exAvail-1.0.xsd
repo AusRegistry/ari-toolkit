@@ -31,7 +31,7 @@
     <complexType name="checkStateType">
         <choice>
             <sequence>
-                <element name="reason" type="eppcom:reasonType"/>
+                <element name="reason" type="eppcom:reasonType" minOccurs="0"/>
             </sequence>
             <sequence>
                 <element name="phase" type="eppcom:labelType" minOccurs="0"/>
