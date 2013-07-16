@@ -38,7 +38,7 @@ public class TreatyOrStatuteTest extends MarkAbstractTest {
         assertEquals(treatyOrStatute.getLabels().get(1), "exampleone");
         assertEquals(treatyOrStatute.getGoodsAndServices()
                 , "Dirigendas et eiusmodi featuring infringo in airfare et cartam servicia.");
-        assertEquals(treatyOrStatute.getRefNum().longValue(), 234235);
+        assertEquals(treatyOrStatute.getRefNum(), "234235-A");
         assertEquals(treatyOrStatute.getProDate(), proDate);
         assertEquals(treatyOrStatute.getTitle(), "title");
         assertEquals(treatyOrStatute.getExecDate(), execDate);

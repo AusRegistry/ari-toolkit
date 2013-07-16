@@ -31,5 +31,6 @@ public class MarkHolderTest extends MarkAbstractTest {
         assertEquals(markHolder.getVoiceExt(), "1234");
         assertEquals(markHolder.getFax(), "+1.7035555555");
         assertEquals(markHolder.getFaxExt(), "1234");
+        assertEquals(markHolder.getEmail(), "support@example.tld");
     }
 }

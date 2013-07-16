@@ -26,7 +26,7 @@ public class CourtValidatedMark extends AbstractMark {
     private static final String CC_EXPR = "mark:cc/text()";
     private static final String COURTNAME_EXPR = "mark:courtName/text()";
 
-    private Long refNum;
+    private String refNum;
 
     private Date proDate;
 
@@ -36,11 +36,11 @@ public class CourtValidatedMark extends AbstractMark {
 
     private String courtName;
 
-    public Long getRefNum() {
+    public String getRefNum() {
         return refNum;
     }
 
-    public void setRefNum(Long refNum) {
+    public void setRefNum(String refNum) {
         this.refNum = refNum;
     }
 
@@ -89,7 +89,7 @@ public class CourtValidatedMark extends AbstractMark {
                     regions.add(item.getTextContent());
                 }
             }
-            refNum = Long.parseLong(xmlDocument.getNodeValue(REFNUM_EXPR));
+            refNum = xmlDocument.getNodeValue(REFNUM_EXPR);
             cc = xmlDocument.getNodeValue(CC_EXPR);
             proDate = DatatypeConverter.parseDate(xmlDocument.getNodeValue(PRODATE_EXPR)).getTime();
             courtName = xmlDocument.getNodeValue(COURTNAME_EXPR);

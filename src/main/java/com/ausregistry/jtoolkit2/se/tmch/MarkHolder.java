@@ -26,6 +26,7 @@ public class MarkHolder {
     private static final String FAX_EXPR = "mark:fax/text()";
     private static final String FAX_EXT_EXPR = "mark:fax/@x";
     private static final String ADDRESS_EXPR = "mark:addr";
+    private static final String EMAIL_EXPR = "mark:email";
 
     private MarkHolderEntitlement entitlement;
 
@@ -43,6 +44,8 @@ public class MarkHolder {
 
     private String faxExt;
 
+    private String email;
+
     public MarkHolderEntitlement getEntitlement() {
         return entitlement;
     }
@@ -56,6 +59,7 @@ public class MarkHolder {
             voiceExt = xmlDocument.getNodeValue(VOICE_EXT_EXPR);
             fax = xmlDocument.getNodeValue(FAX_EXPR);
             faxExt = xmlDocument.getNodeValue(FAX_EXT_EXPR);
+            email = xmlDocument.getNodeValue(EMAIL_EXPR);
             Node addressElement = xmlDocument.getElement(ADDRESS_EXPR);
             if (addressElement != null) {
                 address = new MarkAddress();
@@ -124,5 +128,9 @@ public class MarkHolder {
 
     public void setFaxExt(String faxExt) {
         this.faxExt = faxExt;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }

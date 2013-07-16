@@ -2,6 +2,8 @@ package com.ausregistry.jtoolkit2.se.tmch;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Arrays;
+
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +22,7 @@ public class TreatyOrStatuteProtectionTest extends MarkAbstractTest {
 
     @Test
     public void shouldPopulateBeanFromXml() {
-        assertEquals(treatyOrStatuteProtection.getRuling(), "US");
+        assertEquals(treatyOrStatuteProtection.getRulings(), Arrays.asList("US", "CA"));
         assertEquals(treatyOrStatuteProtection.getCc(), "US");
         assertEquals(treatyOrStatuteProtection.getRegion(), "region");
     }

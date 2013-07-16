@@ -40,7 +40,7 @@ public class MarkCourtTest extends MarkAbstractTest {
         assertEquals(courtValidatedMark.getLabels().get(1), "exampleone");
         assertEquals(courtValidatedMark.getGoodsAndServices()
                 , "Dirigendas et eiusmodi featuring infringo in airfare et cartam servicia.");
-        assertEquals(courtValidatedMark.getRefNum().longValue(), 234235);
+        assertEquals(courtValidatedMark.getRefNum(), "234235-A");
         assertEquals(courtValidatedMark.getProDate(), proDate);
         assertEquals(courtValidatedMark.getCc(), "cc");
         assertEquals(courtValidatedMark.getCourtName(), "courtName");

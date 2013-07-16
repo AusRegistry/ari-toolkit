@@ -29,7 +29,7 @@ public class TreatyOrStatute extends AbstractMark {
 
     private List<TreatyOrStatuteProtection> treatyOrStatuteProtections = new ArrayList<TreatyOrStatuteProtection>();
 
-    private Long refNum;
+    private String refNum;
 
     private Date proDate;
 
@@ -45,11 +45,11 @@ public class TreatyOrStatute extends AbstractMark {
         this.treatyOrStatuteProtections = treatyOrStatuteProtections;
     }
 
-    public Long getRefNum() {
+    public String getRefNum() {
         return refNum;
     }
 
-    public void setRefNum(Long refNum) {
+    public void setRefNum(String refNum) {
         this.refNum = refNum;
     }
 
@@ -93,7 +93,7 @@ public class TreatyOrStatute extends AbstractMark {
                     treatyOrStatuteProtections.add(treatyOrStatuteProtection);
                 }
             }
-            refNum = Long.parseLong(xmlDocument.getNodeValue(REFNUM_EXPR));
+            refNum = xmlDocument.getNodeValue(REFNUM_EXPR);
             title = xmlDocument.getNodeValue(TITLE_EXPR);
             proDate = DatatypeConverter.parseDate(xmlDocument.getNodeValue(PRODATE_EXPR)).getTime();
             execDate = DatatypeConverter.parseDate(xmlDocument.getNodeValue(EXECDATE_EXPR)).getTime();

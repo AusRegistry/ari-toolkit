@@ -42,10 +42,10 @@ public class TrademarkTest extends MarkAbstractTest {
         assertEquals(trademark.getLabels().get(1), "exampleone");
         assertEquals(trademark.getGoodsAndServices()
                 , "Dirigendas et eiusmodi featuring infringo in airfare et cartam servicia.");
-        assertEquals(trademark.getRegNum(), "234235");
+        assertEquals(trademark.getRegNum(), "234235-A");
         assertEquals(trademark.getRegDate(), regDate);
         assertEquals(trademark.getExDate(), exDate);
-        assertEquals(trademark.getApId(), "1-1");
+        assertEquals(trademark.getApId(), "SOMEAPID");
         assertEquals(trademark.getApDate(), apDate);
     }
 }

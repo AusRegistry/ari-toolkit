@@ -1,6 +1,8 @@
 package com.ausregistry.jtoolkit2.se.tmch;
 
 import javax.xml.xpath.XPathExpressionException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
@@ -14,7 +16,7 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
 public class TreatyOrStatuteProtection {
     private Logger maintLogger = Logger.getLogger(getClass().getPackage().getName() + ".maint");
 
-    private static final String RULING_EXPR = "@ruling";
+    private static final String RULING_EXPR = "mark:ruling";
     private static final String CC_EXPR = "mark:cc/text()";
     private static final String REGION_EXPR = "mark:region/text()";
 
@@ -22,7 +24,7 @@ public class TreatyOrStatuteProtection {
 
     private String region;
 
-    private String ruling;
+    private List<String> rulings = new ArrayList<String>();
 
     public String getCc() {
         return cc;
@@ -40,17 +42,22 @@ public class TreatyOrStatuteProtection {
         this.region = region;
     }
 
-    public String getRuling() {
-        return ruling;
+    public List<String> getRulings() {
+        return rulings;
     }
 
-    public void setRuling(String ruling) {
-        this.ruling = ruling;
+    public void addRuling(String ruling) {
+        rulings.add(ruling);
     }
 
     public void fromXML(XMLDocument xmlDocument) {
         try {
-            ruling = xmlDocument.getNodeValue(RULING_EXPR);
+            String[] rulingArray = xmlDocument.getNodeValues(RULING_EXPR);
+            if (rulingArray != null) {
+                for (int i = 0; i < rulingArray.length; i++) {
+                    rulings.add(rulingArray[i]);
+                }
+            }
             region = xmlDocument.getNodeValue(REGION_EXPR);
             cc = xmlDocument.getNodeValue(CC_EXPR);
 

@@ -32,6 +32,7 @@ public abstract class MarkAbstractTest {
                     "          <mark:cc>US</mark:cc>\n" +
                     "        </mark:addr>\n" +
                     "<mark:voice x=\"1234\">+1.7035555555</mark:voice><mark:fax x=\"1234\">+1.7035555555</mark:fax>" +
+                    "          <mark:email>support@example.tld</mark:email>\n" +
                     "      </mark:holder>\n" +
                     "<mark:contact type=\"owner\">" +
                     "<mark:name>contactName</mark:name><mark:org>Example Inc.</mark:org>\n" +
@@ -54,9 +55,9 @@ public abstract class MarkAbstractTest {
                     "      <mark:goodsAndServices>Dirigendas et eiusmodi\n" +
                     "        featuring infringo in airfare et cartam servicia.\n" +
                     "      </mark:goodsAndServices> \n" +
-                    "      <mark:apId>1-1</mark:apId>\n" +
+                    "      <mark:apId>SOMEAPID</mark:apId>\n" +
                     "      <mark:apDate>2009-08-16T09:00:00.0Z</mark:apDate>\n" +
-                    "      <mark:regNum>234235</mark:regNum>\n" +
+                    "      <mark:regNum>234235-A</mark:regNum>\n" +
                     "      <mark:regDate>2009-08-16T09:00:00.0Z</mark:regDate>\n" +
                     "      <mark:exDate>2015-08-16T09:00:00.0Z</mark:exDate>\n" +
                     "    </mark:trademark>\n" +
@@ -74,14 +75,18 @@ public abstract class MarkAbstractTest {
                     "          <mark:cc>US</mark:cc>\n" +
                     "        </mark:addr>\n" +
                     "      </mark:holder>\n" +
-                    "      <mark:protection ruling=\"US\"><mark:cc>US</mark:cc>" +
-                    "<mark:region>region</mark:region></mark:protection>\n" +
+                    "      <mark:protection>" +
+                    "<mark:cc>US</mark:cc>" +
+                    "<mark:region>region</mark:region>" +
+                    "<mark:ruling>US</mark:ruling>" +
+                    "<mark:ruling>CA</mark:ruling>" +
+                    "</mark:protection>\n" +
                     "      <mark:label>example-one</mark:label>\n" +
                     "      <mark:label>exampleone</mark:label>\n" +
                     "      <mark:goodsAndServices>Dirigendas et eiusmodi\n" +
                     "        featuring infringo in airfare et cartam servicia.\n" +
                     "      </mark:goodsAndServices> \n" +
-                    "      <mark:refNum>234235</mark:refNum>\n" +
+                    "      <mark:refNum>234235-A</mark:refNum>\n" +
                     "      <mark:proDate>2009-08-16T09:00:00.0Z</mark:proDate>\n" +
                     "      <mark:title>title</mark:title>\n" +
                     "      <mark:execDate>2015-08-16T09:00:00.0Z</mark:execDate>\n" +
@@ -105,7 +110,7 @@ public abstract class MarkAbstractTest {
                     "      <mark:goodsAndServices>Dirigendas et eiusmodi\n" +
                     "        featuring infringo in airfare et cartam servicia.\n" +
                     "      </mark:goodsAndServices> \n" +
-                    "      <mark:refNum>234235</mark:refNum>\n" +
+                    "      <mark:refNum>234235-A</mark:refNum>\n" +
                     "      <mark:proDate>2009-08-16T09:00:00.0Z</mark:proDate>\n" +
                     "      <mark:cc>cc</mark:cc><mark:region>r1</mark:region><mark:region>r3</mark:region>\n" +
                     "      <mark:courtName>courtName</mark:courtName>\n" +
