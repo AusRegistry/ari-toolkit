@@ -2,20 +2,15 @@ package com.ausregistry.jtoolkit2.tmdb;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.whenNew;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.UnrecoverableKeyException;
-import java.security.cert.CertificateException;
 
-import com.ausregistry.jtoolkit2.session.KeyStoreNotFoundException;
-import com.ausregistry.jtoolkit2.session.KeyStoreReadException;
 import com.ausregistry.jtoolkit2.session.TLSContext;
 import com.ausregistry.jtoolkit2.tmdb.model.TmNotice;
 import com.ausregistry.jtoolkit2.tmdb.xml.TmNoticeXmlParser;
@@ -69,7 +64,7 @@ public class TmdbClientTest {
     }
 
     @Test
-    public void shouldCloseSocket() throws Exception {
+    public void shouldCloseStream() throws Exception {
         tmdbClient.requestNotice("lookupKey");
 
         verify(stringInputStream).close();

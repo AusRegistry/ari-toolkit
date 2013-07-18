@@ -12,7 +12,7 @@ ext {
 
     simpleFrameworkVersion       = '4.1.21'
     httpClientVersion            = '4.2.3'
-    powerMockVersion             = '1.5.1'
+    powerMockVersion             = '1.5'
     hamcrestVersion              = '1.3'
     ariMockHttpServerVersion     = '1.0.1'
 }
@@ -33,6 +33,10 @@ sourceSets {
         java.srcDir('src/test/component/java')
         resources.srcDir('src/test/component/resources')
     }
+    integrationTest {
+        java.srcDir('src/test/integration/java')
+        resources.srcDir('src/test/integration/resources')
+    }
 }
 
 dependencies {
@@ -41,6 +45,7 @@ dependencies {
     }
 
     compile "org.apache.httpcomponents:httpclient:$httpClientVersion"
+
     testCompile "org.hamcrest:hamcrest-all:$hamcrestVersion"
     testCompile "org.simpleframework:simple:$simpleFrameworkVersion"
     testCompile("org.powermock:powermock-api-mockito:$powerMockVersion") {
@@ -53,8 +58,10 @@ dependencies {
         exclude group: 'org.hamcrest', module: 'hamcrest-core' // exclude hamcrest-core 1.3
     }
 
-    componentTestCompile "ari-mock-http-server:ari-mock-http-server:$ariMockHttpServerVersion"
+    integrationTestCompile sourceSets.main.output
+    integrationTestCompile configurations.testCompile
 
+    componentTestCompile "ari-mock-http-server:ari-mock-http-server:$ariMockHttpServerVersion"
     componentTestCompile sourceSets.main.output
     componentTestCompile configurations.testCompile
 }
@@ -87,13 +94,17 @@ clean.dependsOn cleanArtifacts
 
 test.dependsOn jar
 
+task integrationTest(type: Test) {
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    testResultsDir = file('build/test-results/integration')
+    classpath += sourceSets.integrationTest.runtimeClasspath
+}
+
 task componentTest(type: Test) {
     testClassesDir = sourceSets.componentTest.output.classesDir
     testResultsDir = file('build/test-results/component')
     classpath += sourceSets.componentTest.runtimeClasspath
 }
-
-build.dependsOn componentTest
 
 //Run this task to download the gradle wrapper corresponding to the gradleWrapperVersion number
 
@@ -113,7 +124,7 @@ task javadocJar(type: Jar, dependsOn:javadoc) {
 
 task checkVersionNumbersInReadme << {
     def readme = file("readme.md")
-    def looksLikeVersionNumber = ~/\d+\.\d+\.\d+\.\d+/
+    def looksLikeVersionNumber = ~/\d+\.\d+\.\d+/
     def versionNumbersInReadmeFile = readme.readLines().collectMany { line ->
         looksLikeVersionNumber.matcher(line).collect { match ->
             (toolkitVersion == match) ? null : match
@@ -126,8 +137,6 @@ artifacts {
     archives sourcesJar
     archives javadocJar
 }
-
-uploadArchives.dependsOn checkVersionNumbersInReadme, javadoc
 
 uploadArchives {
     uploadDescriptor = false
@@ -163,3 +172,7 @@ uploadArchives << {
         }
     }
 }
+
+uploadArchives.dependsOn checkVersionNumbersInReadme, javadoc
+
+build.dependsOn integrationTest, componentTest

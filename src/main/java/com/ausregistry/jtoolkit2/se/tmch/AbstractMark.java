@@ -19,6 +19,10 @@ import org.w3c.dom.NodeList;
  */
 public abstract class AbstractMark {
 
+    private static final String HOLDER_EXPR = "holder";
+    private static final String CONTACT_EXPR = "contact";
+    private static final String LABEL_EXPR = "label";
+
     private Logger maintLogger =
             Logger.getLogger(getClass().getPackage().getName() + ".maint");
 
@@ -34,13 +38,9 @@ public abstract class AbstractMark {
 
     private String goodsAndServices;
 
-    private static final String HOLDER_EXPR = "holder";
-    private static final String CONTACT_EXPR = "contact";
-    private static final String LABEL_EXPR = "label";
-
 
     public void fromXML(XMLDocument xmlDocument) {
-        try{
+        try {
             id = xmlDocument.getNodeValue("mark:id/text()");
             markName = xmlDocument.getNodeValue("mark:markName/text()");
             goodsAndServices = xmlDocument.getNodeValue("mark:goodsAndServices/text()");
@@ -53,13 +53,11 @@ public abstract class AbstractMark {
                     MarkHolder markHolder = new MarkHolder();
                     markHolder.fromXML(new XMLDocument((Element) item));
                     holders.add(markHolder);
-                }
-                else if (CONTACT_EXPR.equals(item.getLocalName())) {
+                } else if (CONTACT_EXPR.equals(item.getLocalName())) {
                     MarkContact markContact = new MarkContact();
                     markContact.fromXML(new XMLDocument((Element) item));
                     contacts.add(markContact);
-                }
-                else if (LABEL_EXPR.equals(item.getLocalName())) {
+                } else if (LABEL_EXPR.equals(item.getLocalName())) {
                     labels.add(item.getTextContent());
                 }
             }
