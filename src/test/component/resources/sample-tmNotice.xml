@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tmNotice:notice xmlns:tmNotice="urn:ietf:params:xml:ns:tmNotice-1.0">
+    <tmNotice:id>370d0b7c9223372036854775807</tmNotice:id>
+    <tmNotice:notBefore>2010-08-14T09:00:00.0Z</tmNotice:notBefore>
+    <tmNotice:notAfter>2010-08-16T09:00:00.0Z</tmNotice:notAfter>
+    <tmNotice:label>example-one</tmNotice:label>
+
+    <tmNotice:claim>
+        <tmNotice:markName>Example One</tmNotice:markName>
+        <tmNotice:holder entitlement="owner">
+            <tmNotice:org>Example Inc.</tmNotice:org>
+            <tmNotice:addr>
+                <tmNotice:street>123 Example Dr.</tmNotice:street>
+                <tmNotice:street>Suite 100</tmNotice:street>
+                <tmNotice:city>Reston</tmNotice:city>
+                <tmNotice:sp>VA</tmNotice:sp>
+                <tmNotice:pc>20190</tmNotice:pc>
+                <tmNotice:cc>US</tmNotice:cc>
+            </tmNotice:addr>
+        </tmNotice:holder>
+        <tmNotice:holder entitlement="assignee">
+            <tmNotice:addr>
+                <tmNotice:street>123 Example Dr.</tmNotice:street>
+                <tmNotice:city>Reston</tmNotice:city>
+                <tmNotice:cc>US</tmNotice:cc>
+            </tmNotice:addr>
+        </tmNotice:holder>
+        <tmNotice:contact type="owner">
+            <tmNotice:name>Joe Doe</tmNotice:name>
+            <tmNotice:org>Example Inc.</tmNotice:org>
+            <tmNotice:addr>
+                <tmNotice:street>123 Example Dr.</tmNotice:street>
+                <tmNotice:street>Suite 100</tmNotice:street>
+                <tmNotice:city>Reston</tmNotice:city>
+                <tmNotice:sp>VA</tmNotice:sp>
+                <tmNotice:pc>20190</tmNotice:pc>
+                <tmNotice:cc>US</tmNotice:cc>
+            </tmNotice:addr>
+            <tmNotice:voice x="4321">+1.7035555555</tmNotice:voice>
+            <tmNotice:email>jdoe@example.com</tmNotice:email>
+        </tmNotice:contact>
+        <tmNotice:contact type="owner">
+            <tmNotice:name>Contact Two</tmNotice:name>
+            <tmNotice:addr>
+                <tmNotice:street>Street 200</tmNotice:street>
+                <tmNotice:city>Sydney</tmNotice:city>
+                <tmNotice:cc>AU</tmNotice:cc>
+            </tmNotice:addr>
+            <tmNotice:voice x="4321">+1.7035555555</tmNotice:voice>
+            <tmNotice:email>contact2@example.com</tmNotice:email>
+        </tmNotice:contact>
+        <tmNotice:jurDesc jurCC="US">UNITED STATES OF AMERICA</tmNotice:jurDesc>
+        <tmNotice:classDesc classNum="35">
+            Advertising; business management; business administration.
+        </tmNotice:classDesc>
+        <tmNotice:classDesc classNum="36">
+            Insurance; financial affairs; monetary affairs; real estate.
+        </tmNotice:classDesc>
+        <tmNotice:goodsAndServices>
+            Bardus populorum circumdabit se cum captiosus populum.
+            Smert populorum circumdabit se cum captiosus populum qui eis differimus.
+        </tmNotice:goodsAndServices>
+    </tmNotice:claim>
+
+    <tmNotice:claim>
+        <tmNotice:markName>Example-One</tmNotice:markName>
+        <tmNotice:holder entitlement="owner">
+            <tmNotice:org>Example S.A. de C.V.</tmNotice:org>
+            <tmNotice:addr>
+                <tmNotice:street>Calle conocida #343</tmNotice:street>
+                <tmNotice:city>Conocida</tmNotice:city>
+                <tmNotice:sp>SP</tmNotice:sp>
+                <tmNotice:pc>82140</tmNotice:pc>
+                <tmNotice:cc>BR</tmNotice:cc>
+            </tmNotice:addr>
+        </tmNotice:holder>
+        <tmNotice:jurDesc jurCC="BR">BRAZIL</tmNotice:jurDesc>
+        <tmNotice:goodsAndServices>
+            Bardus populorum circumdabit se cum captiosus populum.
+            Smert populorum circumdabit se cum captiosus populum qui eis differimus.
+        </tmNotice:goodsAndServices>
+    </tmNotice:claim>
+
+    <tmNotice:claim>
+        <tmNotice:markName>One</tmNotice:markName>
+        <tmNotice:holder entitlement="owner">
+            <tmNotice:org>One Corporation</tmNotice:org>
+            <tmNotice:addr>
+                <tmNotice:street>Otra calle</tmNotice:street>
+                <tmNotice:city>Otra ciudad</tmNotice:city>
+                <tmNotice:sp>OT</tmNotice:sp>
+                <tmNotice:pc>383742</tmNotice:pc>
+                <tmNotice:cc>CR</tmNotice:cc>
+            </tmNotice:addr>
+        </tmNotice:holder>
+        <tmNotice:jurDesc jurCC="CR">COSTA RICA</tmNotice:jurDesc>
+        <tmNotice:goodsAndServices>
+            Bardus populorum circumdabit se cum captiosus populum.
+            Smert populorum circumdabit se cum captiosus populum qui eis differimus.
+        </tmNotice:goodsAndServices>
+        <tmNotice:notExactMatch>
+            <tmNotice:court>
+                <tmNotice:refNum>234235</tmNotice:refNum>
+                <tmNotice:cc>CR</tmNotice:cc>
+                <tmNotice:courtName>Supreme Court of Justice of Costa Rica</tmNotice:courtName>
+            </tmNotice:court>
+        </tmNotice:notExactMatch>
+    </tmNotice:claim>
+
+    <tmNotice:claim>
+        <tmNotice:markName>One Inc</tmNotice:markName>
+        <tmNotice:holder entitlement="owner">
+            <tmNotice:org>One SA de CV</tmNotice:org>
+            <tmNotice:addr>
+                <tmNotice:street>La calle</tmNotice:street>
+                <tmNotice:city>La ciudad</tmNotice:city>
+                <tmNotice:sp>CD</tmNotice:sp>
+                <tmNotice:pc>34323</tmNotice:pc>
+                <tmNotice:cc>AR</tmNotice:cc>
+            </tmNotice:addr>
+        </tmNotice:holder>
+        <tmNotice:jurDesc jurCC="AR">ARGENTINA</tmNotice:jurDesc>
+        <tmNotice:goodsAndServices>
+            Bardus populorum circumdabit se cum captiosus populum.
+            Smert populorum circumdabit se cum captiosus populum qui eis differimus.
+        </tmNotice:goodsAndServices>
+        <tmNotice:notExactMatch>
+            <tmNotice:udrp>
+                <tmNotice:caseNo>D2003-0499</tmNotice:caseNo>
+                <tmNotice:udrpProvider>WIPO</tmNotice:udrpProvider>
+            </tmNotice:udrp>
+            <tmNotice:court>
+                <tmNotice:refNum>234235</tmNotice:refNum>
+                <tmNotice:cc>CR</tmNotice:cc>
+                <tmNotice:courtName>Supreme Court of Justice of Costa Rica</tmNotice:courtName>
+            </tmNotice:court>
+            <tmNotice:udrp>
+                <tmNotice:caseNo>C1000-0678</tmNotice:caseNo>
+                <tmNotice:udrpProvider>WIPO</tmNotice:udrpProvider>
+            </tmNotice:udrp>
+        </tmNotice:notExactMatch>
+    </tmNotice:claim>
+</tmNotice:notice>

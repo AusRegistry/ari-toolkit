@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/AusRegistry/ari-toolkit.png)](https://travis-ci.org/AusRegistry/ari-toolkit)
 ## Downloads
 
-The latest ari-toolkit is available for download. [ari-toolkit v3.0.3](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.0.3/arjtk-3.0.3.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.0.3/arjtk-3.0.3-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.0.3/arjtk-3.0.3-javadoc.jar))
+The latest ari-toolkit is available for download. [ari-toolkit v3.1.0](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.0/arjtk-3.1.0.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.0/arjtk-3.1.0-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.0/arjtk-3.1.0-javadoc.jar))
 
 For more information, please read [Installation and Setup](#installation-and-setup).
 
@@ -32,6 +32,7 @@ The EPP toolkit developed and supplied by ARI provides client-side libraries tha
 
 The service element mapping module provides a simple means of translating between EPP service elements and their programmatic representation. The network transport module, which depends on session management service elements in the service element module, provides the following services; service information discovery, opening and closing EPP sessions, and sending and receiving EPP service elements.
 
+This toolkit also provides a mechanism to retrieve a Trademark Claims Notice from TMDB for a look up key. For detailed information on retrieving TM notice please refer to [Trademark Claims Notice](#trademark-claims-notice)
 
 ## Installation and Setup
 
@@ -39,7 +40,7 @@ The service element mapping module provides a simple means of translating betwee
 
 #### Direct download
 
-Obtain the latest toolkit here: [Toolkit v3.0.3](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.0.3/arjtk-3.0.3.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.0.3/arjtk-3.0.3-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.0.3/arjtk-3.0.3-javadoc.jar))
+Obtain the latest toolkit here: [Toolkit v3.1.0](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.0/arjtk-3.1.0.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.0/arjtk-3.1.0-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.0/arjtk-3.1.0-javadoc.jar))
 
 #### Dependency Management
 
@@ -48,7 +49,7 @@ Use your build's dependency management tool to automatically download the toolki
 * Repository: `http://ausregistry.github.com/repo/`
 * groupId: `au.com.ausregistry`
 * artifactId: `arjtk`
-* version: `3.0.3`
+* version: `3.1.0`
 
 For example (using Maven):
 
@@ -63,7 +64,7 @@ For example (using Maven):
        <dependency>
           <groupId>au.com.ausregistry</groupId>
           <artifactId>arjtk</artifactId>
-          <version>3.0.3</version>
+          <version>3.1.0</version>
        </dependency>
     </dependencies>
 
@@ -289,3 +290,56 @@ The properties relevant to the standard logging implementation are:
   
 * `package-name.audience.handlers` should be left at the default values to use the provided handler implementations. The default values are provided in the `logging.properties` file distributed with the Toolkit.
 Alternatively, the user may implement custom handler classes and register those classes using the package-name.audience.handlers parameters. Implementers should familiarise themselves with the Java Logging API [JLOGAPI] and Java Logging Overview [JLOGGUIDE] before deciding on this approach.
+
+## Trademark Claims Notice
+
+The Toolkit facilitates connections to the TMDB using classes in the com.ausregistry.jtoolkit2.tmdb package.
+
+### Configuration
+
+All properties related to the tmdb connections must be specified in the properties file named 'tmdb.properties'.
+
+All the properties mentioned in tmdb.properties are mandatory.
+
+`tmdb.server.url` - TMDB server URL including the https protocol and optional server port number if default https port is not used.
+
+    `tmdb.server.url=https://<tmdb-domain-name>/cnis`
+
+`tmdb.truststore.location` - Path to the TMDB truststore file, relative to classpath.
+
+    `tmdb.truststore.location=tmdb-truststore.jks`
+
+`tmdb.truststore.pass` - Password to the TMDB truststore.
+
+    `tmdb.truststore.pass=password`
+
+`tmdb.socket.timeout` - Https socket connection time out.
+
+    `tmdb.socket.timeout=60000`
+
+### TMDB Communication
+
+Trade Mark notice for a lookup key from the configured TMDB server can be requested using the TmdbClient class.
+
+TmdbClient uses the properties specified in 'tmdb.properties' file to establish a connection to the TMDB server.
+
+The information contained in a TradeMark notice response from TMDB is encapsulated in a TmNotice object.
+
+The following code sends a request for a TradeMark notice using TmdbClient.
+
+        TmdbClient tmdbClient = new TmdbClient();
+
+        TmNotice tmNotice = tmdbClient.requestNotice(lookupKey);
+
+A TmdbClient can be used to request multiple TradeMark notices.
+
+
+
+
+
+
+
+
+
+
+

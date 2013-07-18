@@ -1,32 +1,19 @@
 package com.ausregistry.jtoolkit2.session;
 
+import javax.net.ssl.*;
+import javax.security.auth.x500.X500Principal;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketException;
-import java.security.KeyManagementException;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.UnrecoverableKeyException;
+import java.net.URL;
+import java.security.*;
 import java.security.cert.Certificate;
-import java.security.cert.CertificateException;
-import java.security.cert.CertificateExpiredException;
-import java.security.cert.CertificateNotYetValidException;
-import java.security.cert.X509Certificate;
+import java.security.cert.*;
 import java.util.Enumeration;
 import java.util.logging.Logger;
-
-import javax.net.ssl.KeyManager;
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLHandshakeException;
-import javax.net.ssl.SSLSocket;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.TrustManagerFactory;
-import javax.security.auth.x500.X500Principal;
 
 import com.ausregistry.jtoolkit2.ErrorPkg;
 
@@ -67,8 +54,6 @@ public class TLSContext {
      *            the key store type
      * @param algorithm
      *            the algorithm
-     * @throws KeyStoreTypeException
-     *             the key store type exception
      * @throws KeyStoreNotFoundException
      *             the key store not found exception
      * @throws KeyStoreReadException
@@ -77,10 +62,6 @@ public class TLSContext {
      *             the key store exception
      * @throws CertificateException
      *             the certificate exception
-     * @throws CertificateExpiredException
-     *             the certificate expired exception
-     * @throws CertificateNotYetValidException
-     *             the certificate not yet valid exception
      * @throws UnrecoverableKeyException
      *             the unrecoverable key exception
      * @throws NoSuchAlgorithmException
@@ -89,8 +70,8 @@ public class TLSContext {
      *             the key management exception
      */
     public TLSContext(String keystore, String keypass, String truststore, String trustpass, String type,
-            String algorithm) throws KeyStoreTypeException, KeyStoreNotFoundException, KeyStoreReadException,
-            KeyStoreException, CertificateException, CertificateExpiredException, CertificateNotYetValidException,
+            String algorithm) throws KeyStoreNotFoundException, KeyStoreReadException,
+            KeyStoreException, CertificateException,
             UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
 
         String pname = getClass().getPackage().getName();
@@ -101,7 +82,10 @@ public class TLSContext {
 
         try {
             TrustManager[] trustManagers = loadTrustManagers(truststore, trustpass);
-            KeyManager[] keyManagers = loadKeyManagers(keystore, keypass, type, algorithm);
+            KeyManager[] keyManagers = null;
+            if (keystore != null) {
+                keyManagers = loadKeyManagers(keystore, keypass, type, algorithm);
+            }
 
             ctx = SSLContext.getInstance(TLS);
             ctx.init(keyManagers, trustManagers, null);
@@ -127,6 +111,40 @@ public class TLSContext {
             throw kme;
         }
     }
+
+    /**
+     * Instantiates a new TLS context.
+     *
+     * @param truststore
+     *            the filename of the trust store that is to be used for the key store
+     * @param trustpass
+     *            the password used in the trust store
+     *
+     * @throws KeyStoreNotFoundException
+     *             the key store not found exception
+     * @throws KeyStoreReadException
+     *             the key store read exception
+     * @throws KeyStoreException
+     *             the key store exception
+     * @throws CertificateException
+     *             the certificate exception
+     * @throws UnrecoverableKeyException
+     *             the unrecoverable key exception
+     * @throws NoSuchAlgorithmException
+     *             the no such algorithm exception
+     * @throws KeyManagementException
+     *             the key management exception
+     */
+    public TLSContext(String truststore, String trustpass) throws CertificateException,
+                                                                  UnrecoverableKeyException,
+                                                                  NoSuchAlgorithmException,
+                                                                  KeyStoreException,
+                                                                  KeyManagementException,
+                                                                  KeyStoreReadException,
+                                                                  KeyStoreNotFoundException {
+        this(null, null, truststore, trustpass, null, null);
+    }
+
 
     public String getCertificateCommonName() {
         return commonName;
@@ -183,6 +201,32 @@ public class TLSContext {
         socket.getSession().invalidate();
 
         return socket;
+    }
+
+    /**
+     * Creates a Https connection to the specified URL connection.
+     *
+     * @param url the URL to establish a HTTPS connection to
+     * @param connectionTimeout connection timeout value to be used in milliseconds
+     * @return HTTPS URL connection
+     * @throws IOException in case of a malformed URL or an IO exception occurring while trying to open a connection
+     */
+    public HttpsURLConnection createHttpsUrlConnection(String url, Integer connectionTimeout) throws IOException {
+        HttpsURLConnection.setDefaultHostnameVerifier(
+                new javax.net.ssl.HostnameVerifier(){
+
+                    public boolean verify(String hostname,
+                                          javax.net.ssl.SSLSession sslSession) {
+                        if (hostname.equals("localhost")) {
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+        HttpsURLConnection urlConnection = (HttpsURLConnection) (new URL(url)).openConnection();
+        urlConnection.setSSLSocketFactory(ctx.getSocketFactory());
+        urlConnection.setConnectTimeout(connectionTimeout);
+        return urlConnection;
     }
 
     private KeyManager[] loadKeyManagers(String filename, String password, String type, String algorithm)
@@ -314,4 +358,6 @@ public class TLSContext {
 
         return store;
     }
+
+
 }
