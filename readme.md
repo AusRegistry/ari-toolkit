@@ -303,19 +303,19 @@ All the properties mentioned in tmdb.properties are mandatory.
 
 `tmdb.server.url` - TMDB server URL including the https protocol and optional server port number if default https port is not used.
 
-    `tmdb.server.url=https://<tmdb-domain-name>/cnis`
+    tmdb.server.url=https://<tmdb-domain-name>/cnis
 
 `tmdb.truststore.location` - Path to the TMDB truststore file, relative to classpath.
 
-    `tmdb.truststore.location=tmdb-truststore.jks`
+    tmdb.truststore.location=tmdb-truststore.jks
 
 `tmdb.truststore.pass` - Password to the TMDB truststore.
 
-    `tmdb.truststore.pass=password`
+    tmdb.truststore.pass=password
 
 `tmdb.socket.timeout` - Https socket connection time out.
 
-    `tmdb.socket.timeout=60000`
+    tmdb.socket.timeout=60000
 
 ### TMDB Communication
 

@@ -31,6 +31,7 @@ public class TmchXMLUtil {
      */
     public static byte[] extractBase64EncodedPartFromSmdFile(final InputStream smdFileInputStream) throws IOException {
         String smdFile = loadInputStreamIntoString(smdFileInputStream);
+        smdFile.replaceAll("\\r\\n", "\n");
         return smdFile.substring(smdFile.indexOf(ENCODED_PART_BEGIN_SIGN) + ENCODED_PART_BEGIN_SIGN.length(),
                 smdFile.indexOf(ENCODED_PART_END_SIGN)).getBytes();
     }
