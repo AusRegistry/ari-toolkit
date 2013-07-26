@@ -1,9 +1,14 @@
 package com.ausregistry.jtoolkit2;
 
+import javax.xml.bind.DatatypeConverter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.cert.X509Certificate;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Properties;
+import java.util.TimeZone;
 import java.util.logging.Logger;
 
 /**
@@ -173,5 +178,32 @@ public class ErrorPkg {
 
     private static String findMessageFile() {
         return "messages.properties";
+    }
+
+    public static String getMessage(String name, String arg, Date date) {
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+        calendar.setTime(date);
+
+        return getMessage(name, arg, DatatypeConverter.printDateTime(calendar));
+    }
+
+    public static String getMessage(String name, String arg, X509Certificate certificate) {
+        StringBuilder messageBuilder = new StringBuilder("Certificate");
+        messageBuilder.append(" of serial number '");
+        messageBuilder.append(certificate.getSerialNumber());
+        messageBuilder.append("'");
+        String commonName = certificate.getSubjectDN().getName();
+        if (commonName != null) {
+            messageBuilder.append(" and DN '");
+            messageBuilder.append(commonName);
+            messageBuilder.append("'");
+        }
+        String signerCommonName = certificate.getIssuerDN().getName();
+        if (signerCommonName != null) {
+            messageBuilder.append(" and signer DN '");
+            messageBuilder.append(signerCommonName);
+            messageBuilder.append("'");
+        }
+        return getMessage(name, arg, messageBuilder.toString());
     }
 }

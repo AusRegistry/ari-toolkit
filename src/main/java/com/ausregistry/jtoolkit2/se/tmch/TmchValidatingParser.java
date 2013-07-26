@@ -1,0 +1,273 @@
+package com.ausregistry.jtoolkit2.se.tmch;
+
+import javax.xml.bind.DatatypeConverter;
+import javax.xml.crypto.MarshalException;
+import javax.xml.crypto.dsig.XMLSignature;
+import javax.xml.crypto.dsig.XMLSignatureException;
+import javax.xml.crypto.dsig.XMLSignatureFactory;
+import javax.xml.crypto.dsig.dom.DOMValidateContext;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+import java.io.*;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.*;
+import java.util.*;
+
+import com.ausregistry.jtoolkit2.se.tmch.exception.*;
+import com.ausregistry.jtoolkit2.xml.NamespaceContextImpl;
+import com.ausregistry.jtoolkit2.xml.ParsingException;
+import org.apache.commons.codec.DecoderException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
+
+/**
+ * This defines the operations to facilitate validation and parsing of signed mark data for tmch.
+ */
+public class TmchValidatingParser extends TmchXmlParser {
+
+    public static final String CERTIFICATE_BEGIN_DELIMITER = "-----BEGIN CERTIFICATE-----\n";
+    public static final String CERTIFICATE_END_DELIMITER = "\n-----END CERTIFICATE-----\n";
+
+    public static final int BUFFER_SIZE = 1024;
+    private final List<String> smdrlIdList = new ArrayList<String>();
+
+    private final CRL certRevocationList;
+    private final CertificateFactory certificateFactory;
+    private final KeyStore icannCertificateTrustStore;
+
+    private DocumentBuilderFactory documentBuilderFactory;
+    private XPath xPath;
+    private final XMLSignatureFactory xmlSignatureFactory;
+
+    /**
+     * Instantiate a TmchValidatingParser which validates and parses an encoded SMD.
+     *
+     * @param certificateRevocationList the Certificate Revocation List
+     * @param smdRevocationList the SMD Revocation List
+     * @param tmchIcannCert the SMD Issuing Authority Certificate
+     * @throws CertificateException if an exception occurs while processing CRL or Issuing Authority certificate
+     * @throws CRLException if an exception occurs while processing CRL
+     * @throws IOException if an exception occurs while processing SMDRL or Issuing Authority certificate
+     * @throws KeyStoreException if an exception occurs while processing Issuing Authority certificate
+     * @throws NoSuchAlgorithmException if an exception occurs while processing Issuing Authority certificate
+     */
+    public TmchValidatingParser(InputStream certificateRevocationList, InputStream smdRevocationList,
+                                InputStream tmchIcannCert)
+            throws CertificateException, CRLException, IOException, KeyStoreException, NoSuchAlgorithmException {
+        documentBuilderFactory = DocumentBuilderFactory.newInstance();
+        documentBuilderFactory.setNamespaceAware(true);
+
+        certificateFactory = CertificateFactory.getInstance("X.509");
+        certRevocationList = certificateFactory.generateCRL(certificateRevocationList);
+
+        xPath = XPathFactory.newInstance().newXPath();
+        xPath.setNamespaceContext(new NamespaceContextImpl());
+
+        readSmdRevocationList(smdRevocationList);
+
+        Certificate icannTmchCACertificate = certificateFactory.generateCertificate(tmchIcannCert);
+
+        icannCertificateTrustStore = KeyStore.getInstance(KeyStore.getDefaultType());
+        icannCertificateTrustStore.load(null, null);
+        icannCertificateTrustStore.setCertificateEntry("tmchCA", icannTmchCACertificate);
+
+        xmlSignatureFactory = XMLSignatureFactory.getInstance();
+    }
+
+    private void readSmdRevocationList(InputStream smdRevocationList) throws IOException {
+        BufferedReader smdrlReader = new BufferedReader(new InputStreamReader(smdRevocationList));
+        smdrlReader.readLine();
+        smdrlReader.readLine();
+        String line;
+        while ((line = smdrlReader.readLine()) != null) {
+            String[] smdrlTokens = line.split(",");
+            smdrlIdList.add(smdrlTokens[0]);
+        }
+    }
+
+    /**
+     * Decodes and validates the provided base64-encoded SMD based on the provided date.
+     * If the SMD passes validation, it is parsed into a SignedMarkData bean.
+     *
+     * @param encodedSignedMarkData Input stream to the base64-encoded smd to be validated.
+     * @param dateForValidation The date against which the input SMD needs to be validated against.
+     * @return if the input SMD is valid the parsed SignedMarkDate object
+     * @throws IOException In case the input stream cannot be read
+     * @throws ParsingException In case an error occurs while parsing
+     * @throws DecoderException In case the stream cannot be decoded
+     * @throws XPathExpressionException if an exception occurs while parsing the decoded
+     * @throws ParserConfigurationException if an exception occurs while parsing the decoded smd
+     * @throws NoSuchAlgorithmException if an exception occurs while parsing the smd certificate
+     * @throws CertificateException if an exception occurs while validating smd certificate
+     * @throws KeyStoreException if an exception occurs while validating smd certificate
+     * @throws InvalidAlgorithmParameterException if an exception occurs while validating smd certificate
+     */
+    public SignedMarkData validateAndParseEncodedSignedMarkData(InputStream encodedSignedMarkData,
+                                                                Date dateForValidation)
+            throws ParsingException, IOException, DecoderException, ParserConfigurationException,
+            XPathExpressionException, NoSuchAlgorithmException, CertificateException, KeyStoreException,
+            InvalidAlgorithmParameterException {
+        return validateEncodedSignedMarkDataForDate(encodedSignedMarkData, dateForValidation);
+    }
+
+    /**
+     * Decodes and validates the provided base64-encoded SMD against the current date.
+     * If the SMD passes validation, it is parsed into a SignedMarkData bean.
+     *
+     * @param encodedSignedMarkData Input stream to the base64-encoded smd to be validated
+     * @return if the input SMD is valid the parsed SignedMarkDate object
+     * @throws IOException In case the input stream cannot be read
+     * @throws ParsingException In case an error occurs while parsing
+     * @throws DecoderException In case the stream cannot be decoded
+     * @throws XPathExpressionException if an exception occurs while parsing the decoded
+     * @throws ParserConfigurationException if an exception occurs while parsing the decoded smd
+     * @throws NoSuchAlgorithmException if an exception occurs while parsing the smd certificate
+     * @throws CertificateException if an exception occurs while validating smd certificate
+     * @throws KeyStoreException if an exception occurs while validating smd certificate
+     * @throws InvalidAlgorithmParameterException if an exception occurs while validating smd certificate
+     */
+    public SignedMarkData validateAndParseEncodedSignedMarkData(InputStream encodedSignedMarkData) throws
+            ParsingException, IOException, DecoderException, ParserConfigurationException, XPathExpressionException,
+            NoSuchAlgorithmException, CertificateException, KeyStoreException, InvalidAlgorithmParameterException {
+        return validateEncodedSignedMarkDataForDate(encodedSignedMarkData, new Date());
+    }
+
+    private SignedMarkData validateEncodedSignedMarkDataForDate(InputStream encodedSignedMarkData,
+                                                                Date dateForValidation) throws
+            ParsingException, IOException, DecoderException, ParserConfigurationException, XPathExpressionException,
+            NoSuchAlgorithmException, CertificateException, KeyStoreException, InvalidAlgorithmParameterException {
+
+        byte[] dataBytes = decodeSignedMarkData(encodedSignedMarkData);
+
+        Document document = loadSmdXmlIntoDocument(dataBytes);
+
+        Node signatureNode = extractSignatureNode(document);
+        X509Certificate x509Certificate = extractCertificateFromDocument(document);
+
+        validateSignature(signatureNode, x509Certificate);
+        assertCertificateIsValid(dateForValidation, x509Certificate);
+        assertCertificateNotRevoked(x509Certificate);
+        assertSmdNotRevoked(document);
+
+        Calendar notBeforeDate = DatatypeConverter.parseDate(xPath.evaluate("/smd:signedMark/smd:notBefore", document));
+        Calendar notAfterDate = DatatypeConverter.parseDate(xPath.evaluate("/smd:signedMark/smd:notAfter", document));
+
+        if (dateForValidation.before(notBeforeDate.getTime())) {
+            throw new NotYetValidSignedMarkDataException(notBeforeDate.getTime());
+        }
+
+        if (dateForValidation.after(notAfterDate.getTime())) {
+            throw new ExpiredSignedMarkDataException(notAfterDate.getTime());
+        }
+
+        return parseDecodedSignedMarkData(new ByteArrayInputStream(dataBytes));
+    }
+
+    private void assertSmdNotRevoked(Document document) throws XPathExpressionException {
+        String smdId = xPath.evaluate("/smd:signedMark/smd:id", document);
+
+        if (smdrlIdList.contains(smdId)) {
+            throw new TmchSmdRevokedException(smdId);
+        }
+    }
+
+    private Node extractSignatureNode(Document document) throws XPathExpressionException {
+        Node signatureNode = (Node) xPath.evaluate("/smd:signedMark/ds:Signature", document, XPathConstants.NODE);
+
+        if (signatureNode == null) {
+            throw new SmdSignatureMissingException();
+        }
+        return signatureNode;
+    }
+
+    private void validateSignature(Node signatureNode, X509Certificate x509Certificate) {
+        DOMValidateContext validateContext = new DOMValidateContext(x509Certificate.getPublicKey(), signatureNode);
+
+        XMLSignature xmlSignature;
+        try {
+            xmlSignature = xmlSignatureFactory.unmarshalXMLSignature(validateContext);
+        } catch (MarshalException e) {
+            throw new InvalidSignedMarkDataException(e);
+        }
+
+        try {
+            if (!xmlSignature.validate(validateContext)) {
+                throw new SmdSignatureInvalidException();
+            }
+        } catch (XMLSignatureException e) {
+            throw new InvalidSignedMarkDataException(e);
+        }
+    }
+
+    private void assertCertificateIsValid(Date currentDate, X509Certificate x509Certificate) throws
+            NoSuchAlgorithmException,
+            CertificateException,
+            KeyStoreException,
+            InvalidAlgorithmParameterException {
+        CertPathValidator certPathValidator = CertPathValidator.getInstance("PKIX");
+
+        CertPath certPath = certificateFactory.generateCertPath(Arrays.asList(x509Certificate));
+        PKIXParameters pkixParameters = new PKIXParameters(icannCertificateTrustStore);
+        pkixParameters.setRevocationEnabled(false);
+        pkixParameters.setDate(currentDate);
+        try {
+            certPathValidator.validate(certPath, pkixParameters);
+        } catch (CertPathValidatorException e) {
+            if (PKIXReason.NO_TRUST_ANCHOR.equals(e.getReason())) {
+                throw new TmchCertificateNotSignedByIcannCAException(x509Certificate, e);
+            } else if (CertPathValidatorException.BasicReason.EXPIRED.equals(e.getReason())) {
+                throw new TmchCertificateExpiredException(x509Certificate.getNotAfter(), e);
+            } else if (CertPathValidatorException.BasicReason.NOT_YET_VALID.equals(e.getReason())) {
+                throw new TmchCertificateNotYetValidException(x509Certificate.getNotBefore(), e);
+            } else {
+                throw new InvalidSignedMarkDataException(e);
+            }
+        }
+    }
+
+    private X509Certificate assertCertificateNotRevoked(X509Certificate x509Certificate)
+            throws XPathExpressionException {
+
+        if (certRevocationList.isRevoked(x509Certificate)) {
+            throw new TmchCertificateRevokedException(x509Certificate);
+        }
+        return x509Certificate;
+    }
+
+    private X509Certificate extractCertificateFromDocument(Document document) throws XPathExpressionException {
+        String certificateXpathQuery = "/smd:signedMark/ds:Signature/ds:KeyInfo/ds:X509Data/ds:X509Certificate";
+        String certificateString = xPath.evaluate(certificateXpathQuery, document);
+        String certificateEntireContent = CERTIFICATE_BEGIN_DELIMITER + certificateString + CERTIFICATE_END_DELIMITER;
+
+        try {
+            Certificate certificate = certificateFactory.generateCertificate(new ByteArrayInputStream(
+                    certificateEntireContent.getBytes()));
+            if (!X509Certificate.class.isAssignableFrom(certificate.getClass())) {
+                throw new TmchCertificateInvalidTypeException(certificate.getClass());
+            }
+            return (X509Certificate) certificate;
+        } catch (CertificateException e) {
+            throw new InvalidSignedMarkDataException(e);
+        }
+    }
+
+    private Document loadSmdXmlIntoDocument(byte[] decodedSignedMarkDataBytes) throws ParserConfigurationException,
+            DecoderException, IOException {
+        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+
+        try {
+            return documentBuilder.parse(new ByteArrayInputStream(decodedSignedMarkDataBytes));
+        } catch (SAXException e) {
+            throw new InvalidSignedMarkDataException(e);
+        }
+    }
+}

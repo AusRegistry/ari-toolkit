@@ -8,10 +8,10 @@ import java.io.IOException;
 
 import com.ausregistry.jtoolkit2.xml.ParsingException;
 import org.apache.commons.codec.DecoderException;
+import org.junit.Before;
 import org.junit.Test;
 
-public class TmchXMLUtilTest {
-
+public class TmchXMLUtilIntegrationTest {
     private static final String encodedSmdPart = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHNtZDpzaWdu" +
             "ZWRNYXJrIHhtbG5zOnNtZD0idXJuOmlldGY6cGFyYW1zOnhtbDpuczpzaWduZWRN" +
             "YXJrLTEuMCIgaWQ9InNpZ25lZE1hcmsiPgogIDxzbWQ6aWQ+MS0yPC9zbWQ6aWQ+" +
@@ -235,21 +235,26 @@ public class TmchXMLUtilTest {
                     "  </Signature>\n" +
                     "</smd:signedMark>";
 
+    private TmchXmlParser tmchXMLParser;
+
+    @Before
+    public void setUp() throws Exception {
+        tmchXMLParser = new TmchXmlParser();
+    }
 
     @Test
     public void shouldExtractBase64EncodedPartFromSmdFile() throws IOException {
-        byte[] bytes = TmchXMLUtil.extractBase64EncodedPartFromSmdFile(new ByteArrayInputStream(smdFileExample
+        byte[] bytes = tmchXMLParser.extractBase64EncodedPartFromSmdFile(new ByteArrayInputStream(smdFileExample
                 .getBytes()));
         assertEquals(encodedSmdPart, new String(bytes));
     }
 
     @Test
     public void shouldReturnDecodedSignedMarkData() throws IOException, DecoderException {
-
         String expectedDecodedSignedMarkData = "encodedSignedMarkData";
         String encodedSignedMarkData = "ZW5jb2RlZFNpZ25lZE1hcmtEYXRh";
         ByteArrayInputStream encodedSignedMarkDataStream = new ByteArrayInputStream(encodedSignedMarkData.getBytes());
-        String decoded = new String(TmchXMLUtil.decodeSignedMarkData(encodedSignedMarkDataStream));
+        String decoded = new String(tmchXMLParser.decodeSignedMarkData(encodedSignedMarkDataStream));
 
         assertEquals(decoded, expectedDecodedSignedMarkData);
     }
@@ -257,17 +262,16 @@ public class TmchXMLUtilTest {
     @Test
     public void shouldReturnAllObjects() throws Exception {
         SignedMarkData signedMarkData =
-                TmchXMLUtil.parseDecodedSignedMarkData(new ByteArrayInputStream(tmchSignedMarkDataXml.getBytes()));
+                tmchXMLParser.parseDecodedSignedMarkData(new ByteArrayInputStream(tmchSignedMarkDataXml.getBytes()));
 
         assertNotNull(signedMarkData.getMarksList());
         assertNotNull(signedMarkData.getSmdIssuerInfo());
         assertNotNull(signedMarkData.getMarksList().getMarks().get(0));
-
     }
 
     @Test
     public void shouldParseEncodedSignedMarkData() throws IOException, ParsingException, DecoderException {
-        SignedMarkData signedMarkData = TmchXMLUtil.parseEncodedSignedMarkData(new ByteArrayInputStream
+        SignedMarkData signedMarkData = tmchXMLParser.parseEncodedSignedMarkData(new ByteArrayInputStream
                 (encodedSmdPart.getBytes()));
         assertNotNull(signedMarkData.getMarksList());
         assertNotNull(signedMarkData.getSmdIssuerInfo());

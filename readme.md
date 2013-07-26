@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/AusRegistry/ari-toolkit.png)](https://travis-ci.org/AusRegistry/ari-toolkit)
 ## Downloads
 
-The latest ari-toolkit is available for download. [ari-toolkit v3.1.0](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.0/arjtk-3.1.0.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.0/arjtk-3.1.0-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.0/arjtk-3.1.0-javadoc.jar))
+The latest ari-toolkit is available for download. [ari-toolkit v3.1.1](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.1/arjtk-3.1.1.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.1/arjtk-3.1.1-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.1/arjtk-3.1.1-javadoc.jar))
 
 For more information, please read [Installation and Setup](#installation-and-setup).
 
@@ -32,7 +32,10 @@ The EPP toolkit developed and supplied by ARI provides client-side libraries tha
 
 The service element mapping module provides a simple means of translating between EPP service elements and their programmatic representation. The network transport module, which depends on session management service elements in the service element module, provides the following services; service information discovery, opening and closing EPP sessions, and sending and receiving EPP service elements.
 
-This toolkit also provides a mechanism to retrieve a Trademark Claims Notice from TMDB for a look up key. For detailed information on retrieving TM notice please refer to [Trademark Claims Notice](#trademark-claims-notice)
+This toolkit also provides a mechanism to perform the following Trademark Clearing House (TMCH) related functionality:
+
+-   Retrieve a Trademark Claims Notice from TMDB for a look up key. For more information on retrieving TM notice please refer to [Trademark Claims Notice](#trademark-claims-notice)
+-   Parse and validate Signed Mark Data (SMD). For more information on how to use the library for parsing and validating SMDs please refer to [Trademark Clearing House (TMCH)](#trademark-clearing-house)
 
 ## Installation and Setup
 
@@ -40,7 +43,7 @@ This toolkit also provides a mechanism to retrieve a Trademark Claims Notice fro
 
 #### Direct download
 
-Obtain the latest toolkit here: [Toolkit v3.1.0](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.0/arjtk-3.1.0.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.0/arjtk-3.1.0-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.0/arjtk-3.1.0-javadoc.jar))
+Obtain the latest toolkit here: [Toolkit v3.1.1](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.1/arjtk-3.1.1.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.1/arjtk-3.1.1-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.1/arjtk-3.1.1-javadoc.jar))
 
 #### Dependency Management
 
@@ -49,7 +52,7 @@ Use your build's dependency management tool to automatically download the toolki
 * Repository: `http://ausregistry.github.com/repo/`
 * groupId: `au.com.ausregistry`
 * artifactId: `arjtk`
-* version: `3.1.0`
+* version: `3.1.1`
 
 For example (using Maven):
 
@@ -64,7 +67,7 @@ For example (using Maven):
        <dependency>
           <groupId>au.com.ausregistry</groupId>
           <artifactId>arjtk</artifactId>
-          <version>3.1.0</version>
+          <version>3.1.1</version>
        </dependency>
     </dependencies>
 
@@ -290,6 +293,127 @@ The properties relevant to the standard logging implementation are:
   
 * `package-name.audience.handlers` should be left at the default values to use the provided handler implementations. The default values are provided in the `logging.properties` file distributed with the Toolkit.
 Alternatively, the user may implement custom handler classes and register those classes using the package-name.audience.handlers parameters. Implementers should familiarise themselves with the Java Logging API [JLOGAPI] and Java Logging Overview [JLOGGUIDE] before deciding on this approach.
+
+### Trademark Clearing House (TMCH)
+
+The toolkit provides an API to integrate with Registries to perform TMCH related functionality using ARI TMCH extension.
+It also provides an API to validate and parse SignedMarkData (SMD) file and access its contents,
+
+Given an input SMD file, the base64-encoded part of this file must be extracted:
+
+    // extract base64-encoded part
+    // adjust parameters to point to the input SMD file
+    byte[] base64EncodedPart = TmchXmlParser.extractBase64EncodedPartFromSmdFile(
+	                            new FileOutputStream("pathToInputSmdFile"));
+
+It can then be inserted in the TMCH Domain Create extension:
+
+    // create TmchDomainCreateCommandExtension
+    CommandExtension extension = new TmchDomainCreateCommandExtension();
+    extension.setEncodedSignedMarkData(new String(base64EncodedPart));
+
+    // append the extension to the DomainCreateCommand
+    command.appendExtension(extension);
+
+    // execute the command containing the TMCH extension
+    manager.execute(new Transaction(command, response));
+
+
+A similar extension can be appended to the DomainInfoCommand:
+
+    // create TmchDomainInfoCommandExtension
+    CommandExtension extension = new TmchDomainInfoCommandExtension();
+
+    // append it to DomainInfoCommand
+    command.appendExtension(extension);
+
+    // instantiate a domain info response object
+    final DomainInfoResponse response = new DomainInfoResponse();
+
+    // instantiate a TMCH extension response object
+    TmchDomainInfoResponseExtension tmchResponse = new TmchDomainInfoResponseExtension();
+
+    // register the TMCH extension with the response object
+    response.registerExtension(tmchResponse);
+
+    // execute the command with the response object from above
+    manager.execute(new Transaction(command, response));
+
+    // obtain the information from the response extension
+    if (tmchResponse.isInitialised()) {
+	    String encodedSignedMarkData = tmchResponse.getEncodedSignedMarkData();
+    }
+
+A similar extension can also be appended to the DomainCheckCommand:
+
+    // create TmchDomainCheckCommandExtension
+    CommandExtension extension = new TmchDomainCheckCommandExtension();
+
+    // append it to DomainCheckCommand
+    command.appendExtension(extension);
+
+    // execute the command containing the TMCH extension
+    manager.execute(new Transaction(command, response));
+
+When the extension is provided, the response will then contain if the requested domain name has been found in the Domain Name Label list and, if so, its related claims lookup “key”:
+
+    // retrieve the claims lookup key
+    String claimsLookupKey = response.getClaimsKey(“domainName”);
+
+The tool also enables to have access to the contents of an input SMD base64-encoded part (potentially extracted from the SMD file as mentioned above):
+
+    // decode and parse SMD base64-encoded part
+    SignedMarkData signedMarkData = TmchXmlParser.parseEncodedSignedMarkData(
+	                new ByteArrayInputStream(smdBase64EncodedBytes));
+
+If the input is a SMD decoded part, the tool can also parse it:
+
+    // parse SMD decoded part
+    SignedMarkData signedMarkData = TmchXmlParser.parseDecodedSignedMarkData(
+	                new ByteArrayInputStream(smdBase64DecodedBytes));
+
+The output SignedMarkData bean can then be queried to retrieve the TMCH data:
+
+    // get SMD id
+    String smdId = signedMarkData.getId();
+    // get first trademark
+    Trademark trademark = signedMarkData. getMarksList().getMarks().get(0);
+    // get trademark’s labels
+    List<String> labels = trademark.getLabels();
+
+Some basic validation can also be performed on the output SignedMarkData against a particular date:
+
+    //notBeforeDate and notAfterDate of the output SignedMarkData bean can be validated
+    Date dateToValidateAgainst;
+    .....
+    boolean isValid = signedMarkData.isValid(dateToValidateAgainst);
+
+#### Comprehensive Validation And Parsing
+
+The tool also enables the user to validate SMDs before parsing it:
+
+To Validate the SMD before parsing, the following additional resources are required
+
+- Certificate Revocation List
+- SMD Revocation List
+- SMD Issuing Authority Certificate
+
+Note: To refresh the above resources, construct a new instance of the TmchValidatingParser (as explained below)
+with the input streams to the new/refreshed resources.
+
+An encoded SMD can be validated and parsed as follows:
+
+    //Instantiate a TmchValidatingParser with the required additional resources mentioned above
+    //The resources are supplied as InputStreams
+    TmchValidatingParser tmchValidatingParser =
+                new TmchValidatingParser(certificateRevocationListInputStream, smdRevocationListInputStream,
+                certificateInputStream);
+
+    //Validate the SMD against the current date and parsed
+    tmchValidatingParser.validateEncodedSignedMarkData(encodedSignedMarkData)
+
+    //A SMD can be validated against a particular date and parsed
+    tmchValidatingParser.validateEncodedSignedMarkData(encodedSignedMarkData, dateForValidation)
 
 ## Trademark Claims Notice
 

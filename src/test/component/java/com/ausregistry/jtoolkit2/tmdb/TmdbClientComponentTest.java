@@ -5,20 +5,11 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
+import javax.xml.bind.DatatypeConverter;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.UnrecoverableKeyException;
-import java.security.cert.CertificateException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.TimeZone;
 
 import ari.dnrs.test.infrastructure.RegistryMockSSLHttpServer;
 import com.ausregistry.jtoolkit2.tmdb.model.TmClaim;
@@ -54,7 +45,7 @@ public class TmdbClientComponentTest {
         assertThat(tmNotice, notNullValue());
         assertThat(tmNotice.getId(), is("370d0b7c9223372036854775807"));
         assertThat(tmNotice.getNotBeforeDateTime().getTimeInMillis(),
-                is(getDateFromString("2010-08-14T09:00:00.0Z").getTimeInMillis()));
+                is(DatatypeConverter.parseDate("2010-08-14T09:00:00.0Z").getTimeInMillis()));
 
         assertThat(tmNotice.getLabel(), is("example-one"));
         assertThat(tmNotice.getClaims().size(), is(4));
@@ -111,19 +102,6 @@ public class TmdbClientComponentTest {
             noticeXml.append(line);
         }
         return noticeXml.toString();
-    }
-
-    private GregorianCalendar getDateFromString(String dateString) throws ParseException {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SS'Z'");
-
-        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-
-        Date date = simpleDateFormat.parse(dateString);
-
-        GregorianCalendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
-
-        return calendar;
     }
 
     @After
