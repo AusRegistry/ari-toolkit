@@ -200,8 +200,24 @@ public class ErrorPkg {
         }
         String signerCommonName = certificate.getIssuerDN().getName();
         if (signerCommonName != null) {
-            messageBuilder.append(" and signer DN '");
+            messageBuilder.append(" and \nsigner DN '");
             messageBuilder.append(signerCommonName);
+            messageBuilder.append("'\n");
+        }
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+        Date notBeforeDate = certificate.getNotBefore();
+        if (notBeforeDate != null) {
+            calendar.setTime(notBeforeDate);
+            messageBuilder.append("valid from '");
+            messageBuilder.append(DatatypeConverter.printDateTime(calendar));
+            messageBuilder.append("'");
+        }
+
+        Date notAfterDate = certificate.getNotAfter();
+        if (notAfterDate != null) {
+            calendar.setTime(notAfterDate);
+            messageBuilder.append(" and valid to '");
+            messageBuilder.append(DatatypeConverter.printDateTime(calendar));
             messageBuilder.append("'");
         }
         return getMessage(name, arg, messageBuilder.toString());

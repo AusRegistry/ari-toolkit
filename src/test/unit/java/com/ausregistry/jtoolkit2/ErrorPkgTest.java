@@ -65,11 +65,16 @@ public class ErrorPkgTest {
         when(mockPrincipalTwo.getName()).thenReturn("EMAILADDRESS=issuer@abc.com.au, " +
                 "CN=issuer, OU=Oud, O=ARI, L=Melbourne, ST=Vic, C=AU");
 
+        Calendar notAfterCal = DatatypeConverter.parseDate("2019-08-16T09:00:00Z");
+        Calendar notBeforeCal = DatatypeConverter.parseDate("2009-08-16T09:00:00Z");
+        when(mockSmdCertificate.getNotAfter()).thenReturn(notAfterCal.getTime());
+        when(mockSmdCertificate.getNotBefore()).thenReturn(notBeforeCal.getTime());
+
         String expectedMessage = "Test message <<in1>>; "
                 + "Certificate of serial number '7' and DN 'EMAILADDRESS=revoked@abc.com.au,"
-                + " CN=revoked, OU=Oud, O=ARI, L=Melbourne, ST=Victoria, C=AU' and signer DN"
+                + " CN=revoked, OU=Oud, O=ARI, L=Melbourne, ST=Victoria, C=AU' and \nsigner DN"
                 + " 'EMAILADDRESS=issuer@abc.com.au, CN=issuer, OU=Oud, O=ARI, L=Melbourne,"
-                + " ST=Vic, C=AU'";
+                + " ST=Vic, C=AU'\nvalid from '2009-08-16T09:00:00Z' and valid to '2019-08-16T09:00:00Z'";
 
         String message = ErrorPkg.getMessage("test.msg.2", "<<in2>>", mockSmdCertificate);
         assertThat(message, is(expectedMessage));

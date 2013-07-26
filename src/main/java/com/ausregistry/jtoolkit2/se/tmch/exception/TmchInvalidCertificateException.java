@@ -1,15 +1,15 @@
 package com.ausregistry.jtoolkit2.se.tmch.exception;
 
+import com.ausregistry.jtoolkit2.ErrorPkg;
+
 import java.security.cert.CertPathValidatorException;
 import java.security.cert.X509Certificate;
 
-import com.ausregistry.jtoolkit2.ErrorPkg;
-
-public class TmchCertificateNotSignedByIcannCAException extends RuntimeException {
+public class TmchInvalidCertificateException extends RuntimeException {
     private final X509Certificate certificate;
 
-    public TmchCertificateNotSignedByIcannCAException(X509Certificate certificate, CertPathValidatorException e) {
-        super(e);
+    public TmchInvalidCertificateException(X509Certificate certificate, CertPathValidatorException cause) {
+        super(cause);
         this.certificate = certificate;
     }
 
@@ -19,6 +19,6 @@ public class TmchCertificateNotSignedByIcannCAException extends RuntimeException
 
     @Override
     public String getMessage() {
-        return ErrorPkg.getMessage("tmch.smd.cert.notSignedByIcannCA", "<<cert-detailed-msg>>", certificate);
+        return ErrorPkg.getMessage("tmch.smd.cert.invalid", "<<cert-detailed-msg>>", certificate);
     }
 }

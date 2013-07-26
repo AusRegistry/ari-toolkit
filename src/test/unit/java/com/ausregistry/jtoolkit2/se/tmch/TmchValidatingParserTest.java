@@ -117,68 +117,20 @@ public class TmchValidatingParserTest {
     }
 
     @Test
-    public void shouldThrowExeceptionWhenCertificateHasExpired() throws Exception {
+    public void shouldThrowExeceptionWhenCertificateIsInvalid() throws Exception {
         String dummyEncodedSmdWithId = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5k" +
                 "YWxvbmU9Im5vIj8+PHNpZ25lZE1hcms6c2lnbmVkTWFyayB4bWxuczpzaWduZWRNYXJr" +
                 "PSJ1cm46aWV0ZjpwYXJhbXM6eG1sOm5zOnNpZ25lZE1hcmstMS4wIiBpZD0ic2lnbmVk" +
                 "TWFyayI+PHNpZ25lZE1hcms6aWQ+MS0yPC9zaWduZWRNYXJrOmlkPjwvc2lnbmVkTWFy" +
                 "azpzaWduZWRNYXJrPg==";
-        CertPathValidatorException certPathValidatorException = new CertPathValidatorException("test", null,
-                null, -1, CertPathValidatorException.BasicReason.EXPIRED);
+        CertPathValidatorException certPathValidatorException = mock(CertPathValidatorException.class);
 
-        Date mockNotAfterDate = mock(Date.class);
-        when(mockSmdCertificate.getNotAfter()).thenReturn(mockNotAfterDate);
         when(mockCertPathValidator.validate(eq(mockCertPath), any(PKIXParameters.class)))
                 .thenThrow(certPathValidatorException);
-        TmchCertificateExpiredException mockException = mock(TmchCertificateExpiredException.class);
-        whenNew(TmchCertificateExpiredException.class).withArguments(mockNotAfterDate, certPathValidatorException)
+
+        TmchInvalidCertificateException mockException = mock(TmchInvalidCertificateException.class);
+        whenNew(TmchInvalidCertificateException.class).withArguments(mockSmdCertificate, certPathValidatorException)
                 .thenReturn(mockException);
-
-        thrown.expect(is(mockException));
-        tmchXMLUtil.validateAndParseEncodedSignedMarkData(new ByteArrayInputStream(dummyEncodedSmdWithId.getBytes()));
-    }
-
-    @Test
-    public void shouldThrowExceptionWhenCertificateIsNotYetValid() throws Exception {
-        String dummyEncodedSmdWithId = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5k" +
-                "YWxvbmU9Im5vIj8+PHNpZ25lZE1hcms6c2lnbmVkTWFyayB4bWxuczpzaWduZWRNYXJr" +
-                "PSJ1cm46aWV0ZjpwYXJhbXM6eG1sOm5zOnNpZ25lZE1hcmstMS4wIiBpZD0ic2lnbmVk" +
-                "TWFyayI+PHNpZ25lZE1hcms6aWQ+MS0yPC9zaWduZWRNYXJrOmlkPjwvc2lnbmVkTWFy" +
-                "azpzaWduZWRNYXJrPg==";
-        CertPathValidatorException certPathValidatorException = new CertPathValidatorException("test", null,
-                null, -1, CertPathValidatorException.BasicReason.NOT_YET_VALID);
-
-        Date mockNotBeforeDate = mock(Date.class);
-        TmchCertificateNotYetValidException mockException = mock(TmchCertificateNotYetValidException.class);
-
-        when(mockSmdCertificate.getNotBefore()).thenReturn(mockNotBeforeDate);
-        when(mockCertPathValidator.validate(eq(mockCertPath), any(PKIXParameters.class)))
-                .thenThrow(certPathValidatorException);
-        whenNew(TmchCertificateNotYetValidException.class).withArguments(mockNotBeforeDate,
-                certPathValidatorException).thenReturn(mockException);
-
-        thrown.expect(is(mockException));
-        tmchXMLUtil.validateAndParseEncodedSignedMarkData(new ByteArrayInputStream(dummyEncodedSmdWithId.getBytes()));
-    }
-
-    @Test
-    public void shouldThrowExceptionWhenCertificateIsNotSignedByIcannCA() throws Exception {
-        String dummyEncodedSmdWithId = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5k" +
-                "YWxvbmU9Im5vIj8+PHNpZ25lZE1hcms6c2lnbmVkTWFyayB4bWxuczpzaWduZWRNYXJr" +
-                "PSJ1cm46aWV0ZjpwYXJhbXM6eG1sOm5zOnNpZ25lZE1hcmstMS4wIiBpZD0ic2lnbmVk" +
-                "TWFyayI+PHNpZ25lZE1hcms6aWQ+MS0yPC9zaWduZWRNYXJrOmlkPjwvc2lnbmVkTWFy" +
-                "azpzaWduZWRNYXJrPg==";
-        CertPathValidatorException certPathValidatorException = new CertPathValidatorException("test", null,
-                null, -1, PKIXReason.NO_TRUST_ANCHOR);
-
-        TmchCertificateNotSignedByIcannCAException mockException =
-                mock(TmchCertificateNotSignedByIcannCAException.class);
-
-        when(mockCertPathValidator.validate(eq(mockCertPath), any(PKIXParameters.class)))
-                .thenThrow(certPathValidatorException);
-
-        whenNew(TmchCertificateNotSignedByIcannCAException.class).withArguments(mockSmdCertificate,
-                certPathValidatorException).thenReturn(mockException);
 
         thrown.expect(is(mockException));
         tmchXMLUtil.validateAndParseEncodedSignedMarkData(new ByteArrayInputStream(dummyEncodedSmdWithId.getBytes()));

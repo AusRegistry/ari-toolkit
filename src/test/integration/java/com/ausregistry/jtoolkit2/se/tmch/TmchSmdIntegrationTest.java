@@ -98,9 +98,8 @@ public class TmchSmdIntegrationTest {
         InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream
                 ("NotSignedByCASMDData.txt");
 
-        thrown.expect(TmchCertificateNotSignedByIcannCAException.class);
-        thrown.expectMessage("Invalid Certificate in SignedMarkData. The issuing authority that issued the " +
-                "SignedMarkData is not a trusted entity.\nCertificate of serial number '5'");
+        thrown.expect(TmchInvalidCertificateException.class);
+        thrown.expectMessage("Invalid Certificate provided in SignedMarkData.\nCertificate of serial number '5'");
         tmchValidatingParser.validateAndParseEncodedSignedMarkData(inputStream);
     }
 
@@ -133,8 +132,8 @@ public class TmchSmdIntegrationTest {
 
         Date dateForValidation = DatatypeConverter.parseDate("2009-08-16T09:00:00.0Z").getTime();
 
-        thrown.expect(TmchCertificateNotYetValidException.class);
-        thrown.expectMessage("The certificate used in SignedMarkData is not valid before 2013-04-23T00:20:15Z.");
+        thrown.expect(TmchInvalidCertificateException.class);
+        thrown.expectMessage("Invalid Certificate provided in SignedMarkData.\nCertificate of serial number '4097'");
         tmchValidatingParser.validateAndParseEncodedSignedMarkData(inputStream, dateForValidation);
     }
 
@@ -144,8 +143,8 @@ public class TmchSmdIntegrationTest {
                 ("ValidSMDData.txt");
 
         Date dateForValidation = DatatypeConverter.parseDate("2015-08-16T09:00:00.0Z").getTime();
-        thrown.expect(TmchCertificateExpiredException.class);
-        thrown.expectMessage("The certificate used in SignedMarkData is not valid after 2014-04-18T00:20:15Z.");
+        thrown.expect(TmchInvalidCertificateException.class);
+        thrown.expectMessage("Invalid Certificate provided in SignedMarkData.\nCertificate of serial number '4097'");
         tmchValidatingParser.validateAndParseEncodedSignedMarkData(inputStream, dateForValidation);
     }
 

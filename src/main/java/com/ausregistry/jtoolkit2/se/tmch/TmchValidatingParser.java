@@ -1,12 +1,19 @@
 package com.ausregistry.jtoolkit2.se.tmch;
 
+import com.ausregistry.jtoolkit2.se.tmch.exception.*;
+import com.ausregistry.jtoolkit2.xml.NamespaceContextImpl;
+import com.ausregistry.jtoolkit2.xml.ParsingException;
+import org.apache.commons.codec.DecoderException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
+
 import javax.xml.bind.DatatypeConverter;
 import javax.xml.crypto.MarshalException;
 import javax.xml.crypto.dsig.XMLSignature;
 import javax.xml.crypto.dsig.XMLSignatureException;
 import javax.xml.crypto.dsig.XMLSignatureFactory;
 import javax.xml.crypto.dsig.dom.DOMValidateContext;
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
@@ -21,23 +28,14 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.*;
 import java.util.*;
 
-import com.ausregistry.jtoolkit2.se.tmch.exception.*;
-import com.ausregistry.jtoolkit2.xml.NamespaceContextImpl;
-import com.ausregistry.jtoolkit2.xml.ParsingException;
-import org.apache.commons.codec.DecoderException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.xml.sax.SAXException;
-
 /**
- * This defines the operations to facilitate validation and parsing of signed mark data for tmch.
+ * This defines the operations to facilitate validation and parsing of signed mark data for TMCH.
  */
 public class TmchValidatingParser extends TmchXmlParser {
 
     public static final String CERTIFICATE_BEGIN_DELIMITER = "-----BEGIN CERTIFICATE-----\n";
     public static final String CERTIFICATE_END_DELIMITER = "\n-----END CERTIFICATE-----\n";
 
-    public static final int BUFFER_SIZE = 1024;
     private final List<String> smdrlIdList = new ArrayList<String>();
 
     private final CRL certRevocationList;
@@ -229,15 +227,7 @@ public class TmchValidatingParser extends TmchXmlParser {
         try {
             certPathValidator.validate(certPath, pkixParameters);
         } catch (CertPathValidatorException e) {
-            if (PKIXReason.NO_TRUST_ANCHOR.equals(e.getReason())) {
-                throw new TmchCertificateNotSignedByIcannCAException(x509Certificate, e);
-            } else if (CertPathValidatorException.BasicReason.EXPIRED.equals(e.getReason())) {
-                throw new TmchCertificateExpiredException(x509Certificate.getNotAfter(), e);
-            } else if (CertPathValidatorException.BasicReason.NOT_YET_VALID.equals(e.getReason())) {
-                throw new TmchCertificateNotYetValidException(x509Certificate.getNotBefore(), e);
-            } else {
-                throw new InvalidSignedMarkDataException(e);
-            }
+            throw new TmchInvalidCertificateException(x509Certificate, e);
         }
     }
 

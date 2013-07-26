@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/AusRegistry/ari-toolkit.png)](https://travis-ci.org/AusRegistry/ari-toolkit)
 ## Downloads
 
-The latest ari-toolkit is available for download. [ari-toolkit v3.1.1](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.1/arjtk-3.1.1.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.1/arjtk-3.1.1-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.1/arjtk-3.1.1-javadoc.jar))
+The latest ari-toolkit is available for download. [ari-toolkit v3.1.2](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.2/arjtk-3.1.2.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.2/arjtk-3.1.2-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.2/arjtk-3.1.2-javadoc.jar))
 
 For more information, please read [Installation and Setup](#installation-and-setup).
 
@@ -35,7 +35,7 @@ The service element mapping module provides a simple means of translating betwee
 This toolkit also provides a mechanism to perform the following Trademark Clearing House (TMCH) related functionality:
 
 -   Retrieve a Trademark Claims Notice from TMDB for a look up key. For more information on retrieving TM notice please refer to [Trademark Claims Notice](#trademark-claims-notice)
--   Parse and validate Signed Mark Data (SMD). For more information on how to use the library for parsing and validating SMDs please refer to [Trademark Clearing House (TMCH)](#trademark-clearing-house)
+-   Parse and validate Signed Mark Data (SMD). For more information on how to use the library for parsing and validating SMDs please refer to [Trademark Clearing House (TMCH)](#trademark-clearing-house-tmch)
 
 ## Installation and Setup
 
@@ -43,7 +43,7 @@ This toolkit also provides a mechanism to perform the following Trademark Cleari
 
 #### Direct download
 
-Obtain the latest toolkit here: [Toolkit v3.1.1](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.1/arjtk-3.1.1.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.1/arjtk-3.1.1-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.1/arjtk-3.1.1-javadoc.jar))
+    Obtain the latest toolkit here: [Toolkit v3.1.2](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.2/arjtk-3.1.2.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.2/arjtk-3.1.2-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.1.2/arjtk-3.1.2-javadoc.jar))
 
 #### Dependency Management
 
@@ -52,7 +52,7 @@ Use your build's dependency management tool to automatically download the toolki
 * Repository: `http://ausregistry.github.com/repo/`
 * groupId: `au.com.ausregistry`
 * artifactId: `arjtk`
-* version: `3.1.1`
+* version: `3.1.2`
 
 For example (using Maven):
 
@@ -67,7 +67,7 @@ For example (using Maven):
        <dependency>
           <groupId>au.com.ausregistry</groupId>
           <artifactId>arjtk</artifactId>
-          <version>3.1.1</version>
+          <version>3.1.2</version>
        </dependency>
     </dependencies>
 
