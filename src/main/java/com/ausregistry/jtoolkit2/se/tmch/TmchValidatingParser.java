@@ -53,7 +53,7 @@ public class TmchValidatingParser extends TmchXmlParser {
      *
      * @param certificateRevocationList the Certificate Revocation List
      * @param smdRevocationList the SMD Revocation List
-     * @param tmchIcannCert the SMD Issuing Authority Certificate
+     * @param tmchIssuingAuthorityCert the SMD Issuing Authority Certificate
      * @throws CertificateException if an exception occurs while processing CRL or Issuing Authority certificate
      * @throws CRLException if an exception occurs while processing CRL
      * @throws IOException if an exception occurs while processing SMDRL or Issuing Authority certificate
@@ -61,7 +61,7 @@ public class TmchValidatingParser extends TmchXmlParser {
      * @throws NoSuchAlgorithmException if an exception occurs while processing Issuing Authority certificate
      */
     public TmchValidatingParser(InputStream certificateRevocationList, InputStream smdRevocationList,
-                                InputStream tmchIcannCert)
+                                InputStream tmchIssuingAuthorityCert)
             throws CertificateException, CRLException, IOException, KeyStoreException, NoSuchAlgorithmException {
         documentBuilderFactory = DocumentBuilderFactory.newInstance();
         documentBuilderFactory.setNamespaceAware(true);
@@ -74,7 +74,7 @@ public class TmchValidatingParser extends TmchXmlParser {
 
         readSmdRevocationList(smdRevocationList);
 
-        Certificate icannTmchCACertificate = certificateFactory.generateCertificate(tmchIcannCert);
+        Certificate icannTmchCACertificate = certificateFactory.generateCertificate(tmchIssuingAuthorityCert);
 
         icannCertificateTrustStore = KeyStore.getInstance(KeyStore.getDefaultType());
         icannCertificateTrustStore.load(null, null);
@@ -98,24 +98,24 @@ public class TmchValidatingParser extends TmchXmlParser {
      * Decodes and validates the provided base64-encoded SMD based on the provided date.
      * If the SMD passes validation, it is parsed into a SignedMarkData bean.
      *
-     * @param encodedSignedMarkData Input stream to the base64-encoded smd to be validated.
+     * @param encodedSignedMarkData Input stream to the base64-encoded SMD to be validated.
      * @param dateForValidation The date against which the input SMD needs to be validated against.
      * @return if the input SMD is valid the parsed SignedMarkDate object
      * @throws IOException In case the input stream cannot be read
      * @throws ParsingException In case an error occurs while parsing
      * @throws DecoderException In case the stream cannot be decoded
-     * @throws XPathExpressionException if an exception occurs while parsing the decoded
-     * @throws ParserConfigurationException if an exception occurs while parsing the decoded smd
-     * @throws NoSuchAlgorithmException if an exception occurs while parsing the smd certificate
-     * @throws CertificateException if an exception occurs while validating smd certificate
-     * @throws KeyStoreException if an exception occurs while validating smd certificate
-     * @throws InvalidAlgorithmParameterException if an exception occurs while validating smd certificate
+     * @throws XPathExpressionException if an exception occurs while parsing the decoded SMD
+     * @throws ParserConfigurationException if an exception occurs while parsing the decoded SMD
+     * @throws NoSuchAlgorithmException if an exception occurs while parsing the SMD certificate
+     * @throws CertificateException if an exception occurs while validating SMD certificate
+     * @throws KeyStoreException if an exception occurs while validating SMD certificate
+     * @throws InvalidAlgorithmParameterException if an exception occurs while validating SMD certificate
      */
     public SignedMarkData validateAndParseEncodedSignedMarkData(InputStream encodedSignedMarkData,
                                                                 Date dateForValidation)
             throws ParsingException, IOException, DecoderException, ParserConfigurationException,
             XPathExpressionException, NoSuchAlgorithmException, CertificateException, KeyStoreException,
-            InvalidAlgorithmParameterException {
+            InvalidAlgorithmParameterException, SAXException {
         return validateEncodedSignedMarkDataForDate(encodedSignedMarkData, dateForValidation);
     }
 
@@ -123,32 +123,39 @@ public class TmchValidatingParser extends TmchXmlParser {
      * Decodes and validates the provided base64-encoded SMD against the current date.
      * If the SMD passes validation, it is parsed into a SignedMarkData bean.
      *
-     * @param encodedSignedMarkData Input stream to the base64-encoded smd to be validated
+     * @param encodedSignedMarkData Input stream to the base64-encoded SMD to be validated
      * @return if the input SMD is valid the parsed SignedMarkDate object
      * @throws IOException In case the input stream cannot be read
      * @throws ParsingException In case an error occurs while parsing
      * @throws DecoderException In case the stream cannot be decoded
-     * @throws XPathExpressionException if an exception occurs while parsing the decoded
-     * @throws ParserConfigurationException if an exception occurs while parsing the decoded smd
-     * @throws NoSuchAlgorithmException if an exception occurs while parsing the smd certificate
-     * @throws CertificateException if an exception occurs while validating smd certificate
-     * @throws KeyStoreException if an exception occurs while validating smd certificate
-     * @throws InvalidAlgorithmParameterException if an exception occurs while validating smd certificate
+     * @throws XPathExpressionException if an exception occurs while parsing the decoded SMD
+     * @throws ParserConfigurationException if an exception occurs while parsing the decoded SMD
+     * @throws NoSuchAlgorithmException if an exception occurs while parsing the SMD certificate
+     * @throws CertificateException if an exception occurs while validating SMD certificate
+     * @throws KeyStoreException if an exception occurs while validating SMD certificate
+     * @throws InvalidAlgorithmParameterException if an exception occurs while validating SMD certificate
      */
     public SignedMarkData validateAndParseEncodedSignedMarkData(InputStream encodedSignedMarkData) throws
             ParsingException, IOException, DecoderException, ParserConfigurationException, XPathExpressionException,
-            NoSuchAlgorithmException, CertificateException, KeyStoreException, InvalidAlgorithmParameterException {
+            NoSuchAlgorithmException, CertificateException, KeyStoreException, InvalidAlgorithmParameterException,
+            SAXException {
         return validateEncodedSignedMarkDataForDate(encodedSignedMarkData, new Date());
     }
 
     private SignedMarkData validateEncodedSignedMarkDataForDate(InputStream encodedSignedMarkData,
                                                                 Date dateForValidation) throws
             ParsingException, IOException, DecoderException, ParserConfigurationException, XPathExpressionException,
-            NoSuchAlgorithmException, CertificateException, KeyStoreException, InvalidAlgorithmParameterException {
+            NoSuchAlgorithmException, CertificateException, KeyStoreException, InvalidAlgorithmParameterException,
+            SAXException {
 
         byte[] dataBytes = decodeSignedMarkData(encodedSignedMarkData);
 
-        Document document = loadSmdXmlIntoDocument(dataBytes);
+        Document document = null;
+        try {
+            document = loadSmdXmlIntoDocument(new ByteArrayInputStream(dataBytes));
+        } catch (SAXException e) {
+            throw new InvalidSignedMarkDataException(e);
+        }
 
         Node signatureNode = extractSignatureNode(document);
         X509Certificate x509Certificate = extractCertificateFromDocument(document);
@@ -256,17 +263,6 @@ public class TmchValidatingParser extends TmchXmlParser {
             }
             return (X509Certificate) certificate;
         } catch (CertificateException e) {
-            throw new InvalidSignedMarkDataException(e);
-        }
-    }
-
-    private Document loadSmdXmlIntoDocument(byte[] decodedSignedMarkDataBytes) throws ParserConfigurationException,
-            DecoderException, IOException {
-        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-
-        try {
-            return documentBuilder.parse(new ByteArrayInputStream(decodedSignedMarkDataBytes));
-        } catch (SAXException e) {
             throw new InvalidSignedMarkDataException(e);
         }
     }

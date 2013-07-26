@@ -270,7 +270,7 @@ public class TmchXMLUtilIntegrationTest {
     }
 
     @Test
-    public void shouldParseEncodedSignedMarkData() throws IOException, ParsingException, DecoderException {
+    public void shouldParseEncodedSignedMarkData() throws Exception {
         SignedMarkData signedMarkData = tmchXMLParser.parseEncodedSignedMarkData(new ByteArrayInputStream
                 (encodedSmdPart.getBytes()));
         assertNotNull(signedMarkData.getMarksList());

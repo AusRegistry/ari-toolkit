@@ -36,7 +36,7 @@ public class TmchSmdIntegrationTest {
     }
 
     @Test
-    public void shouldParseIcannSmdExample() throws IOException, ParsingException, DecoderException {
+    public void shouldParseIcannSmdExample() throws Exception {
         InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream
                 ("Trademark-Agent-Arabic-Active.smd");
 
