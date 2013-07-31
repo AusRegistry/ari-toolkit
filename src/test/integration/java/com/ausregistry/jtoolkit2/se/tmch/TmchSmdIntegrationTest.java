@@ -77,10 +77,11 @@ public class TmchSmdIntegrationTest {
     public void shouldFailValidationIfSmdIsNotYetValid() throws Exception {
         InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream
                 ("NotYetValidSMDData.txt");
+        Date validationDate = DatatypeConverter.parseDate("2013-07-16T09:00:00.0Z").getTime();
 
         thrown.expect(NotYetValidSignedMarkDataException.class);
         thrown.expectMessage("SignedMarkData is not valid before 2013-07-29T09:00:00Z.");
-        tmchValidatingParser.validateAndParseEncodedSignedMarkData(inputStream);
+        tmchValidatingParser.validateAndParseEncodedSignedMarkData(inputStream, validationDate);
     }
 
     @Test

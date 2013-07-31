@@ -1,13 +1,5 @@
 package com.ausregistry.jtoolkit2.se.tmch;
 
-import com.ausregistry.jtoolkit2.se.tmch.exception.*;
-import com.ausregistry.jtoolkit2.xml.NamespaceContextImpl;
-import com.ausregistry.jtoolkit2.xml.ParsingException;
-import org.apache.commons.codec.DecoderException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.xml.sax.SAXException;
-
 import javax.xml.bind.DatatypeConverter;
 import javax.xml.crypto.MarshalException;
 import javax.xml.crypto.dsig.XMLSignature;
@@ -27,6 +19,14 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.*;
 import java.util.*;
+
+import com.ausregistry.jtoolkit2.se.tmch.exception.*;
+import com.ausregistry.jtoolkit2.xml.NamespaceContextImpl;
+import com.ausregistry.jtoolkit2.xml.ParsingException;
+import org.apache.commons.codec.DecoderException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
 
 /**
  * This defines the operations to facilitate validation and parsing of signed mark data for TMCH.
@@ -196,6 +196,7 @@ public class TmchValidatingParser extends TmchXmlParser {
 
     private void validateSignature(Node signatureNode, X509Certificate x509Certificate) {
         DOMValidateContext validateContext = new DOMValidateContext(x509Certificate.getPublicKey(), signatureNode);
+        signatureNode.getOwnerDocument().getDocumentElement().setIdAttribute("id", true);
 
         XMLSignature xmlSignature;
         try {

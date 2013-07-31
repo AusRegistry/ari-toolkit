@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 import static org.powermock.api.mockito.PowerMockito.whenNew;
 
+import javax.xml.bind.DatatypeConverter;
 import javax.xml.crypto.MarshalException;
 import javax.xml.crypto.dsig.XMLSignature;
 import javax.xml.crypto.dsig.XMLSignatureFactory;
@@ -35,6 +36,7 @@ import org.mockito.Mock;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 @RunWith(PowerMockRunner.class)
@@ -68,6 +70,8 @@ public class TmchValidatingParserTest {
         Node mockNode = mock(Node.class);
         PublicKey mockKey = mock(PublicKey.class);
         BufferedReader mockReader = mock(BufferedReader.class);
+        Document mockDocument = mock(Document.class);
+        Element mockElement = mock(Element.class);
 
         when(CertificateFactory.getInstance("X.509")).thenReturn(mockCertificateFactory);
         when(mockCertificateFactory.generateCRL(mockInputStream)).thenReturn(mockCrl);
@@ -85,6 +89,8 @@ public class TmchValidatingParserTest {
 
         when(mockXpath.evaluate(eq("/smd:signedMark/ds:Signature"), any(Document.class), eq(XPathConstants.NODE)))
                 .thenReturn(mockNode);
+        when(mockNode.getOwnerDocument()).thenReturn(mockDocument);
+        when(mockDocument.getDocumentElement()).thenReturn(mockElement);
         when(mockXmlSignatureFactory.unmarshalXMLSignature(any(DOMValidateContext.class))).thenReturn(mockXmlSignature);
         when(mockXmlSignature.validate(any(DOMValidateContext.class))).thenReturn(true);
 
@@ -197,6 +203,46 @@ public class TmchValidatingParserTest {
         when(mockXpath.evaluate(eq("/smd:signedMark/ds:Signature"), any(Document.class), eq(XPathConstants.NODE)))
                 .thenReturn(null);
         thrown.expect(SmdSignatureMissingException.class);
+        tmchXMLUtil.validateAndParseEncodedSignedMarkData(new ByteArrayInputStream(dummyEncodedSmdWithId.getBytes()));
+    }
+
+    @Test
+    public void shouldThrowExceptionForExpiredSmdWhenCallingTheValidationMethodWithoutADate() throws Exception {
+        String dummyEncodedSmdWithId = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5k" +
+                "YWxvbmU9Im5vIj8+PHNpZ25lZE1hcms6c2lnbmVkTWFyayB4bWxuczpzaWduZWRNYXJr" +
+                "PSJ1cm46aWV0ZjpwYXJhbXM6eG1sOm5zOnNpZ25lZE1hcmstMS4wIiBpZD0ic2lnbmVk" +
+                "TWFyayI+PHNpZ25lZE1hcms6aWQ+MS0yPC9zaWduZWRNYXJrOmlkPjwvc2lnbmVkTWFy" +
+                "azpzaWduZWRNYXJrPg==";
+
+        Date dateForValidation = DatatypeConverter.parseDate("2015-08-16T09:00:00.0Z").getTime();
+        whenNew(Date.class).withNoArguments().thenReturn(dateForValidation);
+
+        when(mockXpath.evaluate(eq("/smd:signedMark/smd:notBefore"), any(Document.class)))
+                .thenReturn("2009-08-16T09:00:00.0Z");
+        when(mockXpath.evaluate(eq("/smd:signedMark/smd:notAfter"), any(Document.class)))
+                .thenReturn("2013-08-16T09:00:00.0Z");
+
+        thrown.expect(ExpiredSignedMarkDataException.class);
+        tmchXMLUtil.validateAndParseEncodedSignedMarkData(new ByteArrayInputStream(dummyEncodedSmdWithId.getBytes()));
+    }
+
+    @Test
+    public void shouldThrowExceptionForNotYetValidSmdWhenCallingTheValidationMethodWithoutADate() throws Exception {
+        String dummyEncodedSmdWithId = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5k" +
+                "YWxvbmU9Im5vIj8+PHNpZ25lZE1hcms6c2lnbmVkTWFyayB4bWxuczpzaWduZWRNYXJr" +
+                "PSJ1cm46aWV0ZjpwYXJhbXM6eG1sOm5zOnNpZ25lZE1hcmstMS4wIiBpZD0ic2lnbmVk" +
+                "TWFyayI+PHNpZ25lZE1hcms6aWQ+MS0yPC9zaWduZWRNYXJrOmlkPjwvc2lnbmVkTWFy" +
+                "azpzaWduZWRNYXJrPg==";
+
+        Date dateForValidation = DatatypeConverter.parseDate("2008-08-16T09:00:00.0Z").getTime();
+        whenNew(Date.class).withNoArguments().thenReturn(dateForValidation);
+
+        when(mockXpath.evaluate(eq("/smd:signedMark/smd:notBefore"), any(Document.class)))
+                .thenReturn("2009-08-16T09:00:00.0Z");
+        when(mockXpath.evaluate(eq("/smd:signedMark/smd:notAfter"), any(Document.class)))
+                .thenReturn("2013-08-16T09:00:00.0Z");
+
+        thrown.expect(NotYetValidSignedMarkDataException.class);
         tmchXMLUtil.validateAndParseEncodedSignedMarkData(new ByteArrayInputStream(dummyEncodedSmdWithId.getBytes()));
     }
 }

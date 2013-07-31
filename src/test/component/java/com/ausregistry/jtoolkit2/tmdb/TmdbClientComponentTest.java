@@ -18,6 +18,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * This test would only work with Java7 because the test dependency 'ari-mock-http-server' is compiled with Java7
+ */
 public class TmdbClientComponentTest {
 
     private RegistryMockSSLHttpServer mockHttpsServer;

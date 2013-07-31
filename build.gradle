@@ -175,4 +175,4 @@ uploadArchives << {
 
 uploadArchives.dependsOn checkVersionNumbersInReadme, javadoc
 
-build.dependsOn integrationTest, componentTest
+test.dependsOn integrationTest
