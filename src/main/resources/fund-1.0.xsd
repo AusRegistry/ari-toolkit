@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="urn:ar:params:xml:ns:fund-1.0"
+        xmlns:fund="urn:ar:params:xml:ns:fund-1.0"
+        xmlns="http://www.w3.org/2001/XMLSchema"
+        elementFormDefault="qualified">
+
+    <annotation>
+        <documentation>
+            Fund Balance Check Extensions to the
+            Extensible Provisioning Protocol.
+        </documentation>
+    </annotation>
+
+    <!--
+    <info> request elements
+    -->
+    <element name="info"/>
+
+    <!--
+    <info> response elements
+    -->
+    <element name="infData" type="fund:infDataType"/>
+
+    <complexType name="infDataType">
+        <sequence>
+            <element name="fund" type="fund:fundType" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="fundType">
+        <sequence>
+            <element name="id" type="token"/>
+            <element name="available" type="decimal" minOccurs="0"/>
+        </sequence>
+        <attribute name="limit" type="boolean" use="required"/>
+    </complexType>
+</schema>
