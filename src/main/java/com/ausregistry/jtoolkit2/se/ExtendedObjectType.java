@@ -28,7 +28,10 @@ public enum ExtendedObjectType implements ObjectType {
     TMCH("tmch", "urn:ar:params:xml:ns:tmch-1.0", "tmch-1.0.xsd", "name"),
     /** References the domain name price extension XML namespace and schema file */
     PRICE ("price", "urn:ar:params:xml:ns:price-1.0", "price-1.0.xsd", "name"),
-    EX_AVAIL ("exAvail", "urn:ar:params:xml:ns:exAvail-1.0", "exAvail-1.0.xsd", "name");
+    /** References the extended domain check XML namespace and schema file */
+    EX_AVAIL ("exAvail", "urn:ar:params:xml:ns:exAvail-1.0", "exAvail-1.0.xsd", "name"),
+    /** References the fund info XML namespace and schema file */
+    FUND ("fund", "urn:ar:params:xml:ns:fund-1.0", "fund-1.0.xsd");
 
     private final String prefix, uri, schemaDefinition, identType;
 
@@ -38,6 +41,13 @@ public enum ExtendedObjectType implements ObjectType {
         this.uri = uri;
         this.schemaDefinition = schemaDefinition;
         this.identType = identType;
+    }
+
+    ExtendedObjectType(final String prefix, final String uri, final String schemaDefinition) {
+        this.prefix = prefix;
+        this.uri = uri;
+        this.schemaDefinition = schemaDefinition;
+        this.identType = null;
     }
 
     @Override

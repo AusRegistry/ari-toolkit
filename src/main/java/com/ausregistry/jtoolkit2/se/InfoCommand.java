@@ -29,7 +29,18 @@ public abstract class InfoCommand extends ObjectCommand {
 	public InfoCommand(ObjectType objType, String ident) {
 		super(StandardCommandType.INFO, objType, ident);
 	}
-	
+
+    /**
+	 * Create an info command mapped to the specified object type to retrieve
+	 * information about the related object.
+	 *
+	 * @param objType The type of object to which the info command is to be
+	 * mapped.
+	 */
+	public InfoCommand(ObjectType objType) {
+		super(StandardCommandType.INFO, objType);
+	}
+
     public InfoCommand(StandardObjectType objType, String ident, Attribute attribute) {
         super(StandardCommandType.INFO, objType, ident, attribute.getType(), attribute.getValue());
     }

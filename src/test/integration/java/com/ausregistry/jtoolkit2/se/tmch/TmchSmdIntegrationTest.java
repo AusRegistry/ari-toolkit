@@ -157,14 +157,6 @@ public class TmchSmdIntegrationTest {
     }
 
     @Test
-    public void shouldPassValidationWhenSmdIsValid() throws Exception {
-        InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream
-                ("ValidSMDData.txt");
-        SignedMarkData signedMarkData = tmchValidatingParser.validateAndParseEncodedSignedMarkData(inputStream);
-        assertThat(signedMarkData.getId(), is("11-2"));
-    }
-
-    @Test
     public void shouldPassValidationForADateWhenSmdIsValid() throws Exception {
         InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream
                 ("ValidSMDData.txt");

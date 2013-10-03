@@ -63,7 +63,27 @@ public abstract class ObjectCommand extends Command {
 		xmlWriter.appendChild(
 				objElement, objType.getIdentType()).setTextContent(ident);
 	}
-	
+
+    /**
+     * Construct the DOM tree component common to all object-mapped commands
+     * which operates on objects related to user.
+     *
+     * @throws IllegalArgumentException if {@code objectType} is {@code null}.
+     */
+	public ObjectCommand(CommandType commandType, ObjectType objectType) {
+
+		super(commandType);
+
+		if (objectType == null) {
+			throw new IllegalArgumentException(
+					ErrorPkg.getMessage("se.object.missing_arg"));
+		}
+
+		objType = objectType;
+
+		commonInit();
+	}
+
 	/**
 	 * Construct the DOM tree component common to all object-mapped commands
 	 * which operate on a single object, and assign it the attribute name and value.
