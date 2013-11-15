@@ -30,8 +30,10 @@
     <complexType name="fundType">
         <sequence>
             <element name="id" type="token"/>
+            <element name="balance" type="decimal"/>
+            <element name="limit" type="decimal" minOccurs="0"/>
             <element name="available" type="decimal" minOccurs="0"/>
         </sequence>
-        <attribute name="limit" type="boolean" use="required"/>
+        <attribute name="hasLimit" type="boolean" use="required"/>
     </complexType>
 </schema>

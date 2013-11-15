@@ -14,7 +14,7 @@ import org.w3c.dom.NodeList;
 
 /**
  * Use this to access fund object information as provided in an EPP fund
- * info response.  Such a service element is sent by a ari registry server
+ * info response. Such a service element is sent by a ari registry server
  * in response to a valid fund info command, implemented by the
  * FundInfoCommand class.
  *
@@ -43,22 +43,39 @@ public class FundInfoResponse extends DataResponse {
 
             for (int i = 0; i < fundNodes.getLength(); i++) {
                 Node fundNode = fundNodes.item(i);
-                boolean limit = Boolean.parseBoolean(fundNode.getAttributes().getNamedItem("limit").getNodeValue());
-
-                Node idNode = fundNode.getFirstChild();
-                String id = idNode.getFirstChild().getNodeValue();
-                BigDecimal available = null;
-                if (idNode.getNextSibling() != null) {
-                    available = new BigDecimal(idNode.getNextSibling().getFirstChild().getNodeValue());
-                }
-
-                funds.add(new Fund(id, limit, available));
+                Fund fund = parseFundNode(fundNode);
+                funds.add(fund);
             }
         } catch (XPathExpressionException xpee) {
             maintLogger.warning(xpee.getMessage());
         }
 
         debugLogger.finest("exit");
+    }
+
+    private Fund parseFundNode(Node fundNode) {
+        boolean hasLimit = Boolean.parseBoolean(fundNode.getAttributes().getNamedItem("hasLimit").getNodeValue());
+        NodeList fundElements = fundNode.getChildNodes();
+
+        String id = null;
+        BigDecimal balance = null;
+        BigDecimal limit = null;
+        BigDecimal available = null;
+        for (int j = 0; j < fundElements.getLength(); j++) {
+            Node currentNode = fundElements.item(j);
+            String elementName = currentNode.getNodeName();
+
+            if ("fund:id".equals(elementName)) {
+                id = currentNode.getFirstChild().getNodeValue();
+            } else if ("fund:balance".equals(elementName)) {
+                balance = new BigDecimal(currentNode.getFirstChild().getNodeValue());
+            } else if ("fund:limit".equals(elementName)) {
+                limit = new BigDecimal(currentNode.getFirstChild().getNodeValue());
+            } else if ("fund:available".equals(elementName)) {
+                available = new BigDecimal(currentNode.getFirstChild().getNodeValue());
+            }
+        }
+        return new Fund(id, hasLimit, balance, limit, available);
     }
 
     public List<Fund> getFunds() {
