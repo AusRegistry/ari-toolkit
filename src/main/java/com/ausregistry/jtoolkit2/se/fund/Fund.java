@@ -10,11 +10,15 @@ import java.math.BigDecimal;
  */
 public class Fund {
     private String id;
-    private boolean limit;
+    private boolean hasLimit;
+    private BigDecimal balance;
+    private BigDecimal limit;
     private BigDecimal available;
 
-    public Fund(String id, boolean limit, BigDecimal available) {
+    public Fund(String id, boolean hasLimit, BigDecimal balance, BigDecimal limit, BigDecimal available) {
         this.id = id;
+        this.hasLimit = hasLimit;
+        this.balance = balance;
         this.limit = limit;
         this.available = available;
     }
@@ -27,7 +31,15 @@ public class Fund {
         return id;
     }
 
-    public boolean getLimit() {
+    public boolean isHasLimit() {
+        return hasLimit;
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public BigDecimal getLimit() {
         return limit;
     }
 }
