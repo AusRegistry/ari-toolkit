@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" standalone="no" ?>
+<schema targetNamespace="urn:ar:params:xml:ns:price-1.1"
+        xmlns:price="urn:ar:params:xml:ns:price-1.1"
+        xmlns:eppcom="urn:ietf:params:xml:ns:eppcom-1.0"
+		xmlns:domain="urn:ietf:params:xml:ns:domain-1.0"
+        xmlns="http://www.w3.org/2001/XMLSchema"
+        elementFormDefault="qualified">
+
+    <import namespace="urn:ietf:params:xml:ns:eppcom-1.0" />
+	<import namespace="urn:ietf:params:xml:ns:domain-1.0" />
+
+    <!-- command-response extension elements -->
+    <element name="check" type="price:chkType" />
+	<element name="create" type="price:ackType" />
+    <element name="renew" type="price:ackType" />
+    <element name="transfer" type="price:ackType" />
+
+    <complexType name="chkType">
+		<sequence>
+			<element name="period" type="domain:periodType" minOccurs="0" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="ackType">
+        <sequence>
+            <element name="ack" type="price:priceAckType" />
+        </sequence>
+    </complexType>
+
+    <complexType name="priceAckType">
+        <sequence>
+            <element name="price" type="decimal" minOccurs="0" />
+            <element name="renewalPrice" type="decimal" minOccurs="0" />
+        </sequence>
+    </complexType>
+	
+	<!-- response elements -->
+	<element name="chkData" type="price:chkDataType" />
+	
+	<complexType name="chkDataType">
+		<sequence>
+			<element name="cd" type="price:checkType" maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="checkType">
+		<sequence>
+			<element name="name" type="price:checkNameType" />
+			<element name="period" type="domain:periodType" minOccurs="0" />
+			<element name="price" type="decimal" minOccurs="0" />
+			<element name="renewalPrice" type="decimal" minOccurs="0" />
+			<element name="restorePrice" type="decimal" minOccurs="0" />
+			<element name="transferPrice" type="decimal" minOccurs="0" />
+			<element name="reason" type="eppcom:reasonType" minOccurs="0" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="checkNameType">
+		<simpleContent>
+			<extension base="eppcom:labelType">
+				<attribute name="premium" type="boolean" />
+			</extension>
+		</simpleContent>
+	</complexType>
+
+</schema>

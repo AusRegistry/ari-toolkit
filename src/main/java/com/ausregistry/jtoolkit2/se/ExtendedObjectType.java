@@ -28,6 +28,8 @@ public enum ExtendedObjectType implements ObjectType {
     TMCH("tmch", "urn:ar:params:xml:ns:tmch-1.0", "tmch-1.0.xsd", "name"),
     /** References the domain name price extension XML namespace and schema file */
     PRICE ("price", "urn:ar:params:xml:ns:price-1.0", "price-1.0.xsd", "name"),
+    /** References the domain name price extension XML namespace and schema file */
+    PRICEV11("priceV1_1", "urn:ar:params:xml:ns:price-1.1", "price-1.1.xsd", "name"),
     /** References the extended domain check XML namespace and schema file */
     EX_AVAIL ("exAvail", "urn:ar:params:xml:ns:exAvail-1.0", "exAvail-1.0.xsd", "name"),
     /** References the fund info XML namespace and schema file */
