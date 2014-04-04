@@ -34,7 +34,7 @@ public class DomainRenewPriceCommandExtension implements CommandExtension {
         final XMLWriter xmlWriter = command.getXmlWriter();
         final Element extensionElement = command.getExtensionElement();
         final Element renewElement = xmlWriter.appendChild(extensionElement, "renew",
-                ExtendedObjectType.PRICE.getURI());
+                getExtendedObjectType().getURI());
         Element ackElement = xmlWriter.appendChild(renewElement, "ack");
 
         if (renewalPrice != null) {
@@ -45,4 +45,9 @@ public class DomainRenewPriceCommandExtension implements CommandExtension {
     public void setRenewalPrice(BigDecimal renewalPrice) {
         this.renewalPrice = renewalPrice;
     }
+
+    protected ExtendedObjectType getExtendedObjectType() {
+        return ExtendedObjectType.PRICE;
+    }
+
 }

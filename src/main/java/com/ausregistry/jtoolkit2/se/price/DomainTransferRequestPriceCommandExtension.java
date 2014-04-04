@@ -32,12 +32,16 @@ public class DomainTransferRequestPriceCommandExtension implements CommandExtens
         final XMLWriter xmlWriter = command.getXmlWriter();
         final Element extensionElement = command.getExtensionElement();
         final Element transferElement = xmlWriter.appendChild(extensionElement, "transfer",
-                ExtendedObjectType.PRICE.getURI());
+                getExtendedObjectType().getURI());
         Element ackElement = xmlWriter.appendChild(transferElement, "ack");
 
         if (renewalPrice != null) {
             xmlWriter.appendChild(ackElement, "renewalPrice").setTextContent(renewalPrice.toPlainString());
         }
+    }
+
+    protected ExtendedObjectType getExtendedObjectType() {
+        return ExtendedObjectType.PRICE;
     }
 
     public void setRenewalPrice(BigDecimal renewalPrice) {
