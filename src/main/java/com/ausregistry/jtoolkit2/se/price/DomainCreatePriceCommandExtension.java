@@ -2,14 +2,13 @@ package com.ausregistry.jtoolkit2.se.price;
 
 import java.math.BigDecimal;
 
-import org.w3c.dom.Element;
-
 import com.ausregistry.jtoolkit2.se.Command;
 import com.ausregistry.jtoolkit2.se.CommandExtension;
 import com.ausregistry.jtoolkit2.se.DomainCreateCommand;
 import com.ausregistry.jtoolkit2.se.DomainCreateResponse;
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.xml.XMLWriter;
+import org.w3c.dom.Element;
 
 /**
  * <p>Extension for the EPP Domain Create command, representing the Create Premium Domain aspect of the
@@ -37,7 +36,7 @@ public class DomainCreatePriceCommandExtension implements CommandExtension {
         final XMLWriter xmlWriter = command.getXmlWriter();
         final Element extensionElement = command.getExtensionElement();
         final Element createElement = xmlWriter.appendChild(extensionElement, "create",
-                ExtendedObjectType.PRICE.getURI());
+                getExtendedObjectType().getURI());
         Element ackElement = xmlWriter.appendChild(createElement, "ack");
         if (price != null) {
             xmlWriter.appendChild(ackElement, "price").setTextContent(price.toPlainString());
@@ -45,6 +44,10 @@ public class DomainCreatePriceCommandExtension implements CommandExtension {
         if (renewalPrice != null) {
             xmlWriter.appendChild(ackElement, "renewalPrice").setTextContent(renewalPrice.toPlainString());
         }
+    }
+
+    protected ExtendedObjectType getExtendedObjectType() {
+        return ExtendedObjectType.PRICE;
     }
 
     public void setPrice(BigDecimal price) {
