@@ -36,7 +36,7 @@ public class DomainCreatePriceCommandExtension implements CommandExtension {
         final XMLWriter xmlWriter = command.getXmlWriter();
         final Element extensionElement = command.getExtensionElement();
         final Element createElement = xmlWriter.appendChild(extensionElement, "create",
-                getExtendedObjectType().getURI());
+                ExtendedObjectType.PRICE.getURI());
         Element ackElement = xmlWriter.appendChild(createElement, "ack");
         if (price != null) {
             xmlWriter.appendChild(ackElement, "price").setTextContent(price.toPlainString());
@@ -44,10 +44,6 @@ public class DomainCreatePriceCommandExtension implements CommandExtension {
         if (renewalPrice != null) {
             xmlWriter.appendChild(ackElement, "renewalPrice").setTextContent(renewalPrice.toPlainString());
         }
-    }
-
-    protected ExtendedObjectType getExtendedObjectType() {
-        return ExtendedObjectType.PRICE;
     }
 
     public void setPrice(BigDecimal price) {

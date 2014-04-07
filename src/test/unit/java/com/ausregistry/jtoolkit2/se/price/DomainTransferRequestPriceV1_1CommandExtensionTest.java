@@ -34,7 +34,7 @@ public class DomainTransferRequestPriceV1_1CommandExtensionTest {
             + "</command>"
             + "</epp>";
 
-    private final static String DOMAIN_TRANSFER_REQUEST_ACK_RENEW_PRICE_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+    private final static String DOMAIN_TRANSFER_REQUEST_ACK_PRICE_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
             + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
             + "xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">"
             + "<command>"
@@ -50,7 +50,7 @@ public class DomainTransferRequestPriceV1_1CommandExtensionTest {
             + "<extension>"
             + "<transfer xmlns=\"urn:ar:params:xml:ns:price-1.1\">"
             + "<ack>"
-            + "<renewalPrice>100.00</renewalPrice>"
+            + "<price>100.00</price>"
             + "</ack>"
             + "</transfer>"
             + "</extension>"
@@ -71,18 +71,18 @@ public class DomainTransferRequestPriceV1_1CommandExtensionTest {
     }
 
     @Test
-    public void shouldCreateDomainTransferRequestXmlWithPriceAckAndNoRenewalPrice() throws Exception {
+    public void shouldCreateDomainTransferRequestXmlWithPriceAckAndNoPrice() throws Exception {
         domainTransferRequestCommand.appendExtension(domainTransferRequestPriceV1_1CommandExtension);
 
         assertEquals(DOMAIN_TRANSFER_REQUEST_ACK_NO_PRICE_XML, domainTransferRequestCommand.toXML());
     }
 
     @Test
-    public void shouldCreateDomainTransferRequestXmlWithPriceAckIncludingRenewalPrices() throws Exception {
+    public void shouldCreateDomainTransferRequestXmlWithPriceAckIncludingPrices() throws Exception {
 
-        domainTransferRequestPriceV1_1CommandExtension.setRenewalPrice(BigDecimal.valueOf(10000, 2));
+        domainTransferRequestPriceV1_1CommandExtension.setPrice(BigDecimal.valueOf(10000, 2));
         domainTransferRequestCommand.appendExtension(domainTransferRequestPriceV1_1CommandExtension);
 
-        assertEquals(DOMAIN_TRANSFER_REQUEST_ACK_RENEW_PRICE_XML, domainTransferRequestCommand.toXML());
+        assertEquals(DOMAIN_TRANSFER_REQUEST_ACK_PRICE_XML, domainTransferRequestCommand.toXML());
     }
 }

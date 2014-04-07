@@ -30,7 +30,6 @@
     <complexType name="priceAckType">
         <sequence>
             <element name="price" type="decimal" minOccurs="0" />
-            <element name="renewalPrice" type="decimal" minOccurs="0" />
         </sequence>
     </complexType>
 	
@@ -47,8 +46,8 @@
 		<sequence>
 			<element name="name" type="price:checkNameType" />
 			<element name="period" type="domain:periodType" minOccurs="0" />
-			<element name="price" type="decimal" minOccurs="0" />
-			<element name="renewalPrice" type="decimal" minOccurs="0" />
+			<element name="createPrice" type="decimal" minOccurs="0" />
+			<element name="renewPrice" type="decimal" minOccurs="0" />
 			<element name="restorePrice" type="decimal" minOccurs="0" />
 			<element name="transferPrice" type="decimal" minOccurs="0" />
 			<element name="reason" type="eppcom:reasonType" minOccurs="0" />

@@ -37,8 +37,8 @@ public class DomainCheckPriceV1_1ResponseExtension extends ResponseExtension {
     private static final String CHKDATA_PREMIUM_VALUE_EXPR = "/priceV1_1:name/@premium";
     private static final String CHKDATA_PERIOD_UNIT_EXPR = "/priceV1_1:period/@unit";
     private static final String CHKDATA_PERIOD_VALUE_EXPR = "/priceV1_1:period/text()";
-    private static final String CHKDATA_CREATE_PRICE_EXPR = "/priceV1_1:price/text()";
-    private static final String CHKDATA_RENEW_PRICE_EXPR = "/priceV1_1:renewalPrice/text()";
+    private static final String CHKDATA_CREATE_PRICE_EXPR = "/priceV1_1:createPrice/text()";
+    private static final String CHKDATA_RENEW_PRICE_EXPR = "/priceV1_1:renewPrice/text()";
     private static final String CHKDATA_RESTORE_PRICE_EXPR = "/priceV1_1:restorePrice/text()";
     private static final String CHKDATA_TRANSFER_PRICE_EXPR = "/priceV1_1:transferPrice/text()";
     private static final String CHKDATA_REASON_EXPR = "/priceV1_1:reason/text()";
@@ -66,8 +66,8 @@ public class DomainCheckPriceV1_1ResponseExtension extends ResponseExtension {
             String isPremiumDomainValue = xmlDoc.getNodeValue(qry + CHKDATA_PREMIUM_VALUE_EXPR);
             Boolean isPremiumDomain = isPremiumDomainValue == null ? null : isPremiumDomainValue.equals("1");
             String periodValue = xmlDoc.getNodeValue(qry + CHKDATA_PERIOD_VALUE_EXPR);
-            Period period = periodValue == null ? null :
-                            new Period(PeriodUnit.value(xmlDoc.getNodeValue(qry + CHKDATA_PERIOD_UNIT_EXPR)),
+            Period period = periodValue == null ? null
+                    : new Period(PeriodUnit.value(xmlDoc.getNodeValue(qry + CHKDATA_PERIOD_UNIT_EXPR)),
                                     Integer.parseInt(periodValue));
             String createPriceValue = xmlDoc.getNodeValue(qry + CHKDATA_CREATE_PRICE_EXPR);
             BigDecimal createPrice =

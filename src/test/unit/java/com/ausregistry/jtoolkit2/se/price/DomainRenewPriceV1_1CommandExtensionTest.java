@@ -33,7 +33,7 @@ public class DomainRenewPriceV1_1CommandExtensionTest {
             + "</command>"
             + "</epp>";
 
-    private final static String DOMAIN_RENEW_ACK_RENEW_PRICE_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+    private final static String DOMAIN_RENEW_ACK_WITH_PRICE_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
             + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
             + "xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">"
             + "<command>"
@@ -47,7 +47,7 @@ public class DomainRenewPriceV1_1CommandExtensionTest {
             + "<extension>"
             + "<renew xmlns=\"urn:ar:params:xml:ns:price-1.1\">"
             + "<ack>"
-            + "<renewalPrice>150.00</renewalPrice>"
+            + "<price>150.00</price>"
             + "</ack>"
             + "</renew>"
             + "</extension>"
@@ -69,7 +69,7 @@ public class DomainRenewPriceV1_1CommandExtensionTest {
     }
 
     @Test
-    public void shouldCreateDomainRenewXmlWithPriceAckAndNoRenewalPrice() throws Exception {
+    public void shouldCreateDomainRenewXmlWithPriceAck() throws Exception {
         domainRenewCommand.appendExtension(domainRenewPriceV1_1CommandExtension);
 
         assertEquals(DOMAIN_RENEW_ACK_NO_PRICE_XML, domainRenewCommand.toXML());
@@ -78,9 +78,9 @@ public class DomainRenewPriceV1_1CommandExtensionTest {
     @Test
     public void shouldCreateDomainRenewXmlWithPriceAckIncludingRenewalPrices() throws Exception {
 
-        domainRenewPriceV1_1CommandExtension.setRenewalPrice(BigDecimal.valueOf(15000, 2));
+        domainRenewPriceV1_1CommandExtension.setPrice(BigDecimal.valueOf(15000, 2));
         domainRenewCommand.appendExtension(domainRenewPriceV1_1CommandExtension);
 
-        assertEquals(DOMAIN_RENEW_ACK_RENEW_PRICE_XML, domainRenewCommand.toXML());
+        assertEquals(DOMAIN_RENEW_ACK_WITH_PRICE_XML, domainRenewCommand.toXML());
     }
 }
