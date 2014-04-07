@@ -14,6 +14,7 @@
 	<element name="create" type="price:ackType" />
     <element name="renew" type="price:ackType" />
     <element name="transfer" type="price:ackType" />
+    <element name="update" type="price:ackType" />
 
     <complexType name="chkType">
 		<sequence>
