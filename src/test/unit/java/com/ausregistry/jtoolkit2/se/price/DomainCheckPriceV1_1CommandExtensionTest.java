@@ -23,7 +23,7 @@ public class DomainCheckPriceV1_1CommandExtensionTest {
     @Test
     public void shouldGetValidXmlWhenPricingExtensionIsAppliedWithNoPeriod() throws SAXException {
         Command cmd = new DomainCheckCommand(new String[]{"domain.zone"});
-        DomainCheckPricingV1_1CommandExtension extension = new DomainCheckPricingV1_1CommandExtension();
+        DomainCheckPriceV1_1CommandExtension extension = new DomainCheckPriceV1_1CommandExtension();
 
         cmd.appendExtension(extension);
 
@@ -49,7 +49,7 @@ public class DomainCheckPriceV1_1CommandExtensionTest {
     @Test
     public void shouldGetValidXmlWhenPricingExtensionIsAppliedWithPeriod() throws SAXException {
         Command cmd = new DomainCheckCommand(new String[]{"domain.zone"});
-        DomainCheckPricingV1_1CommandExtension extension = new DomainCheckPricingV1_1CommandExtension();
+        DomainCheckPriceV1_1CommandExtension extension = new DomainCheckPriceV1_1CommandExtension();
         extension.setPeriod(new Period(PeriodUnit.YEARS, 2));
 
         cmd.appendExtension(extension);
