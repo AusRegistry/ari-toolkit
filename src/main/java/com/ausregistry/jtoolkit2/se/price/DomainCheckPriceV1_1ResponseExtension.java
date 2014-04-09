@@ -23,7 +23,7 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
  * <p>For flexibility, this implementation extracts the data from the response using XPath queries, the expressions
  * for which are defined statically.</p>
  *
- * @see DomainCheckPricingV1_1CommandExtension
+ * @see DomainCheckPriceV1_1CommandExtension
  * @see <a href="http://ausregistry.github.io/doc/pricing-1.1/pricing-1.1.html">Domain Name Check Pricing Extension
  * Mapping for the Extensible Provisioning Protocol (EPP)</a>
  */

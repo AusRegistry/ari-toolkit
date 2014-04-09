@@ -19,7 +19,7 @@ import org.w3c.dom.Element;
  * @see <a href="http://ausregistry.github.io/doc/price-1.1/price-1.1.html">Domain Name Check Price Extension
  * Mapping for the Extensible Provisioning Protocol (EPP)</a>
  */
-public class DomainCheckPricingV1_1CommandExtension implements CommandExtension {
+public class DomainCheckPriceV1_1CommandExtension implements CommandExtension {
 
     private static final long serialVersionUID = 6536806259913602008L;
     private Period period;
