@@ -40,24 +40,18 @@ public final class DomainRegistrantTransferCommand extends Command {
      * Request that the domain name be transferred to the legal entity 
      * specified by the extension data that is provided in the key-value list.
      *
-     * @param name
-     *            The domain name to transfer.
+     * @param name The domain name to transfer.
      * 
-     * @param curExpDate
-     *            The current expiry of the identified domain name. This is
-     *            required in order to prevent repeated transfer of the name due
-     *            to protocol transmission failures.
+     * @param curExpDate The current expiry of the identified domain name. This is
+     *                   required in order to prevent repeated transfer of the name due
+     *                   to protocol transmission failures.
      * 
-     * @param period
-     *            The desired new validity period, starting from the time the
-     *            transfer completes successfully. Optional.
+     * @param period The desired new validity period, starting from the time the
+     *               transfer completes successfully. Optional.
      * 
-     * @param kvListName
-     *            The name under which the list of key-value items are aggregated.
+     * @param kvListName The name under which the list of key-value items are aggregated.
      * 
-     * @param explanation
-     *            An explanation of how the transfer was effected.
-     * @throws IllegalAccessException if {@code curExpDate} is {@code null}.
+     * @param explanation An explanation of how the transfer was effected.
      */
     public DomainRegistrantTransferCommand(final String name, final GregorianCalendar curExpDate,
             final Period period, final String kvListName, final String explanation) {
