@@ -65,9 +65,10 @@ public class Result implements java.io.Serializable {
 
     /**
      * The value child elements of the extValue element of a result. From RFC5730: <blockquote> Zero or more OPTIONAL
-     * {@code <extValue>} elements that can be used to provide additional error diagnostic information, including:<br/>
-     * - A @{code <value>} element that identifies a client-provided element (including XML tag and value) that caused a
-     * server error condition. </blockquote>
+     * {@code &lt;extValue&gt;} elements that can be used to provide additional error diagnostic information, including:
+     * <br>
+     * - A @{code &lt;value&gt;} element that identifies a client-provided element (including XML tag and value) that
+     * caused a server error condition. </blockquote>
      */
     public Node[] getResultExtValueValue() {
         return resultExtvalueValues;
@@ -75,8 +76,9 @@ public class Result implements java.io.Serializable {
 
     /**
      * The reason child elements of the extValue element of a result. From RFC5730: <blockquote> Zero or more OPTIONAL
-     * {@code <extValue>} elements that can be used to provide additional error diagnostic information, including:<br/>
-     * - A {@code <reason>} element containing a human-readable message that describes the reason for the error.
+     * {@code &lt;extValue&gt;} elements that can be used to provide additional error diagnostic information, including:
+     * <br>
+     * - A {@code &lt;reason&gt;} element containing a human-readable message that describes the reason for the error.
      * </blockquote> TODO provide interface to get language of each reason.
      */
     public String[] getResultExtValueReason() {

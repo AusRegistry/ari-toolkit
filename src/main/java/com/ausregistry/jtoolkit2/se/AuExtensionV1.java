@@ -3,7 +3,7 @@ package com.ausregistry.jtoolkit2.se;
 /**
  * A bundled set of constants representing the .au EPP extension
  * schema.  The namespace URI uniquely identifies the extension.
- * @deprecated Should instead use {@link ExtensionImpl#AU1}.
+ * @deprecated Should instead use {@link ExtensionImpl#AU_V1}.
  */
 class AuExtensionV1 implements Extension {
     private static final long serialVersionUID = 9214786434610077531L;

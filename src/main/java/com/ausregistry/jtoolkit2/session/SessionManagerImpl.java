@@ -17,8 +17,8 @@ import com.ausregistry.jtoolkit2.xml.ParsingException;
 
 /**
  * <p>
- * AusRegistry&apos;s basic implementation of the SessionManager interface. Upon successful configuration, it guarantees
- * that a pool of {@link com.ausregistry.jtoolkit2.session.Session}s will be available for processing
+ * AusRegistry&rsquo;s basic implementation of the SessionManager interface. Upon successful configuration, it
+ * guarantees that a pool of {@link com.ausregistry.jtoolkit2.session.Session}s will be available for processing
  * {@link com.ausregistry.jtoolkit2.session.Transaction}s. A SessionManager is configured from a
  * {@link com.ausregistry.jtoolkit2.session.SessionManagerProperties} object. This implementation provides only a
  * blocking implementation of the <code>execute</code> method. It will create a
@@ -73,8 +73,8 @@ public class SessionManagerImpl implements SessionManager {
     /**
      * Configure the SessionManager from the given set of properties. This can also be used to reconfigure the
      * SessionManager dynamically at any time, including changes to the managed
-     * {@link com.ausregistry.jtoolkit2.session.SessionPool}. A change of password should be performed using <a
-     * href="#changePassword(java.lang.String, java.lang.String)">changePassword</a> . Following a change of password,
+     * {@link com.ausregistry.jtoolkit2.session.SessionPool}. A change of password should be performed using {@link
+     * #changePassword(String, String) changePassword}. Following a change of password,
      * the properties source should be updated to reflect the change. If this is not done, then the next invocation of
      * configure will fail due to session login failures. A successful call to configure indicates that subsequent
      * invocations of <a href="#execute(com.ausregistry.jtoolkit2.session.Transaction)">execute</a> may succeed

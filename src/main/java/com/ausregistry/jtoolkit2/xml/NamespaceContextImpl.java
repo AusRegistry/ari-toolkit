@@ -19,7 +19,7 @@ import com.ausregistry.jtoolkit2.se.StandardObjectType;
  * EPP specific implementation of a NamespaceContext, which maps prefixes to name space URIs and vice versa. Initially,
  * instances of this class support all of the standard EPP object name spaces, as defined in RFC5730-RFC5733, as well as
  * the name spaces of the e164epp, auext and aeext command/response extensions and the arext protocol extension. Support
- * for other extensions can be added at runtime by invoking the <a href="#put(String, String)">put</a> class method.
+ * for other extensions can be added at runtime by invoking the {@link #put(String, String) put} class method.
  * </p>
  *
  * <p>
@@ -60,7 +60,7 @@ public final class NamespaceContextImpl implements NamespaceContext {
     private final Logger debugLogger;
 
     /**
-     * Add a prefix->URI mapping and a URI->prefix mapping between the given prefix and URI.
+     * Add a prefix to URI mapping and a URI to prefix mapping between the given prefix and URI.
      */
     public static synchronized void put(String prefix, String uri) {
         boolean isPut = false;
@@ -130,7 +130,7 @@ public final class NamespaceContextImpl implements NamespaceContext {
     }
 
     /**
-     * Lookup the List of prefixes for the given namespaceURI from the URI->prefix map, then return the iterator for
+     * Lookup the List of prefixes for the given namespaceURI from the URI to prefix map, then return the iterator for
      * that List if the URI is in the map. Return null if there is no mapping for the given URI.
      */
     @Override

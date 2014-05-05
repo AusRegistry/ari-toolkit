@@ -3,7 +3,7 @@ package com.ausregistry.jtoolkit2.se;
 import java.io.Serializable;
 
 /**
- * This class models the <variant> element specified in an IDNA EPP Domain
+ * This class models the &lt;variant&gt; element specified in an IDNA EPP Domain
  * Create/Info response, as documented in 'IDN Extension Mapping for the
  * Extensible Provisioning Protocol'.
  */

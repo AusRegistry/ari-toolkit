@@ -104,7 +104,7 @@ public interface Session {
 	 * Read a single EPP service element from the transport layer and assign
 	 * values to the attributes of the given Response instance appropriately,
 	 * according to the received XML document content.  Typically, the latter
-	 * can be achieved by invoking the given Response instance&apos;s toXML
+	 * can be achieved by invoking the given Response instance&rsquo;s toXML
 	 * method.
 	 *
 	 * @throws IOException There was a failure in the transport layer in
