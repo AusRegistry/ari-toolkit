@@ -6,13 +6,17 @@ import static org.junit.Assert.assertThat;
 
 import javax.xml.bind.DatatypeConverter;
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 
-import com.ausregistry.jtoolkit2.se.tmch.exception.*;
-import com.ausregistry.jtoolkit2.xml.ParsingException;
-import org.apache.commons.codec.DecoderException;
+import com.ausregistry.jtoolkit2.se.tmch.exception.ExpiredSignedMarkDataException;
+import com.ausregistry.jtoolkit2.se.tmch.exception.InvalidSignedMarkDataException;
+import com.ausregistry.jtoolkit2.se.tmch.exception.NotYetValidSignedMarkDataException;
+import com.ausregistry.jtoolkit2.se.tmch.exception.SmdSignatureInvalidException;
+import com.ausregistry.jtoolkit2.se.tmch.exception.SmdSignatureMissingException;
+import com.ausregistry.jtoolkit2.se.tmch.exception.TmchCertificateRevokedException;
+import com.ausregistry.jtoolkit2.se.tmch.exception.TmchInvalidCertificateException;
+import com.ausregistry.jtoolkit2.se.tmch.exception.TmchSmdRevokedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -40,11 +44,9 @@ public class TmchSmdIntegrationTest {
         InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream
                 ("Trademark-Agent-Arabic-Active.smd");
 
-        TmchXmlParser tmchXmlParser = new TmchXmlParser();
-
         byte[] encodedSmdPart = TmchXmlParser.extractBase64EncodedPartFromSmdFile(inputStream);
 
-        SignedMarkData signedMarkData = tmchXmlParser.parseEncodedSignedMarkData(new ByteArrayInputStream
+        SignedMarkData signedMarkData = TmchXmlParser.parseEncodedSignedMarkData(new ByteArrayInputStream
                 (encodedSmdPart));
 
         assertEquals(signedMarkData.getId(), "0000001861373633632586-65535");
@@ -119,7 +121,7 @@ public class TmchSmdIntegrationTest {
         InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream
                 ("InvalidSignature-Trademark-Agent-English-Active.smd");
 
-        byte[] encodedSmdPart = tmchValidatingParser.extractBase64EncodedPartFromSmdFile(inputStream);
+        byte[] encodedSmdPart = TmchValidatingParser.extractBase64EncodedPartFromSmdFile(inputStream);
 
         thrown.expect(SmdSignatureInvalidException.class);
         thrown.expectMessage("Invalid Signature element in the SignedMarkData provided.");

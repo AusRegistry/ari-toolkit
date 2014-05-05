@@ -82,7 +82,7 @@ public class EPPResolver implements URIResolver {
     public Source resolve(final String href, final String base) throws TransformerException {
         final String filename = uriLocMap.get(href);
 
-        Source source = null;
+        Source source;
 
         Logger.getLogger(pname + ".debug").fine(
                 ErrorPkg.getMessage("xml.validation.resolve.begin", new String[] { "<<href>>", "<<filename>>" },
