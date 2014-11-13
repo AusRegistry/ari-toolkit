@@ -2,9 +2,9 @@ package com.ausregistry.jtoolkit2.tmdb;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.powermock.api.mockito.PowerMockito.spy;
 import static org.powermock.api.mockito.PowerMockito.whenNew;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -46,7 +46,7 @@ public class TmdbClientTest {
 
         when(mockTlsContext.createHttpsUrlConnection("TMDB server URL/lookupKey.xml", 1000)).thenReturn(mockConnection);
 
-        stringInputStream = spy(new ByteArrayInputStream("noticeXml".getBytes()));
+        stringInputStream = new ByteArrayInputStream("noticeXml".getBytes());
         when(mockConnection.getInputStream()).thenReturn(stringInputStream);
 
         whenNew(TmNoticeXmlParser.class).withNoArguments().thenReturn(mockTmNoticeXmlParser);
@@ -65,8 +65,11 @@ public class TmdbClientTest {
 
     @Test
     public void shouldCloseStream() throws Exception {
+        InputStream inputStream = spy(stringInputStream);
+        when(mockConnection.getInputStream()).thenReturn(inputStream);
+
         tmdbClient.requestNotice("lookupKey");
 
-        verify(stringInputStream).close();
+        verify(inputStream).close();
     }
 }

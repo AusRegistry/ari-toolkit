@@ -1,20 +1,22 @@
 apply plugin: 'java'
 apply plugin: 'maven'
+apply plugin: 'com.github.ben-manes.versions'
 
 sourceCompatibility = '6'
 
 ext {
-    junitVersion = '4.8.2'
+    junitVersion = '4.11'
     artifactsDir = "$projectDir/artifacts"
     artifactGroupId = 'au.com.ausregistry'
-    gradleWrapperVersion = '1.11'
+    gradleWrapperVersion = '2.1'
     pagesProjectDir = "$projectDir/../ari-toolkit-gitpages"
 
+    commonsCodecVersion          = '1.10'
     simpleFrameworkVersion       = '4.1.21'
-    httpClientVersion            = '4.2.3'
+    httpClientVersion            = '4.3.6'
     powerMockVersion             = '1.5'
     hamcrestVersion              = '1.3'
-    ariMockHttpServerVersion     = '1.0.1'
+    ariMockHttpServerVersion     = '1.0.2'
 }
 
 version = toolkitVersion
@@ -23,6 +25,17 @@ repositories {
     mavenCentral()
     flatDir name:'ExternalJars',dirs:'lib'
 }
+
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.5'
+    }
+}
+
 
 sourceSets {
     test {
@@ -40,7 +53,7 @@ sourceSets {
 }
 
 dependencies {
-    compile("commons-codec:commons-codec:1.7") {
+    compile("commons-codec:commons-codec:$commonsCodecVersion") {
         exclude group: 'junit', module: 'junit'
     }
 
@@ -61,12 +74,10 @@ dependencies {
     integrationTestCompile sourceSets.main.output
     integrationTestCompile configurations.testCompile
 
-    componentTestCompile "ari-mock-http-server:ari-mock-http-server:$ariMockHttpServerVersion"
-    componentTestCompile sourceSets.main.output
-    componentTestCompile configurations.testCompile
+    testCompile "ari-mock-http-server:ari-mock-http-server:$ariMockHttpServerVersion"
 }
 
-tasks.withType(Compile) {
+tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
     options.compilerArgs << "-Xlint:-options"
 }
@@ -96,13 +107,14 @@ test.dependsOn jar
 
 task integrationTest(type: Test) {
     testClassesDir = sourceSets.integrationTest.output.classesDir
-    testResultsDir = file('build/test-results/integration')
+    reports.junitXml.destination = "build/test-results/integration"
     classpath += sourceSets.integrationTest.runtimeClasspath
 }
 
 task componentTest(type: Test) {
     testClassesDir = sourceSets.componentTest.output.classesDir
-    testResultsDir = file('build/test-results/component')
+    reports.junitXml.destination = "build/test-results/component"
+    classpath += sourceSets.componentTest.runtimeClasspath
     classpath += sourceSets.componentTest.runtimeClasspath
 }
 

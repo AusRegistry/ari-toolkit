@@ -1,17 +1,15 @@
 package com.ausregistry.jtoolkit2;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 import com.ausregistry.jtoolkit2.se.CommandType;
 import com.ausregistry.jtoolkit2.se.StandardCommandType;
 import com.ausregistry.jtoolkit2.session.SessionManagerProperties;
 import com.ausregistry.jtoolkit2.session.SessionPoolProperties;
 import com.ausregistry.jtoolkit2.session.SessionProperties;
-
-import java.io.InputStream;
-import java.io.IOException;
-import java.io.FileNotFoundException;
-
-import java.util.Properties;
-
 import org.junit.Ignore;
 
 @Ignore
@@ -38,8 +36,7 @@ public final class TestEnvironment implements SessionManagerProperties,
             sitePropsFile = DEFAULT_SITE_PROPS;
         }
         siteProps = new Properties();
-        InputStream in = getClass().getClassLoader().getResourceAsStream(
-                sitePropsFile);
+        InputStream in = getClass().getClassLoader().getResourceAsStream(sitePropsFile);
 
         if (in == null) {
             throw new FileNotFoundException(sitePropsFile);
