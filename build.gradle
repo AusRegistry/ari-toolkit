@@ -1,6 +1,5 @@
 apply plugin: 'java'
 apply plugin: 'maven'
-apply plugin: 'com.github.ben-manes.versions'
 
 sourceCompatibility = '6'
 
@@ -30,9 +29,6 @@ buildscript {
     repositories {
         mavenCentral()
         jcenter()
-    }
-    dependencies {
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.5'
     }
 }
 
