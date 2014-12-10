@@ -409,7 +409,7 @@ public class SessionManagerImpl implements SessionManager {
             } catch (IOException ioe) {
                 userLogger.warning(ioe.getMessage());
                 userLogger.warning("net.socket.closed");
-
+                session.close();
                 if (state != SMState.STOPPED && failCount < MAX_ACCEPTABLE_FAIL_COUNT) {
                     failCount++;
                 } else {
