@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="urn:X-ar:params:xml:ns:blocked-1.0"
+        xmlns:blocked="urn:X-ar:params:xml:ns:blocked-1.0"
+        xmlns:eppcom="urn:ietf:params:xml:ns:eppcom-1.0"
+        xmlns:epp="urn:ietf:params:xml:ns:epp-1.0"
+        xmlns="http://www.w3.org/2001/XMLSchema"
+        elementFormDefault="qualified">
+
+    <!--
+        Import common element types.
+    -->
+    <import namespace="urn:ietf:params:xml:ns:eppcom-1.0" schemaLocation="eppcom-1.0.xsd"/>
+    <import namespace="urn:ietf:params:xml:ns:epp-1.0" schemaLocation="epp-1.0.xsd"/>
+
+    <annotation>
+        <documentation>
+            Blocked Domain Name Extensions to the Extensible Provisioning Protocol v1.0. schema.
+        </documentation>
+    </annotation>
+
+    <!--
+        Protocol extension framework elements.
+    -->
+    <element name="command" type="blocked:commandType"/>
+
+    <!--
+        Protocol extension type definitions.
+    -->
+    <complexType name="commandType">
+        <sequence>
+            <choice>
+                <element name="create" type="epp:readWriteType"/>
+                <element name="info" type="epp:readWriteType"/>
+                <element name="update" type="epp:readWriteType"/>
+                <element name="delete" type="epp:readWriteType"/>
+            </choice>
+            <element name="clTRID" type="epp:trIDStringType" minOccurs="0"/>
+        </sequence>
+    </complexType>
+
+    <element name="create" type="blocked:creDataType"/>
+    <element name="info" type="blocked:infDataType"/>
+    <element name="update" type="blocked:upDataType"/>
+    <element name="delete" type="blocked:delDataType"/>
+
+    <!--
+        Type definitions.
+    -->
+    <complexType name="creDataType">
+        <sequence>
+            <element name="name" type="eppcom:labelType" minOccurs="1"/>
+            <element name="id" type="epp:trIDStringType" minOccurs="1"/>
+            <element name="registrant" type="eppcom:clIDType" minOccurs="1"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="infDataType">
+        <sequence>
+            <element name="id" type="epp:trIDStringType" minOccurs="1"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="upDataType">
+        <sequence>
+            <element name="id" type="epp:trIDStringType" minOccurs="1"/>
+            <element name="registrant" type="eppcom:clIDType" minOccurs="1"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="delDataType">
+        <sequence>
+            <element name="id" type="epp:trIDStringType" minOccurs="1"/>
+        </sequence>
+    </complexType>
+
+    <!--
+        End of schema.
+    -->
+</schema>
