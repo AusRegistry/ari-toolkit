@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/AusRegistry/ari-toolkit.png)](https://travis-ci.org/AusRegistry/ari-toolkit)
 ## Downloads
 
-The latest ari-toolkit is available for download. [ari-toolkit v3.3.6](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.3.6/arjtk-3.3.6.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.3.6/arjtk-3.3.6-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.3.6/arjtk-3.3.6-javadoc.jar))
+The latest ari-toolkit is available for download. [ari-toolkit v3.4.0](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.4.0/arjtk-3.4.0.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.4.0/arjtk-3.4.0-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.4.0/arjtk-3.4.0-javadoc.jar))
 
 For more information, please read [Installation and Setup](#installation-and-setup).
 
@@ -43,7 +43,7 @@ This toolkit also provides a mechanism to perform the following Trademark Cleari
 
 #### Direct download
 
-    Obtain the latest toolkit here: [Toolkit v3.4.0](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.4.0/arjtk-3.4.0.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.3.6/arjtk-3.4.0-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.4.0/arjtk-3.4.0-javadoc.jar))
+    Obtain the latest toolkit here: [Toolkit v3.4.0](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.4.0/arjtk-3.4.0.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.4.0/arjtk-3.4.0-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.4.0/arjtk-3.4.0-javadoc.jar))
 
 #### Dependency Management
 
