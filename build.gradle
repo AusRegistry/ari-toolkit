@@ -11,9 +11,9 @@ ext {
     pagesProjectDir = "$projectDir/../ari-toolkit-gitpages"
 
     commonsCodecVersion          = '1.10'
-    simpleFrameworkVersion       = '4.1.21'
+    simpleFrameworkVersion       = '5.1.6'
     httpClientVersion            = '4.4'
-    powerMockVersion             = '1.5'
+    powerMockVersion             = '1.6.1'
     hamcrestVersion              = '1.3'
     ariMockHttpServerVersion     = '1.0.2'
 }
