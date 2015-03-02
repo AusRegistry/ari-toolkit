@@ -39,7 +39,7 @@
     </complexType>
 
     <element name="create" type="blocked:creDataType"/>
-    <element name="info" type="blocked:infDataType"/>
+    <element name="info" type="blocked:infoType"/>
     <element name="update" type="blocked:upDataType"/>
     <element name="delete" type="blocked:delDataType"/>
 
@@ -54,7 +54,7 @@
         </sequence>
     </complexType>
 
-    <complexType name="infDataType">
+    <complexType name="infoType">
         <sequence>
             <element name="id" type="epp:trIDStringType" minOccurs="1"/>
         </sequence>
@@ -70,6 +70,25 @@
     <complexType name="delDataType">
         <sequence>
             <element name="id" type="epp:trIDStringType" minOccurs="1"/>
+        </sequence>
+    </complexType>
+
+    <!--
+     Child response elements.
+     -->
+    <element name="infData" type="blocked:infDataType"/>
+
+    <!--
+     <info> response elements.
+     -->
+    <complexType name="infDataType">
+        <sequence>
+            <element name="id" type="epp:trIDStringType" minOccurs="1"/>
+            <element name="name" type="eppcom:labelType" minOccurs="1"/>
+            <element name="registrant" type="eppcom:clIDType" minOccurs="0"/>
+            <element name="clID" type="eppcom:clIDType"/>
+            <element name="crDate" type="dateTime" minOccurs="0"/>
+            <element name="exDate" type="dateTime" minOccurs="0"/>
         </sequence>
     </complexType>
 

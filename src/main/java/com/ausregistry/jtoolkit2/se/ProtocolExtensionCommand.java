@@ -9,6 +9,10 @@ public abstract class ProtocolExtensionCommand extends ObjectCommand {
 
     private static final long serialVersionUID = 4842063175523680995L;
 
+    public ProtocolExtensionCommand(CommandType cmdType, ObjectType objType) {
+        super(cmdType, objType);
+    }
+
     public ProtocolExtensionCommand(CommandType cmdType, ObjectType objType,
             String ident) {
         super(cmdType, objType, ident);

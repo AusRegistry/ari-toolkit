@@ -1,15 +1,16 @@
 package com.ausregistry.jtoolkit2.se.blocked;
 
 import com.ausregistry.jtoolkit2.se.*;
-import org.w3c.dom.Element;
 
 /**
  * Use this to create a Blocked Domain Name. Instances of this class
- * generate RFC5730 compliant fund info EPP command service elements via the toXML method.
+ * generate blocked create EPP command service elements via the toXML method.
  *
  * @see com.ausregistry.jtoolkit2.se.blocked.BlockedCreateCommand
  */
 public class BlockedCreateCommand extends ProtocolExtensionCommand {
+    private static final long serialVersionUID = 4324879283895987704L;
+
     private final String id;
     private final String registrantContactId;
 
