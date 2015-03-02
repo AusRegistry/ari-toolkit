@@ -18,11 +18,11 @@ public class BlockedCreateCommand extends ProtocolExtensionCommand {
      * Create a Blocked Domain Name create command.
      */
     public BlockedCreateCommand(String domainName, String id, String registrantContactId) {
-        super(new BlockedDomainCreateCommandType(), ExtendedObjectType.BLOCKED, domainName);
+        super(new BlockedDomainCreateCommandType(), ExtendedObjectType.BLOCKED, id);
         this.id = id;
         this.registrantContactId = registrantContactId;
 
-        xmlWriter.appendChild(objElement, "id").setTextContent(id);
+        xmlWriter.appendChild(objElement, "name").setTextContent(domainName);
         xmlWriter.appendChild(objElement, "registrant").setTextContent(registrantContactId);
 
     }

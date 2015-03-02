@@ -22,7 +22,7 @@ public class BlockedInfoCommandTest {
 
     @Test
     public void shouldGenerateValidXML() {
-        String id = UUID.randomUUID().toString();
+        String id = "BD-001";
         Command cmd = new BlockedInfoCommand(id);
         try {
             String xml = cmd.toXML();

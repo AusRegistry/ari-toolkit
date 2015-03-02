@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/AusRegistry/ari-toolkit.png)](https://travis-ci.org/AusRegistry/ari-toolkit)
 ## Downloads
 
-The latest ari-toolkit is available for download. [ari-toolkit v3.4.2](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.4.2/arjtk-3.4.2.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.4.2/arjtk-3.4.2-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.4.2/arjtk-3.4.2-javadoc.jar))
+The latest ari-toolkit is available for download. [ari-toolkit v3.4.3](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.4.3/arjtk-3.4.3.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.4.3/arjtk-3.4.3-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.4.3/arjtk-3.4.3-javadoc.jar))
 
 For more information, please read [Installation and Setup](#installation-and-setup).
 
@@ -43,7 +43,7 @@ This toolkit also provides a mechanism to perform the following Trademark Cleari
 
 #### Direct download
 
-    Obtain the latest toolkit here: [Toolkit v3.4.2](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.4.2/arjtk-3.4.2.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.4.2/arjtk-3.4.2-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.4.2/arjtk-3.4.2-javadoc.jar))
+    Obtain the latest toolkit here: [Toolkit v3.4.3](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.4.3/arjtk-3.4.3.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.4.3/arjtk-3.4.3-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.4.3/arjtk-3.4.3-javadoc.jar))
 
 #### Dependency Management
 
@@ -52,7 +52,7 @@ Use your build's dependency management tool to automatically download the toolki
 * Repository: `http://ausregistry.github.com/repo/`
 * groupId: `au.com.ausregistry`
 * artifactId: `arjtk`
-* version: `3.4.2`
+* version: `3.4.3`
 
 For example (using Maven):
 
@@ -67,7 +67,7 @@ For example (using Maven):
        <dependency>
           <groupId>au.com.ausregistry</groupId>
           <artifactId>arjtk</artifactId>
-          <version>3.4.2</version>
+          <version>3.4.3</version>
        </dependency>
     </dependencies>
 
@@ -120,13 +120,13 @@ ARI's EPP Toolkit allows you to send commands to an EPP service and receive back
 
 To create a session, an implementation of SessionManagerProperties is required. The default implementation (SessionManagerPropertiesImpl) uses a property file (defaulting to 'toolkit.properties' if not specified on construction) obtained from the classpath, to handle properties such as EPP server host, port, and user details. You can also use a custom implementation of SessionManagerProperties if this behaviour is not appropriate for your circumstances. The following code creates a new SessionManager:
 
-    /* Read in configuration properties from the toolkit.properties 
-       file. This file is searched for on the classpath. Alternatively 
-       you can create your own implementation of sessionmanagerproperties 
+    /* Read in configuration properties from the toolkit.properties
+       file. This file is searched for on the classpath. Alternatively
+       you can create your own implementation of sessionmanagerproperties
 	   should the default behaviour not suit. */
     properties = new SessionManagerPropertiesImpl("toolkit.properties");
 
-    /* Create a new session manager. This will use the properties loaded 
+    /* Create a new session manager. This will use the properties loaded
        above to set up parameters required to connect to an EPP server. */
     manager = SessionManagerFactory.newInstance(properties);
 
@@ -134,8 +134,8 @@ To create a session, an implementation of SessionManagerProperties is required. 
 
 After obtaining a SessionManager, it is necessary to start a session. This will create a connection, handle the EPP greeting and then login, allowing you to send across EPP commands:
 
-    /* Start the session. This will automatically create a connection, send 
-       a hello and a greeting and perform a login. The manager will be 
+    /* Start the session. This will automatically create a connection, send
+       a hello and a greeting and perform a login. The manager will be
        ready to execute transactions after this call. */
     manager.startup();
 
@@ -149,7 +149,7 @@ After starting a session, a command must be created. It is also necessary to cre
     // Create the required response object for the domain check
     final DomainCheckResponse response = new DomainCheckResponse();
 
-    /* Execute the command using the session manager, wrapping it in a 
+    /* Execute the command using the session manager, wrapping it in a
        Transaction object */
     manager.execute(new Transaction(command, response));
 
@@ -158,7 +158,7 @@ After starting a session, a command must be created. It is also necessary to cre
 After creating a command, you can view the details of the response:
 
     // Print out the details of the response
-    System.out.println("EPP Response code: " + 
+    System.out.println("EPP Response code: " +
        response.getResults()[0].getResultCode());
 
 **End a session**
@@ -173,9 +173,9 @@ After you have finished sending commands, it is possible to end the session, log
 It is recommended to send multiple commands in the same session, to avoid the overhead of connecting and sending login commands each time. The following example performs multiple domain checks, saving the results in an array of result objects:
 
     final int loops = 5;
-    final DomainCheckResponse[] responses = new 
+    final DomainCheckResponse[] responses = new
        DomainCheckResponse[loops];
-    for (int i = 0; i < loops; i++) { 
+    for (int i = 0; i < loops; i++) {
        DomainCheckCommand command = new DomainCheckCommand(domainName);
        final DomainCheckResponse response = new DomainCheckResponse();
        manager.execute(new Transaction(command, response));
@@ -228,7 +228,7 @@ Register the extension with the response. You can then execute the command, whic
 
     // execute the command with the response object from above
     manager.execute(new Transaction(new DomainInfoCommand("domain.example"), response));
- 
+
 Obtain the information from the response extension:
 
     if (idnResponse.isInitialised()) {String languageTag = idnResponse.getLanguageTag();}
@@ -282,15 +282,15 @@ The properties relevant to the standard logging implementation are:
 
 * `.level={ALL|FINEST|FINER|FINE|INFO|WARNING|SEVERE|NONE}`
   defines the minimum severity of messages that will be logged.
-  
+
   Thus, if `.level=FINER`, then all messages of severity `FINER` or greater would be logged (`FINER`,`FINE`,`INFO`,`WARNING`,`SEVERE`) unless a more specific rule overrides this parameter (see below).
 
-* `package-name.audience.level={ALL|FINEST|FINER|FINE|INFO|WARNING|SEVERE|NONE}` 
+* `package-name.audience.level={ALL|FINEST|FINER|FINE|INFO|WARNING|SEVERE|NONE}`
   overrides for the named package and audience any more general specification of logging level.
-  
+
 * `handler-class.*`
   FileHandler properties, as described in the FileHandler section of the Java Logging API. As long as the default handler implementations are used, all of the properties specified for FileHandler are effective. Notable properties are pattern and formatter, which control the destination file and format (plain text or XML) respectively.
-  
+
 * `package-name.audience.handlers` should be left at the default values to use the provided handler implementations. The default values are provided in the `logging.properties` file distributed with the Toolkit.
 Alternatively, the user may implement custom handler classes and register those classes using the package-name.audience.handlers parameters. Implementers should familiarise themselves with the Java Logging API [JLOGAPI] and Java Logging Overview [JLOGGUIDE] before deciding on this approach.
 

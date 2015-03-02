@@ -32,62 +32,110 @@
                 <element name="create" type="epp:readWriteType"/>
                 <element name="info" type="epp:readWriteType"/>
                 <element name="update" type="epp:readWriteType"/>
+                <element name="renew" type="epp:readWriteType"/>
                 <element name="delete" type="epp:readWriteType"/>
             </choice>
             <element name="clTRID" type="epp:trIDStringType" minOccurs="0"/>
         </sequence>
     </complexType>
 
-    <element name="create" type="blocked:creDataType"/>
+    <element name="create" type="blocked:createType"/>
     <element name="info" type="blocked:infoType"/>
-    <element name="update" type="blocked:upDataType"/>
-    <element name="delete" type="blocked:delDataType"/>
+    <element name="update" type="blocked:updateType"/>
+    <element name="renew" type="blocked:renewType"/>
+    <element name="delete" type="blocked:deleteType"/>
 
     <!--
         Type definitions.
     -->
-    <complexType name="creDataType">
+    <complexType name="createType">
         <sequence>
+            <element name="id" type="eppcom:clIDType" minOccurs="1"/>
             <element name="name" type="eppcom:labelType" minOccurs="1"/>
-            <element name="id" type="epp:trIDStringType" minOccurs="1"/>
             <element name="registrant" type="eppcom:clIDType" minOccurs="1"/>
         </sequence>
     </complexType>
 
     <complexType name="infoType">
         <sequence>
-            <element name="id" type="epp:trIDStringType" minOccurs="1"/>
+            <element name="id" type="eppcom:clIDType" minOccurs="1"/>
         </sequence>
     </complexType>
 
-    <complexType name="upDataType">
+    <complexType name="updateType">
         <sequence>
-            <element name="id" type="epp:trIDStringType" minOccurs="1"/>
+            <element name="id" type="eppcom:clIDType" minOccurs="1"/>
             <element name="registrant" type="eppcom:clIDType" minOccurs="1"/>
         </sequence>
     </complexType>
 
-    <complexType name="delDataType">
+    <complexType name="deleteType">
         <sequence>
-            <element name="id" type="epp:trIDStringType" minOccurs="1"/>
+            <element name="id" type="eppcom:clIDType" minOccurs="1"/>
         </sequence>
     </complexType>
+
+    <!--
+    Child elements of the <renew> command.
+    -->
+    <complexType name="renewType">
+        <sequence>
+            <element name="id" type="eppcom:clIDType" minOccurs="1"/>
+            <element name="curExpDate" type="date"/>
+            <element name="period" type="blocked:periodType"
+                     minOccurs="0"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="periodType">
+        <simpleContent>
+            <extension base="blocked:pLimitType">
+                <attribute name="unit" type="blocked:pUnitType"
+                           use="required"/>
+            </extension>
+        </simpleContent>
+    </complexType>
+
+    <simpleType name="pLimitType">
+        <restriction base="unsignedShort">
+            <minInclusive value="1"/>
+            <maxInclusive value="99"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="pUnitType">
+        <restriction base="token">
+            <enumeration value="y"/>
+            <enumeration value="m"/>
+        </restriction>
+    </simpleType>
 
     <!--
      Child response elements.
      -->
     <element name="infData" type="blocked:infDataType"/>
+    <element name="renData" type="blocked:renDataType"/>
 
     <!--
      <info> response elements.
      -->
     <complexType name="infDataType">
         <sequence>
-            <element name="id" type="epp:trIDStringType" minOccurs="1"/>
+            <element name="id" type="eppcom:clIDType" minOccurs="1"/>
             <element name="name" type="eppcom:labelType" minOccurs="1"/>
             <element name="registrant" type="eppcom:clIDType" minOccurs="0"/>
             <element name="clID" type="eppcom:clIDType"/>
             <element name="crDate" type="dateTime" minOccurs="0"/>
+            <element name="exDate" type="dateTime" minOccurs="0"/>
+        </sequence>
+    </complexType>
+
+    <!--
+        <renew> response elements.
+    -->
+    <complexType name="renDataType">
+        <sequence>
+            <element name="id" type="eppcom:clIDType" minOccurs="1"/>
             <element name="exDate" type="dateTime" minOccurs="0"/>
         </sequence>
     </complexType>
