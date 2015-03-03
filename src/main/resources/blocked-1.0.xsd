@@ -18,27 +18,6 @@
         </documentation>
     </annotation>
 
-    <!--
-        Protocol extension framework elements.
-    -->
-    <element name="command" type="blocked:commandType"/>
-
-    <!--
-        Protocol extension type definitions.
-    -->
-    <complexType name="commandType">
-        <sequence>
-            <choice>
-                <element name="create" type="epp:readWriteType"/>
-                <element name="info" type="epp:readWriteType"/>
-                <element name="update" type="epp:readWriteType"/>
-                <element name="renew" type="epp:readWriteType"/>
-                <element name="delete" type="epp:readWriteType"/>
-            </choice>
-            <element name="clTRID" type="epp:trIDStringType" minOccurs="0"/>
-        </sequence>
-    </complexType>
-
     <element name="create" type="blocked:createType"/>
     <element name="info" type="blocked:infoType"/>
     <element name="update" type="blocked:updateType"/>
