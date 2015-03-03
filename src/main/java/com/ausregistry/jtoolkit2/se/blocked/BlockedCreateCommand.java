@@ -8,27 +8,16 @@ import com.ausregistry.jtoolkit2.se.*;
  *
  * @see com.ausregistry.jtoolkit2.se.blocked.BlockedCreateCommand
  */
-public class BlockedCreateCommand extends ProtocolExtensionCommand {
+public class BlockedCreateCommand extends CreateCommand {
     private static final long serialVersionUID = 4324879283895987704L;
-
-    private final String id;
-    private final String registrantContactId;
 
     /**
      * Create a Blocked Domain Name create command.
      */
     public BlockedCreateCommand(String domainName, String id, String registrantContactId) {
-        super(new BlockedDomainCreateCommandType(), ExtendedObjectType.BLOCKED, id);
-        this.id = id;
-        this.registrantContactId = registrantContactId;
+        super(ExtendedObjectType.BLOCKED, id);
 
         xmlWriter.appendChild(objElement, "name").setTextContent(domainName);
         xmlWriter.appendChild(objElement, "registrant").setTextContent(registrantContactId);
-
-    }
-
-    @Override
-    protected Extension getExtension() {
-        return ExtensionImpl.BLOCKED;
     }
 }

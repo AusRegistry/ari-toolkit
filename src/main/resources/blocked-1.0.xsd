@@ -124,7 +124,6 @@
             <element name="id" type="eppcom:clIDType" minOccurs="1"/>
             <element name="name" type="eppcom:labelType" minOccurs="1"/>
             <element name="registrant" type="eppcom:clIDType" minOccurs="0"/>
-            <element name="clID" type="eppcom:clIDType"/>
             <element name="crDate" type="dateTime" minOccurs="0"/>
             <element name="exDate" type="dateTime" minOccurs="0"/>
         </sequence>

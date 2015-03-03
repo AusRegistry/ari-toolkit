@@ -1,14 +1,13 @@
 package com.ausregistry.jtoolkit2.se.blocked;
 
+import java.util.GregorianCalendar;
+import javax.xml.xpath.XPathExpressionException;
+
 import com.ausregistry.jtoolkit2.EPPDateFormatter;
 import com.ausregistry.jtoolkit2.se.DataResponse;
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
+import com.ausregistry.jtoolkit2.se.StandardCommandType;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import javax.xml.xpath.XPathExpressionException;
-import java.util.GregorianCalendar;
 
 /**
  * Use this to access blocked domain object information as provided in an EPP blocked domain
@@ -30,7 +29,7 @@ public class BlockedRenewResponse extends DataResponse {
     private GregorianCalendar exDate;
 
     public BlockedRenewResponse() {
-        super(new BlockedDomainRenewCommandType(), ExtendedObjectType.BLOCKED);
+        super(StandardCommandType.RENEW, ExtendedObjectType.BLOCKED);
     }
 
     public String getId() {

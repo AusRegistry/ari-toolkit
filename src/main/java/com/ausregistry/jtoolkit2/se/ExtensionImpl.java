@@ -17,8 +17,7 @@ public enum ExtensionImpl implements Extension {
     AE("aeext", "urn:X-ae:params:xml:ns:aeext-1.0", "aeext-1.0.xsd"),
     AU("auext", "urn:X-au:params:xml:ns:auext-1.1", "auext-1.1.xsd"),
     AU_V1("auext1", "urn:au:params:xml:ns:auext-1.0", "auext-1.0.xsd"),
-    VIEXT("viext", "urn:X-ar:params:xml:ns:viext-1.0", "viext-1.0.xsd"),
-    BLOCKED("blocked", "urn:X-ar:params:xml:ns:blocked-1.0", "blocked-1.0.xsd");
+    VIEXT("viext", "urn:X-ar:params:xml:ns:viext-1.0", "viext-1.0.xsd");
 
     private final String prefix;
     private final String schemaDefinition;

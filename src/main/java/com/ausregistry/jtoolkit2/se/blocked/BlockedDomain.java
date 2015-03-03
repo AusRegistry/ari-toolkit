@@ -11,16 +11,14 @@ public class BlockedDomain {
     private final String id;
     private final String domainName;
     private final String registrantContactId;
-    private final String clID;
     private final GregorianCalendar crDate;
     private final GregorianCalendar exDate;
 
     public BlockedDomain(String id, String domainName, String registrantContactId,
-                         String clID, GregorianCalendar crDate, GregorianCalendar exDate) {
+                         GregorianCalendar crDate, GregorianCalendar exDate) {
         this.id = id;
         this.domainName = domainName;
         this.registrantContactId = registrantContactId;
-        this.clID = clID;
         this.crDate = crDate;
         this.exDate = exDate;
     }
@@ -35,10 +33,6 @@ public class BlockedDomain {
 
     public String getId() {
         return id;
-    }
-
-    public String getClID() {
-        return clID;
     }
 
     public GregorianCalendar getCrDate() {

@@ -9,6 +9,7 @@ import org.w3c.dom.NodeList;
 import com.ausregistry.jtoolkit2.EPPDateFormatter;
 import com.ausregistry.jtoolkit2.se.DataResponse;
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
+import com.ausregistry.jtoolkit2.se.StandardCommandType;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 
 /**
@@ -25,7 +26,7 @@ public class BlockedInfoResponse extends DataResponse {
     private BlockedDomain blockedDomain;
 
     public BlockedInfoResponse() {
-        super(new BlockedDomainInfoCommandType(), ExtendedObjectType.BLOCKED);
+        super(StandardCommandType.INFO, ExtendedObjectType.BLOCKED);
     }
 
     @Override
@@ -52,7 +53,6 @@ public class BlockedInfoResponse extends DataResponse {
         String id = null;
         String domainName = null;
         String registrantContactId = null;
-        String clID = null;
         GregorianCalendar crDate = null;
         GregorianCalendar exDate = null;
         for (int j = 0; j < blockedDomainElements.getLength(); j++) {
@@ -65,15 +65,13 @@ public class BlockedInfoResponse extends DataResponse {
                 domainName = currentNode.getFirstChild().getNodeValue();
             } else if ("blocked:registrant".equals(elementName)) {
                 registrantContactId = currentNode.getFirstChild().getNodeValue();
-            } else if ("blocked:clID".equals(elementName)) {
-                clID = currentNode.getFirstChild().getNodeValue();
             } else if ("blocked:crDate".equals(elementName)) {
                 crDate = EPPDateFormatter.fromXSDateTime(currentNode.getFirstChild().getNodeValue());
             } else if ("blocked:exDate".equals(elementName)) {
                 exDate = EPPDateFormatter.fromXSDateTime(currentNode.getFirstChild().getNodeValue());
             }
         }
-        return new BlockedDomain(id, domainName, registrantContactId, clID, crDate, exDate);
+        return new BlockedDomain(id, domainName, registrantContactId, crDate, exDate);
     }
 
     public BlockedDomain getBlockedDomain() {

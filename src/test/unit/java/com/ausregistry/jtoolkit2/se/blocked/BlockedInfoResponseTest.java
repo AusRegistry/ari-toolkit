@@ -3,8 +3,6 @@ package com.ausregistry.jtoolkit2.se.blocked;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-import java.util.UUID;
-
 import org.junit.Test;
 
 import com.ausregistry.jtoolkit2.EPPDateFormatter;
@@ -32,7 +30,6 @@ public class BlockedInfoResponseTest {
                                 "<blocked:id>" + id + "</blocked:id>" +
                                 "<blocked:name>example.com.au</blocked:name>" +
                                 "<blocked:registrant>EXAMPLE</blocked:registrant>" +
-                                "<blocked:clID>Registrar</blocked:clID>" +
                                 "<blocked:crDate>2006-02-09T15:44:58.0Z</blocked:crDate>" +
                                 "<blocked:exDate>2007-02-09T15:44:58.0Z</blocked:exDate>" +
                             "</blocked:infData>" +
@@ -45,7 +42,6 @@ public class BlockedInfoResponseTest {
         assertThat(blockedDomain.getId(), is(id));
         assertThat(blockedDomain.getDomainName(), is("example.com.au"));
         assertThat(blockedDomain.getRegistrantContactId(), is("EXAMPLE"));
-        assertThat(blockedDomain.getClID(), is("Registrar"));
         assertThat(blockedDomain.getCrDate(), is(EPPDateFormatter.fromXSDateTime("2006-02-09T15:44:58.0Z")));
         assertThat(blockedDomain.getExDate(), is(EPPDateFormatter.fromXSDateTime("2007-02-09T15:44:58.0Z")));
 

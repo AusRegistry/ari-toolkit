@@ -10,8 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import java.util.UUID;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
@@ -34,18 +32,16 @@ public class BlockedRenewCommandTest {
                     + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\""
                     + " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
                     + " xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">"
-                    + "<extension>"
-                    + "<command xmlns=\"urn:X-ar:params:xml:ns:blocked-1.0\""
-                    + " xsi:schemaLocation=\"urn:X-ar:params:xml:ns:blocked-1.0 blocked-1.0.xsd\">"
+                    + "<command>"
                     + "<renew>"
-                    + "<renew xsi:schemaLocation=\"urn:X-ar:params:xml:ns:blocked-1.0 blocked-1.0.xsd\">"
+                    + "<renew xmlns=\"urn:X-ar:params:xml:ns:blocked-1.0\""
+                        + " xsi:schemaLocation=\"urn:X-ar:params:xml:ns:blocked-1.0 blocked-1.0.xsd\">"
                     + "<id>" + id + "</id>"
                     + "<curExpDate>" + currentExpiry + "</curExpDate>"
                     + "</renew>"
                     + "</renew>"
                     + "<clTRID>JTKUTEST.20070101.010101.0</clTRID>"
                     + "</command>"
-                    + "</extension>"
                     + "</epp>";
             assertEquals(expectedXml, xml);
         } catch (SAXException saxe) {
@@ -66,11 +62,10 @@ public class BlockedRenewCommandTest {
                     + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\""
                     + " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
                     + " xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">"
-                    + "<extension>"
-                    + "<command xmlns=\"urn:X-ar:params:xml:ns:blocked-1.0\""
-                    + " xsi:schemaLocation=\"urn:X-ar:params:xml:ns:blocked-1.0 blocked-1.0.xsd\">"
+                    + "<command>"
                     + "<renew>"
-                    + "<renew xsi:schemaLocation=\"urn:X-ar:params:xml:ns:blocked-1.0 blocked-1.0.xsd\">"
+                    + "<renew xmlns=\"urn:X-ar:params:xml:ns:blocked-1.0\""
+                        + " xsi:schemaLocation=\"urn:X-ar:params:xml:ns:blocked-1.0 blocked-1.0.xsd\">"
                     + "<id>" + id + "</id>"
                     + "<curExpDate>" + currentExpiry + "</curExpDate>"
                     + "<period unit=\"" + period.getUnit().toString() + "\">" + period.getPeriod() + "</period>"
@@ -78,7 +73,6 @@ public class BlockedRenewCommandTest {
                     + "</renew>"
                     + "<clTRID>JTKUTEST.20070101.010101.0</clTRID>"
                     + "</command>"
-                    + "</extension>"
                     + "</epp>";
             assertEquals(expectedXml, xml);
         } catch (SAXException saxe) {

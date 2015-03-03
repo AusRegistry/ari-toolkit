@@ -1,13 +1,12 @@
 package com.ausregistry.jtoolkit2.se.blocked;
 
-import com.ausregistry.jtoolkit2.EPPDateFormatter;
-import com.ausregistry.jtoolkit2.xml.XMLParser;
-import org.junit.Test;
-
-import java.util.UUID;
-
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+
+import org.junit.Test;
+
+import com.ausregistry.jtoolkit2.EPPDateFormatter;
+import com.ausregistry.jtoolkit2.xml.XMLParser;
 
 public class BlockedRenewResponseTest {
     private BlockedRenewResponse response = new BlockedRenewResponse();
