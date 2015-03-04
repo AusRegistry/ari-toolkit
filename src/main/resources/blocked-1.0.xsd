@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema targetNamespace="urn:X-ar:params:xml:ns:blocked-1.0"
-        xmlns:blocked="urn:X-ar:params:xml:ns:blocked-1.0"
+<schema targetNamespace="urn:ar:params:xml:ns:blocked-1.0"
+        xmlns:blocked="urn:ar:params:xml:ns:blocked-1.0"
         xmlns:eppcom="urn:ietf:params:xml:ns:eppcom-1.0"
-        xmlns:epp="urn:ietf:params:xml:ns:epp-1.0"
         xmlns="http://www.w3.org/2001/XMLSchema"
         elementFormDefault="qualified">
 
@@ -30,8 +29,6 @@
     <complexType name="createType">
         <sequence>
             <element name="id" type="eppcom:clIDType" minOccurs="1"/>
-            <element name="name" type="eppcom:labelType" minOccurs="1"/>
-            <element name="registrant" type="eppcom:clIDType" minOccurs="1"/>
         </sequence>
     </complexType>
 
@@ -44,7 +41,6 @@
     <complexType name="updateType">
         <sequence>
             <element name="id" type="eppcom:clIDType" minOccurs="1"/>
-            <element name="registrant" type="eppcom:clIDType" minOccurs="1"/>
         </sequence>
     </complexType>
 
@@ -60,40 +56,24 @@
     <complexType name="renewType">
         <sequence>
             <element name="id" type="eppcom:clIDType" minOccurs="1"/>
-            <element name="curExpDate" type="date"/>
-            <element name="period" type="blocked:periodType"
-                     minOccurs="0"/>
         </sequence>
     </complexType>
-
-    <complexType name="periodType">
-        <simpleContent>
-            <extension base="blocked:pLimitType">
-                <attribute name="unit" type="blocked:pUnitType"
-                           use="required"/>
-            </extension>
-        </simpleContent>
-    </complexType>
-
-    <simpleType name="pLimitType">
-        <restriction base="unsignedShort">
-            <minInclusive value="1"/>
-            <maxInclusive value="99"/>
-        </restriction>
-    </simpleType>
-
-    <simpleType name="pUnitType">
-        <restriction base="token">
-            <enumeration value="y"/>
-            <enumeration value="m"/>
-        </restriction>
-    </simpleType>
 
     <!--
      Child response elements.
      -->
+    <element name="creData" type="blocked:creDataType"/>
     <element name="infData" type="blocked:infDataType"/>
     <element name="renData" type="blocked:renDataType"/>
+
+    <!--
+     <create> response elements.
+     -->
+    <complexType name="creDataType">
+        <sequence>
+            <element name="id" type="eppcom:clIDType" minOccurs="1"/>
+        </sequence>
+    </complexType>
 
     <!--
      <info> response elements.
@@ -101,10 +81,6 @@
     <complexType name="infDataType">
         <sequence>
             <element name="id" type="eppcom:clIDType" minOccurs="1"/>
-            <element name="name" type="eppcom:labelType" minOccurs="1"/>
-            <element name="registrant" type="eppcom:clIDType" minOccurs="0"/>
-            <element name="crDate" type="dateTime" minOccurs="0"/>
-            <element name="exDate" type="dateTime" minOccurs="0"/>
         </sequence>
     </complexType>
 
@@ -114,7 +90,6 @@
     <complexType name="renDataType">
         <sequence>
             <element name="id" type="eppcom:clIDType" minOccurs="1"/>
-            <element name="exDate" type="dateTime" minOccurs="0"/>
         </sequence>
     </complexType>
 
