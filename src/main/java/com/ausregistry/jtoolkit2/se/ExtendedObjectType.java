@@ -34,8 +34,8 @@ public enum ExtendedObjectType implements ObjectType {
     EX_AVAIL ("exAvail", "urn:ar:params:xml:ns:exAvail-1.0", "exAvail-1.0.xsd", "name"),
     /** References the fund info XML namespace and schema file */
     FUND ("fund", "urn:ar:params:xml:ns:fund-1.0", "fund-1.0.xsd"),
-    /** References the Blocked Domain Name XML namespace and schema file */
-    BLOCKED ("blocked", "urn:ar:params:xml:ns:blocked-1.0", "blocked-1.0.xsd", "id");
+    /** References the Block XML namespace and schema file */
+    BLOCK("block", "urn:ar:params:xml:ns:block-1.0", "block-1.0.xsd", "id");
 
     private final String prefix, uri, schemaDefinition, identType;
 

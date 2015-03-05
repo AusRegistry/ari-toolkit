@@ -1,4 +1,4 @@
-package com.ausregistry.jtoolkit2.se.blocked;
+package com.ausregistry.jtoolkit2.se.block;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -35,7 +35,7 @@ public class DomainDeleteBlockCommandExtensionTest {
                     + "<command><delete><delete xmlns=\"urn:ietf:params:xml:ns:domain-1.0\" "
                     + "xsi:schemaLocation=\"urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd\">"
                     + "<name>jtkutest.com.au</name></delete></delete>" + "<extension>"
-                    + "<delete xmlns=\"urn:ar:params:xml:ns:blocked-1.0\">"
+                    + "<delete xmlns=\"urn:ar:params:xml:ns:block-1.0\">"
                     + "<id>" + id + "</id>"
                     + "</delete>"
                     + "</extension><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>";

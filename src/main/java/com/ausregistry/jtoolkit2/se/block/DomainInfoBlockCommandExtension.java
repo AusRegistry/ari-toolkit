@@ -1,4 +1,4 @@
-package com.ausregistry.jtoolkit2.se.blocked;
+package com.ausregistry.jtoolkit2.se.block;
 
 import org.w3c.dom.Element;
 
@@ -8,17 +8,16 @@ import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.xml.XMLWriter;
 
 /**
- * <p>Extension for the EPP Domain Info command, representing the Application Info aspect of the
- * Blocked Domain Name extension.</p>
+ * <p>Extension for the EPP Domain Info command, representing the Block Info aspect of the Block extension.</p>
  *
- * <p>Use this to mark the ID of a domain block to retrieve info for as part of an EPP Domain Info command
+ * <p>Use this to mark the ID of a Block to retrieve info for as part of an EPP Domain Info command
  * compliant with RFC5730 and RFC5731. The response expected from a server should be
- * handled by a Domain Info Response with the Blocked Domain Info Response extension.</p>
+ * handled by a Domain Info Response with the Block Info Response extension.</p>
  *
  * @see com.ausregistry.jtoolkit2.se.DomainInfoCommand
  * @see DomainInfoBlockResponseExtension
- * @see <a href="http://ausregistry.github.io/doc/blocked-1.0/blocked-1.0.html">Blocked Domain Name
- * Extension Mapping for the Extensible Provisioning Protocol (EPP)</a>
+ * @see <a href="http://ausregistry.github.io/doc/block-1.0/block-1.0.html">Block Extension Mapping for the
+ * Extensible Provisioning Protocol (EPP)</a>
  */
 public class DomainInfoBlockCommandExtension implements CommandExtension {
     private static final long serialVersionUID = -3106443818428865374L;
@@ -30,9 +29,9 @@ public class DomainInfoBlockCommandExtension implements CommandExtension {
         final XMLWriter xmlWriter = command.getXmlWriter();
         final Element extensionElement = command.getExtensionElement();
         final Element infoElement = xmlWriter.appendChild(extensionElement, "info",
-                ExtendedObjectType.BLOCKED.getURI());
+                ExtendedObjectType.BLOCK.getURI());
 
-        xmlWriter.appendChild(infoElement, "id", ExtendedObjectType.BLOCKED.getURI()).setTextContent(id);
+        xmlWriter.appendChild(infoElement, "id", ExtendedObjectType.BLOCK.getURI()).setTextContent(id);
     }
 
     public void setId(String id) {

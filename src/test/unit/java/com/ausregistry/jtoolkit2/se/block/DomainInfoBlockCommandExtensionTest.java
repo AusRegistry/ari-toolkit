@@ -1,4 +1,4 @@
-package com.ausregistry.jtoolkit2.se.blocked;
+package com.ausregistry.jtoolkit2.se.block;
 
 import static org.junit.Assert.*;
 
@@ -38,7 +38,7 @@ public class DomainInfoBlockCommandExtensionTest {
                     + "<name>jtkutest.com.au</name>"
                     + "</info></info>"
                     + "<extension>"
-                    + "<info xmlns=\"urn:ar:params:xml:ns:blocked-1.0\"><id>" + id + "</id></info>"
+                    + "<info xmlns=\"urn:ar:params:xml:ns:block-1.0\"><id>" + id + "</id></info>"
                     + "</extension>"
                     + "<clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>";
             assertEquals(expectedXml, xml);

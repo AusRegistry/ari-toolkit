@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema targetNamespace="urn:ar:params:xml:ns:blocked-1.0"
-        xmlns:blocked="urn:ar:params:xml:ns:blocked-1.0"
+<schema targetNamespace="urn:ar:params:xml:ns:block-1.0"
+        xmlns:block="urn:ar:params:xml:ns:block-1.0"
         xmlns:eppcom="urn:ietf:params:xml:ns:eppcom-1.0"
         xmlns="http://www.w3.org/2001/XMLSchema"
         elementFormDefault="qualified">
@@ -13,15 +13,15 @@
 
     <annotation>
         <documentation>
-            Blocked Domain Name Extensions to the Extensible Provisioning Protocol v1.0. schema.
+            block Domain Name Extensions to the Extensible Provisioning Protocol v1.0. schema.
         </documentation>
     </annotation>
 
-    <element name="create" type="blocked:createType"/>
-    <element name="info" type="blocked:infoType"/>
-    <element name="update" type="blocked:updateType"/>
-    <element name="renew" type="blocked:renewType"/>
-    <element name="delete" type="blocked:deleteType"/>
+    <element name="create" type="block:createType"/>
+    <element name="info" type="block:infoType"/>
+    <element name="update" type="block:updateType"/>
+    <element name="renew" type="block:renewType"/>
+    <element name="delete" type="block:deleteType"/>
 
     <!--
         Type definitions.
@@ -62,9 +62,9 @@
     <!--
      Child response elements.
      -->
-    <element name="creData" type="blocked:creDataType"/>
-    <element name="infData" type="blocked:infDataType"/>
-    <element name="renData" type="blocked:renDataType"/>
+    <element name="creData" type="block:creDataType"/>
+    <element name="infData" type="block:infDataType"/>
+    <element name="renData" type="block:renDataType"/>
 
     <!--
      <create> response elements.
