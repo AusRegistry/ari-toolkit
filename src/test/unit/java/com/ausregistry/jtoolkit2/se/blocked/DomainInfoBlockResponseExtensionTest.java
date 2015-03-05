@@ -28,22 +28,10 @@ public class DomainInfoBlockResponseExtensionTest {
                                 " xsi:schemaLocation=\"urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd\">" +
                                 "<name>example.com</name>" +
                                 "<roid>D0000003-AR</roid>" +
-                                "<status s=\"ok\" lang=\"en\"/>" +
                                 "<registrant>EXAMPLE</registrant>" +
-                                "<contact type=\"tech\">EXAMPLE</contact>" +
-                                "<ns>" +
-                                "<hostObj>ns1.example.com.au</hostObj>" +
-                                "<hostObj>ns2.example.com.au</hostObj>" +
-                                "</ns>" +
-                                "<host>ns1.example.com.au</host>" +
-                                "<host>ns2.exmaple.com.au</host>" +
                                 "<clID>Registrar</clID>" +
-                                "<crID>Registrar</crID>" +
                                 "<crDate>2006-02-09T15:44:58.0Z</crDate>" +
                                 "<exDate>2008-02-10T00:00:00.0Z</exDate>" +
-                                "<authInfo>" +
-                                "<pw>0192pqow</pw>" +
-                                "</authInfo>" +
                             "</infData>" +
                         "</resData>" +
                         "<extension>" +
