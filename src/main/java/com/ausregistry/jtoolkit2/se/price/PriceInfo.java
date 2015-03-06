@@ -11,8 +11,10 @@ import com.ausregistry.jtoolkit2.se.Period;
 public class PriceInfo implements Serializable {
 
     private static final long serialVersionUID = -3981943930495021516L;
+    public static final String STANDARD_CATEGORY_NAME = "STANDARD";
     private Boolean isPremium;
     private Period period;
+    private String priceCategory;
     private BigDecimal createPrice;
     private BigDecimal renewPrice;
     private BigDecimal restorePrice;
@@ -57,6 +59,29 @@ public class PriceInfo implements Serializable {
     }
 
     /**
+     * @param priceCategory price category for the domain
+     * @param period period that the prices relate to
+     * @param createPrice create price for the domain
+     * @param renewPrice renew price for the domain
+     * @param restorePrice restore price for the domain
+     * @param transferPrice transfer price for the domain
+     * @param reason reason message with extra information
+     */
+    public PriceInfo(final String priceCategory, final Period period, final BigDecimal createPrice, final BigDecimal
+            renewPrice, final BigDecimal restorePrice, final BigDecimal transferPrice, final String reason) {
+        this.priceCategory = priceCategory;
+        if (priceCategory != null) {
+            this.isPremium = !STANDARD_CATEGORY_NAME.equals(priceCategory);
+        }
+        this.period = period;
+        this.createPrice = createPrice;
+        this.renewPrice = renewPrice;
+        this.restorePrice = restorePrice;
+        this.transferPrice = transferPrice;
+        this.reason = reason;
+    }
+
+    /**
      * @return if a domain is premium
      */
     public Boolean isPremium() {
@@ -71,31 +96,38 @@ public class PriceInfo implements Serializable {
     }
 
     /**
-     * @return create price for premium domain
+     * @return create price for domain
      */
     public BigDecimal getCreatePrice() {
         return createPrice;
     }
 
     /**
-     * @return renew price for premium domain
+     * @return renew price for domain
      */
     public BigDecimal getRenewPrice() {
         return renewPrice;
     }
 
     /**
-     * @return renew price for premium domain
+     * @return renew price for domain
      */
     public BigDecimal getRestorePrice() {
         return restorePrice;
     }
 
     /**
-     * @return renew price for premium domain
+     * @return renew price for domain
      */
     public BigDecimal getTransferPrice() {
         return transferPrice;
+    }
+
+    /**
+     * @return price category for domain
+     */
+    public String getCategory() {
+        return priceCategory;
     }
 
     /**
