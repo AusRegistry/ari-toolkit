@@ -2,6 +2,7 @@ package com.ausregistry.jtoolkit2.tmdb;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.spy;
@@ -70,6 +71,6 @@ public class TmdbClientTest {
 
         tmdbClient.requestNotice("lookupKey");
 
-        verify(inputStream).close();
+        verify(inputStream, atLeastOnce()).close();
     }
 }
