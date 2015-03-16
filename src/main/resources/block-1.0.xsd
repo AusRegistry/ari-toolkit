@@ -28,25 +28,25 @@
     -->
     <complexType name="createType">
         <sequence>
-            <element name="id" type="eppcom:clIDType" minOccurs="1"/>
+            <element name="id" type="eppcom:clIDType"/>
         </sequence>
     </complexType>
 
     <complexType name="infoType">
         <sequence>
-            <element name="id" type="eppcom:clIDType" minOccurs="1"/>
+            <element name="id" type="eppcom:clIDType"/>
         </sequence>
     </complexType>
 
     <complexType name="updateType">
         <sequence>
-            <element name="id" type="eppcom:clIDType" minOccurs="1"/>
+            <element name="id" type="eppcom:clIDType"/>
         </sequence>
     </complexType>
 
     <complexType name="deleteType">
         <sequence>
-            <element name="id" type="eppcom:clIDType" minOccurs="1"/>
+            <element name="id" type="eppcom:clIDType"/>
         </sequence>
     </complexType>
 
@@ -55,7 +55,7 @@
     -->
     <complexType name="renewType">
         <sequence>
-            <element name="id" type="eppcom:clIDType" minOccurs="1"/>
+            <element name="id" type="eppcom:clIDType"/>
         </sequence>
     </complexType>
 
@@ -71,7 +71,7 @@
      -->
     <complexType name="creDataType">
         <sequence>
-            <element name="id" type="eppcom:clIDType" minOccurs="1"/>
+            <element name="id" type="eppcom:clIDType"/>
         </sequence>
     </complexType>
 
@@ -80,7 +80,7 @@
      -->
     <complexType name="infDataType">
         <sequence>
-            <element name="id" type="eppcom:clIDType" minOccurs="1"/>
+            <element name="id" type="eppcom:clIDType"/>
         </sequence>
     </complexType>
 
@@ -89,7 +89,7 @@
     -->
     <complexType name="renDataType">
         <sequence>
-            <element name="id" type="eppcom:clIDType" minOccurs="1"/>
+            <element name="id" type="eppcom:clIDType"/>
         </sequence>
     </complexType>
 
