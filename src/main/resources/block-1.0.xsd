@@ -19,7 +19,6 @@
 
     <element name="create" type="block:createType"/>
     <element name="info" type="block:infoType"/>
-    <element name="update" type="block:updateType"/>
     <element name="renew" type="block:renewType"/>
     <element name="delete" type="block:deleteType"/>
 
@@ -33,12 +32,6 @@
     </complexType>
 
     <complexType name="infoType">
-        <sequence>
-            <element name="id" type="eppcom:clIDType"/>
-        </sequence>
-    </complexType>
-
-    <complexType name="updateType">
         <sequence>
             <element name="id" type="eppcom:clIDType"/>
         </sequence>
