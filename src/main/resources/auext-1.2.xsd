@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="urn:X-au:params:xml:ns:auext-1.2"
+        xmlns:auext="urn:X-au:params:xml:ns:auext-1.2"
+        xmlns:eppcom="urn:ietf:params:xml:ns:eppcom-1.0"
+        xmlns:epp="urn:ietf:params:xml:ns:epp-1.0"
+        xmlns="http://www.w3.org/2001/XMLSchema"
+        elementFormDefault="qualified">
+
+    <!--
+        Import common element types.
+    -->
+    <import namespace="urn:ietf:params:xml:ns:eppcom-1.0" schemaLocation="eppcom-1.0.xsd"/>
+    <import namespace="urn:ietf:params:xml:ns:epp-1.0" schemaLocation="epp-1.0.xsd"/>
+
+    <annotation>
+        <documentation>
+            .au Extensions to the
+            Extensible Provisioning
+            Protocol v1.2 schema.
+        </documentation>
+    </annotation>
+
+    <!--
+        Protocol extension framework elements.
+    -->
+    <element name="command" type="auext:commandType"/>
+
+    <!--
+        Protocol extension type definitions.
+    -->
+
+    <complexType name="commandType">
+        <sequence>
+            <choice>
+                <element name="registrantTransfer" type="epp:readWriteType"/>
+            </choice>
+            <element name="clTRID" type="epp:trIDStringType" minOccurs="0"/>
+        </sequence>
+    </complexType>
+
+    <!--
+        Command-response framework extension elements.
+    -->
+    <element name="create" type="auext:createType"/>
+    <element name="update" type="auext:updateType"/>
+    <element name="infData" type="auext:infDataType"/>
+
+    <!--
+        .au update command extension
+    -->
+    <complexType name="updateType">
+        <sequence>
+            <element name="auProperties" type="auext:auPropertiesType" minOccurs="1"/>
+            <element name="explanation" type="auext:explanationType" minOccurs="1"/>
+        </sequence>
+    </complexType>
+
+    <!--
+        .au create command extension
+    -->
+    <complexType name="createType">
+        <sequence>
+            <element name="auProperties" type="auext:auPropertiesType" minOccurs="1"/>
+        </sequence>
+    </complexType>
+
+    <!--
+        .au info response extension
+    -->
+    <complexType name="infDataType">
+        <sequence>
+            <element name="auProperties" type="auext:auPropertiesType" minOccurs="1"/>
+        </sequence>
+    </complexType>
+
+    <!--
+        the .au extension domain properties
+    -->
+    <complexType name="auPropertiesType">
+        <sequence>
+            <element name="registrantName" type="eppcom:labelType" minOccurs="1"/>
+            <element name="registrantID" type="eppcom:labelType" minOccurs="0"/>
+            <element name="eligibilityType" type="eppcom:labelType" minOccurs="1"/>
+            <element name="eligibilityName" type="eppcom:labelType" minOccurs="0"/>
+            <element name="eligibilityID" type="eppcom:labelType" minOccurs="0"/>
+            <element name="policyReason" type="auext:policyNumType" minOccurs="1"/>
+        </sequence>
+    </complexType>
+
+    <!--
+        the explanation type
+    -->
+    <simpleType name="explanationType">
+        <restriction base="normalizedString">
+            <maxLength value="1000"/>
+        </restriction>
+    </simpleType>
+
+    <!--
+        policy numbers can be allocated up to 106. Less than the max number
+        of policy values may be valid in the .au registry. This will be handled
+        by registry command validation. (this is done so that a new schema does
+        not have to be released each time the policy reasons are modified)
+    -->
+    <simpleType name="policyNumType">
+        <restriction base="integer">
+            <minInclusive value="1"/>
+            <maxInclusive value="106"/>
+        </restriction>
+    </simpleType>
+
+    <!--
+        End of schema.
+    -->
+</schema>

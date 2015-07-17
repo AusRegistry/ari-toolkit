@@ -5,7 +5,7 @@ import org.w3c.dom.Element;
 
 /**
  * Extension of EPP urn:ietf:params:xml:ns:domain-1.0 create command specified
- * in RFC5731 to urn:X-au:params:xml:ns:auext-1.1.  .au domains must be
+ * in RFC5731 to urn:X-au:params:xml:ns:auext-1.2.  .au domains must be
  * provisioned using this class rather than {@link
  * com.ausregistry.jtoolkit2.se.DomainCreateCommand}, as the au extension data
  * is mandatory.
@@ -36,7 +36,7 @@ public final class AuDomainCreateCommand extends DomainCreateCommand {
 
 	/**
 	 * Full data specification constructor for a domain:create + auext:create
-	 * EPP command.  Please refer to the urn:X-au:params:xml:ns:auext-1.1 schema
+	 * EPP command.  Please refer to the urn:X-au:params:xml:ns:auext-1.2 schema
 	 * for specification of the required fields.
 	 * The mapping of parameter names to au extension fields is given in the
 	 * parameter documentation.
@@ -112,7 +112,7 @@ public final class AuDomainCreateCommand extends DomainCreateCommand {
 
 	/**
 	 * &lt;extension&gt;
-	 * &nbsp;&lt;create xmlns="urn:X-au:params:xml:ns:auext-1.1" xsi:schemaLocation="urn:X-au:params:xml:ns:auext-1.1 auext.1.1.xsd"&gt;
+	 * &nbsp;&lt;create xmlns="urn:X-au:params:xml:ns:auext-1.2" xsi:schemaLocation="urn:X-au:params:xml:ns:auext-1.2 auext.1.1.xsd"&gt;
 	 * &nbsp;&nbsp;&lt;auProperties&gt;
 	 * &nbsp;&nbsp;&nbsp;&lt;registrantName&gt;registrantName&lt;/registrantName&gt;
 	 * &nbsp;&nbsp;&nbsp;&lt;registrantID type="registrantIDType"&gt;registrantID&lt;/registrantID&gt;

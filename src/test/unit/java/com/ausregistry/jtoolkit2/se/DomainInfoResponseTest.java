@@ -228,8 +228,8 @@ public class DomainInfoResponseTest {
         result.append("</infData>");
         result.append("</resData>");
         result.append("<extension>");
-        result.append("<auext:infData xmlns:auext=\"urn:X-au:params:xml:ns:auext-1.1\"");
-        result.append(" xsi:schemaLocation=\"urn:X-au:params:xml:ns:auext-1.1 auext-1.1.xsd\">");
+        result.append("<auext:infData xmlns:auext=\"urn:X-au:params:xml:ns: auext-1.2\"");
+        result.append(" xsi:schemaLocation=\"urn:X-au:params:xml:ns: auext-1.2  auext-1.2.xsd\">");
         result.append("<auext:auProperties>");
         result.append("<auext:registrantName>RegistrantName Pty. Ltd.</auext:registrantName>");
         result.append("<auext:registrantID type=\"ACN\">123456789</auext:registrantID>");

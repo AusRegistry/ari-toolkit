@@ -7,7 +7,7 @@ package com.ausregistry.jtoolkit2.se;
 public enum ExtendedObjectType implements ObjectType {
     AR_DOMAIN("ardom", "urn:X-ar:params:xml:ns:ardomain-1.0", "ardomain-1.0.xsd", "name"),
     AE_DOMAIN("aedom", "urn:X-ae:params:xml:ns:aedomain-1.0", "aedomain-1.0.xsd", "name"),
-    AU_DOMAIN("audom", "urn:X-au:params:xml:ns:audomain-1.0", "audomain-1.0.xsd", "name"),
+    AU_DOMAIN("audom", "urn:X-au:params:xml:ns:audomain-1.1", "audomain-1.1.xsd", "name"),
     IDNA_DOMAIN("idnadomain", "urn:X-ar:params:xml:ns:idnadomain-1.0", "idnadomain-1.0.xsd", "name"),
     /** References the domain name variants extension (v1.0) XML namespace and schema file */
     VARIANT ("variant", "urn:X-ar:params:xml:ns:variant-1.0", "variant-1.0.xsd", "name"),

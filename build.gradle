@@ -7,7 +7,7 @@ ext {
     junitVersion = '4.11'
     artifactsDir = "$projectDir/artifacts"
     artifactGroupId = 'au.com.ausregistry'
-    gradleWrapperVersion = '2.1'
+    gradleWrapperVersion = '2.5'
     pagesProjectDir = "$projectDir/../ari-toolkit-gitpages"
 
     commonsCodecVersion          = '1.10'
