@@ -1,12 +1,14 @@
 package com.ausregistry.jtoolkit2.se;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
 import com.ausregistry.jtoolkit2.Timer;
 import com.ausregistry.jtoolkit2.xml.Attribute;
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
-
-import static org.junit.Assert.*;
 
 public class DomainInfoCommandTest {
     private DomainInfoCommand cmd1;
@@ -36,7 +38,7 @@ public class DomainInfoCommandTest {
     @Test
     public void testToXML() {
         try {
-            assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><command><info><info xmlns=\"urn:ietf:params:xml:ns:domain-1.0\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd\"><name>jtkutest.com.au</name></info></info><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>", cmd1.toXML());
+            assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?><!--Produced with --><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><command><info><info xmlns=\"urn:ietf:params:xml:ns:domain-1.0\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd\"><name>jtkutest.com.au</name></info></info><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>", cmd1.toXML());
         } catch (SAXException saxe) {
             fail(saxe.getMessage());
         }
@@ -53,7 +55,7 @@ public class DomainInfoCommandTest {
             fail("Parsing failed with message: " + e.getMessage());
         }
         
-        String expectedXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><command><info><info xmlns=\"urn:ietf:params:xml:ns:domain-1.0\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd\"><name hosts=\"del\">domain.com</name></info></info><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>";
+        String expectedXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!--Produced with --><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><command><info><info xmlns=\"urn:ietf:params:xml:ns:domain-1.0\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd\"><name hosts=\"del\">domain.com</name></info></info><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>";
         assertEquals("Should be expected output", expectedXml , outputXml);
     }
     
@@ -69,7 +71,7 @@ public class DomainInfoCommandTest {
             fail("Parsing failed with message: " + e.getMessage());
         }
         
-        String expectedXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><command><info><info xmlns=\"urn:ietf:params:xml:ns:domain-1.0\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd\"><name hosts=\"del\">domain.com</name><authInfo><pw>password</pw></authInfo></info></info><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>";
+        String expectedXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!--Produced with --><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><command><info><info xmlns=\"urn:ietf:params:xml:ns:domain-1.0\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd\"><name hosts=\"del\">domain.com</name><authInfo><pw>password</pw></authInfo></info></info><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>";
         assertEquals("Should be expected output", expectedXml , outputXml);
     }
     
@@ -85,7 +87,7 @@ public class DomainInfoCommandTest {
             fail("Parsing failed with message: " + e.getMessage());
         }
         
-        String expectedXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><command><info><info xmlns=\"urn:ietf:params:xml:ns:domain-1.0\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd\"><name hosts=\"del\">domain.com</name><authInfo><pw roid=\"D_123A-ARI\">password</pw></authInfo></info></info><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>";
+        String expectedXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!--Produced with --><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><command><info><info xmlns=\"urn:ietf:params:xml:ns:domain-1.0\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd\"><name hosts=\"del\">domain.com</name><authInfo><pw roid=\"D_123A-ARI\">password</pw></authInfo></info></info><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>";
         assertEquals("Should be expected output", expectedXml , outputXml);
     }
 

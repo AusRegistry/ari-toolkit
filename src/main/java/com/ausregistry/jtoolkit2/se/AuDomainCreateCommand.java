@@ -112,7 +112,7 @@ public final class AuDomainCreateCommand extends DomainCreateCommand {
 
 	/**
 	 * &lt;extension&gt;
-	 * &nbsp;&lt;create xmlns="urn:X-au:params:xml:ns:auext-1.2" xsi:schemaLocation="urn:X-au:params:xml:ns:auext-1.2 auext.1.1.xsd"&gt;
+	 * &nbsp;&lt;create xmlns="urn:X-au:params:xml:ns:auext-1.2" xsi:schemaLocation="urn:X-au:params:xml:ns:auext-1.2 auext.1.2.xsd"&gt;
 	 * &nbsp;&nbsp;&lt;auProperties&gt;
 	 * &nbsp;&nbsp;&nbsp;&lt;registrantName&gt;registrantName&lt;/registrantName&gt;
 	 * &nbsp;&nbsp;&nbsp;&lt;registrantID type="registrantIDType"&gt;registrantID&lt;/registrantID&gt;

@@ -2,7 +2,7 @@
 <schema targetNamespace="urn:X-au:params:xml:ns:audomain-1.1"
 	xmlns:auDomain="urn:X-au:params:xml:ns:audomain-1.1"
 	xmlns:eppcom="urn:ietf:params:xml:ns:eppcom-1.0"
-        xmlns:domain="urn:ietf:params:xml:ns:domain-1.0"
+    xmlns:domain="urn:ietf:params:xml:ns:domain-1.0"
 	xmlns:auext="urn:X-au:params:xml:ns:auext-1.2"
 	xmlns="http://www.w3.org/2001/XMLSchema"
 	elementFormDefault="qualified">
@@ -12,6 +12,7 @@
 	-->
 	<import namespace="urn:ietf:params:xml:ns:eppcom-1.0" schemaLocation="eppcom-1.0.xsd"/>
 	<import namespace="urn:ietf:params:xml:ns:domain-1.0" schemaLocation="domain-1.0.xsd"/>
+	<import namespace="urn:X-au:params:xml:ns:auext-1.2" schemaLocation="auext-1.2.xsd"/>
 
 	<annotation>
 		<documentation>
@@ -50,10 +51,10 @@
 	<complexType name="auPropertiesType">
 		<sequence>
 			<element name="registrantName" type="eppcom:labelType" minOccurs="1"/>
-			<element name="registrantID" type="eppcom:labelType" minOccurs="0"/>
+			<element name="registrantID" type="auext:registrantIDType" minOccurs="0"/>
 			<element name="eligibilityType" type="eppcom:labelType" minOccurs="1"/>
 			<element name="eligibilityName" type="eppcom:labelType" minOccurs="0"/>
-			<element name="eligibilityID" type="eppcom:labelType" minOccurs="0"/>
+			<element name="eligibilityID" type="auext:eligibilityIDType" minOccurs="0"/>
 			<element name="policyReason" type="auext:policyNumType" minOccurs="1"/>
 		</sequence>
 	</complexType>

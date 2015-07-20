@@ -1,18 +1,16 @@
 package com.ausregistry.jtoolkit2.xml;
 
 import java.util.logging.Logger;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import com.ausregistry.jtoolkit2.ErrorPkg;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
-
-import com.ausregistry.jtoolkit2.ErrorPkg;
 
 /**
  * An EPP-specific implementation of an XMLWriter. Instances of this class set the xml declaration and root element
@@ -36,12 +34,12 @@ public class EPPWriter extends XMLWriter {
 
     private Document doc;
     private Element eppElement;
-    private final Logger debugLogger;
     private final String pname;
+    private final Package classPackage;
 
     {
-        pname = getClass().getPackage().getName();
-        debugLogger = Logger.getLogger(pname + ".debug");
+        classPackage = getClass().getPackage();
+        pname = classPackage.getName();
         userLogger = Logger.getLogger(pname + ".user");
     }
 
@@ -61,8 +59,6 @@ public class EPPWriter extends XMLWriter {
     protected EPPWriter(String version, String encoding, boolean standalone, String eppNamespace, String xsi,
             String eppSchemaLocation) {
 
-        debugLogger.finest("enter");
-
         this.version = version;
         this.encoding = encoding;
         this.standalone = standalone;
@@ -79,8 +75,6 @@ public class EPPWriter extends XMLWriter {
         } catch (javax.xml.parsers.ParserConfigurationException pce) {
             userLogger.severe(pce.getMessage());
             userLogger.severe(ErrorPkg.getMessage("EPPWriter.init.0"));
-        } finally {
-            debugLogger.finest("exit");
         }
     }
 
@@ -105,7 +99,6 @@ public class EPPWriter extends XMLWriter {
 
     @Override
     protected final SAXParser newSAXParser() throws SAXException, ParserConfigurationException {
-
         return spFactory.newSAXParser();
     }
 
@@ -118,4 +111,5 @@ public class EPPWriter extends XMLWriter {
     protected final Element createElement(String uri, String name) {
         return doc.createElementNS(uri, name);
     }
+
 }

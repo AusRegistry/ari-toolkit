@@ -79,10 +79,10 @@
     <complexType name="auPropertiesType">
         <sequence>
             <element name="registrantName" type="eppcom:labelType" minOccurs="1"/>
-            <element name="registrantID" type="eppcom:labelType" minOccurs="0"/>
+            <element name="registrantID" type="auext:registrantIDType" minOccurs="0"/>
             <element name="eligibilityType" type="eppcom:labelType" minOccurs="1"/>
             <element name="eligibilityName" type="eppcom:labelType" minOccurs="0"/>
-            <element name="eligibilityID" type="eppcom:labelType" minOccurs="0"/>
+            <element name="eligibilityID" type="auext:eligibilityIDType" minOccurs="0"/>
             <element name="policyReason" type="auext:policyNumType" minOccurs="1"/>
         </sequence>
     </complexType>
@@ -95,6 +95,28 @@
             <maxLength value="1000"/>
         </restriction>
     </simpleType>
+
+    <!--
+        registrant id type is used for registrantID
+    -->
+    <complexType name="registrantIDType">
+        <simpleContent>
+            <extension base="eppcom:labelType">
+                <attribute name="type" type="token" use="required"/>
+            </extension>
+        </simpleContent>
+    </complexType>
+
+    <!--
+        eligibility id type is used for eligibilityID
+    -->
+    <complexType name="eligibilityIDType">
+        <simpleContent>
+            <extension base="eppcom:labelType">
+                <attribute name="type" type="token" use="required"/>
+            </extension>
+        </simpleContent>
+    </complexType>
 
     <!--
         policy numbers can be allocated up to 106. Less than the max number

@@ -1,14 +1,14 @@
 package com.ausregistry.jtoolkit2.se.rgp;
 
+import static org.junit.Assert.assertEquals;
+
+import java.util.GregorianCalendar;
+
 import com.ausregistry.jtoolkit2.EPPDateFormatter;
 import com.ausregistry.jtoolkit2.Timer;
 import com.ausregistry.jtoolkit2.se.CLTRID;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.GregorianCalendar;
-
-import static org.junit.Assert.assertEquals;
 
 public class DomainRestoreReportCommandTest {
 
@@ -33,7 +33,7 @@ public class DomainRestoreReportCommandTest {
 		final DomainRestoreReportCommand cmd = new DomainRestoreReportCommand(
 				"jtkutest.com.au", preData, postData, delTime, resTime,
 				resReason, statement, null, null);
-		assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\""
+		assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?><!--Produced with --><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\""
 				+ " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params"
 				+ ":xml:ns:epp-1.0 epp-1.0.xsd\"><command><update><update xmlns=\"urn:ietf:params:xml:ns:domain-"
 				+ "1.0\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd\"><name>jtkutest"
@@ -63,7 +63,7 @@ public class DomainRestoreReportCommandTest {
 		final DomainRestoreReportCommand cmd = new DomainRestoreReportCommand(
 				"jtkutest.com.au", preData, postData, delTime, resTime,
 				resReason, statement, secondStatement, other);
-		assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\""
+		assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?><!--Produced with --><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\""
 				+ " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params"
 				+ ":xml:ns:epp-1.0 epp-1.0.xsd\"><command><update><update xmlns=\"urn:ietf:params:xml:ns:domain-"
 				+ "1.0\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd\"><name>jtkutest"

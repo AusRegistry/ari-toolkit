@@ -1,13 +1,13 @@
 package com.ausregistry.jtoolkit2.se.extendedAvailability;
 
+import static org.junit.Assert.assertEquals;
+
 import com.ausregistry.jtoolkit2.Timer;
 import com.ausregistry.jtoolkit2.se.CLTRID;
 import com.ausregistry.jtoolkit2.se.DomainCheckCommand;
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
-
-import static org.junit.Assert.assertEquals;
 
 public class DomainCheckExtendedAvailabilityCommandExtensionTest {
 
@@ -26,7 +26,7 @@ public class DomainCheckExtendedAvailabilityCommandExtensionTest {
 
         checkCommand.appendExtension(ext);
 
-        assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+        assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?><!--Produced with -->"
                 + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" "
                 + "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
                 + "xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">"

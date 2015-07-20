@@ -6,7 +6,7 @@ import org.w3c.dom.Element;
 /**
  * Extension of the domain mapping of the EPP update command, as defined in
  * RFC5730 and RFC5731, to .au domain names, the specification of which is in
- * the XML schema definition urn:X-au:params:xml:ns:auext-1.1.
+ * the XML schema definition urn:X-au:params:xml:ns:auext-1.2.
  * This class should only be used to correct au extension data for .au domain
  * names, and only where the legal registrant has not changed.
  * Use this class to generate a standards-compliant XML document, given simple

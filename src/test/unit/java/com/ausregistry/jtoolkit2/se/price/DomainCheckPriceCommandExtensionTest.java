@@ -24,7 +24,7 @@ public class DomainCheckPriceCommandExtensionTest {
 
         cmd.appendExtension(extension);
 
-        assertEquals(cmd.toXML(), "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+        assertEquals(cmd.toXML(), "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!--Produced with -->"
                 + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" "
                 + "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
                 + "xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">"
@@ -51,7 +51,7 @@ public class DomainCheckPriceCommandExtensionTest {
 
         cmd.appendExtension(extension);
 
-        assertEquals(cmd.toXML(), "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+        assertEquals(cmd.toXML(), "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!--Produced with -->"
                 + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" "
                 + "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
                 + "xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">"

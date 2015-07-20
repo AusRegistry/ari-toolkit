@@ -1,13 +1,13 @@
 package com.ausregistry.jtoolkit2.se;
 
-import com.ausregistry.jtoolkit2.xml.XMLDocument;
-
 import javax.xml.xpath.XPathExpressionException;
+
+import com.ausregistry.jtoolkit2.xml.XMLDocument;
 
 /**
  * Extension of the domain mapping of the EPP info response, as defined in
  * RFC5730 and RFC5731, to .au domain names, the specification of which is in
- * the XML schema definition urn:X-au:params:xml:ns:auext-1.1.
+ * the XML schema definition urn:X-au:params:xml:ns:auext-1.2.
  * Instances of this class provide an interface to access all of the
  * information available through EPP for a .au domain name.
  * This relies on the instance first being initialised by a suitable EPP domain

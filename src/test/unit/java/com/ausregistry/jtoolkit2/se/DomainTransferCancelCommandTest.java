@@ -22,7 +22,8 @@ public class DomainTransferCancelCommandTest {
 
     @Test
     public void testDomainTransferCancelCommandWithNameOnly() throws SAXException {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" "
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!--Produced with -->"
+                + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" "
                 + "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
                 + "xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">"
                 + "<command><transfer op=\"cancel\">"
@@ -37,7 +38,8 @@ public class DomainTransferCancelCommandTest {
 
     @Test
     public void testDomainTransferCancelCommandWithNameAndPassword() throws SAXException {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" "
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!--Produced with -->"
+                + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" "
                 + "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
                 + "xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">"
                 + "<command><transfer op=\"cancel\">"
@@ -53,7 +55,8 @@ public class DomainTransferCancelCommandTest {
 
     @Test
     public void testDomainTransferCancelCommandWithNameRoidAndPassword() throws SAXException {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" "
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!--Produced with -->"
+                + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" "
                 + "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
                 + "xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">"
                 + "<command><transfer op=\"cancel\">"

@@ -40,7 +40,7 @@ public class DomainRegistrantTransferCommandTest {
 
         String xml = command.toXML();
         assertEquals(
-                "<?xml version=\"1.0\" encoding=\"UTF-8\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><extension><command xmlns=\"urn:X-ar:params:xml:ns:registrant-1.0\"><registrantTransfer><name>jtkutest.com.ae</name><curExpDate>" +
+                "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!--Produced with --><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><extension><command xmlns=\"urn:X-ar:params:xml:ns:registrant-1.0\"><registrantTransfer><name>jtkutest.com.ae</name><curExpDate>" +
                 EPPDateFormatter.toXSDate(curExpDate) +
                 "</curExpDate><kvlist xmlns=\"urn:X-ar:params:xml:ns:kv-1.0\" name=\"au\"><item key=\"eligibilityIDType\">Trademark</item><item key=\"eligibilityIDValue\">1231239523</item><item key=\"eligibilityName\">Blah</item><item key=\"eligibilityType\">Trademark</item><item key=\"policyReason\">1</item><item key=\"registrantIDType\">Trade License</item><item key=\"registrantIDValue\">01241326211</item><item key=\"registrantName\">AusRegistry</item></kvlist><explanation>testing</explanation></registrantTransfer><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></extension></epp>"
                 , xml);
@@ -54,7 +54,7 @@ public class DomainRegistrantTransferCommandTest {
 
         String xml = command.toXML();
         assertEquals(
-                "<?xml version=\"1.0\" encoding=\"UTF-8\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><extension><command xmlns=\"urn:X-ar:params:xml:ns:registrant-1.0\"><registrantTransfer><name>jtkutest.com.ae</name><curExpDate>" +
+                "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!--Produced with --><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><extension><command xmlns=\"urn:X-ar:params:xml:ns:registrant-1.0\"><registrantTransfer><name>jtkutest.com.ae</name><curExpDate>" +
                 EPPDateFormatter.toXSDate(curExpDate) +
                 "</curExpDate><period unit=\"y\">2</period><kvlist xmlns=\"urn:X-ar:params:xml:ns:kv-1.0\" name=\"au\"><item key=\"eligibilityIDType\">Trademark</item><item key=\"eligibilityIDValue\">1231239523</item><item key=\"eligibilityName\">Blah</item><item key=\"eligibilityType\">Trademark</item><item key=\"policyReason\">1</item><item key=\"registrantIDType\">Trade License</item><item key=\"registrantIDValue\">01241326211</item><item key=\"registrantName\">AusRegistry</item></kvlist><explanation>testing</explanation></registrantTransfer><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></extension></epp>"
                 , xml);

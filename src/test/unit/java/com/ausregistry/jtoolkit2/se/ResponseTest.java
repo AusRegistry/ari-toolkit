@@ -1,17 +1,14 @@
 package com.ausregistry.jtoolkit2.se;
 
+import static org.junit.Assert.assertEquals;
+
 import com.ausregistry.jtoolkit2.Timer;
-
-import static org.junit.Assert.*;
-
-import org.junit.Before;
-import org.junit.Test;
-
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 import com.ausregistry.jtoolkit2.xml.XMLParser;
+import org.junit.Before;
+import org.junit.Test;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class ResponseTest {
     private static final String XML1 = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><response><result code=\"1500\"><msg>Command completed successfully; ending session</msg></result><trID><clTRID>TESTER1.20070101.010101.1</clTRID><svTRID>32161187</svTRID></trID></response></epp>";

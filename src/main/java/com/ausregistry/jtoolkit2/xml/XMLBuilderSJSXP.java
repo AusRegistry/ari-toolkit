@@ -53,8 +53,11 @@ public final class XMLBuilderSJSXP implements XMLBuilder {
         enc = encoding;
     }
 
+    private final Package classPackage;
+
     {
-        pname = getClass().getPackage().getName();
+        classPackage = getClass().getPackage();
+        pname = classPackage.getName();
         namespaceContext = new NamespaceContextImpl();
         bufferStream = new ByteArrayOutputStream(BUFFER_SIZE);
     }
@@ -85,6 +88,7 @@ public final class XMLBuilderSJSXP implements XMLBuilder {
     public String toXML(Element root, String encoding, String version) {
         try {
             writer.writeStartDocument(encoding, version);
+            writer.writeComment("Produced with " + getToolkitVersion());
             dfs(root);
             writer.flush();
         } catch (XMLStreamException xse) {
@@ -178,4 +182,14 @@ public final class XMLBuilderSJSXP implements XMLBuilder {
             writer.writeEndElement();
         }
     }
+
+    private String getToolkitVersion() {
+        String specificationTitle = classPackage.getSpecificationTitle();
+        if (specificationTitle != null) {
+            return specificationTitle + " " + classPackage.getSpecificationVersion();
+        } else {
+            return "";
+        }
+    }
+
 }

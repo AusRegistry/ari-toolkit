@@ -40,7 +40,7 @@ public final class HostInfoCommandTest {
 
     private static String getInfoCommandExpectedXml(final String hostName) {
         final StringBuilder result = new StringBuilder();
-        result.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+        result.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?><!--Produced with -->");
         result.append("<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\"");
         result.append(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"");
         result.append(" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">");

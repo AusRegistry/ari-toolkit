@@ -50,10 +50,10 @@ public class XMLDocument {
      * @return the XML
      */
     public String getSourceXMLString() {
-		return sourceXMLString;
-	}
+        return sourceXMLString;
+    }
 
-	/**
+    /**
      * Create an XMLDocument rooted at the given element.
      *
      * @param root The root element of the XML document.
@@ -68,15 +68,15 @@ public class XMLDocument {
      *
      * @return the string representation the document
      */
-	@Override
+    @Override
     public String toString() {
         XMLWriter writer = XMLWriter.newInstance();
         writer.setRoot(root);
-		try {
-			return writer.toXML();
-		} catch (SAXException saxe) {
-			return "";
-		}
+        try {
+            return writer.toXML();
+        } catch (SAXException saxe) {
+            return "";
+        }
     }
 
     /**
@@ -104,8 +104,7 @@ public class XMLDocument {
         return getNodeValue(query, root);
     }
 
-    private String getNodeValue(String query, Node qRoot)
-            throws XPathExpressionException {
+    private String getNodeValue(String query, Node qRoot) throws XPathExpressionException {
 
         String countStr = xpath.evaluate("count(" + query + ")", qRoot);
         if (countStr.length() == 0 || Integer.valueOf(countStr) == 0) {
@@ -127,8 +126,7 @@ public class XMLDocument {
         return getNodeName(query, root);
     }
 
-    private String getNodeName(String query, Node qRoot)
-            throws XPathExpressionException {
+    private String getNodeName(String query, Node qRoot) throws XPathExpressionException {
 
         Node node = (Node) xpath.evaluate(query, qRoot, XPathConstants.NODE);
         if (node != null) {
@@ -150,8 +148,7 @@ public class XMLDocument {
         return getChildNames(query, root);
     }
 
-    private String[] getChildNames(String query, Node qRoot)
-            throws XPathExpressionException {
+    private String[] getChildNames(String query, Node qRoot) throws XPathExpressionException {
 
         String[] names;
 
@@ -177,12 +174,10 @@ public class XMLDocument {
      * @throws XPathExpressionException the XPath expression exception
      */
     public String[] getNodeValues(String query) throws XPathExpressionException {
-
         return getNodeValues(query, root);
     }
 
-    private String[] getNodeValues(String query, Node qRoot)
-            throws XPathExpressionException {
+    private String[] getNodeValues(String query, Node qRoot) throws XPathExpressionException {
 
         String[] result;
 
@@ -210,11 +205,9 @@ public class XMLDocument {
         return getElements(query, root);
     }
 
-    private NodeList getElements(String query, Node qRoot)
-            throws XPathExpressionException {
+    private NodeList getElements(String query, Node qRoot) throws XPathExpressionException {
 
-        NodeList nodes = (NodeList) xpath.evaluate(query, qRoot,
-                XPathConstants.NODESET);
+        NodeList nodes = (NodeList) xpath.evaluate(query, qRoot, XPathConstants.NODESET);
 
         if (nodes != null && nodes.getLength() > 0) {
             return nodes;
@@ -231,9 +224,6 @@ public class XMLDocument {
      * @throws XPathExpressionException the XPath expression exception
      */
     public Node getElement(String query) throws XPathExpressionException {
-
-        Node node = (Node) xpath.evaluate(query, root, XPathConstants.NODE);
-
-        return node;
+        return (Node) xpath.evaluate(query, root, XPathConstants.NODE);
     }
 }

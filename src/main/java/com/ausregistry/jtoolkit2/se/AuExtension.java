@@ -20,7 +20,7 @@ class AuExtension implements Extension {
 	 * Get the globally unique namespace URI which identifies this extension.
 	 */
 	public String getURI() {
-		return "urn:X-au:params:xml:ns:auext-1.1";
+		return "urn:X-au:params:xml:ns:auext-1.2";
 	}
 
 	/**
@@ -28,7 +28,7 @@ class AuExtension implements Extension {
 	 * element instances using this extension.
 	 */
 	public String getSchemaLocation() {
-		return "urn:X-au:params:xml:ns:auext-1.1 auext-1.1.xsd";
+		return "urn:X-au:params:xml:ns:auext-1.2 auext-1.2.xsd";
 	}
 }
 

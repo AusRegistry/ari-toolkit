@@ -120,6 +120,15 @@ task wrapper(type: Wrapper) {
     gradleVersion = "$gradleWrapperVersion"
 }
 
+jar {
+    manifest {
+        attributes('Specification-Title': 'The DNRS Registry Java Toolkit',
+        'Specification-Version': "${version}",
+        'Implementation-Version': "${version}",
+        "Implementation-Timestamp": new Date())
+    }
+}
+
 task sourcesJar(type: Jar, dependsOn:classes) {
     classifier = 'sources'
     from sourceSets.main.allSource

@@ -12,7 +12,7 @@ import com.ausregistry.jtoolkit2.se.DomainUpdateCommand;
 
 public class DomainUpdateVariantCommandExtensionV1_1Test {
 
-    private final static String DOMAIN_UPDATE_VARIANT_ADD_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+    private final static String DOMAIN_UPDATE_VARIANT_ADD_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!--Produced with -->"
             + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
             + "xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">"
             + "<command>"
@@ -33,7 +33,7 @@ public class DomainUpdateVariantCommandExtensionV1_1Test {
             + "</command>"
             + "</epp>";
 
-    private final static String DOMAIN_UPDATE_VARIANT_REM_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+    private final static String DOMAIN_UPDATE_VARIANT_REM_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!--Produced with -->"
             + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
             + "xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">"
             + "<command>"
@@ -54,7 +54,7 @@ public class DomainUpdateVariantCommandExtensionV1_1Test {
             + "</command>"
             + "</epp>";
 
-    private final static String DOMAIN_UPDATE_VARIANT_COMPO_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+    private final static String DOMAIN_UPDATE_VARIANT_COMPO_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!--Produced with -->"
             + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
             + "xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">"
             + "<command>"
