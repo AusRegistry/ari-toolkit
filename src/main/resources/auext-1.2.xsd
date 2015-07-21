@@ -127,7 +127,6 @@
     <simpleType name="policyNumType">
         <restriction base="integer">
             <minInclusive value="1"/>
-            <maxInclusive value="106"/>
         </restriction>
     </simpleType>
 
