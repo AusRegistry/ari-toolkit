@@ -40,8 +40,22 @@
             <element name="name" type="eppcom:labelType" minOccurs="1"/>
             <element name="curExpDate" type="date" minOccurs="1"/>
             <element name="period" type="domain:periodType" minOccurs="0"/>
-            <element name="auProperties" type="auext:auPropertiesType" minOccurs="1"/>
+            <element name="auProperties" type="auDomain:auPropertiesType" minOccurs="1"/>
             <element name="explanation" type="auext:explanationType" minOccurs="1"/>
+        </sequence>
+    </complexType>
+
+    <!--
+        the .au extension domain properties
+    -->
+    <complexType name="auPropertiesType">
+        <sequence>
+            <element name="registrantName" type="eppcom:labelType" minOccurs="1"/>
+            <element name="registrantID" type="auext:registrantIDType" minOccurs="0"/>
+            <element name="eligibilityType" type="eppcom:labelType" minOccurs="1"/>
+            <element name="eligibilityName" type="eppcom:labelType" minOccurs="0"/>
+            <element name="eligibilityID" type="auext:eligibilityIDType" minOccurs="0"/>
+            <element name="policyReason" type="auext:policyNumType" minOccurs="1"/>
         </sequence>
     </complexType>
 
