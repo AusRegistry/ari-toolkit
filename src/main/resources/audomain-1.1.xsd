@@ -1,72 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema targetNamespace="urn:X-au:params:xml:ns:audomain-1.1"
-	xmlns:auDomain="urn:X-au:params:xml:ns:audomain-1.1"
-	xmlns:eppcom="urn:ietf:params:xml:ns:eppcom-1.0"
-    xmlns:domain="urn:ietf:params:xml:ns:domain-1.0"
-	xmlns:auext="urn:X-au:params:xml:ns:auext-1.2"
-	xmlns="http://www.w3.org/2001/XMLSchema"
-	elementFormDefault="qualified">
+        xmlns:auDomain="urn:X-au:params:xml:ns:audomain-1.1"
+        xmlns:eppcom="urn:ietf:params:xml:ns:eppcom-1.0"
+        xmlns:domain="urn:ietf:params:xml:ns:domain-1.0"
+        xmlns:auext="urn:X-au:params:xml:ns:auext-1.2"
+        xmlns="http://www.w3.org/2001/XMLSchema"
+        elementFormDefault="qualified">
 
-	<!--
-		Import common element types.
-	-->
-	<import namespace="urn:ietf:params:xml:ns:eppcom-1.0" schemaLocation="eppcom-1.0.xsd"/>
-	<import namespace="urn:ietf:params:xml:ns:domain-1.0" schemaLocation="domain-1.0.xsd"/>
-	<import namespace="urn:X-au:params:xml:ns:auext-1.2" schemaLocation="auext-1.2.xsd"/>
+    <!--
+        Import common element types.
+    -->
+    <import namespace="urn:ietf:params:xml:ns:eppcom-1.0" schemaLocation="eppcom-1.0.xsd"/>
+    <import namespace="urn:ietf:params:xml:ns:domain-1.0" schemaLocation="domain-1.0.xsd"/>
+    <import namespace="urn:X-au:params:xml:ns:auext-1.2" schemaLocation="auext-1.2.xsd"/>
 
-	<annotation>
-		<documentation>
-			.au Domain Extensions to the Extensible
-			Provisioning Protocol v1.0. schema.
-		</documentation>
-	</annotation>
+    <annotation>
+        <documentation>
+            .au Domain Extensions to the Extensible
+            Provisioning Protocol v1.0. schema.
+        </documentation>
+    </annotation>
 
-	<!--
-		Protocol extension framework command elements.
-	-->
-	<element name="registrantTransfer" type="auDomain:registrantTransferType"/>
+    <!--
+        Protocol extension framework command elements.
+    -->
+    <element name="registrantTransfer" type="auDomain:registrantTransferType"/>
 
-	<!--
-		Protocol extension framework response elements.
-	-->
-	<element name="rtrnData" type="auDomain:rtrnDataType"/>
+    <!--
+        Protocol extension framework response elements.
+    -->
+    <element name="rtrnData" type="auDomain:rtrnDataType"/>
 
-	<!--
-		Type definitions.
-	-->
+    <!--
+        Type definitions.
+    -->
 
-	<complexType name="registrantTransferType">
-		<sequence>
-			<element name="name" type="eppcom:labelType" minOccurs="1"/>
-			<element name="curExpDate" type="date" minOccurs="1"/>
-			<element name="period" type="domain:periodType" minOccurs="0"/>
-			<element name="auProperties" type="auDomain:auPropertiesType" minOccurs="1"/>
-			<element name="explanation" type="auext:explanationType" minOccurs="1"/>
-		</sequence>
-	</complexType>
+    <complexType name="registrantTransferType">
+        <sequence>
+            <element name="name" type="eppcom:labelType" minOccurs="1"/>
+            <element name="curExpDate" type="date" minOccurs="1"/>
+            <element name="period" type="domain:periodType" minOccurs="0"/>
+            <element name="auProperties" type="auext:auPropertiesType" minOccurs="1"/>
+            <element name="explanation" type="auext:explanationType" minOccurs="1"/>
+        </sequence>
+    </complexType>
 
-	<!--
-		the .au extension domain properties
-	-->
-	<complexType name="auPropertiesType">
-		<sequence>
-			<element name="registrantName" type="eppcom:labelType" minOccurs="1"/>
-			<element name="registrantID" type="auext:registrantIDType" minOccurs="0"/>
-			<element name="eligibilityType" type="eppcom:labelType" minOccurs="1"/>
-			<element name="eligibilityName" type="eppcom:labelType" minOccurs="0"/>
-			<element name="eligibilityID" type="auext:eligibilityIDType" minOccurs="0"/>
-			<element name="policyReason" type="auext:policyNumType" minOccurs="1"/>
-		</sequence>
-	</complexType>
+    <complexType name="rtrnDataType">
+        <sequence>
+            <element name="name" type="eppcom:labelType" minOccurs="1"/>
+            <element name="exDate" type="dateTime" minOccurs="1"/>
+        </sequence>
+    </complexType>
 
-	<complexType name="rtrnDataType">
-		<sequence>
-			<element name="name" type="eppcom:labelType" minOccurs="1"/>
-			<element name="exDate" type="dateTime" minOccurs="1"/>
-		</sequence>
-	</complexType>
-
-	<!--
-		End of schema.
-	-->
+    <!--
+        End of schema.
+    -->
 </schema>
