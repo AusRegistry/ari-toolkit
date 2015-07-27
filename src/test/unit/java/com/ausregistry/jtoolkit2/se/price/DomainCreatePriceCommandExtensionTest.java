@@ -13,7 +13,7 @@ import com.ausregistry.jtoolkit2.se.DomainCreateCommand;
 
 public class DomainCreatePriceCommandExtensionTest {
 
-    private final static String DOMAIN_CREATE_ACK_NO_PRICE_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!--Produced with -->"
+    private final static String DOMAIN_CREATE_ACK_NO_PRICE_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
             + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
             + "xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">"
             + "<command>"
@@ -35,7 +35,7 @@ public class DomainCreatePriceCommandExtensionTest {
             + "</command>"
             + "</epp>";
 
-    private final static String DOMAIN_CREATE_ACK_CREATE_PRICE_ONLY_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!--Produced with -->"
+    private final static String DOMAIN_CREATE_ACK_CREATE_PRICE_ONLY_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
             + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
             + "xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">"
             + "<command>"
@@ -59,7 +59,7 @@ public class DomainCreatePriceCommandExtensionTest {
             + "</command>"
             + "</epp>";
 
-    private final static String DOMAIN_CREATE_ACK_RENEW_PRICE_ONLY_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!--Produced with -->"
+    private final static String DOMAIN_CREATE_ACK_RENEW_PRICE_ONLY_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
             + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
             + "xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">"
             + "<command>"
@@ -83,7 +83,7 @@ public class DomainCreatePriceCommandExtensionTest {
             + "</command>"
             + "</epp>";
 
-    private final static String DOMAIN_CREATE_ACK_BOTH_PRICE_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!--Produced with -->"
+    private final static String DOMAIN_CREATE_ACK_BOTH_PRICE_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
             + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
             + "xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">"
             + "<command>"

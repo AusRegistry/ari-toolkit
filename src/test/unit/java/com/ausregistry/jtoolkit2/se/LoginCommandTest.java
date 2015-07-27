@@ -39,7 +39,7 @@ public class LoginCommandTest {
         Command cmd = new LoginCommand("JTKUTEST", "1234abcd!@#$JTK");
         try {
             String xml = cmd.toXML();
-            assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?><!--Produced with --><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><command><login><clID>JTKUTEST</clID><pw>1234abcd!@#$JTK</pw><options><version>1.0</version><lang>en</lang></options><svcs><objURI>urn:ietf:params:xml:ns:domain-1.0</objURI><objURI>urn:ietf:params:xml:ns:host-1.0</objURI><objURI>urn:ietf:params:xml:ns:contact-1.0</objURI></svcs></login><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>", xml);
+            assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><command><login><clID>JTKUTEST</clID><pw>1234abcd!@#$JTK</pw><options><version>1.0</version><lang>en</lang></options><svcs><objURI>urn:ietf:params:xml:ns:domain-1.0</objURI><objURI>urn:ietf:params:xml:ns:host-1.0</objURI><objURI>urn:ietf:params:xml:ns:contact-1.0</objURI></svcs></login><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>", xml);
         } catch (SAXException saxe) {
             fail(saxe.getMessage());
         }
@@ -51,7 +51,7 @@ public class LoginCommandTest {
                 objURIs, extURIs);
         try {
             String xml = cmd.toXML();
-            assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?><!--Produced with --><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><command><login><clID>JTKUTEST</clID><pw>1234abcd!@#$JTK</pw><options><version>1.0</version><lang>en</lang></options><svcs><objURI>urn:ietf:params:xml:ns:domain-1.0</objURI><objURI>urn:ietf:params:xml:ns:host-1.0</objURI><objURI>urn:ietf:params:xml:ns:contact-1.0</objURI><svcExtension><extURI>urn:au:params:xml:ns:auext-1.0</extURI></svcExtension></svcs></login><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>", xml);
+            assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><command><login><clID>JTKUTEST</clID><pw>1234abcd!@#$JTK</pw><options><version>1.0</version><lang>en</lang></options><svcs><objURI>urn:ietf:params:xml:ns:domain-1.0</objURI><objURI>urn:ietf:params:xml:ns:host-1.0</objURI><objURI>urn:ietf:params:xml:ns:contact-1.0</objURI><svcExtension><extURI>urn:au:params:xml:ns:auext-1.0</extURI></svcExtension></svcs></login><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>", xml);
         } catch (SAXException saxe) {
             fail(saxe.getMessage());
         }
@@ -63,7 +63,7 @@ public class LoginCommandTest {
                 objURIs, extURIs);
         try {
             String xml = cmd.toXML();
-            assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?><!--Produced with --><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><command><login><clID>JTKUTEST</clID><pw>1234abcd!@#$JTK</pw><options><version>1.0</version><lang>fr</lang></options><svcs><objURI>urn:ietf:params:xml:ns:domain-1.0</objURI><objURI>urn:ietf:params:xml:ns:host-1.0</objURI><objURI>urn:ietf:params:xml:ns:contact-1.0</objURI><svcExtension><extURI>urn:au:params:xml:ns:auext-1.0</extURI></svcExtension></svcs></login><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>", xml);
+            assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><command><login><clID>JTKUTEST</clID><pw>1234abcd!@#$JTK</pw><options><version>1.0</version><lang>fr</lang></options><svcs><objURI>urn:ietf:params:xml:ns:domain-1.0</objURI><objURI>urn:ietf:params:xml:ns:host-1.0</objURI><objURI>urn:ietf:params:xml:ns:contact-1.0</objURI><svcExtension><extURI>urn:au:params:xml:ns:auext-1.0</extURI></svcExtension></svcs></login><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>", xml);
         } catch (SAXException saxe) {
             fail(saxe.getMessage());
         }
@@ -75,7 +75,7 @@ public class LoginCommandTest {
                 "n(-w18PW*", "1.0", "fr", objURIs, extURIs);
         try {
             String xml = cmd.toXML();
-            assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?><!--Produced with --><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><command><login><clID>JTKUTEST</clID><pw>1234abcd!@#$JTK</pw><newPW>n(-w18PW*</newPW><options><version>1.0</version><lang>fr</lang></options><svcs><objURI>urn:ietf:params:xml:ns:domain-1.0</objURI><objURI>urn:ietf:params:xml:ns:host-1.0</objURI><objURI>urn:ietf:params:xml:ns:contact-1.0</objURI><svcExtension><extURI>urn:au:params:xml:ns:auext-1.0</extURI></svcExtension></svcs></login><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>", xml);
+            assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><command><login><clID>JTKUTEST</clID><pw>1234abcd!@#$JTK</pw><newPW>n(-w18PW*</newPW><options><version>1.0</version><lang>fr</lang></options><svcs><objURI>urn:ietf:params:xml:ns:domain-1.0</objURI><objURI>urn:ietf:params:xml:ns:host-1.0</objURI><objURI>urn:ietf:params:xml:ns:contact-1.0</objURI><svcExtension><extURI>urn:au:params:xml:ns:auext-1.0</extURI></svcExtension></svcs></login><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>", xml);
         } catch (SAXException saxe) {
             fail(saxe.getMessage());
         }
@@ -92,7 +92,7 @@ public class LoginCommandTest {
                 objURIs, secDnsExtURIs);
         try {
             String xml = cmd.toXML();
-            assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?><!--Produced with --><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><command><login><clID>JTKUTEST</clID><pw>1234abcd!@#$JTK</pw><options><version>1.0</version><lang>en</lang></options><svcs><objURI>urn:ietf:params:xml:ns:domain-1.0</objURI><objURI>urn:ietf:params:xml:ns:host-1.0</objURI><objURI>urn:ietf:params:xml:ns:contact-1.0</objURI><svcExtension><extURI>urn:ietf:params:xml:ns:secDNS-1.1</extURI></svcExtension></svcs></login><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>", xml);
+            assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><command><login><clID>JTKUTEST</clID><pw>1234abcd!@#$JTK</pw><options><version>1.0</version><lang>en</lang></options><svcs><objURI>urn:ietf:params:xml:ns:domain-1.0</objURI><objURI>urn:ietf:params:xml:ns:host-1.0</objURI><objURI>urn:ietf:params:xml:ns:contact-1.0</objURI><svcExtension><extURI>urn:ietf:params:xml:ns:secDNS-1.1</extURI></svcExtension></svcs></login><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>", xml);
         } catch (SAXException saxe) {
             fail(saxe.getMessage());
         }

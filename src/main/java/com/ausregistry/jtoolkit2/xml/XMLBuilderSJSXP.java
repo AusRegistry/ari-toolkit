@@ -88,7 +88,10 @@ public final class XMLBuilderSJSXP implements XMLBuilder {
     public String toXML(Element root, String encoding, String version) {
         try {
             writer.writeStartDocument(encoding, version);
-            writer.writeComment("Produced with " + getToolkitVersion());
+            String toolkitVersion = getToolkitVersion();
+            if (!toolkitVersion.isEmpty()) {
+                writer.writeComment(toolkitVersion);
+            }
             dfs(root);
             writer.flush();
         } catch (XMLStreamException xse) {
@@ -186,7 +189,7 @@ public final class XMLBuilderSJSXP implements XMLBuilder {
     private String getToolkitVersion() {
         String specificationTitle = classPackage.getSpecificationTitle();
         if (specificationTitle != null) {
-            return specificationTitle + " " + classPackage.getSpecificationVersion();
+            return specificationTitle + " v" + classPackage.getSpecificationVersion();
         } else {
             return "";
         }
