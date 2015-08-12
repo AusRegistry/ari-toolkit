@@ -119,10 +119,7 @@
     </complexType>
 
     <!--
-        policy numbers can be allocated up to 106. Less than the max number
-        of policy values may be valid in the .au registry. This will be handled
-        by registry command validation. (this is done so that a new schema does
-        not have to be released each time the policy reasons are modified)
+        policyNumType is used for policy reason
     -->
     <simpleType name="policyNumType">
         <restriction base="integer">
