@@ -55,7 +55,7 @@
             <element name="eligibilityType" type="eppcom:labelType" minOccurs="1"/>
             <element name="eligibilityName" type="eppcom:labelType" minOccurs="0"/>
             <element name="eligibilityID" type="auext:eligibilityIDType" minOccurs="0"/>
-            <element name="policyReason" type="auext:policyNumType" minOccurs="1"/>
+            <element name="policyReason" type="integer" minOccurs="1"/>
         </sequence>
     </complexType>
 
