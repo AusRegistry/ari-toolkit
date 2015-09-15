@@ -18,12 +18,12 @@ ext {
     junitVersion = '4.11'
     artifactsDir = "$projectDir/artifacts"
     artifactGroupId = 'au.com.ausregistry'
-    gradleWrapperVersion = '2.5'
+    gradleWrapperVersion = '2.7'
     pagesProjectDir = "$projectDir/../ari-toolkit-gitpages"
 
     commonsCodecVersion          = '1.10'
     simpleFrameworkVersion       = '5.1.6'
-    httpClientVersion            = '4.4.1'
+    httpClientVersion            = '4.5'
     powerMockVersion             = '1.6.2'
     hamcrestVersion              = '1.3'
     ariMockHttpServerVersion     = '1.0.2'
