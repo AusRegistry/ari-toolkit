@@ -1,7 +1,9 @@
 package com.ausregistry.jtoolkit2.se.generic;
 
 import static org.junit.Assert.assertEquals;
-import junit.framework.Assert;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -32,8 +34,8 @@ public class DomainInfoKVResponseExtensionTest {
         final XMLDocument doc = xmlParser.parse(xml);
         response.fromXML(doc);
         
-        Assert.assertTrue(kvExtension.isInitialised());
-        Assert.assertNull(kvExtension.getItem("nonExistentListName", "registrantIDValue"));
+        assertTrue(kvExtension.isInitialised());
+        assertNull(kvExtension.getItem("nonExistentListName", "registrantIDValue"));
     }
 
     @Test
@@ -48,8 +50,8 @@ public class DomainInfoKVResponseExtensionTest {
         final XMLDocument doc = xmlParser.parse(xml);
         response.fromXML(doc);
         
-        Assert.assertTrue(kvExtension.isInitialised());
-        Assert.assertNull(kvExtension.getItem("kvListTwo", "nonExistentItem"));
+        assertTrue(kvExtension.isInitialised());
+        assertNull(kvExtension.getItem("kvListTwo", "nonExistentItem"));
     }
 
     @Test
@@ -64,7 +66,7 @@ public class DomainInfoKVResponseExtensionTest {
         final XMLDocument doc = xmlParser.parse(xml);
         response.fromXML(doc);
         
-        Assert.assertFalse(kvExtension.isInitialised());
+        assertFalse(kvExtension.isInitialised());
     }
 
 

@@ -1,12 +1,15 @@
 package com.ausregistry.jtoolkit2.se.app;
 
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Before;
+import org.junit.Test;
+
 import com.ausregistry.jtoolkit2.se.DomainCreateResponse;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 import com.ausregistry.jtoolkit2.xml.XMLParser;
-import junit.framework.Assert;
-import org.junit.Before;
-import org.junit.Test;
 
 public class DomainCreateApplicationResponseExtensionTest {
 
@@ -55,14 +58,14 @@ public class DomainCreateApplicationResponseExtensionTest {
 
     @Test
     public void shouldGetId() {
-        Assert.assertTrue(responseExtension.isInitialised());
-        Assert.assertEquals(responseExtension.getId(), "ACF7B10EBC3284E34B4A7C350DA27EA7B-ARI");
+        assertTrue(responseExtension.isInitialised());
+        assertEquals(responseExtension.getId(), "ACF7B10EBC3284E34B4A7C350DA27EA7B-ARI");
     }
 
     @Test
     public void shouldGetPhase() {
-        Assert.assertTrue(responseExtension.isInitialised());
-        Assert.assertEquals(responseExtension.getPhase(), "sunrise");
+        assertTrue(responseExtension.isInitialised());
+        assertEquals(responseExtension.getPhase(), "sunrise");
 
     }
 

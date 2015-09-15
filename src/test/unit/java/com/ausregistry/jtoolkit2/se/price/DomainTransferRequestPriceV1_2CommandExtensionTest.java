@@ -1,14 +1,15 @@
 package com.ausregistry.jtoolkit2.se.price;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
+
+import org.junit.Before;
+import org.junit.Test;
 
 import com.ausregistry.jtoolkit2.Timer;
 import com.ausregistry.jtoolkit2.se.CLTRID;
 import com.ausregistry.jtoolkit2.se.DomainTransferRequestCommand;
-import org.junit.Before;
-import org.junit.Test;
 
 public class DomainTransferRequestPriceV1_2CommandExtensionTest {
 

@@ -1,6 +1,6 @@
 package com.ausregistry.jtoolkit2.se.price;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
