@@ -37,7 +37,9 @@ public enum ExtendedObjectType implements ObjectType {
     /** References the fund info XML namespace and schema file */
     FUND ("fund", "urn:ar:params:xml:ns:fund-1.0", "fund-1.0.xsd"),
     /** References the Block XML namespace and schema file */
-    BLOCK("block", "urn:ar:params:xml:ns:block-1.0", "block-1.0.xsd", "id");
+    BLOCK("block", "urn:ar:params:xml:ns:block-1.0", "block-1.0.xsd", "id"),
+    /** References the Launch XML namespace and schema file */
+    LAUNCH("launch", "urn:ietf:params:xml:ns:launch-1.0", "launch-1.0.xsd", "name");
 
     private final String prefix, uri, schemaDefinition, identType;
 
