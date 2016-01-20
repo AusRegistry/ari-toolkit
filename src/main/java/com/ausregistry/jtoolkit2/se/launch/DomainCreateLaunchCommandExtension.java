@@ -25,7 +25,6 @@ public class DomainCreateLaunchCommandExtension implements CommandExtension {
     private static final long serialVersionUID = 5202343696850193788L;
 
     private String phaseName;
-    private String applicationId;
     private String encodedSignedMarkData;
     private LaunchCreateType launchCreateType;
     private PhaseType phaseType;
