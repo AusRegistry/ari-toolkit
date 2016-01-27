@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<schema targetNamespace="urn:ietf:params:xml:ns:neulevel-1.0"
+        xmlns:neulevel="urn:ietf:params:xml:ns:neulevel-1.0"
+        xmlns="http://www.w3.org/2001/XMLSchema"
+        elementFormDefault="qualified">
+
+    <annotation>
+        <documentation>
+            Extensible Provisioning Protocol v1.0
+            NeuLevel extension schema.
+        </documentation>
+    </annotation>
+
+    <!--
+    NeuLevel extension type.
+    -->
+    <element name="extension" type="neulevel:neulevelExtensionType"/>
+
+    <complexType name="neulevelExtensionType">
+        <sequence>
+            <element name="unspec" type="neulevel:neulevelUnspecType" minOccurs="0"/>
+            <element name="genericNVPairs" type="neulevel:neulevelNVPairType" minOccurs="0"/>
+        </sequence>
+    </complexType>
+
+    <!--
+    NeuLevel extension type: string for name/value (for EPP-04 compatibility)
+    -->
+
+    <simpleType name="neulevelUnspecType">
+        <restriction base="normalizedString">
+        </restriction>
+    </simpleType>
+
+    <complexType name="neulevelNVPairType">
+        <sequence>
+            <element name="NVTuple" type="neulevel:NVType" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="NVType">
+        <simpleContent>
+            <extension base="string">
+                <attribute name="name" type="string" use="required"/>
+            </extension>
+        </simpleContent>
+    </complexType>
+
+    <!--
+    End of schema.
+    -->
+</schema>
