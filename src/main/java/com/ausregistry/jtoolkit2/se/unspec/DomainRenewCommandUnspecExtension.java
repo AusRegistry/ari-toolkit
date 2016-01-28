@@ -14,8 +14,6 @@ import org.w3c.dom.Element;
  * server should be handled by a Domain Renew Response.</p>
  *
  * @see DomainRenewCommand
- * @see <a href="http://ausregistry.github.io/doc/block-1.0/block-1.0.html">Block Extension Mapping for the
- * Extensible Provisioning Protocol (EPP)</a>
  */
 public class DomainRenewCommandUnspecExtension implements CommandExtension {
     private final RestoreReasonCode restoreReasonCode;
