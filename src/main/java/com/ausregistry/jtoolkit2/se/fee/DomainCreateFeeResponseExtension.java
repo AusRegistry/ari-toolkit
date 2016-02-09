@@ -20,7 +20,7 @@ import java.math.BigDecimal;
  *
  * @see DomainCreateCommand
  * @see DomainCreateResponse
- * @see <a href="http://tools.ietf.org/html/rfc3915">Domain Name Fee Extension
+ * @see <a href="https://tools.ietf.org/html/draft-brown-epp-fees-03">Domain Name Fee Extension
  * Mapping for the Extensible Provisioning Protocol (EPP)</a>
  */
 public final class DomainCreateFeeResponseExtension extends ResponseExtension {

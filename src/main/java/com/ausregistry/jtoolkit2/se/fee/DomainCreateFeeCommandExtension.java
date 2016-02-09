@@ -21,7 +21,7 @@ import java.math.BigDecimal;
  *
  * @see DomainCreateCommand
  * @see DomainCreateResponse
- * @see <a href="http://ausregistry.github.io/doc/fee-0.6/fee-0.6.html">Domain Name Fee Extension
+ * @see <a href="https://tools.ietf.org/html/draft-brown-epp-fees-03">Domain Name Fee Extension
  * Mapping for the Extensible Provisioning Protocol (EPP)</a>
  */
 public class DomainCreateFeeCommandExtension implements CommandExtension {

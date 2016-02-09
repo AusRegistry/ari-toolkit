@@ -43,7 +43,7 @@ public enum ExtendedObjectType implements ObjectType {
     /** References the Launch XML namespace and schema file */
     LAUNCH("launch", "urn:ietf:params:xml:ns:launch-1.0", "launch-1.0.xsd", "name"),
     /** References the Fee XML namespace and schema file */
-    FEE("launch", "urn:ietf:params:xml:ns:fee-0.6", "fee-0.6.xsd", "fee");
+    FEE("fee", "urn:ietf:params:xml:ns:fee-0.6", "fee-0.6.xsd", "fee");
 
     private final String prefix, uri, schemaDefinition, identType;
 
