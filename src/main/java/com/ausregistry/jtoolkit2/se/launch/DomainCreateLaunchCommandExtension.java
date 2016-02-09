@@ -1,5 +1,6 @@
 package com.ausregistry.jtoolkit2.se.launch;
 
+import com.ausregistry.jtoolkit2.EPPDateFormatter;
 import com.ausregistry.jtoolkit2.se.Command;
 import com.ausregistry.jtoolkit2.se.CommandExtension;
 import com.ausregistry.jtoolkit2.se.DomainCreateCommand;
@@ -9,10 +10,13 @@ import com.ausregistry.jtoolkit2.xml.NamespaceContextImpl;
 import com.ausregistry.jtoolkit2.xml.XMLWriter;
 import org.w3c.dom.Element;
 
+import java.util.GregorianCalendar;
+
 /**
  * <p>Extension for the EPP Domain Create command, representing the Registration
  * aspects of the Domain Name Launch extension.  The current implementation is to provide Domain Create functionality
- * using the Launch extension for a zone in First Come First Serve Sunrise phase.</p>
+ * using the Launch extension for registrations only, either in fcfs sunrise (requiring smd) or claims (requiring
+ * noticeID)</p>
  *
  *
  * @see DomainCreateCommand
@@ -28,6 +32,9 @@ public class DomainCreateLaunchCommandExtension implements CommandExtension {
     private String encodedSignedMarkData;
     private LaunchCreateType launchCreateType;
     private PhaseType phaseType;
+    private String noticeId;
+    private GregorianCalendar notAfterDateTime;
+    private GregorianCalendar acceptedDateTime;
 
     @Override
     public void addToCommand(Command command) {
@@ -36,15 +43,43 @@ public class DomainCreateLaunchCommandExtension implements CommandExtension {
         final Element createElement = xmlWriter.appendChild(extensionElement, "create",
                 ExtendedObjectType.LAUNCH.getURI());
         final Element phaseElement = xmlWriter.appendChild(createElement, "phase");
-        if(phaseName!=null){
-            phaseElement.setAttribute("name", phaseName);
-        }
-        final NamespaceContextImpl namespaceContext = new NamespaceContextImpl();
+
         createElement.setAttribute("type", launchCreateType.getCreateType());
         phaseElement.setTextContent(phaseType.getPhaseType());
-        xmlWriter.appendChild(createElement,"encodedSignedMark",namespaceContext.getNamespaceURI("smd"))
-                .setTextContent(encodedSignedMarkData);
 
+        if (phaseName != null){
+            phaseElement.setAttribute("name", phaseName);
+        }
+        if(noticeId != null){
+            appendClaimsNotice(xmlWriter, createElement);
+        }
+
+        final NamespaceContextImpl namespaceContext = new NamespaceContextImpl();
+        if (encodedSignedMarkData != null){
+            appendSignedMarkData(xmlWriter, createElement, namespaceContext);
+        }
+    }
+
+    private void appendSignedMarkData(XMLWriter xmlWriter, Element createElement, NamespaceContextImpl namespaceContext)
+    {
+            xmlWriter.appendChild(createElement,"encodedSignedMark",namespaceContext.getNamespaceURI("smd"))
+                    .setTextContent(encodedSignedMarkData);
+    }
+
+    private void appendClaimsNotice(XMLWriter xmlWriter, Element createElement) {
+        Element noticeElement = xmlWriter.appendChild(createElement, "notice");
+        xmlWriter.appendChild(noticeElement, "noticeID", ExtendedObjectType.LAUNCH.getURI())
+                    .setTextContent(noticeId);
+
+        if (notAfterDateTime != null) {
+            xmlWriter.appendChild(noticeElement, "notAfter", ExtendedObjectType.LAUNCH.getURI())
+                    .setTextContent(EPPDateFormatter.toXSDateTime(notAfterDateTime));
+        }
+
+        if (acceptedDateTime != null) {
+            xmlWriter.appendChild(noticeElement, "acceptedDate", ExtendedObjectType.LAUNCH.getURI())
+                    .setTextContent(EPPDateFormatter.toXSDateTime(acceptedDateTime));
+        }
     }
 
     public void setPhaseName(String phaseName) {
@@ -63,4 +98,15 @@ public class DomainCreateLaunchCommandExtension implements CommandExtension {
         this.launchCreateType = type;
     }
 
+    public void setNoticeId(String noticeId) {
+        this.noticeId = noticeId;
+    }
+
+    public void setNotAfterDateTime(GregorianCalendar notAfterDateTime) {
+        this.notAfterDateTime = notAfterDateTime;
+    }
+
+    public void setAcceptedDateTime(GregorianCalendar acceptedDateTime) {
+        this.acceptedDateTime = acceptedDateTime;
+    }
 }
