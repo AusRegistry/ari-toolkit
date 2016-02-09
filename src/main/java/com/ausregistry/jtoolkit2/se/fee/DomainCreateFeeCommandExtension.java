@@ -44,9 +44,7 @@ public class DomainCreateFeeCommandExtension implements CommandExtension {
         final Element createElement = xmlWriter.appendChild(extensionElement, "create",
                 ExtendedObjectType.FEE.getURI());
         xmlWriter.appendChild(createElement, "currency").setTextContent(currency);
-
-        Element feeElement = xmlWriter.appendChild(createElement, "fee");
-        feeElement.setTextContent(fee.toPlainString());
+        xmlWriter.appendChild(createElement, "fee").setTextContent(fee.toPlainString());
     }
 
 }
