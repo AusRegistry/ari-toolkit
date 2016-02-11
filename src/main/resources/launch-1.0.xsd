@@ -11,14 +11,9 @@
     <!--
     Import common element types.
     -->
-    <import namespace="urn:ietf:params:xml:ns:eppcom-1.0"
-            schemaLocation="eppcom-1.0.xsd"/>
-
-    <import namespace="urn:ietf:params:xml:ns:mark-1.0"
-            schemaLocation="mark-1.0.xsd"/>
-
-    <import namespace="urn:ietf:params:xml:ns:signedMark-1.0"
-            schemaLocation="signedMark-1.0.xsd"/>
+    <import namespace="urn:ietf:params:xml:ns:eppcom-1.0"/>
+    <import namespace="urn:ietf:params:xml:ns:mark-1.0"/>
+    <import namespace="urn:ietf:params:xml:ns:signedMark-1.0"/>
 
     <annotation>
         <documentation>
@@ -42,12 +37,16 @@
     -->
     <complexType name="idContainerType">
         <sequence>
-            <element name="phase" type="launch:phaseType"/>
-            <element name="applicationID" type="launch:applicationIDType"/>
+            <element name="phase"
+                     type="launch:phaseType"/>
+            <element name="applicationID"
+                     type="launch:applicationIDType"/>
         </sequence>
     </complexType>
 
     <!--
+
+
     Definition for application identifier
     -->
     <simpleType name="applicationIDType">
@@ -96,6 +95,8 @@
             <extension base="launch:codeValue">
                 <attribute name="validatorID"
                            type="launch:validatorIDType" use="optional"/>
+
+
             </extension>
         </simpleContent>
     </complexType>
@@ -144,6 +145,8 @@
 
     <!--
     Status type definition
+
+
     -->
     <complexType name="statusType">
         <simpleContent>
@@ -184,13 +187,16 @@
                 <element ref="smd:encodedSignedMark"
                          maxOccurs="unbounded"/>
             </choice>
-            <element name="notice" minOccurs="0"
-                     type="launch:createNoticeType"/>
+            <element name="notice"
+                     type="launch:createNoticeType"
+                     minOccurs="0" maxOccurs="unbounded"/>
         </sequence>
         <attribute name="type" type="launch:objectType"/>
     </complexType>
 
     <!--
+
+
     Type of launch object
     -->
     <simpleType name="objectType">
@@ -218,7 +224,8 @@
     -->
     <complexType name="checkType">
         <sequence>
-            <element name="phase" type="launch:phaseType"/>
+            <element name="phase" type="launch:phaseType"
+                     minOccurs="0"/>
         </sequence>
         <attribute name="type" type="launch:checkFormType"
                    default="claims"/>
@@ -233,8 +240,10 @@
         <restriction base="token">
             <enumeration value="claims"/>
             <enumeration value="avail"/>
+            <enumeration value="trademark"/>
         </restriction>
     </simpleType>
+
 
     <!--
     Child elements of info command.
@@ -262,7 +271,8 @@
      -->
     <complexType name="chkDataType">
         <sequence>
-            <element name="phase" type="launch:phaseType"/>
+            <element name="phase" type="launch:phaseType"
+                     minOccurs="0"/>
             <element name="cd" type="launch:cdType"
                      maxOccurs="unbounded"/>
         </sequence>
@@ -272,7 +282,7 @@
         <sequence>
             <element name="name" type="launch:cdNameType"/>
             <element name="claimKey" type="launch:claimKeyType"
-                     minOccurs="0"/>
+                     minOccurs="0" maxOccurs="unbounded"/>
         </sequence>
     </complexType>
 
@@ -283,6 +293,8 @@
                            use="required"/>
             </extension>
         </simpleContent>
+
+
     </complexType>
 
     <complexType name="claimKeyType">
