@@ -30,10 +30,11 @@ public class DomainCheckLaunchResponseExtension extends ResponseExtension {
 
     private static final long serialVersionUID = -1696245785014202518L;
 
-    private static final String CHKDATA_COUNT_EXPR = "count(" + EXTENSION_EXPR
-            + "/launch:chkData/*)";
-    private static final String CHKDATA_IND_EXPR = EXTENSION_EXPR
-            + "/launch:chkData/launch:cd[IDX]";
+    private static final String CHKDATA_COUNT_EXPR = "count(" + EXTENSION_EXPR + "/launch:chkData/*)";
+    private static final String CHKDATA_PHASE_EXPR = EXTENSION_EXPR + "/launch:chkData/launch:phase";
+    private static final String CHKDATA_PHASE_COUNT_EXPR = "count(" + CHKDATA_PHASE_EXPR + ")";
+    private static final String CHKDATA_PHASE_NAME_EXPR = "/@name";
+    private static final String CHKDATA_IND_EXPR = EXTENSION_EXPR + "/launch:chkData/launch:cd[IDX]";
     private static final String CHKDATA_DOMAIN_NAME_EXPR = "/launch:name/text()";
     private static final String CHKDATA_EXISTS_VALUE_EXPR = "/launch:name/@exists";
     private static final String CHKDATA_CLAIMS_KEY_EXPR = "/launch:claimKey/text()";
@@ -42,6 +43,8 @@ public class DomainCheckLaunchResponseExtension extends ResponseExtension {
     private Map<Long, ClaimsInfo> claimsIndexMap;
 
     private boolean isInitialised;
+    private String phaseType;
+    private String phaseName;
 
     public DomainCheckLaunchResponseExtension() {
         claimsNameMap = new HashMap<String, ClaimsInfo>();
@@ -54,7 +57,11 @@ public class DomainCheckLaunchResponseExtension extends ResponseExtension {
     @Override
     public final void fromXML(XMLDocument xmlDoc) throws XPathExpressionException {
         int cdCount = xmlDoc.getNodeCount(CHKDATA_COUNT_EXPR);
-        for (int i = 0; i < cdCount; i++) {
+        int phaseCount = xmlDoc.getNodeCount(CHKDATA_PHASE_COUNT_EXPR);
+        if (phaseCount > 0) {
+            processPhaseElement(xmlDoc);
+        }
+        for (int i = phaseCount; i < (cdCount - phaseCount); i++) {
             processElement(xmlDoc, i);
         }
         if (cdCount > 0) {
@@ -102,16 +109,34 @@ public class DomainCheckLaunchResponseExtension extends ResponseExtension {
         return claimsInfo == null ? null : claimsInfo.getClaimsKey();
     }
 
+    /**
+     * @return phaseType the phase in the original request
+    */
+    public String getPhaseType() {
+        return phaseType;
+    }
+
+    /**
+     * @return phaseName the name of the phase in the original request
+     */
+    public String getPhaseName() {
+        return phaseName;
+    }
+
     private void processElement(XMLDocument xmlDoc, int i) throws XPathExpressionException {
         String qry = replaceIndex(CHKDATA_IND_EXPR, i + 1);
         String domainName = xmlDoc.getNodeValue(qry + CHKDATA_DOMAIN_NAME_EXPR);
         String existsString = xmlDoc.getNodeValue(qry + CHKDATA_EXISTS_VALUE_EXPR);
-        boolean exists = (existsString.equals("1") ? true : false);
         String claimsKey = xmlDoc.getNodeValue(qry + CHKDATA_CLAIMS_KEY_EXPR);
 
-        ClaimsInfo claimsInfo = new ClaimsInfo(exists, claimsKey);
+        ClaimsInfo claimsInfo = new ClaimsInfo("1".equals(existsString), claimsKey);
         claimsNameMap.put(domainName, claimsInfo);
         claimsIndexMap.put(i + 1L, claimsInfo);
+    }
+
+    private void processPhaseElement(XMLDocument xmlDoc) throws XPathExpressionException {
+        phaseType = xmlDoc.getNodeValue(CHKDATA_PHASE_EXPR);
+        phaseName = xmlDoc.getNodeValue(CHKDATA_PHASE_EXPR + CHKDATA_PHASE_NAME_EXPR);
     }
 
 }
