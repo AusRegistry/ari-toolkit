@@ -62,7 +62,7 @@ public class DomainCheckLaunchResponseExtension extends ResponseExtension {
             processPhaseElement(xmlDoc);
         }
         for (int i = phaseCount; i < elementCount; i++) {
-            processElement(xmlDoc, i);
+            processElement(xmlDoc, i + 1 - phaseCount);
         }
         if (elementCount > 0) {
             isInitialised = true;
@@ -131,7 +131,7 @@ public class DomainCheckLaunchResponseExtension extends ResponseExtension {
 
         ClaimsInfo claimsInfo = new ClaimsInfo("1".equals(existsString), claimsKey);
         claimsNameMap.put(domainName, claimsInfo);
-        claimsIndexMap.put(i + 1L, claimsInfo);
+        claimsIndexMap.put(i + 0L, claimsInfo);
     }
 
     private void processPhaseElement(XMLDocument xmlDoc) throws XPathExpressionException {
