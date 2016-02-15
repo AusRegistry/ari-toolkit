@@ -80,7 +80,7 @@ public class DomainCheckLaunchResponseExtension extends ResponseExtension {
      */
     public final Boolean exists(String domainName) {
         ClaimsInfo claimsInfo = claimsNameMap.get(domainName);
-        return claimsInfo == null ? null : claimsInfo.exists();
+        return claimsInfo == null ? false : claimsInfo.exists();
     }
     /**
      * @param index the index of domain to be checked
@@ -88,7 +88,7 @@ public class DomainCheckLaunchResponseExtension extends ResponseExtension {
      */
     public final Boolean exists(final long index) {
         ClaimsInfo claimsInfo = claimsIndexMap.get(index);
-        return claimsInfo == null ? null : claimsInfo.exists();
+        return claimsInfo == null ? false : claimsInfo.exists();
     }
 
     /**
