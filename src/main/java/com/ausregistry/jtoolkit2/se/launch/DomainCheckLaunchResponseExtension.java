@@ -56,15 +56,15 @@ public class DomainCheckLaunchResponseExtension extends ResponseExtension {
      */
     @Override
     public final void fromXML(XMLDocument xmlDoc) throws XPathExpressionException {
-        int cdCount = xmlDoc.getNodeCount(CHKDATA_COUNT_EXPR);
+        int elementCount = xmlDoc.getNodeCount(CHKDATA_COUNT_EXPR);
         int phaseCount = xmlDoc.getNodeCount(CHKDATA_PHASE_COUNT_EXPR);
         if (phaseCount > 0) {
             processPhaseElement(xmlDoc);
         }
-        for (int i = phaseCount; i < (cdCount - phaseCount); i++) {
+        for (int i = phaseCount; i < elementCount; i++) {
             processElement(xmlDoc, i);
         }
-        if (cdCount > 0) {
+        if (elementCount > 0) {
             isInitialised = true;
         }
     }
@@ -80,7 +80,7 @@ public class DomainCheckLaunchResponseExtension extends ResponseExtension {
      */
     public final Boolean exists(String domainName) {
         ClaimsInfo claimsInfo = claimsNameMap.get(domainName);
-        return claimsInfo == null ? false : claimsInfo.exists();
+        return claimsInfo == null ? null : claimsInfo.exists();
     }
     /**
      * @param index the index of domain to be checked
@@ -88,7 +88,7 @@ public class DomainCheckLaunchResponseExtension extends ResponseExtension {
      */
     public final Boolean exists(final long index) {
         ClaimsInfo claimsInfo = claimsIndexMap.get(index);
-        return claimsInfo == null ? false : claimsInfo.exists();
+        return claimsInfo == null ? null : claimsInfo.exists();
     }
 
     /**
@@ -124,7 +124,7 @@ public class DomainCheckLaunchResponseExtension extends ResponseExtension {
     }
 
     private void processElement(XMLDocument xmlDoc, int i) throws XPathExpressionException {
-        String qry = replaceIndex(CHKDATA_IND_EXPR, i + 1);
+        String qry = replaceIndex(CHKDATA_IND_EXPR, i);
         String domainName = xmlDoc.getNodeValue(qry + CHKDATA_DOMAIN_NAME_EXPR);
         String existsString = xmlDoc.getNodeValue(qry + CHKDATA_EXISTS_VALUE_EXPR);
         String claimsKey = xmlDoc.getNodeValue(qry + CHKDATA_CLAIMS_KEY_EXPR);
