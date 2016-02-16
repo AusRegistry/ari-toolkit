@@ -43,7 +43,7 @@ public class DomainCreateFeeCommandExtensionTest {
                     + "<name>jtkutest.com.au</name><authInfo><pw>jtkUT3st</pw></authInfo></create></create>"
                     + "<extension><create xmlns=\"urn:ietf:params:xml:ns:fee-0.6\">"
                     + "<currency>USD</currency>"
-                    + "<fee>10.0</fee>"
+                    + "<fee>10.00</fee>"
                     + "</create>"
                     + "</extension><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>";
 

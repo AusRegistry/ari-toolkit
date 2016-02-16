@@ -40,6 +40,7 @@ public class DomainCreateFeeCommandExtension implements CommandExtension {
     public void addToCommand(Command command) {
         final XMLWriter xmlWriter = command.getXmlWriter();
         final Element extensionElement = command.getExtensionElement();
+        fee = fee.setScale(2);
 
         final Element createElement = xmlWriter.appendChild(extensionElement, "create",
                 ExtendedObjectType.FEE.getURI());
