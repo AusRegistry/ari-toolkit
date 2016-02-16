@@ -43,7 +43,7 @@ This toolkit also provides a mechanism to perform the following Trademark Cleari
 
 #### Direct download
 
-    Obtain the latest toolkit here: [Toolkit v3.6.8](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.6.8/arjtk-3.6.8.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.6.8/arjtk-3.6.8-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.6.8/arjtk-3.6.8-javadoc.jar))
+    Obtain the latest toolkit here: [Toolkit v3.6.9](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.6.9/arjtk-3.6.9.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.6.9/arjtk-3.6.9-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.6.9/arjtk-3.6.9-javadoc.jar))
 
 #### Dependency Management
 
@@ -52,8 +52,6 @@ Use your build's dependency management tool to automatically download the toolki
 * Repository: `http://ausregistry.github.com/repo/`
 * groupId: `au.com.ausregistry`
 * artifactId: `arjtk`
-* version: `3.6.8`
-
 * version: `3.6.8`
 
 For example (using Maven):
@@ -69,7 +67,7 @@ For example (using Maven):
        <dependency>
           <groupId>au.com.ausregistry</groupId>
           <artifactId>arjtk</artifactId>
-          <version>3.6.8</version>
+          <version>3.6.9</version>
        </dependency>
     </dependencies>
 
