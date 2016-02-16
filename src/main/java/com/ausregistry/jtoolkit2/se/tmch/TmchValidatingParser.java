@@ -28,6 +28,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
+import static com.ausregistry.jtoolkit2.se.ExtendedObjectType.SIGNED_MARK_DATA;
+import static com.ausregistry.jtoolkit2.se.ExtendedObjectType.XML_DSIG;
+
 /**
  * This defines the operations to facilitate validation and parsing of signed mark data for TMCH.
  */
@@ -35,6 +38,18 @@ public class TmchValidatingParser extends TmchXmlParser {
 
     public static final String CERTIFICATE_BEGIN_DELIMITER = "-----BEGIN CERTIFICATE-----\n";
     public static final String CERTIFICATE_END_DELIMITER = "\n-----END CERTIFICATE-----\n";
+
+    private static final String SMD_BASE_EXPR = "/" + SIGNED_MARK_DATA.getName() + ":";
+    private static final String DS_BASE_EXPR = "/" + XML_DSIG.getName() + ":";
+    private static final String SIGNED_MARK = "signedMark";
+
+    private static final String SMD_NOT_BEFORE_EXPR = SMD_BASE_EXPR + SIGNED_MARK + SMD_BASE_EXPR + "notBefore";
+    private static final String SMD_NOT_AFTER_EXPR = SMD_BASE_EXPR + SIGNED_MARK + SMD_BASE_EXPR + "notAfter";
+    private static final String SMD_ID_EXPR = SMD_BASE_EXPR + SIGNED_MARK + SMD_BASE_EXPR + "id";
+    private static final String SMD_DS_SIGNATURE_EXPR = SMD_BASE_EXPR + SIGNED_MARK + DS_BASE_EXPR + "Signature";
+    private static final String CERTIFICATE_XPATH_EXPR = SMD_BASE_EXPR + SIGNED_MARK
+            + DS_BASE_EXPR + "Signature" + DS_BASE_EXPR + "KeyInfo" + DS_BASE_EXPR + "X509Data"
+            + DS_BASE_EXPR + "X509Certificate";
 
     private final List<String> smdrlIdList = new ArrayList<String>();
 
@@ -163,8 +178,8 @@ public class TmchValidatingParser extends TmchXmlParser {
         assertCertificateNotRevoked(x509Certificate);
         assertSmdNotRevoked(document);
 
-        Calendar notBeforeDate = DatatypeConverter.parseDate(xPath.evaluate("/smd:signedMark/smd:notBefore", document));
-        Calendar notAfterDate = DatatypeConverter.parseDate(xPath.evaluate("/smd:signedMark/smd:notAfter", document));
+        Calendar notBeforeDate = DatatypeConverter.parseDate(xPath.evaluate(SMD_NOT_BEFORE_EXPR, document));
+        Calendar notAfterDate = DatatypeConverter.parseDate(xPath.evaluate(SMD_NOT_AFTER_EXPR, document));
 
         if (dateForValidation.before(notBeforeDate.getTime())) {
             throw new NotYetValidSignedMarkDataException(notBeforeDate.getTime());
@@ -178,7 +193,7 @@ public class TmchValidatingParser extends TmchXmlParser {
     }
 
     private void assertSmdNotRevoked(Document document) throws XPathExpressionException {
-        String smdId = xPath.evaluate("/smd:signedMark/smd:id", document);
+        String smdId = xPath.evaluate(SMD_ID_EXPR, document);
 
         if (smdrlIdList.contains(smdId)) {
             throw new TmchSmdRevokedException(smdId);
@@ -186,7 +201,7 @@ public class TmchValidatingParser extends TmchXmlParser {
     }
 
     private Node extractSignatureNode(Document document) throws XPathExpressionException {
-        Node signatureNode = (Node) xPath.evaluate("/smd:signedMark/ds:Signature", document, XPathConstants.NODE);
+        Node signatureNode = (Node) xPath.evaluate(SMD_DS_SIGNATURE_EXPR, document, XPathConstants.NODE);
 
         if (signatureNode == null) {
             throw new SmdSignatureMissingException();
@@ -242,8 +257,7 @@ public class TmchValidatingParser extends TmchXmlParser {
     }
 
     private X509Certificate extractCertificateFromDocument(Document document) throws XPathExpressionException {
-        String certificateXpathQuery = "/smd:signedMark/ds:Signature/ds:KeyInfo/ds:X509Data/ds:X509Certificate";
-        String certificateString = xPath.evaluate(certificateXpathQuery, document);
+        String certificateString = xPath.evaluate(CERTIFICATE_XPATH_EXPR, document);
         String certificateEntireContent = CERTIFICATE_BEGIN_DELIMITER + certificateString + CERTIFICATE_END_DELIMITER;
 
         try {

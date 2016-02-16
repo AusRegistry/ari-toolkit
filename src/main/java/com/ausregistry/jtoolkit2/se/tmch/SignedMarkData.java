@@ -7,6 +7,9 @@ import java.util.logging.Logger;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 import org.w3c.dom.Element;
 
+import static com.ausregistry.jtoolkit2.se.ExtendedObjectType.SIGNED_MARK_DATA;
+import static com.ausregistry.jtoolkit2.se.ExtendedObjectType.MARK;
+
 /**
  * Represents a signedMarkData from the Trademark Clearing House extension, represented by the "signedMark" element
  * of type "signedMarkType" in the "urn:ietf:params:xml:ns:signedMark-1.0" namespace,
@@ -16,12 +19,12 @@ import org.w3c.dom.Element;
 public class SignedMarkData {
     private Logger maintLogger = Logger.getLogger(getClass().getPackage().getName() + ".maint");
 
-    public static final String BASE_EXPR = "/smd:signedMark";
-    private static final String SMD_ID_EXPR = BASE_EXPR + "/smd:id/text()";
-    private static final String SMD_NOT_BEFORE_EXPR = BASE_EXPR + "/smd:notBefore/text()";
-    private static final String SMD_NOT_AFTER_EXPR = BASE_EXPR + "/smd:notAfter/text()";
-    private static final String ISSUER_INFO_EXPR = BASE_EXPR + "/smd:issuerInfo";
-    private static final String MARK_EXPR = BASE_EXPR + "/mark:mark";
+    public static final String BASE_EXPR = "/" + SIGNED_MARK_DATA.getName() + ":signedMark";
+    private static final String SMD_ID_EXPR = BASE_EXPR + "/" + SIGNED_MARK_DATA.getName() + ":id/text()";
+    private static final String SMD_NOT_BEFORE_EXPR = BASE_EXPR + "/" + SIGNED_MARK_DATA.getName() + ":notBefore/text()";
+    private static final String SMD_NOT_AFTER_EXPR = BASE_EXPR + "/" + SIGNED_MARK_DATA.getName() + ":notAfter/text()";
+    private static final String ISSUER_INFO_EXPR = BASE_EXPR + "/" + SIGNED_MARK_DATA.getName() + ":issuerInfo";
+    private static final String MARK_EXPR = BASE_EXPR + "/" + MARK.getName() + ":mark";
 
     private String id;
 

@@ -32,6 +32,9 @@ public enum ExtendedObjectType implements ObjectType {
     PRICEV11("priceV1_1", "urn:ar:params:xml:ns:price-1.1", "price-1.1.xsd", "name"),
     /** References the domain name price extension XML namespace and schema file */
     PRICEV12("priceV1_2", "urn:ar:params:xml:ns:price-1.2", "price-1.2.xsd", "name"),
+    SIGNED_MARK_DATA("smd", "urn:ietf:params:xml:ns:signedMark-1.0", "signedMark-1.0.xsd", "smd"),
+    MARK("mark", "urn:ietf:params:xml:ns:mark-1.0", "mark-1.0.xsd", "mark"),
+    XML_DSIG("ds", "http://www.w3.org/2000/09/xmldsig#", "xmldsig-core-schema.xsd", "ds"),
     /** References the extended domain check XML namespace and schema file */
     EX_AVAIL ("exAvail", "urn:ar:params:xml:ns:exAvail-1.0", "exAvail-1.0.xsd", "name"),
     /** References the fund info XML namespace and schema file */
