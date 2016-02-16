@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/AusRegistry/ari-toolkit.png)](https://travis-ci.org/AusRegistry/ari-toolkit)
 ## Downloads
 
-The latest ari-toolkit is available for download. [ari-toolkit v3.6.8](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.6.8/arjtk-3.6.8.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.6.8/arjtk-3.6.8-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.6.8/arjtk-3.6.8-javadoc.jar))
+The latest ari-toolkit is available for download. [ari-toolkit v3.6.9](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.6.9/arjtk-3.6.9.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.6.9/arjtk-3.6.9-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.6.9/arjtk-3.6.9-javadoc.jar))
 
 For more information, please read [Installation and Setup](#installation-and-setup).
 
@@ -52,7 +52,7 @@ Use your build's dependency management tool to automatically download the toolki
 * Repository: `http://ausregistry.github.com/repo/`
 * groupId: `au.com.ausregistry`
 * artifactId: `arjtk`
-* version: `3.6.8`
+* version: `3.6.9`
 
 For example (using Maven):
 
