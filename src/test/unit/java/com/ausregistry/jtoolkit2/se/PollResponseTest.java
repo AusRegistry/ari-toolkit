@@ -1,11 +1,10 @@
 package com.ausregistry.jtoolkit2.se;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 import com.ausregistry.jtoolkit2.se.app.DomainInfoApplicationResponseExtension;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.ausregistry.jtoolkit2.EPPDateFormatter;
@@ -24,39 +23,23 @@ public class PollResponseTest {
     private static final String xml4 = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\"><response><result code=\"1000\"><msg lang=\"en\">Command completed successfully</msg></result><resData><domain:infData xmlns:domain=\"urn:ietf:params:xml:ns:domain-1.0\"><domain:name>xn--hgbc.idnzone</domain:name><domain:roid>D2269C59040734D258CA62095E7AF925B-ARI</domain:roid><domain:status s=\"inactive\"/><domain:registrant>DOMAINCONTACT1</domain:registrant><domain:contact type=\"tech\">DOMAINCONTACT1</domain:contact><domain:clID>eppIdOne</domain:clID><domain:crID>eppIdOne</domain:crID><domain:crDate>2013-05-09T03:38:16Z</domain:crDate><domain:upID>eppIdOne</domain:upID><domain:upDate>2013-05-09T03:38:17Z</domain:upDate><domain:exDate>2014-05-09T03:38:16Z</domain:exDate><domain:authInfo><domain:pw>P@55w0rD</domain:pw></domain:authInfo></domain:infData></resData><extension><infData xmlns=\"urn:ar:params:xml:ns:idn-1.0\"><languageTag>ar</languageTag></infData><rgp:infData xmlns:rgp=\"urn:ietf:params:xml:ns:rgp-1.0\"><rgp:rgpStatus s=\"addPeriod\">2013-05-14T03:38:16Z</rgp:rgpStatus></rgp:infData><infData xmlns=\"urn:ar:params:xml:ns:variant-1.1\"><variant>xn--igbe.idnzone</variant></infData><secDNS:infData xmlns:secDNS=\"urn:ietf:params:xml:ns:secDNS-1.1\"><secDNS:keyData><secDNS:flags>256</secDNS:flags><secDNS:protocol>3</secDNS:protocol><secDNS:alg>8</secDNS:alg><secDNS:pubKey>AwEAAc3d4rj+vs3ZSuaqokDCcs2Yh63JWRYshK4YlQtxGaxvMJfv7ubJLv18eVjGgyBlHVDL/JeXV5QtJ282cPFt2Zfg4wqNmiMgBtfbIHAtQ/ANVYKUwFwNAaBUJoBTtqNJZlgjUKQCYnspDeyppSVK0X/N1y5Lx8oV0FgOxQsyVqlk9q65j449pG8AL4nCRRKdZoEadpO5Dd1dFVDGY+KIOoky6c7XW9zbyXVXHpQetBAOLly12pUi8croXjQbqSmajrDYpT0INYtxtO8kaWW7zDdOWySPOynW0hU/9AyYyK7y0u5R8ups+bgSxjpWW0BgGWmlSiHLuQTNS3yOm3Kt8EjUImLnyt1wBOgCkrY4mti45bTS9IFy4Pqc/DwBHuuuNeX5At4ZD9bLiSpcjexvBIOy9bDg/IavMKuo7m3SxeWU5eg6/t6qV/uxGJWbdNJC6mI80JQIf5mUxajbU5WHX3m44r/p9HyhgypmZLWJlH7GKgNw+wpJkkqsAFZXXF0C+65PqpVepBtDpckBWVhZUjUySOBbi1/ALaHIPWKklwkfbeZ46DNql/XePyCMJSHHq5+PeSW2MY0SuSlEx1rxON2LJa7QvPxCeof/AP+SuZxY+Umgf3uddHLtGQyrLtB3wTDHiRn3layZwE9pFfLdQUBz4aH1jGl69n6KgwHFYCer</secDNS:pubKey></secDNS:keyData><secDNS:keyData><secDNS:flags>258</secDNS:flags><secDNS:protocol>3</secDNS:protocol><secDNS:alg>8</secDNS:alg><secDNS:pubKey>AQPJ////4Q==</secDNS:pubKey></secDNS:keyData></secDNS:infData><infData xmlns=\"urn:X-ar:params:xml:ns:kv-1.0\"><kvlist name=\"abc\"><item key=\"keyName1\">updatedKeyValue1</item><item key=\"keyName2\">keyValue2</item></kvlist><kvlist name=\"def\"><item key=\"keyName1\">keyValue1</item><item key=\"keyName2\">keyValue2</item></kvlist></infData></extension><trID><clTRID>.20130509.133817.3</clTRID><svTRID>serverTxnId-1368070697723</svTRID></trID></response></epp>";
     private static final String xml5 = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><response><result code=\"1000\"><msg>Command completed successfully</msg></result><resData><infData xmlns=\"urn:ietf:params:xml:ns:domain-1.0\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd\"><name>domain.zone</name><roid>D0000003-AR</roid><status s=\"ok\" lang=\"en\"/><registrant>EXAMPLE</registrant><contact type=\"tech\">EXAMPLE</contact><ns><hostObj>ns1.example.com.au</hostObj><hostObj>ns2.example.com.au</hostObj></ns><host>ns1.example.com.au</host><host>ns2.exmaple.com.au</host><clID>Registrar</clID><crID>Registrar</crID><crDate>2008-02-10T00:00:00.0Z</crDate><upDate>2008-02-10T00:00:00.0Z</upDate><exDate>2008-02-10T00:00:00.0Z</exDate><authInfo><pw>0192pqow</pw></authInfo></infData></resData><extension><app:infData xmlns:app=\"urn:ar:params:xml:ns:application-1.0\" xsi:schemaLocation=\"urn:ar:params:xml:ns:application-1.0 application-1.0.xsd\"><app:id>applicationId</app:id><app:phase>phase</app:phase><app:status s=\"applied\" /></app:infData><tmch:infData xmlns:tmch=\"urn:ar:params:xml:ns:tmch-1.0\"><tmch:smd>ZW5jb2RlZFNpZ25lZE1hcmtEYXRh</tmch:smd></tmch:infData></extension><trID><clTRID>ABC-12345</clTRID><svTRID>54321-XYZ</svTRID></trID></response></epp>";
 
-    private static PollResponse response1, response2, response3, response4, response5;
-
-    static {
-        response1 = new PollResponse();
+    private PollResponse xmlPollResponse(String xml) {
         final XMLParser parser = new XMLParser();
+        PollResponse pollResponse = new PollResponse();
         XMLDocument doc;
         try {
-            doc = parser.parse(xml1);
-            response1.fromXML(doc);
-
-            response2 = new PollResponse();
-            doc = parser.parse(xml2);
-            response2.fromXML(doc);
-
-            response3 = new PollResponse();
-            doc = parser.parse(xml3);
-            response3.fromXML(doc);
-
-            response4 = new PollResponse();
-            doc = parser.parse(xml4);
-            response4.fromXML(doc);
-
-            response5 = new PollResponse();
-            doc = parser.parse(xml5);
-            response5.fromXML(doc);
+            doc = parser.parse(xml);
+            pollResponse.fromXML(doc);
+            return pollResponse;
         } catch (ParsingException e) {
-            e.printStackTrace();
+            fail("Cannot parse given XML to a PollResponse!");
+            throw new IllegalStateException();
         }
     }
 
     @Test
     public void testGetContactTransferResponse() {
-        final ContactTransferResponse ctr = response2.getContactTransferResponse();
+        final ContactTransferResponse ctr = xmlPollResponse(xml2).getContactTransferResponse();
         assertNotNull(ctr);
         assertEquals("JTKUTEST", ctr.getID());
         assertEquals("pending", ctr.getTransferStatus());
@@ -66,7 +49,7 @@ public class PollResponseTest {
 
     @Test
     public void testGetDomainTransferResponse() {
-        final DomainTransferResponse dtr = response1.getDomainTransferResponse();
+        final DomainTransferResponse dtr = xmlPollResponse(xml1).getDomainTransferResponse();
         assertNotNull(dtr);
         assertEquals("example.com", dtr.getName());
         assertEquals("pending", dtr.getTransferStatus());
@@ -76,7 +59,7 @@ public class PollResponseTest {
 
     @Test
     public void shouldGetIdnExtensionFromInfoResponse() {
-        final DomainInfoIdnResponseExtension domainInfoIdnResponseExtension = response4
+        final DomainInfoIdnResponseExtension domainInfoIdnResponseExtension = xmlPollResponse(xml4)
                 .getIdnDomainInfoResponseExtension();
         assertThat(domainInfoIdnResponseExtension.getLanguageTag(), is("ar"));
         assertThat(domainInfoIdnResponseExtension.isInitialised(), is(true));
@@ -85,7 +68,7 @@ public class PollResponseTest {
 
     @Test
     public void shouldGetSecDnsExtensionFromInfoResponse() {
-        final SecDnsDomainInfoResponseExtension secDnsDomainInfoResponseExtension = response4
+        final SecDnsDomainInfoResponseExtension secDnsDomainInfoResponseExtension = xmlPollResponse(xml4)
                 .getSecDnsDomainInfoResponseExtension();
         assertThat(secDnsDomainInfoResponseExtension.getInfData().getKeyDataList().size(), is(2));
         assertThat(secDnsDomainInfoResponseExtension.getInfData().getKeyDataList().get(0).getAlg(), is(8));
@@ -93,7 +76,7 @@ public class PollResponseTest {
 
     @Test
     public void shouldGetVariantResponseExtension() {
-        final DomainVariantResponseExtensionV1_1 variantResponseExtension1_1 = response4
+        final DomainVariantResponseExtensionV1_1 variantResponseExtension1_1 = xmlPollResponse(xml4)
                 .getVariantDomainInfoResponseExtensionV1_1();
         assertThat(variantResponseExtension1_1.getVariants().size(), is(1));
         assertThat(variantResponseExtension1_1.getVariants().get(0).getName(), is("xn--igbe.idnzone"));
@@ -102,7 +85,7 @@ public class PollResponseTest {
 
     @Test
     public void shouldGetRgpResponseExtension() {
-        final DomainInfoRgpResponseExtension rgpDomainInfoResponseExtension = response4
+        final DomainInfoRgpResponseExtension rgpDomainInfoResponseExtension = xmlPollResponse(xml4)
                 .getRgpDomainInfoResponseExtension();
 
         assertThat(rgpDomainInfoResponseExtension.getRgpStatuses().size(), is(1));
@@ -112,14 +95,14 @@ public class PollResponseTest {
 
     @Test
     public void shouldGetKvResponseExtension() {
-        final DomainInfoKVResponseExtension kvDomainInfoResponseExtension = response4
+        final DomainInfoKVResponseExtension kvDomainInfoResponseExtension = xmlPollResponse(xml4)
                 .getKvDomainInfoResponseExtension();
         assertThat(kvDomainInfoResponseExtension.getItem("abc", "keyName1"), is("updatedKeyValue1"));
     }
 
     @Test
     public void shouldGetDomainInfoApplicationResponseExtension() {
-        final DomainInfoApplicationResponseExtension domainInfoApplicationResponseExtension = response5
+        final DomainInfoApplicationResponseExtension domainInfoApplicationResponseExtension = xmlPollResponse(xml5)
                 .getDomainInfoApplicationResponseExtension();
         assertThat(domainInfoApplicationResponseExtension.getApplicationId(), is("applicationId"));
         assertThat(domainInfoApplicationResponseExtension.getPhase(), is("phase"));
@@ -128,9 +111,9 @@ public class PollResponseTest {
 
     @Test
     public void testGetResults() {
-        final Result[] results1 = response1.getResults();
-        final Result[] results2 = response2.getResults();
-        final Result[] results3 = response3.getResults();
+        final Result[] results1 = xmlPollResponse(xml1).getResults();
+        final Result[] results2 = xmlPollResponse(xml2).getResults();
+        final Result[] results3 = xmlPollResponse(xml3).getResults();
         assertEquals(1, results1.length);
         assertEquals(1, results2.length);
         assertEquals(1, results3.length);
@@ -144,47 +127,47 @@ public class PollResponseTest {
 
     @Test
     public void testGetCLTRID() {
-        assertEquals("ABC-12345", response1.getCLTRID());
-        assertEquals("ABC-12345", response2.getCLTRID());
-        assertEquals("ABC-12345", response3.getCLTRID());
+        assertEquals("ABC-12345", xmlPollResponse(xml1).getCLTRID());
+        assertEquals("ABC-12345", xmlPollResponse(xml2).getCLTRID());
+        assertEquals("ABC-12345", xmlPollResponse(xml3).getCLTRID());
     }
 
     @Test
     public void testGetMessageEnqueueDate() {
-        assertEquals(EPPDateFormatter.fromXSDateTime("2000-06-08T22:00:00.0Z"), response1.getMessageEnqueueDate());
-        assertEquals(EPPDateFormatter.fromXSDateTime("2000-06-08T22:00:00.0Z"), response2.getMessageEnqueueDate());
-        assertEquals(EPPDateFormatter.fromXSDateTime("2000-06-08T22:00:00.0Z"), response3.getMessageEnqueueDate());
+        assertEquals(EPPDateFormatter.fromXSDateTime("2000-06-08T22:00:00.0Z"), xmlPollResponse(xml1).getMessageEnqueueDate());
+        assertEquals(EPPDateFormatter.fromXSDateTime("2000-06-08T22:00:00.0Z"), xmlPollResponse(xml2).getMessageEnqueueDate());
+        assertEquals(EPPDateFormatter.fromXSDateTime("2000-06-08T22:00:00.0Z"), xmlPollResponse(xml3).getMessageEnqueueDate());
     }
 
     @Test
     public void testGetMessage() {
-        assertEquals("Transfer requested.", response1.getMessage());
-        assertEquals("Transfer requested.", response2.getMessage());
-        assertEquals("Host updated by TRO.", response3.getMessage());
+        assertEquals("Transfer requested.", xmlPollResponse(xml1).getMessage());
+        assertEquals("Transfer requested.", xmlPollResponse(xml2).getMessage());
+        assertEquals("Host updated by TRO.", xmlPollResponse(xml3).getMessage());
     }
 
     @Test
     public void testGetMessageLanguage() {
-        assertEquals("en", response2.getMessageLanguage());
+        assertEquals("en", xmlPollResponse(xml2).getMessageLanguage());
     }
 
     @Test
     public void testGetMsgCount() {
-        assertEquals("Require 5 messages", 5, response1.getMsgCount());
-        assertEquals("Require 5 messages", 5, response2.getMsgCount());
-        assertEquals("Require 5 messages", 5, response3.getMsgCount());
+        assertEquals("Require 5 messages", 5, xmlPollResponse(xml1).getMsgCount());
+        assertEquals("Require 5 messages", 5, xmlPollResponse(xml2).getMsgCount());
+        assertEquals("Require 5 messages", 5, xmlPollResponse(xml3).getMsgCount());
     }
 
     @Test
     public void testGetMsgID() {
-        assertEquals("12345", response1.getMsgID());
-        assertEquals("12345", response2.getMsgID());
-        assertEquals("12345", response3.getMsgID());
+        assertEquals("12345", xmlPollResponse(xml1).getMsgID());
+        assertEquals("12345", xmlPollResponse(xml2).getMsgID());
+        assertEquals("12345", xmlPollResponse(xml3).getMsgID());
     }
 
     @Test
     public void testGetHostUpdateResponse() {
-        final HostInfoResponse hostInfoResponse = response3.getHostInfoResponse();
+        final HostInfoResponse hostInfoResponse = xmlPollResponse(xml3).getHostInfoResponse();
         assertNotNull(hostInfoResponse);
         assertEquals("ns1.example.com", hostInfoResponse.getName());
         assertEquals("NS1_EXAMPLE1-REP", hostInfoResponse.getROID());

@@ -3,6 +3,7 @@ package com.ausregistry.jtoolkit2.se;
 import javax.xml.xpath.XPathExpressionException;
 
 import com.ausregistry.jtoolkit2.se.app.DomainInfoApplicationResponseExtension;
+import com.ausregistry.jtoolkit2.se.ietf.idn.DomainInfoIetfIdnResponseExtension;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
@@ -45,6 +46,7 @@ public class PollResponse extends Response {
     private HostInfoResponse hostInfoResponse;
     private Response resDataResponse = null;
     private DomainInfoIdnResponseExtension domainInfoIdnResponseExtension;
+    private DomainInfoIetfIdnResponseExtension domainInfoIetfIdnResponseExtension;
     private SecDnsDomainInfoResponseExtension secDnsDomainInfoResponseExtension;
     private DomainVariantResponseExtensionV1_1 variantResponseExtension1_1;
     private DomainInfoRgpResponseExtension rgpDomainInfoResponseExtension;
@@ -162,12 +164,14 @@ public class PollResponse extends Response {
 
     private void initialiseExtensions() {
         domainInfoIdnResponseExtension = new DomainInfoIdnResponseExtension();
+        domainInfoIetfIdnResponseExtension = new DomainInfoIetfIdnResponseExtension();
         secDnsDomainInfoResponseExtension = new SecDnsDomainInfoResponseExtension();
         variantResponseExtension1_1 = new DomainVariantResponseExtensionV1_1(ResponseExtension.INFO);
         rgpDomainInfoResponseExtension = new DomainInfoRgpResponseExtension(ResponseExtension.INFO);
         kvDomainInfoResponseExtension = new DomainInfoKVResponseExtension();
         domainInfoApplicationResponseExtension = new DomainInfoApplicationResponseExtension(ResponseExtension.INFO);
         domInfoResponse.registerExtension(domainInfoIdnResponseExtension);
+        domInfoResponse.registerExtension(domainInfoIetfIdnResponseExtension);
         domInfoResponse.registerExtension(secDnsDomainInfoResponseExtension);
         domInfoResponse.registerExtension(variantResponseExtension1_1);
         domInfoResponse.registerExtension(rgpDomainInfoResponseExtension);
