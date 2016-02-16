@@ -76,10 +76,10 @@ public class DomainInfoIetfIdnResponseExtensionTest {
                 .append("</resData>");
 
         result.append("<extension>")
-                .append("<idn:data xmlns:idn=\"urn:ietf:params:xml:ns:idn-1.0\">")
-                .append("<idn:table>").append(table).append("</idn:table>")
-                .append("<idn:uname>").append(uname).append("</idn:uname>")
-                .append("</idn:data>")
+                .append("<data xmlns=\"urn:ietf:params:xml:ns:idn-1.0\">")
+                .append("<table>").append(table).append("</table>")
+                .append("<uname>").append(uname).append("</uname>")
+                .append("</data>")
                 .append("</extension>");
 
         result.append("<trID>")

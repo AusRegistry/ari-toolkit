@@ -1,13 +1,7 @@
 package com.ausregistry.jtoolkit2.se;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
-
-import com.ausregistry.jtoolkit2.se.app.DomainInfoApplicationResponseExtension;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import com.ausregistry.jtoolkit2.EPPDateFormatter;
+import com.ausregistry.jtoolkit2.se.app.DomainInfoApplicationResponseExtension;
 import com.ausregistry.jtoolkit2.se.generic.DomainInfoKVResponseExtension;
 import com.ausregistry.jtoolkit2.se.idn.DomainInfoIdnResponseExtension;
 import com.ausregistry.jtoolkit2.se.rgp.DomainInfoRgpResponseExtension;
@@ -15,6 +9,13 @@ import com.ausregistry.jtoolkit2.se.secdns.SecDnsDomainInfoResponseExtension;
 import com.ausregistry.jtoolkit2.xml.ParsingException;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 import com.ausregistry.jtoolkit2.xml.XMLParser;
+import org.junit.Test;
+
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 
 public class PollResponseTest {
     private static final String xml1 = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><response><result code=\"1301\"><msg>Command completed successfully; ack to dequeue</msg></result><msgQ count=\"5\" id=\"12345\"><qDate>2000-06-08T22:00:00.0Z</qDate><msg>Transfer requested.</msg></msgQ><resData><domain:trnData xmlns:domain=\"urn:ietf:params:xml:ns:domain-1.0\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd\"><domain:name>example.com</domain:name><domain:trStatus>pending</domain:trStatus><domain:reID>ClientX</domain:reID><domain:reDate>2000-06-08T22:00:00.0Z</domain:reDate><domain:acID>ClientY</domain:acID><domain:acDate>2000-06-13T22:00:00.0Z</domain:acDate><domain:exDate>2002-09-08T22:00:00.0Z</domain:exDate></domain:trnData></resData><trID><clTRID>ABC-12345</clTRID><svTRID>54321-XYZ</svTRID></trID></response></epp>";
