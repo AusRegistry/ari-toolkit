@@ -15,7 +15,7 @@ import java.math.BigDecimal;
  * <p>Extension for the EPP Domain Transfer response, representing the Fee
  * extension.</p>
  *
- * <p>Use this to acknowledge the price associated with this domain name as part of an EPP Domain Create
+ * <p>Use this to acknowledge the price associated with this domain name as part of an EPP Domain Transfer
  * command compliant with RFC5730 and RFC5731. The "currency" and "fee" values
  * supplied, should match the fees that are set for the domain name for the requested period.
  * The response expected from a server should be handled by a Domain Transfer Response.</p>

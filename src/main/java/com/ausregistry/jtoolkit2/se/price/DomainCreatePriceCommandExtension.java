@@ -26,7 +26,7 @@ import org.w3c.dom.Element;
  */
 public class DomainCreatePriceCommandExtension implements CommandExtension {
 
-    private static final long serialVersionUID = 2782521830455586062L;
+    private static final long serialVersionUID = 6982521830455586062L;
 
     private BigDecimal price;
     private BigDecimal renewalPrice;

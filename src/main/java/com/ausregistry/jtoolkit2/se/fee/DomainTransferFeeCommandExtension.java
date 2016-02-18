@@ -16,7 +16,7 @@ import java.math.BigDecimal;
  * <p>Extension for the EPP Domain Transfer command, representing the Transfer Premium Domain aspect of the
  * Domain Name Fee Extension.</p>
  *
- * <p>Use this to acknowledge the price associated with this domain name as part of an EPP Domain Create
+ * <p>Use this to acknowledge the price associated with this domain name as part of an EPP Domain Transfer
  * command compliant with RFC5730 and RFC5731. The "currency" and "fee" values
  * supplied, should match the fees that are set for the domain name for the requested period.
  * The response expected from a server should be handled by a Domain Transfer Response.</p>
@@ -28,7 +28,7 @@ import java.math.BigDecimal;
  */
 public class DomainTransferFeeCommandExtension implements CommandExtension {
 
-    private static final long serialVersionUID = 2782521830455586062L;
+    private static final long serialVersionUID = 5982521830455586062L;
 
     private BigDecimal fee;
     private String currency;

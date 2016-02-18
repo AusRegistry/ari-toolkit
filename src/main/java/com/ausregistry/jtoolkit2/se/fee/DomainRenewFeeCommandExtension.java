@@ -21,7 +21,7 @@ import java.math.BigDecimal;
  */
 public class DomainRenewFeeCommandExtension implements CommandExtension {
 
-    private static final long serialVersionUID = 2782521830855586062L;
+    private static final long serialVersionUID = 4982521830855586062L;
 
     private BigDecimal fee;
     private String currency;
