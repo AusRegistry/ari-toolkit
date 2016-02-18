@@ -44,13 +44,16 @@ public class DomainCreateLaunchCommandExtension implements CommandExtension {
                 ExtendedObjectType.LAUNCH.getURI());
         final Element phaseElement = xmlWriter.appendChild(createElement, "phase");
 
-        createElement.setAttribute("type", launchCreateType.getCreateType());
+        if(launchCreateType != null){
+            createElement.setAttribute("type", launchCreateType.getCreateType());
+        }
+
         phaseElement.setTextContent(phaseType.getPhaseType());
 
         if (phaseName != null){
             phaseElement.setAttribute("name", phaseName);
         }
-        if(noticeId != null){
+        if (noticeId != null){
             appendClaimsNotice(xmlWriter, createElement);
         }
 

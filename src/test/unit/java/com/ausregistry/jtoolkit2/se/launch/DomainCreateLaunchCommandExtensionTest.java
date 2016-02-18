@@ -104,5 +104,40 @@ public class DomainCreateLaunchCommandExtensionTest{
                 + "<clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>", cmd.toXML());
 
     }
+
+    @Test
+    public void shouldCreateValidXmlCommandWithNoTypeAttributeProvided() throws SAXException {
+
+        final Command cmd = new DomainCreateCommand("jtkutest.com.au", "jtkUT3st");
+        final DomainCreateLaunchCommandExtension ext = new DomainCreateLaunchCommandExtension();
+        ext.setPhaseType(PhaseType.CLAIMS);
+        ext.setNoticeId("49FD46E6C4B45C55D4AC");
+        ext.setNotAfterDateTime(
+                EPPDateFormatter.fromXSDateTime("2007-01-01T01:01:01.0Z"));
+        ext.setAcceptedDateTime(
+                EPPDateFormatter.fromXSDateTime("2007-02-02T02:02:02.0Z"));
+
+        cmd.appendExtension(ext);
+
+        assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+                + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\""
+                + " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
+                + " xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">"
+                + "<command><create><create xmlns=\"urn:ietf:params:xml:ns:domain-1.0\" "
+                + "xsi:schemaLocation=\"urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd\">"
+                + "<name>jtkutest.com.au</name><authInfo><pw>jtkUT3st</pw></authInfo></create></create>"
+                + "<extension>"
+                + "<create xmlns=\"urn:ietf:params:xml:ns:launch-1.0\">"
+                + "<phase>claims</phase>"
+                + "<notice>"
+                + "<noticeID>49FD46E6C4B45C55D4AC</noticeID>"
+                + "<notAfter>2007-01-01T01:01:01.000Z</notAfter>"
+                + "<acceptedDate>2007-02-02T02:02:02.000Z</acceptedDate>"
+                + "</notice>"
+                + "</create>"
+                + "</extension>"
+                + "<clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>", cmd.toXML());
+
+    }
 }
 
