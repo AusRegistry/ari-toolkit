@@ -18,7 +18,7 @@ public class DomainRenewFeeResponseExtensionTest {
         final DomainRenewResponse response = new DomainRenewResponse();
         final DomainRenewFeeResponseExtension feeResponseExtension =
                 new DomainRenewFeeResponseExtension(ResponseExtension.RENEW);
-        final XMLDocument doc = PARSER.parse(getCreateResponseExpectedXml(dnsForm, true));
+        final XMLDocument doc = PARSER.parse(getRenewResponseExpectedXml(dnsForm, true));
 
         response.registerExtension(feeResponseExtension);
         response.fromXML(doc);
@@ -34,16 +34,17 @@ public class DomainRenewFeeResponseExtensionTest {
         final String domainName = "jtkutest.com.au";
         final DomainRenewResponse response = new DomainRenewResponse();
         final DomainRenewFeeResponseExtension feeResponseExtension =
-                new DomainRenewFeeResponseExtension(ResponseExtension.CREATE);
-        final XMLDocument doc = PARSER.parse(getCreateResponseExpectedXml(domainName, false));
+                new DomainRenewFeeResponseExtension(ResponseExtension.RENEW);
+        final XMLDocument doc = PARSER.parse(getRenewResponseExpectedXml(domainName, false));
 
+        response.registerExtension(feeResponseExtension);
         response.fromXML(doc);
 
         assertEquals(domainName, response.getName());
         assertFalse("Fee should not have been initialised", feeResponseExtension.isInitialised());
     }
 
-    private static String getCreateResponseExpectedXml(final String domainName, boolean feeExtension) {
+    private static String getRenewResponseExpectedXml(final String domainName, boolean feeExtension) {
         final StringBuilder result = new StringBuilder();
         result.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         result.append("<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\">");
