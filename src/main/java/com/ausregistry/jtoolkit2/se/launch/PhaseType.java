@@ -7,8 +7,8 @@ import com.ausregistry.jtoolkit2.se.DomainCreateCommand;
  *
  *
  * @see DomainCreateCommand
- * @see com.ausregistry.jtoolkit2.se.launch.DomainCreateLaunchCommandExtension
- * @see <a href="http://ausregistry.github.io/doc/launch-1.0/launch-1.0.html">Domain Name Launch
+ * @see DomainCreateLaunchCommandExtension
+ * @see <a href="https://tools.ietf.org/html/draft-ietf-eppext-launchphase-07">Domain Name Launch
  * Extension Mapping for the Extensible Provisioning Protocol (EPP)</a>
  */
 public enum PhaseType {

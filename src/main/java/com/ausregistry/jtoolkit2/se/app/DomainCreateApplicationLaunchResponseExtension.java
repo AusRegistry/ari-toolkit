@@ -1,11 +1,13 @@
 package com.ausregistry.jtoolkit2.se.app;
 
 
+import javax.xml.xpath.XPathExpressionException;
+
+import com.ausregistry.jtoolkit2.se.DomainCreateCommand;
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.se.ResponseExtension;
+import com.ausregistry.jtoolkit2.se.launch.DomainCreateLaunchCommandExtension;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
-
-import javax.xml.xpath.XPathExpressionException;
 
 /**
  * <p>Extension for the EPP Domain Create response, representing the Application Create aspect of the Domain Name
@@ -18,9 +20,9 @@ import javax.xml.xpath.XPathExpressionException;
  * <p>For flexibility, this implementation extracts the data from the response using XPath queries, the expressions
  * for which are defined statically.</p>
  *
- * @see com.ausregistry.jtoolkit2.se.DomainCreateCommand
- * @see com.ausregistry.jtoolkit2.se.launch.DomainCreateLaunchCommandExtension
- * @see <a href="http://ausregistry.github.io/doc/launch-1.0/launch-1.0.html">Domain Name Launch
+ * @see DomainCreateCommand
+ * @see DomainCreateLaunchCommandExtension
+ * @see <a href="https://tools.ietf.org/html/draft-ietf-eppext-launchphase-07">Domain Name Launch
  * Extension Mapping for the Extensible Provisioning Protocol (EPP)</a>
  */
 public class DomainCreateApplicationLaunchResponseExtension extends ResponseExtension {

@@ -1,16 +1,15 @@
 package com.ausregistry.jtoolkit2.se.launch;
 
+import java.util.GregorianCalendar;
+
 import com.ausregistry.jtoolkit2.EPPDateFormatter;
 import com.ausregistry.jtoolkit2.se.Command;
 import com.ausregistry.jtoolkit2.se.CommandExtension;
 import com.ausregistry.jtoolkit2.se.DomainCreateCommand;
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
-import com.ausregistry.jtoolkit2.se.tmch.SignedMarkData;
 import com.ausregistry.jtoolkit2.xml.NamespaceContextImpl;
 import com.ausregistry.jtoolkit2.xml.XMLWriter;
 import org.w3c.dom.Element;
-
-import java.util.GregorianCalendar;
 
 /**
  * <p>Extension for the EPP Domain Create command, representing the Registration
@@ -20,8 +19,8 @@ import java.util.GregorianCalendar;
  *
  *
  * @see DomainCreateCommand
- * @see com.ausregistry.jtoolkit2.se.launch.DomainCreateLaunchCommandExtension
- * @see <a href="http://ausregistry.github.io/doc/launch-1.0/launch-1.0.html">Domain Name Launch
+ * @see DomainCreateLaunchCommandExtension
+ * @see <a href="https://tools.ietf.org/html/draft-ietf-eppext-launchphase-07">Domain Name Launch
  * Extension Mapping for the Extensible Provisioning Protocol (EPP)</a>
  */
 public class DomainCreateLaunchCommandExtension implements CommandExtension {
@@ -63,9 +62,9 @@ public class DomainCreateLaunchCommandExtension implements CommandExtension {
         }
     }
 
-    private void appendSignedMarkData(XMLWriter xmlWriter, Element createElement, NamespaceContextImpl namespaceContext)
-    {
-            xmlWriter.appendChild(createElement,"encodedSignedMark",namespaceContext.getNamespaceURI("smd"))
+    private void appendSignedMarkData(XMLWriter xmlWriter, Element createElement,
+                                      NamespaceContextImpl namespaceContext) {
+        xmlWriter.appendChild(createElement,"encodedSignedMark",namespaceContext.getNamespaceURI("smd"))
                     .setTextContent(encodedSignedMarkData);
     }
 
