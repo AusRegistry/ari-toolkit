@@ -1,6 +1,5 @@
 package com.ausregistry.jtoolkit2.se.launch;
 
-import java.math.BigDecimal;
 import java.util.GregorianCalendar;
 
 import com.ausregistry.jtoolkit2.EPPDateFormatter;
@@ -35,14 +34,11 @@ public class DomainCreateLaunchCommandExtension implements CommandExtension {
     private String noticeId;
     private GregorianCalendar notAfterDateTime;
     private GregorianCalendar acceptedDateTime;
-    private BigDecimal fee;
-    private String currency;
 
     @Override
     public void addToCommand(Command command) {
         final XMLWriter xmlWriter = command.getXmlWriter();
         final Element extensionElement = command.getExtensionElement();
-
         final Element createElement = xmlWriter.appendChild(extensionElement, "create",
                 ExtendedObjectType.LAUNCH.getURI());
         final Element phaseElement = xmlWriter.appendChild(createElement, "phase");
@@ -64,13 +60,6 @@ public class DomainCreateLaunchCommandExtension implements CommandExtension {
         if (encodedSignedMarkData != null){
             appendSignedMarkData(xmlWriter, createElement, namespaceContext);
         }
-
-        if(fee != null && currency != null){
-            final Element feeElement = xmlWriter.appendChild(extensionElement, "create",
-                    ExtendedObjectType.FEE.getURI());
-            appendFeeData(xmlWriter, feeElement);
-        }
-
     }
 
     private void appendSignedMarkData(XMLWriter xmlWriter, Element createElement,
@@ -93,12 +82,6 @@ public class DomainCreateLaunchCommandExtension implements CommandExtension {
             xmlWriter.appendChild(noticeElement, "acceptedDate", ExtendedObjectType.LAUNCH.getURI())
                     .setTextContent(EPPDateFormatter.toXSDateTime(acceptedDateTime));
         }
-    }
-
-    private void appendFeeData(XMLWriter xmlWriter, Element feeElement) {
-        fee = fee.setScale(2);
-        xmlWriter.appendChild(feeElement, "currency").setTextContent(currency);
-        xmlWriter.appendChild(feeElement, "fee").setTextContent(fee.toPlainString());
     }
 
     public void setPhaseName(String phaseName) {
@@ -127,13 +110,5 @@ public class DomainCreateLaunchCommandExtension implements CommandExtension {
 
     public void setAcceptedDateTime(GregorianCalendar acceptedDateTime) {
         this.acceptedDateTime = acceptedDateTime;
-    }
-
-    public void setFee(BigDecimal fee) {
-        this.fee = fee;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
     }
 }

@@ -9,8 +9,6 @@ import com.ausregistry.jtoolkit2.se.ResponseExtension;
 import com.ausregistry.jtoolkit2.se.launch.DomainCreateLaunchCommandExtension;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 
-import java.math.BigDecimal;
-
 /**
  * <p>Extension for the EPP Domain Create response, representing the Application Create aspect of the Domain Name
  * Launch extension.</p>
@@ -39,21 +37,11 @@ public class DomainCreateApplicationLaunchResponseExtension extends ResponseExte
     private static final String PHASE_EXPR = LAUNCH_XPATH_PREFIX + ":phase/text()";
     private static final String RESPONSE_TYPE = ResponseExtension.CREATE;
 
-    private static final String FEE_PREFIX = ExtendedObjectType.FEE.getName();
-
-    private static final String FEE_XPATH_PREFIX = ResponseExtension.EXTENSION_EXPR + "/" + FEE_PREFIX
-            + ":RESPONSE_TYPE/" + FEE_PREFIX;
-    private static final String CURRENCY_EXPR = FEE_XPATH_PREFIX + ":currency/text()";
-    private static final String FEE_EXPR = FEE_XPATH_PREFIX + ":fee/text()";
-
-
     private boolean initialised = false;
-    private boolean feeInitialised = false;
 
     private String id;
     private String phase;
-    private String currency;
-    private BigDecimal fee;
+
 
 
     @Override
@@ -63,22 +51,12 @@ public class DomainCreateApplicationLaunchResponseExtension extends ResponseExte
         phase = xmlDoc.getNodeValue(replaceResponseType(
                 PHASE_EXPR, RESPONSE_TYPE));
 
-        currency = xmlDoc.getNodeValue(replaceResponseType(
-                CURRENCY_EXPR, RESPONSE_TYPE));
-        String feeAmount = xmlDoc.getNodeValue(replaceResponseType(FEE_EXPR, RESPONSE_TYPE));
-        fee = feeAmount == null ? null : new BigDecimal(feeAmount);
-
         initialised = (id != null && phase != null);
-        feeInitialised = (currency != null && fee != null);
     }
 
     @Override
     public boolean isInitialised() {
         return initialised;
-    }
-
-    public boolean isFeeInitialised() {
-        return feeInitialised;
     }
 
     public String getId() {
@@ -87,13 +65,5 @@ public class DomainCreateApplicationLaunchResponseExtension extends ResponseExte
 
     public String getPhase() {
         return phase;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public BigDecimal getFee() {
-        return fee;
     }
 }
