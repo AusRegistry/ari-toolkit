@@ -20,6 +20,7 @@ ext {
     artifactGroupId = 'au.com.ausregistry'
     gradleWrapperVersion = '2.7'
     pagesProjectDir = "$projectDir/../ari-toolkit-gitpages"
+    checkstyleConfDirPath = "$projectDir/checkstyle/"
 
     commonsCodecVersion          = '1.10'
     simpleFrameworkVersion       = '5.1.6'
@@ -198,3 +199,18 @@ uploadArchives << {
 uploadArchives.dependsOn checkVersionNumbersInReadme, javadoc
 
 test.dependsOn integrationTest
+
+apply plugin: 'checkstyle'
+
+checkstyle {
+    configFile = file(checkstyleConfDirPath + 'checkstyle.xml')
+    configProperties = [checkstyleConfigDir: checkstyleConfDirPath]
+    toolVersion = "6.6"
+}
+
+tasks.withType(Checkstyle) {
+    classpath = project.sourceSets.main.output
+    classpath += configurations.compile
+    classpath += configurations.testCompile
+    classpath += configurations.integrationTestCompile
+}
