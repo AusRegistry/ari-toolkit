@@ -1,4 +1,4 @@
-package com.ausregistry.jtoolkit2.se.idn;
+package com.ausregistry.jtoolkit2.se.idn.ietf;
 
 import com.ausregistry.jtoolkit2.se.*;
 import com.ausregistry.jtoolkit2.xml.XMLWriter;

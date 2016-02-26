@@ -22,7 +22,7 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
  * <p>For flexibility, this implementation extracts the data from the response using XPath queries, the expressions
  * for which are defined statically.</p>
  *
- * @see com.ausregistry.jtoolkit2.se.tmch.TmchDomainCheckCommandExtension
+ * @see DomainCheckLaunchCommandExtension
  * @see <a href="https://tools.ietf.org/html/draft-ietf-eppext-launchphase-07">Domain Name Launch
  * Mapping for the Extensible Provisioning Protocol (EPP)</a>
  */
