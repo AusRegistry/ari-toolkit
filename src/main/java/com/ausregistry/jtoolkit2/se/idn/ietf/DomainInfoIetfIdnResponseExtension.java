@@ -1,4 +1,4 @@
-package com.ausregistry.jtoolkit2.se.ietf.idn;
+package com.ausregistry.jtoolkit2.se.idn.ietf;
 
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.se.ResponseExtension;

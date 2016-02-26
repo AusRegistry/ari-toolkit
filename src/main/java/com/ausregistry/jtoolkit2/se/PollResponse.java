@@ -3,7 +3,7 @@ package com.ausregistry.jtoolkit2.se;
 import javax.xml.xpath.XPathExpressionException;
 
 import com.ausregistry.jtoolkit2.se.app.DomainInfoApplicationResponseExtension;
-import com.ausregistry.jtoolkit2.se.ietf.idn.DomainInfoIetfIdnResponseExtension;
+import com.ausregistry.jtoolkit2.se.idn.ietf.DomainInfoIetfIdnResponseExtension;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 

@@ -1,14 +1,13 @@
-package com.ausregistry.jtoolkit2.se.app;
+package com.ausregistry.jtoolkit2.se.launch;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import com.ausregistry.jtoolkit2.se.DomainCreateResponse;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 import com.ausregistry.jtoolkit2.xml.XMLParser;
-import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 
 public class DomainCreateApplicationLaunchResponseExtensionTest {

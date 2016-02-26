@@ -1,4 +1,4 @@
-package com.ausregistry.jtoolkit2.se.app;
+package com.ausregistry.jtoolkit2.se.launch;
 
 
 import javax.xml.xpath.XPathExpressionException;
@@ -6,7 +6,6 @@ import javax.xml.xpath.XPathExpressionException;
 import com.ausregistry.jtoolkit2.se.DomainCreateCommand;
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.se.ResponseExtension;
-import com.ausregistry.jtoolkit2.se.launch.DomainCreateLaunchCommandExtension;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 
 /**
