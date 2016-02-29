@@ -1,4 +1,4 @@
-package com.ausregistry.jtoolkit2.se.launch;
+package com.ausregistry.jtoolkit2.se.app;
 
 
 import javax.xml.xpath.XPathExpressionException;
@@ -34,6 +34,7 @@ public class DomainCreateApplicationLaunchResponseExtension extends ResponseExte
             + ":RESPONSE_TYPE/" + LAUNCH_PREFIX;
     private static final String APP_ID_EXPR = LAUNCH_XPATH_PREFIX + ":applicationID/text()";
     private static final String PHASE_EXPR = LAUNCH_XPATH_PREFIX + ":phase/text()";
+    private static final String PHASE_NAME_EXPR = "/@name";
     private static final String RESPONSE_TYPE = ResponseExtension.CREATE;
 
     private boolean initialised = false;
@@ -48,8 +49,7 @@ public class DomainCreateApplicationLaunchResponseExtension extends ResponseExte
         id = xmlDoc.getNodeValue(replaceResponseType(
                 APP_ID_EXPR, RESPONSE_TYPE));
         phase = xmlDoc.getNodeValue(replaceResponseType(
-                PHASE_EXPR, RESPONSE_TYPE));
-
+                PHASE_EXPR + PHASE_NAME_EXPR, RESPONSE_TYPE));
         initialised = (id != null && phase != null);
     }
 
