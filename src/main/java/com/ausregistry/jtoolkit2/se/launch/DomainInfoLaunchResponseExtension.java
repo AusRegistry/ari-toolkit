@@ -1,9 +1,13 @@
 package com.ausregistry.jtoolkit2.se.launch;
 
+import static com.ausregistry.jtoolkit2.se.ExtendedObjectType.MARK;
+
 import javax.xml.xpath.XPathExpressionException;
 
 import com.ausregistry.jtoolkit2.se.ResponseExtension;
+import com.ausregistry.jtoolkit2.se.tmch.MarksList;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
+import org.w3c.dom.Element;
 
 /**
  * <p>Representation of the EPP Domain Info response for the Domain Name Launch extension.</p>
@@ -38,12 +42,16 @@ public class DomainInfoLaunchResponseExtension extends ResponseExtension {
     private static final String CHKDATA_STATUS_EXISTS_EXPR = "count(" + LAUNCH_INF_DATA_EXPRESSION
             + "launch:status)";
 
+    private static final String MARK_EXPR = LAUNCH_INF_DATA_EXPRESSION + MARK.getName() + ":mark";
+    private static final String MARK_STATUS_EXISTS_EXPR = "count(" + MARK_EXPR + ")";
+
     private boolean isInitialised;
     private String phaseType;
     private String phaseName;
     private String applicationID;
     private String status;
     private String statusName;
+    private MarksList marksList;
 
     /**
      * @param xmlDoc the XML to be processed
@@ -63,6 +71,14 @@ public class DomainInfoLaunchResponseExtension extends ResponseExtension {
         if (xmlDoc.getNodeCount(CHKDATA_STATUS_EXISTS_EXPR) > 0) {
             status = xmlDoc.getNodeValue(CHKDATA_STATUS_EXPR);
             statusName = xmlDoc.getNodeValue(CHKDATA_STATUS_NAME_EXPR);
+        }
+
+        if (xmlDoc.getNodeCount(MARK_STATUS_EXISTS_EXPR) > 0) {
+            Element markElement = (Element) xmlDoc.getElement(MARK_EXPR);
+            if (markElement != null) {
+                marksList = new MarksList();
+                marksList.fromXML(new XMLDocument(markElement));
+            }
         }
 
         if (elementCount > 0) {
@@ -101,5 +117,9 @@ public class DomainInfoLaunchResponseExtension extends ResponseExtension {
 
     public String getStatusName() {
         return statusName;
+    }
+
+    public MarksList getMarksList() {
+        return marksList;
     }
 }
