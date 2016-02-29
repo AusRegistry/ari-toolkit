@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import com.ausregistry.jtoolkit2.se.DomainCreateResponse;
+import com.ausregistry.jtoolkit2.se.app.DomainCreateApplicationLaunchResponseExtension;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 import com.ausregistry.jtoolkit2.xml.XMLParser;
 import org.junit.Before;
@@ -40,8 +41,6 @@ public class DomainCreateApplicationLaunchResponseExtensionTest {
     private XMLParser xmlParser;
     private DomainCreateApplicationLaunchResponseExtension responseExtension;
     private DomainCreateResponse domainResponse;
-
-
 
     @Before
     public void setUp() throws Exception {

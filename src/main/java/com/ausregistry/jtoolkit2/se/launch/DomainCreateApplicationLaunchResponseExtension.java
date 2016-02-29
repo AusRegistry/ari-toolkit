@@ -19,7 +19,7 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
  * for which are defined statically.</p>
  *
  * @see com.ausregistry.jtoolkit2.se.DomainCreateCommand
- * @see DomainCreateLaunchCommandExtension
+ * @see com.ausregistry.jtoolkit2.se.launch.DomainCreateLaunchCommandExtension
  * @see <a href="https://tools.ietf.org/html/draft-ietf-eppext-launchphase-07">Domain Name Launch
  * Extension Mapping for the Extensible Provisioning Protocol (EPP)</a>
  */
