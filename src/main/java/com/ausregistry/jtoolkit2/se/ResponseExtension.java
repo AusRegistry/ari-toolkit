@@ -21,6 +21,7 @@ public abstract class ResponseExtension implements java.io.Serializable {
     public static final String RENEW = "renData";
     public static final String DATA = "data";
     public static final String TRANSFER = "trnData";
+    public static final String CHK_DATA = "chkData";
 
     /**
      * XPath expression to locate the extension element from the EPP response.

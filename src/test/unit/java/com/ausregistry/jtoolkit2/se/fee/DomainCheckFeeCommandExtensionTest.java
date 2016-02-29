@@ -1,0 +1,262 @@
+package com.ausregistry.jtoolkit2.se.fee;
+
+import com.ausregistry.jtoolkit2.Timer;
+import com.ausregistry.jtoolkit2.se.CLTRID;
+import com.ausregistry.jtoolkit2.se.Command;
+import com.ausregistry.jtoolkit2.se.DomainCheckCommand;
+import com.ausregistry.jtoolkit2.se.Period;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import org.xml.sax.SAXException;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+
+public class DomainCheckFeeCommandExtensionTest {
+
+    public static final String DOMAIN_NAME = "jtkutest.com.au";
+    public static final String CURRENCY = "AUD";
+    public static final String COMMAND = "CREATE";
+    public static final String PHASE = "claims";
+    public static final int NUMBER_OF_YEARS = 1;
+    public static final String SUBPHASE = "landrush";
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Before
+    public void setUp() throws Exception {
+        Timer.setTime("20070101.010101");
+        CLTRID.setClID("JTKUTEST");
+    }
+
+    @Test
+    public void shouldCreateValidXmlWhenSupplyFeeExtension() throws SAXException {
+
+        final Command cmd = new DomainCheckCommand(DOMAIN_NAME);
+
+        final DomainCheckFeeCommandExtension ext = new DomainCheckFeeCommandExtension();
+        FeeCheckData.Command command = new FeeCheckData.Command(COMMAND);
+        command.setPhase(PHASE);
+        command.setSubphase(SUBPHASE);
+        FeeCheckData feeCheckData = new FeeCheckData(DOMAIN_NAME, command);
+        feeCheckData.setCurrency(CURRENCY);
+        feeCheckData.setPeriod(new Period(NUMBER_OF_YEARS));
+
+        ext.addFeeCheckDomain(feeCheckData);
+
+        try {
+            cmd.appendExtension(ext);
+            String expectedXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                    "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\"" +
+                    " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
+                    " xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">" +
+                    "<command>" +
+                    "<check>" +
+                    "<check xmlns=\"urn:ietf:params:xml:ns:domain-1.0\"" +
+                    " xsi:schemaLocation=\"urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd\">" +
+                    "<name>jtkutest.com.au</name>" +
+                    "</check>" +
+                    "</check>" +
+                    "<extension>" +
+                    "<check xmlns=\"urn:ietf:params:xml:ns:fee-0.6\">" +
+                    "<domain>" +
+                    "<name>" + DOMAIN_NAME + "</name>" +
+                    "<currency>" + CURRENCY + "</currency>" +
+                    "<command phase=\"" + PHASE + "\" subphase=\"" + SUBPHASE + "\">" + COMMAND + "</command>" +
+                    "<period unit=\"y\">" + NUMBER_OF_YEARS + "</period>" +
+                    "</domain>" +
+                    "</check>" +
+                    "</extension>" +
+                    "<clTRID>JTKUTEST.20070101.010101.0</clTRID>" +
+                    "</command>" +
+                    "</epp>";
+
+            assertEquals(expectedXml, cmd.toXML());
+
+        } catch (SAXException saxe) {
+            fail(saxe.getMessage());
+        }
+    }
+
+    @Test
+    public void shouldCreateValidXmlWhenSubphaseNotProvided() throws SAXException {
+
+        final Command cmd = new DomainCheckCommand(DOMAIN_NAME);
+
+        final DomainCheckFeeCommandExtension ext = new DomainCheckFeeCommandExtension();
+        FeeCheckData.Command command = new FeeCheckData.Command(COMMAND);
+        command.setPhase(PHASE);
+        FeeCheckData feeCheckData = new FeeCheckData(DOMAIN_NAME, command);
+        feeCheckData.setCurrency(CURRENCY);
+        feeCheckData.setPeriod(new Period(NUMBER_OF_YEARS));
+
+        ext.addFeeCheckDomain(feeCheckData);
+
+        try {
+            cmd.appendExtension(ext);
+            String expectedXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                    "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\"" +
+                    " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
+                    " xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">" +
+                    "<command>" +
+                    "<check>" +
+                    "<check xmlns=\"urn:ietf:params:xml:ns:domain-1.0\"" +
+                    " xsi:schemaLocation=\"urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd\">" +
+                    "<name>jtkutest.com.au</name>" +
+                    "</check>" +
+                    "</check>" +
+                    "<extension>" +
+                    "<check xmlns=\"urn:ietf:params:xml:ns:fee-0.6\">" +
+                    "<domain>" +
+                    "<name>" + DOMAIN_NAME + "</name>" +
+                    "<currency>" + CURRENCY + "</currency>" +
+                    "<command phase=\"" + PHASE + "\">" + COMMAND + "</command>" +
+                    "<period unit=\"y\">" + NUMBER_OF_YEARS + "</period>" +
+                    "</domain>" +
+                    "</check>" +
+                    "</extension>" +
+                    "<clTRID>JTKUTEST.20070101.010101.0</clTRID>" +
+                    "</command>" +
+                    "</epp>";
+
+            assertEquals(expectedXml, cmd.toXML());
+
+        } catch (SAXException saxe) {
+            fail(saxe.getMessage());
+        }
+    }
+
+    @Test
+    public void shouldCreateValidXmlWhenCurrencyProvided() throws SAXException {
+
+        final Command cmd = new DomainCheckCommand(DOMAIN_NAME);
+
+        final DomainCheckFeeCommandExtension ext = new DomainCheckFeeCommandExtension();
+        FeeCheckData.Command command = new FeeCheckData.Command(COMMAND);
+        command.setPhase(PHASE);
+        command.setSubphase(SUBPHASE);
+        FeeCheckData feeCheckData = new FeeCheckData(DOMAIN_NAME, command);
+        feeCheckData.setPeriod(new Period(NUMBER_OF_YEARS));
+
+        ext.addFeeCheckDomain(feeCheckData);
+
+        try {
+            cmd.appendExtension(ext);
+            String expectedXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                    "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\"" +
+                    " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
+                    " xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">" +
+                    "<command>" +
+                    "<check>" +
+                    "<check xmlns=\"urn:ietf:params:xml:ns:domain-1.0\"" +
+                    " xsi:schemaLocation=\"urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd\">" +
+                    "<name>jtkutest.com.au</name>" +
+                    "</check>" +
+                    "</check>" +
+                    "<extension>" +
+                    "<check xmlns=\"urn:ietf:params:xml:ns:fee-0.6\">" +
+                    "<domain>" +
+                    "<name>" + DOMAIN_NAME + "</name>" +
+                    "<command phase=\"" + PHASE + "\" subphase=\"" + SUBPHASE + "\">" + COMMAND + "</command>" +
+                    "<period unit=\"y\">" + NUMBER_OF_YEARS + "</period>" +
+                    "</domain>" +
+                    "</check>" +
+                    "</extension>" +
+                    "<clTRID>JTKUTEST.20070101.010101.0</clTRID>" +
+                    "</command>" +
+                    "</epp>";
+
+            assertEquals(expectedXml, cmd.toXML());
+
+        } catch (SAXException saxe) {
+            fail(saxe.getMessage());
+        }
+    }
+
+    @Test
+    public void failWhenNameNotProvided() throws SAXException {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Field 'name' is required.");
+
+        final Command cmd = new DomainCheckCommand(DOMAIN_NAME);
+
+        final DomainCheckFeeCommandExtension ext = new DomainCheckFeeCommandExtension();
+
+        FeeCheckData.Command command = new FeeCheckData.Command(COMMAND);
+        command.setPhase(PHASE);
+        command.setSubphase(SUBPHASE);
+        FeeCheckData feeCheckData = new FeeCheckData(null, command);
+        feeCheckData.setCurrency(CURRENCY);
+        feeCheckData.setPeriod(new Period(NUMBER_OF_YEARS));
+        ext.addFeeCheckDomain(feeCheckData);
+        cmd.appendExtension(ext);
+        cmd.toXML();
+    }
+
+    @Test
+    public void failWhenCommandNotProvided() throws SAXException {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Field 'command' is required.");
+
+        final Command cmd = new DomainCheckCommand(DOMAIN_NAME);
+
+        final DomainCheckFeeCommandExtension ext = new DomainCheckFeeCommandExtension();
+        FeeCheckData feeCheckData = new FeeCheckData(DOMAIN_NAME, null);
+        feeCheckData.setCurrency(CURRENCY);
+        feeCheckData.setPeriod(new Period(NUMBER_OF_YEARS));
+        ext.addFeeCheckDomain(feeCheckData);
+        cmd.appendExtension(ext);
+        cmd.toXML();
+    }
+
+    @Test
+    public void shouldCreateValidXmlWhenNoPeriodSupplied() throws SAXException {
+
+        final Command cmd = new DomainCheckCommand(DOMAIN_NAME);
+
+        final DomainCheckFeeCommandExtension ext = new DomainCheckFeeCommandExtension();
+        FeeCheckData.Command command = new FeeCheckData.Command(COMMAND);
+        command.setPhase(PHASE);
+        command.setSubphase(SUBPHASE);
+        FeeCheckData feeCheckData = new FeeCheckData(DOMAIN_NAME, command);
+        feeCheckData.setCurrency(CURRENCY);
+        ext.addFeeCheckDomain(feeCheckData);
+
+        try {
+            cmd.appendExtension(ext);
+            String expectedXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                    "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\"" +
+                    " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
+                    " xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">" +
+                    "<command>" +
+                    "<check>" +
+                    "<check xmlns=\"urn:ietf:params:xml:ns:domain-1.0\"" +
+                    " xsi:schemaLocation=\"urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd\">" +
+                    "<name>jtkutest.com.au</name>" +
+                    "</check>" +
+                    "</check>" +
+                    "<extension>" +
+                    "<check xmlns=\"urn:ietf:params:xml:ns:fee-0.6\">" +
+                    "<domain>" +
+                    "<name>" + DOMAIN_NAME + "</name>" +
+                    "<currency>" + CURRENCY + "</currency>" +
+                    "<command phase=\"" + PHASE + "\" subphase=\"" + SUBPHASE + "\">" + COMMAND + "</command>" +
+                    "</domain>" +
+                    "</check>" +
+                    "</extension>" +
+                    "<clTRID>JTKUTEST.20070101.010101.0</clTRID>" +
+                    "</command>" +
+                    "</epp>";
+
+            assertEquals(expectedXml, cmd.toXML());
+
+        } catch (SAXException saxe) {
+            fail(saxe.getMessage());
+        }
+    }
+
+}
