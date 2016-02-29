@@ -143,7 +143,7 @@ public class DomainInfoLaunchResponseExtensionTest {
          + "      <mark:courtName>courtName</mark:courtName>\n"
          + "    </mark:court>\n"
          + "  </mark:mark>\n"
-         +"      </launch:infData>"
+         + "      </launch:infData>"
          + "    </extension>"
          + "    <trID>"
          + "      <clTRID>ABC-12345</clTRID>"
