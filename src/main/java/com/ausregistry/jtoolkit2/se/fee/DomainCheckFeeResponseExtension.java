@@ -3,6 +3,7 @@ package com.ausregistry.jtoolkit2.se.fee;
 
 import com.ausregistry.jtoolkit2.se.*;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import javax.xml.xpath.XPathExpressionException;
@@ -51,50 +52,67 @@ public class DomainCheckFeeResponseExtension extends ResponseExtension {
 
     @Override
     public void fromXML(XMLDocument xmlDoc) throws XPathExpressionException {
-
-        int cdCount = xmlDoc.getNodeCount(CHKDATA_COUNT_EXPR);
-        if (cdCount > 0) {
-            FeeCheckData feeCheckData;
-            for (int i = 0; i < cdCount; i++) {
-                String qry = replaceIndex(CHKDATA_IND_EXPR, i + 1);
-                final String domainName = xmlDoc.getNodeValue(qry + CHKDATA_DOMAIN_NAME_EXPR);
-                final String currency = xmlDoc.getNodeValue(qry + CHKDATA_DOMAIN_CURRENCY_EXPR);
-                final FeeCheckData.Command command = new FeeCheckData.Command(
-                        xmlDoc.getNodeValue(qry + CHKDATA_DOMAIN_COMMAND_EXPR));
-                command.setPhase(xmlDoc.getNodeValue(qry + CHKDATA_DOMAIN_COMMAND_PHASE_EXPR));
-                command.setSubphase(xmlDoc.getNodeValue(qry + CHKDATA_DOMAIN_COMMAND_SUBPHASE_EXPR));
-                final String feeClass = xmlDoc.getNodeValue(qry + CHKDATA_DOMAIN_FEE_CLASS_EXPR);
-
-                final String periodValue = xmlDoc.getNodeValue(qry + CHKDATA_DOMAIN_PERIOD_EXPR);
-                Period period = periodValue == null
-                        ? null
-                        : new Period(PeriodUnit.value(xmlDoc.getNodeValue(qry + CHKDATA_DOMAIN_PERIOD_UNIT_EXPR)),
-                                Integer.parseInt(periodValue));
-
-                feeCheckData = new FeeCheckData(domainName, command);
-                feeCheckData.setCurrency(currency);
-                feeCheckData.setPeriod(period);
-                feeCheckData.setFeeClass(feeClass);
-
-                NodeList feeNodes = xmlDoc.getElements(qry + CHKDATA_FEE_NODES_EXPR);
-                for (int j = 0; j < feeNodes.getLength(); j++) {
-                    BigDecimal feeValue = feeNodes.item(j).getTextContent() == null ? null
-                            : new BigDecimal(feeNodes.item(j).getTextContent());
-                    String description = feeNodes.item(j).getAttributes().getNamedItem("description").getTextContent();
-                    String refundable = feeNodes.item(j).getAttributes().getNamedItem("refundable") != null
-                            ? feeNodes.item(j).getAttributes().getNamedItem("refundable").getTextContent()
-                            : null;
-                    FeeCheckData.Fee fee = new FeeCheckData.Fee(feeValue, description);
-                    fee.setRefundable("1".equals(refundable));
-                    feeCheckData.addFee(fee);
-                }
-
-                feeDomains.put(domainName, feeCheckData);
-            }
-            initialised = true;
-        } else {
-            initialised = false;
+        int checkDataCount = xmlDoc.getNodeCount(CHKDATA_COUNT_EXPR);
+        for (int checkDataIndex = 0; checkDataIndex < checkDataCount; checkDataIndex++) {
+            parseFeeCheckDataNodes(xmlDoc, checkDataIndex);
         }
+        initialised = checkDataCount > 0;
+    }
+
+    private void parseFeeCheckDataNodes(XMLDocument xmlDoc, int checkDataIndex) throws XPathExpressionException {
+        String checkDataQueryPath = replaceIndex(CHKDATA_IND_EXPR, checkDataIndex + 1);
+
+        final String domainName = parseTextValue(xmlDoc, checkDataQueryPath + CHKDATA_DOMAIN_NAME_EXPR);
+        final FeeCheckData.Command command = parseCommandNode(xmlDoc, checkDataQueryPath);
+
+        FeeCheckData feeCheckData = new FeeCheckData(domainName, command);
+        feeCheckData.setCurrency(parseTextValue(xmlDoc, checkDataQueryPath + CHKDATA_DOMAIN_CURRENCY_EXPR));
+        feeCheckData.setFeeClass(parseTextValue(xmlDoc, checkDataQueryPath + CHKDATA_DOMAIN_FEE_CLASS_EXPR));
+        feeCheckData.setPeriod(parsePeriod(xmlDoc, checkDataQueryPath));
+
+        parseFeeNodes(xmlDoc, feeCheckData, checkDataQueryPath + CHKDATA_FEE_NODES_EXPR);
+
+        feeDomains.put(domainName, feeCheckData);
+    }
+
+    private String parseTextValue(XMLDocument xmlDoc, String queryPath) throws XPathExpressionException {
+        return xmlDoc.getNodeValue(queryPath);
+    }
+
+    private FeeCheckData.Command parseCommandNode(XMLDocument xmlDoc, String checkDataQueryPath)
+            throws XPathExpressionException {
+        final FeeCheckData.Command command = new FeeCheckData.Command(
+                xmlDoc.getNodeValue(checkDataQueryPath + CHKDATA_DOMAIN_COMMAND_EXPR));
+        command.setPhase(xmlDoc.getNodeValue(checkDataQueryPath + CHKDATA_DOMAIN_COMMAND_PHASE_EXPR));
+        command.setSubphase(xmlDoc.getNodeValue(checkDataQueryPath + CHKDATA_DOMAIN_COMMAND_SUBPHASE_EXPR));
+        return command;
+    }
+
+    private Period parsePeriod(XMLDocument xmlDoc, String checkDataQueryPath) throws XPathExpressionException {
+        final String periodValue = parseTextValue(xmlDoc, checkDataQueryPath + CHKDATA_DOMAIN_PERIOD_EXPR);
+        final String unitValue = parseTextValue(xmlDoc, checkDataQueryPath + CHKDATA_DOMAIN_PERIOD_UNIT_EXPR);
+        return (periodValue != null)
+                ? new Period(PeriodUnit.value(unitValue), Integer.parseInt(periodValue))
+                : null;
+    }
+
+    private void parseFeeNodes(XMLDocument xmlDoc, FeeCheckData feeCheckData, String feeNodesQueryPath)
+            throws XPathExpressionException {
+        NodeList feeNodes = xmlDoc.getElements(feeNodesQueryPath);
+        for (int feeNodeIndex = 0; feeNodeIndex < feeNodes.getLength(); feeNodeIndex++) {
+            Node feeNode = feeNodes.item(feeNodeIndex);
+            feeCheckData.addFee(parseFee(feeNode));
+        }
+    }
+
+    private FeeCheckData.Fee parseFee(Node feeNode) {
+        BigDecimal feeValue = new BigDecimal(feeNode.getTextContent());
+        String description = feeNode.getAttributes().getNamedItem("description").getTextContent();
+        FeeCheckData.Fee fee = new FeeCheckData.Fee(feeValue, description);
+        String refundable = feeNode.getAttributes().getNamedItem("refundable") != null
+                ? feeNode.getAttributes().getNamedItem("refundable").getTextContent() : null;
+        fee.setRefundable("1".equals(refundable));
+        return fee;
     }
 
     @Override

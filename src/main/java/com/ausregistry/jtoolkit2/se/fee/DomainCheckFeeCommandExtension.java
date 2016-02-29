@@ -6,6 +6,7 @@ import com.ausregistry.jtoolkit2.xml.XMLWriter;
 import org.w3c.dom.Element;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,41 +28,8 @@ public class DomainCheckFeeCommandExtension implements CommandExtension {
     private Map<String, FeeCheckData> feeCheckDomains = new LinkedHashMap<String, FeeCheckData>();
 
 
-    @Override
-    public void addToCommand(Command command) {
-
-        if (!feeCheckDomains.isEmpty()) {
-            final XMLWriter xmlWriter = command.getXmlWriter();
-            final Element extensionElement = command.getExtensionElement();
-            final Element checkElement = xmlWriter.appendChild(extensionElement, "check",
-                    ExtendedObjectType.FEE.getURI());
-
-            for (Map.Entry<String, FeeCheckData> feeCheckDomain: feeCheckDomains.entrySet()) {
-                FeeCheckData feeCheckData = feeCheckDomain.getValue();
-                final Element domainElement = xmlWriter.appendChild(checkElement, "domain");
-                xmlWriter.appendChild(domainElement, "name").setTextContent(feeCheckData.getName());
-                if (feeCheckData.getCurrency() != null) {
-                    xmlWriter.appendChild(domainElement, "currency").setTextContent(feeCheckData.getCurrency());
-                }
-                final Element commandElement = xmlWriter.appendChild(domainElement, "command");
-                commandElement.setTextContent(feeCheckData.getCommand().getName());
-                if (feeCheckData.getCommand().getPhase() != null) {
-                    commandElement.setAttribute("phase", feeCheckData.getCommand().getPhase());
-                }
-                if (feeCheckData.getCommand().getSubphase() != null) {
-                    commandElement.setAttribute("subphase", feeCheckData.getCommand().getSubphase());
-                }
-                if (feeCheckData.getPeriod() != null) {
-                    Element periodElement = xmlWriter.appendChild(domainElement, "period");
-                    periodElement.setTextContent(String.valueOf(feeCheckData.getPeriod().getPeriod()));
-                    periodElement.setAttribute("unit", feeCheckData.getPeriod().getUnit().toString());
-                }
-            }
-        }
-    }
-
-    public void addFeeCheckDomain(FeeCheckData feeCheckDomain) {
-        if (feeCheckDomain != null) {
+    public DomainCheckFeeCommandExtension(List<FeeCheckData> feeCds) {
+        for (FeeCheckData feeCheckDomain : feeCds) {
             if (feeCheckDomain.getName() == null) {
                 throw new IllegalArgumentException(ErrorPkg.getMessage("se.ar.domain.chcek.fee", FIELD_IDENTIFIER,
                         "name"));
@@ -73,4 +41,48 @@ public class DomainCheckFeeCommandExtension implements CommandExtension {
             feeCheckDomains.put(feeCheckDomain.getName(), feeCheckDomain);
         }
     }
+
+    @Override
+    public void addToCommand(Command command) {
+
+        final XMLWriter xmlWriter = command.getXmlWriter();
+        final Element extensionElement = command.getExtensionElement();
+        final Element checkElement = xmlWriter.appendChild(extensionElement, "check", ExtendedObjectType.FEE.getURI());
+
+        for (Map.Entry<String, FeeCheckData> feeCheckDomain: feeCheckDomains.entrySet()) {
+            FeeCheckData feeCheckData = feeCheckDomain.getValue();
+            final Element domainElement = xmlWriter.appendChild(checkElement, "domain");
+
+            xmlWriter.appendChild(domainElement, "name").setTextContent(feeCheckData.getName());
+            writeCurrency(xmlWriter, feeCheckData, domainElement);
+            writeCommand(xmlWriter, feeCheckData, domainElement);
+            writePeriod(xmlWriter, feeCheckData, domainElement);
+        }
+    }
+
+    private void writeCurrency(XMLWriter xmlWriter, FeeCheckData feeCheckData, Element domainElement) {
+        if (feeCheckData.getCurrency() != null) {
+            xmlWriter.appendChild(domainElement, "currency").setTextContent(feeCheckData.getCurrency());
+        }
+    }
+
+    private void writeCommand(XMLWriter xmlWriter, FeeCheckData feeCheckData, Element domainElement) {
+        final Element commandElement = xmlWriter.appendChild(domainElement, "command");
+        commandElement.setTextContent(feeCheckData.getCommand().getName());
+        if (feeCheckData.getCommand().getPhase() != null) {
+            commandElement.setAttribute("phase", feeCheckData.getCommand().getPhase());
+        }
+        if (feeCheckData.getCommand().getSubphase() != null) {
+            commandElement.setAttribute("subphase", feeCheckData.getCommand().getSubphase());
+        }
+    }
+
+    private void writePeriod(XMLWriter xmlWriter, FeeCheckData feeCheckData, Element domainElement) {
+        if (feeCheckData.getPeriod() != null) {
+            Element periodElement = xmlWriter.appendChild(domainElement, "period");
+            periodElement.setTextContent(String.valueOf(feeCheckData.getPeriod().getPeriod()));
+            periodElement.setAttribute("unit", feeCheckData.getPeriod().getUnit().toString());
+        }
+    }
+
 }

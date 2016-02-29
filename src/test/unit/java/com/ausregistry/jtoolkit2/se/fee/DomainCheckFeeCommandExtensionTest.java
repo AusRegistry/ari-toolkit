@@ -11,6 +11,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.xml.sax.SAXException;
 
+import java.util.Collections;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
@@ -38,7 +40,6 @@ public class DomainCheckFeeCommandExtensionTest {
 
         final Command cmd = new DomainCheckCommand(DOMAIN_NAME);
 
-        final DomainCheckFeeCommandExtension ext = new DomainCheckFeeCommandExtension();
         FeeCheckData.Command command = new FeeCheckData.Command(COMMAND);
         command.setPhase(PHASE);
         command.setSubphase(SUBPHASE);
@@ -46,7 +47,8 @@ public class DomainCheckFeeCommandExtensionTest {
         feeCheckData.setCurrency(CURRENCY);
         feeCheckData.setPeriod(new Period(NUMBER_OF_YEARS));
 
-        ext.addFeeCheckDomain(feeCheckData);
+        final DomainCheckFeeCommandExtension ext =
+                new DomainCheckFeeCommandExtension(Collections.singletonList(feeCheckData));
 
         try {
             cmd.appendExtension(ext);
@@ -87,14 +89,14 @@ public class DomainCheckFeeCommandExtensionTest {
 
         final Command cmd = new DomainCheckCommand(DOMAIN_NAME);
 
-        final DomainCheckFeeCommandExtension ext = new DomainCheckFeeCommandExtension();
         FeeCheckData.Command command = new FeeCheckData.Command(COMMAND);
         command.setPhase(PHASE);
         FeeCheckData feeCheckData = new FeeCheckData(DOMAIN_NAME, command);
         feeCheckData.setCurrency(CURRENCY);
         feeCheckData.setPeriod(new Period(NUMBER_OF_YEARS));
 
-        ext.addFeeCheckDomain(feeCheckData);
+        final DomainCheckFeeCommandExtension ext =
+                new DomainCheckFeeCommandExtension(Collections.singletonList(feeCheckData));
 
         try {
             cmd.appendExtension(ext);
@@ -135,15 +137,14 @@ public class DomainCheckFeeCommandExtensionTest {
 
         final Command cmd = new DomainCheckCommand(DOMAIN_NAME);
 
-        final DomainCheckFeeCommandExtension ext = new DomainCheckFeeCommandExtension();
         FeeCheckData.Command command = new FeeCheckData.Command(COMMAND);
         command.setPhase(PHASE);
         command.setSubphase(SUBPHASE);
         FeeCheckData feeCheckData = new FeeCheckData(DOMAIN_NAME, command);
         feeCheckData.setPeriod(new Period(NUMBER_OF_YEARS));
 
-        ext.addFeeCheckDomain(feeCheckData);
-
+        final DomainCheckFeeCommandExtension ext =
+                new DomainCheckFeeCommandExtension(Collections.singletonList(feeCheckData));
         try {
             cmd.appendExtension(ext);
             String expectedXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
@@ -184,15 +185,15 @@ public class DomainCheckFeeCommandExtensionTest {
 
         final Command cmd = new DomainCheckCommand(DOMAIN_NAME);
 
-        final DomainCheckFeeCommandExtension ext = new DomainCheckFeeCommandExtension();
-
         FeeCheckData.Command command = new FeeCheckData.Command(COMMAND);
         command.setPhase(PHASE);
         command.setSubphase(SUBPHASE);
         FeeCheckData feeCheckData = new FeeCheckData(null, command);
         feeCheckData.setCurrency(CURRENCY);
         feeCheckData.setPeriod(new Period(NUMBER_OF_YEARS));
-        ext.addFeeCheckDomain(feeCheckData);
+        final DomainCheckFeeCommandExtension ext =
+                new DomainCheckFeeCommandExtension(Collections.singletonList(feeCheckData));
+
         cmd.appendExtension(ext);
         cmd.toXML();
     }
@@ -204,11 +205,11 @@ public class DomainCheckFeeCommandExtensionTest {
 
         final Command cmd = new DomainCheckCommand(DOMAIN_NAME);
 
-        final DomainCheckFeeCommandExtension ext = new DomainCheckFeeCommandExtension();
         FeeCheckData feeCheckData = new FeeCheckData(DOMAIN_NAME, null);
         feeCheckData.setCurrency(CURRENCY);
         feeCheckData.setPeriod(new Period(NUMBER_OF_YEARS));
-        ext.addFeeCheckDomain(feeCheckData);
+        final DomainCheckFeeCommandExtension ext =
+                new DomainCheckFeeCommandExtension(Collections.singletonList(feeCheckData));
         cmd.appendExtension(ext);
         cmd.toXML();
     }
@@ -218,14 +219,13 @@ public class DomainCheckFeeCommandExtensionTest {
 
         final Command cmd = new DomainCheckCommand(DOMAIN_NAME);
 
-        final DomainCheckFeeCommandExtension ext = new DomainCheckFeeCommandExtension();
         FeeCheckData.Command command = new FeeCheckData.Command(COMMAND);
         command.setPhase(PHASE);
         command.setSubphase(SUBPHASE);
         FeeCheckData feeCheckData = new FeeCheckData(DOMAIN_NAME, command);
         feeCheckData.setCurrency(CURRENCY);
-        ext.addFeeCheckDomain(feeCheckData);
-
+        final DomainCheckFeeCommandExtension ext =
+                new DomainCheckFeeCommandExtension(Collections.singletonList(feeCheckData));
         try {
             cmd.appendExtension(ext);
             String expectedXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
