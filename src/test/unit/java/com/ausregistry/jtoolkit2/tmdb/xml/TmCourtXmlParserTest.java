@@ -22,9 +22,9 @@ import org.w3c.dom.Node;
 public class TmCourtXmlParserTest {
 
     @Mock
-    TmCourt mockCourt;
+    private TmCourt mockCourt;
 
-    TmCourtXmlParser tmCourtXmlParser = new TmCourtXmlParser();
+    private TmCourtXmlParser tmCourtXmlParser = new TmCourtXmlParser();
 
     @Before
     public void setUp() throws Exception {
@@ -38,7 +38,7 @@ public class TmCourtXmlParserTest {
         TmCourt court = tmCourtXmlParser.parse(nodeForString(courtXml));
 
         assertThat(court, sameInstance(mockCourt));
-        verify(mockCourt).setReferenceNumber(234235l);
+        verify(mockCourt).setReferenceNumber(234235L);
     }
 
     @Test

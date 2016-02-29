@@ -10,7 +10,7 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
 import com.ausregistry.jtoolkit2.xml.XMLParser;
 
 public class HostCheckResponseTest {
-    private static final String xml =
+    private static final String XML =
         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><response><result code=\"1000\"><msg>Command completed successfully</msg></result><resData><host:chkData xmlns:host=\"urn:ietf:params:xml:ns:host-1.0\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:host-1.0 host-1.0.xsd\"><host:cd><host:name avail=\"1\">ns1.example.com</host:name></host:cd><host:cd><host:name avail=\"0\">ns2.example2.com</host:name><host:reason>In use</host:reason></host:cd><host:cd><host:name avail=\"1\">ns3.example3.com</host:name></host:cd></host:chkData></resData><trID><clTRID>ABC-12345</clTRID><svTRID>54322-XYZ</svTRID></trID></response></epp>";
     private HostCheckResponse response;
 
@@ -18,7 +18,7 @@ public class HostCheckResponseTest {
     public void setUp() throws Exception {
         response = new HostCheckResponse();
         XMLParser parser = new XMLParser();
-        XMLDocument doc = parser.parse(xml);
+        XMLDocument doc = parser.parse(XML);
         response.fromXML(doc);
     }
 

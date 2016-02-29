@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class TmNoticeTest {
 
-    TmNotice tmNotice = new TmNotice();
+    private TmNotice tmNotice = new TmNotice();
 
     @Test
     public void shouldGetTheId() {

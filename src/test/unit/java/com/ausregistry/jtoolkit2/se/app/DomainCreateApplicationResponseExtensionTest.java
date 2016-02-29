@@ -13,7 +13,7 @@ import com.ausregistry.jtoolkit2.xml.XMLParser;
 
 public class DomainCreateApplicationResponseExtensionTest {
 
-    private static final String xml =
+    private static final String XML =
             "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>" +
                     "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\">" +
                     "  <response>" +
@@ -52,7 +52,7 @@ public class DomainCreateApplicationResponseExtensionTest {
         domainResponse = new DomainCreateResponse();
         domainResponse.registerExtension(responseExtension);
         XMLParser parser = new XMLParser();
-        XMLDocument doc = parser.parse(xml);
+        XMLDocument doc = parser.parse(XML);
         domainResponse.fromXML(doc);
     }
 

@@ -10,16 +10,16 @@ import org.junit.Test;
 import org.xml.sax.SAXException;
 
 public class ContactTransferRequestCommandTest {
-    private static final String clID = "JTKUTEST";
-    private static final String id1 = "JTKCON1";
-    private static final String id1pw = "jtkcon1pw";
+    private static final String CL_ID = "JTKUTEST";
+    private static final String ID_1 = "JTKCON1";
+    private static final String ID_1_PW = "jtkcon1pw";
     private Command cmd;
 
     @Before
     public void setUp() throws Exception {
         Timer.setTime("20070101.010101");
-        CLTRID.setClID(clID);
-        cmd = new ContactTransferRequestCommand(id1, id1pw);
+        CLTRID.setClID(CL_ID);
+        cmd = new ContactTransferRequestCommand(ID_1, ID_1_PW);
     }
 
     @After

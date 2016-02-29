@@ -38,7 +38,7 @@ public class ErrorPkgTest {
     @Test
     public void testGetMessageFromInts() {
         String[] args = new String[] {"<<in1>>", "<<in2>>"};
-        int[] vals = new int[] {0,1};
+        int[] vals = new int[] {0, 1};
         String msg = ErrorPkg.getMessage("test.msg.2", args, vals);
         assertEquals("Test message 0; 1", msg);
     }

@@ -15,8 +15,7 @@ import org.junit.Test;
 
 public class DomainCheckPriceV1_1ResponseExtensionTest {
 
-    private DomainCheckPriceV1_1ResponseExtension domainCheckPriceV11Response;
-    private static final String priceXml =
+    private static final String PRICE_XML =
             "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>"
                     + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" "
                     + "     xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
@@ -61,12 +60,14 @@ public class DomainCheckPriceV1_1ResponseExtensionTest {
                     + "    </response>"
                     + "</epp>";
 
+    private DomainCheckPriceV1_1ResponseExtension domainCheckPriceV11Response;
+
     @Before
     public void setUp() throws Exception {
         domainCheckPriceV11Response = new DomainCheckPriceV1_1ResponseExtension();
 
         XMLParser parser = new XMLParser();
-        XMLDocument doc = parser.parse(priceXml);
+        XMLDocument doc = parser.parse(PRICE_XML);
         domainCheckPriceV11Response.fromXML(doc);
     }
 

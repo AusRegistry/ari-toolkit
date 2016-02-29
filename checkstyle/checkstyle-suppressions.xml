@@ -31,6 +31,7 @@
          + `e.printStackTrace()`
          + `System.out.println()`
       -->
+    <suppress checks="RegexpCheck" files=".*Test\.java" />
     <suppress checks="RegexpCheck" files=".*Demo.java" />
     <suppress checks="RegexpCheck" files="SessionManagerFactory\.java" />
     <suppress checks="RegexpCheck" files="TLSContext\.java" />
@@ -38,6 +39,7 @@
     <suppress checks="RegexpCheck" files="EPPSchemaProvider\.java" />
     <suppress checks="RegexpCheck" files="XMLBuilderSJSXP\.java" />
     <suppress checks="RegexpCheck" files="XMLParser\.java" />
+    <suppress checks="RegexpCheck" files="NodeForXml\.java" />
 
     <!-- Variables 'cmdElement', 'command' and 'extension' shall be defined as private with accessor methods -->
     <suppress checks="VisibilityModifierCheck" files="Command\.java" />
@@ -50,9 +52,12 @@
     <!-- Variables should be defined as private with accessor methods -->
     <suppress checks="VisibilityModifierCheck" files="XMLWriter\.java" />
 
+    <suppress checks="VisibilityModifierCheck" files="MarkAbstractTest\.java" />
+
     <!--
       Issues caused by not conventional names
       -->
+    <suppress checks="MethodNameCheck|MemberNameCheck|TypeNameCheck" files=".*Test\.java" />
     <suppress checks="TypeNameCheck" files="DomainVariantResponseExtensionV1_1\.java" />
     <suppress checks="TypeNameCheck" files="DomainCheckPriceV1_1CommandExtension\.java" />
     <suppress checks="TypeNameCheck" files="DomainCheckPriceV1_1ResponseExtension\.java" />
@@ -69,4 +74,79 @@
     <suppress checks="TypeNameCheck" files="DomainUpdateVariantCommandExtensionV1_1\.java" />
     <suppress checks="MemberNameCheck|MethodNameCheck" files="PollResponse\.java" />
 
+    <suppress checks="LineLengthCheck" files="PerfTest\.java" />
+    <suppress checks="LineLengthCheck" files="AuDomainModifyRegistrantCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="AuDomainTransferRegistrantCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="AuDomainTransferRegistrantResponseTest\.java" />
+    <suppress checks="LineLengthCheck" files="ContactCheckCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="ContactCheckResponseTest\.java" />
+    <suppress checks="LineLengthCheck" files="ContactCreateCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="ContactCreateResponseTest\.java" />
+    <suppress checks="LineLengthCheck" files="ContactDeleteCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="ContactInfoCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="ContactInfoResponseTest\.java" />
+    <suppress checks="LineLengthCheck" files="ContactTransferQueryCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="ContactTransferRequestCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="ContactTransferResponseTest\.java" />
+    <suppress checks="LineLengthCheck" files="ContactUpdateCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainCheckCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainCheckResponseTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainCreateCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainCreateIdnaCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainCreateResponseTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainDeleteCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainInfoCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainInfoResponseTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainNotificationResponseTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainRenewCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainRenewResponseTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainTransferQueryCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainTransferRequestCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainTransferResponseTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainUpdateCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainVariantInfoCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="EnumDomainInfoResponseTest\.java" />
+    <suppress checks="LineLengthCheck" files="GreetingTest\.java" />
+    <suppress checks="LineLengthCheck" files="HelloTest\.java" />
+    <suppress checks="LineLengthCheck" files="HostCheckCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="HostCheckResponseTest\.java" />
+    <suppress checks="LineLengthCheck" files="HostCreateCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="HostCreateResponseTest\.java" />
+    <suppress checks="LineLengthCheck" files="HostDeleteCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="HostUpdateCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="LoginCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="LogoutCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="PollAckCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="PollRequestCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="PollResponseTest\.java" />
+    <suppress checks="LineLengthCheck" files="ResponseTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainRenewFeeCommandExtensionTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainTransferFeeCommandExtensionTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainInfoKVResponseExtensionTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainKVCommandExtensionTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainRegistrantTransferCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainRegistrantTransferResponseTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainCreateIdnCommandTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainCreateIetfIdnCommandExtensionTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainInfoIetfIdnResponseExtensionTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainCheckPriceV1_1ResponseExtensionTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainCheckPriceV1_2ResponseExtensionTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainInfoRgpResponseTest\.java" />
+    <suppress checks="LineLengthCheck" files="SecDnsDomainCreateCommandExtensionAddTest\.java" />
+    <suppress checks="LineLengthCheck" files="SecDnsDomainUpdateCommandExtensionAddTest\.java" />
+    <suppress checks="LineLengthCheck" files="SecDnsDomainUpdateCommandExtensionRemoveTest\.java" />
+    <suppress checks="LineLengthCheck" files="CommandCounterTest\.java" />
+    <suppress checks="LineLengthCheck" files="SessionTest\.java" />
+    <suppress checks="LineLengthCheck" files="DomainTransferRequestPriceCommandExtensionTest\.java" />
+    <suppress checks="LineLengthCheck" files="SecDnsDomainUpdateCommandExtensionChangeTest\.java" />
+
+    <!-- Ignore the problem caused by XML indentation used in test -->
+    <suppress checks="ParenPadCheck" files="DomainCreateResponseTest\.java" />
+    <suppress checks="ParenPadCheck" files="DomainCreateFeeResponseExtensionTest\.java" />
+    <suppress checks="ParenPadCheck" files="DomainTransferFeeResponseExtensionTest\.java" />
+    <suppress checks="ParenPadCheck" files="SecDnsDomainInfoResponseTest\.java" />
+    <suppress checks="ParenPadCheck" files="DomainCreateVariantV1_1ResponseTest\.java" />
+    <suppress checks="NoWhitespaceAfterCheck" files="DomainInfoResponseTest\.java" />
+    <suppress checks="NoWhitespaceAfterCheck" files="DomainUpdateCommandTest\.java" />
+    <suppress checks="NoWhitespaceAfterCheck" files="DomainKVCommandExtensionTest\.java" />
 </suppressions>

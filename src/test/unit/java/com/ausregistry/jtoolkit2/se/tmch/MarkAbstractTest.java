@@ -5,7 +5,7 @@ import com.ausregistry.jtoolkit2.xml.XMLParser;
 import org.junit.Before;
 
 public abstract class MarkAbstractTest {
-    private static final String tmchSignedMarkDataXml =
+    private static final String TMCH_SIGNED_MARK_DATA_XML =
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                     "<smd:signedMark xmlns:smd=\"urn:ietf:params:xml:ns:signedMark-1.0\" id=\"signedMark\">\n" +
                     "  <smd:id>1-2</smd:id>\n" +
@@ -178,11 +178,11 @@ public abstract class MarkAbstractTest {
                     "    </KeyInfo>\n" +
                     "  </Signature>\n" +
                     "</smd:signedMark>";
-    protected XMLDocument xmlDocument;
 
+    protected XMLDocument xmlDocument;
 
     @Before
     public void parseExampleDocument() throws Exception {
-        xmlDocument = new XMLParser().parse(tmchSignedMarkDataXml);
+        xmlDocument = new XMLParser().parse(TMCH_SIGNED_MARK_DATA_XML);
     }
 }

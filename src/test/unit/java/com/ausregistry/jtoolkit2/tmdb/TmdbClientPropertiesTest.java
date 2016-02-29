@@ -28,7 +28,7 @@ public class TmdbClientPropertiesTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    @Mock InputStream mockInputStream;
+    @Mock private InputStream mockInputStream;
     @Mock private Properties mockProperties;
 
     private String fileName = "fileName";

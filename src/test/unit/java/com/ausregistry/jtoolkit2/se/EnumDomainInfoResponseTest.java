@@ -10,7 +10,7 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
 import com.ausregistry.jtoolkit2.xml.XMLParser;
 
 public class EnumDomainInfoResponseTest {
-    private static final String xml =
+    private static final String XML =
         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><response><result code=\"1000\"><msg>Command completed successfully</msg></result><resData><domain:infData xmlns:domain=\"urn:ietf:params:xml:ns:domain-1.0\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd\"><domain:name>3.8.0.0.6.9.2.3.6.1.4.4.e164.arpa</domain:name><domain:roid>EXAMPLE1-REP</domain:roid><domain:status s=\"ok\"/><domain:registrant>jd1234</domain:registrant><domain:contact type=\"admin\">sh8013</domain:contact><domain:contact type=\"tech\">sh8013</domain:contact><domain:ns><domain:hostObj>ns1.example.com</domain:hostObj><domain:hostObj>ns2.example.com</domain:hostObj></domain:ns><domain:host>ns1.example.com</domain:host><domain:host>ns2.example.com</domain:host><domain:clID>ClientX</domain:clID><domain:crID>ClientY</domain:crID><domain:crDate>1999-04-03T22:00:00.0Z</domain:crDate><domain:upID>ClientX</domain:upID><domain:upDate>1999-12-03T09:00:00.0Z</domain:upDate><domain:exDate>2005-04-03T22:00:00.0Z</domain:exDate><domain:trDate>2000-04-08T09:00:00.0Z</domain:trDate><domain:authInfo><domain:pw>2fooBAR</domain:pw></domain:authInfo></domain:infData></resData><extension><e164:infData xmlns:e164=\"urn:ietf:params:xml:ns:e164epp-1.0\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:e164epp-1.0 e164epp-1.0.xsd\"><e164:naptr><e164:order>10</e164:order><e164:pref>100</e164:pref><e164:flags>u</e164:flags><e164:svc>E2U+sip</e164:svc><e164:regex>\"!^.*$!sip:info@example.com!\"</e164:regex></e164:naptr><e164:naptr><e164:order>10</e164:order><e164:pref>102</e164:pref><e164:flags>u</e164:flags><e164:svc>E2U+msg</e164:svc><e164:regex>\"!^.*$!mailto:info@example.com!\"</e164:regex></e164:naptr></e164:infData></extension><trID><clTRID>ABC-12345</clTRID><svTRID>54322-XYZ</svTRID></trID></response></epp>";
     private EnumDomainInfoResponse response;
 
@@ -18,7 +18,7 @@ public class EnumDomainInfoResponseTest {
     public void setUp() throws Exception {
         response = new EnumDomainInfoResponse();
         XMLParser parser = new XMLParser();
-        XMLDocument doc = parser.parse(xml);
+        XMLDocument doc = parser.parse(XML);
         response.fromXML(doc);
     }
 

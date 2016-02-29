@@ -5,15 +5,13 @@ import com.ausregistry.jtoolkit2.Timer;
 import com.ausregistry.jtoolkit2.se.CLTRID;
 import com.ausregistry.jtoolkit2.se.Command;
 import com.ausregistry.jtoolkit2.se.DomainCreateCommand;
-import com.ausregistry.jtoolkit2.xml.XMLParser;
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 import static org.junit.Assert.assertEquals;
 
 
-public class DomainCreateLaunchCommandExtensionTest{
-
+public class DomainCreateLaunchCommandExtensionTest {
         @Before
         public void setUp() throws Exception {
             Timer.setTime("20070101.010101");

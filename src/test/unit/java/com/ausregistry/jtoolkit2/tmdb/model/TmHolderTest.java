@@ -7,7 +7,7 @@ import static org.mockito.Mockito.mock;
 import org.junit.Test;
 
 public class TmHolderTest {
-    TmHolder tmHolder = new TmHolder();
+    private TmHolder tmHolder = new TmHolder();
 
     @Test
     public void shouldGetTheRightEntitlement() {

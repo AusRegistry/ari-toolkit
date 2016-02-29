@@ -11,7 +11,7 @@ import org.junit.Test;
 
 
 public class DomainCreateApplicationLaunchResponseExtensionTest {
-    private static final String xml =
+    private static final String XML =
             "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>" +
                     "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\">" +
                     "  <response>" +
@@ -50,7 +50,7 @@ public class DomainCreateApplicationLaunchResponseExtensionTest {
         domainResponse = new DomainCreateResponse();
         domainResponse.registerExtension(responseExtension);
         XMLParser parser = new XMLParser();
-        XMLDocument doc = parser.parse(xml);
+        XMLDocument doc = parser.parse(XML);
         domainResponse.fromXML(doc);
     }
 

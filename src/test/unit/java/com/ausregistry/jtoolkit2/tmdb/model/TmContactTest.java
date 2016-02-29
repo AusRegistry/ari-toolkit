@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class TmContactTest {
 
-    TmContact tmContact = new TmContact();
+    private TmContact tmContact = new TmContact();
 
     @Test
     public void shouldGetTheRightType() {

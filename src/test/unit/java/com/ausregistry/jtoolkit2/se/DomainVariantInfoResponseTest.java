@@ -11,7 +11,8 @@ import org.junit.Test;
 import com.ausregistry.jtoolkit2.xml.XMLParser;
 
 public class DomainVariantInfoResponseTest {
-    private static final String singleDomainResponseXml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>"
+    private static final String SINGLE_DOMAIN_RESPONSE_XML =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>"
             + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
             + " xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">"
             + "<response><result code=\"1000\"><msg lang=\"en\">Command completed successfully</msg></result>"
@@ -23,7 +24,8 @@ public class DomainVariantInfoResponseTest {
             + "</resData>"
             + "<trID><clTRID>ABC-12345</clTRID><svTRID>54322-XYZ</svTRID></trID>"
             + "</response>" + "</epp>";
-    private static final String twoDomainsResponseXml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>"
+    private static final String TWO_DOMAINS_RESPONSE_XML =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>"
             + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
             + " xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">"
             + "<response><result code=\"1000\"><msg lang=\"en\">Command completed successfully</msg></result>"
@@ -36,17 +38,17 @@ public class DomainVariantInfoResponseTest {
             + "</resData>"
             + "<trID><clTRID>ABC-12345</clTRID><svTRID>54322-XYZ</svTRID></trID>"
             + "</response>" + "</epp>";
+    private static final XMLParser PARSER = new XMLParser();
 
     private DomainVariantInfoResponse twoDomainsResponse;
     private DomainVariantInfoResponse singleDomainsResponse;
-    private static final XMLParser PARSER = new XMLParser();
 
     @Before
     public void setUp() throws Exception {
         twoDomainsResponse = new DomainVariantInfoResponse();
         singleDomainsResponse = new DomainVariantInfoResponse();
-        twoDomainsResponse.fromXML(PARSER.parse(twoDomainsResponseXml));
-        singleDomainsResponse.fromXML(PARSER.parse(singleDomainResponseXml));
+        twoDomainsResponse.fromXML(PARSER.parse(TWO_DOMAINS_RESPONSE_XML));
+        singleDomainsResponse.fromXML(PARSER.parse(SINGLE_DOMAIN_RESPONSE_XML));
     }
 
     @Test

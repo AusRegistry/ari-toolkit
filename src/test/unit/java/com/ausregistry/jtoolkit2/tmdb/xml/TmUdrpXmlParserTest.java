@@ -21,9 +21,9 @@ import org.w3c.dom.Node;
 @PrepareForTest({TmUdrpXmlParser.class})
 public class TmUdrpXmlParserTest {
     @Mock
-    TmUdrp mockUdrp;
+    private TmUdrp mockUdrp;
 
-    TmUdrpXmlParser tmUdrpXmlParser = new TmUdrpXmlParser();
+    private TmUdrpXmlParser tmUdrpXmlParser = new TmUdrpXmlParser();
 
     @Before
     public void setUp() throws Exception {

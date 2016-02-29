@@ -151,7 +151,7 @@ public class SecDnsDomainCreateCommandExtensionAddTest {
         try {
             cmd.toXML();
             Assert.assertTrue("Should trigger a SAXParserException", false);
-        } catch(Exception spe) {
+        } catch (Exception spe) {
             Assert.assertTrue("Should trigger a SAXParserException with message about keyData", spe.getMessage().contains("element 'keyData'"));
         }
     }

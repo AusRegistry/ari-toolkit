@@ -37,7 +37,7 @@ public class TmContactXmlParserTest {
     @Test
     public void shouldParseTypeCorrectly() throws Exception {
 
-        String contactXml = "<tmNotice:contact type=\"agent\" />" ;
+        String contactXml = "<tmNotice:contact type=\"agent\" />";
 
         TmContact tmContact = tmContactXmlParser.parse(nodeForString(contactXml));
 

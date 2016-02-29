@@ -12,12 +12,12 @@ import org.junit.Test;
 
 public class DomainInfoIetfIdnResponseExtensionTest {
 
+    private static final XMLParser PARSER = new XMLParser();
+
     @Before
     public void setUp() throws Exception {
 
     }
-
-    private static final XMLParser PARSER = new XMLParser();
 
     @Test
     public void testGetIdnName() throws Exception {

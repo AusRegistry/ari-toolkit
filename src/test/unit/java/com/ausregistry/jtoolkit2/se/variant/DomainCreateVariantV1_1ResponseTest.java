@@ -12,7 +12,6 @@ import com.ausregistry.jtoolkit2.se.IdnDomainVariant;
 import com.ausregistry.jtoolkit2.se.ResponseExtension;
 import org.junit.Test;
 
-import com.ausregistry.jtoolkit2.EPPDateFormatter;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 import com.ausregistry.jtoolkit2.xml.XMLParser;
 

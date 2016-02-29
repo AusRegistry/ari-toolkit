@@ -9,17 +9,17 @@ import org.xml.sax.SAXException;
 import com.ausregistry.jtoolkit2.Timer;
 
 public class DomainTransferApproveCommandTest {
-    private static final String clID = "JTKUTEST";
-    private static final String name1 = "approve1.com.au";
-    private static final String pw1 = "app1evo";
-    private static final String name2 = "approve2.com.au";
-    private static final String con1pw = "con1pw";
-    private static final String con1ROID = "C2006120801-AR";
+    private static final String CL_ID = "JTKUTEST";
+    private static final String NAME_1 = "approve1.com.au";
+    private static final String PW_1 = "app1evo";
+    private static final String NAME_2 = "approve2.com.au";
+    private static final String CON_1_PW = "con1pw";
+    private static final String CON_1_ROID = "C2006120801-AR";
 
     @Before
     public void setUp() throws Exception {
         Timer.setTime("20070101.010101");
-        CLTRID.setClID(clID);
+        CLTRID.setClID(CL_ID);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class DomainTransferApproveCommandTest {
                 + "<name>approve1.com.au</name>"
                 + "</transfer></transfer><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>";
 
-        String actual = new DomainTransferApproveCommand(name1).toXML();
+        String actual = new DomainTransferApproveCommand(NAME_1).toXML();
         assertEquals(expected, actual);
     }
 
@@ -51,7 +51,7 @@ public class DomainTransferApproveCommandTest {
                 + "<authInfo><pw>app1evo</pw></authInfo>"
                 + "</transfer></transfer><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>";
 
-        String actual = new DomainTransferApproveCommand(name1, pw1).toXML();
+        String actual = new DomainTransferApproveCommand(NAME_1, PW_1).toXML();
         assertEquals(expected, actual);
     }
 
@@ -68,7 +68,7 @@ public class DomainTransferApproveCommandTest {
                 + "<authInfo><pw roid=\"C2006120801-AR\">con1pw</pw></authInfo>"
                 + "</transfer></transfer><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>";
 
-        String actual = new DomainTransferApproveCommand(name2, con1ROID, con1pw).toXML();
+        String actual = new DomainTransferApproveCommand(NAME_2, CON_1_ROID, CON_1_PW).toXML();
         assertEquals(expected, actual);
     }
 }

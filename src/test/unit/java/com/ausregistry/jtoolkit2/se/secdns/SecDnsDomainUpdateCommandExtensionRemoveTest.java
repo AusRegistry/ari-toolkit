@@ -105,7 +105,7 @@ public class SecDnsDomainUpdateCommandExtensionRemoveTest {
         try {
             cmd.toXML();
             Assert.assertTrue("Should trigger a SAXParserException", false);
-        } catch(SAXParseException spe) {
+        } catch (SAXParseException spe) {
             Assert.assertTrue("Should trigger a SAXParserException", spe.getMessage().contains("element 'keyData'"));
         }
     }
@@ -127,7 +127,7 @@ public class SecDnsDomainUpdateCommandExtensionRemoveTest {
         try {
             cmd.toXML();
             Assert.assertTrue("Should trigger a SAXParserException", false);
-        } catch(SAXParseException spe) {
+        } catch (SAXParseException spe) {
             Assert.assertTrue("Should trigger a SAXParserException with message about keyData", spe.getMessage().contains("element 'keyData'"));
         }
     }
@@ -150,7 +150,7 @@ public class SecDnsDomainUpdateCommandExtensionRemoveTest {
         try {
             cmd.toXML();
             Assert.assertTrue("Should trigger a SAXParserException", false);
-        } catch(SAXParseException spe) {
+        } catch (SAXParseException spe) {
             Assert.assertTrue("Should trigger a SAXParserException with message about dsData", spe.getMessage().contains("element 'dsData'"));
         }
     }

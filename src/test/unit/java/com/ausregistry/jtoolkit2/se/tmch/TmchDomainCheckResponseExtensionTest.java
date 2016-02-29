@@ -12,7 +12,7 @@ import com.ausregistry.jtoolkit2.xml.XMLParser;
 
 public class TmchDomainCheckResponseExtensionTest {
 
-    private static final String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>" +
+    private static final String XML = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>" +
             "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\">" +
             "<response>" +
             "<result code=\"1000\">" +
@@ -50,7 +50,7 @@ public class TmchDomainCheckResponseExtensionTest {
     public void setUp() throws Exception {
         response = new TmchDomainCheckResponseExtension();
         XMLParser parser = new XMLParser();
-        XMLDocument doc = parser.parse(xml);
+        XMLDocument doc = parser.parse(XML);
         response.fromXML(doc);
     }
 

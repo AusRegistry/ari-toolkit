@@ -9,13 +9,13 @@ import org.junit.Test;
 
 public class TmCourtTest {
 
-    TmCourt tmCourt = new TmCourt();
+    private TmCourt tmCourt = new TmCourt();
 
     @Test
     public void shouldGetTheSetReferenceNumber() {
-        tmCourt.setReferenceNumber(234235l);
+        tmCourt.setReferenceNumber(234235L);
 
-        assertThat(tmCourt.getReferenceNumber(), is(234235l));
+        assertThat(tmCourt.getReferenceNumber(), is(234235L));
     }
 
     @Test

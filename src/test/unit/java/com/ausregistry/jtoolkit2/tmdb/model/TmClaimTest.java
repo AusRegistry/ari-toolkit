@@ -9,7 +9,8 @@ import java.util.Arrays;
 import org.junit.Test;
 
 public class TmClaimTest {
-    TmClaim tmClaim = new TmClaim();
+
+    private TmClaim tmClaim = new TmClaim();
 
     @Test
     public void shouldGetTheSetMarkName() {

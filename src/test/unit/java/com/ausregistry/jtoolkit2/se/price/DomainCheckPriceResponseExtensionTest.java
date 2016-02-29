@@ -13,8 +13,7 @@ import com.ausregistry.jtoolkit2.xml.XMLParser;
 
 public class DomainCheckPriceResponseExtensionTest {
 
-    private DomainCheckPriceResponseExtension domainCheckPriceResponse;
-    private static final String priceXml =
+    private static final String PRICE_XML =
             "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>"
                     + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" "
                     + "     xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
@@ -55,12 +54,14 @@ public class DomainCheckPriceResponseExtensionTest {
                     + "    </response>"
                     + "</epp>";
 
+    private DomainCheckPriceResponseExtension domainCheckPriceResponse;
+
     @Before
     public void setUp() throws Exception {
         domainCheckPriceResponse = new DomainCheckPriceResponseExtension();
 
         XMLParser parser = new XMLParser();
-        XMLDocument doc = parser.parse(priceXml);
+        XMLDocument doc = parser.parse(PRICE_XML);
         domainCheckPriceResponse.fromXML(doc);
     }
 

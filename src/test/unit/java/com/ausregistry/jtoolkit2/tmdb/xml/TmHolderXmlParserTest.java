@@ -39,7 +39,7 @@ public class TmHolderXmlParserTest {
     @Test
     public void shouldParseEntitlementCorrectly() throws Exception {
 
-        String holderXml = "<tmNotice:holder entitlement=\"owner\" />" ;
+        String holderXml = "<tmNotice:holder entitlement=\"owner\" />";
 
         TmHolder tmHolder = tmHolderXmlParser.parse(nodeForString(holderXml));
 

@@ -184,8 +184,8 @@ public class SessionManagerTest {
                 Response response = txs[i][j].getResponse();
                 Result[] result = response.getResults();
                 if (result == null) {
-                    fail("Transaction (" + String.valueOf(i+1) + ","
-                            + String.valueOf(j+1)
+                    fail("Transaction (" + String.valueOf(i + 1) + ","
+                            + String.valueOf(j + 1)
                             + ") has no result. Transaction state: "
                             + txs[i][j].getState().toString());
                 } else {

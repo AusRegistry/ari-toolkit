@@ -2,7 +2,6 @@ package com.ausregistry.jtoolkit2.tmdb.model;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
 
 import java.util.Arrays;
 

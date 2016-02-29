@@ -1,7 +1,6 @@
 package com.ausregistry.jtoolkit2.se.fund;
 
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 

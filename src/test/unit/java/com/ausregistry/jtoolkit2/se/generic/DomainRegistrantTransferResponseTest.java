@@ -6,13 +6,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.ausregistry.jtoolkit2.EPPDateFormatter;
-import com.ausregistry.jtoolkit2.se.generic.DomainRegistrantTransferResponse;
 import com.ausregistry.jtoolkit2.se.Result;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 import com.ausregistry.jtoolkit2.xml.XMLParser;
 
-public class DomainRegistrantTransferResponseTest{
-    private static final String xml =
+public class DomainRegistrantTransferResponseTest {
+    private static final String XML =
         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\"><response><result code=\"1000\"><msg>Command completed successfully</msg></result><resData><rtrnData xmlns=\"urn:X-ar:params:xml:ns:registrant-1.0\"><name>example.com</name><exDate>2009-04-03T22:00:00.0Z</exDate></rtrnData></resData><trID><clTRID>ABC-12345</clTRID><svTRID>54321-XYZ</svTRID></trID></response></epp>";
     private DomainRegistrantTransferResponse response;
     private Result[] results;
@@ -21,7 +20,7 @@ public class DomainRegistrantTransferResponseTest{
     public void setUp() throws Exception {
         response = new DomainRegistrantTransferResponse();
         XMLParser parser = new XMLParser();
-        XMLDocument doc = parser.parse(xml);
+        XMLDocument doc = parser.parse(XML);
         response.fromXML(doc);
         results = response.getResults();
     }
