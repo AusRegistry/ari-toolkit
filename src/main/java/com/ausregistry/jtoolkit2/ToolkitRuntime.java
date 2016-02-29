@@ -17,9 +17,13 @@ import java.util.logging.SimpleFormatter;
  * Essentially the will create a jtkenv.log file if the env logger is defined that contains the system properties and
  * the local host IP address.
  */
-public class ToolkitRuntime {
+public final class ToolkitRuntime {
     static {
         initialise();
+    }
+
+    private ToolkitRuntime() {
+        // intentionally do nothing, make checkstyle happy
     }
 
     /**

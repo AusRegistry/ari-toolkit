@@ -32,11 +32,11 @@ public final class SecDnsDomainCreateCommandExtension implements CommandExtensio
 
     }
 
-    public final DSOrKeyType getCreateData() {
+    public DSOrKeyType getCreateData() {
         return createData;
     }
 
-    public final void setCreateData(DSOrKeyType createData) {
+    public void setCreateData(DSOrKeyType createData) {
         this.createData = createData;
     }
 

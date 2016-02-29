@@ -21,23 +21,16 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
  */
 public abstract class NotificationResponse extends DataResponse {
 
-	private static final long serialVersionUID = 8926602539143476957L;
+    protected static final String IDENT = "IDENT";
 
-	protected static final String IDENT = "IDENT";
+    protected static final String PAN_DATA_EXPR = RES_DATA_EXPR + "/OBJ:panData";
+    protected static final String IDENT_EXPR = PAN_DATA_EXPR + "/OBJ:IDENT/text()";
+    protected static final String RESULT_EXPR = PAN_DATA_EXPR + "/OBJ:IDENT/@paResult";
+    protected static final String CLTRID_EXPR = PAN_DATA_EXPR + "/OBJ:paTRID/e:clTRID/text()";
+    protected static final String SVTRID_EXPR = PAN_DATA_EXPR + "/OBJ:paTRID/e:svTRID/text()";
+    protected static final String PADATE_EXPR = PAN_DATA_EXPR + "/OBJ:paDate/text()";
 
-    private static final String PAN_DATA_EXPR = RES_DATA_EXPR
-        + "/OBJ:panData";
-
-    protected static final String IDENT_EXPR = PAN_DATA_EXPR
-        + "/OBJ:IDENT/text()";
-    protected static final String RESULT_EXPR = PAN_DATA_EXPR
-        + "/OBJ:IDENT/@paResult";
-    protected static final String CLTRID_EXPR = PAN_DATA_EXPR
-        + "/OBJ:paTRID/e:clTRID/text()";
-    protected static final String SVTRID_EXPR = PAN_DATA_EXPR
-        + "/OBJ:paTRID/e:svTRID/text()";
-    protected static final String PADATE_EXPR = PAN_DATA_EXPR
-        + "/OBJ:paDate/text()";
+    private static final long serialVersionUID = 8926602539143476957L;
 
     private String identifier;
     private boolean result;
@@ -118,16 +111,16 @@ public abstract class NotificationResponse extends DataResponse {
 
     @Override
     public String toString() {
-		String retval = super.toString();
+        String retval = super.toString();
 
-		retval += "(panData = ("
-			+ getObjType().getIdentType() + " = " + getIdentifier()
-			+ ")(result = " + String.valueOf(getResult())
-			+ ")(clTRID = " + getPaClTrID()
-			+ ")(svTRID = " + getPaSvTrID()
+        retval += "(panData = ("
+            + getObjType().getIdentType() + " = " + getIdentifier()
+            + ")(result = " + String.valueOf(getResult())
+            + ")(clTRID = " + getPaClTrID()
+            + ")(svTRID = " + getPaSvTrID()
                         + ")(paDate = " + getPaDate() + "))";
 
-		return retval;
+        return retval;
     }
 
     protected abstract String identifierExpr();

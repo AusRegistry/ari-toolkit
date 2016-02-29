@@ -8,15 +8,15 @@ package com.ausregistry.jtoolkit2.se;
  * @see com.ausregistry.jtoolkit2.se.Response
  */
 public class HostDeleteCommand extends DeleteCommand {
-	private static final long serialVersionUID = -6471660003899153889L;
+    private static final long serialVersionUID = -6471660003899153889L;
 
-	/**
-	 * Delete the identified host.
-	 *
-	 * @param name The name of the host to delete.
-	 */
-	public HostDeleteCommand(String name) {
-		super(StandardObjectType.HOST, name);
-	}
+    /**
+     * Delete the identified host.
+     *
+     * @param name The name of the host to delete.
+     */
+    public HostDeleteCommand(String name) {
+        super(StandardObjectType.HOST, name);
+    }
 }
 

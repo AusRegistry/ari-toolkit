@@ -13,20 +13,22 @@ import com.ausregistry.jtoolkit2.xml.XMLWriter;
  */
 public abstract class Command extends SendSE {
 
-	private static final long serialVersionUID = 1683406928215004832L;
-	private final CommandType cmdType;
+    private static final long serialVersionUID = 1683406928215004832L;
+
+    private static final int APPEND_EXTENSION_STATUS_SUCCESS = 0;
+    private static final int APPEND_EXTENSION_STATUS_FAILED = 1;
+    private static final int APPEND_EXTENSION_STATUS_FAILED_NULL_COMMAND_EXTENSION = 2;
+
     protected org.w3c.dom.Element cmdElement;
     protected org.w3c.dom.Element command;
     protected org.w3c.dom.Element extension;
 
-    public org.w3c.dom.Element getExtensionElement() {
-		return extension;
-	}
+    private final CommandType cmdType;
 
     /**
      * @throws IllegalArgumentException if {@code commandType} is {@code null}.
      */
-	public Command(final CommandType commandType) {
+    public Command(final CommandType commandType) {
         if (commandType == null) {
             throw new IllegalArgumentException(ErrorPkg.getMessage("se.command.type.missing"));
         }
@@ -34,6 +36,10 @@ public abstract class Command extends SendSE {
         cmdType = commandType;
         initCmdElement();
         cmdElement = xmlWriter.appendChild(command, cmdType.getCommandName());
+    }
+
+    public org.w3c.dom.Element getExtensionElement() {
+        return extension;
     }
 
     protected void initCmdElement() {
@@ -56,10 +62,6 @@ public abstract class Command extends SendSE {
         return xmlWriter.toXML();
     }
 
-    public static final int APPEND_EXTENSION_STATUS_SUCCESS = 0;
-    public static final int APPEND_EXTENSION_STATUS_FAILED = 1;
-    public static final int APPEND_EXTENSION_STATUS_FAILED_NULL_COMMAND_EXTENSION = 2;
-
     public int appendExtension(final CommandExtension ce) {
         int result = APPEND_EXTENSION_STATUS_FAILED;
         if (ce == null) {
@@ -79,8 +81,8 @@ public abstract class Command extends SendSE {
         return result;
     }
 
-	public XMLWriter getXmlWriter() {
-		return xmlWriter;
-	}
+    public XMLWriter getXmlWriter() {
+        return xmlWriter;
+    }
 
 }

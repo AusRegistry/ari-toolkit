@@ -13,11 +13,11 @@ import com.ausregistry.jtoolkit2.xml.XMLWriter;
  * of EPP.
  */
 public interface Appendable extends Serializable {
-	/**
-	 * Used internally for building a DOM representation of a service element.
-	 * This really should not be exposed to the end user, but Java has no
-	 * package-visible interface type.
-	 */
-	public Element appendToElement(XMLWriter xmlWriter, Element parent);
+    /**
+     * Used internally for building a DOM representation of a service element.
+     * This really should not be exposed to the end user, but Java has no
+     * package-visible interface type.
+     */
+    Element appendToElement(XMLWriter xmlWriter, Element parent);
 }
 

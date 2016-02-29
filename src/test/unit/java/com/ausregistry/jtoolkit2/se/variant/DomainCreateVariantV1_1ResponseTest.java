@@ -39,7 +39,7 @@ public class DomainCreateVariantV1_1ResponseTest {
         assertEquals("Incorrect number of variants returned", 1, variantList.size());
         assertEquals(variantDnsForm, variantList.get(0).getName());
     }
-    
+
     @Test
     public void testGetNoVariantsV1_1() throws Exception {
         final String domainName = "xn--xha91b83h.com";

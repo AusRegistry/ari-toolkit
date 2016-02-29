@@ -7,9 +7,9 @@ package com.ausregistry.jtoolkit2.session;
  * for the state transitions.
  */
 public enum TransactionState {
-	UNPROCESSED,
-	PROCESSED,
-	RETRY,
-	FATAL_ERROR;
+    UNPROCESSED,
+    PROCESSED,
+    RETRY,
+    FATAL_ERROR;
 }
 

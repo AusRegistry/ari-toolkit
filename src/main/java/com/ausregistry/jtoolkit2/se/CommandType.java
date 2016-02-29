@@ -8,9 +8,9 @@ package com.ausregistry.jtoolkit2.se;
  *
  */
 public interface CommandType extends java.io.Serializable {
-	/**
-	 * Get the command name, as described above.
-	 */
-	public String getCommandName();
+    /**
+     * Get the command name, as described above.
+     */
+    String getCommandName();
 }
 

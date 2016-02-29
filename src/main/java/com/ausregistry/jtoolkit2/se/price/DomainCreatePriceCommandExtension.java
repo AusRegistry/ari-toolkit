@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 
 import com.ausregistry.jtoolkit2.se.Command;
 import com.ausregistry.jtoolkit2.se.CommandExtension;
-import com.ausregistry.jtoolkit2.se.DomainCreateCommand;
-import com.ausregistry.jtoolkit2.se.DomainCreateResponse;
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.xml.XMLWriter;
 import org.w3c.dom.Element;
@@ -19,8 +17,8 @@ import org.w3c.dom.Element;
  * supplied, should match the fees that are set for the domain name for the requested period.
  * The response expected from a server should be handled by a Domain Create Response.</p>
  *
- * @see DomainCreateCommand
- * @see DomainCreateResponse
+ * @see com.ausregistry.jtoolkit2.se.DomainCreateCommand
+ * @see com.ausregistry.jtoolkit2.se.DomainCreateResponse
  * @see <a href="http://ausregistry.github.io/doc/price-1.0/price-1.0.html">Domain Name Price Extension
  * Mapping for the Extensible Provisioning Protocol (EPP)</a>
  */

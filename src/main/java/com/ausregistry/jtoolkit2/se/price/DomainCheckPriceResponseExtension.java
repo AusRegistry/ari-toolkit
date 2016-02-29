@@ -63,8 +63,9 @@ public class DomainCheckPriceResponseExtension extends ResponseExtension {
             String isPremiumDomainValue = xmlDoc.getNodeValue(qry + CHKDATA_PREMIUM_VALUE_EXPR);
             Boolean isPremiumDomain = isPremiumDomainValue == null ? null : isPremiumDomainValue.equals("1");
             String periodValue = xmlDoc.getNodeValue(qry + CHKDATA_PERIOD_VALUE_EXPR);
-            Period period = periodValue == null ? null :
-                            new Period(PeriodUnit.value(xmlDoc.getNodeValue(qry + CHKDATA_PERIOD_UNIT_EXPR)),
+            Period period = periodValue == null
+                    ? null
+                    : new Period(PeriodUnit.value(xmlDoc.getNodeValue(qry + CHKDATA_PERIOD_UNIT_EXPR)),
                                     Integer.parseInt(periodValue));
             String createPriceValue = xmlDoc.getNodeValue(qry + CHKDATA_CREATE_PRICE_EXPR);
             BigDecimal createPrice =

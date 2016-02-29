@@ -17,8 +17,8 @@ import org.xml.sax.SAXException;
  * In cases where the legal registrant of a domain name has changed, this
  * class should be used to request a transfer of registrant.  This is a
  * different action to correcting extension data which was originally specified
- * incorrectly, and should only be used in the situation described.  
- * 
+ * incorrectly, and should only be used in the situation described.
+ *
  * Use this class to generate a standards-compliant XML document, given simple
  * input parameters.  The {@code toXML()} method in Command serialises this object to
  * XML.
@@ -26,7 +26,8 @@ import org.xml.sax.SAXException;
 public final class DomainRegistrantTransferCommand extends Command {
 
     private static final long serialVersionUID = 6623456616110752095L;
-    private static final CommandType rtrnType = new DomainRegistrantTransferCommandType();
+    private static final CommandType TRANSFER_COMMAND_TYPE = new DomainRegistrantTransferCommandType();
+
     private TreeMap<String, String> kvList;
     private final Element kvListElement;
 
@@ -37,30 +38,30 @@ public final class DomainRegistrantTransferCommand extends Command {
     }
 
     /**
-     * Request that the domain name be transferred to the legal entity 
+     * Request that the domain name be transferred to the legal entity
      * specified by the extension data that is provided in the key-value list.
      *
      * @param name The domain name to transfer.
-     * 
+     *
      * @param curExpDate The current expiry of the identified domain name. This is
      *                   required in order to prevent repeated transfer of the name due
      *                   to protocol transmission failures.
-     * 
+     *
      * @param period The desired new validity period, starting from the time the
      *               transfer completes successfully. Optional.
-     * 
+     *
      * @param kvListName The name under which the list of key-value items are aggregated.
-     * 
+     *
      * @param explanation An explanation of how the transfer was effected.
      */
     public DomainRegistrantTransferCommand(final String name, final GregorianCalendar curExpDate,
             final Period period, final String kvListName, final String explanation) {
 
-        super(rtrnType);
+        super(TRANSFER_COMMAND_TYPE);
 
         xmlWriter.appendChild(
                 cmdElement, ExtendedObjectType.REGISTRANT.getIdentType()).setTextContent(name);
-        
+
 
         if (curExpDate == null) {
             throw new IllegalArgumentException(
@@ -78,12 +79,12 @@ public final class DomainRegistrantTransferCommand extends Command {
         kvListElement.setAttribute("name", kvListName);
 
         xmlWriter.appendChild(cmdElement, "explanation").setTextContent(explanation);
-        
+
         kvList = new TreeMap<String, String>();
     }
 
     /**
-     * Adds a key-value item into the list, to be included in the command when 
+     * Adds a key-value item into the list, to be included in the command when
      * the XML is generated.
      */
     public void addItem(final String key, final String value) {

@@ -17,8 +17,6 @@ import org.w3c.dom.NodeList;
  */
 public class Trademark extends AbstractMark {
 
-    private Logger maintLogger = Logger.getLogger(getClass().getPackage().getName() + ".maint");
-
     private static final String JURISDICTION_EXPR = "mark:jurisdiction/text()";
     private static final String CLASS_NODE_LOCAL_NAME = "class";
     private static final String AP_ID_EXPR = "mark:apId/text()";
@@ -27,6 +25,7 @@ public class Trademark extends AbstractMark {
     private static final String REG_DATE_EXPR = "mark:regDate/text()";
     private static final String EX_DATE_EXPR = "mark:exDate/text()";
 
+    private Logger maintLogger = Logger.getLogger(getClass().getPackage().getName() + ".maint");
 
     private String jurisdiction;
 

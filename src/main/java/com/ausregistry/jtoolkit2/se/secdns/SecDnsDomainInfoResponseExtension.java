@@ -80,9 +80,9 @@ public class SecDnsDomainInfoResponseExtension extends ResponseExtension {
     }
 
     @Override
-	public boolean isInitialised() {
-		return initialised;
-	}
+    public boolean isInitialised() {
+        return initialised;
+    }
 
     public final DSOrKeyType getInfData() {
         return infData;

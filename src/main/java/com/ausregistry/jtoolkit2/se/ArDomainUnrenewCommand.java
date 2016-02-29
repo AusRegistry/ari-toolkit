@@ -11,19 +11,19 @@ import com.ausregistry.jtoolkit2.ErrorPkg;
  * Use this class to generate an AusRegistry-compliant XML document, given
  * simple input parameters.  The toXML method in Command serialises this object
  * to XML.
- * 
+ *
  * @see ArDomainUnrenewResponse
  */
 public class ArDomainUnrenewCommand extends ProtocolExtensionCommand {
     private static final long serialVersionUID = -3723213074751854975L;
 
-	private static final CommandType unrenewCmdType = new ArUnrenewCommandType();
+    private static final CommandType UNRENEW_COMMAND_TYPE = new ArUnrenewCommandType();
 
     /**
      * @throws IllegalArgumentException if {@code name} or {@code exDaten} is {@code null}.
      */
     public ArDomainUnrenewCommand(String name, GregorianCalendar exDate) {
-        super(unrenewCmdType, ExtendedObjectType.AR_DOMAIN, name);
+        super(UNRENEW_COMMAND_TYPE, ExtendedObjectType.AR_DOMAIN, name);
 
         if (exDate == null) {
             throw new IllegalArgumentException(
@@ -35,9 +35,9 @@ public class ArDomainUnrenewCommand extends ProtocolExtensionCommand {
                 exDateStr);
     }
 
-	@Override
-	protected Extension getExtension() {
-		return ExtensionImpl.AR;
-	}
+    @Override
+    protected Extension getExtension() {
+        return ExtensionImpl.AR;
+    }
 }
 

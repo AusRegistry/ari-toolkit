@@ -17,7 +17,7 @@ public class ContactTransferRequestCommandTest {
 
     @Before
     public void setUp() throws Exception {
-		Timer.setTime("20070101.010101");
+        Timer.setTime("20070101.010101");
         CLTRID.setClID(clID);
         cmd = new ContactTransferRequestCommand(id1, id1pw);
     }

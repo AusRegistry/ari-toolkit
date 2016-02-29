@@ -21,18 +21,22 @@ import com.ausregistry.jtoolkit2.ErrorPkg;
  * Uses the maintenance, support and user level loggers.
  */
 public abstract class XMLWriter {
-    private static final String pname;
+    private static final String PACKAGE_NAME = XMLWriter.class.getPackage().getName();
 
     /*
      * This lock is a workaround to an implementation flaw in com.sun.xml.internal.stream.XMLOutputFactoryImpl which
      * results in the output stream assigned to a XMLStreamWriter being over-written by another thread. This is resolved
      * in Java 7.
      */
-    private static final Object WORKAROUND_LOCK = new Object();;
+    private static final Object WORKAROUND_LOCK = new Object();
 
-    static {
-        pname = XMLWriter.class.getPackage().getName();
-    }
+    protected String xml;
+    protected String version;
+    protected String encoding;
+    protected boolean standalone;
+    protected Logger supportLogger = Logger.getLogger(PACKAGE_NAME + ".support");
+    protected Logger userLogger = Logger.getLogger(PACKAGE_NAME + ".user");
+    protected Logger maintLogger = Logger.getLogger(PACKAGE_NAME + ".maint");
 
     /**
      * Get an instance of the default implementation of XMLWriter.
@@ -40,15 +44,6 @@ public abstract class XMLWriter {
     public static XMLWriter newInstance() {
         return new EPPWriter();
     }
-
-    protected String xml;
-    protected String version;
-    protected String encoding;
-    protected boolean standalone;
-    protected Logger supportLogger = Logger.getLogger(pname + ".support");
-    protected Logger userLogger = Logger.getLogger(pname + ".user");
-    protected Logger maintLogger = Logger.getLogger(pname + ".maint");
-
     /**
      * Get the root element of the DOM tree associated with this writer.
      *

@@ -20,6 +20,10 @@ public class HostCreateResponse extends CreateResponse {
 
     private String name;
 
+    public HostCreateResponse() {
+        super(StandardObjectType.HOST);
+    }
+
     @Override
     protected String crDateExpr() {
         return HOS_CR_DATE_EXPR;
@@ -27,10 +31,6 @@ public class HostCreateResponse extends CreateResponse {
 
     protected static String exprReplace(String expr) {
         return expr.replaceAll(OBJ, StandardObjectType.HOST.getName());
-    }
-
-    public HostCreateResponse() {
-        super(StandardObjectType.HOST);
     }
 
     public String getName() {

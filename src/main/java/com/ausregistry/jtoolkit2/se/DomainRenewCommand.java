@@ -16,32 +16,32 @@ import com.ausregistry.jtoolkit2.ErrorPkg;
  * @see com.ausregistry.jtoolkit2.se.DomainRenewResponse
  */
 public class DomainRenewCommand extends ObjectCommand {
-	private static final long serialVersionUID = 4860769492565708028L;
+    private static final long serialVersionUID = 4860769492565708028L;
 
     /**
      * @throws IllegalArgumentException if {@code exDate} is {@code null}.
      */
-	public DomainRenewCommand(String name, GregorianCalendar exDate) {
-		super(StandardCommandType.RENEW, StandardObjectType.DOMAIN, name);
+    public DomainRenewCommand(String name, GregorianCalendar exDate) {
+        super(StandardCommandType.RENEW, StandardObjectType.DOMAIN, name);
 
-		if (exDate == null) {
-			throw new IllegalArgumentException(ErrorPkg.getMessage(
-						"se.domain.renew.curExpDate.missing"));
-		}
+        if (exDate == null) {
+            throw new IllegalArgumentException(ErrorPkg.getMessage(
+                        "se.domain.renew.curExpDate.missing"));
+        }
 
-		String dateStr = EPPDateFormatter.toXSDate(exDate);
+        String dateStr = EPPDateFormatter.toXSDate(exDate);
 
-		xmlWriter.appendChild(objElement, "curExpDate").setTextContent(dateStr);
-	}
+        xmlWriter.appendChild(objElement, "curExpDate").setTextContent(dateStr);
+    }
 
-	public DomainRenewCommand(String name, GregorianCalendar exDate,
-			Period period) {
+    public DomainRenewCommand(String name, GregorianCalendar exDate,
+            Period period) {
 
-		this(name, exDate);
+        this(name, exDate);
 
-		if (period != null) {
-			period.appendPeriod(xmlWriter, objElement);
-		}
-	}
+        if (period != null) {
+            period.appendPeriod(xmlWriter, objElement);
+        }
+    }
 }
 

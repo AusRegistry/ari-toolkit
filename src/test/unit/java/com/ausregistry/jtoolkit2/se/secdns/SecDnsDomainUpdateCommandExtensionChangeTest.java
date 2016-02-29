@@ -24,7 +24,7 @@ public class SecDnsDomainUpdateCommandExtensionChangeTest {
                 null, null, "JTKCON");
         final SecDnsDomainUpdateCommandExtension ext = new SecDnsDomainUpdateCommandExtension();
         ext.setUrgent(true);
-        
+
         MaxSigLifeType maxSigLife = new MaxSigLifeType();
         maxSigLife.setMaxSigLife(604800);
 

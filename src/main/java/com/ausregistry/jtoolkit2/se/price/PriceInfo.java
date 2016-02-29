@@ -9,9 +9,9 @@ import com.ausregistry.jtoolkit2.se.Period;
  * Contains the price information of a domain returned in a check response extension.
  */
 public class PriceInfo implements Serializable {
+    public static final String STANDARD_CATEGORY_NAME = "STANDARD";
 
     private static final long serialVersionUID = -3981943930495021516L;
-    public static final String STANDARD_CATEGORY_NAME = "STANDARD";
     private Boolean isPremium;
     private Period period;
     private String priceCategory;

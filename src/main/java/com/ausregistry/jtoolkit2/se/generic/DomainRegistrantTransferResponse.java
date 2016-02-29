@@ -14,7 +14,7 @@ import java.util.GregorianCalendar;
  * element is sent by a compliant EPP server in response to a valid domain
  * registrant transfer command, implemented by the
  * DomainRegistrantTransferCommand.
- * 
+ *
  * @see com.ausregistry.jtoolkit2.se.generic.DomainRegistrantTransferCommand
  */
 public class DomainRegistrantTransferResponse extends Response {
@@ -22,7 +22,7 @@ public class DomainRegistrantTransferResponse extends Response {
 
     private static final String DOM_NAME_EXPR =
         "/e:epp/epp:response/epp:resData/registrant:rtrnData/registrant:name/text()";
-    private static final String DOM_EX_DATE_EXPR = 
+    private static final String DOM_EX_DATE_EXPR =
         "/e:epp/epp:response/epp:resData/registrant:rtrnData/registrant:exDate/text()";
 
     private String name;

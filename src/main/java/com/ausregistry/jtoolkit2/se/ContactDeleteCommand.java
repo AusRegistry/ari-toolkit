@@ -6,15 +6,15 @@ package com.ausregistry.jtoolkit2.se;
  * delete EPP command service elements via the toXML method.
  */
 public class ContactDeleteCommand extends DeleteCommand {
-	private static final long serialVersionUID = 8454618926166260306L;
+    private static final long serialVersionUID = 8454618926166260306L;
 
-	/**
-	 * Delete the identified contact.
-	 *
-	 * @param id The identifier of the contact to delete.
-	 */
-	public ContactDeleteCommand(String id) {
-		super(StandardObjectType.CONTACT, id);
-	}
+    /**
+     * Delete the identified contact.
+     *
+     * @param id The identifier of the contact to delete.
+     */
+    public ContactDeleteCommand(String id) {
+        super(StandardObjectType.CONTACT, id);
+    }
 }
 

@@ -15,12 +15,12 @@ public class IPVersionTest {
     public void testToStringV6() {
         assertEquals(IPVersion.IPv6.toString(), "v6");
     }
-    
+
     @Test
     public void testValueOfV4() {
         assertEquals(IPVersion.IPv4, IPVersion.value(null));
     }
-    
+
     @Test
     public void testValueOfV6() {
         assertNotSame(IPVersion.IPv6, IPVersion.value(null));

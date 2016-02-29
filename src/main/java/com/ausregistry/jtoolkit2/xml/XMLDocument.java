@@ -21,36 +21,13 @@ public class XMLDocument {
     private static XPathFactory xpathFactory;
     private static NamespaceContext nsCtx;
 
-    static {
-        xpathFactory = XPathFactory.newInstance();
-        nsCtx = new NamespaceContextImpl();
-    }
-
-    private static XPath newXPath() {
-        return xpathFactory.newXPath();
-    }
-
     private XPath xpath;
     private final Element root;
     private String sourceXMLString;
 
-    {
-        xpath = XMLDocument.newXPath();
-        xpath.setNamespaceContext(nsCtx);
-    }
-
-    XMLDocument(Element root, final String sourceXMLStringArg) {
-        this.root = root;
-        this.sourceXMLString = sourceXMLStringArg;
-    }
-
-    /**
-     * Returns the XML used to produce the document.
-     *
-     * @return the XML
-     */
-    public String getSourceXMLString() {
-        return sourceXMLString;
+    static {
+        xpathFactory = XPathFactory.newInstance();
+        nsCtx = new NamespaceContextImpl();
     }
 
     /**
@@ -60,6 +37,28 @@ public class XMLDocument {
      */
     public XMLDocument(Element root) {
         this.root = root;
+        xpath = XMLDocument.newXPath();
+        xpath.setNamespaceContext(nsCtx);
+    }
+
+    XMLDocument(Element root, final String sourceXMLStringArg) {
+        this.root = root;
+        this.sourceXMLString = sourceXMLStringArg;
+        xpath = XMLDocument.newXPath();
+        xpath.setNamespaceContext(nsCtx);
+    }
+
+    private static XPath newXPath() {
+        return xpathFactory.newXPath();
+    }
+
+    /**
+     * Returns the XML used to produce the document.
+     *
+     * @return the XML
+     */
+    public String getSourceXMLString() {
+        return sourceXMLString;
     }
 
     /**

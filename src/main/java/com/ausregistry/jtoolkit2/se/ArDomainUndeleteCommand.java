@@ -7,16 +7,16 @@ package com.ausregistry.jtoolkit2.se;
  * parameters. The toXML method in Command serialises this object to XML.
  */
 public class ArDomainUndeleteCommand extends ProtocolExtensionCommand {
-	private static final long serialVersionUID = 420815971854196895L;
+    private static final long serialVersionUID = 420815971854196895L;
 
-	private static final CommandType undeleteCmdType = new ArUndeleteCommandType();
+    private static final CommandType UNDELETE_COMMAND_TYPE = new ArUndeleteCommandType();
 
-	public ArDomainUndeleteCommand(String name) {
-		super(undeleteCmdType, ExtendedObjectType.AR_DOMAIN, name);
-	}
+    public ArDomainUndeleteCommand(String name) {
+        super(UNDELETE_COMMAND_TYPE, ExtendedObjectType.AR_DOMAIN, name);
+    }
 
-	protected Extension getExtension() {
-		return ExtensionImpl.AR;
-	}
+    protected Extension getExtension() {
+        return ExtensionImpl.AR;
+    }
 }
 

@@ -12,13 +12,14 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
  */
 public abstract class ReceiveSE implements java.io.Serializable {
 
-	private static final long serialVersionUID = 3404913770026760200L;
+    private static final long serialVersionUID = 3404913770026760200L;
 
-	protected String xml;
     protected Logger maintLogger;
-    protected Logger supportLogger;
     protected Logger userLogger;
     protected Logger debugLogger;
+
+    private String xml;
+    private Logger supportLogger;
 
     protected ReceiveSE() {
         final String pname = getClass().getPackage().getName();

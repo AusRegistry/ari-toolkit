@@ -103,7 +103,7 @@ public class HostInfoResponseTest {
         response.fromXML(doc);
         assertEquals("ABC-12345", response.getCLTRID());
     }
-    
+
     private static String getInfoResponseExpectedXml(final String hostName) {
         final StringBuilder result = new StringBuilder();
         result.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");

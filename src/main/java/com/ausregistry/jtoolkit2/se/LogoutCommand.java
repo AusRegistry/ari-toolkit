@@ -10,10 +10,10 @@ package com.ausregistry.jtoolkit2.se;
  * opened using this command prior to logging out.
  */
 public final class LogoutCommand extends Command {
-	private static final long serialVersionUID = -5639166942335318497L;
+    private static final long serialVersionUID = -5639166942335318497L;
 
-	public LogoutCommand() {
-		super(StandardCommandType.LOGOUT);
-	}
+    public LogoutCommand() {
+        super(StandardCommandType.LOGOUT);
+    }
 }
 

@@ -38,28 +38,12 @@ public final class XMLBuilderSJSXP implements XMLBuilder {
     private XMLStreamWriter writer;
     private String pname;
     private NamespaceContext namespaceContext;
+    private final Package classPackage;
 
     static {
         xmlOutputFactory = XMLOutputFactory.newInstance();
         enc = "UTF-8";
         vers = "1.0";
-    }
-
-    static void setVersion(String version) {
-        vers = version;
-    }
-
-    static void setEncoding(String encoding) {
-        enc = encoding;
-    }
-
-    private final Package classPackage;
-
-    {
-        classPackage = getClass().getPackage();
-        pname = classPackage.getName();
-        namespaceContext = new NamespaceContextImpl();
-        bufferStream = new ByteArrayOutputStream(BUFFER_SIZE);
     }
 
     public XMLBuilderSJSXP() {
@@ -78,6 +62,21 @@ public final class XMLBuilderSJSXP implements XMLBuilder {
             Logger.getLogger(pname + ".user").severe(
                     ErrorPkg.getMessage("xml.writer.config.fail.msg"));
         }
+    }
+
+    static void setVersion(String version) {
+        vers = version;
+    }
+
+    static void setEncoding(String encoding) {
+        enc = encoding;
+    }
+
+    {
+        classPackage = getClass().getPackage();
+        pname = classPackage.getName();
+        namespaceContext = new NamespaceContextImpl();
+        bufferStream = new ByteArrayOutputStream(BUFFER_SIZE);
     }
 
     @Override

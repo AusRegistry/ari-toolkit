@@ -12,10 +12,19 @@ import com.ausregistry.jtoolkit2.session.Transaction;
  * A basic demonstration of the life cycle of a SessionManager using a Domain Check Command.
  */
 public class DomainCheckDemo {
+    private static final String USAGE = "Must be run with the following parameters: \"Domain Name\"";
+
     private final SessionManager manager;
     private final SessionManagerProperties properties;
-    
-    private static String USAGE = "Must be run with the following parameters: \"Domain Name\"";
+
+    public DomainCheckDemo() throws Exception {
+        // Read in configuration properties from the toolkit.properties file
+        properties = new SessionManagerPropertiesImpl("toolkit.properties");
+
+        // Create a new session manager. This will use the properties loaded above to set up parameters
+        // required to connect to an EPP server.
+        manager = SessionManagerFactory.newInstance(properties);
+    }
 
     public static void main(String[] args) {
         try {
@@ -32,15 +41,6 @@ public class DomainCheckDemo {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public DomainCheckDemo() throws Exception {
-        // Read in configuration properties from the toolkit.properties file
-        properties = new SessionManagerPropertiesImpl("toolkit.properties");
-
-        // Create a new session manager. This will use the properties loaded above to set up parameters
-        // required to connect to an EPP server.
-        manager = SessionManagerFactory.newInstance(properties);
     }
 
     public void runDemo(final String domainName) throws Exception {

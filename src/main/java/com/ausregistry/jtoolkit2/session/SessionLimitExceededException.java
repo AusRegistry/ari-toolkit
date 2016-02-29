@@ -13,21 +13,21 @@ import com.ausregistry.jtoolkit2.ErrorPkg;
  * existing unused sessions and closing inactive connections.}</p>
  */
 public class SessionLimitExceededException extends LoginException {
-	/**
+    /**
      *
      */
     private static final long serialVersionUID = 7819901786803747534L;
 
     public SessionLimitExceededException() {
-		this(ErrorPkg.getMessage("session.limit.exceeded"));
-	}
+        this(ErrorPkg.getMessage("session.limit.exceeded"));
+    }
 
-	public SessionLimitExceededException(Throwable t) {
-		super(t);
-	}
+    public SessionLimitExceededException(Throwable t) {
+        super(t);
+    }
 
-	public SessionLimitExceededException(String message) {
-		super(message);
-	}
+    public SessionLimitExceededException(String message) {
+        super(message);
+    }
 }
 

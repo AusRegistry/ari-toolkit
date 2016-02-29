@@ -11,10 +11,21 @@ import com.ausregistry.jtoolkit2.xml.XMLParser;
 
 
 public class ArDomainUnrenewResponseTest {
-    private static final String xml1 =
-        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\"><response><result code=\"1000\"><msg>Command completed successfully</msg></result><resData><urenData xmlns=\"urn:X-ar:params:xml:ns:ardomain-1.0\"><name>example.com</name><exDate>2005-04-03T22:00:00.0Z</exDate></urenData></resData><trID><clTRID>ABC-12345</clTRID><svTRID>54322-XYZ</svTRID></trID></response></epp>";
-    private static final String xml2 =
-        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\"><response><result code=\"1001\"><msg>Command completed successfully; action pending</msg></result><resData><urenData xmlns=\"urn:X-ar:params:xml:ns:ardomain-1.0\"><name>example.com</name></urenData></resData><trID><clTRID>ABC-12345</clTRID><svTRID>54322-XYZ</svTRID></trID></response></epp>";
+    private static final String XML_1 =
+        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>"
+                + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\"><response><result code=\"1000\">"
+                + "<msg>Command completed successfully</msg></result><resData>"
+                + "<urenData xmlns=\"urn:X-ar:params:xml:ns:ardomain-1.0\"><name>example.com</name>"
+                + "<exDate>2005-04-03T22:00:00.0Z</exDate></urenData></resData><trID>"
+                + "<clTRID>ABC-12345</clTRID><svTRID>54322-XYZ</svTRID></trID></response></epp>";
+    private static final String XML_2 =
+        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>"
+                + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\"><response><result code=\"1001\">"
+                + "<msg>Command completed successfully; action pending</msg></result><resData>"
+                + "<urenData xmlns=\"urn:X-ar:params:xml:ns:ardomain-1.0\"><name>example.com</name>"
+                + "</urenData></resData><trID><clTRID>ABC-12345</clTRID><svTRID>54322-XYZ</svTRID></trID>"
+                + "</response></epp>";
+
     private ArDomainUnrenewResponse response1, response2;
 
     @Before
@@ -22,9 +33,9 @@ public class ArDomainUnrenewResponseTest {
         response1 = new ArDomainUnrenewResponse();
         response2 = new ArDomainUnrenewResponse();
         XMLParser parser = new XMLParser();
-        XMLDocument doc = parser.parse(xml1);
+        XMLDocument doc = parser.parse(XML_1);
         response1.fromXML(doc);
-        doc = parser.parse(xml2);
+        doc = parser.parse(XML_2);
         response2.fromXML(doc);
     }
 

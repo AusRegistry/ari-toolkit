@@ -10,24 +10,24 @@ public interface SessionPoolProperties {
     /**
      * Get the maximum number of sessions allowed in the pool.
      */
-    public int getMaximumPoolSize();
+    int getMaximumPoolSize();
 
     /**
      * Get the configured time interval (in milliseconds) after which the EPP
      * server will close idle connections.
      */
-    public long getServerTimeout();
+    long getServerTimeout();
 
     /**
      * The maximum time for configured objects to spend in wait() for any
      * relevant condition, such as session acquisition or release.
      */
-    public long getWaitTimeout();
+    long getWaitTimeout();
 
     /**
      * Get the session idle time (in milliseconds) after which the keep-alive
      * feature will allow sessions in the pool to be dropped (will no longer
      * poll).
      */
-    public long getClientTimeout();
+    long getClientTimeout();
 }

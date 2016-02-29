@@ -41,25 +41,25 @@ public class TmchSmdIntegrationTest {
 
     @Test
     public void shouldParseIcannSmdExample() throws Exception {
-        InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream
-                ("Trademark-Agent-Arabic-Active.smd");
+        InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(
+                "Trademark-Agent-Arabic-Active.smd");
 
         byte[] encodedSmdPart = TmchXmlParser.extractBase64EncodedPartFromSmdFile(inputStream);
 
-        SignedMarkData signedMarkData = TmchXmlParser.parseEncodedSignedMarkData(new ByteArrayInputStream
-                (encodedSmdPart));
+        SignedMarkData signedMarkData =
+                TmchXmlParser.parseEncodedSignedMarkData(new ByteArrayInputStream(encodedSmdPart));
 
         assertEquals(signedMarkData.getId(), "0000001861373633632586-65535");
     }
 
     @Test
     public void shouldFailValidationIfCertificateIsRevoked() throws Exception {
-        InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream
-                ("RevokedCertificateSMDData.txt");
+        InputStream inputStream =
+                Thread.currentThread().getContextClassLoader().getResourceAsStream("RevokedCertificateSMDData.txt");
 
-        String expectedMessage = "Invalid Certificate in SignedMarkData. The issuing authority has revoked the " +
-                "certificate used in SignedMarkData:\n" +
-                "Certificate of serial number '7'";
+        String expectedMessage = "Invalid Certificate in SignedMarkData. The issuing authority has revoked the "
+                + "certificate used in SignedMarkData:\n"
+                + "Certificate of serial number '7'";
         thrown.expect(TmchCertificateRevokedException.class);
         thrown.expectMessage(expectedMessage);
         tmchValidatingParser.validateAndParseEncodedSignedMarkData(inputStream);
@@ -67,8 +67,8 @@ public class TmchSmdIntegrationTest {
 
     @Test
     public void shouldFailValidationIfSmdIsRevoked() throws Exception {
-        InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream
-                ("RevokedSMDData.txt");
+        InputStream inputStream =
+                Thread.currentThread().getContextClassLoader().getResourceAsStream("RevokedSMDData.txt");
 
         thrown.expect(TmchSmdRevokedException.class);
         thrown.expectMessage("SignedMarkData with ID: 1-2 has been revoked.");
@@ -77,8 +77,8 @@ public class TmchSmdIntegrationTest {
 
     @Test
     public void shouldFailValidationIfSmdIsNotYetValid() throws Exception {
-        InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream
-                ("NotYetValidSMDData.txt");
+        InputStream inputStream =
+                Thread.currentThread().getContextClassLoader().getResourceAsStream("NotYetValidSMDData.txt");
         Date validationDate = DatatypeConverter.parseDate("2013-07-16T09:00:00.0Z").getTime();
 
         thrown.expect(NotYetValidSignedMarkDataException.class);
@@ -88,8 +88,8 @@ public class TmchSmdIntegrationTest {
 
     @Test
     public void shouldFailValidationIfSmdHasExpired() throws Exception {
-        InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream
-                ("ExpiredSMDData.txt");
+        InputStream inputStream =
+                Thread.currentThread().getContextClassLoader().getResourceAsStream("ExpiredSMDData.txt");
 
         thrown.expect(ExpiredSignedMarkDataException.class);
         thrown.expectMessage("SignedMarkData is not valid after 2012-08-29T09:00:00Z.");
@@ -98,8 +98,8 @@ public class TmchSmdIntegrationTest {
 
     @Test
     public void shouldFailValidationIfCertificateIsNotSignedByIcann() throws Exception {
-        InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream
-                ("NotSignedByCASMDData.txt");
+        InputStream inputStream =
+                Thread.currentThread().getContextClassLoader().getResourceAsStream("NotSignedByCASMDData.txt");
 
         thrown.expect(TmchInvalidCertificateException.class);
         thrown.expectMessage("Invalid Certificate provided in SignedMarkData.\nCertificate of serial number '5'");
@@ -108,8 +108,8 @@ public class TmchSmdIntegrationTest {
 
     @Test
     public void shouldFailValidationIfSmdDoesNotHaveSignature() throws Exception {
-        InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream
-                ("NoSignatureSmd.txt");
+        InputStream inputStream =
+                Thread.currentThread().getContextClassLoader().getResourceAsStream("NoSignatureSmd.txt");
 
         thrown.expect(SmdSignatureMissingException.class);
         thrown.expectMessage("SignedMarkData provided is invalid as it is does not contain the Signature element.");
@@ -118,8 +118,9 @@ public class TmchSmdIntegrationTest {
 
     @Test
     public void shouldFailValidationIfSignatureIsInvalid() throws Exception {
-        InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream
-                ("InvalidSignature-Trademark-Agent-English-Active.smd");
+        InputStream inputStream =
+                Thread.currentThread().getContextClassLoader()
+                        .getResourceAsStream("InvalidSignature-Trademark-Agent-English-Active.smd");
 
         byte[] encodedSmdPart = TmchValidatingParser.extractBase64EncodedPartFromSmdFile(inputStream);
 
@@ -130,8 +131,8 @@ public class TmchSmdIntegrationTest {
 
     @Test
     public void shouldFailWhenCertificateIsNotYetValid() throws Exception {
-        InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream
-                ("ValidSMDData.txt");
+        InputStream inputStream =
+                Thread.currentThread().getContextClassLoader().getResourceAsStream("ValidSMDData.txt");
 
         Date dateForValidation = DatatypeConverter.parseDate("2009-08-16T09:00:00.0Z").getTime();
 
@@ -142,8 +143,8 @@ public class TmchSmdIntegrationTest {
 
     @Test
     public void shouldFailWhenCertificateHasExpired() throws Exception {
-        InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream
-                ("ValidSMDData.txt");
+        InputStream inputStream =
+                Thread.currentThread().getContextClassLoader().getResourceAsStream("ValidSMDData.txt");
 
         Date dateForValidation = DatatypeConverter.parseDate("2015-08-16T09:00:00.0Z").getTime();
         thrown.expect(TmchInvalidCertificateException.class);
@@ -160,8 +161,8 @@ public class TmchSmdIntegrationTest {
 
     @Test
     public void shouldPassValidationForADateWhenSmdIsValid() throws Exception {
-        InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream
-                ("ValidSMDData.txt");
+        InputStream inputStream =
+                Thread.currentThread().getContextClassLoader().getResourceAsStream("ValidSMDData.txt");
 
         Date dateForValidation = DatatypeConverter.parseDate("2013-08-16T09:00:00.0Z").getTime();
         SignedMarkData signedMarkData = tmchValidatingParser.validateAndParseEncodedSignedMarkData(inputStream,

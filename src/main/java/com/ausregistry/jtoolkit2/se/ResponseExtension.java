@@ -14,10 +14,8 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
  * expressions for which are defined statically.
  */
 public abstract class ResponseExtension implements java.io.Serializable {
-    
-	private static final long serialVersionUID = -9214377057865043563L;
-	
-	public static final String CREATE = "creData";
+
+    public static final String CREATE = "creData";
     public static final String INFO = "infData";
     public static final String UPDATE = "upData";
     public static final String RENEW = "renData";
@@ -27,7 +25,9 @@ public abstract class ResponseExtension implements java.io.Serializable {
     /**
      * XPath expression to locate the extension element from the EPP response.
      */
-    public static final String EXTENSION_EXPR = "/e:epp/e:response/e:extension";
+    protected static final String EXTENSION_EXPR = "/e:epp/e:response/e:extension";
+
+    private static final long serialVersionUID = -9214377057865043563L;
 
     protected static String replaceResponseType(final String expr, String responseType) {
         return expr.replaceAll("RESPONSE_TYPE", responseType);
@@ -40,11 +40,11 @@ public abstract class ResponseExtension implements java.io.Serializable {
      */
     public abstract void fromXML(XMLDocument xmlDoc) throws XPathExpressionException;
 
-	/**
-	 * Indicates whether fromXML() completed successfully and the extension was
-	 * successfully initialised from the EPP response.
-	 * 
-	 * @return true if the extension has been initialised, else false.
-	 */
-    public abstract boolean isInitialised(); 
+    /**
+     * Indicates whether fromXML() completed successfully and the extension was
+     * successfully initialised from the EPP response.
+     *
+     * @return true if the extension has been initialised, else false.
+     */
+    public abstract boolean isInitialised();
 }

@@ -20,16 +20,16 @@ import org.xml.sax.SAXException;
  * Uses the debug and user level loggers.
  */
 public class EPPWriter extends XMLWriter {
-    private static final DocumentBuilderFactory dbFactory;
-    private static final SAXParserFactory spFactory;
+    private static final DocumentBuilderFactory DOCUMENT_BUILDER_FACTORY;
+    private static final SAXParserFactory SAX_PARSER_FACTORY;
 
     static {
-        dbFactory = DocumentBuilderFactory.newInstance();
-        spFactory = SAXParserFactory.newInstance();
-        spFactory.setNamespaceAware(true);
-        spFactory.setValidating(false);
+        DOCUMENT_BUILDER_FACTORY = DocumentBuilderFactory.newInstance();
+        SAX_PARSER_FACTORY = SAXParserFactory.newInstance();
+        SAX_PARSER_FACTORY.setNamespaceAware(true);
+        SAX_PARSER_FACTORY.setValidating(false);
         EPPSchemaProvider.setValidating(true);
-        spFactory.setSchema(EPPSchemaProvider.getSchema());
+        SAX_PARSER_FACTORY.setSchema(EPPSchemaProvider.getSchema());
     }
 
     private Document doc;
@@ -66,7 +66,7 @@ public class EPPWriter extends XMLWriter {
         xml = null;
         try {
             DocumentBuilder docBuilder;
-            docBuilder = dbFactory.newDocumentBuilder();
+            docBuilder = DOCUMENT_BUILDER_FACTORY.newDocumentBuilder();
             doc = docBuilder.newDocument();
             eppElement = doc.createElementNS(eppNamespace, "epp");
             eppElement.setAttribute("xmlns:xsi", xsi);
@@ -99,12 +99,12 @@ public class EPPWriter extends XMLWriter {
 
     @Override
     protected final SAXParser newSAXParser() throws SAXException, ParserConfigurationException {
-        return spFactory.newSAXParser();
+        return SAX_PARSER_FACTORY.newSAXParser();
     }
 
     @Override
     protected final boolean isParserValidating() {
-        return (spFactory.getSchema() != null);
+        return (SAX_PARSER_FACTORY.getSchema() != null);
     }
 
     @Override

@@ -25,29 +25,26 @@ import javax.xml.xpath.XPathExpressionException;
 public class DomainTransferResponse extends TransferResponse {
     private static final long serialVersionUID = -3652461689615678734L;
 
-    private static final String DOM_NAME_EXPR = RES_DATA_EXPR +
-        "/domain:trnData/domain:name/text()";
-    private static final String DOM_EXDATE_EXPR = RES_DATA_EXPR +
-        "/domain:trnData/domain:exDate/text()";
+    private static final String DOM_NAME_EXPR = RES_DATA_EXPR + "/domain:trnData/domain:name/text()";
+    private static final String DOM_EXDATE_EXPR = RES_DATA_EXPR + "/domain:trnData/domain:exDate/text()";
 
-    private static final String DOM_TR_STATUS_EXPR =
-        exprReplace(TR_STATUS_EXPR); 
-    private static final String DOM_REID_EXPR = exprReplace(REID_EXPR); 
-    private static final String DOM_REDATE_EXPR = exprReplace(REDATE_EXPR); 
-    private static final String DOM_ACID_EXPR = exprReplace(ACID_EXPR); 
-    private static final String DOM_ACDATE_EXPR = exprReplace(ACDATE_EXPR); 
+    private static final String DOM_TR_STATUS_EXPR = exprReplace(TR_STATUS_EXPR);
+    private static final String DOM_REID_EXPR = exprReplace(REID_EXPR);
+    private static final String DOM_REDATE_EXPR = exprReplace(REDATE_EXPR);
+    private static final String DOM_ACID_EXPR = exprReplace(ACID_EXPR);
+    private static final String DOM_ACDATE_EXPR = exprReplace(ACDATE_EXPR);
 
     private GregorianCalendar exDate;
     private String name;
     private String exDateStr;
 
+    public DomainTransferResponse() {
+        super(StandardObjectType.DOMAIN);
+    }
+
     protected static String exprReplace(String expr) {
         return expr.replaceAll(OBJ,
                 StandardObjectType.DOMAIN.getName());
-    }
-
-    public DomainTransferResponse() {
-        super(StandardObjectType.DOMAIN);
     }
 
     public String getName() {

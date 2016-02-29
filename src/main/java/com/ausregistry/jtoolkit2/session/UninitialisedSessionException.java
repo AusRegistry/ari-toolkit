@@ -7,13 +7,13 @@ import com.ausregistry.jtoolkit2.ErrorPkg;
  * successfully opened.
  */
 public class UninitialisedSessionException extends java.io.IOException {
-	/**
-     * 
+    /**
+     *
      */
     private static final long serialVersionUID = 175246572597956573L;
 
     public UninitialisedSessionException() {
-		super(ErrorPkg.getMessage("net.socket.uninitialised"));
-	}
+        super(ErrorPkg.getMessage("net.socket.uninitialised"));
+    }
 }
 

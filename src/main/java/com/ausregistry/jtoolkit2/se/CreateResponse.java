@@ -22,11 +22,11 @@ import javax.xml.xpath.XPathExpressionException;
  */
 public abstract class CreateResponse extends DataResponse {
 
-	private static final long serialVersionUID = 5488683100446489329L;
-
-	protected static final String OBJ = "OBJ";
+    protected static final String OBJ = "OBJ";
     protected static final String CRE_DATA_EXPR = "/e:epp/e:response/e:resData/OBJ:creData";
     protected static final String CR_DATE_EXPR = CRE_DATA_EXPR + "/OBJ:crDate/text()";
+
+    private static final long serialVersionUID = 5488683100446489329L;
 
     private GregorianCalendar crDate;
 

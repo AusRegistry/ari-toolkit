@@ -22,28 +22,18 @@ import javax.xml.xpath.XPathExpressionException;
  */
 public abstract class InfoResponse extends DataResponse {
 
-	private static final long serialVersionUID = 1473168990371776574L;
+    protected static final String INF_DATA_EXPR = RESPONSE_EXPR + "/e:resData/OBJ:infData";
+    protected static final String ROID_EXPR = INF_DATA_EXPR + "/OBJ:roid/text()";
+    protected static final String CR_ID_EXPR = INF_DATA_EXPR + "/OBJ:crID/text()";
+    protected static final String UP_ID_EXPR = INF_DATA_EXPR + "/OBJ:upID/text()";
+    protected static final String CL_ID_EXPR = INF_DATA_EXPR + "/OBJ:clID/text()";
+    protected static final String CR_DATE_EXPR = INF_DATA_EXPR + "/OBJ:crDate/text()";
+    protected static final String UP_DATE_EXPR = INF_DATA_EXPR + "/OBJ:upDate/text()";
+    protected static final String TR_DATE_EXPR = INF_DATA_EXPR + "/OBJ:trDate/text()";
+    protected static final String STATUS_COUNT_EXPR = "count(" + INF_DATA_EXPR + "/OBJ:status)";
+    protected static final String STATUS_EXPR = INF_DATA_EXPR + "/OBJ:status[IDX]";
 
-	protected static final String INF_DATA_EXPR = RESPONSE_EXPR +
-        "/e:resData/OBJ:infData";
-    protected static final String ROID_EXPR = INF_DATA_EXPR +
-        "/OBJ:roid/text()";
-    protected static final String CR_ID_EXPR = INF_DATA_EXPR +
-        "/OBJ:crID/text()";
-    protected static final String UP_ID_EXPR = INF_DATA_EXPR +
-        "/OBJ:upID/text()";
-    protected static final String CL_ID_EXPR = INF_DATA_EXPR +
-        "/OBJ:clID/text()";
-    protected static final String CR_DATE_EXPR = INF_DATA_EXPR +
-        "/OBJ:crDate/text()";
-    protected static final String UP_DATE_EXPR = INF_DATA_EXPR +
-        "/OBJ:upDate/text()";
-    protected static final String TR_DATE_EXPR = INF_DATA_EXPR +
-        "/OBJ:trDate/text()";
-    protected static final String STATUS_COUNT_EXPR = "count(" + INF_DATA_EXPR
-        + "/OBJ:status)";
-    protected static final String STATUS_EXPR = INF_DATA_EXPR +
-        "/OBJ:status[IDX]";
+    private static final long serialVersionUID = 1473168990371776574L;
     private static final String STATUS_S_EXPR = "/@s";
     private static final String STATUS_REASON_EXPR = "/text()";
     private static final String STATUS_LANG_EXPR = "/@lang";
@@ -114,7 +104,7 @@ public abstract class InfoResponse extends DataResponse {
             int statusCount = xmlDoc.getNodeCount(statusCountExpr());
             statuses = new Status[statusCount];
             for (int i = 0; i < statuses.length; i++) {
-                String qry = ReceiveSE.replaceIndex(statusExpr(), i+1);
+                String qry = ReceiveSE.replaceIndex(statusExpr(), i + 1);
                 String reason = xmlDoc.getNodeValue(qry + STATUS_REASON_EXPR);
                 String s = xmlDoc.getNodeValue(qry + STATUS_S_EXPR);
                 String lang = xmlDoc.getNodeValue(qry + STATUS_LANG_EXPR);

@@ -1,9 +1,7 @@
 package com.ausregistry.jtoolkit2.se.idn;
 
 import com.ausregistry.jtoolkit2.se.Command;
-import com.ausregistry.jtoolkit2.se.DomainCreateCommand;
 import com.ausregistry.jtoolkit2.se.CommandExtension;
-import com.ausregistry.jtoolkit2.se.DomainCreateResponse;
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.xml.XMLWriter;
 import org.w3c.dom.Element;
@@ -16,8 +14,8 @@ import org.w3c.dom.Element;
  * compliant with RFC5730 and RFC5731. The response expected from a server should be
  * handled by a Domain Create Response.</p>
  *
- * @see DomainCreateCommand
- * @see DomainCreateResponse
+ * @see com.ausregistry.jtoolkit2.se.DomainCreateCommand
+ * @see com.ausregistry.jtoolkit2.se.DomainCreateResponse
  * @see <a href="http://ausregistry.github.io/doc/idn-1.0/idn-1.0.html">Internationalized Domain Name Extension
  * Mapping for the Extensible Provisioning Protocol (EPP)</a>
  */
@@ -33,14 +31,14 @@ public final class DomainCreateIdnCommandExtension implements CommandExtension {
         setLanguage(language);
     }
 
-	public void addToCommand(final Command command) {
-		final XMLWriter xmlWriter = command.getXmlWriter();
-		final Element extensionElement = command.getExtensionElement();
-		final Element createElement = xmlWriter.appendChild(extensionElement,
-				"create", ExtendedObjectType.IDN.getURI());
-		xmlWriter.appendChild(createElement, "languageTag").setTextContent(language);
+    public void addToCommand(final Command command) {
+        final XMLWriter xmlWriter = command.getXmlWriter();
+        final Element extensionElement = command.getExtensionElement();
+        final Element createElement = xmlWriter.appendChild(extensionElement,
+                "create", ExtendedObjectType.IDN.getURI());
+        xmlWriter.appendChild(createElement, "languageTag").setTextContent(language);
     }
-    
+
     private void setLanguage(final String language) {
         if (language == null || language.isEmpty()) {
             throw new IllegalArgumentException("Language must not be null or empty");

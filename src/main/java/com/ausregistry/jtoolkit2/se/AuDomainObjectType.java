@@ -8,19 +8,19 @@ class AuDomainObjectType implements ObjectType {
     private static final long serialVersionUID = -543331887000261081L;
 
     public String getName() {
-		return "audom";
-	}
+        return "audom";
+    }
 
-	public String getURI() {
-		return "urn:X-au:params:xml:ns:audomain-1.0";
-	}
+    public String getURI() {
+        return "urn:X-au:params:xml:ns:audomain-1.0";
+    }
 
-	public String getSchemaLocation() {
-		return "urn:X-au:params:xml:ns:audomain-1.0 audomain-1.0.xsd";
-	}
+    public String getSchemaLocation() {
+        return "urn:X-au:params:xml:ns:audomain-1.0 audomain-1.0.xsd";
+    }
 
-	public String getIdentType() {
-		return "name";
-	}
+    public String getIdentType() {
+        return "name";
+    }
 }
 

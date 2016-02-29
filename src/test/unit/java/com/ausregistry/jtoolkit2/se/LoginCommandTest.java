@@ -12,7 +12,7 @@ import org.xml.sax.SAXException;
 
 public class LoginCommandTest {
     private static String[] objURIs, extURIs;
-    
+
     static {
         objURIs = new String[] {
                 "urn:ietf:params:xml:ns:domain-1.0",
@@ -26,7 +26,7 @@ public class LoginCommandTest {
 
     @Before
     public void setUp() throws Exception {
-		Timer.setTime("20070101.010101");
+        Timer.setTime("20070101.010101");
         CLTRID.setClID("JTKUTEST");
     }
 
@@ -80,15 +80,15 @@ public class LoginCommandTest {
             fail(saxe.getMessage());
         }
     }
-    
+
     @Test
     public void testLoginCommandSecDnsExtension() {
 
-    	final String[] secDnsExtURIs = new String[] {
+        final String[] secDnsExtURIs = new String[] {
                 "urn:ietf:params:xml:ns:secDNS-1.1"
         };
-    	
-    	Command cmd = new LoginCommand("JTKUTEST", "1234abcd!@#$JTK",
+
+        Command cmd = new LoginCommand("JTKUTEST", "1234abcd!@#$JTK",
                 objURIs, secDnsExtURIs);
         try {
             String xml = cmd.toXML();
@@ -100,15 +100,15 @@ public class LoginCommandTest {
 
     @Test
     public void testLoginCommandSecDnsExtensionNotProvided() {
-    	
-    	Command cmd = new LoginCommand("JTKUTEST", "1234abcd!@#$JTK",
-    			objURIs, extURIs);
-    	try {
-    		String xml = cmd.toXML();
-    		assertFalse(xml.contains("urn:ietf:params:xml:ns:secDNS-1.1"));
-    	} catch (SAXException saxe) {
-    		fail(saxe.getMessage());
-    	}
+
+        Command cmd = new LoginCommand("JTKUTEST", "1234abcd!@#$JTK",
+                objURIs, extURIs);
+        try {
+            String xml = cmd.toXML();
+            assertFalse(xml.contains("urn:ietf:params:xml:ns:secDNS-1.1"));
+        } catch (SAXException saxe) {
+            fail(saxe.getMessage());
+        }
     }
 
 }

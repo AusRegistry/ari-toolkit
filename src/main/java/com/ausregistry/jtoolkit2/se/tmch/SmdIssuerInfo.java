@@ -12,7 +12,6 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
  *
  */
 public class SmdIssuerInfo {
-    private Logger maintLogger = Logger.getLogger(getClass().getPackage().getName() + ".maint");
 
     private static final String ISSUER_INFO_ID_EXPR = "@issuerID";
     private static final String ISSUER_INFO_ORG_EXPR = "smd:org/text()";
@@ -20,6 +19,8 @@ public class SmdIssuerInfo {
     private static final String ISSUER_INFO_URL_EXPR = "smd:url/text()";
     private static final String ISSUER_INFO_VOICE_EXPR = "smd:voice/text()";
     private static final String ISSUER_INFO_VOICE_EXT_EXPR = "smd:voice/@x";
+
+    private Logger maintLogger = Logger.getLogger(getClass().getPackage().getName() + ".maint");
 
     private String id;
 

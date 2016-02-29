@@ -23,19 +23,14 @@ import javax.xml.xpath.XPathExpressionException;
  */
 public abstract class TransferResponse extends DataResponse {
 
-	private static final long serialVersionUID = 4700444182315651037L;
+    protected static final String OBJ = "OBJ";
+    protected static final String TR_STATUS_EXPR = RES_DATA_EXPR + "/OBJ:trnData/OBJ:trStatus/text()";
+    protected static final String REID_EXPR = RES_DATA_EXPR + "/OBJ:trnData/OBJ:reID/text()";
+    protected static final String REDATE_EXPR = RES_DATA_EXPR + "/OBJ:trnData/OBJ:reDate/text()";
+    protected static final String ACID_EXPR = RES_DATA_EXPR + "/OBJ:trnData/OBJ:acID/text()";
+    protected static final String ACDATE_EXPR = RES_DATA_EXPR + "/OBJ:trnData/OBJ:acDate/text()";
 
-	protected static final String OBJ = "OBJ";
-    protected static final String TR_STATUS_EXPR = RES_DATA_EXPR +
-        "/OBJ:trnData/OBJ:trStatus/text()";
-    protected static final String REID_EXPR = RES_DATA_EXPR +
-        "/OBJ:trnData/OBJ:reID/text()";
-    protected static final String REDATE_EXPR = RES_DATA_EXPR +
-        "/OBJ:trnData/OBJ:reDate/text()";
-    protected static final String ACID_EXPR = RES_DATA_EXPR +
-        "/OBJ:trnData/OBJ:acID/text()";
-    protected static final String ACDATE_EXPR = RES_DATA_EXPR +
-        "/OBJ:trnData/OBJ:acDate/text()";
+    private static final long serialVersionUID = 4700444182315651037L;
 
     private String trStatus;
     private String reID;

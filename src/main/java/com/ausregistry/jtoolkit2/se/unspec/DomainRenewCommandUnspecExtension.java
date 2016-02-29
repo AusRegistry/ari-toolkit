@@ -1,7 +1,6 @@
 package com.ausregistry.jtoolkit2.se.unspec;
 
 import com.ausregistry.jtoolkit2.se.Command;
-import com.ausregistry.jtoolkit2.se.DomainRenewCommand;
 import com.ausregistry.jtoolkit2.se.CommandExtension;
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.xml.XMLWriter;
@@ -13,7 +12,7 @@ import org.w3c.dom.Element;
  * <p>Use this to command to restore a domain name in Redemption. The response expected from a
  * server should be handled by a Domain Renew Response.</p>
  *
- * @see DomainRenewCommand
+ * @see com.ausregistry.jtoolkit2.se.DomainRenewCommand
  */
 public class DomainRenewCommandUnspecExtension implements CommandExtension {
     private final RestoreReasonCode restoreReasonCode;

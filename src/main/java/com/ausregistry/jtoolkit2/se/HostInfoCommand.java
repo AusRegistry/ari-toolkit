@@ -10,13 +10,13 @@ package com.ausregistry.jtoolkit2.se;
 public class HostInfoCommand extends InfoCommand {
     private static final long serialVersionUID = 8483563284887107960L;
 
-	/**
-	 * Create a host info command with the specified identifier.
-	 *
-	 * @param name The name of the host to retrieve information about.
-	 */
+    /**
+     * Create a host info command with the specified identifier.
+     *
+     * @param name The name of the host to retrieve information about.
+     */
     public HostInfoCommand(String name) {
-		super(StandardObjectType.HOST, name);
-	}
+        super(StandardObjectType.HOST, name);
+    }
 }
 

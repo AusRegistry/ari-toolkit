@@ -12,23 +12,22 @@ import java.util.ArrayList;
  * Extensible Provisioning Protocol'. Such a service element is sent by an EPP
  * server that supports the variant-1.0 extension, in response to a valid
  * Domain Variant Info command.
- * 
+ *
  * @see com.ausregistry.jtoolkit2.se.DomainVariantInfoCommand
  */
 public class DomainVariantInfoResponse extends DataResponse {
 
-    private static final long serialVersionUID = -6265618329673981603L;
-    private static final VariantInfoCommandType COMMAND_TYPE = new VariantInfoCommandType();
-    private static final String VARIANT_PREFIX = ExtendedObjectType.VARIANT.getName();
-
-    private ArrayList<IdnaDomainVariant> domains;
-
+    protected static final String VARIANT_PREFIX = ExtendedObjectType.VARIANT.getName();
     protected static final String VARINFDATA_BASE_EXPR =
-            RES_DATA_EXPR + "/" + VARIANT_PREFIX + ":varInfData/" + VARIANT_PREFIX
-                    + ":variant";
+            RES_DATA_EXPR + "/" + VARIANT_PREFIX + ":varInfData/" + VARIANT_PREFIX + ":variant";
     protected static final String VARINFDATA_COUNT_EXPR = "count(" + VARINFDATA_BASE_EXPR + ")";
     protected static final String VARINFDATA_IND_EXPR = VARINFDATA_BASE_EXPR + "[IDX]";
+
+    private static final long serialVersionUID = -6265618329673981603L;
+    private static final VariantInfoCommandType COMMAND_TYPE = new VariantInfoCommandType();
     private static final String VARIANT_USER_FORM_EXPR = "/@userForm";
+
+    private ArrayList<IdnaDomainVariant> domains;
 
     public DomainVariantInfoResponse() {
         super(COMMAND_TYPE, ExtendedObjectType.VARIANT);

@@ -14,11 +14,12 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
  *
  */
 public class TreatyOrStatuteProtection {
-    private Logger maintLogger = Logger.getLogger(getClass().getPackage().getName() + ".maint");
 
     private static final String RULING_EXPR = "mark:ruling";
     private static final String CC_EXPR = "mark:cc/text()";
     private static final String REGION_EXPR = "mark:region/text()";
+
+    private Logger maintLogger = Logger.getLogger(getClass().getPackage().getName() + ".maint");
 
     private String cc;
 

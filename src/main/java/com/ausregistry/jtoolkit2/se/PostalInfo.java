@@ -15,21 +15,18 @@ public abstract class PostalInfo implements Appendable {
     private static final long serialVersionUID = -8790808568589212577L;
 
     private String type;
-	private String name;
-	private String org;
-	private String[] street;
-	private String city;
-	private String sp;
-	private String pc;
-	private String cc;
+    private String name;
+    private String org;
+    private String[] street;
+    private String city;
+    private String sp;
+    private String pc;
+    private String cc;
 
     /**
      * Minimal information required as per RFC5733 for creation of a contact.
      */
-    protected PostalInfo(PostalInfoType type, String name, String city,
-			String countryCode)
-
-    {
+    protected PostalInfo(PostalInfoType type, String name, String city, String countryCode) {
         this(type, name, null, null, city, null, null, countryCode);
     }
 
@@ -37,49 +34,49 @@ public abstract class PostalInfo implements Appendable {
      * All fields defined in RFC5733 for postalInfoType.
      */
     protected PostalInfo(PostalInfoType type, String name, String org,
-			String[] street, String city, String stateProv, String postcode,
-			String countryCode) {
+            String[] street, String city, String stateProv, String postcode,
+            String countryCode) {
 
         assert type != null;
         assert name != null;
         assert city != null;
         assert countryCode != null;
-		this.type = type.toString();
-		this.name = name;
-		this.org = org;
-		if (street != null) {
-			this.street = street.clone();
-		}
-		this.city = city;
-		this.sp = stateProv;
-		this.pc = postcode;
-		this.cc = countryCode;
+        this.type = type.toString();
+        this.name = name;
+        this.org = org;
+        if (street != null) {
+            this.street = street.clone();
+        }
+        this.city = city;
+        this.sp = stateProv;
+        this.pc = postcode;
+        this.cc = countryCode;
     }
 
-	public Element appendToElement(XMLWriter xmlWriter, Element parent) {
-		Element postalInfo = xmlWriter.appendChild(parent, "postalInfo", "type", type);
-		xmlWriter.appendChild(postalInfo, "name").setTextContent(name);
-		if (org != null) {
-			xmlWriter.appendChild(postalInfo, "org").setTextContent(org);
-		}
+    public Element appendToElement(XMLWriter xmlWriter, Element parent) {
+        Element postalInfo = xmlWriter.appendChild(parent, "postalInfo", "type", type);
+        xmlWriter.appendChild(postalInfo, "name").setTextContent(name);
+        if (org != null) {
+            xmlWriter.appendChild(postalInfo, "org").setTextContent(org);
+        }
 
-		Element addr = xmlWriter.appendChild(postalInfo, "addr");
-		if (street != null) {
-			for (String s : street) {
-				xmlWriter.appendChild(addr, "street").setTextContent(s);
-			}
-		}
-		xmlWriter.appendChild(addr, "city").setTextContent(city);
-		if (sp != null) {
-			xmlWriter.appendChild(addr, "sp").setTextContent(sp);
-		}
-		if (pc != null) {
-			xmlWriter.appendChild(addr, "pc").setTextContent(pc);
-		}
-		xmlWriter.appendChild(addr, "cc").setTextContent(cc);
+        Element addr = xmlWriter.appendChild(postalInfo, "addr");
+        if (street != null) {
+            for (String s : street) {
+                xmlWriter.appendChild(addr, "street").setTextContent(s);
+            }
+        }
+        xmlWriter.appendChild(addr, "city").setTextContent(city);
+        if (sp != null) {
+            xmlWriter.appendChild(addr, "sp").setTextContent(sp);
+        }
+        if (pc != null) {
+            xmlWriter.appendChild(addr, "pc").setTextContent(pc);
+        }
+        xmlWriter.appendChild(addr, "cc").setTextContent(cc);
 
-		return postalInfo;
-	}
+        return postalInfo;
+    }
 
     public String getCountryCode() {
         return cc;

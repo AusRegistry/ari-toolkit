@@ -48,9 +48,9 @@ public final class IdnaDomainVariant implements Comparable<IdnaDomainVariant>,
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        
+
         result = prime * result + ((userForm == null) ? 0 : userForm.hashCode());
-        
+
         /*
          * Given that DNS form is generated from the user form, adding its hash
          * code generally does not serve to differentiate the overall hash
@@ -87,7 +87,7 @@ public final class IdnaDomainVariant implements Comparable<IdnaDomainVariant>,
      * form. Given that DNS form is generated from the user form, these two
      * comparisons should yield identical results.  However, since both values are
      * provided externally this can't be guaranteed, hence both are compared.
-     * 
+     *
      * @see Comparable#compareTo(Object)
      */
     public int compareTo(final IdnaDomainVariant other) {
@@ -96,7 +96,7 @@ public final class IdnaDomainVariant implements Comparable<IdnaDomainVariant>,
         }
 
         int match = compareStrings(userForm, other.userForm);
-        
+
         if (match == 0) {
             match = compareStrings(name, other.name);
         }

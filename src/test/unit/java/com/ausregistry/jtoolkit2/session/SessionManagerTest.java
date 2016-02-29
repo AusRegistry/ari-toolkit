@@ -151,7 +151,7 @@ public class SessionManagerTest {
                     } catch (Exception e) {
                         fail(e.getMessage());
                     }
-                    
+
                     if (errIdx < SEQUENTIAL_COUNT) {
                         fail("Executed fewer than requested transactions: "
                                 + String.valueOf(errIdx) + " < "

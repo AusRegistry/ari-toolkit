@@ -20,7 +20,7 @@ public class DomainInfoIdnResponseTest {
         final DomainInfoResponse response = new DomainInfoResponse();
         final DomainInfoIdnResponseExtension re = new DomainInfoIdnResponseExtension();
 
-		final XMLDocument doc =
+        final XMLDocument doc =
                 PARSER.parse(getInfoResponseExpectedXml(dnsForm, true, languageTag));
         response.registerExtension(re);
         response.fromXML(doc);
@@ -28,7 +28,7 @@ public class DomainInfoIdnResponseTest {
         assertTrue("IDN extension should have been initialised", re.isInitialised());
         assertEquals(languageTag, re.getLanguageTag());
     }
-    
+
     @Test
     public void testGetNoIdn() throws Exception {
         final String domainName = "xn--xha91b83h.com";
@@ -79,7 +79,7 @@ public class DomainInfoIdnResponseTest {
         result.append("</resData>");
 
         if (isIdn) {
-        	result.append("<extension>");
+            result.append("<extension>");
             result.append("<infData xmlns=\"urn:ar:params:xml:ns:idn-1.0\"");
             result.append(" xsi:schemaLocation=\"urn:ar:params:xml:ns:idn-1.0 idn-1.0.xsd\">");
             result.append("<languageTag>" + languageTag + "</languageTag>");

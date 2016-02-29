@@ -15,10 +15,13 @@ import javax.xml.xpath.XPathExpressionException;
 public class ContactCreateResponse extends CreateResponse {
     private static final long serialVersionUID = -5714257489160996356L;
     private static final String CON_CR_DATE_EXPR = exprReplace(CR_DATE_EXPR);
-    private static final String CON_ID_EXPR = exprReplace(CRE_DATA_EXPR) +
-        "/contact:id/text()";
+    private static final String CON_ID_EXPR = exprReplace(CRE_DATA_EXPR) + "/contact:id/text()";
 
     private String id;
+
+    public ContactCreateResponse() {
+        super(StandardObjectType.CONTACT);
+    }
 
     protected String crDateExpr() {
         return CON_CR_DATE_EXPR;
@@ -27,10 +30,6 @@ public class ContactCreateResponse extends CreateResponse {
     protected static String exprReplace(String expr) {
         return expr.replaceAll(OBJ,
                 StandardObjectType.CONTACT.getName());
-    }
-
-    public ContactCreateResponse() {
-        super(StandardObjectType.CONTACT);
     }
 
     public String getID() {

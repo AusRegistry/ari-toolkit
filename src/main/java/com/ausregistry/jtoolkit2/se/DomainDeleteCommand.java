@@ -6,15 +6,15 @@ package com.ausregistry.jtoolkit2.se;
  * delete EPP command service elements via the toXML method.
  */
 public class DomainDeleteCommand extends DeleteCommand {
-	private static final long serialVersionUID = -2941660288275937680L;
+    private static final long serialVersionUID = -2941660288275937680L;
 
-	/**
-	 * Delete the identified domain.
-	 *
-	 * @param name The name of the domain to delete.
-	 */
-	public DomainDeleteCommand(String name) {
-		super(StandardObjectType.DOMAIN, name);
-	}
+    /**
+     * Delete the identified domain.
+     *
+     * @param name The name of the domain to delete.
+     */
+    public DomainDeleteCommand(String name) {
+        super(StandardObjectType.DOMAIN, name);
+    }
 }
 

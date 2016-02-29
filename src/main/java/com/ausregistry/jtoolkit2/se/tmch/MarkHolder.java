@@ -16,8 +16,6 @@ import org.w3c.dom.Node;
  */
 public class MarkHolder {
 
-    private Logger maintLogger = Logger.getLogger(getClass().getPackage().getName() + ".maint");
-
     private static final String ENTITLEMENT_EXPR = "@entitlement";
     private static final String ORG_EXPR = "mark:org/text()";
     private static final String NAME_EXPR = "mark:name/text()";
@@ -27,6 +25,8 @@ public class MarkHolder {
     private static final String FAX_EXT_EXPR = "mark:fax/@x";
     private static final String ADDRESS_EXPR = "mark:addr";
     private static final String EMAIL_EXPR = "mark:email";
+
+    private Logger maintLogger = Logger.getLogger(getClass().getPackage().getName() + ".maint");
 
     private MarkHolderEntitlement entitlement;
 

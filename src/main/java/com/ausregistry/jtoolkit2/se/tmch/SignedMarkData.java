@@ -17,14 +17,16 @@ import static com.ausregistry.jtoolkit2.se.ExtendedObjectType.MARK;
  *
  */
 public class SignedMarkData {
-    private Logger maintLogger = Logger.getLogger(getClass().getPackage().getName() + ".maint");
 
     public static final String BASE_EXPR = "/" + SIGNED_MARK_DATA.getName() + ":signedMark";
     private static final String SMD_ID_EXPR = BASE_EXPR + "/" + SIGNED_MARK_DATA.getName() + ":id/text()";
-    private static final String SMD_NOT_BEFORE_EXPR = BASE_EXPR + "/" + SIGNED_MARK_DATA.getName() + ":notBefore/text()";
+    private static final String SMD_NOT_BEFORE_EXPR =
+            BASE_EXPR + "/" + SIGNED_MARK_DATA.getName() + ":notBefore/text()";
     private static final String SMD_NOT_AFTER_EXPR = BASE_EXPR + "/" + SIGNED_MARK_DATA.getName() + ":notAfter/text()";
     private static final String ISSUER_INFO_EXPR = BASE_EXPR + "/" + SIGNED_MARK_DATA.getName() + ":issuerInfo";
     private static final String MARK_EXPR = BASE_EXPR + "/" + MARK.getName() + ":mark";
+
+    private Logger maintLogger = Logger.getLogger(getClass().getPackage().getName() + ".maint");
 
     private String id;
 

@@ -1,7 +1,5 @@
 package com.ausregistry.jtoolkit2.se.fee;
 
-import com.ausregistry.jtoolkit2.se.DomainCreateCommand;
-import com.ausregistry.jtoolkit2.se.DomainCreateResponse;
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.se.ResponseExtension;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
@@ -18,8 +16,8 @@ import java.math.BigDecimal;
  * supplied, should match the fees that are set for the domain name for the requested period.
  * The response expected from a server should be handled by a Domain Create Response.</p>
  *
- * @see DomainCreateCommand
- * @see DomainCreateResponse
+ * @see com.ausregistry.jtoolkit2.se.DomainCreateCommand
+ * @see com.ausregistry.jtoolkit2.se.DomainCreateResponse
  * @see <a href="https://tools.ietf.org/html/draft-brown-epp-fees-03">Domain Name Fee Extension
  * Mapping for the Extensible Provisioning Protocol (EPP)</a>
  */

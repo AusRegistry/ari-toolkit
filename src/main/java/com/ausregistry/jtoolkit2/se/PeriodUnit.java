@@ -16,18 +16,18 @@ public enum PeriodUnit {
         return desc;
     }
 
-	public static PeriodUnit value(String name) {
-		if (name == null) {
-			return PeriodUnit.YEARS;
-		}
+    public static PeriodUnit value(String name) {
+        if (name == null) {
+            return PeriodUnit.YEARS;
+        }
 
-		for (PeriodUnit unit : PeriodUnit.values()) {
-			if (unit.toString().equals(name)) {
-				return unit;
-			}
-		}
+        for (PeriodUnit unit : PeriodUnit.values()) {
+            if (unit.toString().equals(name)) {
+                return unit;
+            }
+        }
 
-		return PeriodUnit.YEARS;
-	}
+        return PeriodUnit.YEARS;
+    }
 }
 

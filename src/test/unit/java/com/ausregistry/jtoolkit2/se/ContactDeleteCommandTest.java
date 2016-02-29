@@ -12,7 +12,7 @@ import org.xml.sax.SAXException;
  * Test the only published feature of the ContactDeleteCommand class, which is
  * to build a valid EPP delete contact command XML document given a contact
  * identifier.
- * 
+ *
  * @author anthony (anthony@ausregistry.com.au)
  *
  */
@@ -20,7 +20,7 @@ public class ContactDeleteCommandTest {
 
     @Before
     public void setUp() throws Exception {
-		Timer.setTime("20070101.010101");
+        Timer.setTime("20070101.010101");
         CLTRID.setClID("JTKUTEST");
     }
 

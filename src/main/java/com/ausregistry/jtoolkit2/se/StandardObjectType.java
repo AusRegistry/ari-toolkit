@@ -5,23 +5,20 @@ package com.ausregistry.jtoolkit2.se;
  * resulting XML.
  */
 public enum StandardObjectType implements ObjectType {
-	HOST("host", "urn:ietf:params:xml:ns:host-1.0",
-			"host-1.0.xsd", "name"),
-	CONTACT("contact", "urn:ietf:params:xml:ns:contact-1.0",
-			"contact-1.0.xsd", "id"),
-    DOMAIN("domain", "urn:ietf:params:xml:ns:domain-1.0",
-			"domain-1.0.xsd", "name");
+    HOST("host", "urn:ietf:params:xml:ns:host-1.0", "host-1.0.xsd", "name"),
+    CONTACT("contact", "urn:ietf:params:xml:ns:contact-1.0", "contact-1.0.xsd", "id"),
+    DOMAIN("domain", "urn:ietf:params:xml:ns:domain-1.0", "domain-1.0.xsd", "name");
 
+    private static String[] stdURIs;
     private String name, uri, schemaDefinition, identType;
-	private static String[] stdURIs;
 
-	static {
-		stdURIs = new String[] {
-			DOMAIN.getURI(),
-			HOST.getURI(),
-			CONTACT.getURI()
-		};
-	}
+    static {
+        stdURIs = new String[] {
+            DOMAIN.getURI(),
+            HOST.getURI(),
+            CONTACT.getURI()
+        };
+    }
 
     StandardObjectType(final String name, final String uri, final String schemaDefinition,
             final String identType) {
@@ -29,7 +26,7 @@ public enum StandardObjectType implements ObjectType {
         this.name = name;
         this.uri = uri;
         this.schemaDefinition = schemaDefinition;
-		this.identType = identType;
+        this.identType = identType;
     }
 
     @Override
@@ -51,13 +48,13 @@ public enum StandardObjectType implements ObjectType {
         return schemaDefinition;
     }
 
-	@Override
+    @Override
     public String getIdentType() {
-		return identType;
-	}
+        return identType;
+    }
 
-	public static String[] getStandardURIs() {
-		return stdURIs;
-	}
+    public static String[] getStandardURIs() {
+        return stdURIs;
+    }
 }
 

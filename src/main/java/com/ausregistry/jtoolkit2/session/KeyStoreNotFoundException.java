@@ -10,8 +10,8 @@ package com.ausregistry.jtoolkit2.session;
 public class KeyStoreNotFoundException extends java.io.FileNotFoundException {
     private static final long serialVersionUID = 8838426685198744968L;
 
-	public KeyStoreNotFoundException(java.io.FileNotFoundException fnfe) {
-		super(fnfe.getMessage());
-	}
+    public KeyStoreNotFoundException(java.io.FileNotFoundException fnfe) {
+        super(fnfe.getMessage());
+    }
 }
 

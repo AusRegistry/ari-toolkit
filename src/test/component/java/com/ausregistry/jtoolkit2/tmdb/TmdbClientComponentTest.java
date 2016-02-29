@@ -18,7 +18,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
+/*
  * This test would only work with Java7 because the test dependency 'ari-mock-http-server' is compiled with Java7
  */
 public class TmdbClientComponentTest {
@@ -75,16 +75,16 @@ public class TmdbClientComponentTest {
         mockHttpsServer
                 .expect(Method.GET, "/lookup/key.xml")
                 .respondWith(200, "text/xml",
-                        "<tmNotice:notice xmlns:tmNotice=\"urn:ietf:params:xml:ns:tmNotice-1.0\">" +
-                                "<tmNotice:id>noticeId1</tmNotice:id>" +
-                                "</tmNotice:notice>");
+                        "<tmNotice:notice xmlns:tmNotice=\"urn:ietf:params:xml:ns:tmNotice-1.0\">"
+                                + "<tmNotice:id>noticeId1</tmNotice:id>"
+                                + "</tmNotice:notice>");
 
         mockHttpsServer
                 .expect(Method.GET, "/anotherLookupKey.xml")
                 .respondWith(200, "text/xml",
-                        "<tmNotice:notice xmlns:tmNotice=\"urn:ietf:params:xml:ns:tmNotice-1.0\">" +
-                                "<tmNotice:id>noticeId2</tmNotice:id>" +
-                        "</tmNotice:notice>");
+                        "<tmNotice:notice xmlns:tmNotice=\"urn:ietf:params:xml:ns:tmNotice-1.0\">"
+                                + "<tmNotice:id>noticeId2</tmNotice:id>"
+                                + "</tmNotice:notice>");
 
         TmdbClient tmdbClient = new TmdbClient();
         TmNotice firstTmNotice = tmdbClient.requestNotice("lookup/key");

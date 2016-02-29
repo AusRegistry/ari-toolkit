@@ -22,14 +22,14 @@ public class ContactTransferRejectCommand extends ContactTransferCommand {
         super(TransferOp.REJECT, id);
     }
 
-	/**
-	 * Create a contact transfer command for the identified contact, specifying
-	 * the designated password and the 'reject' transfer operation.
-	 *
-	 * @param id The identifier of the contact to reject transfer of.
-	 *
-	 * @param pw The identified contact's password.
-	 */
+    /**
+     * Create a contact transfer command for the identified contact, specifying
+     * the designated password and the 'reject' transfer operation.
+     *
+     * @param id The identifier of the contact to reject transfer of.
+     *
+     * @param pw The identified contact's password.
+     */
     public ContactTransferRejectCommand(String id, String pw) {
         super(TransferOp.REJECT, id, pw);
     }

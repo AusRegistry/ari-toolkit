@@ -11,8 +11,8 @@ import java.util.logging.FileHandler;
  * <code>FileHandler</code> for a description of the available parameters.
  */
 public class MaintenanceHandler extends FileHandler {
-	public MaintenanceHandler() throws IOException {
-		super();
-	}
+    public MaintenanceHandler() throws IOException {
+        super();
+    }
 }
 

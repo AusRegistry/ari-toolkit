@@ -18,13 +18,13 @@ import org.w3c.dom.NodeList;
  */
 public class CourtValidatedMark extends AbstractMark {
 
-    private Logger maintLogger = Logger.getLogger(getClass().getPackage().getName() + ".maint");
-
     private static final String REGION_NODE_LOCAL_NAME = "region";
     private static final String REFNUM_EXPR = "mark:refNum/text()";
     private static final String PRODATE_EXPR = "mark:proDate/text()";
     private static final String CC_EXPR = "mark:cc/text()";
     private static final String COURTNAME_EXPR = "mark:courtName/text()";
+
+    private Logger maintLogger = Logger.getLogger(getClass().getPackage().getName() + ".maint");
 
     private String refNum;
 

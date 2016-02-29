@@ -82,7 +82,7 @@ public class TmHolderXmlParserTest {
 
         verify(mockTmHolder).setEmail("Example@Email.One");
     }
-    
+
     @Test
     public void shouldParseVoiceCorrectly() throws Exception {
 

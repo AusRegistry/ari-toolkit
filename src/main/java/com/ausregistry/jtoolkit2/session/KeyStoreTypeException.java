@@ -9,8 +9,8 @@ import java.security.KeyStoreException;
 public class KeyStoreTypeException extends KeyStoreException {
     private static final long serialVersionUID = 2871709917491631879L;
 
-	public KeyStoreTypeException(KeyStoreException cause) {
-		super(cause);
-	}
+    public KeyStoreTypeException(KeyStoreException cause) {
+        super(cause);
+    }
 }
 

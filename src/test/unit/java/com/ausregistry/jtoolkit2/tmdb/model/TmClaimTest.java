@@ -17,7 +17,7 @@ public class TmClaimTest {
 
         assertThat(tmClaim.getMarkName(), is("MarkName"));
     }
-    
+
     @Test
     public void shouldGetTheSetJurisdiction() {
         tmClaim.setJurisdiction("Jurisdiction");

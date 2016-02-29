@@ -10,11 +10,12 @@ import com.ausregistry.jtoolkit2.xml.XMLWriter;
  */
 abstract class SendSE implements Serializable {
 
-	private static final long serialVersionUID = 8732674992510564553L;
+    private static final long serialVersionUID = 8732674992510564553L;
 
-	private String xml;
     protected final transient XMLWriter xmlWriter;
     protected final transient Logger userLogger;
+
+    private String xml;
 
     {
         final String pname = getClass().getPackage().getName();
@@ -22,7 +23,7 @@ abstract class SendSE implements Serializable {
         xmlWriter = XMLWriter.newInstance();
     }
 
-    protected SendSE() {}
+    protected SendSE() { }
 
     protected abstract String toXMLImpl() throws org.xml.sax.SAXException;
 

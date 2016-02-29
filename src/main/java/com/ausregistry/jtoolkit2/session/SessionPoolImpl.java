@@ -26,11 +26,11 @@ public class SessionPoolImpl implements SessionPool, StatsViewer {
     // / Minimum acceptable poll interval is 2 minutes. Reduce for testing.
     private static final long MIN_ACCEPTABLE_POLL_INTERVAL = 120000;
 
-    private static final String[] CMD_LIMIT_PAIR = new String[] { "<<command>>", "<<limit>>" };
+    private static final String[] CMD_LIMIT_PAIR = new String[] {"<<command>>", "<<limit>>" };
 
-    private static final String[] SESSION_LIMIT_EXCEDED_ERROR_MSG_ARGS = new String[] { "<<total>>", "<<cutoff>>" };
+    private static final String[] SESSION_LIMIT_EXCEDED_ERROR_MSG_ARGS = new String[] {"<<total>>", "<<cutoff>>" };
 
-    private static final String[] CMD_COUNT_LIMIT = new String[] { "<<command>>", "<<count>>", "<<limit>>" };
+    private static final String[] CMD_COUNT_LIMIT = new String[] {"<<command>>", "<<count>>", "<<limit>>" };
 
     private String pname;
     private Set<Session> pool;
@@ -213,7 +213,7 @@ public class SessionPoolImpl implements SessionPool, StatsViewer {
         Throwable cause = soe.getCause();
         if (cause instanceof SessionLimitExceededException) {
             userLogger.warning(ErrorPkg.getMessage("epp.session.open.fail.limit_exceeded",
-                    SESSION_LIMIT_EXCEDED_ERROR_MSG_ARGS, new int[] { maximumSize, pool.size() }));
+                    SESSION_LIMIT_EXCEDED_ERROR_MSG_ARGS, new int[] {maximumSize, pool.size() }));
             // The server is not allowing me to open any more sessions,
             // therefore the actual maximum allowed concurrently open
             // sessions is probably the current number of open sessions.
@@ -304,8 +304,10 @@ public class SessionPoolImpl implements SessionPool, StatsViewer {
                     totCutoff = Integer.MAX_VALUE;
 
                     if (type == null) {
-                        cc = tc = session.getStatsManager().getRecentCommandCount();
-                        cmdCutoff = totCutoff = sessionProperties.getCommandLimit();
+                        tc = session.getStatsManager().getRecentCommandCount();
+                        cc = tc;
+                        totCutoff = sessionProperties.getCommandLimit();
+                        cmdCutoff = totCutoff;
                     } else {
                         cc = session.getStatsManager().getRecentCommandCount(type);
                         cmdCutoff = sessionProperties.getCommandLimit(type);
@@ -319,12 +321,12 @@ public class SessionPoolImpl implements SessionPool, StatsViewer {
                         bestSession = session;
                         if (debugLogger.isLoggable(Level.FINE)) {
                             debugLogger.fine(ErrorPkg.getMessage("epp.session.rate.limit.notexceeded",
-                                    CMD_COUNT_LIMIT, new String[] { type == null ? "all commands" : type.toString(),
+                                    CMD_COUNT_LIMIT, new String[] {type == null ? "all commands" : type.toString(),
                                             String.valueOf(cc), String.valueOf(cmdCutoff) }));
                         }
                     } else {
                         userLogger.info(ErrorPkg.getMessage("epp.session.rate.limit.exceeded", CMD_LIMIT_PAIR,
-                                new String[] { type.toString(), String.valueOf(cmdCutoff) }));
+                                new String[] {type.toString(), String.valueOf(cmdCutoff) }));
                     }
                 }
             }
@@ -430,8 +432,9 @@ public class SessionPoolImpl implements SessionPool, StatsViewer {
         int retval = 0;
 
         for (Session s : pool) {
-            if (s == null)
+            if (s == null) {
                 continue;
+            }
             StatsViewer v = s.getStatsManager();
             if (type == null) {
                 retval += v.getRecentCommandCount();
@@ -448,8 +451,9 @@ public class SessionPoolImpl implements SessionPool, StatsViewer {
         long retval = 0L;
 
         for (Session s : pool) {
-            if (s == null)
+            if (s == null) {
                 continue;
+            }
             StatsViewer v = s.getStatsManager();
             if (type == null) {
                 retval += v.getCommandCount();
@@ -494,8 +498,9 @@ public class SessionPoolImpl implements SessionPool, StatsViewer {
         long minInterval = Long.MAX_VALUE;
 
         for (Session s : pool) {
-            if (s == null)
+            if (s == null) {
                 continue;
+            }
             long mruInterval = s.getStatsManager().getMruInterval();
             minInterval = mruInterval < minInterval ? mruInterval : minInterval;
         }
@@ -508,8 +513,9 @@ public class SessionPoolImpl implements SessionPool, StatsViewer {
         long retval = 0L;
 
         for (Session s : pool) {
-            if (s == null)
+            if (s == null) {
                 continue;
+            }
             retval += s.getStatsManager().getResultCodeCount(resultCode);
         }
 
@@ -517,10 +523,6 @@ public class SessionPoolImpl implements SessionPool, StatsViewer {
     }
 
     private static boolean isCutoff(int ccount, int tcount, int clim, int tlim) {
-        if (ccount >= clim || tcount >= tlim) {
-            return true;
-        } else {
-            return false;
-        }
+        return ccount >= clim || tcount >= tlim;
     }
 }

@@ -14,13 +14,13 @@ public class DomainNotificationResponse extends NotificationResponse {
     private static final String DOM_SVTRID_EXPR = exprReplace(SVTRID_EXPR);
     private static final String DOM_PADATE_EXPR = exprReplace(PADATE_EXPR);
 
+    public DomainNotificationResponse() {
+        super(StandardObjectType.DOMAIN);
+    }
+
     private static String exprReplace(String expr) {
         return expr.replaceAll(OBJ, StandardObjectType.DOMAIN.getName()
                 ).replaceAll(IDENT, StandardObjectType.DOMAIN.getIdentType());
-    }
-
-    public DomainNotificationResponse() {
-        super(StandardObjectType.DOMAIN);
     }
 
     protected String identifierExpr() {

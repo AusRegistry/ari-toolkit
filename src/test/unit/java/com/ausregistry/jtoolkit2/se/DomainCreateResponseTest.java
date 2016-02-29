@@ -74,7 +74,7 @@ public class DomainCreateResponseTest {
         final DomainCreateResponse response = new DomainCreateResponse();
         final DomainIdnaResponseExtension re =
             new DomainIdnaResponseExtension(ResponseExtension.CREATE);
-        
+
         final XMLDocument doc =
             PARSER.parse(getCreateResponseExpectedXml(domainName));
         response.registerExtension(re);
@@ -104,7 +104,7 @@ public class DomainCreateResponseTest {
         assertEquals(variantDnsForm, variantList.get(0).getName());
         assertEquals(variantUserForm, variantList.get(0).getUserForm());
     }
-    
+
     @Test
     public void testGetNoVariants() throws Exception {
         final String domainName = "xn--xha91b83h.com";

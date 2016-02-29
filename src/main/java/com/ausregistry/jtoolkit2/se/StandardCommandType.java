@@ -5,15 +5,15 @@ package com.ausregistry.jtoolkit2.se;
  */
 public enum StandardCommandType implements CommandType {
     LOGIN("login"),
-	LOGOUT("logout"),
-	POLL("poll"),
-	CHECK("check"),
-	INFO("info"),
-	CREATE("create"),
-	DELETE("delete"),
-	UPDATE("update"),
-	TRANSFER("transfer"),
-	RENEW("renew");
+    LOGOUT("logout"),
+    POLL("poll"),
+    CHECK("check"),
+    INFO("info"),
+    CREATE("create"),
+    DELETE("delete"),
+    UPDATE("update"),
+    TRANSFER("transfer"),
+    RENEW("renew");
 
     private String name;
 

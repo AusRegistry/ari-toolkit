@@ -62,24 +62,32 @@ public class DSData implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         DSData other = (DSData) obj;
-        if (alg != other.alg)
+        if (alg != other.alg) {
             return false;
+        }
         if (digest == null) {
-            if (other.digest != null)
+            if (other.digest != null) {
                 return false;
-        } else if (!digest.equals(other.digest))
+            }
+        } else if (!digest.equals(other.digest)) {
             return false;
-        if (digestType != other.digestType)
+        }
+        if (digestType != other.digestType) {
             return false;
-        if (keyTag != other.keyTag)
+        }
+        if (keyTag != other.keyTag) {
             return false;
+        }
         if (keyData != null && !keyData.equals(other.getKeyData())) {
             return false;
         }

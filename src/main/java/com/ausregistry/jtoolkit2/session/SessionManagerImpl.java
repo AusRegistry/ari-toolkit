@@ -37,7 +37,7 @@ public class SessionManagerImpl implements SessionManager {
     private static final int MAX_SLEEP_INTERRUPTS_TO_FAIL = 3;
     private static final int MAX_ACCEPTABLE_FAIL_COUNT = 5;
 
-    private static enum SMState {
+    private enum SMState {
         STOPPED, STARTED, RUNNING;
     }
 
@@ -301,8 +301,8 @@ public class SessionManagerImpl implements SessionManager {
     public void changePassword(String oldPassword, String newPassword) {
         debugLogger.finest("enter");
 
-        userLogger.info(ErrorPkg.getMessage("reconfigure.pw.change.init", new String[] { "<<old>>", "<<new>>" },
-                new String[] { oldPassword, newPassword }));
+        userLogger.info(ErrorPkg.getMessage("reconfigure.pw.change.init", new String[] {"<<old>>", "<<new>>"},
+                new String[] {oldPassword, newPassword}));
 
         sessionPool.empty();
 
@@ -393,6 +393,7 @@ public class SessionManagerImpl implements SessionManager {
                         case ResultCode.CMD_FAILED:
                             throw new CommandFailedException();
                         case ResultCode.CMD_FAILED_CLOSING:
+                        default:
                             throw new CommandFailedException();
                         }
                     }
@@ -508,7 +509,6 @@ public class SessionManagerImpl implements SessionManager {
             case FATAL_ERROR:
                 continue;
             default:
-                ;
             }
 
             Command command = txs[i].getCommand();
@@ -551,7 +551,6 @@ public class SessionManagerImpl implements SessionManager {
                 firstFailedIndex = Math.min(j, firstFailedIndex);
                 continue;
             default:
-                ;
             }
 
             Response response = txs[j].getResponse();

@@ -16,9 +16,9 @@ public class PollAckCommand extends PollCommand {
     private static final long serialVersionUID = -8544628706096451507L;
 
     public PollAckCommand(String msgID) {
-		super(PollOperation.ACK);
+        super(PollOperation.ACK);
 
-		cmdElement.setAttribute("msgID", msgID);
+        cmdElement.setAttribute("msgID", msgID);
     }
 }
 

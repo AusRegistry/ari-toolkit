@@ -55,6 +55,14 @@ public final class NamespaceContextImpl implements NamespaceContext {
     private final Logger debugLogger;
 
     /**
+     * Create a NamespaceContextImpl with state as possibly adjusted by any previous calls to NamespaceContextImpl.put.
+     */
+    public NamespaceContextImpl() {
+        final String pname = getClass().getPackage().getName();
+        debugLogger = Logger.getLogger(pname + ".debug");
+    }
+
+    /**
      * Add a prefix to URI mapping and a URI to prefix mapping between the given prefix and URI.
      */
     public static synchronized void put(String prefix, String uri) {
@@ -82,17 +90,6 @@ public final class NamespaceContextImpl implements NamespaceContext {
             newList.add(prefix);
             uriPrefixMap.put(uri, newList);
         }
-    }
-
-    {
-        final String pname = getClass().getPackage().getName();
-        debugLogger = Logger.getLogger(pname + ".debug");
-    }
-
-    /**
-     * Create a NamespaceContextImpl with state as possibly adjusted by any previous calls to NamespaceContextImpl.put.
-     */
-    public NamespaceContextImpl() {
     }
 
     /**

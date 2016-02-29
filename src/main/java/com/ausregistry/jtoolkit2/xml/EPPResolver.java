@@ -85,8 +85,8 @@ public class EPPResolver implements URIResolver {
         Source source;
 
         Logger.getLogger(pname + ".debug").fine(
-                ErrorPkg.getMessage("xml.validation.resolve.begin", new String[] { "<<href>>", "<<filename>>" },
-                        new String[] { href, filename }));
+                ErrorPkg.getMessage("xml.validation.resolve.begin", new String[] {"<<href>>", "<<filename>>"},
+                        new String[] {href, filename}));
 
         final InputStream in = getClass().getClassLoader().getResourceAsStream(filename);
         if (in == null) {
@@ -95,8 +95,8 @@ public class EPPResolver implements URIResolver {
 
         Logger.getLogger(pname + ".debug").fine(
                 ErrorPkg.getMessage("xml.validation.resolve.end",
-                        new String[] { "<<href>>", "<<filename>>", "<<file>>" },
-                        new String[] { href, filename, filename }));
+                        new String[] {"<<href>>", "<<filename>>", "<<file>>"},
+                        new String[] {href, filename, filename}));
         source = new StreamSource(in);
 
         return source;

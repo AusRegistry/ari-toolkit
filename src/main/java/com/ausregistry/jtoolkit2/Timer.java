@@ -12,13 +12,16 @@ import java.util.logging.Logger;
  *
  * Uses the debug, support and user level loggers.
  */
-public class Timer {
+public final class Timer {
     private static String pname;
     private static boolean useRealTime = true;
     private static long fixedTime;
 
     static {
         pname = Timer.class.getPackage().getName();
+    }
+
+    private Timer() {
     }
 
     /**

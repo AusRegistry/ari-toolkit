@@ -4,8 +4,6 @@ import javax.xml.xpath.XPathExpressionException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ausregistry.jtoolkit2.se.DomainInfoCommand;
-import com.ausregistry.jtoolkit2.se.DomainInfoResponse;
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.se.ResponseExtension;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
@@ -23,8 +21,8 @@ import org.w3c.dom.NodeList;
  * <p>For flexibility, this implementation extracts the data from the response using XPath queries, the expressions
  * for which are defined statically.</p>
  *
- * @see DomainInfoCommand
- * @see DomainInfoResponse
+ * @see com.ausregistry.jtoolkit2.se.DomainInfoCommand
+ * @see com.ausregistry.jtoolkit2.se.DomainInfoResponse
  * @see <a href="http://tools.ietf.org/html/rfc3915">Domain Registry Grace Period Mapping for the
  * Extensible Provisioning Protocol (EPP)</a>
  */
@@ -32,8 +30,7 @@ public final class DomainInfoRgpResponseExtension extends ResponseExtension {
 
     private static final long serialVersionUID = -821812925617413583L;
 
-    private final String restoreDomainPrefix = ExtendedObjectType.RESTORE
-            .getName();
+    private final String restoreDomainPrefix = ExtendedObjectType.RESTORE.getName();
     private final String responseExtension;
 
     private final String rgpStatusesExpr = ResponseExtension.EXTENSION_EXPR
@@ -42,7 +39,7 @@ public final class DomainInfoRgpResponseExtension extends ResponseExtension {
             + ":RESPONSE_TYPE/"
             + restoreDomainPrefix + ":rgpStatus";
 
-    List<RgpStatus> rgpStatuses;
+    private List<RgpStatus> rgpStatuses;
     private boolean initialised;
 
     public DomainInfoRgpResponseExtension(String responseExtension) {
@@ -62,7 +59,7 @@ public void fromXML(final XMLDocument xmlDoc)
         } else {
             rgpStatuses = new ArrayList<RgpStatus>();
             for (int i = 0; i < rgpStatusNodes.getLength(); i++) {
-                final Element currentRgpStatus= (Element) rgpStatusNodes.item(i);
+                final Element currentRgpStatus = (Element) rgpStatusNodes.item(i);
                 final String status = currentRgpStatus.getAttribute("s");
                 final String language = currentRgpStatus.getAttribute("lang");
                 final String message = currentRgpStatus.getTextContent();

@@ -41,7 +41,7 @@ public class TmContactTest {
     @Test
     public void shouldGetTheSetVoice() {
         tmContact.setVoice("+1-654654654");
-        
+
         assertThat(tmContact.getVoice(), is("+1-654654654"));
     }
 
@@ -51,11 +51,11 @@ public class TmContactTest {
 
         assertThat(tmContact.getVoiceExtension(), is("2"));
     }
-    
+
     @Test
     public void shouldGetTheSetFax() {
         tmContact.setFax("+1-654654654");
-        
+
         assertThat(tmContact.getFax(), is("+1-654654654"));
     }
 
@@ -65,7 +65,7 @@ public class TmContactTest {
 
         assertThat(tmContact.getFaxExtension(), is("2"));
     }
-    
+
     @Test
     public void shouldGetTheSetAddress() {
         TmAddress mockAddress = mock(TmAddress.class);

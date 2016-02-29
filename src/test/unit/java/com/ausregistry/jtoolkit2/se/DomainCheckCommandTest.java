@@ -12,10 +12,10 @@ import org.xml.sax.SAXException;
 
 public class DomainCheckCommandTest {
     private DomainCheckCommand cmd1;
-    
+
     @Before
     public void setUp() throws Exception {
-		Timer.setTime("20070101.010101");
+        Timer.setTime("20070101.010101");
         CLTRID.setClID("JTKUTEST");
         cmd1 = new DomainCheckCommand("test.com.au");
     }

@@ -10,7 +10,7 @@ package com.ausregistry.jtoolkit2.se;
  * @see com.ausregistry.jtoolkit2.se.ContactTransferResponse
  */
 public class ContactTransferApproveCommand extends ContactTransferCommand {
-	private static final long serialVersionUID = -8722539297610164487L;
+    private static final long serialVersionUID = -8722539297610164487L;
 
     /**
      * Create a contact transfer command for the identified contact, specifying
@@ -22,16 +22,16 @@ public class ContactTransferApproveCommand extends ContactTransferCommand {
         super(TransferOp.APPROVE, id);
     }
 
-	/**
-	 * Create a contact transfer command for the identified contact, specifying
-	 * the designated password and the 'approve' transfer operation.
-	 *
-	 * @param id The identifier of the contact to approve transfer of.
-	 *
-	 * @param pw The identified contact's password.
-	 */
-	public ContactTransferApproveCommand(String id, String pw) {
-		super(TransferOp.APPROVE, id, pw);
-	}
+    /**
+     * Create a contact transfer command for the identified contact, specifying
+     * the designated password and the 'approve' transfer operation.
+     *
+     * @param id The identifier of the contact to approve transfer of.
+     *
+     * @param pw The identified contact's password.
+     */
+    public ContactTransferApproveCommand(String id, String pw) {
+        super(TransferOp.APPROVE, id, pw);
+    }
 }
 

@@ -85,7 +85,7 @@ public class DomainUpdateCommandTest {
 
         final SecDnsDomainUpdateCommandExtension ext = new SecDnsDomainUpdateCommandExtension();
         final DSData dsData = new DSData(12345, 3, 1, "49FD46E6C4B45C55D4AC");
-        
+
         DSOrKeyType addData = new DSOrKeyType();
         addData.addToDsData(dsData);
         ext.setAddData(addData);

@@ -16,18 +16,18 @@ public class SessionTest {
     private SessionProperties props;
 
     @Before
-	public void setUp() throws Exception {
-		props = new TestEnvironment();
-		session = SessionFactory.newInstance(props);
-	}
+    public void setUp() throws Exception {
+        props = new TestEnvironment();
+        session = SessionFactory.newInstance(props);
+    }
 
     @After
     public void tearDown() throws Exception {
-		try {
-			session.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        try {
+            session.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -41,7 +41,7 @@ public class SessionTest {
         try {
             session.close();
         } catch (Exception e) {
-			e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -50,7 +50,7 @@ public class SessionTest {
         try {
             session.open();
         } catch (Exception e) {
-			e.printStackTrace();
+            e.printStackTrace();
         }
 
         try {
@@ -65,7 +65,7 @@ public class SessionTest {
         try {
             session.open();
         } catch (Exception e) {
-			e.printStackTrace();
+            e.printStackTrace();
         }
 
         try {
@@ -81,7 +81,7 @@ public class SessionTest {
         try {
             session.open();
         } catch (Exception e) {
-			e.printStackTrace();
+            e.printStackTrace();
         }
 
         try {
@@ -98,7 +98,7 @@ public class SessionTest {
         try {
             session.open();
         } catch (Exception e) {
-			e.printStackTrace();
+            e.printStackTrace();
         }
 
         try {
@@ -118,7 +118,7 @@ public class SessionTest {
         try {
             session.open();
         } catch (Exception e) {
-			e.printStackTrace();
+            e.printStackTrace();
         }
 
         try {
@@ -135,7 +135,7 @@ public class SessionTest {
         try {
             session.open();
         } catch (Exception e) {
-			e.printStackTrace();
+            e.printStackTrace();
         }
 
         try {
@@ -157,7 +157,7 @@ public class SessionTest {
         try {
             session.open();
         } catch (Exception e) {
-			e.printStackTrace();
+            e.printStackTrace();
         }
 
         try {

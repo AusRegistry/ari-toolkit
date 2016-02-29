@@ -7,19 +7,19 @@ package com.ausregistry.jtoolkit2.se;
  */
 public abstract class CreateCommand extends ObjectCommand {
 
-	private static final long serialVersionUID = 6839564125865392586L;
+    private static final long serialVersionUID = 6839564125865392586L;
 
-	/**
-	 * Construct a create command of the given object type mapping with the
-	 * given object identifier.
-	 *
-	 * @param objType The type of object to which the create command is to be
-	 * mapped.
-	 *
-	 * @param ident The identifier of the object to be created.
-	 */
-	public CreateCommand(ObjectType objType, String ident) {
-		super(StandardCommandType.CREATE, objType, ident);
-	}
+    /**
+     * Construct a create command of the given object type mapping with the
+     * given object identifier.
+     *
+     * @param objType The type of object to which the create command is to be
+     * mapped.
+     *
+     * @param ident The identifier of the object to be created.
+     */
+    public CreateCommand(ObjectType objType, String ident) {
+        super(StandardCommandType.CREATE, objType, ident);
+    }
 }
 

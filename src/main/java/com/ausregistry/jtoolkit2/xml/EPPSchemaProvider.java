@@ -17,11 +17,12 @@ import com.ausregistry.jtoolkit2.ErrorPkg;
  *
  * Uses the debug and user level loggers.
  */
-public class EPPSchemaProvider {
+public final class EPPSchemaProvider {
     private static String pname;
 
     private static final EPPResolver DEFAULT_RESOLVER = new EPPResolver();
-    private static final SchemaFactory schemaFactory = SchemaFactory.newInstance(javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI);
+    private static final SchemaFactory SCHEMA_FACTORY =
+            SchemaFactory.newInstance(javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI);
     private static Schema schema = null;
     private static boolean isValidating = true;
 
@@ -43,6 +44,10 @@ public class EPPSchemaProvider {
             Logger.getLogger(pname + ".user").warning(e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    private EPPSchemaProvider() {
+        // intentionally do nothing, required by checkstyle
     }
 
     /**
@@ -70,7 +75,7 @@ public class EPPSchemaProvider {
             sources[i] = resolver.resolve(namespaceURIs[i], null);
         }
 
-        schema = schemaFactory.newSchema(sources);
+        schema = SCHEMA_FACTORY.newSchema(sources);
     }
 
     /**

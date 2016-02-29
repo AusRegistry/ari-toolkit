@@ -8,12 +8,12 @@ package com.ausregistry.jtoolkit2.session;
  */
 public class LoginException extends Exception {
     private static final long serialVersionUID = 1929974738227448000L;
-    
+
     private String msg;
 
     public LoginException() {
-		this("Authentication failure in login");
-	}
+        this("Authentication failure in login");
+    }
 
     public LoginException(Throwable cause) {
         super(cause);

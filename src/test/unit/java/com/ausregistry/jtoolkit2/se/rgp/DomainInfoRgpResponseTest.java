@@ -17,31 +17,31 @@ public class DomainInfoRgpResponseTest {
 
     @Test
     public void testInfoWithRgpExtensionMultipleStatusesResponse() throws Exception {
-    	final String domainName = "test.com.au";
-    	final List<RgpStatus> expectedRgpStatuses = Arrays.asList(
-    			new RgpStatus("addPeriod", "lang", "message"),
-    			new RgpStatus("renewPeriod", "lang", "message"));
-    	
-    	final DomainInfoResponse response = new DomainInfoResponse();
+        final String domainName = "test.com.au";
+        final List<RgpStatus> expectedRgpStatuses = Arrays.asList(
+                new RgpStatus("addPeriod", "lang", "message"),
+                new RgpStatus("renewPeriod", "lang", "message"));
+
+        final DomainInfoResponse response = new DomainInfoResponse();
         final DomainInfoRgpResponseExtension rgpExtension = new DomainInfoRgpResponseExtension(ResponseExtension.INFO);
         final XMLDocument doc = PARSER.parse(getInfoResponseWithRgpExtensionExpectedXml(domainName, expectedRgpStatuses));
-        
+
         response.registerExtension(rgpExtension);
         response.fromXML(doc);
 
         assertTrue("RgpExtension should be initialised", rgpExtension.isInitialised());
         assertEquals("Should return domain name", domainName, response.getName());
         List<RgpStatus> rgpStatuses = rgpExtension.getRgpStatuses();
-		assertEquals("RgpStatuses size differ", expectedRgpStatuses.size(), rgpStatuses.size());
+        assertEquals("RgpStatuses size differ", expectedRgpStatuses.size(), rgpStatuses.size());
         for (int i = 0; i < expectedRgpStatuses.size(); i++) {
-        	RgpStatus expectedRgpStatus = expectedRgpStatuses.get(i);
-        	RgpStatus rgpStatus = rgpStatuses.get(i);
-			assertEquals("Should return expected status", expectedRgpStatus.getStatus(), rgpStatus.getStatus());
-			assertEquals("Should return expected language", expectedRgpStatus.getLanguage(), rgpStatus.getLanguage());
-			assertEquals("Should return expected message", expectedRgpStatus.getMessage(), rgpStatus.getMessage());
-		}
+            RgpStatus expectedRgpStatus = expectedRgpStatuses.get(i);
+            RgpStatus rgpStatus = rgpStatuses.get(i);
+            assertEquals("Should return expected status", expectedRgpStatus.getStatus(), rgpStatus.getStatus());
+            assertEquals("Should return expected language", expectedRgpStatus.getLanguage(), rgpStatus.getLanguage());
+            assertEquals("Should return expected message", expectedRgpStatus.getMessage(), rgpStatus.getMessage());
+        }
     }
-    
+
     @Test
     public void testInfoWithRgpExtensionResponse() throws Exception {
         final String domainName = "test.com.au";
@@ -57,14 +57,14 @@ public class DomainInfoRgpResponseTest {
         assertTrue("RgpExtension should be initialised", rgpExtension.isInitialised());
         assertEquals("Should return domain name", domainName, response.getName());
         List<RgpStatus> rgpStatuses = rgpExtension.getRgpStatuses();
-		assertEquals("RgpStatuses size differ", expectedRgpStatuses.size(), rgpStatuses.size());
+        assertEquals("RgpStatuses size differ", expectedRgpStatuses.size(), rgpStatuses.size());
         for (int i = 0; i < expectedRgpStatuses.size(); i++) {
-        	RgpStatus expectedRgpStatus = expectedRgpStatuses.get(i);
-        	RgpStatus rgpStatus = rgpStatuses.get(i);
-			assertEquals("Should return expected status", expectedRgpStatus.getStatus(), rgpStatus.getStatus());
-			assertEquals("Should return expected language", expectedRgpStatus.getLanguage(), rgpStatus.getLanguage());
-			assertEquals("Should return expected message", expectedRgpStatus.getMessage(), rgpStatus.getMessage());
-		}
+            RgpStatus expectedRgpStatus = expectedRgpStatuses.get(i);
+            RgpStatus rgpStatus = rgpStatuses.get(i);
+            assertEquals("Should return expected status", expectedRgpStatus.getStatus(), rgpStatus.getStatus());
+            assertEquals("Should return expected language", expectedRgpStatus.getLanguage(), rgpStatus.getLanguage());
+            assertEquals("Should return expected message", expectedRgpStatus.getMessage(), rgpStatus.getMessage());
+        }
     }
 
     @Test
@@ -123,13 +123,13 @@ public class DomainInfoRgpResponseTest {
             result.append("<extension>").append("<infData xmlns=\"urn:ietf:params:xml:ns:rgp-1.0\"")
                     .append(" xsi:schemaLocation=\"urn:ietf:params:xml:ns:rgp-1.0 rgp-1.0.xsd\">");
             for (RgpStatus rgpStatus : rgpStatuses) {
-				result.append(
-						"<rgpStatus s=\"" + rgpStatus.getStatus()
-								+ "\" lang=\"" + rgpStatus.getLanguage()
-								+ "\">" + rgpStatus.getMessage()).append(
-						"</rgpStatus>");
-			}
-			result.append("</infData></extension>");
+                result.append(
+                        "<rgpStatus s=\"" + rgpStatus.getStatus()
+                                + "\" lang=\"" + rgpStatus.getLanguage()
+                                + "\">" + rgpStatus.getMessage()).append(
+                        "</rgpStatus>");
+            }
+            result.append("</infData></extension>");
         }
 
         result.append("<trID>");

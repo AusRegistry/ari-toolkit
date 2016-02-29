@@ -11,6 +11,10 @@ import java.io.IOException;
  */
 public final class SessionManagerFactory {
 
+    private SessionManagerFactory() {
+        // intentionally do nothing, required by checkstyle
+    }
+
     /**
      * Create a new SessionManager instance.  The implementation defaults to
      * SessionManagerImpl but may be overridden by setting the system

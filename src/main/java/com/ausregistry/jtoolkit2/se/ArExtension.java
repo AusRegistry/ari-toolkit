@@ -8,27 +8,27 @@ package com.ausregistry.jtoolkit2.se;
 class ArExtension implements Extension {
     private static final long serialVersionUID = -4359473950568658023L;
 
-	/**
-	 * Get the prefix used by the toolkit for evaluating xpath expressions for
-	 * elements having this extension's namespace.
-	 */
-	public String getPrefix() {
-		return "arext";
-	}
+    /**
+     * Get the prefix used by the toolkit for evaluating xpath expressions for
+     * elements having this extension's namespace.
+     */
+    public String getPrefix() {
+        return "arext";
+    }
 
-	/**
-	 * Get the globally unique namespace URI which identifies this extension.
-	 */
+    /**
+     * Get the globally unique namespace URI which identifies this extension.
+     */
     public String getURI() {
-		return "urn:X-ar:params:xml:ns:arext-1.0";
-	}
+        return "urn:X-ar:params:xml:ns:arext-1.0";
+    }
 
-	/**
-	 * Get the location hint for the XML schema used to validate EPP service
-	 * element instances using this extension.
-	 */
-	public String getSchemaLocation() {
-		return "urn:X-ar:params:xml:ns:arext-1.0 arext-1.0.xsd";
-	}
+    /**
+     * Get the location hint for the XML schema used to validate EPP service
+     * element instances using this extension.
+     */
+    public String getSchemaLocation() {
+        return "urn:X-ar:params:xml:ns:arext-1.0 arext-1.0.xsd";
+    }
 }
 

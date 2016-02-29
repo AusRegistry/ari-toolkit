@@ -28,7 +28,7 @@ import com.ausregistry.jtoolkit2.ErrorPkg;
  */
 public class TLSContext {
     private static final String TLS = "TLSv1";
-    private static final String[] ENABLED_PROTOCOLS = { TLS };
+    private static final String[] ENABLED_PROTOCOLS = {TLS};
     private static final String TMF_ALGORITHM = TrustManagerFactory.getDefaultAlgorithm();
 
     private SSLContext ctx;
@@ -176,8 +176,8 @@ public class TLSContext {
         try {
             socket = (SSLSocket) ctx.getSocketFactory().createSocket(tcpSocket, host, port, autoCloseTcpSocket);
         } catch (IOException ioe) {
-            userLogger.severe(ErrorPkg.getMessage("net.socket.open.fail", new String[] { "<<port>>", "<<host>>" },
-                    new String[] { String.valueOf(port), host }));
+            userLogger.severe(ErrorPkg.getMessage("net.socket.open.fail", new String[] {"<<port>>", "<<host>>" },
+                    new String[] {String.valueOf(port), host }));
             userLogger.severe(ioe.getMessage());
             throw ioe;
         }
@@ -193,8 +193,8 @@ public class TLSContext {
             throw sslhe;
         } catch (SocketException se) {
             userLogger.severe(se.getMessage());
-            userLogger.severe(ErrorPkg.getMessage("net.socket.open.fail", new String[] { "<<port>>", "<<host>>" },
-                    new String[] { String.valueOf(port), host }));
+            userLogger.severe(ErrorPkg.getMessage("net.socket.open.fail", new String[] {"<<port>>", "<<host>>" },
+                    new String[] {String.valueOf(port), host }));
             throw se;
         }
 
@@ -213,7 +213,7 @@ public class TLSContext {
      */
     public HttpsURLConnection createHttpsUrlConnection(String url, Integer connectionTimeout) throws IOException {
         HttpsURLConnection.setDefaultHostnameVerifier(
-                new javax.net.ssl.HostnameVerifier(){
+                new javax.net.ssl.HostnameVerifier() {
 
                     public boolean verify(String hostname,
                                           javax.net.ssl.SSLSession sslSession) {

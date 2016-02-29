@@ -15,46 +15,47 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
 public class DomainCheckResponse extends CheckResponse<String> {
 
     private static final long serialVersionUID = -7501698464402166104L;
-    protected static final String DOM_CHKDATA_COUNT_EXPR = exprReplace(CHKDATA_COUNT_EXPR);
-	protected static final String DOM_CHKDATA_IND_EXPR = exprReplace(CHKDATA_IND_EXPR);
-	protected static final String DOM_CHKDATA_IDENT_EXPR = exprReplace(CHKDATA_IDENT_EXPR);
-	protected static final String DOM_CHKDATA_AVAIL_EXPR = exprReplace(CHKDATA_AVAIL_EXPR);
-	protected static final String DOM_CHKDATA_REASON_EXPR = exprReplace(CHKDATA_REASON_EXPR);
-
-	protected static String exprReplace(String expr) {
-		return expr.replaceAll(
-				OBJ, StandardObjectType.DOMAIN.getName()
-				).replaceAll(
-					"IDENT", "name");
-	}
+    private static final String DOM_CHKDATA_COUNT_EXPR = exprReplace(CHKDATA_COUNT_EXPR);
+    private static final String DOM_CHKDATA_IND_EXPR = exprReplace(CHKDATA_IND_EXPR);
+    private static final String DOM_CHKDATA_IDENT_EXPR = exprReplace(CHKDATA_IDENT_EXPR);
+    private static final String DOM_CHKDATA_AVAIL_EXPR = exprReplace(CHKDATA_AVAIL_EXPR);
+    private static final String DOM_CHKDATA_REASON_EXPR = exprReplace(CHKDATA_REASON_EXPR);
 
     public DomainCheckResponse() {
         super(StandardObjectType.DOMAIN);
     }
 
-	protected String chkDataCountExpr() {
-		return DOM_CHKDATA_COUNT_EXPR;
-	}
+    protected String chkDataCountExpr() {
+        return DOM_CHKDATA_COUNT_EXPR;
+    }
 
-	protected String chkDataIndexExpr() {
-		return DOM_CHKDATA_IND_EXPR;
-	}
+    protected String chkDataIndexExpr() {
+        return DOM_CHKDATA_IND_EXPR;
+    }
 
-	protected String chkDataTextExpr() {
-		return DOM_CHKDATA_IDENT_EXPR;
-	}
+    protected String chkDataTextExpr() {
+        return DOM_CHKDATA_IDENT_EXPR;
+    }
 
-	protected String chkDataAvailExpr() {
-		return DOM_CHKDATA_AVAIL_EXPR;
-	}
+    protected String chkDataAvailExpr() {
+        return DOM_CHKDATA_AVAIL_EXPR;
+    }
 
-	protected String chkDataReasonExpr() {
-		return DOM_CHKDATA_REASON_EXPR;
-	}
+    protected String chkDataReasonExpr() {
+        return DOM_CHKDATA_REASON_EXPR;
+    }
 
     @Override
     protected String getKey(final XMLDocument xmlDoc, final String qry) throws XPathExpressionException {
         return xmlDoc.getNodeValue(qry + chkDataTextExpr());
     }
+
+    private static String exprReplace(String expr) {
+        return expr.replaceAll(
+                OBJ, StandardObjectType.DOMAIN.getName()
+        ).replaceAll(
+                "IDENT", "name");
+    }
+
 }
 

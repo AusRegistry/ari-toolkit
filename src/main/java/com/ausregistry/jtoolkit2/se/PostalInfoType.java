@@ -7,17 +7,17 @@ package com.ausregistry.jtoolkit2.se;
  * content may be represented in unrestricted UTF8.
  */
 public enum PostalInfoType {
-	INTERNATIONAL ("int"),
-	LOCAL ("loc");
+    INTERNATIONAL ("int"),
+    LOCAL ("loc");
 
-	private String type;
+    private String type;
 
-	PostalInfoType(String type) {
-		this.type = type;
-	}
+    PostalInfoType(String type) {
+        this.type = type;
+    }
 
-	public String toString() {
-		return type;
-	}
+    public String toString() {
+        return type;
+    }
 }
 

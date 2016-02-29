@@ -10,17 +10,17 @@ import com.ausregistry.jtoolkit2.ErrorPkg;
  * associated log messages to identify the problem and resolve the issue.
  */
 public class FatalSessionException extends Exception {
-	/**
-     * 
+    /**
+     *
      */
     private static final long serialVersionUID = 895103134023475944L;
 
     public FatalSessionException() {
-		super(ErrorPkg.getMessage("epp.session.open.fatalerr"));
-	}
+        super(ErrorPkg.getMessage("epp.session.open.fatalerr"));
+    }
 
-	public FatalSessionException(Throwable cause) {
-		super(cause);
-	}
+    public FatalSessionException(Throwable cause) {
+        super(cause);
+    }
 }
 

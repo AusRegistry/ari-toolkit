@@ -7,7 +7,7 @@ package com.ausregistry.jtoolkit2.se;
  * consistent with the AusRegistry documents 'Variant Extension Domain Mapping
  * for the Extensible Provisioning Protocol' and 'Variant Extension for the
  * Extensible Provisioning Protocol'.
- * 
+ *
  * @see com.ausregistry.jtoolkit2.se.DomainVariantInfoResponse
  */
 public class DomainVariantInfoCommand extends ProtocolExtensionCommand {

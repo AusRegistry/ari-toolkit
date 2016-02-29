@@ -15,8 +15,6 @@ import org.w3c.dom.Node;
  */
 public class MarkContact {
 
-    private Logger maintLogger = Logger.getLogger(getClass().getPackage().getName() + ".maint");
-
     private static final String TYPE_EXPR = "@type";
     private static final String ORG_EXPR = "mark:org/text()";
     private static final String NAME_EXPR = "mark:name/text()";
@@ -26,6 +24,8 @@ public class MarkContact {
     private static final String FAX_EXT_EXPR = "mark:fax/@x";
     private static final String EMAIL_EXPR = "mark:email/text()";
     private static final String ADDRESS_EXPR = "mark:addr";
+
+    private Logger maintLogger = Logger.getLogger(getClass().getPackage().getName() + ".maint");
 
     private MarkContactType type;
 

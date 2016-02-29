@@ -2,10 +2,6 @@ package com.ausregistry.jtoolkit2.se.fee;
 
 import com.ausregistry.jtoolkit2.se.Command;
 import com.ausregistry.jtoolkit2.se.CommandExtension;
-import com.ausregistry.jtoolkit2.se.DomainCreateCommand;
-import com.ausregistry.jtoolkit2.se.DomainCreateResponse;
-import com.ausregistry.jtoolkit2.se.DomainTransferCommand;
-import com.ausregistry.jtoolkit2.se.DomainTransferResponse;
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.xml.XMLWriter;
 import org.w3c.dom.Element;
@@ -21,8 +17,8 @@ import java.math.BigDecimal;
  * supplied, should match the fees that are set for the domain name for the requested period.
  * The response expected from a server should be handled by a Domain Transfer Response.</p>
  *
- * @see DomainTransferCommand
- * @see DomainTransferResponse
+ * @see com.ausregistry.jtoolkit2.se.DomainTransferCommand
+ * @see com.ausregistry.jtoolkit2.se.DomainTransferResponse
  * @see <a href="https://tools.ietf.org/html/draft-brown-epp-fees-03#section-4.2.4">Domain Name Fee Extension
  * Mapping for the Extensible Provisioning Protocol (EPP)</a>
  */

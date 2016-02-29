@@ -6,10 +6,10 @@ package com.ausregistry.jtoolkit2.se;
  */
 public enum TransferOp {
     QUERY("query"),
-	REQUEST("request"),
-	CANCEL("cancel"),
-	APPROVE("approve"),
-	REJECT("reject");
+    REQUEST("request"),
+    CANCEL("cancel"),
+    APPROVE("approve"),
+    REJECT("reject");
 
     private String op;
 

@@ -30,10 +30,10 @@ public class DomainKVCommandExtensionTest {
         final DomainKVCommandExtension extension = new DomainKVCommandExtension(
                 CommandExtension.UPDATE);
         addSampleItemsToExtension(extension, "ae");
-        
+
         final Command updateCommand = new DomainUpdateCommand("jtkutest.com.ae");
         updateCommand.appendExtension(extension);
-        
+
         try {
             final String xml = updateCommand.toXML();
             assertEquals(
@@ -43,7 +43,7 @@ public class DomainKVCommandExtensionTest {
             fail(saxe.getMessage());
         }
     }
-    
+
     @Test
     public void testCreateSingleKVList() {
         final DomainKVCommandExtension extension = new DomainKVCommandExtension(
@@ -70,11 +70,11 @@ public class DomainKVCommandExtensionTest {
                 CommandExtension.CREATE);
         addSampleItemsToExtension(extension, "au");
         addSampleItemsToExtension(extension, "ae");
-        
+
         final Command createCommand = new DomainCreateCommand("jtkutest.com.ae", "jtkUT3st",
                 "JTKCON", new String[] { "JTKCON2" });
         createCommand.appendExtension(extension);
-        
+
         try {
             final String xml = createCommand.toXML();
             assertEquals(
@@ -84,10 +84,10 @@ public class DomainKVCommandExtensionTest {
             fail(saxe.getMessage());
         }
     }
-    
+
     private void addSampleItemsToExtension(final DomainKVCommandExtension extension, String listName) {
         extension.addItem(listName, "eligibilityType", eligibilityType);
         extension.addItem(listName, "policyReason", String.valueOf(policyReason));
         extension.addItem(listName, "registrantName", registrantName);
-    }    
+    }
 }

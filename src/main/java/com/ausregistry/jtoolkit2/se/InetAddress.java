@@ -16,44 +16,44 @@ public class InetAddress implements Appendable {
     private static final long serialVersionUID = -1450632623902648843L;
 
     private IPVersion version;
-	private String textRep;
+    private String textRep;
 
-	/**
-	 * Construct an IPv4 (default) InetAddress using its textual
-	 * representation.
-	 */
+    /**
+     * Construct an IPv4 (default) InetAddress using its textual
+     * representation.
+     */
     public InetAddress(String textRep) {
-		this(IPVersion.IPv4, textRep);
-	}
-
-	/**
-	 * Construct an InetAddress of the specified version (either IPv4 or IPv6)
-	 * using its textual representation.
-	 */
-    public InetAddress(IPVersion version, String textRep) {
-		this.version = version;
-		this.textRep = textRep;
+        this(IPVersion.IPv4, textRep);
     }
 
-	/**
-	 * Get the Internet Protocol version of this address.
-	 *
-	 * @see com.ausregistry.jtoolkit2.se.IPVersion Enumerates possible return
-	 * values.
-	 */
-	public String getVersion() {
-		return version.toString();
-	}
+    /**
+     * Construct an InetAddress of the specified version (either IPv4 or IPv6)
+     * using its textual representation.
+     */
+    public InetAddress(IPVersion version, String textRep) {
+        this.version = version;
+        this.textRep = textRep;
+    }
 
-	/**
-	 * Get the textual representation of this Internet address.
-	 */
-	public String getTextRep() {
-		return textRep;
-	}
+    /**
+     * Get the Internet Protocol version of this address.
+     *
+     * @see com.ausregistry.jtoolkit2.se.IPVersion Enumerates possible return
+     * values.
+     */
+    public String getVersion() {
+        return version.toString();
+    }
 
-	public Element appendToElement(XMLWriter xmlWriter, Element parent) {
-		return xmlWriter.appendChild(parent, "addr", textRep, "ip", getVersion());
-	}
+    /**
+     * Get the textual representation of this Internet address.
+     */
+    public String getTextRep() {
+        return textRep;
+    }
+
+    public Element appendToElement(XMLWriter xmlWriter, Element parent) {
+        return xmlWriter.appendChild(parent, "addr", textRep, "ip", getVersion());
+    }
 }
 

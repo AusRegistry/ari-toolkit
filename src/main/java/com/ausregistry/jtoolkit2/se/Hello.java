@@ -6,13 +6,13 @@ package com.ausregistry.jtoolkit2.se;
  * hello service elements compliant with the specification of hello in RFC5730.
  */
 public final class Hello extends SendSE {
-	private static final long serialVersionUID = -121313711512679943L;
+    private static final long serialVersionUID = -121313711512679943L;
 
-	public Hello() {
-		super();
+    public Hello() {
+        super();
 
-		xmlWriter.appendChild(xmlWriter.getRoot(), "hello");
-	}
+        xmlWriter.appendChild(xmlWriter.getRoot(), "hello");
+    }
 
     protected String toXMLImpl() throws org.xml.sax.SAXException {
         return xmlWriter.toXML();

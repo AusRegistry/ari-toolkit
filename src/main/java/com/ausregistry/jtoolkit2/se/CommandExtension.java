@@ -6,8 +6,8 @@ package com.ausregistry.jtoolkit2.se;
  * under the command extension element.
  */
 public interface CommandExtension extends java.io.Serializable {
-    public static final String CREATE = "create";
-    public static final String UPDATE = "update";
+    String CREATE = "create";
+    String UPDATE = "update";
 
-    public void addToCommand(Command command);
+    void addToCommand(Command command);
 }

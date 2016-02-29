@@ -22,7 +22,7 @@ public class AuDomainModifyRegistrantCommandTest {
 
     @Before
     public void setUp() throws Exception {
-		Timer.setTime("20070101.010101");
+        Timer.setTime("20070101.010101");
         CLTRID.setClID("JTKUTEST");
     }
 
@@ -46,7 +46,7 @@ public class AuDomainModifyRegistrantCommandTest {
 
         final SecDnsDomainUpdateCommandExtension ext = new SecDnsDomainUpdateCommandExtension();
         final DSData dsData = new DSData(12345, 3, 1, "49FD46E6C4B45C55D4AC");
-        
+
         DSOrKeyType addData = new DSOrKeyType();
         addData.addToDsData(dsData);
         ext.setAddData(addData);

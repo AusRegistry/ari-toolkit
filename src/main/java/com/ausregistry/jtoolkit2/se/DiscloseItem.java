@@ -11,25 +11,25 @@ package com.ausregistry.jtoolkit2.se;
  * @see com.ausregistry.jtoolkit2.se.ContactInfoResponse
  */
 public class DiscloseItem implements java.io.Serializable {
-	private static final long serialVersionUID = -7503075321824634366L;
-	private String name;
-	private String type;
+    private static final long serialVersionUID = -7503075321824634366L;
+    private String name;
+    private String type;
 
-	public DiscloseItem(String elementName) {
-		this.name = elementName;
-	}
+    public DiscloseItem(String elementName) {
+        this.name = elementName;
+    }
 
-	public DiscloseItem(String elementName, String type) {
-		this(elementName);
-		this.type = type;
-	}
+    public DiscloseItem(String elementName, String type) {
+        this(elementName);
+        this.type = type;
+    }
 
-	public String getElementName() {
-		return name;
-	}
+    public String getElementName() {
+        return name;
+    }
 
-	public String getType() {
-		return type;
-	}
+    public String getType() {
+        return type;
+    }
 }
 

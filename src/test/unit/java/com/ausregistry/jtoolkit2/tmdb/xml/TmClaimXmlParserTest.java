@@ -76,7 +76,7 @@ public class TmClaimXmlParserTest {
         verify(mockClaim).setGoodsAndServices("Bardus populorum circumdabit se cum captiosus populum.\n" +
                 "Smert populorum circumdabit se cum captiosus populum qui eis differimus.");
     }
-    
+
     @Test
     public void shouldParseClassDescCorrectly() throws Exception {
         String claimXml =

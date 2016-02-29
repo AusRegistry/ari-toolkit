@@ -10,48 +10,48 @@ public interface StatsViewer {
     /**
      * Get the number of responses received having the given result code.
      */
-    public long getResultCodeCount(int resultCode);
+    long getResultCodeCount(int resultCode);
 
     /**
      * Get the number of commands of the given type that the Session(s)
      * associated with this viewer has/have processed since creation.
      */
-    public long getCommandCount();
+    long getCommandCount();
 
     /**
      * Get the number of commands of the given type that the Session(s)
      * associated with this viewer has/have processed recently (default: 1
      * second).
      */
-    public int getRecentCommandCount();
+    int getRecentCommandCount();
 
     /**
      * Get the total number of commands processed by Sessions associated with
      * this StatsViewer.
      */
-    public long getCommandCount(CommandType type);
+    long getCommandCount(CommandType type);
 
     /**
      * Get the total number of commands recently processed by Sessions
      * associated with this StatsViewer.
      */
-    public int getRecentCommandCount(CommandType type);
+    int getRecentCommandCount(CommandType type);
 
     /**
      * Get the average response time (in milliseconds) of all transactions.
      */
-    public long getAverageResponseTime();
+    long getAverageResponseTime();
 
     /**
      * Get the average response time (in milliseconds) of transactions of the
      * given command type.
      */
-    public long getAverageResponseTime(CommandType type);
+    long getAverageResponseTime(CommandType type);
 
     /**
      * Get the time interval since the most recent use of a Session associated
      * with this StatsViewer.
      */
-    public long getMruInterval();
+    long getMruInterval();
 }
 

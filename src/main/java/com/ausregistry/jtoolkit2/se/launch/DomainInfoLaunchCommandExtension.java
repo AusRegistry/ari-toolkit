@@ -2,7 +2,6 @@ package com.ausregistry.jtoolkit2.se.launch;
 
 import com.ausregistry.jtoolkit2.se.Command;
 import com.ausregistry.jtoolkit2.se.CommandExtension;
-import com.ausregistry.jtoolkit2.se.DomainInfoCommand;
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.xml.XMLWriter;
 import org.w3c.dom.Element;
@@ -13,7 +12,7 @@ import org.w3c.dom.Element;
  * using the Launch extension.</p>
  *
  *
- * @see DomainInfoCommand
+ * @see com.ausregistry.jtoolkit2.se.DomainInfoCommand
  * @see DomainInfoLaunchCommandExtension
  * @see <a href="https://tools.ietf.org/html/draft-ietf-eppext-launchphase-07">Domain Name Launch
  * Extension Mapping for the Extensible Provisioning Protocol (EPP)</a>
@@ -35,12 +34,12 @@ public class DomainInfoLaunchCommandExtension implements CommandExtension {
                 ExtendedObjectType.LAUNCH.getURI());
         final Element phaseElement = xmlWriter.appendChild(infoElement, "phase");
         infoElement.setAttribute("includeMark", String.valueOf(includeMark));
-        if(phaseName != null){
+        if (phaseName != null) {
             phaseElement.setAttribute("name", phaseName);
         }
         phaseElement.setTextContent(phaseType.getPhaseType());
 
-        if(applicationID != null){
+        if (applicationID != null) {
             final Element idElement = xmlWriter.appendChild(infoElement, "applicationID");
             idElement.setTextContent(applicationID);
         }

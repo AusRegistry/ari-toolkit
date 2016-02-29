@@ -34,8 +34,20 @@ public class AeDomainTransferRegistrantCommandTest {
         Command cmd = new AeDomainTransferRegistrantCommand("jtkutest.com.ae",
                 curExpDate, registrantName, eligibilityType, 1, "testing");
         try {
-            String xml = cmd.toXML();
-            assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><extension><command xmlns=\"urn:X-ae:params:xml:ns:aeext-1.0\" xsi:schemaLocation=\"urn:X-ae:params:xml:ns:aeext-1.0 aeext-1.0.xsd\"><registrantTransfer><registrantTransfer xmlns=\"urn:X-ae:params:xml:ns:aedomain-1.0\" xsi:schemaLocation=\"urn:X-ae:params:xml:ns:aedomain-1.0 aedomain-1.0.xsd\"><name>jtkutest.com.ae</name><curExpDate>2007-01-01</curExpDate><aeProperties><registrantName>AusRegistry</registrantName><eligibilityType>Trademark</eligibilityType><policyReason>1</policyReason></aeProperties><explanation>testing</explanation></registrantTransfer></registrantTransfer><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></extension></epp>", xml);
+            String expectedXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+                    + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" "
+                    + "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
+                    + "xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">"
+                    + "<extension><command xmlns=\"urn:X-ae:params:xml:ns:aeext-1.0\" "
+                    + "xsi:schemaLocation=\"urn:X-ae:params:xml:ns:aeext-1.0 aeext-1.0.xsd\">"
+                    + "<registrantTransfer><registrantTransfer xmlns=\"urn:X-ae:params:xml:ns:aedomain-1.0\" "
+                    + "xsi:schemaLocation=\"urn:X-ae:params:xml:ns:aedomain-1.0 aedomain-1.0.xsd\">"
+                    + "<name>jtkutest.com.ae</name><curExpDate>2007-01-01</curExpDate><aeProperties>"
+                    + "<registrantName>AusRegistry</registrantName><eligibilityType>Trademark</eligibilityType>"
+                    + "<policyReason>1</policyReason></aeProperties><explanation>testing</explanation>"
+                    + "</registrantTransfer></registrantTransfer><clTRID>JTKUTEST.20070101.010101.0</clTRID>"
+                    + "</command></extension></epp>";
+            assertEquals(expectedXml, cmd.toXML());
         } catch (SAXException saxe) {
             fail(saxe.getMessage());
         }
@@ -48,8 +60,22 @@ public class AeDomainTransferRegistrantCommandTest {
                 policyReason, registrantName, registrantID, registrantIDType,
                 eligibilityName, eligibilityID, eligibilityIDType, "testing");
         try {
-            String xml = cmd.toXML();
-            assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?><epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\"><extension><command xmlns=\"urn:X-ae:params:xml:ns:aeext-1.0\" xsi:schemaLocation=\"urn:X-ae:params:xml:ns:aeext-1.0 aeext-1.0.xsd\"><registrantTransfer><registrantTransfer xmlns=\"urn:X-ae:params:xml:ns:aedomain-1.0\" xsi:schemaLocation=\"urn:X-ae:params:xml:ns:aedomain-1.0 aedomain-1.0.xsd\"><name>jtkutest.com.ae</name><curExpDate>2007-01-01</curExpDate><period unit=\"y\">2</period><aeProperties><registrantName>AusRegistry</registrantName><registrantID type=\"Trade License\">01241326211</registrantID><eligibilityType>Trademark</eligibilityType><eligibilityName>Blah</eligibilityName><eligibilityID type=\"Trademark\">1231239523</eligibilityID><policyReason>1</policyReason></aeProperties><explanation>testing</explanation></registrantTransfer></registrantTransfer><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></extension></epp>", xml);
+            String expectedXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+                    + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" "
+                    + "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
+                    + "xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">"
+                    + "<extension><command xmlns=\"urn:X-ae:params:xml:ns:aeext-1.0\" "
+                    + "xsi:schemaLocation=\"urn:X-ae:params:xml:ns:aeext-1.0 aeext-1.0.xsd\">"
+                    + "<registrantTransfer><registrantTransfer xmlns=\"urn:X-ae:params:xml:ns:aedomain-1.0\" "
+                    + "xsi:schemaLocation=\"urn:X-ae:params:xml:ns:aedomain-1.0 aedomain-1.0.xsd\">"
+                    + "<name>jtkutest.com.ae</name><curExpDate>2007-01-01</curExpDate><period unit=\"y\">2</period>"
+                    + "<aeProperties><registrantName>AusRegistry</registrantName>"
+                    + "<registrantID type=\"Trade License\">01241326211</registrantID>"
+                    + "<eligibilityType>Trademark</eligibilityType><eligibilityName>Blah</eligibilityName>"
+                    + "<eligibilityID type=\"Trademark\">1231239523</eligibilityID><policyReason>1</policyReason>"
+                    + "</aeProperties><explanation>testing</explanation></registrantTransfer></registrantTransfer>"
+                    + "<clTRID>JTKUTEST.20070101.010101.0</clTRID></command></extension></epp>";
+            assertEquals(expectedXml, cmd.toXML());
         } catch (SAXException saxe) {
             fail(saxe.getMessage());
         }

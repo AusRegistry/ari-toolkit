@@ -11,13 +11,13 @@ import java.io.IOException;
  */
 public class CustomerHandler extends java.util.logging.FileHandler {
 
-	/**
-	 * Instantiates a new customer handler.
-	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public CustomerHandler() throws IOException {
-		super();
-	}
+    /**
+     * Instantiates a new customer handler.
+     *
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
+    public CustomerHandler() throws IOException {
+        super();
+    }
 }
 

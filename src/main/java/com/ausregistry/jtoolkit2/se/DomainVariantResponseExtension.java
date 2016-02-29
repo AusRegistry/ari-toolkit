@@ -3,7 +3,6 @@ package com.ausregistry.jtoolkit2.se;
 import javax.xml.xpath.XPathExpressionException;
 import java.util.ArrayList;
 
-import com.ausregistry.jtoolkit2.se.variant.DomainUpdateVariantCommandExtension;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 
 /**
@@ -18,7 +17,7 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
  * <p>For flexibility, this implementation extracts the data from the response using XPath queries, the expressions
  * for which are defined statically.</p>
  *
- * @see DomainUpdateVariantCommandExtension
+ * @see com.ausregistry.jtoolkit2.se.variant.DomainUpdateVariantCommandExtension
  */
 public final class DomainVariantResponseExtension extends
         ResponseExtension {
@@ -64,7 +63,7 @@ public final class DomainVariantResponseExtension extends
             final String query = ReceiveSE.replaceIndex(indexExpression, i + 1);
             final String domainName = xmlDoc.getNodeValue(query);
             final String userForm = xmlDoc.getNodeValue(query + VARIANT_USER_FORM_EXPR);
-            
+
             variants.add(new IdnaDomainVariant(domainName, userForm));
         }
 

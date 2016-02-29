@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  *
  * Uses the debug, support and user level loggers.
  */
-public class ErrorPkg {
+public final class ErrorPkg {
     private static Properties properties;
     private static String pname;
 
@@ -30,6 +30,10 @@ public class ErrorPkg {
                     "Fatal error: failed to load error messages file");
             throw new ConfigurationError(e);
         }
+    }
+
+    private ErrorPkg() {
+        // intentionally do nothing, make checkstyle happy
     }
 
     /**

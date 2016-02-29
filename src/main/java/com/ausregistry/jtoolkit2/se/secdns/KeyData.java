@@ -167,24 +167,32 @@ public class KeyData implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         KeyData other = (KeyData) obj;
-        if (alg != other.alg)
+        if (alg != other.alg) {
             return false;
-        if (flags != other.flags)
+        }
+        if (flags != other.flags) {
             return false;
-        if (protocol != other.protocol)
+        }
+        if (protocol != other.protocol) {
             return false;
+        }
         if (pubKey == null) {
-            if (other.pubKey != null)
+            if (other.pubKey != null) {
                 return false;
-        } else if (!pubKey.equals(other.pubKey))
+            }
+        } else if (!pubKey.equals(other.pubKey)) {
             return false;
+        }
         return true;
     }
 

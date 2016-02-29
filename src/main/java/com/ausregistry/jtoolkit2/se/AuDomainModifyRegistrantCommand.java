@@ -14,7 +14,7 @@ import org.w3c.dom.Element;
  * XML.
  */
 public final class AuDomainModifyRegistrantCommand
-	extends DomainUpdateCommand {
+    extends DomainUpdateCommand {
 
     private static final long serialVersionUID = 8196324073107340593L;
 
@@ -26,63 +26,63 @@ public final class AuDomainModifyRegistrantCommand
             int policyReason, String registrantName, String registrantID,
             String registrantIDType, String eligibilityName,
             String eligibilityID, String eligibilityIDType,
-			String explanation) {
+            String explanation) {
 
         super(name);
 
-		if (eligibilityType == null || registrantName == null) {
-			throw new IllegalArgumentException(ErrorPkg.getMessage(
+        if (eligibilityType == null || registrantName == null) {
+            throw new IllegalArgumentException(ErrorPkg.getMessage(
                     "se.domain.modify.au.missing_arg"));
-		}
+        }
 
-		assert (registrantID == null && registrantIDType == null)
-			|| (registrantID != null && registrantIDType != null);
+        assert (registrantID == null && registrantIDType == null)
+            || (registrantID != null && registrantIDType != null);
 
-		assert (eligibilityID == null && eligibilityIDType == null)
-			|| (eligibilityID != null && eligibilityIDType != null);
+        assert (eligibilityID == null && eligibilityIDType == null)
+            || (eligibilityID != null && eligibilityIDType != null);
 
-		extension = xmlWriter.appendChild(command, "extension");
+        extension = xmlWriter.appendChild(command, "extension");
         Element extensionElement = xmlWriter.appendChild(extension, "update", ExtensionImpl.AU.getURI());
 
-		extensionElement.setAttribute(
-				"xsi:schemaLocation",
-				ExtensionImpl.AU.getSchemaLocation());
+        extensionElement.setAttribute(
+                "xsi:schemaLocation",
+                ExtensionImpl.AU.getSchemaLocation());
 
                 Element auProperties = xmlWriter.appendChild(extensionElement, "auProperties");
-		xmlWriter.appendChild(
-			auProperties,
-			"registrantName").setTextContent(registrantName);
+        xmlWriter.appendChild(
+            auProperties,
+            "registrantName").setTextContent(registrantName);
 
-		if (registrantID != null && registrantIDType != null) {
-			xmlWriter.appendChild(auProperties,
-					"registrantID",
-					registrantID,
-					"type", registrantIDType);
-		}
+        if (registrantID != null && registrantIDType != null) {
+            xmlWriter.appendChild(auProperties,
+                    "registrantID",
+                    registrantID,
+                    "type", registrantIDType);
+        }
 
-		xmlWriter.appendChild(auProperties,
-			"eligibilityType").setTextContent(eligibilityType);
+        xmlWriter.appendChild(auProperties,
+            "eligibilityType").setTextContent(eligibilityType);
 
-		if (eligibilityName != null) {
-			xmlWriter.appendChild(
+        if (eligibilityName != null) {
+            xmlWriter.appendChild(
                                 auProperties,
-					"eligibilityName").setTextContent(eligibilityName);
-		}
+                    "eligibilityName").setTextContent(eligibilityName);
+        }
 
-		if (eligibilityID != null && eligibilityIDType != null) {
-			xmlWriter.appendChild(auProperties,
-					"eligibilityID",
-					eligibilityID,
-					"type", eligibilityIDType);
-		}
+        if (eligibilityID != null && eligibilityIDType != null) {
+            xmlWriter.appendChild(auProperties,
+                    "eligibilityID",
+                    eligibilityID,
+                    "type", eligibilityIDType);
+        }
 
-		xmlWriter.appendChild(
+        xmlWriter.appendChild(
                         auProperties,
-				"policyReason").setTextContent(
-					String.valueOf(policyReason));
+                "policyReason").setTextContent(
+                    String.valueOf(policyReason));
 
-		xmlWriter.appendChild(extensionElement,
-				"explanation").setTextContent(explanation);
+        xmlWriter.appendChild(extensionElement,
+                "explanation").setTextContent(explanation);
     }
 }
 

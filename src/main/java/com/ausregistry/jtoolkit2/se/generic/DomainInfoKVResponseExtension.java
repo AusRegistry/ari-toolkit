@@ -19,7 +19,7 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
  * EPP for a generic domain name. This relies on the instance first being
  * initialised by a suitable EPP domain info response using the method
  * fromXML().
- * 
+ *
  * For flexibility, this implementation extracts the data from the response
  * using XPath queries.
  */
@@ -38,7 +38,7 @@ public final class DomainInfoKVResponseExtension extends ResponseExtension {
     /**
      * Retrieves the names of all key-value lists that have been added to the
      * object.
-     * 
+     *
      * @return the set of list names
      */
     public Set<String> getLists() {
@@ -48,39 +48,39 @@ public final class DomainInfoKVResponseExtension extends ResponseExtension {
     /**
      * Retrieves the names of all item keys, for a specified key-value list
      * name.
-     * 
+     *
      * @param listName
      *            the name of the key-value list
-     * 
+     *
      * @return the set of item keys
      */
     public Set<String> getListItems(final String listName) {
         TreeMap<String, String> list = kvLists.get(listName);
-        
+
         if (list == null) {
             return null;
         }
-        
+
         return list.keySet();
     }
 
     /**
      * Retrieves the value of a given key-value item.
-     * 
+     *
      * @param listName
      *            the name of the key-value list
      * @param key
      *            the key of the item
-     * 
+     *
      * @return the value of the item
      */
     public String getItem(final String listName, final String key) {
         TreeMap<String, String> list = kvLists.get(listName);
-        
+
         if (list == null) {
             return null;
         }
-        
+
         return list.get(key);
     }
 

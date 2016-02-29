@@ -4,9 +4,13 @@ package com.ausregistry.jtoolkit2.session;
  * This factory provides instances of Session implementations.  The default
  * Session implementation is com.ausregistry.jtoolkit2.session.TLSSession.
  * Alternative implementations may be loaded as described in the newInstance
- * descriptions.  
+ * descriptions.
  */
 public final class SessionFactory {
+
+    private SessionFactory() {
+        // intentionally do nothing, required by checkstyle
+    }
 
     /**
      * Create a new Session instance.  The implementation defaults to

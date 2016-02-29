@@ -16,7 +16,7 @@ public interface SessionManager extends Runnable {
      * @param properties the properties to be used
      * @throws ConfigurationException the configuration exception
      */
-    public void configure(SessionManagerProperties properties) throws ConfigurationException;
+    void configure(SessionManagerProperties properties) throws ConfigurationException;
 
     /**
      * Change password.
@@ -24,21 +24,21 @@ public interface SessionManager extends Runnable {
      * @param oldPassword the old password
      * @param newPassword the new password
      */
-    public void changePassword(String oldPassword, String newPassword);
+    void changePassword(String oldPassword, String newPassword);
 
     /**
      * Change max pool size.  Assumes there is a session pool.
      *
      * @param newSize the new size of the session pool
      */
-    public void changeMaxPoolSize(int newSize);
+    void changeMaxPoolSize(int newSize);
 
     /**
      * Returns the properties used during configuration.
      *
      * @return the properties
      */
-    public SessionManagerProperties getProperties();
+    SessionManagerProperties getProperties();
 
     /**
      * Execute a single Transaction.
@@ -50,7 +50,7 @@ public interface SessionManager extends Runnable {
      * @throws CommandFailedException the command failed exception
      * @throws IllegalStateException the illegal state exception
      */
-    public void execute(Transaction tx) throws FatalSessionException, IOException, ParsingException,
+    void execute(Transaction tx) throws FatalSessionException, IOException, ParsingException,
             CommandFailedException, IllegalStateException;
 
     /**
@@ -62,7 +62,7 @@ public interface SessionManager extends Runnable {
      * @throws IllegalStateException the illegal state exception
      * @throws IOException Signals that an I/O exception has occurred.
      */
-    public int execute(Transaction[] txs) throws FatalSessionException, IllegalStateException, IOException;
+    int execute(Transaction[] txs) throws FatalSessionException, IllegalStateException, IOException;
 
     /**
      * Initialise the SessionManager.
@@ -70,12 +70,12 @@ public interface SessionManager extends Runnable {
      * @throws SessionConfigurationException the session configuration exception
      * @throws SessionOpenException the session open exception
      */
-    public void startup() throws SessionConfigurationException, SessionOpenException;
+    void startup() throws SessionConfigurationException, SessionOpenException;
 
     /**
      * Shutdown the SessionManger, making it unavailable for further transaction processing.
      */
-    public void shutdown();
+    void shutdown();
 
     /**
      * Returns the last greeting.
@@ -84,15 +84,15 @@ public interface SessionManager extends Runnable {
      * @throws SessionConfigurationException the session configuration exception
      * @throws SessionOpenException the session open exception
      */
-    public Greeting getLastGreeting() throws SessionConfigurationException, SessionOpenException;
+    Greeting getLastGreeting() throws SessionConfigurationException, SessionOpenException;
 
     @Override
-    public void run();
+    void run();
 
     /**
      * Returns the viewer created to record run statistics of sessions.
      *
      * @return the viewer
      */
-    public StatsViewer getStatsViewer();
+    StatsViewer getStatsViewer();
 }

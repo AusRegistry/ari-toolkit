@@ -16,12 +16,12 @@ public enum IPVersion {
         return name;
     }
 
-	public static IPVersion value(String name) {
-		if (name == null) {
-			return IPVersion.IPv4;
-		}
+    public static IPVersion value(String name) {
+        if (name == null) {
+            return IPVersion.IPv4;
+        }
 
-		return valueOf("IP" + name);
-	}
+        return valueOf("IP" + name);
+    }
 }
 

@@ -8,19 +8,19 @@ class ArDomainObjectType implements ObjectType {
     private static final long serialVersionUID = 992842005698675196L;
 
     public String getName() {
-		return "ardom";
-	}
+        return "ardom";
+    }
 
-	public String getURI() {
-		return "urn:X-ar:params:xml:ns:ardomain-1.0";
-	}
+    public String getURI() {
+        return "urn:X-ar:params:xml:ns:ardomain-1.0";
+    }
 
-	public String getSchemaLocation() {
-		return "urn:X-ar:params:xml:ns:ardomain-1.0 ardomain-1.0.xsd";
-	}
+    public String getSchemaLocation() {
+        return "urn:X-ar:params:xml:ns:ardomain-1.0 ardomain-1.0.xsd";
+    }
 
-	public String getIdentType() {
-		return "name";
-	}
+    public String getIdentType() {
+        return "name";
+    }
 }
 

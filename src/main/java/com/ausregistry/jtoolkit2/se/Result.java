@@ -158,11 +158,7 @@ public class Result implements java.io.Serializable {
      * if this returns true, then no further results should be available for the associated response.
      */
     public boolean succeeded() {
-        if (1000 <= resultCode && resultCode < 2000) {
-            return true;
-        } else {
-            return false;
-        }
+        return (resultCode >= 1000 && resultCode < 2000);
     }
 
     @Override

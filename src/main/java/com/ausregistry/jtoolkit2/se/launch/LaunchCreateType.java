@@ -1,13 +1,12 @@
 package com.ausregistry.jtoolkit2.se.launch;
 
-import com.ausregistry.jtoolkit2.se.DomainCreateCommand;
 
 /**
  * <p>Enum maps to 'objectType' attribute in launch-1.0 extension, represents whether an application is
  * created or a direct registration.</p>
  *
  *
- * @see DomainCreateCommand
+ * @see com.ausregistry.jtoolkit2.se.DomainCreateCommand
  * @see DomainCreateLaunchCommandExtension
  * @see <a href="https://tools.ietf.org/html/draft-ietf-eppext-launchphase-07">Domain Name Launch
  * Extension Mapping for the Extensible Provisioning Protocol (EPP)</a>

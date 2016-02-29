@@ -15,23 +15,11 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
 public class ContactCheckResponse extends CheckResponse<String> {
     private static final long serialVersionUID = -8516482858545087664L;
 
-	protected static final String CON_CHKDATA_COUNT_EXPR =
-		exprReplace(CHKDATA_COUNT_EXPR);
-	protected static final String CON_CHKDATA_IND_EXPR =
-		exprReplace(CHKDATA_IND_EXPR);
-	protected static final String CON_CHKDATA_IDENT_EXPR =
-		exprReplace(CHKDATA_IDENT_EXPR);
-	protected static final String CON_CHKDATA_AVAIL_EXPR =
-		exprReplace(CHKDATA_AVAIL_EXPR);
-	protected static final String CON_CHKDATA_REASON_EXPR =
-		exprReplace(CHKDATA_REASON_EXPR);
-
-	protected static String exprReplace(String expr) {
-		return expr.replaceAll(
-				OBJ, StandardObjectType.CONTACT.getName()
-				).replaceAll(
-					"IDENT", "id");
-	}
+    private static final String CON_CHKDATA_COUNT_EXPR = exprReplace(CHKDATA_COUNT_EXPR);
+    private static final String CON_CHKDATA_IND_EXPR = exprReplace(CHKDATA_IND_EXPR);
+    private static final String CON_CHKDATA_IDENT_EXPR = exprReplace(CHKDATA_IDENT_EXPR);
+    private static final String CON_CHKDATA_AVAIL_EXPR = exprReplace(CHKDATA_AVAIL_EXPR);
+    private static final String CON_CHKDATA_REASON_EXPR = exprReplace(CHKDATA_REASON_EXPR);
 
     public ContactCheckResponse() {
         super(StandardObjectType.CONTACT);
@@ -42,35 +30,41 @@ public class ContactCheckResponse extends CheckResponse<String> {
         super.fromXML(xmlDoc);
     }
 
-	@Override
+    @Override
     protected String chkDataCountExpr() {
-		return CON_CHKDATA_COUNT_EXPR;
-	}
+        return CON_CHKDATA_COUNT_EXPR;
+    }
 
-	@Override
+    @Override
     protected String chkDataIndexExpr() {
-		return CON_CHKDATA_IND_EXPR;
-	}
+        return CON_CHKDATA_IND_EXPR;
+    }
 
-	@Override
+    @Override
     protected String chkDataTextExpr() {
-		return CON_CHKDATA_IDENT_EXPR;
-	}
+        return CON_CHKDATA_IDENT_EXPR;
+    }
 
-	@Override
+    @Override
     protected String chkDataAvailExpr() {
-		return CON_CHKDATA_AVAIL_EXPR;
-	}
+        return CON_CHKDATA_AVAIL_EXPR;
+    }
 
-	@Override
+    @Override
     protected String chkDataReasonExpr() {
-		return CON_CHKDATA_REASON_EXPR;
-	}
+        return CON_CHKDATA_REASON_EXPR;
+    }
 
     @Override
     protected String getKey(final XMLDocument xmlDoc, final String qry) throws XPathExpressionException {
         return xmlDoc.getNodeValue(qry + chkDataTextExpr());
     }
 
+    private static String exprReplace(String expr) {
+        return expr.replaceAll(
+                OBJ, StandardObjectType.CONTACT.getName()
+        ).replaceAll(
+                "IDENT", "id");
+    }
 }
 

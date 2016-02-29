@@ -125,14 +125,14 @@ public final class SecDnsDomainInfoResponseTest {
         return result.toString();
     }
 
-	private static void buildXmlResponseAfterExtension(final StringBuilder result) {
-		result.append(        "<trID>");
+    private static void buildXmlResponseAfterExtension(final StringBuilder result) {
+        result.append(        "<trID>");
         result.append(            "<clTRID>ABC-12345</clTRID>");
         result.append(            "<svTRID>54321-XYZ</svTRID>");
         result.append(        "</trID>");
         result.append(    "</response>");
         result.append("</epp>");
-	}
+    }
 
     private static void buildSecDNSXmlExtension(final boolean isMulitpleDs, final StringBuilder result) {
         buildSecDNSXmlExtension(isMulitpleDs, false, true, result);
@@ -140,7 +140,7 @@ public final class SecDnsDomainInfoResponseTest {
 
     private static void buildSecDNSXmlExtension(final boolean isMulitpleDs, final boolean isKeyData,
             final boolean isDsData, final StringBuilder result) {
-		result.append(        "<extension>");
+        result.append(        "<extension>");
         result.append(            "<secDNS:infData xmlns:secDNS=\"urn:ietf:params:xml:ns:secDNS-1.1\"");
         result.append(                 " xsi:schemaLocation=\"urn:ietf:params:xml:ns:secDNS-1.1 secDNS-1.1.xsd\">");
         result.append(                 "<secDNS:maxSigLife>604800</secDNS:maxSigLife>");
@@ -178,11 +178,11 @@ public final class SecDnsDomainInfoResponseTest {
 
         result.append(             "</secDNS:infData>");
         result.append(        "</extension>");
-	}
+    }
 
-	private static void buildXmlResponseBeforeExtension(final String domainName,
-			final StringBuilder result) {
-		result.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+    private static void buildXmlResponseBeforeExtension(final String domainName,
+            final StringBuilder result) {
+        result.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         result.append("<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\"");
         result.append(    " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"");
         result.append(    " xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">");
@@ -192,7 +192,7 @@ public final class SecDnsDomainInfoResponseTest {
         result.append(        "</result>");
         result.append(        "<resData>");
         result.append(            "<infData xmlns=\"urn:ietf:params:xml:ns:domain-1.0\"");
-        result.append(          	  " xsi:schemaLocation=\"urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd\">");
+        result.append(                " xsi:schemaLocation=\"urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd\">");
         result.append(                "<name>" + domainName + "</name>");
         result.append(                "<roid>D0000003-AR</roid>");
         result.append(                "<status s=\"ok\" lang=\"en\"/>");
@@ -214,5 +214,5 @@ public final class SecDnsDomainInfoResponseTest {
         result.append(                "</authInfo>");
         result.append(            "</infData>");
         result.append(        "</resData>");
-	}
+    }
 }

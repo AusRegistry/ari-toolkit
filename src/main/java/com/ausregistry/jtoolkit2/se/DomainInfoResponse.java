@@ -17,55 +17,40 @@ import javax.xml.xpath.XPathExpressionException;
  * @see com.ausregistry.jtoolkit2.se.DomainInfoCommand
  */
 public class DomainInfoResponse extends InfoResponse {
+
+    protected static final String DOM_ROID_EXPR = DomainInfoResponse.exprReplace(ROID_EXPR);
+    protected static final String DOM_CR_ID_EXPR = DomainInfoResponse.exprReplace(CR_ID_EXPR);
+    protected static final String DOM_UP_ID_EXPR = DomainInfoResponse.exprReplace(UP_ID_EXPR);
+    protected static final String DOM_CL_ID_EXPR = DomainInfoResponse.exprReplace(CL_ID_EXPR);
+    protected static final String DOM_CR_DATE_EXPR = DomainInfoResponse.exprReplace(CR_DATE_EXPR);
+    protected static final String DOM_UP_DATE_EXPR = DomainInfoResponse.exprReplace(UP_DATE_EXPR);
+    protected static final String DOM_TR_DATE_EXPR = DomainInfoResponse.exprReplace(TR_DATE_EXPR);
+    protected static final String DOM_STATUS_COUNT_EXPR = DomainInfoResponse.exprReplace(STATUS_COUNT_EXPR);
+    protected static final String DOM_STATUS_EXPR = DomainInfoResponse.exprReplace(STATUS_EXPR);
+
+    protected static final String DOM_INF_DATA_EXPR = DomainInfoResponse.exprReplace(INF_DATA_EXPR);
+    protected static final String DOM_NAME_EXPR = DOM_INF_DATA_EXPR + "/domain:name/text()";
+    protected static final String DOM_PW_EXPR = DOM_INF_DATA_EXPR + "/domain:authInfo/domain:pw/text()";
+    protected static final String DOM_REGISTRANT_EXPR = DOM_INF_DATA_EXPR + "/domain:registrant/text()";
+    protected static final String DOM_EX_DATE_EXPR = DOM_INF_DATA_EXPR + "/domain:exDate/text()";
+    protected static final String DOM_NS_EXPR = DOM_INF_DATA_EXPR + "/domain:ns/domain:hostObj/text()";
+    protected static final String DOM_HOST_EXPR = DOM_INF_DATA_EXPR + "/domain:host/text()";
+    protected static final String DOM_CON_EXPR = DOM_INF_DATA_EXPR + "/domain:contact[@type='TYPE']/text()";
+    protected static final String DOM_CON_TECH_EXPR = DOM_CON_EXPR.replaceFirst("TYPE", "tech");
+    protected static final String DOM_CON_ADMIN_EXPR = DOM_CON_EXPR.replaceFirst("TYPE", "admin");
+    protected static final String DOM_CON_BILLING_EXPR = DOM_CON_EXPR.replaceFirst("TYPE", "billing");
+
     private static final long serialVersionUID = -5948394715740177139L;
-
-    protected static final String DOM_ROID_EXPR =
-        DomainInfoResponse.exprReplace(ROID_EXPR);
-    protected static final String DOM_CR_ID_EXPR =
-        DomainInfoResponse.exprReplace(CR_ID_EXPR);
-    protected static final String DOM_UP_ID_EXPR =
-        DomainInfoResponse.exprReplace(UP_ID_EXPR);
-    protected static final String DOM_CL_ID_EXPR =
-        DomainInfoResponse.exprReplace(CL_ID_EXPR);
-    protected static final String DOM_CR_DATE_EXPR =
-        DomainInfoResponse.exprReplace(CR_DATE_EXPR);
-    protected static final String DOM_UP_DATE_EXPR =
-        DomainInfoResponse.exprReplace(UP_DATE_EXPR);
-    protected static final String DOM_TR_DATE_EXPR =
-        DomainInfoResponse.exprReplace(TR_DATE_EXPR);
-    protected static final String DOM_STATUS_COUNT_EXPR =
-        DomainInfoResponse.exprReplace(STATUS_COUNT_EXPR);
-    protected static final String DOM_STATUS_EXPR =
-        DomainInfoResponse.exprReplace(STATUS_EXPR);
-
-    protected static final String DOM_INF_DATA_EXPR =
-        DomainInfoResponse.exprReplace(INF_DATA_EXPR);
-    protected static final String DOM_NAME_EXPR = DOM_INF_DATA_EXPR +
-        "/domain:name/text()";
-    protected static final String DOM_PW_EXPR = DOM_INF_DATA_EXPR +
-        "/domain:authInfo/domain:pw/text()";
-    protected static final String DOM_REGISTRANT_EXPR = DOM_INF_DATA_EXPR +
-        "/domain:registrant/text()";
-    protected static final String DOM_EX_DATE_EXPR = DOM_INF_DATA_EXPR +
-        "/domain:exDate/text()";
-    protected static final String DOM_NS_EXPR = DOM_INF_DATA_EXPR +
-        "/domain:ns/domain:hostObj/text()";
-    protected static final String DOM_HOST_EXPR = DOM_INF_DATA_EXPR +
-        "/domain:host/text()";
-    protected static final String DOM_CON_EXPR = DOM_INF_DATA_EXPR +
-        "/domain:contact[@type='TYPE']/text()";
-    protected static final String DOM_CON_TECH_EXPR =
-        DOM_CON_EXPR.replaceFirst("TYPE", "tech");
-    protected static final String DOM_CON_ADMIN_EXPR =
-        DOM_CON_EXPR.replaceFirst("TYPE", "admin");
-    protected static final String DOM_CON_BILLING_EXPR =
-        DOM_CON_EXPR.replaceFirst("TYPE", "billing");
 
     private String name, pw, registrantID;
     private String[] techContacts, adminContacts, billingContacts;
     private String[] delHosts, subHosts;
     private GregorianCalendar exDate;
     private String exDateStr;
+
+    public DomainInfoResponse() {
+        super(StandardObjectType.DOMAIN);
+    }
 
     protected String roidExpr() {
         return DOM_ROID_EXPR;
@@ -105,10 +90,6 @@ public class DomainInfoResponse extends InfoResponse {
 
     protected static String exprReplace(String expr) {
         return expr.replaceAll(OBJ, "domain");
-    }
-
-    public DomainInfoResponse() {
-        super(StandardObjectType.DOMAIN);
     }
 
     public String getName() {

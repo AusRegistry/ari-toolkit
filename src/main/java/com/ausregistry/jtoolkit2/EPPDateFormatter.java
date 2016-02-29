@@ -17,10 +17,14 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *
  * Uses the maintenance and user level loggers.
  */
-public class EPPDateFormatter {
+public final class EPPDateFormatter {
     private static String pname;
     private static DatatypeFactory dtFactory;
     private static final TimeZone UTC = TimeZone.getTimeZone("UTC");
+
+    private EPPDateFormatter() {
+        // intentionally do nothing, make checkstyle happy
+    }
 
     static {
         pname = EPPDateFormatter.class.getPackage().getName();

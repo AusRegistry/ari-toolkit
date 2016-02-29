@@ -8,24 +8,24 @@ package com.ausregistry.jtoolkit2.se;
  * @see com.ausregistry.jtoolkit2.se.HostCheckResponse
  */
 public class HostCheckCommand extends CheckCommand {
-	private static final long serialVersionUID = 8765121289983170340L;
+    private static final long serialVersionUID = 8765121289983170340L;
 
-	/**
-	 * Check the availability of the single identified host.
-	 *
-	 * @param name The name of the host to check the availability of.
-	 */
-	public HostCheckCommand(String name) {
-		super(StandardObjectType.HOST, name);
-	}
+    /**
+     * Check the availability of the single identified host.
+     *
+     * @param name The name of the host to check the availability of.
+     */
+    public HostCheckCommand(String name) {
+        super(StandardObjectType.HOST, name);
+    }
 
-	/**
-	 * Check the availability of at least one host.
-	 *
-	 * @param names The names of the hosts to check the availability of.
-	 */
-	public HostCheckCommand(String[] names) {
-		super(StandardObjectType.HOST, names);
-	}
+    /**
+     * Check the availability of at least one host.
+     *
+     * @param names The names of the hosts to check the availability of.
+     */
+    public HostCheckCommand(String[] names) {
+        super(StandardObjectType.HOST, names);
+    }
 }
 

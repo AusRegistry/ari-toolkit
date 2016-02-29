@@ -7,15 +7,15 @@ package com.ausregistry.jtoolkit2.se;
  */
 public abstract class ContactTransferCommand extends TransferCommand {
 
-	private static final long serialVersionUID = 2266050198631174340L;
+    private static final long serialVersionUID = 2266050198631174340L;
 
-	public ContactTransferCommand(TransferOp operation, String id) {
-		super(StandardObjectType.CONTACT, operation, id);
-	}
+    public ContactTransferCommand(TransferOp operation, String id) {
+        super(StandardObjectType.CONTACT, operation, id);
+    }
 
-	public ContactTransferCommand(TransferOp operation, String id,
-			String pw) {
-		super(StandardObjectType.CONTACT, operation, id, pw);
-	}
+    public ContactTransferCommand(TransferOp operation, String id,
+            String pw) {
+        super(StandardObjectType.CONTACT, operation, id, pw);
+    }
 }
 

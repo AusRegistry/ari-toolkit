@@ -19,20 +19,14 @@ public final class Greeting extends ReceiveSE {
     private static final String GREETING_EXPR = "/e:epp/e:greeting";
     private static final String DCP_EXPR = GREETING_EXPR + "/e:dcp";
     private static final String SVID_EXPR = GREETING_EXPR + "/e:svID/text()";
-    private static final String SVDATE_EXPR = GREETING_EXPR
-            + "/e:svDate/text()";
-    private static final String VERSIONS_EXPR = GREETING_EXPR
-            + "/e:svcMenu/e:version";
-    private static final String LANGS_EXPR = GREETING_EXPR
-            + "/e:svcMenu/e:lang";
-    private static final String OBJ_URIS_EXPR = GREETING_EXPR
-            + "/e:svcMenu/e:objURI";
-    private static final String EXT_URIS_EXPR = GREETING_EXPR
-            + "/e:svcMenu/e:svcExtension/e:extURI";
+    private static final String SVDATE_EXPR = GREETING_EXPR + "/e:svDate/text()";
+    private static final String VERSIONS_EXPR = GREETING_EXPR + "/e:svcMenu/e:version";
+    private static final String LANGS_EXPR = GREETING_EXPR + "/e:svcMenu/e:lang";
+    private static final String OBJ_URIS_EXPR = GREETING_EXPR + "/e:svcMenu/e:objURI";
+    private static final String EXT_URIS_EXPR = GREETING_EXPR + "/e:svcMenu/e:svcExtension/e:extURI";
     private static final String ACCESS_EXPR = DCP_EXPR + "/e:access/*[1]";
     private static final String EXPIRY_EXPR = DCP_EXPR + "/e:expiry/*[1]";
-    private static final String STMT_COUNT_EXPR = "count(" + DCP_EXPR
-            + "/e:statement)";
+    private static final String STMT_COUNT_EXPR = "count(" + DCP_EXPR + "/e:statement)";
     private static final String STMT_IND_EXPR = DCP_EXPR + "/e:statement[IDX]";
     private static final String PURPOSE_EXPR = "/e:purpose";
     private static final String RECIPIENT_EXPR = "/e:recipient";
@@ -143,9 +137,9 @@ public final class Greeting extends ReceiveSE {
      */
     public static final class DCPStatement implements Serializable {
         private static final long serialVersionUID = -589856890805744448L;
-        String[] purposes;
-        String[] recipients;
-        String retention;
+        private String[] purposes;
+        private String[] recipients;
+        private String retention;
 
         DCPStatement(String[] purposes, String[] recipients,
                 String retentionPolicy) {

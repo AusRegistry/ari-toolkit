@@ -8,7 +8,7 @@ import javax.xml.xpath.XPathExpressionException;
  * Extension of the domain mapping of the EPP create/info response, as defined
  * in RFC5730 and RFC5731, to IDN domain names, the specification of which are
  * in the XML schema definition urn:X-ar:params:xml:ns:idnadomain-1.0.
- * 
+ *
  * Instances of this class provide an interface to access create and info data
  * for an IDN domain as provided in an EPP domain create response. This relies
  * on the instance first being initialised by a suitable EPP domain create/info
@@ -17,10 +17,10 @@ import javax.xml.xpath.XPathExpressionException;
  * the DomainCreateCommand and DomainInfoCommand classes, with IDN extensions as
  * implemented by IdnaDomainCreateCommandExtension and
  * IdnaDomainInfoCommandExtension classes.
- * 
+ *
  * For flexibility, this implementation extracts the data from the response
  * using XPath queries, the expressions for which are defined statically.
- * 
+ *
  * @see com.ausregistry.jtoolkit2.se.DomainCreateIdnaCommandExtension
  * @see com.ausregistry.jtoolkit2.se.ResponseExtension
  */
@@ -44,11 +44,11 @@ public final class DomainIdnaResponseExtension extends
             + IDNA_DOMAIN_PREFIX
             + ":userForm/@language";
     private static final String CANONICAL_FORM_EXPR = ResponseExtension.EXTENSION_EXPR
-    		+ "/"
-    		+ IDNA_DOMAIN_PREFIX
-    		+ ":RESPONSE_TYPE/"
-    		+ IDNA_DOMAIN_PREFIX
-    		+ ":canonicalForm/text()";
+            + "/"
+            + IDNA_DOMAIN_PREFIX
+            + ":RESPONSE_TYPE/"
+            + IDNA_DOMAIN_PREFIX
+            + ":canonicalForm/text()";
 
     private String userFormName;
     private String canonicalForm;
@@ -70,8 +70,8 @@ public final class DomainIdnaResponseExtension extends
         language = xmlDoc.getNodeValue(replaceResponseType(
                 LANGUAGE_EXPR, responseType));
         canonicalForm = xmlDoc.getNodeValue(replaceResponseType(
-        		CANONICAL_FORM_EXPR, responseType));
-        
+                CANONICAL_FORM_EXPR, responseType));
+
         initialised = (userFormName != null && canonicalForm != null);
     }
 
@@ -84,9 +84,9 @@ public final class DomainIdnaResponseExtension extends
         return language;
     }
 
-	public String getCanonicalForm() {
-		return canonicalForm;
-	}
+    public String getCanonicalForm() {
+        return canonicalForm;
+    }
 
     @Override
     public boolean isInitialised() {

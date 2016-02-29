@@ -20,27 +20,27 @@ public final class LoginCommand extends Command {
     private static final long serialVersionUID = -704642499677315944L;
 
     private static final String DEFAULT_VERSION = "1.0";
-	private static final String DEFAULT_LANG = "en";
+    private static final String DEFAULT_LANG = "en";
 
-	public LoginCommand(String clID, String password) {
-		this(clID, password, StandardObjectType.getStandardURIs(), null);
-	}
+    public LoginCommand(String clID, String password) {
+        this(clID, password, StandardObjectType.getStandardURIs(), null);
+    }
 
-	public LoginCommand(String clID, String password, String newPW) {
-		this(clID, password, newPW, DEFAULT_VERSION, DEFAULT_LANG,
-				StandardObjectType.getStandardURIs(), null);
-	}
+    public LoginCommand(String clID, String password, String newPW) {
+        this(clID, password, newPW, DEFAULT_VERSION, DEFAULT_LANG,
+                StandardObjectType.getStandardURIs(), null);
+    }
 
-	public LoginCommand(String clID, String password,
-			String[] objURIs, String[] extURIs) {
-		this(clID, password, DEFAULT_VERSION, DEFAULT_LANG, objURIs, extURIs);
-	}
+    public LoginCommand(String clID, String password,
+            String[] objURIs, String[] extURIs) {
+        this(clID, password, DEFAULT_VERSION, DEFAULT_LANG, objURIs, extURIs);
+    }
 
-	public LoginCommand(String clID, String password,
-			String version, String lang,
-			String[] objURIs, String[] extURIs) {
-		this(clID, password, null, version, lang, objURIs, extURIs);
-	}
+    public LoginCommand(String clID, String password,
+            String version, String lang,
+            String[] objURIs, String[] extURIs) {
+        this(clID, password, null, version, lang, objURIs, extURIs);
+    }
 
     /**
      *
@@ -53,38 +53,38 @@ public final class LoginCommand extends Command {
      * @param extURIs Optional.
      * @throws IllegalArgumentException if {@code clID}, {@code password} or {@code version} are {@code null}.
      */
-	public LoginCommand(String clID, String password, String newPassword,
-			String version, String lang,
-			String[] objURIs, String[] extURIs) {
-		super(StandardCommandType.LOGIN);
+    public LoginCommand(String clID, String password, String newPassword,
+            String version, String lang,
+            String[] objURIs, String[] extURIs) {
+        super(StandardCommandType.LOGIN);
 
-		if (clID == null || password == null || version == null) {
-			throw new IllegalArgumentException(
-					ErrorPkg.getMessage("se.login.missing_arg"));
-		}
+        if (clID == null || password == null || version == null) {
+            throw new IllegalArgumentException(
+                    ErrorPkg.getMessage("se.login.missing_arg"));
+        }
 
-		xmlWriter.appendChild(cmdElement, "clID").setTextContent(clID);
-		xmlWriter.appendChild(cmdElement, "pw").setTextContent(password);
-		if (newPassword != null) {
-			xmlWriter.appendChild(
-					cmdElement, "newPW").setTextContent(newPassword);
-		}
-		Element options = xmlWriter.appendChild(cmdElement, "options");
-		xmlWriter.appendChild(options, "version").setTextContent(version);
-		xmlWriter.appendChild(options, "lang").setTextContent(lang);
-		Element svcs = xmlWriter.appendChild(cmdElement, "svcs");
-		for (String objURI : objURIs) {
-			xmlWriter.appendChild(svcs, "objURI").setTextContent(objURI);
-		}
+        xmlWriter.appendChild(cmdElement, "clID").setTextContent(clID);
+        xmlWriter.appendChild(cmdElement, "pw").setTextContent(password);
+        if (newPassword != null) {
+            xmlWriter.appendChild(
+                    cmdElement, "newPW").setTextContent(newPassword);
+        }
+        Element options = xmlWriter.appendChild(cmdElement, "options");
+        xmlWriter.appendChild(options, "version").setTextContent(version);
+        xmlWriter.appendChild(options, "lang").setTextContent(lang);
+        Element svcs = xmlWriter.appendChild(cmdElement, "svcs");
+        for (String objURI : objURIs) {
+            xmlWriter.appendChild(svcs, "objURI").setTextContent(objURI);
+        }
 
-		if (extURIs == null) {
-			return;
-		}
+        if (extURIs == null) {
+            return;
+        }
 
-		Element svcExtension = xmlWriter.appendChild(svcs, "svcExtension");
-		for (String extURI : extURIs) {
-			xmlWriter.appendChild(
-					svcExtension, "extURI").setTextContent(extURI);
-		}
-	}
+        Element svcExtension = xmlWriter.appendChild(svcs, "svcExtension");
+        for (String extURI : extURIs) {
+            xmlWriter.appendChild(
+                    svcExtension, "extURI").setTextContent(extURI);
+        }
+    }
 }

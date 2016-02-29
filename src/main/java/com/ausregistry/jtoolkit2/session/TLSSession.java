@@ -46,12 +46,12 @@ import com.ausregistry.jtoolkit2.xml.XMLParser;
  * </p>
  */
 public class TLSSession implements Session, StatsManager {
+    private static final String[] TYPE_INTERVAL_ARR = new String[] {"<<type>>", "<<interval>>" };
+    private static final String[] TIME_COUNT_ARR = new String[] {"<<time>>", "<<count>>" };
+
     private static final int BUF_SIZE = 4096;
     private static String pollXML;
     private static CommandType pollCmdType;
-    private static String[] TYPE_INTERVAL_ARR = new String[] { "<<type>>", "<<interval>>" };
-
-    private static String[] TIME_COUNT_ARR = new String[] { "<<time>>", "<<count>>" };
 
     static {
         PollRequestCommand poll = new PollRequestCommand();
@@ -207,17 +207,17 @@ public class TLSSession implements Session, StatsManager {
             userLogger.severe(e.getMessage());
             throw new SessionOpenException(e);
         } catch (ConnectException e) {
-            final String errorMessage = ErrorPkg.getMessage("net.socket.open.fail", new String[] { "<<port>>",
-                    "<<host>>" }, new String[] { String.valueOf(port), inaddr.getHostAddress() });
+            final String errorMessage = ErrorPkg.getMessage("net.socket.open.fail", new String[] {"<<port>>",
+                    "<<host>>" }, new String[] {String.valueOf(port), inaddr.getHostAddress() });
             userLogger.severe(errorMessage);
             userLogger.severe(e.getMessage());
             throw new SessionOpenException(errorMessage);
         } catch (IOException e) {
-            userLogger.severe(ErrorPkg.getMessage("net.socket.open.fail", new String[] { "<<port>>", "<<host>>" },
-                    new String[] { String.valueOf(port), inaddr.getHostAddress() }));
+            userLogger.severe(ErrorPkg.getMessage("net.socket.open.fail", new String[] {"<<port>>", "<<host>>" },
+                    new String[] {String.valueOf(port), inaddr.getHostAddress() }));
             userLogger.severe(e.getMessage());
-            throw new SessionOpenException(ErrorPkg.getMessage("net.socket.open.fail", new String[] { "<<port>>",
-                    "<<host>>" }, new String[] { String.valueOf(port), inaddr.getHostAddress() }));
+            throw new SessionOpenException(ErrorPkg.getMessage("net.socket.open.fail", new String[] {"<<port>>",
+                    "<<host>>" }, new String[] {String.valueOf(port), inaddr.getHostAddress() }));
         } catch (SessionLimitExceededException e) {
             e.printStackTrace();
             throw new SessionOpenException(e);
@@ -301,11 +301,11 @@ public class TLSSession implements Session, StatsManager {
 
             if (cn.equals(username)) {
                 userLogger.severe(ErrorPkg.getMessage("epp.login.fail.auth.pw",
-                        new String[] { "<<clID>>", "<<pw>>" }, new String[] { username, password }));
+                        new String[] {"<<clID>>", "<<pw>>" }, new String[] {username, password }));
                 throw new UserPassMismatchException(msg);
             } else {
-                userLogger.severe(ErrorPkg.getMessage("epp.login.fail.auth.match", new String[] { "<<clID>>",
-                        "<<cn>>" }, new String[] { username, cn }));
+                userLogger.severe(ErrorPkg.getMessage("epp.login.fail.auth.match", new String[] {"<<clID>>",
+                        "<<cn>>" }, new String[] {username, cn }));
                 throw new CertificateUserMismatchException(username, cn);
             }
         case ResultCode.UNIMPL_OBJ_SVC:
@@ -323,6 +323,7 @@ public class TLSSession implements Session, StatsManager {
             raiseLoginException(result.hasResultExtReasons(), result.getResultExtReason(0));
         case ResultCode.CMD_FAILED_CLOSING:
             raiseLoginException(result.hasResultExtReasons(), result.getResultExtReason(0));
+        default: // do nothing
         }
     }
 
@@ -371,6 +372,7 @@ public class TLSSession implements Session, StatsManager {
             case ResultCode.SUCCESS:
                 return;
             case ResultCode.CMD_FAILED:
+            default:
                 throw new LogoutException(new CommandFailedException(results[0].getResultMessage()));
             }
         } catch (IOException ioe) {
@@ -540,7 +542,7 @@ public class TLSSession implements Session, StatsManager {
         } else {
             commandTimeMap.put(type, commandTimeMap.get(type) + responseTime);
             debugLogger.info(ErrorPkg.getMessage("epp.server.response_time.previous_cmd", TYPE_INTERVAL_ARR,
-                    new String[] { type.getCommandName(), String.valueOf(responseTime) }));
+                    new String[] {type.getCommandName(), String.valueOf(responseTime) }));
         }
     }
 
@@ -551,7 +553,7 @@ public class TLSSession implements Session, StatsManager {
             return 0L;
         }
         debugLogger.info(ErrorPkg.getMessage("epp.server.response_time.avg", TIME_COUNT_ARR,
-                new String[] { String.valueOf(totalTime), String.valueOf(totalCount) }));
+                new String[] {String.valueOf(totalTime), String.valueOf(totalCount) }));
 
         return totalTime / totalCount;
     }

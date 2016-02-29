@@ -13,7 +13,7 @@ import com.ausregistry.jtoolkit2.xml.XMLParser;
  * Test each of the get methods of the ContactCreateResponse class.  Each test
  * is set up by intialising a ContactCreateResponse instance from a parsed
  * XML document with known parameter values.
- * 
+ *
  * @author anthony (anthony@ausregistry.com.au)
  */
 public class ContactCreateResponseTest {
@@ -45,7 +45,7 @@ public class ContactCreateResponseTest {
     @Test
     public void testGetCreateDate() {
         assertEquals(
-                EPPDateFormatter.fromXSDateTime("1999-04-03T22:00:00.0Z"), 
+                EPPDateFormatter.fromXSDateTime("1999-04-03T22:00:00.0Z"),
                 response.getCreateDate());
     }
 }

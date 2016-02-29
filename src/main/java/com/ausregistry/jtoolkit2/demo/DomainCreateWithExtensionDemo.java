@@ -16,11 +16,20 @@ import com.ausregistry.jtoolkit2.session.Transaction;
  * A demonstration of the steps required to perform a domain create utilising the SECDNS extension.
  */
 public class DomainCreateWithExtensionDemo {
+
+    private static final String USAGE = "Must be run with the following parameters: \"Domain Name for create\" "
+            + "\"Password\" \"Contact User ID\"";
     private final SessionManager manager;
     private final SessionManagerProperties properties;
 
-    private static String USAGE = "Must be run with the following parameters: \"Domain Name for create\" "
-            + "\"Password\" \"Contact User ID\"";
+    public DomainCreateWithExtensionDemo() throws Exception {
+        // Read in configuration properties from the toolkit.properties file
+        properties = new SessionManagerPropertiesImpl("toolkit.properties");
+
+        // Create a new session manager. This will use the properties loaded above to set up parameters
+        // required to connect to an EPP server.
+        manager = SessionManagerFactory.newInstance(properties);
+    }
 
     public static void main(String[] args) {
         try {
@@ -40,15 +49,6 @@ public class DomainCreateWithExtensionDemo {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public DomainCreateWithExtensionDemo() throws Exception {
-        // Read in configuration properties from the toolkit.properties file
-        properties = new SessionManagerPropertiesImpl("toolkit.properties");
-
-        // Create a new session manager. This will use the properties loaded above to set up parameters
-        // required to connect to an EPP server.
-        manager = SessionManagerFactory.newInstance(properties);
     }
 
     public void runDemo(final String domainName, String password, String contactName) throws Exception {
@@ -87,7 +87,8 @@ public class DomainCreateWithExtensionDemo {
         // Obtain the result code, and print relevant data if it is successful
         final int resultCode = domainCreateResponse.getResults()[0].getResultCode();
         System.out.println("Domain create response code: " + resultCode);
-        System.out.println("Domain create response message: " + domainCreateResponse.getResults()[0].getResultMessage());
+        System.out.println("Domain create response message: "
+                + domainCreateResponse.getResults()[0].getResultMessage());
         if (resultCode == ResultCode.SUCCESS || resultCode == ResultCode.SUCCESS_ACT_PEND) {
             System.out.println("Domain created on: " + domainCreateResponse.getCreateDate().getTime());
             System.out.println("Domain expiry on: " + domainCreateResponse.getExpiryDate().getTime());

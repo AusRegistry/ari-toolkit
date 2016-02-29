@@ -6,7 +6,7 @@ import org.w3c.dom.Element;
 /**
  * Use this to set domain extension properties relating to variants for an EPP
  * Domain Info command.
- * 
+ *
  * @see com.ausregistry.jtoolkit2.se.DomainVariantResponseExtension
  */
 public final class DomainInfoVariantCommandExtension implements CommandExtension {
@@ -15,14 +15,14 @@ public final class DomainInfoVariantCommandExtension implements CommandExtension
     private String variants;
 
     public void addToCommand(final Command command) {
-		XMLWriter xmlWriter = command.getXmlWriter();
-		Element extensionElement = command.getExtensionElement();
-		Element infoElement = xmlWriter.appendChild(
-				extensionElement, "info",
-				ExtendedObjectType.VARIANT.getURI());
+        XMLWriter xmlWriter = command.getXmlWriter();
+        Element extensionElement = command.getExtensionElement();
+        Element infoElement = xmlWriter.appendChild(
+                extensionElement, "info",
+                ExtendedObjectType.VARIANT.getURI());
         if (variants != null) {
-			infoElement.setAttribute("variants", variants);
-		}
+            infoElement.setAttribute("variants", variants);
+        }
     }
 
     public String getVariants() {

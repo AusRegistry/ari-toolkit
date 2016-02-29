@@ -25,11 +25,12 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
  * @see com.ausregistry.jtoolkit2.se.UpdateCommand
  */
 public class Response extends ReceiveSE {
+
+    protected static final String RESPONSE_EXPR = "/e:epp/e:response";
+
     private static final long serialVersionUID = -2441248857298156911L;
 
     private static final String DEFAULT_LANGUAGE = "en";
-
-    protected static final String RESPONSE_EXPR = "/e:epp/e:response";
 
     private static final String RESULT_COUNT_EXPR = "count(" + RESPONSE_EXPR + "/e:result)";
 
@@ -149,7 +150,7 @@ public class Response extends ReceiveSE {
             for (int i = 0; i < resultCount; i++) {
                 final String qry = ReceiveSE.replaceIndex(RESULT_EXPR, i + 1);
                 final String code = xmlDoc.getNodeValue(qry + RESULT_CODE_EXPR);
-                final String msg = xmlDoc.getNodeValue(qry + RESULT_MSG_EXPR);
+                final String message = xmlDoc.getNodeValue(qry + RESULT_MSG_EXPR);
                 final NodeList value = xmlDoc.getElements(qry + RESULT_VALUE_EXPR);
 
                 final NodeList extValues = xmlDoc.getElements(qry + RESULT_XVALUE_EXPR);
@@ -168,7 +169,7 @@ public class Response extends ReceiveSE {
                     }
                 }
 
-                resultArray[i] = new Result(Integer.parseInt(code), msg, value, valueNodes, reasons);
+                resultArray[i] = new Result(Integer.parseInt(code), message, value, valueNodes, reasons);
 
                 debugLogger.finer(resultArray[i].toString());
             }
@@ -225,7 +226,7 @@ public class Response extends ReceiveSE {
     }
 
     public String getSourceXMLString() {
-		return xmlDoc.getSourceXMLString();
-	}
+        return xmlDoc.getSourceXMLString();
+    }
 
 }

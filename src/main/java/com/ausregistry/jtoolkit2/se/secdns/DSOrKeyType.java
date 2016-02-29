@@ -105,13 +105,13 @@ public class DSOrKeyType {
             this.maxSigLife.createXMLElement(xmlWriter, addElement);
         }
 
-        if(this.getDsDataList() != null) {
+        if (this.getDsDataList() != null) {
             for (DSData dsData : this.getDsDataList()) {
                 DSData.appendDsDataElement(xmlWriter, addElement, dsData);
             }
         }
 
-        if(this.getKeyDataList() != null) {
+        if (this.getKeyDataList() != null) {
             for (KeyData keyData : this.getKeyDataList()) {
                 KeyData.appendKeyDataElement(xmlWriter, addElement, keyData);
             }

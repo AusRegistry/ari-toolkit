@@ -8,14 +8,14 @@ public class LocalPostalInfo extends PostalInfo {
     private static final long serialVersionUID = 4775140595532169248L;
 
     public LocalPostalInfo(String name, String city, String countryCode) {
-		super(PostalInfoType.LOCAL, name, city, countryCode);
-	}
+        super(PostalInfoType.LOCAL, name, city, countryCode);
+    }
 
     public LocalPostalInfo(String name, String org,
-			String[] street, String city, String stateProv, String postcode,
-			String countryCode) {
-		super(PostalInfoType.LOCAL, name, org, street, city,
-				stateProv, postcode, countryCode);
-	}
+            String[] street, String city, String stateProv, String postcode,
+            String countryCode) {
+        super(PostalInfoType.LOCAL, name, org, street, city,
+                stateProv, postcode, countryCode);
+    }
 }
 

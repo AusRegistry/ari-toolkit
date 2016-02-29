@@ -79,5 +79,5 @@ public class HostCreateResponseTest {
         return result;
     }
 
- 
+
 }

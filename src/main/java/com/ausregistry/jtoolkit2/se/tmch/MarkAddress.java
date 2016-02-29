@@ -17,13 +17,13 @@ import org.w3c.dom.NodeList;
  */
 public class MarkAddress {
 
-    private Logger maintLogger = Logger.getLogger(getClass().getPackage().getName() + ".maint");
-
     private static final String STREET_NODE_LOCAL_NAME = "street";
     private static final String CITY_EXPR = "mark:city/text()";
     private static final String SP_EXPR = "mark:sp/text()";
     private static final String PC_EXPR = "mark:pc/text()";
     private static final String CC_EXPR = "mark:cc/text()";
+
+    private Logger maintLogger = Logger.getLogger(getClass().getPackage().getName() + ".maint");
 
     private List<String> streets = new ArrayList<String>();
 

@@ -10,17 +10,17 @@ package com.ausregistry.jtoolkit2.se;
  * to XML.
  */
 public class ArDomainPolicyUndeleteCommand extends ProtocolExtensionCommand {
-	private static final long serialVersionUID = 420815971854196895L;
+    private static final long serialVersionUID = 420815971854196895L;
 
-	private static final CommandType polUndeleteCmdType = new ArPolicyUndeleteCommandType();
+    private static final CommandType POLICY_UNDELETE_COMMAND_TYPE = new ArPolicyUndeleteCommandType();
 
-	public ArDomainPolicyUndeleteCommand(String name) {
-		super(polUndeleteCmdType, ExtendedObjectType.AR_DOMAIN, name);
-	}
+    public ArDomainPolicyUndeleteCommand(String name) {
+        super(POLICY_UNDELETE_COMMAND_TYPE, ExtendedObjectType.AR_DOMAIN, name);
+    }
 
-	@Override
+    @Override
     protected Extension getExtension() {
-		return ExtensionImpl.AR;
-	}
+        return ExtensionImpl.AR;
+    }
 }
 

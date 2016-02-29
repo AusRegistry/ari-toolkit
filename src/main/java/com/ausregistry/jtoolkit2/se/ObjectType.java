@@ -14,22 +14,22 @@ public interface ObjectType extends java.io.Serializable {
      * used as the prefix. This name should be unique across all extensions and
      * object types.
      */
-    public String getName();
+    String getName();
 
     /**
      * Get the namespace URI of the object identified by this type. This is the
      * authoritative key for distinguishing between object types.
      */
-    public String getURI();
+    String getURI();
 
     /**
      * Get the schema location hint normally prescribed for this object type.
      */
-    public String getSchemaLocation();
+    String getSchemaLocation();
 
     /**
      * Get the label name of the primary identifier used in EPP service elements
      * mapped to the object identified by this type.
      */
-    public String getIdentType();
+    String getIdentType();
 }

@@ -9,20 +9,20 @@ package com.ausregistry.jtoolkit2.se;
  */
 public abstract class UpdateCommand extends ObjectCommand {
 
-	private static final long serialVersionUID = -5658605879430546350L;
+    private static final long serialVersionUID = -5658605879430546350L;
 
-	/**
-	 * Create an update command mapped to the specified object type to update
-	 * the identified object.
-	 *
-	 * @param objType The type of object to which the update command is to be
-	 * mapped.
-	 *
-	 * @param ident An object type-specific label identifying the object to
-	 * update.
-	 */
-	public UpdateCommand(ObjectType objType, String ident) {
-		super(StandardCommandType.UPDATE, objType, ident);
-	}
+    /**
+     * Create an update command mapped to the specified object type to update
+     * the identified object.
+     *
+     * @param objType The type of object to which the update command is to be
+     * mapped.
+     *
+     * @param ident An object type-specific label identifying the object to
+     * update.
+     */
+    public UpdateCommand(ObjectType objType, String ident) {
+        super(StandardCommandType.UPDATE, objType, ident);
+    }
 }
 

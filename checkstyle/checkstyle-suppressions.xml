@@ -4,14 +4,69 @@
     "-//Puppy Crawl//DTD Suppressions 1.1//EN"
     "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
 
+<!--
+  Have to append the following rules to temporarily suppress a handful of violations in legacy code.
+  -->
 <suppressions>
     <suppress checks="JavadocPackage" files=".*.java" />
     <suppress checks="JavadocType" files=".*.java" />
     <suppress checks="JavadocMethod" files=".*.java" />
     <suppress checks="JavadocVariable" files=".*.java" />
     <suppress checks="JavadocPackage" files=".*.java" />
+    <suppress checks="JavadocStyleCheck" files=".*.java" />
     <suppress checks="checkFirstSentence" files=".*.java" />
 
-    <suppress checks="ParameterNumber" files=".*AeDomainCreateCommand.java" />
+    <suppress checks="ParameterNumber" files=".*Command.java" />
+    <suppress checks="ParameterNumber" files=".*CommandV\d.java" />
     <suppress checks="ParameterNumber" files=".*Test.java" />
+    <suppress checks="ParameterNumber" files="Disclose\.java" />
+    <suppress checks="ParameterNumber" files="PostalInfo\.java" />
+
+    <suppress checks="OperatorWrapCheck" files=".*Test.java" />
+
+    <suppress checks="HideUtilityClassConstructorCheck" files="TmchXmlParser\.java" />
+
+    <!--
+     Suppress the checks for illegal pattern, e.g.
+         + `e.printStackTrace()`
+         + `System.out.println()`
+      -->
+    <suppress checks="RegexpCheck" files=".*Demo.java" />
+    <suppress checks="RegexpCheck" files="SessionManagerFactory\.java" />
+    <suppress checks="RegexpCheck" files="TLSContext\.java" />
+    <suppress checks="RegexpCheck" files="TLSSession\.java" />
+    <suppress checks="RegexpCheck" files="EPPSchemaProvider\.java" />
+    <suppress checks="RegexpCheck" files="XMLBuilderSJSXP\.java" />
+    <suppress checks="RegexpCheck" files="XMLParser\.java" />
+
+    <!-- Variables 'cmdElement', 'command' and 'extension' shall be defined as private with accessor methods -->
+    <suppress checks="VisibilityModifierCheck" files="Command\.java" />
+    <!-- Variables 'maintLogger', 'userLogger' and 'debugLogger' shall be defined as private with accessor methods -->
+    <suppress checks="VisibilityModifierCheck" files="ReceiveSE\.java" />
+    <!-- Variable `resultArray` shall be defined as private with accessor methods -->
+    <suppress checks="VisibilityModifierCheck" files="Response\.java" />
+    <!-- Variables `xmlWriter` and `userLogger` shall be defined as private with accessor methods -->
+    <suppress checks="VisibilityModifierCheck" files="SendSE\.java" />
+    <!-- Variables should be defined as private with accessor methods -->
+    <suppress checks="VisibilityModifierCheck" files="XMLWriter\.java" />
+
+    <!--
+      Issues caused by not conventional names
+      -->
+    <suppress checks="TypeNameCheck" files="DomainVariantResponseExtensionV1_1\.java" />
+    <suppress checks="TypeNameCheck" files="DomainCheckPriceV1_1CommandExtension\.java" />
+    <suppress checks="TypeNameCheck" files="DomainCheckPriceV1_1ResponseExtension\.java" />
+    <suppress checks="TypeNameCheck" files="DomainCheckPriceV1_2CommandExtension\.java" />
+    <suppress checks="TypeNameCheck" files="DomainCheckPriceV1_2ResponseExtension\.java" />
+    <suppress checks="TypeNameCheck" files="DomainCreatePriceV1_1CommandExtension\.java" />
+    <suppress checks="TypeNameCheck" files="DomainCreatePriceV1_2CommandExtension\.java" />
+    <suppress checks="TypeNameCheck" files="DomainRenewPriceV1_1CommandExtension\.java" />
+    <suppress checks="TypeNameCheck" files="DomainRenewPriceV1_2CommandExtension\.java" />
+    <suppress checks="TypeNameCheck" files="DomainRestoreRequestPriceV1_1CommandExtension\.java" />
+    <suppress checks="TypeNameCheck" files="DomainRestoreRequestPriceV1_2CommandExtension\.java" />
+    <suppress checks="TypeNameCheck" files="DomainTransferRequestPriceV1_1CommandExtension\.java" />
+    <suppress checks="TypeNameCheck" files="DomainTransferRequestPriceV1_2CommandExtension\.java" />
+    <suppress checks="TypeNameCheck" files="DomainUpdateVariantCommandExtensionV1_1\.java" />
+    <suppress checks="MemberNameCheck|MethodNameCheck" files="PollResponse\.java" />
+
 </suppressions>

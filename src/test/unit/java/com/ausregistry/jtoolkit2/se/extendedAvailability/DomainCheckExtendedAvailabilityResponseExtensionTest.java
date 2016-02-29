@@ -126,7 +126,7 @@ public class DomainCheckExtendedAvailabilityResponseExtensionTest {
         assertNull(domainState.getPhase());
         assertNull(domainState.getVariantPrimaryDomainName());
     }
-    
+
     @Test
     public void shouldReturnCorrectStateDetailsForDomainThatIsUnavailable() {
         DomainCheckExtendedAvailabilityDetails domainState = response.getStateForDomain(UNAVAILABLE_DOMAIN);
@@ -167,7 +167,7 @@ public class DomainCheckExtendedAvailabilityResponseExtensionTest {
         assertNull(domainState.getReason());
         assertNull(domainState.getVariantPrimaryDomainName());
     }
-    
+
     @Test
     public void shouldReturnCorrectStateDetailsForAnActiveVariant() {
         DomainCheckExtendedAvailabilityDetails domainState = response.getStateForDomain(DOMAIN_ACTIVE_VARIANT);

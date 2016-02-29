@@ -16,11 +16,12 @@ import org.w3c.dom.NodeList;
  *
  */
 public class MarksList {
-    private Logger maintLogger = Logger.getLogger(getClass().getPackage().getName() + ".maint");
 
     private static final String TRADEMARK_NODE_LOCAL_NAME = "trademark";
     private static final String TREATY_OR_STATUTE_NODE_LOCAL_NAME = "treatyOrStatute";
     private static final String COURT_NODE_LOCAL_NAME = "court";
+
+    private Logger maintLogger = Logger.getLogger(getClass().getPackage().getName() + ".maint");
 
     private List<AbstractMark> marks;
 
@@ -34,14 +35,11 @@ public class MarksList {
                 AbstractMark abstractMark;
                 if (TRADEMARK_NODE_LOCAL_NAME.equals(item.getLocalName())) {
                     abstractMark = new Trademark();
-                }
-                else if (TREATY_OR_STATUTE_NODE_LOCAL_NAME.equals(item.getLocalName())) {
+                } else if (TREATY_OR_STATUTE_NODE_LOCAL_NAME.equals(item.getLocalName())) {
                     abstractMark = new TreatyOrStatute();
-                }
-                else if (COURT_NODE_LOCAL_NAME.equals(item.getLocalName())) {
+                } else if (COURT_NODE_LOCAL_NAME.equals(item.getLocalName())) {
                     abstractMark = new CourtValidatedMark();
-                }
-                else {
+                } else {
                     continue;
                 }
                 abstractMark.fromXML(new XMLDocument((Element) item));

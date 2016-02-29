@@ -16,20 +16,17 @@ import javax.xml.xpath.XPathExpressionException;
 public class ArExtensionResponse extends ReceiveSE {
     private static final long serialVersionUID = -2441248857298156911L;
 
-    protected static final String RESPONSE_EXPR = "/e:epp/e:extension/arext:response";
-    private static final String RESULT_COUNT_EXPR = "count(" + RESPONSE_EXPR
-            + "/arext:result)";
+    private static final String RESPONSE_EXPR = "/e:epp/e:extension/arext:response";
+    private static final String RESULT_COUNT_EXPR = "count(" + RESPONSE_EXPR + "/arext:result)";
     private static final String RESULT_EXPR = RESPONSE_EXPR + "/arext:result[IDX]";
     private static final String RESULT_CODE_EXPR = "/@code";
     private static final String RESULT_MSG_EXPR = "/arext:msg";
     private static final String RESULT_VALUE_EXPR = "/arext:value";
     private static final String RESULT_XVALUE_EXPR = "/arext:extValue";
-    private static final String CLTRID_EXPR = RESPONSE_EXPR
-            + "/arext:trID/arext:clTRID/text()";
-    private static final String SVTRID_EXPR = RESPONSE_EXPR
-            + "/arext:trID/arext:svTRID/text()";
+    private static final String CLTRID_EXPR = RESPONSE_EXPR + "/arext:trID/arext:clTRID/text()";
+    private static final String SVTRID_EXPR = RESPONSE_EXPR + "/arext:trID/arext:svTRID/text()";
 
-    protected Result[] resultArray;
+    private Result[] resultArray;
     private String clTRID, svTRID;
 
     public ArExtensionResponse() {

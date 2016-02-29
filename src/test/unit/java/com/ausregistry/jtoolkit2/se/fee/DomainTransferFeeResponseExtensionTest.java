@@ -34,7 +34,7 @@ public class DomainTransferFeeResponseExtensionTest {
         assertEquals("10.00", feeResponseExtension.getFee().toPlainString());
 
     }
-    
+
     @Test
     public void shouldNotGetFeeExtension() throws Exception {
         final String domainName = "xn--xha91b83h.com";

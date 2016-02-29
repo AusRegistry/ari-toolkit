@@ -6,9 +6,7 @@ package com.ausregistry.jtoolkit2.session;
  * must be available via getCause().
  */
 public class ConfigurationException extends Exception {
-    /**
-     * 
-     */
+
     private static final long serialVersionUID = -253766373975550464L;
 
     public ConfigurationException(Throwable t) {

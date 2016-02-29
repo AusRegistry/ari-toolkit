@@ -10,17 +10,17 @@ import com.ausregistry.jtoolkit2.ErrorPkg;
  */
 public abstract class PollCommand extends Command {
 
-	private static final long serialVersionUID = 2569927516750627497L;
+    private static final long serialVersionUID = 2569927516750627497L;
 
-	public PollCommand(PollOperation op) {
-		super(StandardCommandType.POLL);
+    public PollCommand(PollOperation op) {
+        super(StandardCommandType.POLL);
 
-		if (op == null) {
-			throw new IllegalArgumentException(
-					ErrorPkg.getMessage("se.poll.op.missing"));
-		}
+        if (op == null) {
+            throw new IllegalArgumentException(
+                    ErrorPkg.getMessage("se.poll.op.missing"));
+        }
 
-		cmdElement.setAttribute("op", op.toString());
+        cmdElement.setAttribute("op", op.toString());
     }
 }
 

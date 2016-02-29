@@ -13,13 +13,13 @@ public class ContactNotificationResponse extends NotificationResponse {
     private static final String CON_SVTRID_EXPR = exprReplace(SVTRID_EXPR);
     private static final String CON_PADATE_EXPR = exprReplace(PADATE_EXPR);
 
+    public ContactNotificationResponse() {
+        super(StandardObjectType.CONTACT);
+    }
+
     private static String exprReplace(String expr) {
         return expr.replaceAll(OBJ, StandardObjectType.CONTACT.getName()
                 ).replaceAll(IDENT, StandardObjectType.CONTACT.getIdentType());
-    }
-
-    public ContactNotificationResponse() {
-        super(StandardObjectType.CONTACT);
     }
 
     protected String identifierExpr() {

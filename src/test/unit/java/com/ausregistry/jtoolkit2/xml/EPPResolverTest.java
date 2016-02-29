@@ -8,10 +8,10 @@ import org.junit.Test;
 
 public class EPPResolverTest {
 
-    
+
     @Test
     public void canFindXSDs() throws TransformerException {
-        
+
         EPPResolver resolver = new EPPResolver();
         String[] namespaceURIs = resolver.getResolvedURIs();
         Source[] sources = new Source[namespaceURIs.length];

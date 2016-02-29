@@ -18,10 +18,21 @@ import com.ausregistry.jtoolkit2.session.Transaction;
  * returning extension elements.
  */
 public class DomainInfoWithExtensionDemo {
+
+    private static final String USAGE = "Must be run with the following parameters: \"Domain Name\" [Password]";
+
     private final SessionManager manager;
     private final SessionManagerProperties properties;
 
-    private static String USAGE = "Must be run with the following parameters: \"Domain Name\" [Password]";
+    public DomainInfoWithExtensionDemo() throws Exception {
+        // Read in configuration properties from the toolkit.properties file. This include extension namespaces
+        // to be used in the session.
+        properties = new SessionManagerPropertiesImpl("toolkit.properties");
+
+        // Create a new session manager. This will use the properties loaded above to set up parameters
+        // required to connect to an EPP server.
+        manager = SessionManagerFactory.newInstance(properties);
+    }
 
     public static void main(String[] args) {
         try {
@@ -43,16 +54,6 @@ public class DomainInfoWithExtensionDemo {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public DomainInfoWithExtensionDemo() throws Exception {
-        // Read in configuration properties from the toolkit.properties file. This include extension namespaces
-        // to be used in the session.
-        properties = new SessionManagerPropertiesImpl("toolkit.properties");
-
-        // Create a new session manager. This will use the properties loaded above to set up parameters
-        // required to connect to an EPP server.
-        manager = SessionManagerFactory.newInstance(properties);
     }
 
     public void runDemo(final String domainName, final String password) throws Exception {

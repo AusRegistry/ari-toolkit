@@ -23,17 +23,16 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
  */
 public abstract class CheckResponse<I> extends DataResponse {
 
-    private static final long serialVersionUID = 7769699662780402541L;
-
-	protected static final String CHKDATA_COUNT_EXPR = "count(" + RES_DATA_EXPR
-            + "/OBJ:chkData/*)";
-    protected static final String CHKDATA_IND_EXPR = RES_DATA_EXPR
-            + "/OBJ:chkData/OBJ:cd[IDX]";
+    protected static final String CHKDATA_COUNT_EXPR = "count(" + RES_DATA_EXPR + "/OBJ:chkData/*)";
+    protected static final String CHKDATA_IND_EXPR = RES_DATA_EXPR + "/OBJ:chkData/OBJ:cd[IDX]";
     protected static final String CHKDATA_IDENT_EXPR = "/OBJ:IDENT/text()";
     protected static final String CHKDATA_AVAIL_EXPR = "/OBJ:IDENT/@avail";
     protected static final String CHKDATA_REASON_EXPR = "/OBJ:reason/text()";
 
-    protected HashMap<I, Availability> availMap;
+    private static final long serialVersionUID = 7769699662780402541L;
+
+    private HashMap<I, Availability> availMap;
+
     private boolean[] availArray;
     private String[] reasonArray;
 

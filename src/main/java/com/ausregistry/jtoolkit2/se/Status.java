@@ -4,7 +4,7 @@ package com.ausregistry.jtoolkit2.se;
  * This class models EPP object statuses.  Instances of this class can be used
  * to update object statuses and are also returned by subclasses of
  * InfoResponse to provide access to the attributes of status values of the
- * queried object. 
+ * queried object.
  *
  * @see com.ausregistry.jtoolkit2.se.UpdateCommand
  * @see com.ausregistry.jtoolkit2.se.InfoResponse
@@ -41,7 +41,7 @@ public class Status implements java.io.Serializable {
     }
 
     public boolean equals(Object obj) {
-        if (! (obj instanceof Status)) {
+        if (!(obj instanceof Status)) {
             return false;
         }
 

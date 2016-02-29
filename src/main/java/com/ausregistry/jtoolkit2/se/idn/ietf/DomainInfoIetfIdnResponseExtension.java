@@ -23,13 +23,15 @@ public class DomainInfoIetfIdnResponseExtension extends ResponseExtension {
 
     @Override
     public void fromXML(XMLDocument xmlDoc) throws XPathExpressionException {
-        Node dataNode = xmlDoc.getElement(replaceResponseType( dataExpr, ResponseExtension.DATA));
+        Node dataNode = xmlDoc.getElement(replaceResponseType(dataExpr, ResponseExtension.DATA));
         if (dataNode != null) {
             initialised = true;
-            Node tableNode =  xmlDoc.getElement(replaceResponseType( dataExpr + "/" + IETF_IDN_PREFIX + ":table", ResponseExtension.DATA));
-            Node unameNode =  xmlDoc.getElement(replaceResponseType( dataExpr + "/" + IETF_IDN_PREFIX + ":uname", ResponseExtension.DATA));
+            Node tableNode = xmlDoc.getElement(
+                    replaceResponseType(dataExpr + "/" + IETF_IDN_PREFIX + ":table", ResponseExtension.DATA));
+            Node unameNode = xmlDoc.getElement(
+                    replaceResponseType(dataExpr + "/" + IETF_IDN_PREFIX + ":uname", ResponseExtension.DATA));
             table = tableNode.getTextContent();
-            if( unameNode != null) {
+            if (unameNode != null) {
                 uname = unameNode.getTextContent();
             }
         } else {

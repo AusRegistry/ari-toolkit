@@ -17,52 +17,50 @@ import javax.xml.xpath.XPathExpressionException;
  * @see com.ausregistry.jtoolkit2.se.DomainCreateCommand
  */
 public class DomainCreateResponse extends CreateResponse {
-	private static final long serialVersionUID = -5724827272682186647L;
+    private static final long serialVersionUID = -5724827272682186647L;
 
-	private static final String DOM_CR_DATE_EXPR = exprReplace(CR_DATE_EXPR);
-	private static final String DOM_NAME_EXPR =
-		exprReplace(CRE_DATA_EXPR) + "/domain:name/text()";
-	private static final String DOM_EX_DATE_EXPR =
-		exprReplace(CRE_DATA_EXPR) + "/domain:exDate/text()";
+    private static final String DOM_CR_DATE_EXPR = exprReplace(CR_DATE_EXPR);
+    private static final String DOM_NAME_EXPR = exprReplace(CRE_DATA_EXPR) + "/domain:name/text()";
+    private static final String DOM_EX_DATE_EXPR = exprReplace(CRE_DATA_EXPR) + "/domain:exDate/text()";
 
-	private String name;
-	private GregorianCalendar exDate;
+    private String name;
+    private GregorianCalendar exDate;
 
-	protected String crDateExpr() {
-		return DOM_CR_DATE_EXPR;
-	}
+    public DomainCreateResponse() {
+        super(StandardObjectType.DOMAIN);
+    }
 
-	protected static String exprReplace(String expr) {
-		return expr.replaceAll(OBJ, StandardObjectType.DOMAIN.getName());
-	}
+    protected String crDateExpr() {
+        return DOM_CR_DATE_EXPR;
+    }
 
-	public DomainCreateResponse() {
-		super(StandardObjectType.DOMAIN);
-	}
+    protected static String exprReplace(String expr) {
+        return expr.replaceAll(OBJ, StandardObjectType.DOMAIN.getName());
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public GregorianCalendar getExpiryDate() {
-		return exDate;
-	}
+    public GregorianCalendar getExpiryDate() {
+        return exDate;
+    }
 
-	@Override
-	public void fromXML(XMLDocument xmlDoc) {
-		super.fromXML(xmlDoc);
+    @Override
+    public void fromXML(XMLDocument xmlDoc) {
+        super.fromXML(xmlDoc);
 
         if (!resultArray[0].succeeded()) {
             return;
         }
 
-		try {
-			name = xmlDoc.getNodeValue(DOM_NAME_EXPR);
-			String exDateStr = xmlDoc.getNodeValue(DOM_EX_DATE_EXPR);
-			exDate = EPPDateFormatter.fromXSDateTime(exDateStr);
-		} catch (XPathExpressionException xpee) {
-			maintLogger.warning(xpee.getMessage());
-		}
-	}
+        try {
+            name = xmlDoc.getNodeValue(DOM_NAME_EXPR);
+            String exDateStr = xmlDoc.getNodeValue(DOM_EX_DATE_EXPR);
+            exDate = EPPDateFormatter.fromXSDateTime(exDateStr);
+        } catch (XPathExpressionException xpee) {
+            maintLogger.warning(xpee.getMessage());
+        }
+    }
 }
 

@@ -11,38 +11,38 @@ import org.w3c.dom.Element;
  * @see com.ausregistry.jtoolkit2.se.Response
  */
 public class HostUpdateCommand extends UpdateCommand {
-	private static final long serialVersionUID = 7375360369820132301L;
+    private static final long serialVersionUID = 7375360369820132301L;
 
-	/**
-	 * Minimal constructor to be used solely by extension subclasses.
-	 */
-	public HostUpdateCommand(String name) {
-		this(name, null, null, null);
-	}
+    /**
+     * Minimal constructor to be used solely by extension subclasses.
+     */
+    public HostUpdateCommand(String name) {
+        this(name, null, null, null);
+    }
 
-	/**
-	 * The complete set of attributes of a host which may be updated as per
-	 * RFC5732.
-	 */
-	public HostUpdateCommand(String name, HostAddRem add,
-			HostAddRem rem, String newName) {
+    /**
+     * The complete set of attributes of a host which may be updated as per
+     * RFC5732.
+     */
+    public HostUpdateCommand(String name, HostAddRem add,
+            HostAddRem rem, String newName) {
 
-		super(StandardObjectType.HOST, name);
+        super(StandardObjectType.HOST, name);
 
-		if (add != null) {
-			Element addElement = xmlWriter.appendChild(objElement, "add");
-			add.appendToElement(xmlWriter, addElement);
-		}
+        if (add != null) {
+            Element addElement = xmlWriter.appendChild(objElement, "add");
+            add.appendToElement(xmlWriter, addElement);
+        }
 
-		if (rem != null) {
-			Element remElement = xmlWriter.appendChild(objElement, "rem");
-			rem.appendToElement(xmlWriter, remElement);
-		}
+        if (rem != null) {
+            Element remElement = xmlWriter.appendChild(objElement, "rem");
+            rem.appendToElement(xmlWriter, remElement);
+        }
 
-		if (newName != null) {
-			Element chgElement = xmlWriter.appendChild(objElement, "chg");
-			xmlWriter.appendChild(chgElement, "name").setTextContent(newName);
-		}
-	}
+        if (newName != null) {
+            Element chgElement = xmlWriter.appendChild(objElement, "chg");
+            xmlWriter.appendChild(chgElement, "name").setTextContent(newName);
+        }
+    }
 }
 

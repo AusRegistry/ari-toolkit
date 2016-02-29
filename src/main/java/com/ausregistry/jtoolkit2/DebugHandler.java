@@ -11,8 +11,8 @@ import java.util.logging.FileHandler;
  * <code>FileHandler</code> for a description of the available parameters.
  */
 public class DebugHandler extends FileHandler {
-	public DebugHandler() throws IOException {
-		super();
-	}
+    public DebugHandler() throws IOException {
+        super();
+    }
 }
 

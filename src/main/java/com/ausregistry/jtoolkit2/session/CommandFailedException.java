@@ -11,17 +11,15 @@ import com.ausregistry.jtoolkit2.ErrorPkg;
  * error.
  */
 public class CommandFailedException extends Exception {
-	/**
-     * 
-     */
+
     private static final long serialVersionUID = 6641607844943105934L;
 
     public CommandFailedException() {
-		super(ErrorPkg.getMessage("epp.server.cmdfail"));
-	}
+        super(ErrorPkg.getMessage("epp.server.cmdfail"));
+    }
 
-	public CommandFailedException(String message) {
-		super(message);
-	}
+    public CommandFailedException(String message) {
+        super(message);
+    }
 }
 

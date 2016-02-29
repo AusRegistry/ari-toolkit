@@ -25,25 +25,25 @@ public interface SessionPool {
      * Close all sessions in the pool, then remove references to those
      * sessions.
      */
-    public void empty();
+    void empty();
 
     /**
      * Close all open sessions, then open the same number of sessions that
      * were closed.
      */
-    public void clean() throws SessionConfigurationException,
+    void clean() throws SessionConfigurationException,
             SessionOpenException;
 
     /**
      * Set the maximum number of sessions allowed in the pool to the
      * specified value.
      */
-    public void setMaxSize(int size);
+    void setMaxSize(int size);
 
     /**
      * Get the greeting data from the most recently opened session in the pool.
      */
-    public Greeting getLastGreeting() throws SessionConfigurationException,
+    Greeting getLastGreeting() throws SessionConfigurationException,
             SessionOpenException, InterruptedException;
 
     /**
@@ -63,7 +63,7 @@ public interface SessionPool {
      * failed to open.  It should be expected that further requests to get a
      * session will fail.
      */
-    public Session getSession() throws SessionConfigurationException,
+    Session getSession() throws SessionConfigurationException,
             SessionOpenException, InterruptedException;
 
     /**
@@ -71,14 +71,14 @@ public interface SessionPool {
      * command to be sent over that session.  See getSession for further
      * details.
      */
-    public Session getSession(CommandType commandType)
+    Session getSession(CommandType commandType)
             throws SessionConfigurationException, SessionOpenException,
             InterruptedException;
 
     /**
      * Release back to the pool a session acquired using getSession.
      */
-    public void releaseSession(Session session);
+    void releaseSession(Session session);
 
     /**
      * Keep a single session in the pool open by polling the EPP server at
@@ -86,11 +86,11 @@ public interface SessionPool {
      *
      * @throws IOException See Session.keepAlive.
      */
-    public long keepAlive() throws IOException;
+    long keepAlive() throws IOException;
 
     /**
      * Get the StatsViewer responsible for reporting operating statistics
      * about the sessions in the pool.
      */
-    public StatsViewer getStatsViewer();
+    StatsViewer getStatsViewer();
 }

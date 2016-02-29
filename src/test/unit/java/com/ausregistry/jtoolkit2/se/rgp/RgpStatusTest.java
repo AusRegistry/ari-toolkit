@@ -38,5 +38,5 @@ public class RgpStatusTest {
         assertFalse(rgpStatus1.equals(rgpStatus2));
         assertFalse(rgpStatus2.equals(rgpStatus1));
     }
-    
+
 }

@@ -12,28 +12,28 @@ import com.ausregistry.jtoolkit2.ErrorPkg;
  * to XML.
  */
 public class ArDomainPolicyDeleteCommand extends ProtocolExtensionCommand {
-	private static final long serialVersionUID = 3008976308409618621L;
+    private static final long serialVersionUID = 3008976308409618621L;
 
-	private static final CommandType polDeleteCmdType = new ArPolicyDeleteCommandType();
+    private static final CommandType POLICY_DELETE_COMMAND_TYPE = new ArPolicyDeleteCommandType();
 
     /**
      * @param name Required.
      * @param reason Required.
      * @throws IllegalArgumentException if {@code name} or {@code reason} is {@code null}.
      */
-	public ArDomainPolicyDeleteCommand(String name, String reason) {
-		super(polDeleteCmdType, ExtendedObjectType.AR_DOMAIN, name);
+    public ArDomainPolicyDeleteCommand(String name, String reason) {
+        super(POLICY_DELETE_COMMAND_TYPE, ExtendedObjectType.AR_DOMAIN, name);
 
-		if (name == null || reason == null) {
-			throw new IllegalArgumentException(
-					ErrorPkg.getMessage("se.ar.policyDelete.missing_arg"));
-		}
+        if (name == null || reason == null) {
+            throw new IllegalArgumentException(
+                    ErrorPkg.getMessage("se.ar.policyDelete.missing_arg"));
+        }
 
-		xmlWriter.appendChild(objElement, "reason").setTextContent(reason);
-	}
+        xmlWriter.appendChild(objElement, "reason").setTextContent(reason);
+    }
 
-	protected Extension getExtension() {
-		return ExtensionImpl.AR;
-	}
+    protected Extension getExtension() {
+        return ExtensionImpl.AR;
+    }
 }
 

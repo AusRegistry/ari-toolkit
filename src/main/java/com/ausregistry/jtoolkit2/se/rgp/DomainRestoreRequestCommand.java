@@ -19,20 +19,20 @@ import org.w3c.dom.Element;
  */
 public class DomainRestoreRequestCommand extends UpdateCommand {
 
-	private static final long serialVersionUID = 2409916920503111390L;
+    private static final long serialVersionUID = 2409916920503111390L;
 
-	/**
-	 * <p>Constructor taking in a domain name for the restore request.</p>
-	 */
-	public DomainRestoreRequestCommand(String name) {
-		super(StandardObjectType.DOMAIN, name);
-		xmlWriter.appendChild(objElement, "chg");
+    /**
+     * <p>Constructor taking in a domain name for the restore request.</p>
+     */
+    public DomainRestoreRequestCommand(String name) {
+        super(StandardObjectType.DOMAIN, name);
+        xmlWriter.appendChild(objElement, "chg");
 
-		extension = xmlWriter.appendChild(command, "extension");
+        extension = xmlWriter.appendChild(command, "extension");
 
-		final Element updateElement = xmlWriter.appendChild(extension,
-				"update", ExtendedObjectType.RESTORE.getURI());
+        final Element updateElement = xmlWriter.appendChild(extension,
+                "update", ExtendedObjectType.RESTORE.getURI());
 
-		xmlWriter.appendChild(updateElement, "restore", "op", "request");
-	}
+        xmlWriter.appendChild(updateElement, "restore", "op", "request");
+    }
 }

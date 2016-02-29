@@ -12,9 +12,9 @@ import com.ausregistry.jtoolkit2.ErrorPkg;
  */
 public abstract class TransferCommand extends ObjectCommand {
 
-	private static final long serialVersionUID = 2577041132486433812L;
+    private static final long serialVersionUID = 2577041132486433812L;
 
-	/**
+    /**
      * Create a transfer command of the specified operation type mapped to the
      * specified object type for the identified object.
      *
@@ -119,7 +119,7 @@ public abstract class TransferCommand extends ObjectCommand {
      */
     public TransferCommand(ObjectType objType, TransferOp operation,
             String ident, String roid, String pw) {
-    	this(objType, operation, ident, null, roid, pw);
+        this(objType, operation, ident, null, roid, pw);
     }
 
     /**

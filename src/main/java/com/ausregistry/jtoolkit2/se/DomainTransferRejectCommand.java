@@ -22,32 +22,32 @@ public class DomainTransferRejectCommand extends DomainTransferCommand {
         super(TransferOp.REJECT, name);
     }
 
-	/**
-	 * Create a domain transfer command for the identified domain, specifying
-	 * the designated password and the 'reject' transfer operation.
-	 *
-	 * @param name The name of the domain to reject transfer of.
-	 *
-	 * @param pw The identified domain's password.
-	 */
+    /**
+     * Create a domain transfer command for the identified domain, specifying
+     * the designated password and the 'reject' transfer operation.
+     *
+     * @param name The name of the domain to reject transfer of.
+     *
+     * @param pw The identified domain's password.
+     */
     public DomainTransferRejectCommand(String name, String pw) {
-		super(TransferOp.REJECT, name, pw);
-	}
+        super(TransferOp.REJECT, name, pw);
+    }
 
-	/**
-	 * Create a domain transfer command for the identified domain, specifying
-	 * the designated password and the 'reject' transfer operation.
-	 *
-	 * @param name The name of the domain to reject transfer of.
-	 *
-	 * @param roid The repository object identifier of the contact for which
-	 * the password is specified.  The identified contact must be a contact
-	 * associated with the domain object being transferred.
-	 *
-	 * @param pw The password of the contact identified by the supplied ROID.
-	 */
-	public DomainTransferRejectCommand(String name, String roid, String pw) {
-		super(TransferOp.REJECT, name, roid, pw);
-	}
+    /**
+     * Create a domain transfer command for the identified domain, specifying
+     * the designated password and the 'reject' transfer operation.
+     *
+     * @param name The name of the domain to reject transfer of.
+     *
+     * @param roid The repository object identifier of the contact for which
+     * the password is specified.  The identified contact must be a contact
+     * associated with the domain object being transferred.
+     *
+     * @param pw The password of the contact identified by the supplied ROID.
+     */
+    public DomainTransferRejectCommand(String name, String roid, String pw) {
+        super(TransferOp.REJECT, name, roid, pw);
+    }
 }
 

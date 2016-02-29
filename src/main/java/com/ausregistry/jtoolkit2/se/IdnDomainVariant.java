@@ -37,7 +37,7 @@ public final class IdnDomainVariant implements Comparable<IdnDomainVariant>,
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        
+
         /*
          * Given that DNS form is generated from the user form, adding its hash
          * code generally does not serve to differentiate the overall hash
@@ -74,7 +74,7 @@ public final class IdnDomainVariant implements Comparable<IdnDomainVariant>,
      * form. Given that DNS form is generated from the user form, these two
      * comparisons should yield identical results.  However, since both values are
      * provided externally this can't be guaranteed, hence both are compared.
-     * 
+     *
      * @see java.lang.Comparable#compareTo(java.lang.Object)
      */
     public int compareTo(final IdnDomainVariant other) {

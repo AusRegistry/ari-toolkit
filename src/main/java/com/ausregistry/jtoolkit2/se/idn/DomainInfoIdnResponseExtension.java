@@ -2,8 +2,6 @@ package com.ausregistry.jtoolkit2.se.idn;
 
 import javax.xml.xpath.XPathExpressionException;
 
-import com.ausregistry.jtoolkit2.se.DomainInfoCommand;
-import com.ausregistry.jtoolkit2.se.DomainInfoResponse;
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.se.ResponseExtension;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
@@ -19,8 +17,8 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
  * <p>For flexibility, this implementation extracts the data from the response using XPath queries, the expressions
  * for which are defined statically.</p>
  *
- * @see DomainInfoCommand
- * @see DomainInfoResponse
+ * @see com.ausregistry.jtoolkit2.se.DomainInfoCommand
+ * @see com.ausregistry.jtoolkit2.se.DomainInfoResponse
  * @see <a href="http://ausregistry.github.io/doc/idn-1.0/idn-1.0.html">Internationalized Domain Name Extension
  * Mapping for the Extensible Provisioning Protocol (EPP)</a>
  */
@@ -36,7 +34,7 @@ public final class DomainInfoIdnResponseExtension extends ResponseExtension {
             + ":RESPONSE_TYPE/"
             + IDN_PREFIX
             + ":languageTag/text()";
-    
+
     private String languageTag;
     private boolean initialised;
 
@@ -47,7 +45,7 @@ public final class DomainInfoIdnResponseExtension extends ResponseExtension {
             throws XPathExpressionException {
         languageTag = xmlDoc.getNodeValue(replaceResponseType(
                 LANGUAGE_EXPR, ResponseExtension.INFO));
-        
+
         initialised = (languageTag != null);
     }
 

@@ -21,11 +21,20 @@ import com.ausregistry.jtoolkit2.session.Transaction;
  * through a session manager.
  */
 public class PipeliningDemo {
+
+    private static final String USAGE = "Must be run with the following parameters: \"Domain Name to check\""
+            + " \"Host Name to check\" \"Contact User ID to check\" \"Domain Name for Info\"";
     private final SessionManager manager;
     private final SessionManagerProperties properties;
 
-    private static String USAGE = "Must be run with the following parameters: \"Domain Name to check\""
-            + " \"Host Name to check\" \"Contact User ID to check\" \"Domain Name for Info\"";
+    public PipeliningDemo() throws Exception {
+        // Read in configuration properties from the toolkit.properties file
+        properties = new SessionManagerPropertiesImpl("toolkit.properties");
+
+        // Create a new session manager. This will use the properties loaded above to set up parameters
+        // required to connect to an EPP server.
+        manager = SessionManagerFactory.newInstance(properties);
+    }
 
     public static void main(String[] args) {
         try {
@@ -46,15 +55,6 @@ public class PipeliningDemo {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public PipeliningDemo() throws Exception {
-        // Read in configuration properties from the toolkit.properties file
-        properties = new SessionManagerPropertiesImpl("toolkit.properties");
-
-        // Create a new session manager. This will use the properties loaded above to set up parameters
-        // required to connect to an EPP server.
-        manager = SessionManagerFactory.newInstance(properties);
     }
 
     public void runDemo(final String domainCheckName, final String hostName, final String contactName,

@@ -17,7 +17,7 @@ public class PollRequestCommand extends PollCommand {
     private static final long serialVersionUID = -5638634358538603322L;
 
     public PollRequestCommand() {
-		super(PollOperation.REQ);
+        super(PollOperation.REQ);
     }
 }
 

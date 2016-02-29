@@ -17,17 +17,17 @@ public class FactoryConfigurationError extends ConfigurationError {
      * @param msg the message to be using in the error
      */
     public FactoryConfigurationError(String msg) {
-		super(msg);
-	}
+        super(msg);
+    }
 
-	/**
-	 * Instantiates a new factory configuration error using a message and an exception.
-	 *
-	 * @param msg the message to be using in the error
-	 * @param cause the exception that caused the error
-	 */
-	public FactoryConfigurationError(String msg, Throwable cause) {
-		super(msg, cause);
-	}
+    /**
+     * Instantiates a new factory configuration error using a message and an exception.
+     *
+     * @param msg the message to be using in the error
+     * @param cause the exception that caused the error
+     */
+    public FactoryConfigurationError(String msg, Throwable cause) {
+        super(msg, cause);
+    }
 }
 

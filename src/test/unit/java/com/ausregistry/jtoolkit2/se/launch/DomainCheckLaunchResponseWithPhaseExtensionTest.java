@@ -70,7 +70,7 @@ public class DomainCheckLaunchResponseWithPhaseExtensionTest {
         assertTrue(response.exists(PENDING_CREATE_DOMAIN));
         assertNull(response.getClaimsKey(PENDING_CREATE_DOMAIN));
     }
-    
+
     @Test
     public void shouldReturnCorrectStateDetailsForAnApplication() {
         assertFalse(response.exists(DOMAIN_APPLICATION));

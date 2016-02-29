@@ -8,8 +8,8 @@ package com.ausregistry.jtoolkit2.session;
 public class KeyStoreReadException extends java.io.IOException {
     private static final long serialVersionUID = 1278011234758501135L;
 
-	public KeyStoreReadException(java.io.IOException ioe) {
-		super(ioe.getMessage());
-	}
+    public KeyStoreReadException(java.io.IOException ioe) {
+        super(ioe.getMessage());
+    }
 }
 

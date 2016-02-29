@@ -21,7 +21,7 @@ import org.w3c.dom.Element;
 public final class AeDomainTransferRegistrantCommand extends ProtocolExtensionCommand {
 
     private static final long serialVersionUID = -7263014552265126595L;
-    private static final CommandType rtrnType = new AeRegistrantTransferCommandType();
+    private static final CommandType RETURN_TYPE = new AeRegistrantTransferCommandType();
 
     public AeDomainTransferRegistrantCommand(String name, GregorianCalendar curExpDate,
             String registrantName, String eligibilityType, int policyReason, String explanation) {
@@ -64,7 +64,7 @@ public final class AeDomainTransferRegistrantCommand extends ProtocolExtensionCo
             String registrantID, String registrantIDType, String eligibilityName,
             String eligibilityID, String eligibilityIDType, String explanation) {
 
-        super(rtrnType, ExtendedObjectType.AE_DOMAIN, name);
+        super(RETURN_TYPE, ExtendedObjectType.AE_DOMAIN, name);
 
         if (curExpDate == null || eligibilityType == null || registrantName == null) {
             throw new IllegalArgumentException(

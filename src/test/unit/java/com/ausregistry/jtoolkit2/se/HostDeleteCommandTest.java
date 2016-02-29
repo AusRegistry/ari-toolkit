@@ -12,7 +12,7 @@ public class HostDeleteCommandTest {
 
     @Before
     public void setUp() throws Exception {
-		Timer.setTime("20070101.010101");
+        Timer.setTime("20070101.010101");
         CLTRID.setClID("JTKUTEST");
     }
 

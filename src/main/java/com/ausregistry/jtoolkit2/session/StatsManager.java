@@ -11,17 +11,17 @@ public interface StatsManager extends StatsViewer {
      * Increment the result count for the given code. This is reflected in the return value of
      * {@link com.ausregistry.jtoolkit2.session.StatsViewer#getResultCodeCount}.
      */
-    public void incResultCounter(int resultCode);
+    void incResultCounter(int resultCode);
 
     /**
      * Increment the command count for the given command type. This is reflected in the return value of
      * {@link com.ausregistry.jtoolkit2.session.StatsViewer#getCommandCount}.
      */
-    public void incCommandCounter(CommandType type);
+    void incCommandCounter(CommandType type);
 
     /**
      * Record the time interval (in milliseconds) which elapsed between sending a command and receiving a response to
      * that command - that is, the response time of a transaction.
      */
-    public void recordResponseTime(CommandType type, long responseTime);
+    void recordResponseTime(CommandType type, long responseTime);
 }

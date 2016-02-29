@@ -7,10 +7,10 @@ import com.ausregistry.jtoolkit2.se.CommandType;
  */
 public class DomainRegistrantTransferCommandType implements CommandType {
 
-	private static final long serialVersionUID = 135465710957937789L;
+    private static final long serialVersionUID = 135465710957937789L;
 
-	@Override
+    @Override
     public String getCommandName() {
-		return "registrantTransfer";
-	}
+        return "registrantTransfer";
+    }
 }

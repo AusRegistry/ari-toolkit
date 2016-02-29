@@ -49,7 +49,7 @@ public class DomainCheckExtendedAvailabilityResponseExtension extends ResponseEx
     public void fromXML(XMLDocument xmlDoc) throws XPathExpressionException {
         int extAvailStateCount = xmlDoc.getNodeCount(CHKDATA_COUNT_EXPR);
 
-        for(int i = 0; i < extAvailStateCount; i++) {
+        for (int i = 0; i < extAvailStateCount; i++) {
             String qry = ReceiveSE.replaceIndex(CHKDATA_IND_EXPR, i + 1);
             final String domainName = xmlDoc.getNodeValue(qry + CHKDATA_DOMAIN_NAME_EXPR);
             String domainState = xmlDoc.getNodeValue(qry + CHKDATA_DOMAIN_STATE_EXPR);

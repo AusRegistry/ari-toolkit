@@ -23,22 +23,22 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
  * Extensible Provisioning Protocol (EPP)</a>
  */
 public class DomainRestoreResponse extends Response {
-	private static final long serialVersionUID = -5724827272682186647L;
+    private static final long serialVersionUID = -5724827272682186647L;
 
-	private final DomainInfoRgpResponseExtension restoreExtension = new DomainInfoRgpResponseExtension(
-			ResponseExtension.UPDATE);
+    private final DomainInfoRgpResponseExtension restoreExtension = new DomainInfoRgpResponseExtension(
+            ResponseExtension.UPDATE);
 
-	@Override
-	public void fromXML(XMLDocument xmlDoc) {
-		registerExtension(restoreExtension);
-		super.fromXML(xmlDoc);
+    @Override
+    public void fromXML(XMLDocument xmlDoc) {
+        registerExtension(restoreExtension);
+        super.fromXML(xmlDoc);
 
-		if (!resultArray[0].succeeded()) {
-			return;
-		}
-	}
+        if (!resultArray[0].succeeded()) {
+            return;
+        }
+    }
 
-	public List<RgpStatus> getRgpStatuses() {
-		return restoreExtension.getRgpStatuses();
-	}
+    public List<RgpStatus> getRgpStatuses() {
+        return restoreExtension.getRgpStatuses();
+    }
 }

@@ -37,75 +37,75 @@ public class ContactUpdateCommand extends UpdateCommand {
 
         super(StandardObjectType.CONTACT, id);
 
-		if (id == null) {
-			throw new IllegalArgumentException(ErrorPkg.getMessage(
-						"se.contact.update.id.missing"));
-		}
+        if (id == null) {
+            throw new IllegalArgumentException(ErrorPkg.getMessage(
+                        "se.contact.update.id.missing"));
+        }
 
-		if (addStatuses != null) {
-			Element add = xmlWriter.appendChild(objElement, "add");
+        if (addStatuses != null) {
+            Element add = xmlWriter.appendChild(objElement, "add");
 
-			for (Status status : addStatuses) {
-				xmlWriter.appendChild(add, "status", status.getRationale(),
-						"s", status.toString());
-			}
-		}
+            for (Status status : addStatuses) {
+                xmlWriter.appendChild(add, "status", status.getRationale(),
+                        "s", status.toString());
+            }
+        }
 
-		if (remStatuses != null) {
-			Element rem = xmlWriter.appendChild(objElement, "rem");
+        if (remStatuses != null) {
+            Element rem = xmlWriter.appendChild(objElement, "rem");
 
-			for (String status : remStatuses) {
-				xmlWriter.appendChild(rem, "status", "s", status);
-			}
-		}
+            for (String status : remStatuses) {
+                xmlWriter.appendChild(rem, "status", "s", status);
+            }
+        }
 
-		if (pw == null && newIntPostalInfo == null && newLocPostalInfo == null
-				&& newVoice == null && newFax == null
-				&& newEmail == null && disclose == null) {
-			return;
-		}
+        if (pw == null && newIntPostalInfo == null && newLocPostalInfo == null
+                && newVoice == null && newFax == null
+                && newEmail == null && disclose == null) {
+            return;
+        }
 
-		Element chg = xmlWriter.appendChild(objElement, "chg");
+        Element chg = xmlWriter.appendChild(objElement, "chg");
 
-		if (newIntPostalInfo != null) {
-			newIntPostalInfo.appendToElement(xmlWriter, chg);
-		}
+        if (newIntPostalInfo != null) {
+            newIntPostalInfo.appendToElement(xmlWriter, chg);
+        }
 
-		if (newLocPostalInfo != null) {
-			newLocPostalInfo.appendToElement(xmlWriter, chg);
-		}
+        if (newLocPostalInfo != null) {
+            newLocPostalInfo.appendToElement(xmlWriter, chg);
+        }
 
-		if (newVoice != null) {
-			Element voice = xmlWriter.appendChild(chg, "voice");
-			if (newVoiceExt != null) {
-				voice.setAttribute("x", newVoiceExt);
-			}
-			voice.setTextContent(newVoice);
-		}
+        if (newVoice != null) {
+            Element voice = xmlWriter.appendChild(chg, "voice");
+            if (newVoiceExt != null) {
+                voice.setAttribute("x", newVoiceExt);
+            }
+            voice.setTextContent(newVoice);
+        }
 
-		if (newFax != null) {
-			Element fax = xmlWriter.appendChild(chg, "fax");
-			if (newFaxExt != null) {
-				fax.setAttribute("x", newFaxExt);
-			}
-			fax.setTextContent(newFax);
-		}
+        if (newFax != null) {
+            Element fax = xmlWriter.appendChild(chg, "fax");
+            if (newFaxExt != null) {
+                fax.setAttribute("x", newFaxExt);
+            }
+            fax.setTextContent(newFax);
+        }
 
-		if (newEmail != null) {
-			xmlWriter.appendChild(chg, "email").setTextContent(newEmail);
-		}
+        if (newEmail != null) {
+            xmlWriter.appendChild(chg, "email").setTextContent(newEmail);
+        }
 
-		if (pw != null) {
-			xmlWriter.appendChild(
-					xmlWriter.appendChild(
-						chg,
-						"authInfo"),
-					"pw").setTextContent(pw);
-		}
+        if (pw != null) {
+            xmlWriter.appendChild(
+                    xmlWriter.appendChild(
+                        chg,
+                        "authInfo"),
+                    "pw").setTextContent(pw);
+        }
 
-		if (disclose != null) {
-			disclose.appendToElement(xmlWriter, chg);
-		}
+        if (disclose != null) {
+            disclose.appendToElement(xmlWriter, chg);
+        }
     }
 }
 

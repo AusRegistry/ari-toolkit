@@ -117,7 +117,7 @@ public class ResponseTest {
     @Test
     public final void testGetResultValue() {
         NodeList values = results2[0].getResultValue();
-        
+
         int expCount = 1;
         String expURI = "urn:ietf:params:xml:ns:domain-1.0";
         String expName = "name";

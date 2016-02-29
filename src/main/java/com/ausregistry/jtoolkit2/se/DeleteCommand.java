@@ -7,19 +7,19 @@ package com.ausregistry.jtoolkit2.se;
  */
 public abstract class DeleteCommand extends ObjectCommand {
 
-	private static final long serialVersionUID = -4790273172825054472L;
+    private static final long serialVersionUID = -4790273172825054472L;
 
-	/**
-	 * Construct a delete command of the given object type mapping with the
-	 * given object identifier.
-	 *
-	 * @param objType The type of object to which the delete command is to be
-	 * mapped.
-	 *
-	 * @param ident The identifier of the object to be created.
-	 */
-	public DeleteCommand(ObjectType objType, String ident) {
-		super(StandardCommandType.DELETE, objType, ident);
-	}
+    /**
+     * Construct a delete command of the given object type mapping with the
+     * given object identifier.
+     *
+     * @param objType The type of object to which the delete command is to be
+     * mapped.
+     *
+     * @param ident The identifier of the object to be created.
+     */
+    public DeleteCommand(ObjectType objType, String ident) {
+        super(StandardCommandType.DELETE, objType, ident);
+    }
 }
 

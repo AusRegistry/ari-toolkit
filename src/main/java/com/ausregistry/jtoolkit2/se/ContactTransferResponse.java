@@ -19,66 +19,63 @@ import javax.xml.xpath.XPathExpressionException;
  * @see com.ausregistry.jtoolkit2.se.ContactTransferQueryCommand
  */
 public class ContactTransferResponse extends TransferResponse {
-	private static final long serialVersionUID = -3303074732303130291L;
+    private static final long serialVersionUID = -3303074732303130291L;
 
-	private static final String CON_ID_EXPR = RES_DATA_EXPR +
-		"/contact:trnData/contact:id/text()";
+    private static final String CON_ID_EXPR = RES_DATA_EXPR + "/contact:trnData/contact:id/text()";
+    private static final String CON_TR_STATUS_EXPR = exprReplace(TR_STATUS_EXPR);
+    private static final String CON_REID_EXPR = exprReplace(REID_EXPR);
+    private static final String CON_REDATE_EXPR = exprReplace(REDATE_EXPR);
+    private static final String CON_ACID_EXPR = exprReplace(ACID_EXPR);
+    private static final String CON_ACDATE_EXPR = exprReplace(ACDATE_EXPR);
 
-	private static final String CON_TR_STATUS_EXPR =
-		exprReplace(TR_STATUS_EXPR); 
-	private static final String CON_REID_EXPR = exprReplace(REID_EXPR); 
-	private static final String CON_REDATE_EXPR = exprReplace(REDATE_EXPR); 
-	private static final String CON_ACID_EXPR = exprReplace(ACID_EXPR); 
-	private static final String CON_ACDATE_EXPR = exprReplace(ACDATE_EXPR); 
+    private String id;
 
-	private String id;
+    public ContactTransferResponse() {
+        super(StandardObjectType.CONTACT);
+    }
 
-	protected static String exprReplace(String expr) {
-		return expr.replaceAll(OBJ,
-				StandardObjectType.CONTACT.getName());
-	}
+    protected static String exprReplace(String expr) {
+        return expr.replaceAll(OBJ,
+                StandardObjectType.CONTACT.getName());
+    }
 
-	public ContactTransferResponse() {
-		super(StandardObjectType.CONTACT);
-	}
+    public String getID() {
+        return id;
+    }
 
-	public String getID() {
-		return id;
-	}
-
-	@Override
-	public void fromXML(XMLDocument xmlDoc) {
-		super.fromXML(xmlDoc);
+    @Override
+    public void fromXML(XMLDocument xmlDoc) {
+        super.fromXML(xmlDoc);
 
         if (!resultArray[0].succeeded()) {
             return;
         }
 
-		try {
-			id = xmlDoc.getNodeValue(CON_ID_EXPR);
-		} catch (XPathExpressionException xpee) {
-			maintLogger.warning(xpee.getMessage());
-		}
-	}
+        try {
+            id = xmlDoc.getNodeValue(CON_ID_EXPR);
+        } catch (XPathExpressionException xpee) {
+            maintLogger.warning(xpee.getMessage());
+        }
+    }
 
-	protected String trStatusExpr() {
-		return CON_TR_STATUS_EXPR;
-	}
+    protected String trStatusExpr() {
+        return CON_TR_STATUS_EXPR;
+    }
 
-	protected String reIDExpr() {
-		return CON_REID_EXPR;
-	}
+    protected String reIDExpr() {
+        return CON_REID_EXPR;
+    }
 
-	protected String reDateExpr() {
-		return CON_REDATE_EXPR;
-	}
+    protected String reDateExpr() {
+        return CON_REDATE_EXPR;
+    }
 
-	protected String acIDExpr() {
-		return CON_ACID_EXPR;
-	}
+    protected String acIDExpr() {
+        return CON_ACID_EXPR;
+    }
 
-	protected String acDateExpr() {
-		return CON_ACDATE_EXPR;
-	}
+    protected String acDateExpr() {
+        return CON_ACDATE_EXPR;
+    }
 }
 

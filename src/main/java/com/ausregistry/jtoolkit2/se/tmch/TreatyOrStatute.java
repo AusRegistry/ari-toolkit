@@ -19,13 +19,13 @@ import org.w3c.dom.NodeList;
  */
 public class TreatyOrStatute extends AbstractMark {
 
-    private Logger maintLogger = Logger.getLogger(getClass().getPackage().getName() + ".maint");
-
     private static final String PROTECTION_NODE_LOCAL_NAME = "protection";
     private static final String REFNUM_EXPR = "mark:refNum/text()";
     private static final String PRODATE_EXPR = "mark:proDate/text()";
     private static final String TITLE_EXPR = "mark:title/text()";
     private static final String EXECDATE_EXPR = "mark:execDate/text()";
+
+    private Logger maintLogger = Logger.getLogger(getClass().getPackage().getName() + ".maint");
 
     private List<TreatyOrStatuteProtection> treatyOrStatuteProtections = new ArrayList<TreatyOrStatuteProtection>();
 
