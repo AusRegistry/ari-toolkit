@@ -62,5 +62,6 @@ public class DomainCreateApplicationLaunchResponseExtension extends ResponseExte
         return phaseName;
     }
 
-    public String getPhaseType() { return phaseType; }
+    public String getPhaseType() {
+        return phaseType; }
 }
