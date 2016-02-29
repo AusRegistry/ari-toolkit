@@ -1,5 +1,6 @@
 package com.ausregistry.jtoolkit2.se.idn.ietf;
 
+import com.ausregistry.jtoolkit2.ErrorPkg;
 import com.ausregistry.jtoolkit2.se.*;
 import com.ausregistry.jtoolkit2.xml.XMLWriter;
 import org.w3c.dom.Element;
@@ -29,7 +30,7 @@ public class DomainCreateIetfIdnCommandExtension implements CommandExtension {
      */
     public DomainCreateIetfIdnCommandExtension(String table, String uname) {
         if (table == null || table.isEmpty()) {
-            throw new IllegalArgumentException("Table must not be null or empty");
+            throw new IllegalArgumentException(ErrorPkg.getMessage("se.ar.domain.create.ietf.idn.table"));
         }
         this.table = table;
         this.uname = uname;

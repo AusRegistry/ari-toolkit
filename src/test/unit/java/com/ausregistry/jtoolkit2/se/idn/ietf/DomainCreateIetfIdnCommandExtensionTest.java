@@ -8,10 +8,15 @@ import com.ausregistry.jtoolkit2.se.CLTRID;
 import com.ausregistry.jtoolkit2.se.Command;
 import com.ausregistry.jtoolkit2.se.DomainCreateCommand;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.xml.sax.SAXException;
 
 public class DomainCreateIetfIdnCommandExtensionTest {
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Before
     public void setUp() throws Exception {
@@ -53,6 +58,16 @@ public class DomainCreateIetfIdnCommandExtensionTest {
         } catch (SAXException saxe) {
             fail(saxe.getMessage());
         }
+    }
+
+    @Test
+    public void failWhenTableNotProvided() throws SAXException {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Table must not be null or empty.");
+        Command cmd = new DomainCreateCommand("jtkutest.com.au", "jtkUT3st");
+        DomainCreateIetfIdnCommandExtension idnExt = new DomainCreateIetfIdnCommandExtension(null, null);
+        cmd.appendExtension(idnExt);
+        cmd.toXML();
     }
 
     private String expectedXmlWithExtension(String extensionSection) {
