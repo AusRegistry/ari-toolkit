@@ -13,7 +13,7 @@ import org.w3c.dom.Element;
  *
  *
  * @see com.ausregistry.jtoolkit2.se.DomainInfoCommand
- * @see DomainInfoLaunchCommandExtension
+ * @see CommandExtension
  * @see <a href="https://tools.ietf.org/html/draft-ietf-eppext-launchphase-07">Domain Name Launch
  * Extension Mapping for the Extensible Provisioning Protocol (EPP)</a>
  */
