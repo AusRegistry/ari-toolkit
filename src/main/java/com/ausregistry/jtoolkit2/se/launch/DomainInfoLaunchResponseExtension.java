@@ -60,10 +60,6 @@ public class DomainInfoLaunchResponseExtension extends ResponseExtension {
             applicationID = xmlDoc.getNodeValue(CHKDATA_APPLICATION_ID_EXPR);
         }
 
-        if (xmlDoc.getNodeCount(CHKDATA_APPLICATION_ID_EXISTS_EXPR) > 0) {
-            applicationID = xmlDoc.getNodeValue(CHKDATA_APPLICATION_ID_EXPR);
-        }
-
         if (xmlDoc.getNodeCount(CHKDATA_STATUS_EXISTS_EXPR) > 0) {
             status = xmlDoc.getNodeValue(CHKDATA_STATUS_EXPR);
             statusName = xmlDoc.getNodeValue(CHKDATA_STATUS_NAME_EXPR);

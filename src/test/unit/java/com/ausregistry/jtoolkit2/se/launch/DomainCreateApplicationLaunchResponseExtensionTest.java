@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import com.ausregistry.jtoolkit2.se.DomainCreateResponse;
-import com.ausregistry.jtoolkit2.se.app.DomainCreateApplicationLaunchResponseExtension;
+import com.ausregistry.jtoolkit2.se.launch.DomainCreateApplicationLaunchResponseExtension;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 import com.ausregistry.jtoolkit2.xml.XMLParser;
 import org.junit.Before;
@@ -27,7 +27,7 @@ public class DomainCreateApplicationLaunchResponseExtensionTest {
                     "    </resData>" +
                     "    <extension>" +
                     "<launch:creData xmlns:launch=\"urn:ietf:params:xml:ns:launch-1.0\">" +
-                    "                <launch:phase>claims</launch:phase>" +
+                    "                <launch:phase name=\"landrush\">claims</launch:phase>" +
                     "        <launch:applicationID>ACF7B10EBC3284E34B4A7C350DA27EA7B-ARI</launch:applicationID>" +
                     "      </launch:creData>" +
                     "    </extension>" +
@@ -60,10 +60,16 @@ public class DomainCreateApplicationLaunchResponseExtensionTest {
     }
 
     @Test
-    public void shouldGetPhase() {
+    public void shouldGetPhaseName() {
         assertTrue(responseExtension.isInitialised());
-        assertEquals(responseExtension.getPhase(), "claims");
-
+        assertEquals(responseExtension.getPhaseName(), "landrush");
     }
+
+    @Test
+    public void shouldGetPhaseType() {
+        assertTrue(responseExtension.isInitialised());
+        assertEquals(responseExtension.getPhaseType(), "claims");
+    }
+
 
 }

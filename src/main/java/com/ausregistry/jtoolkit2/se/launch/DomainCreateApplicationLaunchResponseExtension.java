@@ -1,5 +1,4 @@
-package com.ausregistry.jtoolkit2.se.app;
-
+package com.ausregistry.jtoolkit2.se.launch;
 
 import javax.xml.xpath.XPathExpressionException;
 
@@ -30,26 +29,24 @@ public class DomainCreateApplicationLaunchResponseExtension extends ResponseExte
     private static final String LAUNCH_PREFIX = ExtendedObjectType.LAUNCH.getName();
 
     private static final String LAUNCH_XPATH_PREFIX = ResponseExtension.EXTENSION_EXPR + "/" + LAUNCH_PREFIX
-            + ":RESPONSE_TYPE/" + LAUNCH_PREFIX;
+            + ":creData/" + LAUNCH_PREFIX;
     private static final String APP_ID_EXPR = LAUNCH_XPATH_PREFIX + ":applicationID/text()";
     private static final String PHASE_EXPR = LAUNCH_XPATH_PREFIX + ":phase/text()";
-    private static final String PHASE_NAME_EXPR = "/@name";
-    private static final String RESPONSE_TYPE = ResponseExtension.CREATE;
+    private static final String PHASE_NAME_EXPR = LAUNCH_XPATH_PREFIX + ":phase/@name";
 
     private boolean initialised = false;
 
     private String id;
-    private String phase;
-
+    private String phaseName;
+    private String phaseType;
 
 
     @Override
     public void fromXML(XMLDocument xmlDoc) throws XPathExpressionException {
-        id = xmlDoc.getNodeValue(replaceResponseType(
-                APP_ID_EXPR, RESPONSE_TYPE));
-        phase = xmlDoc.getNodeValue(replaceResponseType(
-                PHASE_EXPR + PHASE_NAME_EXPR, RESPONSE_TYPE));
-        initialised = (id != null && phase != null);
+        id = xmlDoc.getNodeValue(APP_ID_EXPR);
+        phaseName = xmlDoc.getNodeValue(PHASE_NAME_EXPR);
+        phaseType = xmlDoc.getNodeValue(PHASE_EXPR);
+        initialised = (id != null && phaseType != null);
     }
 
     @Override
@@ -61,7 +58,9 @@ public class DomainCreateApplicationLaunchResponseExtension extends ResponseExte
         return id;
     }
 
-    public String getPhase() {
-        return phase;
+    public String getPhaseName() {
+        return phaseName;
     }
+
+    public String getPhaseType() { return phaseType; }
 }
