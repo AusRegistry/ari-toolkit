@@ -6,7 +6,7 @@ import com.ausregistry.jtoolkit2.xml.XMLParser;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.util.Map;
+import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -25,25 +25,28 @@ public class DomainCheckFeeResponseExtensionTest {
         response.registerExtension(feeCheckExtension);
         response.fromXML(doc);
 
-        Map<String, FeeCheckData> fee = feeCheckExtension.getFeeDomains();
-        assertThat(fee.get(DOMAIN_NAME).getName(), is(DOMAIN_NAME));
-        assertThat(fee.get(DOMAIN_NAME).getCurrency(), is("USD"));
-        assertThat(fee.get(DOMAIN_NAME).getCommand().getName(), is("create"));
-        assertThat(fee.get(DOMAIN_NAME).getCommand().getPhase(), is("sunrise"));
-        assertThat(fee.get(DOMAIN_NAME).getPeriod().getPeriod(), is(1));
-        assertThat(fee.get(DOMAIN_NAME).getPeriod().getUnit().toString(), is("y"));
-        assertThat(fee.get(DOMAIN_NAME).getFees(), hasSize(2));
-        assertThat(fee.get(DOMAIN_NAME).getFees().get(0).getDescription(), is("Application Fee"));
-        assertThat(fee.get(DOMAIN_NAME).getFees().get(0).getFee(), is(new BigDecimal("5.00")));
-        assertThat(fee.get(DOMAIN_NAME).getFees().get(0).getRefundable(), is(false));
-        assertThat(fee.get(DOMAIN_NAME).getFees().get(1).getDescription(), is("Registration Fee"));
-        assertThat(fee.get(DOMAIN_NAME).getFees().get(1).getFee(), is(new BigDecimal("5.00")));
-        assertThat(fee.get(DOMAIN_NAME).getFees().get(1).getRefundable(), is(true));
-        assertThat(fee.get(DOMAIN_NAME).getFeeClass(), is("premium-tier1"));
+        List<FeeCheckData> feeDomains = feeCheckExtension.getFeeDomains();
+        assertThat(feeDomains, hasSize(1));
+
+        FeeCheckData fee = feeDomains.get(0);
+        assertThat(fee.getName(), is(DOMAIN_NAME));
+        assertThat(fee.getCurrency(), is("USD"));
+        assertThat(fee.getCommand().getName(), is("create"));
+        assertThat(fee.getCommand().getPhase(), is("sunrise"));
+        assertThat(fee.getPeriod().getPeriod(), is(1));
+        assertThat(fee.getPeriod().getUnit().toString(), is("y"));
+        assertThat(fee.getFees(), hasSize(2));
+        assertThat(fee.getFees().get(0).getDescription(), is("Application Fee"));
+        assertThat(fee.getFees().get(0).getFee(), is(new BigDecimal("5.00")));
+        assertThat(fee.getFees().get(0).getRefundable(), is(false));
+        assertThat(fee.getFees().get(1).getDescription(), is("Registration Fee"));
+        assertThat(fee.getFees().get(1).getFee(), is(new BigDecimal("5.00")));
+        assertThat(fee.getFees().get(1).getRefundable(), is(true));
+        assertThat(fee.getFeeClass(), is("premium-tier1"));
 
     }
 
-    private String getCreateResponseExpectedXml() {
+    private String generateExpectedXml(String fee) {
         return "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
                 "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\">" +
                 "<response>" +
@@ -64,8 +67,7 @@ public class DomainCheckFeeResponseExtensionTest {
                 "<currency>USD</currency>" +
                 "<command phase=\"sunrise\">create</command>" +
                 "<period unit=\"y\">1</period>" +
-                "<fee description=\"Application Fee\" refundable=\"0\">5.00</fee>" +
-                "<fee description=\"Registration Fee\" refundable=\"1\">5.00</fee>" +
+                fee +
                 "<class>premium-tier1</class>" +
                 "</cd>" +
                 "</chkData>" +
@@ -78,5 +80,29 @@ public class DomainCheckFeeResponseExtensionTest {
                 "</epp>";
     }
 
+    private String getCreateResponseExpectedXml() {
+        String fee = "<fee description=\"Application Fee\" refundable=\"0\">5.00</fee>" +
+                "<fee description=\"Registration Fee\" refundable=\"1\">5.00</fee>";
+        return generateExpectedXml(fee);
+    }
+
+    private String getCreateResponseExpectedXmlWithoutFee() {
+        return generateExpectedXml("");
+    }
+
+    @Test
+    public void shouldGetDomainCheckFeeExtensionWhenFeeIsNotAvailable() throws Exception {
+
+        final DomainCheckResponse response = new DomainCheckResponse();
+        final DomainCheckFeeResponseExtension feeCheckExtension =  new DomainCheckFeeResponseExtension();
+        final XMLDocument doc = PARSER.parse(getCreateResponseExpectedXmlWithoutFee());
+        response.registerExtension(feeCheckExtension);
+        response.fromXML(doc);
+
+        List<FeeCheckData> feeDomains = feeCheckExtension.getFeeDomains();
+        assertThat(feeDomains, hasSize(1));
+        FeeCheckData feeCheckData = feeDomains.get(0);
+        assertThat(feeCheckData.getFees(), hasSize(0));
+    }
 
 }

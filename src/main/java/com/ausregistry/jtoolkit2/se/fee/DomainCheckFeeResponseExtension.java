@@ -8,8 +8,7 @@ import org.w3c.dom.NodeList;
 
 import javax.xml.xpath.XPathExpressionException;
 import java.math.BigDecimal;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 import static com.ausregistry.jtoolkit2.se.ReceiveSE.replaceIndex;
 
@@ -48,7 +47,8 @@ public class DomainCheckFeeResponseExtension extends ResponseExtension {
     private static final String CHKDATA_FEE_NODES_EXPR =  "/" + FEE_CHECK_PREFIX + ":fee";
 
     private boolean initialised;
-    private Map<String, FeeCheckData> feeDomains = new LinkedHashMap<String, FeeCheckData>();
+
+    private List<FeeCheckData> feeDomains = new ArrayList<FeeCheckData>();
 
     @Override
     public void fromXML(XMLDocument xmlDoc) throws XPathExpressionException {
@@ -72,7 +72,7 @@ public class DomainCheckFeeResponseExtension extends ResponseExtension {
 
         parseFeeNodes(xmlDoc, feeCheckData, checkDataQueryPath + CHKDATA_FEE_NODES_EXPR);
 
-        feeDomains.put(domainName, feeCheckData);
+        feeDomains.add(feeCheckData);
     }
 
     private String parseTextValue(XMLDocument xmlDoc, String queryPath) throws XPathExpressionException {
@@ -99,9 +99,11 @@ public class DomainCheckFeeResponseExtension extends ResponseExtension {
     private void parseFeeNodes(XMLDocument xmlDoc, FeeCheckData feeCheckData, String feeNodesQueryPath)
             throws XPathExpressionException {
         NodeList feeNodes = xmlDoc.getElements(feeNodesQueryPath);
-        for (int feeNodeIndex = 0; feeNodeIndex < feeNodes.getLength(); feeNodeIndex++) {
-            Node feeNode = feeNodes.item(feeNodeIndex);
-            feeCheckData.addFee(parseFee(feeNode));
+        if (feeNodes != null) {
+            for (int feeNodeIndex = 0; feeNodeIndex < feeNodes.getLength(); feeNodeIndex++) {
+                Node feeNode = feeNodes.item(feeNodeIndex);
+                feeCheckData.addFee(parseFee(feeNode));
+            }
         }
     }
 
@@ -120,7 +122,7 @@ public class DomainCheckFeeResponseExtension extends ResponseExtension {
         return initialised;
     }
 
-    public Map<String, FeeCheckData> getFeeDomains() {
-        return feeDomains;
+    public List<FeeCheckData> getFeeDomains() {
+        return Collections.unmodifiableList(feeDomains);
     }
 }

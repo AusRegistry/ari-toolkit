@@ -5,9 +5,8 @@ import com.ausregistry.jtoolkit2.se.*;
 import com.ausregistry.jtoolkit2.xml.XMLWriter;
 import org.w3c.dom.Element;
 
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>Extension for the EPP Domain Check command, representing the Check Domain aspect of the
@@ -25,8 +24,7 @@ import java.util.Map;
  */
 public class DomainCheckFeeCommandExtension implements CommandExtension {
     private static final String FIELD_IDENTIFIER = "<<field>>";
-    private Map<String, FeeCheckData> feeCheckDomains = new LinkedHashMap<String, FeeCheckData>();
-
+    private List<FeeCheckData> feeCheckDataList = new ArrayList<FeeCheckData>();
 
     public DomainCheckFeeCommandExtension(List<FeeCheckData> feeCds) {
         for (FeeCheckData feeCheckDomain : feeCds) {
@@ -38,7 +36,7 @@ public class DomainCheckFeeCommandExtension implements CommandExtension {
                 throw new IllegalArgumentException(ErrorPkg.getMessage("se.ar.domain.chcek.fee",
                         FIELD_IDENTIFIER, "command"));
             }
-            feeCheckDomains.put(feeCheckDomain.getName(), feeCheckDomain);
+            feeCheckDataList.add(feeCheckDomain);
         }
     }
 
@@ -49,8 +47,7 @@ public class DomainCheckFeeCommandExtension implements CommandExtension {
         final Element extensionElement = command.getExtensionElement();
         final Element checkElement = xmlWriter.appendChild(extensionElement, "check", ExtendedObjectType.FEE.getURI());
 
-        for (Map.Entry<String, FeeCheckData> feeCheckDomain: feeCheckDomains.entrySet()) {
-            FeeCheckData feeCheckData = feeCheckDomain.getValue();
+        for (FeeCheckData feeCheckData : feeCheckDataList) {
             final Element domainElement = xmlWriter.appendChild(checkElement, "domain");
 
             xmlWriter.appendChild(domainElement, "name").setTextContent(feeCheckData.getName());
