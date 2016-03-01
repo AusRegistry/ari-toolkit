@@ -5,11 +5,9 @@ import com.ausregistry.jtoolkit2.se.ResponseExtension;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import javax.xml.xpath.XPathConstants;
+
 import javax.xml.xpath.XPathExpressionException;
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * <p>Extension for the EPP Domain Renew response, representing the Fee extension.</p>
@@ -49,7 +47,7 @@ public final class DomainRestoreFeeResponseExtension extends ResponseExtension {
         currency = xmlDoc.getNodeValue(replaceResponseType(CURRENCY_EXPR, responseType));
 
         NodeList feeNodes = xmlDoc.getElements(replaceResponseType(FEE_EXPR_NODES, responseType));
-        if ( feeNodes != null) {
+        if (feeNodes != null) {
             for (int feeNodeIndex = 0; feeNodeIndex < feeNodes.getLength(); feeNodeIndex++) {
                 Node feeNode = feeNodes.item(feeNodeIndex);
                 String feeNodeValue = feeNode.getTextContent();
