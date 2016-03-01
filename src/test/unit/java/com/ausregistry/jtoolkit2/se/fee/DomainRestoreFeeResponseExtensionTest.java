@@ -1,16 +1,10 @@
 package com.ausregistry.jtoolkit2.se.fee;
 
-import com.ausregistry.jtoolkit2.EPPDateFormatter;
-import com.ausregistry.jtoolkit2.Timer;
-import com.ausregistry.jtoolkit2.se.*;
+import com.ausregistry.jtoolkit2.se.ResponseExtension;
 import com.ausregistry.jtoolkit2.se.rgp.DomainRestoreResponse;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 import com.ausregistry.jtoolkit2.xml.XMLParser;
-import org.junit.Before;
 import org.junit.Test;
-import org.xml.sax.SAXException;
-
-import java.math.BigDecimal;
 
 import static org.junit.Assert.*;
 
@@ -104,7 +98,7 @@ public class DomainRestoreFeeResponseExtensionTest {
             result.append("<extension>");
             result.append("<fee:renData xmlns:fee=\"urn:ietf:params:xml:ns:fee-0.6\">");
             result.append("<fee:currency>USD</fee:currency>");
-            if(withRenew) {
+            if (withRenew) {
                 result.append("<fee:fee description=\"Renew Fee\">10.00</fee:fee>");
             }
             if (withRestore) {
