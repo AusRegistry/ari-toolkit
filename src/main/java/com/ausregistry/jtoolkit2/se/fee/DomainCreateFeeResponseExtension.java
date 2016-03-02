@@ -46,8 +46,10 @@ public final class DomainCreateFeeResponseExtension extends ResponseExtension {
     public void fromXML(XMLDocument xmlDoc) throws XPathExpressionException {
         currency = xmlDoc.getNodeValue(replaceResponseType(
                 CURRENCY_EXPR, responseType));
-        fee = new BigDecimal(xmlDoc.getNodeValue(replaceResponseType(
-                FEE_EXPR, responseType)));
+        String feeNodeValue = xmlDoc.getNodeValue(replaceResponseType(FEE_EXPR, responseType));
+        if (feeNodeValue != null) {
+            fee = new BigDecimal(feeNodeValue);
+        }
 
         initialised = (currency != null && fee != null);
     }
