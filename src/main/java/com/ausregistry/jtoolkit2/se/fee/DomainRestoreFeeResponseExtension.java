@@ -56,7 +56,7 @@ public final class DomainRestoreFeeResponseExtension extends ResponseExtension {
                 if (feetype.equalsIgnoreCase("Restore Fee")) {
                     restoreFee = new BigDecimal(feeNodeValue);
                 }
-                if (feetype.equalsIgnoreCase("Renew Fee")) {
+                if (feetype.equalsIgnoreCase("Renewal Fee")) {
                     renewFee = new BigDecimal(feeNodeValue);
                 }
             }

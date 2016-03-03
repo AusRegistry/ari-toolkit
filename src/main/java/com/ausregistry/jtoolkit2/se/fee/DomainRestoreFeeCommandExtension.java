@@ -51,7 +51,7 @@ public class DomainRestoreFeeCommandExtension implements CommandExtension {
         if (renewFee != null) {
             final Element renewElement = xmlWriter.appendChild(createElement, "fee");
             renewFee = renewFee.setScale(2);
-            renewElement.setAttribute("description", "Renew Fee");
+            renewElement.setAttribute("description", "Renewal Fee");
             renewElement.setTextContent(renewFee.toPlainString());
         }
 
