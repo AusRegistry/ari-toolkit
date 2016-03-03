@@ -132,7 +132,7 @@ public class DomainRestoreFeeCommandExtensionTest {
                 result.append("<fee description=\"Restore Fee\">60.00</fee>");
             }
             if (withRenew) {
-                result.append("<fee description=\"Renew Fee\">10.00</fee>");
+                result.append("<fee description=\"Renewal Fee\">10.00</fee>");
             }
             result.append("</renew>");
         }

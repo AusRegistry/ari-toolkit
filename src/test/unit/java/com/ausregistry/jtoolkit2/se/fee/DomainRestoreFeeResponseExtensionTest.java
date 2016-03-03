@@ -99,7 +99,7 @@ public class DomainRestoreFeeResponseExtensionTest {
             result.append("<fee:renData xmlns:fee=\"urn:ietf:params:xml:ns:fee-0.6\">");
             result.append("<fee:currency>USD</fee:currency>");
             if (withRenew) {
-                result.append("<fee:fee description=\"Renew Fee\">10.00</fee:fee>");
+                result.append("<fee:fee description=\"Renewal Fee\">10.00</fee:fee>");
             }
             if (withRestore) {
                 result.append("<fee:fee description=\"Restore Fee\">60.00</fee:fee>");
