@@ -23,6 +23,7 @@ public class DomainCheckLaunchCommandExtension implements CommandExtension {
 
     private String phaseName;
     private PhaseType phaseType;
+    private String nameAttr;
 
     @Override
     public void addToCommand(Command command) {
@@ -31,7 +32,7 @@ public class DomainCheckLaunchCommandExtension implements CommandExtension {
         final Element createElement = xmlWriter.appendChild(extensionElement, "check",
                 ExtendedObjectType.LAUNCH.getURI());
         final Element phaseElement = xmlWriter.appendChild(createElement, "phase");
-        createElement.setAttribute("type", "claims");
+        createElement.setAttribute("type", nameAttr);
         if (phaseName != null) {
             phaseElement.setAttribute("name", phaseName);
         }
@@ -45,6 +46,10 @@ public class DomainCheckLaunchCommandExtension implements CommandExtension {
 
     public void setPhaseType(PhaseType phaseType) {
         this.phaseType = phaseType;
+    }
+
+    public void setNameAttr(String nameAttr) {
+        this.nameAttr = nameAttr;
     }
 
 }
