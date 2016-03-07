@@ -30,7 +30,7 @@ public class DomainCheckLaunchCommandExtensionTest {
         final DomainCheckLaunchCommandExtension ext = new DomainCheckLaunchCommandExtension();
         ext.setPhaseName("sunrise-fcfs");
         ext.setPhaseType(PhaseType.SUNRISE);
-        ext.setNameAttr("claims");
+        ext.setCheckType("claims");
         cmd.appendExtension(ext);
         assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
                 + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\""
@@ -60,7 +60,7 @@ public class DomainCheckLaunchCommandExtensionTest {
         final DomainCheckLaunchCommandExtension ext = new DomainCheckLaunchCommandExtension();
         ext.setPhaseName("sunrise-for-hometown");
         ext.setPhaseType(PhaseType.SUNRISE);
-        ext.setNameAttr("avail");
+        ext.setCheckType("avail");
         cmd.appendExtension(ext);
         assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
                 + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\""
