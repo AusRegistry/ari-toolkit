@@ -114,7 +114,6 @@
     <suppress checks="LineLengthCheck" files="HostCreateResponseTest\.java" />
     <suppress checks="LineLengthCheck" files="HostDeleteCommandTest\.java" />
     <suppress checks="LineLengthCheck" files="HostUpdateCommandTest\.java" />
-    <suppress checks="LineLengthCheck" files="LoginCommandTest\.java" />
     <suppress checks="LineLengthCheck" files="LogoutCommandTest\.java" />
     <suppress checks="LineLengthCheck" files="PollAckCommandTest\.java" />
     <suppress checks="LineLengthCheck" files="PollRequestCommandTest\.java" />

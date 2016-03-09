@@ -77,7 +77,7 @@ public final class LoginCommand extends Command {
             xmlWriter.appendChild(svcs, "objURI").setTextContent(objURI);
         }
 
-        if (extURIs == null) {
+        if (extURIs == null || extURIs.length == 0) {
             return;
         }
 
