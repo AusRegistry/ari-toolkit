@@ -6,7 +6,9 @@ import com.ausregistry.jtoolkit2.se.Command;
 import com.ausregistry.jtoolkit2.se.DomainCreateCommand;
 import com.ausregistry.jtoolkit2.xml.XMLParser;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.xml.sax.SAXException;
 
 import java.math.BigDecimal;
@@ -19,6 +21,9 @@ public class DomainCreateFeeCommandExtensionTest {
 
     private static final XMLParser PARSER = new XMLParser();
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     @Before
     public void setUp() throws Exception {
         Timer.setTime("20070101.010101");
@@ -30,7 +35,8 @@ public class DomainCreateFeeCommandExtensionTest {
 
         final Command cmd = new DomainCreateCommand("jtkutest.com.au", "jtkUT3st");
         final DomainCreateFeeCommandExtension ext =
-                new DomainCreateFeeCommandExtension(BigDecimal.valueOf(10.00), "USD");
+                new DomainCreateFeeCommandExtension(BigDecimal.valueOf(10.00), BigDecimal.valueOf(15.00),
+                        BigDecimal.valueOf(30.00), "USD");
 
         try {
             cmd.appendExtension(ext);
@@ -43,7 +49,9 @@ public class DomainCreateFeeCommandExtensionTest {
                     + "<name>jtkutest.com.au</name><authInfo><pw>jtkUT3st</pw></authInfo></create></create>"
                     + "<extension><create xmlns=\"urn:ietf:params:xml:ns:fee-0.6\">"
                     + "<currency>USD</currency>"
-                    + "<fee>10.00</fee>"
+                    + "<fee description=\"Application Fee\">10.00</fee>"
+                    + "<fee description=\"Allocation Fee\">15.00</fee>"
+                    + "<fee description=\"Registration Fee\">30.00</fee>"
                     + "</create>"
                     + "</extension><clTRID>JTKUTEST.20070101.010101.0</clTRID></command></epp>";
 
@@ -54,5 +62,34 @@ public class DomainCreateFeeCommandExtensionTest {
         }
 
     }
-}
 
+    @Test
+    public void shouldFailWhenApplicationFeeIsMissing() throws SAXException {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Field 'applicationFee' is required.");
+        final DomainCreateFeeCommandExtension ext =
+                new DomainCreateFeeCommandExtension(null, BigDecimal.valueOf(15.00),
+                        BigDecimal.valueOf(30.00), "USD");
+
+    }
+
+    @Test
+    public void shouldFailWhenAllocationFeeIsMissing() throws SAXException {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Field 'allocationFee' is required.");
+        final DomainCreateFeeCommandExtension ext =
+                new DomainCreateFeeCommandExtension(BigDecimal.valueOf(10.00), null,
+                        BigDecimal.valueOf(30.00), "USD");
+
+    }
+
+    @Test
+    public void shouldFailWhenRegistrationFeeIsMissing() throws SAXException {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Field 'registrationFee' is required.");
+        final DomainCreateFeeCommandExtension ext =
+                new DomainCreateFeeCommandExtension(BigDecimal.valueOf(10.00), BigDecimal.valueOf(15.00),
+                        null, "USD");
+
+    }
+}
