@@ -29,7 +29,9 @@ public class DomainCreateFeeResponseExtensionTest {
         assertTrue("Fee extension should have been initialised",
                 feeResponseExtension.isInitialised());
         assertEquals("USD", feeResponseExtension.getCurrency());
-        assertEquals("10.00", feeResponseExtension.getFee().toPlainString());
+        assertEquals("10.00", feeResponseExtension.getApplicationFee().toPlainString());
+        assertEquals("15.00", feeResponseExtension.getAllocationFee().toPlainString());
+        assertEquals("30.00", feeResponseExtension.getRegistrationFee().toPlainString());
 
     }
 
@@ -67,10 +69,12 @@ public class DomainCreateFeeResponseExtensionTest {
 
         if (feeExtension) {
             result.append("<extension>");
-                result.append("<fee:creData xmlns:fee=\"urn:ietf:params:xml:ns:fee-0.6\">");
-                result.append("<fee:currency>" + "USD" + "</fee:currency>");
-                result.append("<fee:fee>" + "10.00" + "</fee:fee>");
-                result.append("</fee:creData>");
+            result.append("<fee:creData xmlns:fee=\"urn:ietf:params:xml:ns:fee-0.6\">");
+            result.append("<fee:currency>" + "USD" + "</fee:currency>");
+            result.append("<fee:fee description=\"Application Fee\">" + "10.00" + "</fee:fee>");
+            result.append("<fee:fee description=\"Allocation Fee\">" + "15.00" + "</fee:fee>");
+            result.append("<fee:fee description=\"Registration Fee\">" + "30.00" + "</fee:fee>");
+            result.append("</fee:creData>");
             result.append("</extension>");
         }
 
