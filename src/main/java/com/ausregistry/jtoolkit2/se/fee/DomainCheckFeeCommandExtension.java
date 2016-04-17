@@ -19,8 +19,8 @@ import org.w3c.dom.Element;
  * supplied, should match the fees that are set for the domain name for the requested period.
  * The response expected from a server should be handled by a Domain Check Response.</p>
  *
- * @see DomainCheckCommand
- * @see DomainCheckResponse
+ * @see com.ausregistry.jtoolkit2.se.DomainCheckCommand
+ * @see com.ausregistry.jtoolkit2.se.DomainCheckResponse
  * @see <a href="https://tools.ietf.org/html/draft-brown-epp-fees-03">Domain Name Fee Extension
  * Mapping for the Extensible Provisioning Protocol (EPP)</a>
  */
