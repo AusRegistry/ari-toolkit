@@ -1,12 +1,16 @@
 package com.ausregistry.jtoolkit2.se.fee;
 
-import com.ausregistry.jtoolkit2.ErrorPkg;
-import com.ausregistry.jtoolkit2.se.*;
-import com.ausregistry.jtoolkit2.xml.XMLWriter;
-import org.w3c.dom.Element;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.ausregistry.jtoolkit2.ErrorPkg;
+import com.ausregistry.jtoolkit2.se.Command;
+import com.ausregistry.jtoolkit2.se.CommandExtension;
+import com.ausregistry.jtoolkit2.se.DomainCheckCommand;
+import com.ausregistry.jtoolkit2.se.DomainCheckResponse;
+import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
+import com.ausregistry.jtoolkit2.xml.XMLWriter;
+import org.w3c.dom.Element;
 
 /**
  * <p>Extension for the EPP Domain Check command, representing the Check Domain aspect of the
@@ -29,11 +33,11 @@ public class DomainCheckFeeCommandExtension implements CommandExtension {
     public DomainCheckFeeCommandExtension(List<FeeCheckData> feeCds) {
         for (FeeCheckData feeCheckDomain : feeCds) {
             if (feeCheckDomain.getName() == null) {
-                throw new IllegalArgumentException(ErrorPkg.getMessage("se.ar.domain.chcek.fee", FIELD_IDENTIFIER,
+                throw new IllegalArgumentException(ErrorPkg.getMessage("se.ar.domain.check.fee", FIELD_IDENTIFIER,
                         "name"));
             }
             if (feeCheckDomain.getCommand() == null || feeCheckDomain.getCommand().getName() == null) {
-                throw new IllegalArgumentException(ErrorPkg.getMessage("se.ar.domain.chcek.fee",
+                throw new IllegalArgumentException(ErrorPkg.getMessage("se.ar.domain.check.fee",
                         FIELD_IDENTIFIER, "command"));
             }
             feeCheckDataList.add(feeCheckDomain);
