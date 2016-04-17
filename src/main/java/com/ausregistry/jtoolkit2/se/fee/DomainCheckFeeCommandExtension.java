@@ -6,8 +6,6 @@ import java.util.List;
 import com.ausregistry.jtoolkit2.ErrorPkg;
 import com.ausregistry.jtoolkit2.se.Command;
 import com.ausregistry.jtoolkit2.se.CommandExtension;
-import com.ausregistry.jtoolkit2.se.DomainCheckCommand;
-import com.ausregistry.jtoolkit2.se.DomainCheckResponse;
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.xml.XMLWriter;
 import org.w3c.dom.Element;
