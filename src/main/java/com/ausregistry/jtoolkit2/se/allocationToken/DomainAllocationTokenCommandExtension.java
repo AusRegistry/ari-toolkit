@@ -6,7 +6,6 @@ import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.xml.XMLWriter;
 import org.w3c.dom.Element;
 
-import java.math.BigDecimal;
 
 /**
  * <p>Extension for the EPP Domain Create command, representing the Create  Domain aspect of the
