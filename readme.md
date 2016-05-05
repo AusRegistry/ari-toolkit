@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/AusRegistry/ari-toolkit.png)](https://travis-ci.org/AusRegistry/ari-toolkit)
 ## Downloads
 
-The latest ari-toolkit is available for download. [ari-toolkit v3.6.28](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.6.28/arjtk-3.6.28.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.6.28/arjtk-3.6.28-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.6.28/arjtk-3.6.28-javadoc.jar))
+The latest ari-toolkit is available for download. [ari-toolkit v3.6.29](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.6.29/arjtk-3.6.29.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.6.29/arjtk-3.6.29-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.6.29/arjtk-3.6.29-javadoc.jar))
 
 For more information, please read [Installation and Setup](#installation-and-setup).
 
@@ -43,7 +43,7 @@ This toolkit also provides a mechanism to perform the following Trademark Cleari
 
 #### Direct download
 
-    Obtain the latest toolkit here: [Toolkit v3.6.28](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.6.28/arjtk-3.6.28.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.6.28/arjtk-3.6.28-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.6.28/arjtk-3.6.28-javadoc.jar))
+    Obtain the latest toolkit here: [Toolkit v3.6.29](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.6.29/arjtk-3.6.29.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.6.29/arjtk-3.6.29-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.6.29/arjtk-3.6.29-javadoc.jar))
 
 #### Dependency Management
 
@@ -52,7 +52,7 @@ Use your build's dependency management tool to automatically download the toolki
 * Repository: `http://ausregistry.github.com/repo/`
 * groupId: `au.com.ausregistry`
 * artifactId: `arjtk`
-* version: `3.6.28`
+* version: `3.6.29`
 
 For example (using Maven):
 
@@ -67,7 +67,7 @@ For example (using Maven):
        <dependency>
           <groupId>au.com.ausregistry</groupId>
           <artifactId>arjtk</artifactId>
-          <version>3.6.28</version>
+          <version>3.6.29</version>
        </dependency>
     </dependencies>
 
