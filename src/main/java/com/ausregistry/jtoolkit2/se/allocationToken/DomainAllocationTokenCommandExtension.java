@@ -26,7 +26,7 @@ public class DomainAllocationTokenCommandExtension implements CommandExtension {
 
     private static final long serialVersionUID = 5982521830455586062L;
 
-    private String allocationToken;
+    private final String allocationToken;
 
     public DomainAllocationTokenCommandExtension(String allocationToken) {
         this.allocationToken = allocationToken;

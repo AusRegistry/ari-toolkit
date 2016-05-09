@@ -27,7 +27,7 @@ public class DomainAllocationTokenCommandExtensionTest {
     }
 
     @Test
-    public void shouldCreateValidXmlWhenSupplyFeeExtension() throws SAXException {
+    public void shouldCreateValidXmlWhenSupplyFeeExtension() {
 
         final Command cmd = new DomainCreateCommand("jtkutest.com.au", "jtkUT3st");
         final DomainAllocationTokenCommandExtension ext =
