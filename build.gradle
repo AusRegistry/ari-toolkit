@@ -205,7 +205,7 @@ apply plugin: 'checkstyle'
 checkstyle {
     configFile = file(checkstyleConfDirPath + 'checkstyle.xml')
     configProperties = [checkstyleConfigDir: checkstyleConfDirPath]
-    toolVersion = "6.6"
+    toolVersion = "6.19"
 }
 
 tasks.withType(Checkstyle) {
