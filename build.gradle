@@ -76,7 +76,9 @@ dependencies {
     integrationTestCompile sourceSets.main.output
     integrationTestCompile configurations.testCompile
 
-    testCompile "ari-mock-http-server:ari-mock-http-server:$ariMockHttpServerVersion"
+    componentTestCompile sourceSets.main.output
+    componentTestCompile configurations.testCompile
+    componentTestCompile "ari-mock-http-server:ari-mock-http-server:$ariMockHttpServerVersion"
 }
 
 tasks.withType(JavaCompile) {
