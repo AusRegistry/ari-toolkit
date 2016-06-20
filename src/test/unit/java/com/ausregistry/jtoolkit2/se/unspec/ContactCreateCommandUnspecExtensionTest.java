@@ -4,12 +4,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import com.ausregistry.jtoolkit2.EPPDateFormatter;
 import com.ausregistry.jtoolkit2.Timer;
 import com.ausregistry.jtoolkit2.se.CLTRID;
 import com.ausregistry.jtoolkit2.se.Command;
 import com.ausregistry.jtoolkit2.se.ContactCreateCommand;
-import com.ausregistry.jtoolkit2.se.DomainRenewCommand;
 import com.ausregistry.jtoolkit2.se.IntPostalInfo;
 
 import static org.junit.Assert.assertEquals;
