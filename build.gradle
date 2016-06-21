@@ -23,7 +23,7 @@ ext {
     checkstyleConfDirPath = "$projectDir/checkstyle/"
 
     commonsCodecVersion          = '1.10'
-    simpleFrameworkVersion       = '5.1.6'
+    simpleFrameworkVersion       = '4.1.21'
     httpClientVersion            = '4.5.1'
     powerMockVersion             = '1.6.3'
     hamcrestVersion              = '1.3'
@@ -200,7 +200,8 @@ uploadArchives << {
 
 uploadArchives.dependsOn checkVersionNumbersInReadme, javadoc
 
-test.dependsOn integrationTest
+integrationTest.shouldRunAfter test
+componentTest.shouldRunAfter integrationTest
 
 apply plugin: 'checkstyle'
 
@@ -216,3 +217,7 @@ tasks.withType(Checkstyle) {
     classpath += configurations.testCompile
     classpath += configurations.integrationTestCompile
 }
+
+check.dependsOn test
+check.dependsOn integrationTest
+check.dependsOn componentTest
