@@ -18,20 +18,33 @@ import com.ausregistry.jtoolkit2.xml.XMLWriter;
  */
 public class ContactCreateCommandUnspecExtension implements CommandExtension {
 
-    private final boolean extContact;
+    private Boolean extContact;
+    private String nexusCategory;
 
-    public ContactCreateCommandUnspecExtension(boolean extContact) {
-        this.extContact = extContact;
+    public ContactCreateCommandUnspecExtension(Boolean extContact, String nexusCategory) {
+        if (extContact != null) {
+            this.extContact = extContact.booleanValue();
+        }
+        this.nexusCategory = nexusCategory;
     }
 
     @Override
     public void addToCommand(Command command) {
-            final XMLWriter xmlWriter = command.getXmlWriter();
-            final Element extensionElement = command.getExtensionElement();
-            final Element unspecElement = xmlWriter.appendChild(extensionElement, "extension",
-                    ExtendedObjectType.UNSPEC.getURI());
+        final XMLWriter xmlWriter = command.getXmlWriter();
+        final Element extensionElement = command.getExtensionElement();
+        final Element unspecElement = xmlWriter.appendChild(extensionElement, "extension",
+                ExtendedObjectType.UNSPEC.getURI());
 
-            xmlWriter.appendChild(unspecElement, "unspec",
-                    ExtendedObjectType.UNSPEC.getURI()).setTextContent(" extContact=" + (extContact ? "Y" : "N"));
+        StringBuilder unspecText =  new StringBuilder();
+        if (extContact != null) {
+            unspecText.append(" extContact=" + (extContact.booleanValue() ? "Y" : "N"));
+        }
+        if (nexusCategory != null) {
+            unspecText.append(" nexusCategory=" + nexusCategory);
+        }
+
+        xmlWriter.appendChild(unspecElement, "unspec",
+                ExtendedObjectType.UNSPEC.getURI()).setTextContent(unspecText.toString());
+
     }
 }
