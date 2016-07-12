@@ -4,7 +4,6 @@ import com.ausregistry.jtoolkit2.Timer;
 import com.ausregistry.jtoolkit2.se.CLTRID;
 import com.ausregistry.jtoolkit2.se.Command;
 import com.ausregistry.jtoolkit2.se.DomainCreateCommand;
-import com.ausregistry.jtoolkit2.se.allocationToken.DomainAllocationTokenCommandExtension;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
