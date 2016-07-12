@@ -23,11 +23,8 @@ public class ContactCreateCommandUnspecExtensionTest {
 
     @Test
     public void shouldGenerateValidXmlWithExtContactYInUnspec() {
-        String extContact = "Y";
-
         Command cmd = new ContactCreateCommand("JTKUTEST", "jtkUt3st",
                 new IntPostalInfo("JTK Unit Test", "Melbourne", "au"), "jtktest@ausregistry.com.au");
-
         ContactCreateCommandUnspecExtension ext = new ContactCreateCommandUnspecExtension(Boolean.TRUE, null);
         try {
             cmd.appendExtension(ext);
@@ -52,11 +49,8 @@ public class ContactCreateCommandUnspecExtensionTest {
 
     @Test
     public void shouldGenerateValidXmlWithoutExtContactNInUnspec() {
-        String extContact = "Y";
-
         Command cmd = new ContactCreateCommand("JTKUTEST", "jtkUt3st",
                 new IntPostalInfo("JTK Unit Test", "Melbourne", "au"), "jtktest@ausregistry.com.au");
-
         ContactCreateCommandUnspecExtension ext = new ContactCreateCommandUnspecExtension(Boolean.FALSE, null);
         try {
             cmd.appendExtension(ext);
@@ -81,11 +75,8 @@ public class ContactCreateCommandUnspecExtensionTest {
 
     @Test
     public void shouldGenerateValidXmlWithNexusCategoryInUnspec() {
-        String extContact = "Y";
-
         Command cmd = new ContactCreateCommand("JTKUTEST", "jtkUt3st",
                 new IntPostalInfo("JTK Unit Test", "Melbourne", "au"), "jtktest@ausregistry.com.au");
-
         ContactCreateCommandUnspecExtension ext = new ContactCreateCommandUnspecExtension(null, "ORG");
         try {
             cmd.appendExtension(ext);
@@ -111,11 +102,8 @@ public class ContactCreateCommandUnspecExtensionTest {
 
     @Test
     public void shouldGenerateValidXmlWithoutNexusCategoryInUnspec() {
-        String extContact = "Y";
-
         Command cmd = new ContactCreateCommand("JTKUTEST", "jtkUt3st",
                 new IntPostalInfo("JTK Unit Test", "Melbourne", "au"), "jtktest@ausregistry.com.au");
-
         ContactCreateCommandUnspecExtension ext = new ContactCreateCommandUnspecExtension(null, null);
         try {
             cmd.appendExtension(ext);
@@ -141,11 +129,8 @@ public class ContactCreateCommandUnspecExtensionTest {
 
     @Test
     public void shouldGenerateValidXmlWithExtContactAndNexusCategoryInUnspec() {
-        String extContact = "Y";
-
         Command cmd = new ContactCreateCommand("JTKUTEST", "jtkUt3st",
                 new IntPostalInfo("JTK Unit Test", "Melbourne", "au"), "jtktest@ausregistry.com.au");
-
         ContactCreateCommandUnspecExtension ext = new ContactCreateCommandUnspecExtension(Boolean.TRUE, "ORG");
         try {
             cmd.appendExtension(ext);
