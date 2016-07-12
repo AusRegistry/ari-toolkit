@@ -18,8 +18,6 @@ import org.w3c.dom.Element;
  *
  * @see com.ausregistry.jtoolkit2.se.DomainCreateCommand
  * @see com.ausregistry.jtoolkit2.se.DomainCreateResponse
- * Extension
- * Mapping for the Extensible Provisioning Protocol (EPP)</a>
  */
 public class DomainCreateCommandUnspecExtension implements CommandExtension {
 
