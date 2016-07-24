@@ -12,8 +12,6 @@ plugins {
 apply plugin: 'java'
 apply plugin: 'maven'
 
-sourceCompatibility = '6'
-
 ext {
     junitVersion = '4.11'
     artifactsDir = "$projectDir/artifacts"
@@ -82,6 +80,9 @@ dependencies {
 }
 
 tasks.withType(JavaCompile) {
+    sourceCompatibility = '1.6'
+    targetCompatibility = '1.6'
+
     options.encoding = "UTF-8"
     options.compilerArgs << "-Xlint:-options"
 }
