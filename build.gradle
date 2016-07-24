@@ -213,6 +213,15 @@ checkstyle {
 }
 
 tasks.withType(Checkstyle) {
+    doFirst {
+        // check the JDK version (in Travis) to skip Checkstyle execution if necessary
+        def currentJvm = org.gradle.internal.jvm.Jvm.current()
+        if (!currentJvm.javaVersion.java7Compatible) {
+            println "Skip executing task as the runtime JDK ${currentJvm.javaVersion} is not able to run CheckStyle"
+            throw new StopExecutionException()
+        }
+    }
+
     classpath = project.sourceSets.main.output
     classpath += configurations.compile
     classpath += configurations.testCompile
