@@ -121,6 +121,15 @@ task componentTest(type: Test) {
     reports.junitXml.destination = "build/test-results/component"
     classpath += sourceSets.componentTest.runtimeClasspath
     classpath += sourceSets.componentTest.runtimeClasspath
+
+    doFirst {
+        // check the JDK version (in Travis) to skip componentTest execution if necessary
+        def currentJvm = org.gradle.internal.jvm.Jvm.current()
+        if (!currentJvm.javaVersion.java7Compatible) {
+            println "Skip executing task as the runtime JDK ${currentJvm.javaVersion} is not able to run MockHttpServer"
+            throw new StopExecutionException()
+        }
+    }
 }
 
 //Run this task to download the gradle wrapper corresponding to the gradleWrapperVersion number
