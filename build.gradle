@@ -117,19 +117,14 @@ task integrationTest(type: Test) {
 }
 
 task componentTest(type: Test) {
+    onlyIf { // on Travis if runtime is JDK6 it would complain about major.minor version of MockHttpServer
+        isJava7Compatible()
+    }
+
     testClassesDir = sourceSets.componentTest.output.classesDir
     reports.junitXml.destination = "build/test-results/component"
     classpath += sourceSets.componentTest.runtimeClasspath
     classpath += sourceSets.componentTest.runtimeClasspath
-
-    doFirst {
-        // check the JDK version (in Travis) to skip componentTest execution if necessary
-        def currentJvm = org.gradle.internal.jvm.Jvm.current()
-        if (!currentJvm.javaVersion.java7Compatible) {
-            println "Skip executing task as the runtime JDK ${currentJvm.javaVersion} is not able to run MockHttpServer"
-            throw new StopExecutionException()
-        }
-    }
 }
 
 //Run this task to download the gradle wrapper corresponding to the gradleWrapperVersion number
@@ -222,13 +217,8 @@ checkstyle {
 }
 
 tasks.withType(Checkstyle) {
-    doFirst {
-        // check the JDK version (in Travis) to skip Checkstyle execution if necessary
-        def currentJvm = org.gradle.internal.jvm.Jvm.current()
-        if (!currentJvm.javaVersion.java7Compatible) {
-            println "Skip executing task as the runtime JDK ${currentJvm.javaVersion} is not able to run CheckStyle"
-            throw new StopExecutionException()
-        }
+    onlyIf { // on Travis if runtime is JDK6 it would complain about major.minor version of Checkstyle tool
+        isJava7Compatible()
     }
 
     classpath = project.sourceSets.main.output
@@ -240,3 +230,7 @@ tasks.withType(Checkstyle) {
 check.dependsOn test
 check.dependsOn integrationTest
 check.dependsOn componentTest
+
+boolean isJava7Compatible() {
+    org.gradle.internal.jvm.Jvm.current().javaVersion.java7Compatible
+}
