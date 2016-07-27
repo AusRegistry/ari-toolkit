@@ -232,5 +232,5 @@ check.dependsOn integrationTest
 check.dependsOn componentTest
 
 boolean isJava7Compatible() {
-    org.gradle.internal.jvm.Jvm.current().javaVersion.java7Compatible
+    JavaVersion.current().java7Compatible
 }
