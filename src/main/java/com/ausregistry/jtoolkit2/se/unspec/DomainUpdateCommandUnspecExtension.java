@@ -12,8 +12,8 @@ import org.w3c.dom.Element;
  * Domain Name Unspec Extension.</p>
  *
  * <p>Use this to identify the unspec associated with this domain name as part of an EPP Domain Update
- * command compliant with RFC5730 and RFC5731. The "extContact" value
- * will be supplied.
+ * command compliant with RFC5730 and RFC5731. The "extContact" value or combination of WhoisType and Publish
+ * can be supplied depending on the usage.
  * The response expected from a server should be handled by a Domain Update Response.</p>
  *
  * @see com.ausregistry.jtoolkit2.se.DomainUpdateCommand
@@ -22,11 +22,19 @@ import org.w3c.dom.Element;
 public class DomainUpdateCommandUnspecExtension implements CommandExtension {
 
     private static final long serialVersionUID = 5982521830455586062L;
+    private static final String FIELD_IDENTIFIER = "<<field>>";
 
-    private final String extContactId;
+    private String extContactId;
+    private WhoisType whoisType;
+    private Boolean publish;
 
     public DomainUpdateCommandUnspecExtension(String extContactId) {
         this.extContactId = extContactId;
+    }
+
+    public DomainUpdateCommandUnspecExtension(WhoisType whoisType, Boolean publish) {
+        this.whoisType = whoisType;
+        this.publish = publish;
     }
 
     @Override
@@ -37,9 +45,19 @@ public class DomainUpdateCommandUnspecExtension implements CommandExtension {
         final Element unspecElement = xmlWriter.appendChild(extensionElement, "extension",
                 ExtendedObjectType.UNSPEC.getURI());
 
+        StringBuilder unspecValue = new StringBuilder();
+        if (extContactId != null) {
+            unspecValue.append("extContact=" + extContactId);
+        } else {
+            if (whoisType != null) {
+                unspecValue.append("WhoisType=" + whoisType.name());
+            }
+            if (publish != null) {
+                unspecValue.append(" Publish=" + (publish ? "Y" : "N"));
+            }
+        }
+
         xmlWriter.appendChild(unspecElement, "unspec", ExtendedObjectType.UNSPEC.getURI())
-                .setTextContent("extContact=" + extContactId);
-
+                .setTextContent(unspecValue.toString().trim());
     }
-
 }

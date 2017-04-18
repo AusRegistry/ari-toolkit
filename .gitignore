@@ -5,3 +5,4 @@ artifacts
 build
 target
 out
+classes/*
