@@ -29,8 +29,8 @@ public class DomainUpdateCommandUnspecExtensionTest {
     public void shouldCreateValidXmlWhenSupplyUnspecExtension() {
 
         final Command cmd = new DomainUpdateCommand("jtkutest.com.au");
-        final DomainUpdateCommandUnspecExtension ext =
-                new DomainUpdateCommandUnspecExtension("abc123");
+        final DomainUpdateCommandUnspecExtension ext = new DomainUpdateCommandUnspecExtension();
+        ext.setExtContactId("abc123");
 
         try {
             cmd.appendExtension(ext);
@@ -45,8 +45,7 @@ public class DomainUpdateCommandUnspecExtensionTest {
     public void shouldCreateValidXmlWhenExtContactDoesNotProvided() {
 
         final Command cmd = new DomainUpdateCommand("jtkutest.com.au");
-        final DomainUpdateCommandUnspecExtension ext =
-                new DomainUpdateCommandUnspecExtension(null);
+        final DomainUpdateCommandUnspecExtension ext = new DomainUpdateCommandUnspecExtension();
 
         try {
             cmd.appendExtension(ext);
@@ -60,8 +59,8 @@ public class DomainUpdateCommandUnspecExtensionTest {
     @Test
     public void shouldCreateValidXmlWhenEmptyUnspecValueProvidedWithExtContact() {
         final Command cmd = new DomainUpdateCommand("jtkutest.com.au");
-        final DomainUpdateCommandUnspecExtension ext =
-                new DomainUpdateCommandUnspecExtension("");
+        final DomainUpdateCommandUnspecExtension ext = new DomainUpdateCommandUnspecExtension();
+        ext.setExtContactId("");
         try {
             cmd.appendExtension(ext);
             String expectedXml = getCommandXmlWithUnspec("extContact=");
@@ -75,8 +74,7 @@ public class DomainUpdateCommandUnspecExtensionTest {
     @Test
     public void shouldCreateXmlWhenNullUnspecValuesProvidedWithWhoisType() {
         final Command cmd = new DomainUpdateCommand("jtkutest.com.au");
-        final DomainUpdateCommandUnspecExtension ext =
-                new DomainUpdateCommandUnspecExtension(null, null);
+        final DomainUpdateCommandUnspecExtension ext = new DomainUpdateCommandUnspecExtension();
         try {
             cmd.appendExtension(ext);
             String expectedXml = getCommandXmlWithUnspec(null);
@@ -90,8 +88,8 @@ public class DomainUpdateCommandUnspecExtensionTest {
     @Test
     public void shouldCreateValidXmlWhenUnspecValuesProvidedForTypeButNullForPublishWithWhoisType() {
         final Command cmd = new  DomainUpdateCommand("jtkutest.com.au");
-        final DomainUpdateCommandUnspecExtension ext =
-                new DomainUpdateCommandUnspecExtension(WhoisType.LEGAL, null);
+        final DomainUpdateCommandUnspecExtension ext = new DomainUpdateCommandUnspecExtension();
+        ext.setWhoisType(WhoisType.LEGAL);
         try {
             cmd.appendExtension(ext);
             String expectedXml = getCommandXmlWithUnspec("WhoisType=LEGAL");
@@ -105,8 +103,8 @@ public class DomainUpdateCommandUnspecExtensionTest {
     @Test
     public void shouldCreateXmlWhenUnspecValuesProvidedForPublishButNullForTypeWithWhoisType() {
         final Command cmd = new DomainUpdateCommand("jtkutest.com.au");
-        final DomainUpdateCommandUnspecExtension ext =
-                new DomainUpdateCommandUnspecExtension(null, true);
+        final DomainUpdateCommandUnspecExtension ext = new DomainUpdateCommandUnspecExtension();
+        ext.setPublish(true);
         try {
             cmd.appendExtension(ext);
             String expectedXml = getCommandXmlWithUnspec("Publish=Y");
@@ -118,10 +116,43 @@ public class DomainUpdateCommandUnspecExtensionTest {
     }
 
     @Test
+    public void shouldCreateXmlWhenUnspecValuesProvidedForPublishAndExtContact() {
+        final Command cmd = new DomainUpdateCommand("jtkutest.com.au");
+        final DomainUpdateCommandUnspecExtension ext = new DomainUpdateCommandUnspecExtension();
+        ext.setPublish(true);
+        ext.setExtContactId("abc123");
+        try {
+            cmd.appendExtension(ext);
+            String expectedXml = getCommandXmlWithUnspec("extContact=abc123 Publish=Y");
+            assertEquals(expectedXml, cmd.toXML());
+
+        } catch (SAXException saxe) {
+            fail(saxe.getMessage());
+        }
+    }
+
+    @Test
+    public void shouldCreateXmlWhenUnspecValuesProvidedForWhoisTypeAndExtContact() {
+        final Command cmd = new DomainUpdateCommand("jtkutest.com.au");
+        final DomainUpdateCommandUnspecExtension ext = new DomainUpdateCommandUnspecExtension();
+        ext.setExtContactId("abc123");
+        ext.setWhoisType(WhoisType.NATURAL);
+        try {
+            cmd.appendExtension(ext);
+            String expectedXml = getCommandXmlWithUnspec("extContact=abc123 WhoisType=NATURAL");
+            assertEquals(expectedXml, cmd.toXML());
+
+        } catch (SAXException saxe) {
+            fail(saxe.getMessage());
+        }
+    }
+
+    @Test
     public void shouldCreateValidXmlWhenUnspecValuesProvidedForTypeAndPublishWithWhoisType() {
         final Command cmd = new DomainUpdateCommand("jtkutest.com.au");
-        final DomainUpdateCommandUnspecExtension ext =
-                new DomainUpdateCommandUnspecExtension(WhoisType.LEGAL, false);
+        final DomainUpdateCommandUnspecExtension ext = new DomainUpdateCommandUnspecExtension();
+        ext.setWhoisType(WhoisType.LEGAL);
+        ext.setPublish(false);
         try {
             cmd.appendExtension(ext);
             String expectedXml = getCommandXmlWithUnspec("WhoisType=LEGAL Publish=N");

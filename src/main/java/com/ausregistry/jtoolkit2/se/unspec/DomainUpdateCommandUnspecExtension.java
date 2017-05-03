@@ -12,7 +12,7 @@ import org.w3c.dom.Element;
  * Domain Name Unspec Extension.</p>
  *
  * <p>Use this to identify the unspec associated with this domain name as part of an EPP Domain Update
- * command compliant with RFC5730 and RFC5731. The "extContact" value or combination of WhoisType and Publish
+ * command compliant with RFC5730 and RFC5731. The "extContact" value, WhoisType or Publish values
  * can be supplied depending on the usage.
  * The response expected from a server should be handled by a Domain Update Response.</p>
  *
@@ -28,13 +28,12 @@ public class DomainUpdateCommandUnspecExtension implements CommandExtension {
     private WhoisType whoisType;
     private Boolean publish;
 
+    @Deprecated
     public DomainUpdateCommandUnspecExtension(String extContactId) {
         this.extContactId = extContactId;
     }
 
-    public DomainUpdateCommandUnspecExtension(WhoisType whoisType, Boolean publish) {
-        this.whoisType = whoisType;
-        this.publish = publish;
+    public DomainUpdateCommandUnspecExtension() {
     }
 
     @Override
@@ -47,17 +46,27 @@ public class DomainUpdateCommandUnspecExtension implements CommandExtension {
 
         StringBuilder unspecValue = new StringBuilder();
         if (extContactId != null) {
-            unspecValue.append("extContact=" + extContactId);
-        } else {
-            if (whoisType != null) {
-                unspecValue.append("WhoisType=" + whoisType.name());
-            }
-            if (publish != null) {
-                unspecValue.append(" Publish=" + (publish ? "Y" : "N"));
-            }
+            unspecValue.append(" extContact=" + extContactId);
         }
-
+        if (whoisType != null) {
+            unspecValue.append(" WhoisType=" + whoisType.name());
+        }
+        if (publish != null) {
+            unspecValue.append(" Publish=" + (publish ? "Y" : "N"));
+        }
         xmlWriter.appendChild(unspecElement, "unspec", ExtendedObjectType.UNSPEC.getURI())
                 .setTextContent(unspecValue.toString().trim());
+    }
+
+    public void setExtContactId(String extContactId) {
+        this.extContactId = extContactId;
+    }
+
+    public void setWhoisType(WhoisType whoisType) {
+        this.whoisType = whoisType;
+    }
+
+    public void setPublish(Boolean publish) {
+        this.publish = publish;
     }
 }
