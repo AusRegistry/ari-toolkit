@@ -93,7 +93,7 @@ public class DomainCreateCommandUnspecExtensionTest {
         ext.setWhoisType(LEGAL);
         try {
             cmd.appendExtension(ext);
-            String expectedXml = getCommandXmlWithUnspec("WhoisType=LEGAL");
+            String expectedXml = getCommandXmlWithUnspec("WhoisType=Legal");
             assertEquals(expectedXml, cmd.toXML());
 
         } catch (SAXException saxe) {
@@ -141,7 +141,7 @@ public class DomainCreateCommandUnspecExtensionTest {
         ext.setExtContactId("abc123");
         try {
             cmd.appendExtension(ext);
-            String expectedXml = getCommandXmlWithUnspec("extContact=abc123 WhoisType=NATURAL");
+            String expectedXml = getCommandXmlWithUnspec("extContact=abc123 WhoisType=Natural");
             assertEquals(expectedXml, cmd.toXML());
 
         } catch (SAXException saxe) {
@@ -157,7 +157,7 @@ public class DomainCreateCommandUnspecExtensionTest {
         ext.setPublish(false);
         try {
             cmd.appendExtension(ext);
-            String expectedXml = getCommandXmlWithUnspec("WhoisType=LEGAL Publish=N");
+            String expectedXml = getCommandXmlWithUnspec("WhoisType=Legal Publish=N");
             assertEquals(expectedXml, cmd.toXML());
 
         } catch (SAXException saxe) {

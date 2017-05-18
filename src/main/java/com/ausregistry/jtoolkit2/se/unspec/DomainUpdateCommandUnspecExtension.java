@@ -49,7 +49,7 @@ public class DomainUpdateCommandUnspecExtension implements CommandExtension {
             unspecValue.append(" extContact=" + extContactId);
         }
         if (whoisType != null) {
-            unspecValue.append(" WhoisType=" + whoisType.name());
+            unspecValue.append(" WhoisType=" + whoisType.getValue());
         }
         if (publish != null) {
             unspecValue.append(" Publish=" + (publish ? "Y" : "N"));
