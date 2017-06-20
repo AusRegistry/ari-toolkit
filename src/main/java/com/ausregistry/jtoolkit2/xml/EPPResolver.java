@@ -9,6 +9,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.URIResolver;
 import javax.xml.transform.stream.StreamSource;
 
+import com.ausregistry.jtoolkit2.ConfigurationError;
 import com.ausregistry.jtoolkit2.ErrorPkg;
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.se.ExtensionImpl;
@@ -21,8 +22,6 @@ import com.ausregistry.jtoolkit2.se.StandardObjectType;
  */
 public class EPPResolver implements URIResolver {
     private static Map<String, String> uriLocMap;
-
-    private static String[] uris;
 
     static {
         List<String> uriList = new ArrayList<String>();
@@ -52,10 +51,9 @@ public class EPPResolver implements URIResolver {
             uriList.add(extendedObjectType.getURI());
             localResources.add(extendedObjectType.getSchemaDefinition());
         }
-        uris = uriList.toArray(new String[]{});
-        uriLocMap = new HashMap<String, String>();
-        for (int i = 0; i < uris.length; i++) {
-            uriLocMap.put(uris[i], localResources.get(i));
+        uriLocMap = new LinkedHashMap<String, String>();
+        for (int i = 0; i < uriList.size(); i++) {
+            uriLocMap.put(uriList.get(i), localResources.get(i));
         }
     }
 
@@ -69,7 +67,7 @@ public class EPPResolver implements URIResolver {
      * @return The URIs identifying XML schemas for which this instance provides URI to local resource mappings.
      */
     public String[] getResolvedURIs() {
-        return uris;
+        return uriLocMap.keySet().toArray(new String[] {});
     }
 
     /**
@@ -100,6 +98,28 @@ public class EPPResolver implements URIResolver {
         source = new StreamSource(in);
 
         return source;
+    }
+
+    /***
+     * Add more URI entries in URI maps. Useful for clients which want to add support of additional
+     * extensions to be used with other registries.
+     *
+     * If there are multiple URIs to be added, this method should be called for each of them.
+     * Add more URI entries in URI maps. Useful for clients which want to use this toolkit for other
+     *
+     * WARN: this method shall be invoked before `SessionManager` is instantiated, otherwise it
+     *       will NOT have any effect.
+     *
+     * @param extUri extension uri of the extension e.g. "urn:ietf:params:xml:ns:secDNS-1.1"
+     * @param schemaDefinition XSD file name for extension.
+     * @throws ConfigurationError when the given extUri is already configured
+     */
+    public static void addMoreURIs(final String extUri, final String schemaDefinition) {
+        if (!uriLocMap.containsKey(extUri)) {
+            uriLocMap.put(extUri, schemaDefinition);
+        } else {
+            throw new ConfigurationError("URL already exists in the configuration");
+        }
     }
 
 }
