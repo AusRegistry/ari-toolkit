@@ -8,7 +8,7 @@ For more information, please read [Installation and Setup](#installation-and-set
 
 ## Building
 
-To build the ari-toolkit, you must have the Java Development Kit (JDK) v6.0 or above installed. The project can be built with the command `gradlew build`.
+To build the ari-toolkit, you must have the Java Development Kit (JDK) v7.0 or above installed. The project can be built with the command `gradlew build`.
 
 
 ## Introduction
@@ -84,9 +84,11 @@ The javadoc is available online: [Toolkit javadoc](http://ausregistry.github.com
 
 The following environment specifics are required:
 
-#### Java 6
+#### Java Support
 
-The Toolkit has been developed against the standard Java 6 API, and has no runtime dependencies on external libraries.
+The Toolkit has been developed against the standard Java API, and has no runtime dependencies on external libraries.
+
+Since version 3.7.6 the toolkit no longer support Java SE 6. Only Java SE 7 and above are supported. 
 
 #### UTF-8 Encoding
 

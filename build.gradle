@@ -155,12 +155,24 @@ task javadocJar(type: Jar, dependsOn:javadoc) {
 task checkVersionNumbersInReadme << {
     def readme = file("readme.md")
     def looksLikeVersionNumber = ~/\d+\.\d+\.\d+/
-    def versionNumbersInReadmeFile = readme.readLines().collectMany { line ->
-        looksLikeVersionNumber.matcher(line).collect { match ->
-            (toolkitVersion == match) ? null : match
-        }.findResults{ x -> x }
+    def textNeedFixedVersion = 'Since version 3.7.6 the toolkit no longer support Java SE 6.'
+
+    def versionNumbersInReadmeFile = readme.readLines()
+        .findAll { line ->
+            !line.startsWith(textNeedFixedVersion)
+        }
+        .collectMany { line ->
+            looksLikeVersionNumber.matcher(line).collect { match ->
+                (toolkitVersion == match) ? null : match
+            }.findResults{ x -> x }
+        }
+
+    def decommissionJava6LineWithFixedVersion = readme.readLines().find {line ->
+        line.startsWith(textNeedFixedVersion)
     }
+
     assert versionNumbersInReadmeFile.isEmpty()
+    assert decommissionJava6LineWithFixedVersion != null
 }
 
 artifacts {
