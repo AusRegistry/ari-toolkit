@@ -110,6 +110,12 @@ public class PollResponse extends Response {
             }
 
             Node childNode = resData.getFirstChild();
+
+            // the first child might be a whitespace node.  Skip over siblings until an ELEMENT node is encountered.
+            while (childNode != null && childNode.getNodeType() != Node.ELEMENT_NODE) {
+                childNode = childNode.getNextSibling();
+            }
+
             if (childNode == null) {
                 debugLogger.finest("exit");
                 return;
