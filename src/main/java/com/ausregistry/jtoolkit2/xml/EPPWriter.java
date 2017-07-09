@@ -28,7 +28,6 @@ public class EPPWriter extends XMLWriter {
         SAX_PARSER_FACTORY = SAXParserFactory.newInstance();
         SAX_PARSER_FACTORY.setNamespaceAware(true);
         SAX_PARSER_FACTORY.setValidating(false);
-        EPPSchemaProvider.setValidating(true);
         SAX_PARSER_FACTORY.setSchema(EPPSchemaProvider.getSchema());
     }
 
