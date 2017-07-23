@@ -101,7 +101,6 @@ public class DomainCreateCommandUnspecExtensionTest {
         }
     }
 
-
     @Test
     public void shouldCreateValidXmlWhenUnspecValuesProvidedForPublishButNullForTypeWithWhoisType() {
         final Command cmd = new DomainCreateCommand("jtkutest.com.au", "jtkUT3st");
@@ -158,6 +157,36 @@ public class DomainCreateCommandUnspecExtensionTest {
         try {
             cmd.appendExtension(ext);
             String expectedXml = getCommandXmlWithUnspec("WhoisType=Legal Publish=N");
+            assertEquals(expectedXml, cmd.toXML());
+
+        } catch (SAXException saxe) {
+            fail(saxe.getMessage());
+        }
+    }
+
+    @Test
+    public void shouldCreateValidXmlWhenUnspecValuesProvidedForBackorder() {
+        final Command cmd = new DomainCreateCommand("jtkutest.com.au", "jtkUT3st");
+        final DomainCreateCommandUnspecExtension ext = new DomainCreateCommandUnspecExtension();
+        ext.setBackorder(true);
+        try {
+            cmd.appendExtension(ext);
+            String expectedXml = getCommandXmlWithUnspec("ReservationDomain=Yes");
+            assertEquals(expectedXml, cmd.toXML());
+
+        } catch (SAXException saxe) {
+            fail(saxe.getMessage());
+        }
+    }
+
+    @Test
+    public void shouldCreateValidXmlWhenUnspecValuesNoProvidedForBackorder() {
+        final Command cmd = new DomainCreateCommand("jtkutest.com.au", "jtkUT3st");
+        final DomainCreateCommandUnspecExtension ext = new DomainCreateCommandUnspecExtension();
+        ext.setBackorder(false);
+        try {
+            cmd.appendExtension(ext);
+            String expectedXml = getCommandXmlWithUnspec(null);
             assertEquals(expectedXml, cmd.toXML());
 
         } catch (SAXException saxe) {

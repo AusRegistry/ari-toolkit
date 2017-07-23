@@ -22,12 +22,11 @@ import org.w3c.dom.Element;
 public class DomainCreateCommandUnspecExtension implements CommandExtension {
 
     private static final long serialVersionUID = 5982521830455586062L;
-    private static final String FIELD_IDENTIFIER = "<<field>>";
-
 
     private String extContactId;
     private WhoisType whoisType;
     private Boolean publish;
+    private Boolean backorder;
 
     @Deprecated
     public DomainCreateCommandUnspecExtension(String extContactId) {
@@ -55,6 +54,9 @@ public class DomainCreateCommandUnspecExtension implements CommandExtension {
         if (publish != null) {
             unspecValue.append(" Publish=" + (publish ? "Y" : "N"));
         }
+        if (backorder != null && backorder) {
+            unspecValue.append(" ReservationDomain=Yes");
+        }
 
         xmlWriter.appendChild(unspecElement, "unspec", ExtendedObjectType.UNSPEC.getURI())
                 .setTextContent(unspecValue.toString().trim());
@@ -71,5 +73,9 @@ public class DomainCreateCommandUnspecExtension implements CommandExtension {
 
     public void setPublish(Boolean publish) {
         this.publish = publish;
+    }
+
+    public void setBackorder(Boolean backorder) {
+        this.backorder = backorder;
     }
 }
