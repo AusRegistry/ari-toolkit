@@ -194,6 +194,40 @@ public class DomainCreateCommandUnspecExtensionTest {
         }
     }
 
+    @Test
+    public void shouldCreateValidXmlWhenResellerDetailsAreProvided() {
+        final Command cmd = new DomainCreateCommand("jtkutest.com.au", "jtkUT3st");
+        final DomainCreateCommandUnspecExtension ext = new DomainCreateCommandUnspecExtension();
+        ext.setResellerName("Reseller Name");
+        ext.setResellerUrl("www.reseller.com.au");
+        ext.setResellerPhone("+611234567891");
+        try {
+            cmd.appendExtension(ext);
+            String expectedXml = getCommandXmlWithUnspec(
+                    "ResellerName=Reseller+Name ResellerUrl=www.reseller.com.au ResellerPhone=+611234567891");
+            assertEquals(expectedXml, cmd.toXML());
+
+        } catch (SAXException saxe) {
+            fail(saxe.getMessage());
+        }
+    }
+
+    @Test
+    public void shouldCreateValidXmlWhenOnlyResellerNameisProvided() {
+        final Command cmd = new DomainCreateCommand("jtkutest.com.au", "jtkUT3st");
+        final DomainCreateCommandUnspecExtension ext = new DomainCreateCommandUnspecExtension();
+        ext.setResellerName("ResellerName");
+        try {
+            cmd.appendExtension(ext);
+            String expectedXml = getCommandXmlWithUnspec(
+                    "ResellerName=ResellerName");
+            assertEquals(expectedXml, cmd.toXML());
+
+        } catch (SAXException saxe) {
+            fail(saxe.getMessage());
+        }
+    }
+
     private String getCommandXmlWithUnspec(String unspec) {
         String element;
         if (unspec == null) {

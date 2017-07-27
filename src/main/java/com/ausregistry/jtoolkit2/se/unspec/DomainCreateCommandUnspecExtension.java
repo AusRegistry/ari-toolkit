@@ -27,6 +27,9 @@ public class DomainCreateCommandUnspecExtension implements CommandExtension {
     private WhoisType whoisType;
     private Boolean publish;
     private Boolean backorder;
+    private String resellerName;
+    private String resellerUrl;
+    private String resellerPhone;
 
     @Deprecated
     public DomainCreateCommandUnspecExtension(String extContactId) {
@@ -58,6 +61,18 @@ public class DomainCreateCommandUnspecExtension implements CommandExtension {
             unspecValue.append(" ReservationDomain=Yes");
         }
 
+        if (resellerName != null) {
+            unspecValue.append(" ResellerName=").append(resellerName.replaceAll("\\s", "+"));
+        }
+
+        if (resellerUrl != null) {
+            unspecValue.append(" ResellerUrl=").append(resellerUrl);
+        }
+
+        if (resellerPhone != null) {
+            unspecValue.append(" ResellerPhone=").append(resellerPhone);
+        }
+
         xmlWriter.appendChild(unspecElement, "unspec", ExtendedObjectType.UNSPEC.getURI())
                 .setTextContent(unspecValue.toString().trim());
 
@@ -77,5 +92,17 @@ public class DomainCreateCommandUnspecExtension implements CommandExtension {
 
     public void setBackorder(Boolean backorder) {
         this.backorder = backorder;
+    }
+
+    public void setResellerName(String resellerName) {
+        this.resellerName = resellerName;
+    }
+
+    public void setResellerUrl(String resellerUrl) {
+        this.resellerUrl = resellerUrl;
+    }
+
+    public void setResellerPhone(String resellerPhone) {
+        this.resellerPhone = resellerPhone;
     }
 }
