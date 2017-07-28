@@ -393,8 +393,8 @@ public class SessionManagerImpl implements SessionManager {
                         case ResultCode.CMD_FAILED:
                             throw new CommandFailedException();
                         case ResultCode.CMD_FAILED_CLOSING:
-                        default:
                             throw new CommandFailedException();
+                        default:
                         }
                     }
                 }
