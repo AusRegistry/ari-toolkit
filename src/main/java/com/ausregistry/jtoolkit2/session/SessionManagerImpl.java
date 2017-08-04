@@ -389,12 +389,10 @@ public class SessionManagerImpl implements SessionManager {
                         statsManager.incResultCounter(result.getResultCode());
                         int code = result.getResultCode();
 
-                        switch (code) {
-                        case ResultCode.CMD_FAILED:
+                        if (ResultCode.CMD_FAILED == code) {
                             throw new CommandFailedException();
-                        case ResultCode.CMD_FAILED_CLOSING:
+                        } else if (ResultCode.CMD_FAILED_CLOSING == code) {
                             throw new CommandFailedException();
-                        default:
                         }
                     }
                 }

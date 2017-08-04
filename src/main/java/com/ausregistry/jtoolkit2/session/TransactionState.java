@@ -10,6 +10,6 @@ public enum TransactionState {
     UNPROCESSED,
     PROCESSED,
     RETRY,
-    FATAL_ERROR;
+    FATAL_ERROR
 }
 
