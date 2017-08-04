@@ -389,9 +389,7 @@ public class SessionManagerImpl implements SessionManager {
                         statsManager.incResultCounter(result.getResultCode());
                         int code = result.getResultCode();
 
-                        if (ResultCode.CMD_FAILED == code) {
-                            throw new CommandFailedException();
-                        } else if (ResultCode.CMD_FAILED_CLOSING == code) {
+                        if (ResultCode.CMD_FAILED == code || ResultCode.CMD_FAILED_CLOSING == code) {
                             throw new CommandFailedException();
                         }
                     }

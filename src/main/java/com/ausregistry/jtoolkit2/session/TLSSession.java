@@ -368,11 +368,7 @@ public class TLSSession implements Session, StatsManager {
             recordResponseTime(logout.getCommandType(), responseTime);
 
             Result[] results = response.getResults();
-
-            int resultCode = results[0].getResultCode();
-            if (ResultCode.SUCCESS == resultCode) {
-                return;
-            } else if (ResultCode.CMD_FAILED == resultCode) {
+            if (ResultCode.CMD_FAILED == results[0].getResultCode()) {
                 throw new LogoutException(new CommandFailedException(results[0].getResultMessage()));
             }
         } catch (IOException ioe) {
