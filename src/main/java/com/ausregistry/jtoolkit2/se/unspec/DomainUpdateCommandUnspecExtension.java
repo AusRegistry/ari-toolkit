@@ -27,6 +27,9 @@ public class DomainUpdateCommandUnspecExtension implements CommandExtension {
     private String extContactId;
     private WhoisType whoisType;
     private Boolean publish;
+    private String resellerName;
+    private String resellerUrl;
+    private String resellerPhone;
 
     @Deprecated
     public DomainUpdateCommandUnspecExtension(String extContactId) {
@@ -54,6 +57,15 @@ public class DomainUpdateCommandUnspecExtension implements CommandExtension {
         if (publish != null) {
             unspecValue.append(" Publish=" + (publish ? "Y" : "N"));
         }
+        if (resellerName != null) {
+            unspecValue.append(" ResellerName=").append(resellerName.replaceAll("\\s", "+"));
+        }
+        if (resellerUrl != null) {
+            unspecValue.append(" ResellerUrl=").append(resellerUrl);
+        }
+        if (resellerPhone != null) {
+            unspecValue.append(" ResellerPhone=").append(resellerPhone);
+        }
         xmlWriter.appendChild(unspecElement, "unspec", ExtendedObjectType.UNSPEC.getURI())
                 .setTextContent(unspecValue.toString().trim());
     }
@@ -68,5 +80,17 @@ public class DomainUpdateCommandUnspecExtension implements CommandExtension {
 
     public void setPublish(Boolean publish) {
         this.publish = publish;
+    }
+
+    public void setResellerName(String resellerName) {
+        this.resellerName = resellerName;
+    }
+
+    public void setResellerUrl(String resellerUrl) {
+        this.resellerUrl = resellerUrl;
+    }
+
+    public void setResellerPhone(String resellerPhone) {
+        this.resellerPhone = resellerPhone;
     }
 }
