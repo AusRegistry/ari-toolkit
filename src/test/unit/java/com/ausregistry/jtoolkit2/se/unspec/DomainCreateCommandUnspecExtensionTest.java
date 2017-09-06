@@ -228,6 +228,21 @@ public class DomainCreateCommandUnspecExtensionTest {
         }
     }
 
+    @Test
+    public void shouldAddUinWhenProvided() {
+        final Command cmd = new DomainCreateCommand("jtkutest.com.au", "jtkUT3st");
+        final DomainCreateCommandUnspecExtension ext = new DomainCreateCommandUnspecExtension();
+        ext.setUin("457228455201017341");
+        try {
+            cmd.appendExtension(ext);
+            String expectedXml = getCommandXmlWithUnspec("UIN=457228455201017341");
+            assertEquals(expectedXml, cmd.toXML());
+
+        } catch (SAXException saxe) {
+            fail(saxe.getMessage());
+        }
+    }
+
     private String getCommandXmlWithUnspec(String unspec) {
         String element;
         if (unspec == null) {
