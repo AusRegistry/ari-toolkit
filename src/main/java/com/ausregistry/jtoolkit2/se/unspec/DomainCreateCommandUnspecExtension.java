@@ -30,6 +30,7 @@ public class DomainCreateCommandUnspecExtension implements CommandExtension {
     private String resellerName;
     private String resellerUrl;
     private String resellerPhone;
+    private String uin;
 
     @Deprecated
     public DomainCreateCommandUnspecExtension(String extContactId) {
@@ -73,6 +74,10 @@ public class DomainCreateCommandUnspecExtension implements CommandExtension {
             unspecValue.append(" ResellerPhone=").append(resellerPhone);
         }
 
+        if (uin != null) {
+            unspecValue.append(" UIN=").append(uin);
+        }
+
         xmlWriter.appendChild(unspecElement, "unspec", ExtendedObjectType.UNSPEC.getURI())
                 .setTextContent(unspecValue.toString().trim());
 
@@ -104,5 +109,9 @@ public class DomainCreateCommandUnspecExtension implements CommandExtension {
 
     public void setResellerPhone(String resellerPhone) {
         this.resellerPhone = resellerPhone;
+    }
+
+    public void setUin(String uin) {
+        this.uin = uin;
     }
 }
