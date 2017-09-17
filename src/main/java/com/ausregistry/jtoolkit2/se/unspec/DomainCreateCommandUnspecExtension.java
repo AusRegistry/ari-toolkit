@@ -12,8 +12,8 @@ import org.w3c.dom.Element;
  * Domain Name Unspec Extension.</p>
  *
  * <p>Use this to identify the unspec associated with this domain name as part of an EPP Domain Create
- * command compliant with RFC5730 and RFC5731. The "extContact" value, WhoisType or Publish values
- * can be supplied depending on the usage.
+ * command compliant with RFC5730 and RFC5731. The extContact, UIN, Reseleer, ReservationDomain, WhoisType
+ * or Publish values can be supplied depending on the usage.
  * The response expected from a server should be handled by a Domain Create Response.</p>
  *
  * @see com.ausregistry.jtoolkit2.se.DomainCreateCommand
@@ -26,7 +26,7 @@ public class DomainCreateCommandUnspecExtension implements CommandExtension {
     private String extContactId;
     private WhoisType whoisType;
     private Boolean publish;
-    private Boolean backorder;
+    private Boolean reservationDomain;
     private String resellerName;
     private String resellerUrl;
     private String resellerPhone;
@@ -58,7 +58,7 @@ public class DomainCreateCommandUnspecExtension implements CommandExtension {
         if (publish != null) {
             unspecValue.append(" Publish=" + (publish ? "Y" : "N"));
         }
-        if (backorder != null && backorder) {
+        if (reservationDomain != null && reservationDomain) {
             unspecValue.append(" ReservationDomain=Yes");
         }
 
@@ -95,8 +95,8 @@ public class DomainCreateCommandUnspecExtension implements CommandExtension {
         this.publish = publish;
     }
 
-    public void setBackorder(Boolean backorder) {
-        this.backorder = backorder;
+    public void setReservationDomain(Boolean reservationDomain) {
+        this.reservationDomain = reservationDomain;
     }
 
     public void setResellerName(String resellerName) {

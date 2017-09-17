@@ -165,10 +165,10 @@ public class DomainCreateCommandUnspecExtensionTest {
     }
 
     @Test
-    public void shouldCreateValidXmlWhenUnspecValuesProvidedForBackorder() {
+    public void shouldCreateValidXmlWhenUnspecValuesProvidedForRservationDomain() {
         final Command cmd = new DomainCreateCommand("jtkutest.com.au", "jtkUT3st");
         final DomainCreateCommandUnspecExtension ext = new DomainCreateCommandUnspecExtension();
-        ext.setBackorder(true);
+        ext.setReservationDomain(true);
         try {
             cmd.appendExtension(ext);
             String expectedXml = getCommandXmlWithUnspec("ReservationDomain=Yes");
@@ -183,7 +183,7 @@ public class DomainCreateCommandUnspecExtensionTest {
     public void shouldCreateValidXmlWhenUnspecValuesNoProvidedForBackorder() {
         final Command cmd = new DomainCreateCommand("jtkutest.com.au", "jtkUT3st");
         final DomainCreateCommandUnspecExtension ext = new DomainCreateCommandUnspecExtension();
-        ext.setBackorder(false);
+        ext.setReservationDomain(false);
         try {
             cmd.appendExtension(ext);
             String expectedXml = getCommandXmlWithUnspec(null);
