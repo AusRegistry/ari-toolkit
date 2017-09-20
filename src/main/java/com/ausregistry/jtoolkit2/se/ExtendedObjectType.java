@@ -18,6 +18,7 @@ public enum ExtendedObjectType implements ObjectType {
     SYNC("sync", "urn:X-ar:params:xml:ns:sync-1.0", "sync-1.0.xsd", "name"),
     /** References the key-value list extension XML namespace and schema file */
     KV("kv", "urn:X-ar:params:xml:ns:kv-1.0", "kv-1.0.xsd", "name"),
+    KVV11("kvV1_1", "urn:X-ar:params:xml:ns:kv-1.1", "kv-1.1.xsd", "name"),
     REGISTRANT("registrant", "urn:X-ar:params:xml:ns:registrant-1.0", "registrant-1.0.xsd", "name"),
     /** References the domain restore (redemption grace period) extension XML namespace and schema file */
     RESTORE("restore", "urn:ietf:params:xml:ns:rgp-1.0", "rgp-1.0.xsd", "name"),

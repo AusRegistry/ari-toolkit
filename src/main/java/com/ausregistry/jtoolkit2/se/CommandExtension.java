@@ -8,6 +8,7 @@ package com.ausregistry.jtoolkit2.se;
 public interface CommandExtension extends java.io.Serializable {
     String CREATE = "create";
     String UPDATE = "update";
+    String RENEW = "renew";
 
     void addToCommand(Command command);
 }

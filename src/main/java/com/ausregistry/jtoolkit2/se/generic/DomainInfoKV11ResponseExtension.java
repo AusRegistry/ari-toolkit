@@ -1,21 +1,19 @@
 package com.ausregistry.jtoolkit2.se.generic;
 
+import javax.xml.xpath.XPathExpressionException;
 import java.util.Set;
 import java.util.TreeMap;
 
-import javax.xml.xpath.XPathExpressionException;
-
+import com.ausregistry.jtoolkit2.se.ResponseExtension;
+import com.ausregistry.jtoolkit2.xml.XMLDocument;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.ausregistry.jtoolkit2.se.ResponseExtension;
-import com.ausregistry.jtoolkit2.xml.XMLDocument;
-
 /**
  * Extension of the domain mapping of the EPP info response, as defined in
  * RFC5730 and RFC5731, to generic domain names, the specification of which is
- * in the XML schema definition urn:X-ar:params:xml:ns:kv-1.0. Instances of this
+ * in the XML schema definition urn:X-ar:params:xml:ns:kv-1.1. Instances of this
  * class provide an interface to access all of the information available through
  * EPP for a generic domain name. This relies on the instance first being
  * initialised by a suitable EPP domain info response using the method
@@ -25,12 +23,12 @@ import com.ausregistry.jtoolkit2.xml.XMLDocument;
  * using XPath queries.
  */
 
-public final class DomainInfoKVResponseExtension extends ResponseExtension {
+public final class DomainInfoKV11ResponseExtension extends ResponseExtension {
 
     private static final long serialVersionUID = -3759160844459220532L;
 
     private static final String KVLIST_EXPR = ResponseExtension.EXTENSION_EXPR
-            + "/kv:infData/kv:kvlist";
+            + "/kvV1_1:infData/kvV1_1:kvlist";
 
     private final TreeMap<String, TreeMap<String, String>> kvLists = new TreeMap<String, TreeMap<String, String>>();
 
