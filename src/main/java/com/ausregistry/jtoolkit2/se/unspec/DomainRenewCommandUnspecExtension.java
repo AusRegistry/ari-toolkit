@@ -12,13 +12,20 @@ import org.w3c.dom.Element;
  * <p>Use this to command to restore a domain name in Redemption. The response expected from a
  * server should be handled by a Domain Renew Response.</p>
  *
+ * <p>This extension is also used to specify the UIN for renew in the .travel zone.</p>
+ *
  * @see com.ausregistry.jtoolkit2.se.DomainRenewCommand
  */
 public class DomainRenewCommandUnspecExtension implements CommandExtension {
-    private final RestoreReasonCode restoreReasonCode;
-    private final String restoreComment;
-    private final boolean trueData;
-    private final boolean validUse;
+    private RestoreReasonCode restoreReasonCode;
+    private String restoreComment;
+    private boolean trueData;
+    private boolean validUse;
+    private String uin;
+
+    public DomainRenewCommandUnspecExtension(String uin) {
+        this.uin = uin;
+    }
 
     public DomainRenewCommandUnspecExtension(RestoreReasonCode restoreReasonCode, String restoreComment,
                                              boolean trueData, boolean validUse) {
@@ -30,15 +37,23 @@ public class DomainRenewCommandUnspecExtension implements CommandExtension {
 
     @Override
     public void addToCommand(Command command) {
-            final XMLWriter xmlWriter = command.getXmlWriter();
-            final Element extensionElement = command.getExtensionElement();
-            final Element renewElement = xmlWriter.appendChild(extensionElement, "extension",
-                    ExtendedObjectType.UNSPEC.getURI());
+        if (restoreReasonCode != null) {
+            addUnspecWithContent(command, "RestoreReasonCode=" + restoreReasonCode.getValue()
+                    + " RestoreComment=" + restoreComment
+                    + " TrueData=" + (trueData ? "Y" : "N")
+                    + " ValidUse=" + (validUse ? "Y" : "N"));
+        } else if (uin != null) {
+            addUnspecWithContent(command, "UIN=" + uin);
+        }
+    }
 
-            xmlWriter.appendChild(renewElement, "unspec", ExtendedObjectType.UNSPEC.getURI()).setTextContent(
-                    "RestoreReasonCode=" + restoreReasonCode.getValue()
-                            + " RestoreComment=" + restoreComment
-                            + " TrueData=" + (trueData ? "Y" : "N")
-                            + " ValidUse=" + (validUse ? "Y" : "N"));
+    private void addUnspecWithContent(Command command, String content) {
+        final XMLWriter xmlWriter = command.getXmlWriter();
+        final Element extensionElement = command.getExtensionElement();
+        final Element renewElement = xmlWriter.appendChild(extensionElement, "extension",
+                ExtendedObjectType.UNSPEC.getURI());
+
+        xmlWriter.appendChild(renewElement, "unspec", ExtendedObjectType.UNSPEC.getURI()).setTextContent(
+                content);
     }
 }
