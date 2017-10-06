@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/AusRegistry/ari-toolkit.png)](https://travis-ci.org/AusRegistry/ari-toolkit)
 ## Downloads
 
-The latest ari-toolkit is available for download. [ari-toolkit v3.8.2](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.8.2/arjtk-3.8.2.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.8.2/arjtk-3.8.2-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.8.2/arjtk-3.8.2-javadoc.jar))
+The latest ari-toolkit is available for download. [ari-toolkit v3.9.0](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.9.0/arjtk-3.9.0.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.9.0/arjtk-3.9.0-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.9.0/arjtk-3.9.0-javadoc.jar))
 
 For more information, please read [Installation and Setup](#installation-and-setup).
 
@@ -43,7 +43,7 @@ This toolkit also provides a mechanism to perform the following Trademark Cleari
 
 #### Direct download
 
-    Obtain the latest toolkit here: [Toolkit v3.8.2](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.8.2/arjtk-3.8.2.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.8.2/arjtk-3.8.2-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.8.2/arjtk-3.8.2-javadoc.jar))
+    Obtain the latest toolkit here: [Toolkit v3.9.0](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.9.0/arjtk-3.9.0.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.9.0/arjtk-3.9.0-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.9.0/arjtk-3.9.0-javadoc.jar))
 
 #### Dependency Management
 
@@ -52,7 +52,7 @@ Use your build's dependency management tool to automatically download the toolki
 * Repository: `http://ausregistry.github.com/repo/`
 * groupId: `au.com.ausregistry`
 * artifactId: `arjtk`
-* version: `3.8.2`
+* version: `3.9.0`
 
 For example (using Maven):
 
@@ -67,7 +67,7 @@ For example (using Maven):
        <dependency>
           <groupId>au.com.ausregistry</groupId>
           <artifactId>arjtk</artifactId>
-          <version>3.8.2</version>
+          <version>3.9.0</version>
        </dependency>
     </dependencies>
 
