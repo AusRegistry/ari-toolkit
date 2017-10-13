@@ -38,12 +38,17 @@ public abstract class XMLWriter {
     protected Logger userLogger = Logger.getLogger(PACKAGE_NAME + ".user");
     protected Logger maintLogger = Logger.getLogger(PACKAGE_NAME + ".maint");
 
+    private boolean addNamespacePrefix = false;
+    private String namespacePrefix = null;
+    private String namespacePrefixValue = null;
+
     /**
      * Get an instance of the default implementation of XMLWriter.
      */
     public static XMLWriter newInstance() {
         return new EPPWriter();
     }
+
     /**
      * Get the root element of the DOM tree associated with this writer.
      *
@@ -88,8 +93,15 @@ public abstract class XMLWriter {
      * @param uri Namespace URI for the new child element.
      */
     public Element appendChild(Element parent, String name, String uri) {
-        Element newElement = createElement(uri, name);
+        Element newElement;
+        if (addNamespacePrefix && name != "extension") {
+            newElement = createElement(parent.getNamespaceURI(), name);
+            newElement = addNSPrefixToElement(newElement);
+        } else {
+            newElement = createElement(uri, name);
+        }
         parent.appendChild(newElement);
+
 
         return newElement;
     }
@@ -163,7 +175,7 @@ public abstract class XMLWriter {
      * @return The new Element.
      */
     public Element appendChild(Element parent, String name, String uri, String value, String[] attrNames,
-            String[] attrValues) {
+        String[] attrValues) {
         Element newElement = appendChild(parent, name, uri);
 
         for (int i = 0; i < attrNames.length && i < attrValues.length; i++) {
@@ -201,8 +213,8 @@ public abstract class XMLWriter {
      * alternative SAX error handler may be provided as described in
      *
      * @return the string
-     * @throws SAXException the SAX exception
-     * {@link com.ausregistry.jtoolkit2.xml.HandlerFactory}. That handler will receive notification of
+     * @throws SAXException the SAX exception {@link com.ausregistry.jtoolkit2.xml.HandlerFactory}. That handler will
+     * receive notification of
      * parsing/validation failures.
      */
     public String toXML() throws SAXException {
@@ -263,4 +275,27 @@ public abstract class XMLWriter {
         SAXParser saxParser = newSAXParser();
         saxParser.parse(in, handler);
     }
+
+    private Element addNSPrefixToElement(Element element) {
+        if ((namespacePrefix != null && namespacePrefix != "")
+            && (namespacePrefixValue != null && namespacePrefixValue != "")) {
+            element.setAttribute("xmlns:"+namespacePrefix, namespacePrefixValue);
+            element.setPrefix(namespacePrefix);
+        }
+        disableNamespacePrefix();
+        return element;
+    }
+
+    public void setNamespacePrefix(String prefix, String value) {
+        addNamespacePrefix = true;
+        namespacePrefix = prefix;
+        namespacePrefixValue = value;
+    }
+
+    private void disableNamespacePrefix() {
+        addNamespacePrefix = false;
+        namespacePrefix = null;
+        namespacePrefixValue = null;
+    }
+
 }
