@@ -205,24 +205,24 @@ public abstract class XMLWriter {
      * {@link com.ausregistry.jtoolkit2.xml.HandlerFactory}. That handler will receive notification of
      * parsing/validation failures.
      */
-    public String toXML() throws SAXException {
+    public String toXML(XmlOutputConfig xmlOutputConfig) throws SAXException {
         if (xml != null) {
             return xml;
         }
 
         if (!isParserValidating()) {
-            generateXmlLocked();
+            generateXmlLocked(xmlOutputConfig);
 
             supportLogger.info(xml);
             return xml;
         }
 
-        xml = getXMLBuilder().toXML(getRoot());
+        xml = getXMLBuilder().toXML(getRoot(), xmlOutputConfig);
 
         try {
             validate();
         } catch (SAXException saxe) {
-            generateXmlLocked();
+            generateXmlLocked(xmlOutputConfig);
 
             try {
                 validate();
@@ -235,12 +235,12 @@ public abstract class XMLWriter {
             userLogger.warning(pce.getMessage());
             userLogger.warning(ErrorPkg.getMessage("xml.parser.operation.unsupported"));
 
-            generateXmlLocked();
+            generateXmlLocked(xmlOutputConfig);
         } catch (IOException ioe) {
             userLogger.warning(ioe.getMessage());
             maintLogger.warning(ioe.getMessage());
 
-            generateXmlLocked();
+            generateXmlLocked(xmlOutputConfig);
         }
 
         supportLogger.info(xml);
@@ -250,9 +250,9 @@ public abstract class XMLWriter {
     /**
      * See the description of the WORKAROUND_LOCK class member for the rationale behind this method.
      */
-    private void generateXmlLocked() {
+    private void generateXmlLocked(XmlOutputConfig xmlOutputConfig) {
         synchronized (XMLWriter.WORKAROUND_LOCK) {
-            xml = getXMLBuilder().toXML(getRoot());
+            xml = getXMLBuilder().toXML(getRoot(), xmlOutputConfig);
         }
     }
 

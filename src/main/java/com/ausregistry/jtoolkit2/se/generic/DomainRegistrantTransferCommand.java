@@ -10,6 +10,7 @@ import com.ausregistry.jtoolkit2.se.Command;
 import com.ausregistry.jtoolkit2.se.CommandType;
 import com.ausregistry.jtoolkit2.se.ExtendedObjectType;
 import com.ausregistry.jtoolkit2.se.Period;
+import com.ausregistry.jtoolkit2.xml.XmlOutputConfig;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
@@ -92,7 +93,7 @@ public final class DomainRegistrantTransferCommand extends Command {
     }
 
     @Override
-    protected String toXMLImpl() throws SAXException {
+    protected String toXMLImpl(XmlOutputConfig xmlOutputConfig) throws SAXException {
         Element itemElement;
 
         for (final Entry<String, String> item : kvList.entrySet()) {
@@ -101,7 +102,7 @@ public final class DomainRegistrantTransferCommand extends Command {
             itemElement.setTextContent(item.getValue());
         }
 
-        return super.toXMLImpl();
+        return super.toXMLImpl(xmlOutputConfig);
     }
 
     @Override

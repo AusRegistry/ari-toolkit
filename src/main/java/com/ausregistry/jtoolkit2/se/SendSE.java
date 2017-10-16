@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.logging.Logger;
 
 import com.ausregistry.jtoolkit2.xml.XMLWriter;
+import com.ausregistry.jtoolkit2.xml.XmlOutputConfig;
 
 /**
  * This defines the operations or actions for sending XML to an EPP based server.  It defines the user level logger.
@@ -25,7 +26,7 @@ abstract class SendSE implements Serializable {
 
     protected SendSE() { }
 
-    protected abstract String toXMLImpl() throws org.xml.sax.SAXException;
+    protected abstract String toXMLImpl(XmlOutputConfig xmlOutputConfig) throws org.xml.sax.SAXException;
 
     /**
      * Serialize the EPP service element to XML.  This MUST be called prior
@@ -37,12 +38,17 @@ abstract class SendSE implements Serializable {
      * failed schema validation.  Further attempts to serialize this command
      * will also fail.
      */
-    public final String toXML() throws org.xml.sax.SAXException {
+    public final String toXML(XmlOutputConfig outputConfig) throws org.xml.sax.SAXException {
         if (xml == null) {
-            xml = toXMLImpl();
+            xml = toXMLImpl(outputConfig);
         }
 
         return xml;
     }
+
+    public final String toXML() throws org.xml.sax.SAXException {
+        return this.toXML(XmlOutputConfig.defaultConfig());
+    }
+
 }
 

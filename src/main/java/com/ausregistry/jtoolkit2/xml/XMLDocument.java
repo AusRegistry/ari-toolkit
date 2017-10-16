@@ -72,7 +72,7 @@ public class XMLDocument {
         XMLWriter writer = XMLWriter.newInstance();
         writer.setRoot(root);
         try {
-            return writer.toXML();
+            return writer.toXML(XmlOutputConfig.defaultConfig());
         } catch (SAXException saxe) {
             return "";
         }
