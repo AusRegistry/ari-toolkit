@@ -30,6 +30,7 @@ public final class DomainKV11CommandExtension implements CommandExtension {
      * @see CommandExtension#CREATE
      * @see CommandExtension#UPDATE
      * @see CommandExtension#RENEW
+     * @see CommandExtension#TRANSFER
      */
     public DomainKV11CommandExtension(final String commandType) {
         kvLists = new TreeMap<String, TreeMap<String, String>>();

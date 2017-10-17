@@ -10,6 +10,7 @@ import com.ausregistry.jtoolkit2.se.Command;
 import com.ausregistry.jtoolkit2.se.CommandExtension;
 import com.ausregistry.jtoolkit2.se.DomainCreateCommand;
 import com.ausregistry.jtoolkit2.se.DomainRenewCommand;
+import com.ausregistry.jtoolkit2.se.DomainTransferRequestCommand;
 import com.ausregistry.jtoolkit2.se.DomainUpdateCommand;
 import org.junit.Before;
 import org.junit.Test;
@@ -198,6 +199,46 @@ public class DomainKV11CommandExtensionTest {
                             + "<item key=\"registrantName\">AusRegistry</item>"
                             + "</kvlist>"
                             + "</renew>"
+                            + "</extension>"
+                            + "<clTRID>JTKUTEST.20070101.010101.0</clTRID>"
+                            + "</command>"
+                            + "</epp>",
+                    xml);
+        } catch (final SAXException saxe) {
+            fail(saxe.getMessage());
+        }
+    }
+
+    @Test
+    public void shouldAddKvListToTransferCommand() {
+        final DomainKV11CommandExtension extension = new DomainKV11CommandExtension(CommandExtension.TRANSFER);
+        extension.addItem("UIN", "UIN", "myUIN");
+
+        final Command transfer = new DomainTransferRequestCommand("jtkutest.com.ae", "authInfo");
+        transfer.appendExtension(extension);
+
+        try {
+            final String xml = transfer.toXML();
+            assertEquals(
+                    "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+                            + "<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\" "
+                            + "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
+                            + "xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">"
+                            + "<command>"
+                            + "<transfer op=\"request\">"
+                            + "<transfer xmlns=\"urn:ietf:params:xml:ns:domain-1.0\" "
+                            + "xsi:schemaLocation=\"urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd\">"
+                            + "<name>jtkutest.com.ae</name>"
+                            + "<authInfo><pw>authInfo</pw></authInfo>"
+                            + "</transfer>"
+                            + "</transfer>"
+                            + "<extension>"
+                            + "<transfer xmlns=\"urn:X-ar:params:xml:ns:kv-1.1\" "
+                            + "xsi:schemaLocation=\"urn:X-ar:params:xml:ns:kv-1.1 kv-1.1.xsd\">"
+                            + "<kvlist name=\"UIN\">"
+                            + "<item key=\"UIN\">myUIN</item>"
+                            + "</kvlist>"
+                            + "</transfer>"
                             + "</extension>"
                             + "<clTRID>JTKUTEST.20070101.010101.0</clTRID>"
                             + "</command>"

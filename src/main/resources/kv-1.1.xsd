@@ -13,6 +13,7 @@
     <element name="create" type="kv:createType" />
     <element name="update" type="kv:updateType" />
     <element name="renew" type="kv:renewType" />
+    <element name="transfer" type="kv:transferType" />
 
     <complexType name="createType">
         <group ref="kv:kvlist" maxOccurs="unbounded" />
@@ -23,6 +24,10 @@
     </complexType>
 
     <complexType name="renewType">
+        <group ref="kv:kvlist" maxOccurs="unbounded" />
+    </complexType>
+
+    <complexType name="transferType">
         <group ref="kv:kvlist" maxOccurs="unbounded" />
     </complexType>
 

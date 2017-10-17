@@ -9,6 +9,7 @@ public interface CommandExtension extends java.io.Serializable {
     String CREATE = "create";
     String UPDATE = "update";
     String RENEW = "renew";
+    String TRANSFER = "transfer";
 
     void addToCommand(Command command);
 }
