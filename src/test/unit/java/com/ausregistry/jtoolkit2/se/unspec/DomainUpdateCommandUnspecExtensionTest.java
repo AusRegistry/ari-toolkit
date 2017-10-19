@@ -197,6 +197,22 @@ public class DomainUpdateCommandUnspecExtensionTest {
         }
     }
 
+    @Test
+    public void shouldAddUinToXml() {
+        final Command cmd = new DomainUpdateCommand("jtkutest.com.au");
+        final DomainUpdateCommandUnspecExtension ext = new DomainUpdateCommandUnspecExtension();
+        ext.setUin("0000");
+        try {
+            cmd.appendExtension(ext);
+            String expectedXml = getCommandXmlWithUnspec(
+                    "UIN=0000");
+            assertEquals(expectedXml, cmd.toXML());
+
+        } catch (SAXException saxe) {
+            fail(saxe.getMessage());
+        }
+    }
+
     private String getCommandXmlWithUnspec(String unspec) {
         String element;
         if (unspec == null) {
