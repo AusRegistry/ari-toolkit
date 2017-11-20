@@ -27,8 +27,11 @@ import com.ausregistry.jtoolkit2.ErrorPkg;
  * </p>
  */
 public class TLSContext {
-    private static final String TLS = "TLSv1";
-    private static final String[] ENABLED_PROTOCOLS = {TLS};
+    private static final String TLSv1  = "TLSv1";
+    private static final String TLSv11 = "TLSv1.1";
+    private static final String TLSv12 = "TLSv1.2";
+
+    private static final String[] ENABLED_PROTOCOLS = {TLSv1, TLSv11, TLSv12};
     private static final String TMF_ALGORITHM = TrustManagerFactory.getDefaultAlgorithm();
 
     private SSLContext ctx;
@@ -70,7 +73,7 @@ public class TLSContext {
      *             the key management exception
      */
     public TLSContext(String keystore, String keypass, String truststore, String trustpass, String type,
-            String algorithm) throws KeyStoreNotFoundException, KeyStoreReadException,
+            String algorithm, String protocol) throws KeyStoreNotFoundException, KeyStoreReadException,
             KeyStoreException, CertificateException,
             UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException {
 
@@ -87,7 +90,11 @@ public class TLSContext {
                 keyManagers = loadKeyManagers(keystore, keypass, type, algorithm);
             }
 
-            ctx = SSLContext.getInstance(TLS);
+            if (protocol != null) {
+                ctx = SSLContext.getInstance(protocol);
+            }else {
+                ctx = SSLContext.getInstance(TLSv1);
+            }
             ctx.init(keyManagers, trustManagers, null);
         } catch (UnrecoverableKeyException uke) {
             // the given passphrase is incorrect.
@@ -142,7 +149,7 @@ public class TLSContext {
                                                                   KeyManagementException,
                                                                   KeyStoreReadException,
                                                                   KeyStoreNotFoundException {
-        this(null, null, truststore, trustpass, null, null);
+        this(null, null, truststore, trustpass, null, null, TLSv1);
     }
 
 
