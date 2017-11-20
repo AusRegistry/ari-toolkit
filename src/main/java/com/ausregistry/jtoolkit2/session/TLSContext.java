@@ -27,11 +27,11 @@ import com.ausregistry.jtoolkit2.ErrorPkg;
  * </p>
  */
 public class TLSContext {
-    private static final String TLSv1  = "TLSv1";
-    private static final String TLSv11 = "TLSv1.1";
-    private static final String TLSv12 = "TLSv1.2";
+    private static final String TLSV1 = "TLSV1";
+    private static final String TLSV11 = "TLSV1.1";
+    private static final String TLSV12 = "TLSV1.2";
 
-    private static final String[] ENABLED_PROTOCOLS = {TLSv1, TLSv11, TLSv12};
+    private static final String[] ENABLED_PROTOCOLS = {TLSV1, TLSV11, TLSV12};
     private static final String TMF_ALGORITHM = TrustManagerFactory.getDefaultAlgorithm();
 
     private SSLContext ctx;
@@ -92,8 +92,8 @@ public class TLSContext {
 
             if (protocol != null) {
                 ctx = SSLContext.getInstance(protocol);
-            }else {
-                ctx = SSLContext.getInstance(TLSv1);
+            } else {
+                ctx = SSLContext.getInstance(TLSV1);
             }
             ctx.init(keyManagers, trustManagers, null);
         } catch (UnrecoverableKeyException uke) {
@@ -149,7 +149,7 @@ public class TLSContext {
                                                                   KeyManagementException,
                                                                   KeyStoreReadException,
                                                                   KeyStoreNotFoundException {
-        this(null, null, truststore, trustpass, null, null, TLSv1);
+        this(null, null, truststore, trustpass, null, null, TLSV1);
     }
 
 
