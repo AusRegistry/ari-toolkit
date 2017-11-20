@@ -28,10 +28,7 @@ import com.ausregistry.jtoolkit2.ErrorPkg;
  */
 public class TLSContext {
     private static final String TLSV1 = "TLSv1";
-    private static final String TLSV11 = "TLSv1.1";
-    private static final String TLSV12 = "TLSv1.2";
 
-    private static final String[] ENABLED_PROTOCOLS = {TLSV1, TLSV11, TLSV12};
     private static final String TMF_ALGORITHM = TrustManagerFactory.getDefaultAlgorithm();
 
     private SSLContext ctx;
@@ -188,7 +185,6 @@ public class TLSContext {
             userLogger.severe(ioe.getMessage());
             throw ioe;
         }
-        socket.setEnabledProtocols(ENABLED_PROTOCOLS);
         socket.setSoTimeout(soTimeout);
         try {
             socket.startHandshake();
