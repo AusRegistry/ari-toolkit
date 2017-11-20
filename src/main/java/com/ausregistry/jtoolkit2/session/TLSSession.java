@@ -153,7 +153,7 @@ public class TLSSession implements Session, StatsManager {
             if (ctx == null) {
                 ctx = new TLSContext(properties.getKeyStoreFilename(), properties.getKeyStorePassphrase(),
                         properties.getTrustStoreFilename(), properties.getTrustStorePassphrase(),
-                        properties.getKeyStoreType(), properties.getSSLAlgorithm());
+                        properties.getKeyStoreType(), properties.getSSLAlgorithm(), properties.getSSLVersion());
             }
         } catch (Exception e) {
             throw new SessionConfigurationException(e);

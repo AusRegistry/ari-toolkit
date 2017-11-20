@@ -97,8 +97,7 @@ public interface SessionProperties {
     String getTrustStorePassphrase();
 
     /**
-     * The SSL version to use.  The only version currently supported by EPP is
-     * TLSv1.
+     * The SSL version to use.  The default version is TLSv1.
      */
     String getSSLVersion();
 
