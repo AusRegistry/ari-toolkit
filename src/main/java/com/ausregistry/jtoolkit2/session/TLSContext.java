@@ -27,9 +27,9 @@ import com.ausregistry.jtoolkit2.ErrorPkg;
  * </p>
  */
 public class TLSContext {
-    private static final String TLSV1 = "TLSV1";
-    private static final String TLSV11 = "TLSV1.1";
-    private static final String TLSV12 = "TLSV1.2";
+    private static final String TLSV1 = "TLSv1";
+    private static final String TLSV11 = "TLSv1.1";
+    private static final String TLSV12 = "TLSv1.2";
 
     private static final String[] ENABLED_PROTOCOLS = {TLSV1, TLSV11, TLSV12};
     private static final String TMF_ALGORITHM = TrustManagerFactory.getDefaultAlgorithm();
