@@ -1,5 +1,7 @@
 package com.ausregistry.jtoolkit2.se;
 
+import com.ausregistry.jtoolkit2.xml.XmlOutputConfig;
+
 /**
  * Use this to request service information in the form of an EPP greeting
  * from an EPP server.  Instances of this class generate via the toXML method
@@ -14,8 +16,8 @@ public final class Hello extends SendSE {
         xmlWriter.appendChild(xmlWriter.getRoot(), "hello");
     }
 
-    protected String toXMLImpl() throws org.xml.sax.SAXException {
-        return xmlWriter.toXML();
+    protected String toXMLImpl(XmlOutputConfig xmlOutputConfig) throws org.xml.sax.SAXException {
+        return xmlWriter.toXML(xmlOutputConfig);
     }
 }
 

@@ -37,7 +37,7 @@ final class XMLBuilderW3C implements XMLBuilder {
         builder = new StringBuilder(DEFAULT_DOC_SIZE);
     }
 
-    public String toXML(Element root) {
+    public String toXML(Element root, XmlOutputConfig xmlOutputConfig) {
         Logger.getLogger(pname + ".debug").finest("enter");
         writeDeclaration();
         dfs(root);

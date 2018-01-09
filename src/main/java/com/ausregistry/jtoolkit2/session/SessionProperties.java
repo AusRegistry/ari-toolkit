@@ -144,4 +144,29 @@ public interface SessionProperties {
      * prior to transmission.
      */
     boolean enforceStrictValidation();
+
+    /**
+     * Enforce XML output to include namespace prefix.
+     *
+     * <p>
+     * A namespace prefix is considered in-scope on the declaration element
+     * as well as on any of its descendant elements. Once declared, the prefix
+     * can be used in front of any element or attribute name separated by
+     * a colon (such as s:student).
+     * </p>
+     *
+     * <p>
+     * This complete name including the prefix is the lexical form of a qualified name (QName):
+     * </p>
+     * <pre>
+     *     QName = &lt;prefix&gt;:&lt;local name&gt;
+     * </pre>
+     *
+     * <p>
+     * If not configured, the default value will be {@code false}.
+     * </p>
+     *
+     * @return a boolean flag where true means XML output will have namespace prefix
+     */
+    boolean needOutputNamespacePrefixInXml();
 }

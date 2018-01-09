@@ -4,6 +4,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.ausregistry.jtoolkit2.xml.XMLBuilderSJSXP;
+import com.ausregistry.jtoolkit2.xml.XmlOutputConfig;
 
 /**
  * This class models the result element of EPP responses. From RFC5730: <blockquote> One or more {@code <result>}
@@ -126,7 +127,7 @@ public class Result implements java.io.Serializable {
 
     private String toXML(Node valueNode) {
         XMLBuilderSJSXP xmlBuilder = new XMLBuilderSJSXP();
-        return xmlBuilder.partialToXML(valueNode);
+        return xmlBuilder.partialToXML(valueNode, XmlOutputConfig.defaultConfig());
     }
 
     /**

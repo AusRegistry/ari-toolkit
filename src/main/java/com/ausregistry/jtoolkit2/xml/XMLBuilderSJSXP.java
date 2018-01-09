@@ -80,18 +80,18 @@ public final class XMLBuilderSJSXP implements XMLBuilder {
     }
 
     @Override
-    public String toXML(Element root) {
-        return toXML(root, enc, vers);
+    public String toXML(Element root, XmlOutputConfig xmlOutputConfig) {
+        return toXML(root, enc, vers, xmlOutputConfig);
     }
 
-    public String toXML(Element root, String encoding, String version) {
+    public String toXML(Element root, String encoding, String version, XmlOutputConfig xmlOutputConfig) {
         try {
             writer.writeStartDocument(encoding, version);
             String toolkitVersion = getToolkitVersion();
             if (!toolkitVersion.isEmpty()) {
                 writer.writeComment(toolkitVersion);
             }
-            dfs(root);
+            dfs(root, xmlOutputConfig);
             writer.flush();
         } catch (XMLStreamException xse) {
             Logger.getLogger(pname + ".maint").severe(xse.getMessage());
@@ -102,10 +102,10 @@ public final class XMLBuilderSJSXP implements XMLBuilder {
         return bufferStream.toString();
     }
 
-    public String partialToXML(Node topNode) {
+    public String partialToXML(Node topNode, XmlOutputConfig xmlOutputConfig) {
         try {
             writer.setNamespaceContext(namespaceContext);
-            dfs((Element) topNode, (Element) topNode);
+            dfs((Element) topNode, (Element) topNode, xmlOutputConfig);
             writer.flush();
         } catch (XMLStreamException xse) {
             Logger.getLogger(pname + ".maint").severe(xse.getMessage());
@@ -117,14 +117,15 @@ public final class XMLBuilderSJSXP implements XMLBuilder {
         return bufferStream.toString();
     }
 
-    private void dfs(Element e) throws XMLStreamException {
+    private void dfs(Element e, XmlOutputConfig xmlOutputConfig) throws XMLStreamException {
         writer.setNamespaceContext(namespaceContext);
-        dfs(e, null);
+        dfs(e, null, xmlOutputConfig);
     }
 
-    private void dfs(Element e, Element parent) throws XMLStreamException {
+    private void dfs(Element e, Element parent, XmlOutputConfig xmlOutputConfig) throws XMLStreamException {
         String uri = e.getNamespaceURI();
-        String prefix = e.lookupPrefix(uri);
+        String prefix = xmlOutputConfig.needsPrefixNamespace() ? namespaceContext.getPrefix(uri) : e.lookupPrefix(uri);
+
         String localName = e.getLocalName();
         if (localName == null) {
             localName = e.getNodeName();
@@ -137,9 +138,17 @@ public final class XMLBuilderSJSXP implements XMLBuilder {
             writer.setPrefix(prefix, uri);
         }
         if (e.hasChildNodes()) {
-            writer.writeStartElement(uri, localName);
+            if (prefix == null) {
+                writer.writeStartElement(uri, localName);
+            } else {
+                writer.writeStartElement(prefix, localName, uri);
+            }
         } else {
-            writer.writeEmptyElement(uri, localName);
+            if (prefix == null) {
+                writer.writeEmptyElement(uri, localName);
+            } else {
+                writer.writeEmptyElement(prefix, localName, uri);
+            }
         }
         if (parent == null
                 || (uri != null && !parent.getNamespaceURI().equals(uri))) {
@@ -148,6 +157,8 @@ public final class XMLBuilderSJSXP implements XMLBuilder {
 
             if (prefix == null) {
                 writer.writeDefaultNamespace(uri);
+            } else if (!e.hasAttribute("xmlns:" + prefix)) {
+                writer.writeNamespace(prefix, uri);
             }
         }
 
@@ -158,9 +169,7 @@ public final class XMLBuilderSJSXP implements XMLBuilder {
                 Node attr = attributes.item(i);
                 String name = attr.getNodeName();
                 String value = attr.getNodeValue();
-                if (!(name.startsWith("xmlns") && value.equals(uri))) {
-                    writer.writeAttribute(name, value);
-                }
+                writer.writeAttribute(name, value);
             }
         }
 
@@ -175,7 +184,7 @@ public final class XMLBuilderSJSXP implements XMLBuilder {
                 }
 
                 if (child instanceof Element) {
-                    dfs((Element) child, e);
+                    dfs((Element) child, e, xmlOutputConfig);
                 }
             }
         }

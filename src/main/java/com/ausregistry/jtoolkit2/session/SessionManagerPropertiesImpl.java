@@ -57,37 +57,37 @@ public class SessionManagerPropertiesImpl implements SessionManagerProperties, S
         return this;
     }
 
-    // / There is no default EPP server host.
+    // There is no default EPP server host.
     @Override
     public String getHostname() {
         return getStringProperty("epp.server.hostname");
     }
 
-    // / The standard EPP service port number is 700.
+    // The standard EPP service port number is 700.
     @Override
     public int getPort() {
         return getIntProperty("epp.server.port", 700);
     }
 
-    // / The EPP client identifier property has no default value.
+    // The EPP client identifier property has no default value.
     @Override
     public String getClientID() {
         return getStringProperty("epp.client.clID");
     }
 
-    // / The EPP client password property has no default value.
+    // The EPP client password property has no default value.
     @Override
     public String getClientPW() {
         return getStringProperty("epp.client.password");
     }
 
-    // / The default EPP version is '1.0'.
+    // The default EPP version is '1.0'.
     @Override
     public String getVersion() {
         return getStringProperty("epp.client.options.version", "1.0");
     }
 
-    // / The default EPP service element message language is English ('en').
+    // The default EPP service element message language is English ('en').
     @Override
     public String getLanguage() {
         return getStringProperty("epp.client.options.lang", "en");
@@ -138,65 +138,71 @@ public class SessionManagerPropertiesImpl implements SessionManagerProperties, S
         return getStringProperty("ssl.keymanager.algorithm");
     }
 
-    // / Defaults to the maximum value of an Integer.
+    // Defaults to the maximum value of an Integer.
     @Override
     public int getCommandLimit() {
         return getIntProperty("epp.server.command.limit", Integer.MAX_VALUE);
     }
 
-    // / Defaults to the maximum value of an Integer.
+    // Defaults to the maximum value of an Integer.
     @Override
     public int getCommandLimit(CommandType type) {
         String propName = "epp.server.command.limit." + type.getCommandName();
         return getIntProperty(propName, Integer.MAX_VALUE);
     }
 
-    // / Defaults to 1 second (1000 milliseconds).
+    // Defaults to 1 second (1000 milliseconds).
     @Override
     public long getCommandLimitInterval() {
         return getLongProperty("epp.server.command.limit.interval", 1000L);
     }
 
-    // / Defaults to 5 sessions.
+    // Defaults to 5 sessions.
     @Override
     public int getMaximumPoolSize() {
         return getIntProperty("epp.client.session.count.max", 5);
     }
 
-    // / Defaults to 2 minutes
+    // Defaults to 2 minutes
     @Override
     public long getWaitTimeout() {
         return getLongProperty("thread.wait.timeout", 120000);
     }
 
-    // / Defaults to 10 minutes (600000 milliseconds)
+    // Defaults to 10 minutes (600000 milliseconds)
     @Override
     public long getServerTimeout() {
         return getLongProperty("net.server.timeout", 600000);
     }
 
-    // / Defaults to 20 minutes (12 million milliseconds)
+    // Defaults to 20 minutes (12 million milliseconds)
     @Override
     public long getClientTimeout() {
         return getLongProperty("net.client.timeout", 12000000);
     }
 
-    // / Defaults to 20 seconds (20000 ms).
+    // Defaults to 20 seconds (20000 ms).
     @Override
     public long getAcquireTimeout() {
         return getLongProperty("session.acquire.timeout", 20000);
     }
 
-    // / Defaults to 12 seconds (12000 ms).
+    // Defaults to 12 seconds (12000 ms).
     @Override
     public int getSocketTimeout() {
         return getIntProperty("net.socket.timeout", 12000);
     }
 
-    // / Defaults to true.
+    // Defaults to true.
     @Override
     public boolean enforceStrictValidation() {
         return getBooleanProperty("xml.validation.enable", true);
+    }
+
+    // Defaults to false, so XML output will not have namespace prefixes
+    @Override
+    public boolean needOutputNamespacePrefixInXml() {
+        return getBooleanProperty("xml.output.namespace.prefixes", false);
     }
 
     @Override

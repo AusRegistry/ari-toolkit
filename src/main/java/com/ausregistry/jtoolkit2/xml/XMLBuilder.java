@@ -5,5 +5,5 @@ package com.ausregistry.jtoolkit2.xml;
  * DOM tree to an XML String.
  */
 public interface XMLBuilder {
-    String toXML(org.w3c.dom.Element root);
+    String toXML(org.w3c.dom.Element root, XmlOutputConfig xmlOutputConfig);
 }

@@ -139,6 +139,10 @@ public final class TestEnvironment implements SessionManagerProperties,
         return 20000L;
     }
 
+    public boolean needOutputNamespacePrefixInXml() {
+        return false;
+    }
+
     public int getCommandLimit(CommandType type) {
         if (!(type instanceof StandardCommandType)) {
             return 10;

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.logging.Logger;
 
 import com.ausregistry.jtoolkit2.xml.XMLWriter;
+import com.ausregistry.jtoolkit2.xml.XmlOutputConfig;
 
 /**
  * This defines the operations or actions for sending XML to an EPP based server.  It defines the user level logger.
@@ -25,24 +26,40 @@ abstract class SendSE implements Serializable {
 
     protected SendSE() { }
 
-    protected abstract String toXMLImpl() throws org.xml.sax.SAXException;
+    protected abstract String toXMLImpl(XmlOutputConfig xmlOutputConfig) throws org.xml.sax.SAXException;
 
     /**
-     * Serialize the EPP service element to XML.  This MUST be called prior
-     * to attempting to use Java serialization on this object.  Failure to
-     * do so will result in NullPointerException when toXML is called after
+     * Serialize the EPP service element to XML.
+     *
+     * This MUST be called prior to attempting to use Java serialization on this object.
+     * Failure to do so will result in NullPointerException when toXML is called after
      * deserializing the object.
      *
+     * @return XML content as string literal
      * @throws org.xml.sax.SAXException The XML representation of the command
      * failed schema validation.  Further attempts to serialize this command
      * will also fail.
+     * @see SendSE#toXML(XmlOutputConfig) toXML
      */
     public final String toXML() throws org.xml.sax.SAXException {
-        if (xml == null) {
-            xml = toXMLImpl();
-        }
+        return this.toXML(XmlOutputConfig.defaultConfig());
+    }
 
+    /**
+     * Serialize the EPP service element to XML using the given output config.
+     *
+     * @see XmlOutputConfig
+     *
+     * @param outputConfig a configuration that indicates how to output the XML
+     * @return XML content as string literal
+     * @throws org.xml.sax.SAXException
+     */
+    public final String toXML(XmlOutputConfig outputConfig) throws org.xml.sax.SAXException {
+        if (xml == null) {
+            xml = toXMLImpl(outputConfig);
+        }
         return xml;
     }
+
 }
 

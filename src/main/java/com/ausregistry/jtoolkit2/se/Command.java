@@ -2,6 +2,7 @@ package com.ausregistry.jtoolkit2.se;
 
 import com.ausregistry.jtoolkit2.ErrorPkg;
 import com.ausregistry.jtoolkit2.xml.XMLWriter;
+import com.ausregistry.jtoolkit2.xml.XmlOutputConfig;
 
 /**
  * Standard and extension EPP command service elements are modelled by
@@ -57,9 +58,9 @@ public abstract class Command extends SendSE {
      * failed schema validation.  Further attempts to serialize this command
      * will also fail.
      */
-    protected String toXMLImpl() throws org.xml.sax.SAXException {
+    protected String toXMLImpl(XmlOutputConfig xmlOutputConfig) throws org.xml.sax.SAXException {
         xmlWriter.appendChild(command, "clTRID").setTextContent(CLTRID.nextVal());
-        return xmlWriter.toXML();
+        return xmlWriter.toXML(xmlOutputConfig);
     }
 
     public int appendExtension(final CommandExtension ce) {

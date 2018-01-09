@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.net.ssl.SSLHandshakeException;
 import javax.net.ssl.SSLSocket;
 
+import com.ausregistry.jtoolkit2.xml.XmlOutputConfig;
 import org.xml.sax.SAXException;
 
 import com.ausregistry.jtoolkit2.ErrorPkg;
@@ -94,6 +95,7 @@ public class TLSSession implements Session, StatsManager {
     private Logger debugLogger;
     private Logger supportLogger;
     private Logger userLogger;
+    private boolean needOutputNamespacePrefixInXml;
 
     {
         pname = TLSSession.class.getPackage().getName();
@@ -146,6 +148,7 @@ public class TLSSession implements Session, StatsManager {
         commandCounter = new CommandCounter(properties.getCommandLimitInterval());
         this.acquireTimeout = properties.getAcquireTimeout();
         this.soTimeout = properties.getSocketTimeout();
+        this.needOutputNamespacePrefixInXml = properties.needOutputNamespacePrefixInXml();
 
         try {
             inaddr = InetAddress.getByName(properties.getHostname());
@@ -453,7 +456,11 @@ public class TLSSession implements Session, StatsManager {
     @Override
     public void write(Command command) throws IOException, ParsingException {
         try {
-            write(command.toXML());
+            if (needOutputNamespacePrefixInXml) {
+                write(command.toXML(XmlOutputConfig.prefixAllNamespaceConfig()));
+            } else {
+                write(command.toXML());
+            }
         } catch (SAXException saxe) {
             throw new ParsingException(saxe);
         }
