@@ -29,25 +29,36 @@ abstract class SendSE implements Serializable {
     protected abstract String toXMLImpl(XmlOutputConfig xmlOutputConfig) throws org.xml.sax.SAXException;
 
     /**
-     * Serialize the EPP service element to XML.  This MUST be called prior
-     * to attempting to use Java serialization on this object.  Failure to
-     * do so will result in NullPointerException when toXML is called after
+     * Serialize the EPP service element to XML.
+     *
+     * This MUST be called prior to attempting to use Java serialization on this object.
+     * Failure to do so will result in NullPointerException when toXML is called after
      * deserializing the object.
      *
+     * @return XML content as string literal
      * @throws org.xml.sax.SAXException The XML representation of the command
      * failed schema validation.  Further attempts to serialize this command
      * will also fail.
+     * @see SendSE#toXML(XmlOutputConfig) toXML
+     */
+    public final String toXML() throws org.xml.sax.SAXException {
+        return this.toXML(XmlOutputConfig.defaultConfig());
+    }
+
+    /**
+     * Serialize the EPP service element to XML using the given output config.
+     *
+     * @see XmlOutputConfig
+     *
+     * @param outputConfig a configuration that indicates how to output the XML
+     * @return XML content as string literal
+     * @throws org.xml.sax.SAXException
      */
     public final String toXML(XmlOutputConfig outputConfig) throws org.xml.sax.SAXException {
         if (xml == null) {
             xml = toXMLImpl(outputConfig);
         }
-
         return xml;
-    }
-
-    public final String toXML() throws org.xml.sax.SAXException {
-        return this.toXML(XmlOutputConfig.defaultConfig());
     }
 
 }
