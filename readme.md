@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/AusRegistry/ari-toolkit.png)](https://travis-ci.org/AusRegistry/ari-toolkit)
 ## Downloads
 
-The latest ari-toolkit is available for download. [ari-toolkit v3.10.1](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.10.1/arjtk-3.10.1.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.10.1/arjtk-3.10.1-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.10.1/arjtk-3.10.1-javadoc.jar))
+The latest ari-toolkit is available for download. [ari-toolkit v3.10.2](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.10.2/arjtk-3.10.2.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.10.2/arjtk-3.10.2-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.10.2/arjtk-3.10.2-javadoc.jar))
 
 For more information, please read [Installation and Setup](#installation-and-setup).
 
@@ -43,7 +43,7 @@ This toolkit also provides a mechanism to perform the following Trademark Cleari
 
 #### Direct download
 
-    Obtain the latest toolkit here: [Toolkit v3.10.1](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.10.1/arjtk-3.10.1.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.10.1/arjtk-3.10.1-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.10.1/arjtk-3.10.1-javadoc.jar))
+    Obtain the latest toolkit here: [Toolkit v3.10.2](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.10.2/arjtk-3.10.2.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.10.2/arjtk-3.10.2-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.10.2/arjtk-3.10.2-javadoc.jar))
 
 #### Dependency Management
 
@@ -52,7 +52,7 @@ Use your build's dependency management tool to automatically download the toolki
 * Repository: `http://ausregistry.github.com/repo/`
 * groupId: `au.com.ausregistry`
 * artifactId: `arjtk`
-* version: `3.10.1`
+* version: `3.10.2`
 
 For example (using Maven):
 
@@ -67,7 +67,7 @@ For example (using Maven):
        <dependency>
           <groupId>au.com.ausregistry</groupId>
           <artifactId>arjtk</artifactId>
-          <version>3.10.1</version>
+          <version>3.10.2</version>
        </dependency>
     </dependencies>
 
@@ -88,7 +88,7 @@ The following environment specifics are required:
 
 The Toolkit has been developed against the standard Java API, and has no runtime dependencies on external libraries.
 
-Since version 3.7.6 the toolkit no longer support Java SE 6. Only Java SE 7 and above are supported. 
+Since version 3.7.6 the toolkit no longer support Java SE 6. Only Java SE 7 and above are supported.
 
 #### UTF-8 Encoding
 
@@ -255,7 +255,13 @@ The default implementation of SessionManager gathers data such as the number of 
 
 The Toolkit provides Object->XML round-trip serialisation using classes in the *se packages. All commands extend from the Command class, and all responses extend from the Response class. The implementation uses DOM to construct and serialise XML and DOM and XPath to evaluate XML responses from the server.
 
+By default the XML output is prefixless, that is, a default namespace is always in effect on each element. Client of the toolkit may want to change this default behavior, when they intend to send EPP commands to certain registry backend that requires namespace prefixes on QNAME. There is a optional configuration item in `toolkit.properties` file:
+
+    xml.output.namespace.prefixes=true
+
 While construction of commands leads the caller to provide the minimal set of information, the Toolkit was designed to not pre-empt validations of parameter values such that changes to validation rules would not require new revisions of the Toolkit. It is the responsibility of the calling application to ensure the parameter values are correct and accurate for the target registry. The Toolkit provides a configuration option that turns on outbound schema validation to catch errors before a round-trip to the server. This is particularly useful when developing against the Toolkit.
+
+    xml.validation.enable=true
 
 Applications looking to extend the command/response framework should model their code from extensions provided in the core Toolkit. The com.ausregistry.jtoolkit2.se.secdns package provides an example command extension, and its use is documented in the section **Using extensions with commands**.
 
