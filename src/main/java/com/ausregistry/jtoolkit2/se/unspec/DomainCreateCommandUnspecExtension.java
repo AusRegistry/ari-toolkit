@@ -12,8 +12,8 @@ import org.w3c.dom.Element;
  * Domain Name Unspec Extension.</p>
  *
  * <p>Use this to identify the unspec associated with this domain name as part of an EPP Domain Create
- * command compliant with RFC5730 and RFC5731. The extContact, UIN, Reseleer, ReservationDomain, WhoisType
- * or Publish values can be supplied depending on the usage.
+ * command compliant with RFC5730 and RFC5731. The extContact, UIN, Travel Industry Acknowledgement,
+ * Reseleer, ReservationDomain, WhoisType or Publish values can be supplied depending on the usage.
  * The response expected from a server should be handled by a Domain Create Response.</p>
  *
  * @see com.ausregistry.jtoolkit2.se.DomainCreateCommand
@@ -31,6 +31,7 @@ public class DomainCreateCommandUnspecExtension implements CommandExtension {
     private String resellerUrl;
     private String resellerPhone;
     private String uin;
+    private Boolean travelIndustryAcknowledgement;
 
     @Deprecated
     public DomainCreateCommandUnspecExtension(String extContactId) {
@@ -76,6 +77,8 @@ public class DomainCreateCommandUnspecExtension implements CommandExtension {
 
         if (uin != null) {
             unspecValue.append(" UIN=").append(uin);
+        } else if (travelIndustryAcknowledgement != null) {
+            unspecValue.append(" TravelIndustry=").append(travelIndustryAcknowledgement ? "Y" : "N");
         }
 
         xmlWriter.appendChild(unspecElement, "unspec", ExtendedObjectType.UNSPEC.getURI())
@@ -113,5 +116,9 @@ public class DomainCreateCommandUnspecExtension implements CommandExtension {
 
     public void setUin(String uin) {
         this.uin = uin;
+    }
+
+    public void setTravelIndustryAcknowledgement(boolean travelIndustryAcknowledgement) {
+        this.travelIndustryAcknowledgement = travelIndustryAcknowledgement;
     }
 }

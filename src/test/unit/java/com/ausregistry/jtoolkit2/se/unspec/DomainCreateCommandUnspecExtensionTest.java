@@ -243,6 +243,36 @@ public class DomainCreateCommandUnspecExtensionTest {
         }
     }
 
+    @Test
+    public void shouldCreateValidXmlWhenTravelAckIsTrue() {
+        final Command cmd = new DomainCreateCommand("jtkutest.com.au", "jtkUT3st");
+        final DomainCreateCommandUnspecExtension ext = new DomainCreateCommandUnspecExtension();
+        ext.setTravelIndustryAcknowledgement(true);
+        try {
+            cmd.appendExtension(ext);
+            String expectedXml = getCommandXmlWithUnspec("TravelIndustry=Y");
+            assertEquals(expectedXml, cmd.toXML());
+
+        } catch (SAXException saxe) {
+            fail(saxe.getMessage());
+        }
+    }
+
+    @Test
+    public void shouldCreateValidXmlWhenTravelAckIsFalse() {
+        final Command cmd = new DomainCreateCommand("jtkutest.com.au", "jtkUT3st");
+        final DomainCreateCommandUnspecExtension ext = new DomainCreateCommandUnspecExtension();
+        ext.setTravelIndustryAcknowledgement(false);
+        try {
+            cmd.appendExtension(ext);
+            String expectedXml = getCommandXmlWithUnspec("TravelIndustry=N");
+            assertEquals(expectedXml, cmd.toXML());
+
+        } catch (SAXException saxe) {
+            fail(saxe.getMessage());
+        }
+    }
+
     private String getCommandXmlWithUnspec(String unspec) {
         String element;
         if (unspec == null) {

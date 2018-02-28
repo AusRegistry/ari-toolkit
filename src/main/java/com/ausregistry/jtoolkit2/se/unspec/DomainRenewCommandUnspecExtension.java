@@ -12,7 +12,8 @@ import org.w3c.dom.Element;
  * <p>Use this to command to restore a domain name in Redemption. The response expected from a
  * server should be handled by a Domain Renew Response.</p>
  *
- * <p>This extension is also used to specify the UIN for renew in the .travel zone.</p>
+ * <p>This extension is also used to specify the UIN or Travel Industry Acknowledgement
+ * for renew in the .travel zone.</p>
  *
  * @see com.ausregistry.jtoolkit2.se.DomainRenewCommand
  */
@@ -22,9 +23,14 @@ public class DomainRenewCommandUnspecExtension implements CommandExtension {
     private boolean trueData;
     private boolean validUse;
     private String uin;
+    private Boolean travelIndustryAcknowledgement;
 
     public DomainRenewCommandUnspecExtension(String uin) {
         this.uin = uin;
+    }
+
+    public DomainRenewCommandUnspecExtension(boolean travelIndustryAcknowledgement) {
+        this.travelIndustryAcknowledgement = travelIndustryAcknowledgement;
     }
 
     public DomainRenewCommandUnspecExtension(RestoreReasonCode restoreReasonCode, String restoreComment,
@@ -44,6 +50,8 @@ public class DomainRenewCommandUnspecExtension implements CommandExtension {
                     + " ValidUse=" + (validUse ? "Y" : "N"));
         } else if (uin != null) {
             addUnspecWithContent(command, "UIN=" + uin);
+        } else if (travelIndustryAcknowledgement != null) {
+            addUnspecWithContent(command, "TravelIndustry=" + (travelIndustryAcknowledgement ? "Y" : "N"));
         }
     }
 
