@@ -13,29 +13,21 @@ import org.w3c.dom.Element;
  * <p>Use this to command to transfer a domain name. The response expected from a
  * server should be handled by a Domain Transfer Response.</p>
  *
- * <p>This extension is also used to specify the UIN or Travel Industry Acknowledgement
- * for transfer in the .travel zone.</p>
+ * <p>This extension is also used to specify the UIN for transfer in the .travel zone.</p>
  *
  * @see com.ausregistry.jtoolkit2.se.DomainTransferRequestCommand
  */
 public class DomainTransferCommandUnspecExtension implements CommandExtension {
     private String uin;
-    private Boolean travelIndustryAcknowledgement;
 
     public DomainTransferCommandUnspecExtension(String uin) {
         this.uin = uin;
-    }
-
-    public DomainTransferCommandUnspecExtension(Boolean travelIndustryAcknowledgement) {
-        this.travelIndustryAcknowledgement = travelIndustryAcknowledgement;
     }
 
     @Override
     public void addToCommand(Command command) {
         if (uin != null) {
             addUnspecWithContent(command, "UIN=" + uin);
-        } else if (travelIndustryAcknowledgement != null) {
-            addUnspecWithContent(command, "TravelIndustry=" + (travelIndustryAcknowledgement ? "Y" : "N"));
         }
     }
 
