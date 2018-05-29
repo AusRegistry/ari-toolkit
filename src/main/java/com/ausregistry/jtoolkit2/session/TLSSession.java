@@ -417,11 +417,11 @@ public class TLSSession implements Session, StatsManager {
             supportLogger.info(data);
             return data;
         } catch (SocketTimeoutException ste) {
-            userLogger.severe(ste.getMessage());
-            userLogger.severe(ErrorPkg.getMessage("epp.session.read.timeout"));
+            userLogger.warning(ste.getMessage());
+            userLogger.warning(ErrorPkg.getMessage("epp.session.read.timeout"));
             throw ste;
         } catch (IOException ioe) {
-            userLogger.severe(ioe.getMessage());
+            userLogger.warning(ioe.getMessage());
             throw ioe;
         }
     }
