@@ -294,8 +294,10 @@ public class SessionPoolImpl implements SessionPool, StatsViewer {
             final int totCutoff = sessionProperties.getCommandLimit();
             final int cmdCutoff = (type == null ? totCutoff : sessionProperties.getCommandLimit(type));
 
+            boolean anySessionAvailable = false;
             for (Session session : pool) {
                 if (session.isAvailable()) {
+                    anySessionAvailable = true;
                     // total command count
                     int tc = session.getStatsManager().getRecentCommandCount();
                     // command-specific command count
@@ -309,11 +311,15 @@ public class SessionPoolImpl implements SessionPool, StatsViewer {
                                     CMD_COUNT_LIMIT, new String[] {type == null ? "all commands" : type.toString(),
                                             String.valueOf(cc), String.valueOf(cmdCutoff) }));
                         }
-                    } else {
-                        userLogger.info(ErrorPkg.getMessage("epp.session.rate.limit.exceeded", CMD_LIMIT_PAIR,
-                                new String[] {type.toString(), String.valueOf(cmdCutoff) }));
                     }
                 }
+            }
+
+            // If there is any session available but still cannot find a best session,
+            // it implies all the available sessions exceeded the command rate limit already.
+            if (anySessionAvailable && bestSession == null) {
+                userLogger.info(ErrorPkg.getMessage("epp.session.rate.limit.exceeded", CMD_LIMIT_PAIR,
+                        new String[] {type.toString(), String.valueOf(cmdCutoff) }));
             }
         }
 
