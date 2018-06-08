@@ -260,11 +260,6 @@ public class SessionPoolImpl implements SessionPool, StatsViewer {
         debugLogger.finest("enter");
         Session bestSession = null;
 
-        int cc; // command-specific command count
-        int tc; // total command count
-        int min = Integer.MAX_VALUE;
-        int cmdCutoff, totCutoff;
-
         Iterator<Session> iter = pool.iterator();
         CommandType type;
         if (obj instanceof Transaction[]) {
@@ -273,9 +268,6 @@ public class SessionPoolImpl implements SessionPool, StatsViewer {
             sessionSearch: while (iter.hasNext()) {
                 Session session = iter.next();
                 if (session.isAvailable()) {
-                    cmdCutoff = Integer.MAX_VALUE;
-                    totCutoff = Integer.MAX_VALUE;
-
                     for (Transaction tx : txs) {
                         CommandType t = tx.getCommand().getCommandType();
                         StatsManager m = session.getStatsManager();
@@ -298,23 +290,16 @@ public class SessionPoolImpl implements SessionPool, StatsViewer {
                 type = null;
             }
 
+            int min = Integer.MAX_VALUE;
+            final int totCutoff = sessionProperties.getCommandLimit();
+            final int cmdCutoff = (type == null ? totCutoff : sessionProperties.getCommandLimit(type));
+
             for (Session session : pool) {
                 if (session.isAvailable()) {
-                    cmdCutoff = Integer.MAX_VALUE;
-                    totCutoff = Integer.MAX_VALUE;
-
-                    if (type == null) {
-                        tc = session.getStatsManager().getRecentCommandCount();
-                        cc = tc;
-                        totCutoff = sessionProperties.getCommandLimit();
-                        cmdCutoff = totCutoff;
-                    } else {
-                        cc = session.getStatsManager().getRecentCommandCount(type);
-                        cmdCutoff = sessionProperties.getCommandLimit(type);
-
-                        tc = session.getStatsManager().getRecentCommandCount();
-                        totCutoff = sessionProperties.getCommandLimit();
-                    }
+                    // total command count
+                    int tc = session.getStatsManager().getRecentCommandCount();
+                    // command-specific command count
+                    int cc = (type == null ? tc : session.getStatsManager().getRecentCommandCount(type));
 
                     if (cc < cmdCutoff && cc < min && tc < totCutoff) {
                         min = cc;
