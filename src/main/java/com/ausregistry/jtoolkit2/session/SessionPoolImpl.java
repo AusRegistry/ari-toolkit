@@ -289,38 +289,7 @@ public class SessionPoolImpl implements SessionPool, StatsViewer {
             } else {
                 type = null;
             }
-
-            int min = Integer.MAX_VALUE;
-            final int totCutoff = sessionProperties.getCommandLimit();
-            final int cmdCutoff = (type == null ? totCutoff : sessionProperties.getCommandLimit(type));
-
-            boolean anySessionAvailable = false;
-            for (Session session : pool) {
-                if (session.isAvailable()) {
-                    anySessionAvailable = true;
-                    // total command count
-                    int tc = session.getStatsManager().getRecentCommandCount();
-                    // command-specific command count
-                    int cc = (type == null ? tc : session.getStatsManager().getRecentCommandCount(type));
-
-                    if (cc < cmdCutoff && cc < min && tc < totCutoff) {
-                        min = cc;
-                        bestSession = session;
-                        if (debugLogger.isLoggable(Level.FINE)) {
-                            debugLogger.fine(ErrorPkg.getMessage("epp.session.rate.limit.notexceeded",
-                                    CMD_COUNT_LIMIT, new String[] {type == null ? "all commands" : type.toString(),
-                                            String.valueOf(cc), String.valueOf(cmdCutoff) }));
-                        }
-                    }
-                }
-            }
-
-            // If there is any session available but still cannot find a best session,
-            // it implies all the available sessions exceeded the command rate limit already.
-            if (anySessionAvailable && bestSession == null) {
-                userLogger.info(ErrorPkg.getMessage("epp.session.rate.limit.exceeded", CMD_LIMIT_PAIR,
-                        new String[] {type.toString(), String.valueOf(cmdCutoff) }));
-            }
+            bestSession = availableSessionWithMinimumCommandCount(type);
         }
 
         if (bestSession != null) {
@@ -334,6 +303,44 @@ public class SessionPoolImpl implements SessionPool, StatsViewer {
         }
 
         debugLogger.finest("exit");
+        return bestSession;
+    }
+
+    private Session availableSessionWithMinimumCommandCount(CommandType type) {
+        Session bestSession = null;
+
+        int min = Integer.MAX_VALUE;
+        final int totCutoff = sessionProperties.getCommandLimit();
+        final int cmdCutoff = (type == null ? totCutoff : sessionProperties.getCommandLimit(type));
+
+        boolean anySessionAvailable = false;
+        for (Session session : pool) {
+            if (session.isAvailable()) {
+                anySessionAvailable = true;
+                // total command count
+                int tc = session.getStatsManager().getRecentCommandCount();
+                // command-specific command count
+                int cc = (type == null ? tc : session.getStatsManager().getRecentCommandCount(type));
+
+                if (cc < cmdCutoff && cc < min && tc < totCutoff) {
+                    // bookmark the minimum count and use it to compare with the next candidate
+                    min = cc;
+                    bestSession = session;
+                    if (debugLogger.isLoggable(Level.FINE)) {
+                        debugLogger.fine(ErrorPkg.getMessage("epp.session.rate.limit.notexceeded",
+                                CMD_COUNT_LIMIT, new String[] {type == null ? "all commands" : type.toString(),
+                                        String.valueOf(cc), String.valueOf(cmdCutoff) }));
+                    }
+                }
+            }
+        }
+
+        // If there is any session available but still cannot find a best session,
+        // it implies all the available sessions exceeded the command rate limit already.
+        if (anySessionAvailable && bestSession == null) {
+            userLogger.info(ErrorPkg.getMessage("epp.session.rate.limit.exceeded", CMD_LIMIT_PAIR,
+                    new String[] {type.toString(), String.valueOf(cmdCutoff) }));
+        }
         return bestSession;
     }
 
