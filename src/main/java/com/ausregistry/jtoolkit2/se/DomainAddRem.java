@@ -15,6 +15,8 @@ public abstract class DomainAddRem implements Appendable {
 
     private String type;
     private String[] nameservers;
+    private Host[] hosts;
+
     private String[] techContacts;
     private String[] adminContacts;
     private String[] billingContacts;
@@ -26,12 +28,39 @@ public abstract class DomainAddRem implements Appendable {
      * one must be specified.
      */
     public DomainAddRem(AddRemType type, String[] nameservers,
-            String[] techContacts, String[] adminContacts,
-            String[] billingContacts, Status[] statuses) {
+        String[] techContacts, String[] adminContacts,
+        String[] billingContacts, Status[] statuses) {
         this.type = type.toString();
 
         if (nameservers != null) {
             this.nameservers = nameservers.clone();
+        }
+        if (techContacts != null) {
+            this.techContacts = techContacts.clone();
+        }
+        if (adminContacts != null) {
+            this.adminContacts = adminContacts.clone();
+        }
+        if (billingContacts != null) {
+            this.billingContacts = billingContacts.clone();
+        }
+        if (statuses != null) {
+            this.statuses = statuses.clone();
+        }
+    }
+
+    /**
+     * Maximal specification of the attribute values which may be added or
+     * removed from a domain. Each of the parameters is optional, but at least
+     * one must be specified.
+     */
+    public DomainAddRem(AddRemType type, Host[] nameservers,
+        String[] techContacts, String[] adminContacts,
+        String[] billingContacts, Status[] statuses) {
+        this.type = type.toString();
+
+        if (nameservers != null) {
+            this.hosts = nameservers.clone();
         }
         if (techContacts != null) {
             this.techContacts = techContacts.clone();
@@ -52,9 +81,14 @@ public abstract class DomainAddRem implements Appendable {
 
         if (nameservers != null) {
             Element ns = xmlWriter.appendChild(addRem, "ns");
-
             for (String hostObj : nameservers) {
                 xmlWriter.appendChild(ns, "hostObj").setTextContent(hostObj);
+            }
+        }
+        if (hosts != null) {
+            Element ns = xmlWriter.appendChild(addRem, "ns");
+            for (Host hostAttr : hosts) {
+                hostAttr.appendToElement(xmlWriter, ns);
             }
         }
 

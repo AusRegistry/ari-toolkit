@@ -36,5 +36,33 @@ public class DomainRem extends DomainAddRem {
         super(AddRemType.REM, nameservers, techContacts, adminContacts,
                 billingContacts, statuses);
     }
-}
 
+    /**
+     * Remove associations from a domain.
+     *
+     * @param nameservers A  host as attribute with
+     * associated domain. To not remove any nameservers, this parameter
+     * must be null.
+     *
+     * @param techContacts A list of technical contact identifiers to
+     * disassociate from a domain. To not remove any technical contacts,
+     * this parameter must be null.
+     *
+     * @param adminContacts A list of admin contact identifiers to
+     * disassociate from a domain. To not remove any admin contacts,
+     * this parameter must be null.
+     *
+     * @param billingContacts A list of billing contact identifiers to
+     * disassociate from a domain. To not remove any billing contacts,
+     * this parameter must be null.
+     *
+     * @param statuses A list of statuses to remove from the domain. To
+     * not remove any statuses, this parameter must be null.
+     */
+    public DomainRem(Status[] statuses, String[] techContacts,
+        String[] adminContacts, String[] billingContacts, Host[] nameservers) {
+        super(AddRemType.REM, nameservers, techContacts, adminContacts,
+            billingContacts, statuses);
+
+    }
+}

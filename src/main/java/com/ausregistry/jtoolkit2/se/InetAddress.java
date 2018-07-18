@@ -1,8 +1,8 @@
 package com.ausregistry.jtoolkit2.se;
 
-import com.ausregistry.jtoolkit2.xml.XMLWriter;
-
 import org.w3c.dom.Element;
+
+import com.ausregistry.jtoolkit2.xml.XMLWriter;
 
 /**
  * Host Internet addresses are configured and viewed via instances of this
@@ -54,6 +54,10 @@ public class InetAddress implements Appendable {
 
     public Element appendToElement(XMLWriter xmlWriter, Element parent) {
         return xmlWriter.appendChild(parent, "addr", textRep, "ip", getVersion());
+    }
+
+    public Element appendHostAddrToElement(XMLWriter xmlWriter, Element parent) {
+        return xmlWriter.appendChild(parent, "hostAddr", textRep, "ip", getVersion());
     }
 }
 

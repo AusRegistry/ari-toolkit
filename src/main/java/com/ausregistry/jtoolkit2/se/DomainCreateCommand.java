@@ -89,5 +89,71 @@ public class DomainCreateCommand extends CreateCommand {
                     "authInfo"),
                 "pw").setTextContent(pw);
     }
+
+    /**
+     * Most verbose constructor for a domain:create EPP command. All core EPP
+     * domain:create attributes may be set using this constructor.
+     * nameserver will be passed as attribute in this command
+     *
+     * @throws IllegalArgumentException if {@code name} or {@code pw} are {@code null}.
+     */
+    public DomainCreateCommand(String name, String pw, String registrantID,
+        String[] techContacts, String[] adminContacts,
+        String[] billingContacts, Host[] nameservers, Period period, boolean hostAttribute) {
+        super(StandardObjectType.DOMAIN, name);
+
+        if (name == null || pw == null) {
+            throw new IllegalArgumentException(ErrorPkg.getMessage(
+                "se.domain.create.missing_arg"));
+        }
+
+        if (period != null) {
+            period.appendPeriod(xmlWriter, objElement);
+        }
+        if (hostAttribute) {
+            if (nameservers != null) {
+                Element ns = xmlWriter.appendChild(objElement, "ns");
+                for (Host hostAttr : nameservers) {
+                    hostAttr.appendToElement(xmlWriter, ns);
+                }
+            }
+        } else {
+            if (nameservers != null) {
+                Element ns = xmlWriter.appendChild(objElement, "ns");
+                for (Host hostObj : nameservers) {
+                    xmlWriter.appendChild(ns, "hostObj").setTextContent(hostObj.getName());
+                }
+            }
+        }
+
+        if (registrantID != null) {
+            xmlWriter.appendChild(objElement, "registrant").setTextContent(
+                registrantID);
+        }
+
+        if (adminContacts != null) {
+            for (String contactID : adminContacts) {
+                xmlWriter.appendChild(objElement, "contact", contactID, "type", "admin");
+            }
+        }
+
+        if (techContacts != null) {
+            for (String contactID : techContacts) {
+                xmlWriter.appendChild(objElement, "contact", contactID, "type", "tech");
+            }
+        }
+
+        if (billingContacts != null) {
+            for (String contactID : billingContacts) {
+                xmlWriter.appendChild(objElement, "contact", contactID, "type", "billing");
+            }
+        }
+
+        xmlWriter.appendChild(
+            xmlWriter.appendChild(
+                objElement,
+                "authInfo"),
+            "pw").setTextContent(pw);
+    }
 }
 
