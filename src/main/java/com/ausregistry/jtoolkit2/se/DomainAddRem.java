@@ -1,7 +1,6 @@
 package com.ausregistry.jtoolkit2.se;
 
 import com.ausregistry.jtoolkit2.xml.XMLWriter;
-
 import org.w3c.dom.Element;
 
 /**
@@ -14,8 +13,8 @@ public abstract class DomainAddRem implements Appendable {
     private static final long serialVersionUID = -5023022665651367748L;
 
     private String type;
-    private String[] nameservers;
     private Host[] hosts;
+    private boolean asHostAttrType;
 
     private String[] techContacts;
     private String[] adminContacts;
@@ -30,23 +29,9 @@ public abstract class DomainAddRem implements Appendable {
     public DomainAddRem(AddRemType type, String[] nameservers,
         String[] techContacts, String[] adminContacts,
         String[] billingContacts, Status[] statuses) {
-        this.type = type.toString();
 
-        if (nameservers != null) {
-            this.nameservers = nameservers.clone();
-        }
-        if (techContacts != null) {
-            this.techContacts = techContacts.clone();
-        }
-        if (adminContacts != null) {
-            this.adminContacts = adminContacts.clone();
-        }
-        if (billingContacts != null) {
-            this.billingContacts = billingContacts.clone();
-        }
-        if (statuses != null) {
-            this.statuses = statuses.clone();
-        }
+        this(type, hostObject(nameservers), techContacts, adminContacts, billingContacts, statuses);
+        this.asHostAttrType = false;
     }
 
     /**
@@ -74,21 +59,21 @@ public abstract class DomainAddRem implements Appendable {
         if (statuses != null) {
             this.statuses = statuses.clone();
         }
+
+        this.asHostAttrType = true;
     }
 
     public Element appendToElement(XMLWriter xmlWriter, Element parent) {
         Element addRem = xmlWriter.appendChild(parent, type);
 
-        if (nameservers != null) {
-            Element ns = xmlWriter.appendChild(addRem, "ns");
-            for (String hostObj : nameservers) {
-                xmlWriter.appendChild(ns, "hostObj").setTextContent(hostObj);
-            }
-        }
         if (hosts != null) {
             Element ns = xmlWriter.appendChild(addRem, "ns");
             for (Host hostAttr : hosts) {
-                hostAttr.appendToElement(xmlWriter, ns);
+                if (asHostAttrType) {
+                    hostAttr.appendToElement(xmlWriter, ns);
+                } else {
+                    xmlWriter.appendChild(ns, "hostObj").setTextContent(hostAttr.getName());
+                }
             }
         }
 
@@ -124,6 +109,17 @@ public abstract class DomainAddRem implements Appendable {
         }
 
         return addRem;
+    }
+
+    private static Host[] hostObject(String[] nameservers) {
+        if (nameservers != null && nameservers.length > 0) {
+            Host[] results = new Host[nameservers.length];
+            for (int i = 0; i < nameservers.length; i++) {
+                results[i] = new Host(nameservers[i]);
+            }
+            return results;
+        }
+        return null;
     }
 }
 

@@ -59,8 +59,8 @@ public class DomainAdd extends DomainAddRem {
      * @param statuses A list of statuses to add to a domain.  To not add any
      * statuses, this parameter must be null.
      */
-    public DomainAdd(Status[] statuses, String[] techContacts,
-        String[] adminContacts, String[] billingContacts, Host[] nameservers) {
+    public DomainAdd(Host[] nameservers, String[] techContacts,
+        String[] adminContacts, String[] billingContacts, Status[] statuses) {
 
         super(AddRemType.ADD, nameservers, techContacts, adminContacts,
             billingContacts, statuses);

@@ -59,8 +59,8 @@ public class DomainRem extends DomainAddRem {
      * @param statuses A list of statuses to remove from the domain. To
      * not remove any statuses, this parameter must be null.
      */
-    public DomainRem(Status[] statuses, String[] techContacts,
-        String[] adminContacts, String[] billingContacts, Host[] nameservers) {
+    public DomainRem(Host[] nameservers, String[] techContacts,
+        String[] adminContacts, String[] billingContacts, Status[] statuses) {
         super(AddRemType.REM, nameservers, techContacts, adminContacts,
             billingContacts, statuses);
 

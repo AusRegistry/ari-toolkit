@@ -56,8 +56,5 @@ public class InetAddress implements Appendable {
         return xmlWriter.appendChild(parent, "addr", textRep, "ip", getVersion());
     }
 
-    public Element appendHostAddrToElement(XMLWriter xmlWriter, Element parent) {
-        return xmlWriter.appendChild(parent, "hostAddr", textRep, "ip", getVersion());
-    }
 }
 

@@ -10,6 +10,8 @@ import com.ausregistry.jtoolkit2.xml.XMLWriter;
 public class Host implements Appendable {
     private static final long serialVersionUID = -8790808568589212577L;
 
+    private static final InetAddress[] EMPTY_ADDRESSES = {};
+
     private String name;
     private InetAddress[] addresses;
 
@@ -17,8 +19,13 @@ public class Host implements Appendable {
      * Minimal information required as per RFC5733 for creation of a contact.
      */
     public Host(String name, InetAddress[] addresses) {
+        assert name != null;
         this.name = name;
         this.addresses = addresses;
+    }
+
+    public Host(String name) {
+        this(name, EMPTY_ADDRESSES);
     }
 
     /**
@@ -49,19 +56,17 @@ public class Host implements Appendable {
         this.addresses = addresses;
     }
 
+    @Override
     public Element appendToElement(XMLWriter xmlWriter, Element parent) {
         Element hostAttr = xmlWriter.appendChild(parent, "hostAttr");
-        if (name != null) {
 
-            xmlWriter.appendChild(hostAttr, "hostName").setTextContent(name);
-        }
+        xmlWriter.appendChild(hostAttr, "hostName").setTextContent(name);
         if (addresses != null && addresses.length > 0) {
             for (InetAddress inaddr : addresses) {
                 assert inaddr != null;
-                inaddr.appendHostAddrToElement(xmlWriter, hostAttr);
+                xmlWriter.appendChild(hostAttr, "hostAddr", inaddr.getTextRep(), "ip", inaddr.getVersion());
             }
         }
-
         return parent;
     }
 }

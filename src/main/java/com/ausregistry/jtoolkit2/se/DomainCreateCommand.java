@@ -1,8 +1,8 @@
 package com.ausregistry.jtoolkit2.se;
 
-import com.ausregistry.jtoolkit2.ErrorPkg;
-
 import org.w3c.dom.Element;
+
+import com.ausregistry.jtoolkit2.ErrorPkg;
 
 /**
  * Mapping of EPP urn:ietf:params:xml:ns:domain-1.0 create command specified in
@@ -40,54 +40,10 @@ public class DomainCreateCommand extends CreateCommand {
      * @throws IllegalArgumentException if {@code name} or {@code pw} are {@code null}.
      */
     public DomainCreateCommand(String name, String pw, String registrantID,
-            String[] techContacts, String[] adminContacts,
-            String[] billingContacts, String[] nameservers, Period period) {
-        super(StandardObjectType.DOMAIN, name);
-
-        if (name == null || pw == null) {
-            throw new IllegalArgumentException(ErrorPkg.getMessage(
-                        "se.domain.create.missing_arg"));
-        }
-
-        if (period != null) {
-            period.appendPeriod(xmlWriter, objElement);
-        }
-
-        if (nameservers != null) {
-            Element ns = xmlWriter.appendChild(objElement, "ns");
-            for (String hostObj : nameservers) {
-                xmlWriter.appendChild(ns, "hostObj").setTextContent(hostObj);
-            }
-        }
-
-        if (registrantID != null) {
-            xmlWriter.appendChild(objElement, "registrant").setTextContent(
-                    registrantID);
-        }
-
-        if (adminContacts != null) {
-            for (String contactID : adminContacts) {
-                xmlWriter.appendChild(objElement, "contact", contactID, "type", "admin");
-            }
-        }
-
-        if (techContacts != null) {
-            for (String contactID : techContacts) {
-                xmlWriter.appendChild(objElement, "contact", contactID, "type", "tech");
-            }
-        }
-
-        if (billingContacts != null) {
-            for (String contactID : billingContacts) {
-                xmlWriter.appendChild(objElement, "contact", contactID, "type", "billing");
-            }
-        }
-
-        xmlWriter.appendChild(
-                xmlWriter.appendChild(
-                    objElement,
-                    "authInfo"),
-                "pw").setTextContent(pw);
+        String[] techContacts, String[] adminContacts,
+        String[] billingContacts, String[] nameservers, Period period) {
+        this(name, pw, registrantID, techContacts, adminContacts, billingContacts, hostObject(nameservers), period,
+            false);
     }
 
     /**
@@ -154,6 +110,16 @@ public class DomainCreateCommand extends CreateCommand {
                 objElement,
                 "authInfo"),
             "pw").setTextContent(pw);
+    }
+    private static Host[] hostObject(String[] nameservers) {
+        if (nameservers != null && nameservers.length > 0) {
+            Host[] results = new Host[nameservers.length];
+            for (int i = 0; i < nameservers.length; i++) {
+                results[i] = new Host(nameservers[i]);
+            }
+            return results;
+        }
+        return null;
     }
 }
 
