@@ -1,7 +1,8 @@
 package com.ausregistry.jtoolkit2.se;
 
-import com.ausregistry.jtoolkit2.xml.XMLWriter;
+import static com.ausregistry.jtoolkit2.se.Host.hostObjects;
 
+import com.ausregistry.jtoolkit2.xml.XMLWriter;
 import org.w3c.dom.Element;
 
 /**
@@ -14,7 +15,9 @@ public abstract class DomainAddRem implements Appendable {
     private static final long serialVersionUID = -5023022665651367748L;
 
     private String type;
-    private String[] nameservers;
+    private Host[] hosts;
+    private boolean asHostAttrType;
+
     private String[] techContacts;
     private String[] adminContacts;
     private String[] billingContacts;
@@ -26,12 +29,25 @@ public abstract class DomainAddRem implements Appendable {
      * one must be specified.
      */
     public DomainAddRem(AddRemType type, String[] nameservers,
-            String[] techContacts, String[] adminContacts,
-            String[] billingContacts, Status[] statuses) {
+        String[] techContacts, String[] adminContacts,
+        String[] billingContacts, Status[] statuses) {
+
+        this(type, hostObjects(nameservers), techContacts, adminContacts, billingContacts, statuses);
+        this.asHostAttrType = false;
+    }
+
+    /**
+     * Maximal specification of the attribute values which may be added or
+     * removed from a domain. Each of the parameters is optional, but at least
+     * one must be specified.
+     */
+    public DomainAddRem(AddRemType type, Host[] nameservers,
+        String[] techContacts, String[] adminContacts,
+        String[] billingContacts, Status[] statuses) {
         this.type = type.toString();
 
         if (nameservers != null) {
-            this.nameservers = nameservers.clone();
+            this.hosts = nameservers.clone();
         }
         if (techContacts != null) {
             this.techContacts = techContacts.clone();
@@ -45,16 +61,21 @@ public abstract class DomainAddRem implements Appendable {
         if (statuses != null) {
             this.statuses = statuses.clone();
         }
+
+        this.asHostAttrType = true;
     }
 
     public Element appendToElement(XMLWriter xmlWriter, Element parent) {
         Element addRem = xmlWriter.appendChild(parent, type);
 
-        if (nameservers != null) {
+        if (hosts != null) {
             Element ns = xmlWriter.appendChild(addRem, "ns");
-
-            for (String hostObj : nameservers) {
-                xmlWriter.appendChild(ns, "hostObj").setTextContent(hostObj);
+            for (Host hostAttr : hosts) {
+                if (asHostAttrType) {
+                    hostAttr.appendToElement(xmlWriter, ns);
+                } else {
+                    xmlWriter.appendChild(ns, "hostObj").setTextContent(hostAttr.getName());
+                }
             }
         }
 
@@ -91,5 +112,6 @@ public abstract class DomainAddRem implements Appendable {
 
         return addRem;
     }
+
 }
 
