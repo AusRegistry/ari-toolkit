@@ -77,7 +77,7 @@ public class DomainCreateCommandTest {
                 new InetAddress[] {
                     new InetAddress(IPVersion.IPv4, "192.168.0.1")}),
                 new Host("ns4.jtkutest.com.au")},
-            new Period(6), true);
+            new Period(6));
         try {
             String xml = cmd.toXML();
             assertEquals(

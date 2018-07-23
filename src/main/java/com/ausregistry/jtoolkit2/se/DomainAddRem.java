@@ -1,5 +1,7 @@
 package com.ausregistry.jtoolkit2.se;
 
+import static com.ausregistry.jtoolkit2.se.Host.hostObjects;
+
 import com.ausregistry.jtoolkit2.xml.XMLWriter;
 import org.w3c.dom.Element;
 
@@ -30,7 +32,7 @@ public abstract class DomainAddRem implements Appendable {
         String[] techContacts, String[] adminContacts,
         String[] billingContacts, Status[] statuses) {
 
-        this(type, hostObject(nameservers), techContacts, adminContacts, billingContacts, statuses);
+        this(type, hostObjects(nameservers), techContacts, adminContacts, billingContacts, statuses);
         this.asHostAttrType = false;
     }
 
@@ -111,15 +113,5 @@ public abstract class DomainAddRem implements Appendable {
         return addRem;
     }
 
-    private static Host[] hostObject(String[] nameservers) {
-        if (nameservers != null && nameservers.length > 0) {
-            Host[] results = new Host[nameservers.length];
-            for (int i = 0; i < nameservers.length; i++) {
-                results[i] = new Host(nameservers[i]);
-            }
-            return results;
-        }
-        return null;
-    }
 }
 

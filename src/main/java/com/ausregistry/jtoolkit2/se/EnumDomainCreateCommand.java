@@ -45,7 +45,7 @@ public final class EnumDomainCreateCommand extends DomainCreateCommand {
             NAPTR[] naptrs, Period period) {
         super(name, pw, registrantID,
                 techContacts, adminContacts, billingContacts,
-                null, period);
+                EMPTY_NAMESERVERS, period);
         setExtension(naptrs);
     }
 

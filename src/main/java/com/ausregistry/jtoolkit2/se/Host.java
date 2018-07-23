@@ -28,6 +28,17 @@ public class Host implements Appendable {
         this(name, EMPTY_ADDRESSES);
     }
 
+    static Host[] hostObjects(String[] nameservers) {
+        if (nameservers != null && nameservers.length > 0) {
+            Host[] results = new Host[nameservers.length];
+            for (int i = 0; i < nameservers.length; i++) {
+                results[i] = new Host(nameservers[i]);
+            }
+            return results;
+        }
+        return null;
+    }
+
     /**
      * @return the name
      */

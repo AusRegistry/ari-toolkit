@@ -1,5 +1,7 @@
 package com.ausregistry.jtoolkit2.se;
 
+import static com.ausregistry.jtoolkit2.se.Host.hostObjects;
+
 import org.w3c.dom.Element;
 
 import com.ausregistry.jtoolkit2.ErrorPkg;
@@ -13,6 +15,7 @@ import com.ausregistry.jtoolkit2.ErrorPkg;
  * XML.
  */
 public class DomainCreateCommand extends CreateCommand {
+    protected static final String[] EMPTY_NAMESERVERS = null;
     private static final long serialVersionUID = -5572484023403174763L;
 
     /**
@@ -20,12 +23,12 @@ public class DomainCreateCommand extends CreateCommand {
      * the least information required for a valid EPP domain create command.
      */
     public DomainCreateCommand(String name, String pw) {
-        this(name, pw, null, null, null, null, null, null);
+        this(name, pw, null, null, null, null, EMPTY_NAMESERVERS, null);
     }
 
     public DomainCreateCommand(String name, String pw, String registrantID,
             String[] techContacts) {
-        this(name, pw, registrantID, techContacts, null, null, null, null);
+        this(name, pw, registrantID, techContacts, null, null, EMPTY_NAMESERVERS, null);
     }
 
     public DomainCreateCommand(String name, String pw, String registrantID,
@@ -33,17 +36,18 @@ public class DomainCreateCommand extends CreateCommand {
         this(name, pw, registrantID, techContacts, null, null, nameservers, null);
     }
 
-    /**
-     * Most verbose constructor for a domain:create EPP command.  All core EPP
-     * domain:create attributes may be set using this constructor.
-     *
-     * @throws IllegalArgumentException if {@code name} or {@code pw} are {@code null}.
-     */
     public DomainCreateCommand(String name, String pw, String registrantID,
         String[] techContacts, String[] adminContacts,
         String[] billingContacts, String[] nameservers, Period period) {
-        this(name, pw, registrantID, techContacts, adminContacts, billingContacts, hostObject(nameservers), period,
-            false);
+        this(name, pw, registrantID, techContacts, adminContacts, billingContacts,
+                hostObjects(nameservers), period, false);
+    }
+
+    public DomainCreateCommand(String name, String pw, String registrantID,
+        String[] techContacts, String[] adminContacts,
+        String[] billingContacts, Host[] nameservers, Period period) {
+        this(name, pw, registrantID, techContacts, adminContacts, billingContacts,
+                nameservers, period, true);
     }
 
     /**
@@ -53,9 +57,9 @@ public class DomainCreateCommand extends CreateCommand {
      *
      * @throws IllegalArgumentException if {@code name} or {@code pw} are {@code null}.
      */
-    public DomainCreateCommand(String name, String pw, String registrantID,
+    private DomainCreateCommand(String name, String pw, String registrantID,
         String[] techContacts, String[] adminContacts,
-        String[] billingContacts, Host[] nameservers, Period period, boolean hostAttribute) {
+        String[] billingContacts, Host[] nameservers, Period period, boolean asHostAttribute) {
         super(StandardObjectType.DOMAIN, name);
 
         if (name == null || pw == null) {
@@ -66,16 +70,14 @@ public class DomainCreateCommand extends CreateCommand {
         if (period != null) {
             period.appendPeriod(xmlWriter, objElement);
         }
-        if (hostAttribute) {
-            if (nameservers != null) {
-                Element ns = xmlWriter.appendChild(objElement, "ns");
+
+        if (nameservers != null && nameservers.length > 0) {
+            Element ns = xmlWriter.appendChild(objElement, "ns");
+            if (asHostAttribute) {
                 for (Host hostAttr : nameservers) {
                     hostAttr.appendToElement(xmlWriter, ns);
                 }
-            }
-        } else {
-            if (nameservers != null) {
-                Element ns = xmlWriter.appendChild(objElement, "ns");
+            } else {
                 for (Host hostObj : nameservers) {
                     xmlWriter.appendChild(ns, "hostObj").setTextContent(hostObj.getName());
                 }
@@ -110,16 +112,6 @@ public class DomainCreateCommand extends CreateCommand {
                 objElement,
                 "authInfo"),
             "pw").setTextContent(pw);
-    }
-    private static Host[] hostObject(String[] nameservers) {
-        if (nameservers != null && nameservers.length > 0) {
-            Host[] results = new Host[nameservers.length];
-            for (int i = 0; i < nameservers.length; i++) {
-                results[i] = new Host(nameservers[i]);
-            }
-            return results;
-        }
-        return null;
     }
 }
 

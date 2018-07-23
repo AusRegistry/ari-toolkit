@@ -1,4 +1,4 @@
-
+package com.ausregistry.jtoolkit2.se;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
@@ -7,13 +7,6 @@ import org.junit.Test;
 import org.xml.sax.SAXException;
 
 import com.ausregistry.jtoolkit2.Timer;
-import com.ausregistry.jtoolkit2.se.CLTRID;
-import com.ausregistry.jtoolkit2.se.Command;
-import com.ausregistry.jtoolkit2.se.DomainAdd;
-import com.ausregistry.jtoolkit2.se.DomainRem;
-import com.ausregistry.jtoolkit2.se.DomainUpdateCommand;
-import com.ausregistry.jtoolkit2.se.Host;
-import com.ausregistry.jtoolkit2.se.Status;
 import com.ausregistry.jtoolkit2.se.secdns.DSData;
 import com.ausregistry.jtoolkit2.se.secdns.DSOrKeyType;
 import com.ausregistry.jtoolkit2.se.secdns.SecDnsDomainUpdateCommandExtension;
