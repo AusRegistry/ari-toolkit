@@ -143,7 +143,7 @@ public class Result implements java.io.Serializable {
      * Return the text content of the resultValue element at the specified index.
      */
     public String getResultExtReason(int nodeIndex) {
-        if (nodeIndex > resultExtvalueReasons.length) {
+        if (resultExtvalueReasons == null || nodeIndex > resultExtvalueReasons.length) {
             return null;
         }
 
