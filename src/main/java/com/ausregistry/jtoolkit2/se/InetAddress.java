@@ -55,6 +55,13 @@ public class InetAddress implements Appendable {
     public Element appendToElement(XMLWriter xmlWriter, Element parent) {
         return xmlWriter.appendChild(parent, "addr", textRep, "ip", getVersion());
     }
-
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "InetAddress [" + (version != null ? "version=" + version + ", " : "")
+            + (textRep != null ? "textRep=" + textRep : "") + "]";
+    }
 }
 
