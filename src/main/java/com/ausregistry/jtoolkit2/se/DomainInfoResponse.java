@@ -10,7 +10,7 @@ import javax.xml.xpath.XPathExpressionException;
 
 /**
  * Use this to access domain object information as provided in an EPP domain
- * info response compliant with RFC5730 and RFC5731.  Such a service element is
+ * info response compliant with RFC5730 and RFC5731. Such a service element is
  * sent by a compliant EPP server in response to a valid domain info command,
  * implemented by the DomainInfoCommand class.
  *
@@ -33,6 +33,13 @@ public class DomainInfoResponse extends InfoResponse {
     protected static final String DOM_PW_EXPR = DOM_INF_DATA_EXPR + "/domain:authInfo/domain:pw/text()";
     protected static final String DOM_REGISTRANT_EXPR = DOM_INF_DATA_EXPR + "/domain:registrant/text()";
     protected static final String DOM_EX_DATE_EXPR = DOM_INF_DATA_EXPR + "/domain:exDate/text()";
+    private static final String DOMAIN_HOST_ATTR_COUNT_EXPR =
+        "count(" + DOM_INF_DATA_EXPR + "/domain:ns/domain:hostAttr)";
+    private static final String DOMAIN_ATTR_EXPR_IDX = DOM_INF_DATA_EXPR + "/domain:ns/domain:hostAttr[IDX]";
+    private static final String DOMAIN_TXT_EXPR = "/text()";
+    private static final String HOS_ADDR_IP_EXPR = "/@ip";
+    private static final String HOST_ATTR_IDX_EXPR = "/domain:hostAddr[IDX]";
+    private static final String HOST_ATTR_EXPR = "/domain:hostAddr";
     protected static final String DOM_NS_EXPR = DOM_INF_DATA_EXPR + "/domain:ns/domain:hostObj/text()";
     protected static final String DOM_HOST_EXPR = DOM_INF_DATA_EXPR + "/domain:host/text()";
     protected static final String DOM_CON_EXPR = DOM_INF_DATA_EXPR + "/domain:contact[@type='TYPE']/text()";
@@ -47,6 +54,7 @@ public class DomainInfoResponse extends InfoResponse {
     private String[] delHosts, subHosts;
     private GregorianCalendar exDate;
     private String exDateStr;
+    private Host[] hosts;
 
     public DomainInfoResponse() {
         super(StandardObjectType.DOMAIN);
@@ -145,6 +153,23 @@ public class DomainInfoResponse extends InfoResponse {
                 exDate = EPPDateFormatter.fromXSDateTime(exDateStr);
             }
             delHosts = xmlDoc.getNodeValues(DOM_NS_EXPR);
+            int attrCount = xmlDoc.getNodeCount(DOMAIN_HOST_ATTR_COUNT_EXPR);
+            hosts = new Host[attrCount];
+
+            for (int k = 0; k < attrCount; k++) {
+                String hostAttrExpr = ReceiveSE.replaceIndex(DOMAIN_ATTR_EXPR_IDX, k + 1);
+                String hostName = xmlDoc.getNodeValue(hostAttrExpr + "/domain:hostName" + DOMAIN_TXT_EXPR);
+                String hostAddrExpr = hostAttrExpr + HOST_ATTR_IDX_EXPR;
+                int addrCount = xmlDoc.getNodeCount("count(" + hostAttrExpr + HOST_ATTR_EXPR + ")");
+                InetAddress[] inetAddresses = new InetAddress[addrCount];
+                for (int i = 0; i < addrCount; i++) {
+                    String qry = ReceiveSE.replaceIndex(hostAddrExpr, i + 1);
+                    String addr = xmlDoc.getNodeValue(qry + DOMAIN_TXT_EXPR);
+                    String version = xmlDoc.getNodeValue(qry + HOS_ADDR_IP_EXPR);
+                    inetAddresses[i] = new InetAddress(IPVersion.value(version), addr);
+                }
+                hosts[k] = new Host(hostName, inetAddresses);
+            }
             subHosts = xmlDoc.getNodeValues(DOM_HOST_EXPR);
 
             techContacts = xmlDoc.getNodeValues(DOM_CON_TECH_EXPR);
@@ -171,6 +196,10 @@ public class DomainInfoResponse extends InfoResponse {
 
         if (delHosts != null) {
             retval += "(nameserver-hosts = " + arrayToString(delHosts, ",") + ")";
+        }
+
+        if (hosts != null) {
+            retval += "(nameserver-hosts = " + arrayToString(hosts, ",") + ")";
         }
 
         if (techContacts != null) {
