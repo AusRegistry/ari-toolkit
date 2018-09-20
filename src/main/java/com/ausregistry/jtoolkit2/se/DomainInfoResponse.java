@@ -10,7 +10,7 @@ import javax.xml.xpath.XPathExpressionException;
 
 /**
  * Use this to access domain object information as provided in an EPP domain
- * info response compliant with RFC5730 and RFC5731.  Such a service element is
+ * info response compliant with RFC5730 and RFC5731. Such a service element is
  * sent by a compliant EPP server in response to a valid domain info command,
  * implemented by the DomainInfoCommand class.
  *
@@ -39,6 +39,13 @@ public class DomainInfoResponse extends InfoResponse {
     protected static final String DOM_CON_TECH_EXPR = DOM_CON_EXPR.replaceFirst("TYPE", "tech");
     protected static final String DOM_CON_ADMIN_EXPR = DOM_CON_EXPR.replaceFirst("TYPE", "admin");
     protected static final String DOM_CON_BILLING_EXPR = DOM_CON_EXPR.replaceFirst("TYPE", "billing");
+    private static final String DOMAIN_HOST_ATTR_COUNT_EXPR =
+            "count(" + DOM_INF_DATA_EXPR + "/domain:ns/domain:hostAttr)";
+    private static final String DOMAIN_ATTR_EXPR_IDX = DOM_INF_DATA_EXPR + "/domain:ns/domain:hostAttr[IDX]";
+    private static final String DOMAIN_TXT_EXPR = "/text()";
+    private static final String HOS_ADDR_IP_EXPR = "/@ip";
+    private static final String HOST_ATTR_IDX_EXPR = "/domain:hostAddr[IDX]";
+    private static final String HOST_ATTR_EXPR = "/domain:hostAddr";
 
     private static final long serialVersionUID = -5948394715740177139L;
 
@@ -47,6 +54,7 @@ public class DomainInfoResponse extends InfoResponse {
     private String[] delHosts, subHosts;
     private GregorianCalendar exDate;
     private String exDateStr;
+    private Host[] nameserverHosts;
 
     public DomainInfoResponse() {
         super(StandardObjectType.DOMAIN);
@@ -128,6 +136,13 @@ public class DomainInfoResponse extends InfoResponse {
         return subHosts;
     }
 
+    /**
+     * @return the nameserverHosts
+     */
+    public Host[] getNameserverHosts() {
+        return nameserverHosts;
+    }
+
     @Override
     public void fromXML(XMLDocument xmlDoc) {
         super.fromXML(xmlDoc);
@@ -145,6 +160,23 @@ public class DomainInfoResponse extends InfoResponse {
                 exDate = EPPDateFormatter.fromXSDateTime(exDateStr);
             }
             delHosts = xmlDoc.getNodeValues(DOM_NS_EXPR);
+            int attrCount = xmlDoc.getNodeCount(DOMAIN_HOST_ATTR_COUNT_EXPR);
+            nameserverHosts = new Host[attrCount];
+
+            for (int k = 0; k < attrCount; k++) {
+                String hostAttrExpr = ReceiveSE.replaceIndex(DOMAIN_ATTR_EXPR_IDX, k + 1);
+                String hostName = xmlDoc.getNodeValue(hostAttrExpr + "/domain:hostName" + DOMAIN_TXT_EXPR);
+                String hostAddrExpr = hostAttrExpr + HOST_ATTR_IDX_EXPR;
+                int addrCount = xmlDoc.getNodeCount("count(" + hostAttrExpr + HOST_ATTR_EXPR + ")");
+                InetAddress[] inetAddresses = new InetAddress[addrCount];
+                for (int i = 0; i < addrCount; i++) {
+                    String qry = ReceiveSE.replaceIndex(hostAddrExpr, i + 1);
+                    String addr = xmlDoc.getNodeValue(qry + DOMAIN_TXT_EXPR);
+                    String version = xmlDoc.getNodeValue(qry + HOS_ADDR_IP_EXPR);
+                    inetAddresses[i] = new InetAddress(IPVersion.value(version), addr);
+                }
+                nameserverHosts[k] = new Host(hostName, inetAddresses);
+            }
             subHosts = xmlDoc.getNodeValues(DOM_HOST_EXPR);
 
             techContacts = xmlDoc.getNodeValues(DOM_CON_TECH_EXPR);
@@ -173,6 +205,10 @@ public class DomainInfoResponse extends InfoResponse {
             retval += "(nameserver-hosts = " + arrayToString(delHosts, ",") + ")";
         }
 
+        if (nameserverHosts != null) {
+            retval += "(nameserver-hosts = " + arrayToString(nameserverHosts, ",") + ")";
+        }
+
         if (techContacts != null) {
             retval += "(tech-contacts = " + arrayToString(techContacts, ",") + ")";
         }
@@ -188,4 +224,3 @@ public class DomainInfoResponse extends InfoResponse {
         return retval;
     }
 }
-

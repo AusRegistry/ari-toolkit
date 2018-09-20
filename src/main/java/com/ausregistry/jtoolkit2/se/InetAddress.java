@@ -6,9 +6,9 @@ import com.ausregistry.jtoolkit2.xml.XMLWriter;
 
 /**
  * Host Internet addresses are configured and viewed via instances of this
- * class.  InetAddress instances may be supplied to the HostCreateCommand and
+ * class. InetAddress instances may be supplied to the HostCreateCommand and
  * HostUpdateCommand (indirectly via HostAddRem) constructors in order to
- * assign or remove Internet addresses to and from host objects.  They are also
+ * assign or remove Internet addresses to and from host objects. They are also
  * used to view Internet address information retrieved from a HostInfoResponse
  * instance.
  */
@@ -56,5 +56,15 @@ public class InetAddress implements Appendable {
         return xmlWriter.appendChild(parent, "addr", textRep, "ip", getVersion());
     }
 
-}
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "InetAddress [" + (version != null ? "version=" + version + ", " : "")
+            + (textRep != null ? "textRep=" + textRep : "") + "]";
+    }
 
+}

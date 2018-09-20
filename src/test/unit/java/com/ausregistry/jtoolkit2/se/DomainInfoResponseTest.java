@@ -1,10 +1,14 @@
 package com.ausregistry.jtoolkit2.se;
 
 import static com.ausregistry.jtoolkit2.se.DomainInfoResponseTest.DomainInfoResponseBuilder.infoResponseBuilder;
+import static com.ausregistry.jtoolkit2.test.infrastructure.HostMatcher.matchHost;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.arrayContaining;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -191,7 +195,27 @@ public class DomainInfoResponseTest {
         assertEquals("example.com", re.getUserFormName());
     }
 
-    static class DomainInfoResponseBuilder {
+    @Test
+    public void testGetNameserversHostAttribute() throws Exception {
+        // Preparing host[] to compare with parsed response host array
+        InetAddress[] inetAddresses = new InetAddress[2];
+        inetAddresses[0] = new InetAddress("132.16.56.29");
+        inetAddresses[1] = new InetAddress(IPVersion.IPv6, "FE80:CD00:0:CDE:1257:0:211E:729C");
+        Host host1 = new Host("ns1.example.com.au", inetAddresses);
+        Host host2 = new Host("ns2.example.com.au");
+
+        XMLDocument doc = PARSER.parse(infoResponseBuilder("example.com.au").withHosts(host1, host2).build());
+
+        DomainInfoResponse response = new DomainInfoResponse();
+        response.fromXML(doc);
+
+        assertNull("hostObj is not response so it should be null", response.getNameservers());
+        Host[] hosts = response.getNameserverHosts();
+        assertNotNull(hosts);
+        assertThat(hosts, arrayContaining(matchHost(host1), matchHost(host2)));
+    }
+
+    static final class DomainInfoResponseBuilder {
 
         private final String domainName;
         private boolean isIdn = false;
@@ -199,13 +223,14 @@ public class DomainInfoResponseTest {
         private String canonicalForm;
         private String variantUserForm;
         private String variantDnsForm;
-
-        static DomainInfoResponseBuilder infoResponseBuilder(String domainName) {
-            return new DomainInfoResponseBuilder(domainName);
-        }
+        private Host[] nameservers;
 
         private DomainInfoResponseBuilder(String domainName) {
             this.domainName = domainName;
+        }
+
+        static DomainInfoResponseBuilder infoResponseBuilder(String domainName) {
+            return new DomainInfoResponseBuilder(domainName);
         }
 
         private DomainInfoResponseBuilder withIdn(String userForm, String canonicalName) {
@@ -218,6 +243,11 @@ public class DomainInfoResponseTest {
         private DomainInfoResponseBuilder withVariant(String variantUserForm, String variantDnsForm) {
             this.variantUserForm = variantUserForm;
             this.variantDnsForm = variantDnsForm;
+            return this;
+        }
+
+        private DomainInfoResponseBuilder withHosts(Host... nameservers) {
+            this.nameservers = nameservers;
             return this;
         }
 
@@ -240,8 +270,20 @@ public class DomainInfoResponseTest {
             result.append("<registrant>EXAMPLE</registrant>");
             result.append("<contact type=\"tech\">EXAMPLE</contact>");
             result.append("<ns>");
-            result.append("<hostObj>ns1.example.com.au</hostObj>");
-            result.append("<hostObj>ns2.example.com.au</hostObj>");
+            if (nameservers != null && nameservers.length > 0) {
+                for (Host nameserver : nameservers) {
+                    result.append("<hostAttr><hostName>").append(nameserver.getName()).append("</hostName>");
+                    for (InetAddress address : nameserver.getAddresses()) {
+                        result.append("<hostAddr ip=\"").append(address.getVersion()).append("\">")
+                                .append(address.getTextRep()).append("</hostAddr>");
+
+                    }
+                    result.append("</hostAttr>");
+                }
+            } else {
+                result.append("<hostObj>ns1.example.com.au</hostObj>");
+                result.append("<hostObj>ns2.example.com.au</hostObj>");
+            }
             result.append("</ns>");
             result.append("<host>ns1.example.com.au</host>");
             result.append("<host>ns2.exmaple.com.au</host>");

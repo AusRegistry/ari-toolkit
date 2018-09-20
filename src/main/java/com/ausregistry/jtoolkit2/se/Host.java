@@ -1,5 +1,7 @@
 package com.ausregistry.jtoolkit2.se;
 
+import java.util.Arrays;
+
 import org.w3c.dom.Element;
 
 import com.ausregistry.jtoolkit2.xml.XMLWriter;
@@ -80,4 +82,16 @@ public class Host implements Appendable {
         }
         return parent;
     }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "Host [" + (name != null ? "name=" + name + ", " : "")
+            + (addresses != null ? "addresses=" + Arrays.toString(addresses) : "") + "]";
+    }
+
 }
