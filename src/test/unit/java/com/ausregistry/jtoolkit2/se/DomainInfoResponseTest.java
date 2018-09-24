@@ -1,5 +1,6 @@
 package com.ausregistry.jtoolkit2.se;
 
+import static com.ausregistry.jtoolkit2.se.DomainInfoResponseTest.DomainInfoResponseBuilder.infoResponseBuilder;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -115,8 +116,7 @@ public class DomainInfoResponseTest {
                 new DomainIdnaResponseExtension(ResponseExtension.INFO);
 
         final XMLDocument doc =
-                PARSER.parse(getInfoResponseExpectedXml(dnsForm, true, userForm, canonicalForm,
-                        null, null));
+                PARSER.parse(infoResponseBuilder(dnsForm).withIdn(userForm, canonicalForm).build());
         response.registerExtension(re);
         response.fromXML(doc);
         assertEquals(dnsForm, response.getName());
@@ -192,93 +192,122 @@ public class DomainInfoResponseTest {
         assertEquals("example.com", re.getUserFormName());
     }
 
-    private static String getInfoResponseExpectedXml(final String domainName, final boolean isIdn,
-                                                     final String userForm, final String canonicalForm, final String variantUserForm,
-                                                     final String variantDnsForm) {
-        final StringBuilder result = new StringBuilder();
-        result.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-        result.append("<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\"");
-        result.append(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"");
-        result.append(" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">");
-        result.append("<response>");
-        result.append("<result code=\"1000\">");
-        result.append("<msg>Command completed successfully</msg>");
-        result.append("</result>");
-        result.append("<resData>");
-        result.append("<infData xmlns=\"urn:ietf:params:xml:ns:domain-1.0\"");
-        result.append(" xsi:schemaLocation=\"urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd\">");
-        result.append("<name>" + domainName + "</name>");
-        result.append("<roid>D0000003-AR</roid>");
-        result.append("<status s=\"ok\" lang=\"en\"/>");
-        result.append("<registrant>EXAMPLE</registrant>");
-        result.append("<contact type=\"tech\">EXAMPLE</contact>");
-        result.append("<ns>");
-        result.append("<hostObj>ns1.example.com.au</hostObj>");
-        result.append("<hostObj>ns2.example.com.au</hostObj>");
-        result.append("</ns>");
-        result.append("<host>ns1.example.com.au</host>");
-        result.append("<host>ns2.exmaple.com.au</host>");
-        result.append("<clID>Registrar</clID>");
-        result.append("<crID>Registrar</crID>");
-        result.append("<crDate>2006-02-09T15:44:58.0Z</crDate>");
-        result.append("<exDate>2008-02-10T00:00:00.0Z</exDate>");
-        result.append("<authInfo>");
-        result.append("<pw>0192pqow</pw>");
-        result.append("</authInfo>");
-        result.append("</infData>");
-        result.append("</resData>");
-        result.append("<extension>");
-        result.append("<auext:infData xmlns:auext=\"urn:X-au:params:xml:ns:auext-1.2\"");
-        result.append(" xsi:schemaLocation=\"urn:X-au:params:xml:ns:auext-1.2  auext-1.2.xsd\">");
-        result.append("<auext:auProperties>");
-        result.append("<auext:registrantName>RegistrantName Pty. Ltd.</auext:registrantName>");
-        result.append("<auext:registrantID type=\"ACN\">123456789</auext:registrantID>");
-        result.append("<auext:eligibilityType>Other</auext:eligibilityType>");
-        result.append("<auext:eligibilityName>Registrant Eligi</auext:eligibilityName>");
-        result.append("<auext:eligibilityID type=\"ABN\">987654321</auext:eligibilityID>");
-        result.append("<auext:policyReason>2</auext:policyReason>");
-        result.append("</auext:auProperties>");
-        result.append("</auext:infData>");
+    static class DomainInfoResponseBuilder {
 
-        if (isIdn || variantDnsForm != null) {
-            if (isIdn) {
-                result.append("<infData xmlns=\"urn:X-ar:params:xml:ns:idnadomain-1.0\"");
-                result.append(" xsi:schemaLocation=\"urn:X-ar:params:xml:ns:idnadomain-1.0 idnadomain-1.0.xsd\">");
-                result.append("<userForm language=\"test\">" + userForm + "</userForm>");
-                result.append("<canonicalForm>" + canonicalForm + "</canonicalForm>");
-                result.append("</infData>");
-            }
+        private final String domainName;
+        private boolean isIdn = false;
+        private String userForm;
+        private String canonicalForm;
+        private String variantUserForm;
+        private String variantDnsForm;
 
-            if (variantDnsForm != null && variantUserForm != null) {
-                result.append("<infData xmlns=\"urn:X-ar:params:xml:ns:variant-1.0\"");
-                result.append(" xsi:schemaLocation=\"urn:X-ar:params:xml:ns:variant-1.0 variant-1.0.xsd\">");
-                result.append("<variant userForm=\"" + variantUserForm + "\">" + variantDnsForm + "</variant>");
-                result.append("</infData>");
-            }
-
+        static DomainInfoResponseBuilder infoResponseBuilder(String domainName) {
+            return new DomainInfoResponseBuilder(domainName);
         }
 
-        result.append("</extension>");
-        result.append("<trID>");
-        result.append("<clTRID>ABC-12345</clTRID>");
-        result.append("<svTRID>54321-XYZ</svTRID>");
-        result.append("</trID>");
-        result.append("</response>");
-        result.append("</epp>");
-        return result.toString();
+        private DomainInfoResponseBuilder(String domainName) {
+            this.domainName = domainName;
+        }
+
+        private DomainInfoResponseBuilder withIdn(String userForm, String canonicalName) {
+            this.userForm = userForm;
+            this.canonicalForm = canonicalName;
+            this.isIdn = true;
+            return this;
+        }
+
+        private DomainInfoResponseBuilder withVariant(String variantUserForm, String variantDnsForm) {
+            this.variantUserForm = variantUserForm;
+            this.variantDnsForm = variantDnsForm;
+            return this;
+        }
+
+        private String build() {
+            final StringBuilder result = new StringBuilder();
+            result.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+            result.append("<epp xmlns=\"urn:ietf:params:xml:ns:epp-1.0\"");
+            result.append(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"");
+            result.append(" xsi:schemaLocation=\"urn:ietf:params:xml:ns:epp-1.0 epp-1.0.xsd\">");
+            result.append("<response>");
+            result.append("<result code=\"1000\">");
+            result.append("<msg>Command completed successfully</msg>");
+            result.append("</result>");
+            result.append("<resData>");
+            result.append("<infData xmlns=\"urn:ietf:params:xml:ns:domain-1.0\"");
+            result.append(" xsi:schemaLocation=\"urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd\">");
+            result.append("<name>" + domainName + "</name>");
+            result.append("<roid>D0000003-AR</roid>");
+            result.append("<status s=\"ok\" lang=\"en\"/>");
+            result.append("<registrant>EXAMPLE</registrant>");
+            result.append("<contact type=\"tech\">EXAMPLE</contact>");
+            result.append("<ns>");
+            result.append("<hostObj>ns1.example.com.au</hostObj>");
+            result.append("<hostObj>ns2.example.com.au</hostObj>");
+            result.append("</ns>");
+            result.append("<host>ns1.example.com.au</host>");
+            result.append("<host>ns2.exmaple.com.au</host>");
+            result.append("<clID>Registrar</clID>");
+            result.append("<crID>Registrar</crID>");
+            result.append("<crDate>2006-02-09T15:44:58.0Z</crDate>");
+            result.append("<exDate>2008-02-10T00:00:00.0Z</exDate>");
+            result.append("<authInfo>");
+            result.append("<pw>0192pqow</pw>");
+            result.append("</authInfo>");
+            result.append("</infData>");
+            result.append("</resData>");
+            result.append("<extension>");
+            result.append("<auext:infData xmlns:auext=\"urn:X-au:params:xml:ns:auext-1.2\"");
+            result.append(" xsi:schemaLocation=\"urn:X-au:params:xml:ns:auext-1.2  auext-1.2.xsd\">");
+            result.append("<auext:auProperties>");
+            result.append("<auext:registrantName>RegistrantName Pty. Ltd.</auext:registrantName>");
+            result.append("<auext:registrantID type=\"ACN\">123456789</auext:registrantID>");
+            result.append("<auext:eligibilityType>Other</auext:eligibilityType>");
+            result.append("<auext:eligibilityName>Registrant Eligi</auext:eligibilityName>");
+            result.append("<auext:eligibilityID type=\"ABN\">987654321</auext:eligibilityID>");
+            result.append("<auext:policyReason>2</auext:policyReason>");
+            result.append("</auext:auProperties>");
+            result.append("</auext:infData>");
+
+            if (isIdn || variantDnsForm != null) {
+                if (isIdn) {
+                    result.append("<infData xmlns=\"urn:X-ar:params:xml:ns:idnadomain-1.0\"");
+                    result.append(" xsi:schemaLocation=\"urn:X-ar:params:xml:ns:idnadomain-1.0 idnadomain-1.0.xsd\">");
+                    result.append("<userForm language=\"test\">" + userForm + "</userForm>");
+                    result.append("<canonicalForm>" + canonicalForm + "</canonicalForm>");
+                    result.append("</infData>");
+                }
+
+                if (variantDnsForm != null && variantUserForm != null) {
+                    result.append("<infData xmlns=\"urn:X-ar:params:xml:ns:variant-1.0\"");
+                    result.append(" xsi:schemaLocation=\"urn:X-ar:params:xml:ns:variant-1.0 variant-1.0.xsd\">");
+                    result.append("<variant userForm=\"" + variantUserForm + "\">" + variantDnsForm + "</variant>");
+                    result.append("</infData>");
+                }
+
+            }
+
+            result.append("</extension>");
+            result.append("<trID>");
+            result.append("<clTRID>ABC-12345</clTRID>");
+            result.append("<svTRID>54321-XYZ</svTRID>");
+            result.append("</trID>");
+            result.append("</response>");
+            result.append("</epp>");
+            return result.toString();
+        }
     }
 
     private static String getInfoResponseExpectedXml(final String domainName,
                                                      final String variantUserForm, final String variantDnsForm) {
-        return getInfoResponseExpectedXml(domainName, false, null, null, variantUserForm, variantDnsForm);
+        return infoResponseBuilder(domainName).withVariant(variantUserForm, variantDnsForm).build();
     }
 
     private static String getInfoResponseExpectedXml(final String domainName, final boolean isIdn,
                                                      final String userForm) {
-        return getInfoResponseExpectedXml(domainName, isIdn, userForm, null, null, null);
+        return infoResponseBuilder(domainName).withIdn(userForm, null).build();
     }
 
     private static String getInfoResponseExpectedXml(final String domainName) {
-        return getInfoResponseExpectedXml(domainName, false, null, null, null, null);
+        return infoResponseBuilder(domainName).build();
     }
 }
