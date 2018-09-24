@@ -10,11 +10,10 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-import org.junit.Test;
-
 import com.ausregistry.jtoolkit2.EPPDateFormatter;
 import com.ausregistry.jtoolkit2.xml.XMLDocument;
 import com.ausregistry.jtoolkit2.xml.XMLParser;
+import org.junit.Test;
 
 public class DomainInfoResponseTest {
 
@@ -23,14 +22,14 @@ public class DomainInfoResponseTest {
     @Test
     public void testFromXML() throws Exception {
         DomainInfoResponse response = new DomainInfoResponse();
-        XMLDocument doc = PARSER.parse(getInfoResponseExpectedXml("example.com.au"));
+        XMLDocument doc = PARSER.parse(infoResponseBuilder("example.com.au").build());
         response.fromXML(doc);
     }
 
     @Test
     public void testGetPW() throws Exception {
         DomainInfoResponse response = new DomainInfoResponse();
-        XMLDocument doc = PARSER.parse(getInfoResponseExpectedXml("example.com.au"));
+        XMLDocument doc = PARSER.parse(infoResponseBuilder("example.com.au").build());
         response.fromXML(doc);
         assertEquals("0192pqow", response.getPW());
     }
@@ -38,7 +37,7 @@ public class DomainInfoResponseTest {
     @Test
     public void testGetCreateDate() throws Exception {
         DomainInfoResponse response = new DomainInfoResponse();
-        XMLDocument doc = PARSER.parse(getInfoResponseExpectedXml("example.com.au"));
+        XMLDocument doc = PARSER.parse(infoResponseBuilder("example.com.au").build());
         response.fromXML(doc);
         GregorianCalendar exp = EPPDateFormatter.fromXSDateTime("2006-02-09T15:44:58.0Z");
         GregorianCalendar act = response.getCreateDate();
@@ -49,7 +48,7 @@ public class DomainInfoResponseTest {
     @Test
     public void testGetExpireDate() throws Exception {
         DomainInfoResponse response = new DomainInfoResponse();
-        XMLDocument doc = PARSER.parse(getInfoResponseExpectedXml("example.com.au"));
+        XMLDocument doc = PARSER.parse(infoResponseBuilder("example.com.au").build());
         response.fromXML(doc);
         GregorianCalendar exp = EPPDateFormatter.fromXSDateTime("2008-02-10T00:00:00.0Z");
         GregorianCalendar act = response.getExpireDate();
@@ -59,7 +58,7 @@ public class DomainInfoResponseTest {
     @Test
     public void testGetRegistrantID() throws Exception {
         DomainInfoResponse response = new DomainInfoResponse();
-        XMLDocument doc = PARSER.parse(getInfoResponseExpectedXml("example.com.au"));
+        XMLDocument doc = PARSER.parse(infoResponseBuilder("example.com.au").build());
         response.fromXML(doc);
         String exp = "EXAMPLE";
         String act = response.getRegistrantID();
@@ -69,7 +68,7 @@ public class DomainInfoResponseTest {
     @Test
     public void testGetTechContacts() throws Exception {
         DomainInfoResponse response = new DomainInfoResponse();
-        XMLDocument doc = PARSER.parse(getInfoResponseExpectedXml("example.com.au"));
+        XMLDocument doc = PARSER.parse(infoResponseBuilder("example.com.au").build());
         response.fromXML(doc);
         String[] act = response.getTechContacts();
         String[] exp = new String[] { "EXAMPLE" };
@@ -79,7 +78,7 @@ public class DomainInfoResponseTest {
     @Test
     public void testGetNameservers() throws Exception {
         DomainInfoResponse response = new DomainInfoResponse();
-        XMLDocument doc = PARSER.parse(getInfoResponseExpectedXml("example.com.au"));
+        XMLDocument doc = PARSER.parse(infoResponseBuilder("example.com.au").build());
         response.fromXML(doc);
         String[] act = response.getNameservers();
         String[] exp = new String[] { "ns1.example.com.au", "ns2.example.com.au" };
@@ -89,7 +88,7 @@ public class DomainInfoResponseTest {
     @Test
     public void testGetSubordinateHosts() throws Exception {
         DomainInfoResponse response = new DomainInfoResponse();
-        XMLDocument doc = PARSER.parse(getInfoResponseExpectedXml("example.com.au"));
+        XMLDocument doc = PARSER.parse(infoResponseBuilder("example.com.au").build());
         response.fromXML(doc);
         String[] act = response.getSubordinateHosts();
         String[] exp = new String[] { "ns1.example.com.au", "ns2.exmaple.com.au" };
@@ -99,7 +98,7 @@ public class DomainInfoResponseTest {
     @Test
     public void testGetStatuses() throws Exception {
         DomainInfoResponse response = new DomainInfoResponse();
-        XMLDocument doc = PARSER.parse(getInfoResponseExpectedXml("example.com.au"));
+        XMLDocument doc = PARSER.parse(infoResponseBuilder("example.com.au").build());
         response.fromXML(doc);
         Status[] act = response.getStatuses();
         Status[] exp = new Status[] { new Status("ok", null, "lang") };
@@ -134,7 +133,7 @@ public class DomainInfoResponseTest {
                 new DomainIdnaResponseExtension(ResponseExtension.INFO);
 
         final XMLDocument doc =
-                PARSER.parse(getInfoResponseExpectedXml(domainName));
+                PARSER.parse(infoResponseBuilder(domainName).build());
         response.registerExtension(re);
         response.fromXML(doc);
         assertEquals(domainName, response.getName());
@@ -150,7 +149,7 @@ public class DomainInfoResponseTest {
         final DomainVariantResponseExtension variantsExtension =
                 new DomainVariantResponseExtension(ResponseExtension.INFO);
         final XMLDocument doc =
-                PARSER.parse(getInfoResponseExpectedXml(dnsForm, variantUserForm, variantDnsForm));
+                PARSER.parse(infoResponseBuilder(dnsForm).withVariant(variantUserForm, variantDnsForm).build());
 
         response.registerExtension(variantsExtension);
         response.fromXML(doc);
@@ -169,7 +168,7 @@ public class DomainInfoResponseTest {
         final DomainInfoResponse response = new DomainInfoResponse();
         final DomainVariantResponseExtension variantsExtension =
                 new DomainVariantResponseExtension(ResponseExtension.INFO);
-        final XMLDocument doc = PARSER.parse(getInfoResponseExpectedXml(domainName));
+        final XMLDocument doc = PARSER.parse(infoResponseBuilder(domainName).build());
 
         response.registerExtension(variantsExtension);
         response.fromXML(doc);
@@ -184,7 +183,7 @@ public class DomainInfoResponseTest {
         final DomainIdnaResponseExtension re =
                 new DomainIdnaResponseExtension(ResponseExtension.INFO);
         final XMLDocument doc =
-                PARSER.parse(getInfoResponseExpectedXml("example.com", true, "example.com"));
+                PARSER.parse(infoResponseBuilder("example.com").withIdn("example.com", null).build());
         response.registerExtension(re);
         response.fromXML(doc);
         assertEquals("example.com", response.getName());
@@ -297,17 +296,4 @@ public class DomainInfoResponseTest {
         }
     }
 
-    private static String getInfoResponseExpectedXml(final String domainName,
-                                                     final String variantUserForm, final String variantDnsForm) {
-        return infoResponseBuilder(domainName).withVariant(variantUserForm, variantDnsForm).build();
-    }
-
-    private static String getInfoResponseExpectedXml(final String domainName, final boolean isIdn,
-                                                     final String userForm) {
-        return infoResponseBuilder(domainName).withIdn(userForm, null).build();
-    }
-
-    private static String getInfoResponseExpectedXml(final String domainName) {
-        return infoResponseBuilder(domainName).build();
-    }
 }
