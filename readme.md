@@ -1,4 +1,9 @@
 [![Build Status](https://travis-ci.org/AusRegistry/ari-toolkit.png)](https://travis-ci.org/AusRegistry/ari-toolkit)
+
+## Notice
+
+This toolkit is no longer supported, please go to [GitHub/NeustarRegistry](https://github.com/NeustarRegistry/nsr-toolkit) for the latest Neustar Registry Toolkit.
+
 ## Downloads
 
 The latest ari-toolkit is available for download. [ari-toolkit v3.11.5](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.11.5/arjtk-3.11.5.jar) ([sources](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.11.5/arjtk-3.11.5-sources.jar) | [javadoc](http://ausregistry.github.com/repo/au/com/ausregistry/arjtk/3.11.5/arjtk-3.11.5-javadoc.jar))
